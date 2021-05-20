@@ -370,6 +370,7 @@ $(function(){
 	 var optionname=0;
 	 var deliveryoption=0;
 	 
+	 var toltalPrice=0;
 	 var totalCount=0;
 	 var totaldprtprice=0;
 	 
@@ -441,17 +442,19 @@ $(function(){
 	
 	$(".totalbuy").click(function(){
 		
-		//prtprice=$(this).prev().prev().prev().children("input").eq(5).val();
-	    //dprtprice=$(this).prev().prev().prev().children("input").eq(6).val();
+		prtprice=$(this).next().val();
+	    dprtprice=$(this).next().next().val();
 	    /////////pcount는 위에서 만들어줌
-	    //optprice=$(this).prev().prev().prev().children("input").eq(8).val();
-	    //ocount=$(this).prev().prev().prev().children("input").eq(9).val();
+	    optprice=$(this).next().next().next().next().val();
+	    ocount=$(this).next().next().next().next().next().val();
 	   
-	    productnum=$(this).prev().prev().prev().children("input").eq(10).val();
-	    optionnum=$(this).prev().prev().prev().children("input").eq(11).val();
-	    productname=$(this).prev().prev().prev().children("input").eq(12).val();
-	    optionname=$(this).prev().prev().prev().children("input").eq(13).val();
-	    deliveryoption=$(this).prev().prev().prev().children("input").eq(14).val();
+	    productnum=$(this).parent().prev().children("input").eq(0).val();
+	    optionnum=$(this).parent().prev().children("input").eq(1).val();
+	    productname=$(this).parent().prev().children("input").eq(2).val();
+	    optionname=$(this).parent().prev().children("input").eq(3).val();
+	    deliveryoption=$(this).parent().prev().children("input").eq(4).val();
+	    
+	    //alert("productnum"+ productnum+"/productname"+productname+"/optionname"+optionname+"/deliveryoption"+deliveryoption);
     
 	    tprice=(optprice*ocount)+((prtprice-dprtprice)*pcount); //총결제가격
 	    totaldprtprice=dprtprice*pcount; //총할인가격
@@ -461,11 +464,13 @@ $(function(){
 	    totalCount = pcount+optprice;
 	    
 	    
-		alert("상품가격="+prtprice+"/상품의 갯수="+pcount+"/옵션가격="+optprice+"/옵션의갯수="+ocount+"/본래할인가격"+dprtprice+"/총할인가격="+totaldprtprice+"/최종구매가격="+submitprice+"/productname="+productname+"/optionname"+optionname);
-		
-   	  location.href="/sshj/productPay?total="+tprice+"&discountprice="+totaldprtprice+"&productnum="+productnum+"&productname="+productname+"&deliveryoption="+deliveryoption+"optionnum="+optprice+"&totalCount="+totalCount;
-   	  
+		//alert("상품가격="+prtprice+"/상품의 갯수="+pcount+"/옵션가격="+optprice+"/옵션의갯수="+ocount+"/본래할인가격"+dprtprice+"/총할인가격="+totaldprtprice+"/최종구매가격="+submitprice+"/productname="+productname+"/optionname="+optionname+"/deliveryoption="+deliveryoption);
+		//alert("/sshj/productPay?total="+tprice+"&discountprice="+totaldprtprice+"&productnum="+productnum+"&productname="+productname+"&deliveryoption="+deliveryoption+"optionnum="+optprice+"&totalCount="+totalCount);
+   	    location.href="/sshj/productPay?total="+tprice+"&discountprice="+totaldprtprice+"&productnum="+productnum+"&productname="+productname+"&deliveryoption="+deliveryoption+"&optionnum="+optprice+"&totalCount="+totalCount;
+	    //location.href="/sshj/productPay?total="+toltalPrice+"&discountprice="+totaldprtprice+"&productnum=${pvo.productnum}&productname=${pvo.productname}&deliveryoption=${pvo.deliveryoption}&optionnum="+optprice+"&totalCount="+totalCount;
+	
 	});
+	
 	
 	
 });
@@ -490,59 +495,67 @@ $(function(){
 			</ul>
 
        <c:forEach var="wl" items="${wlist}">
-      
-			<ul class="wishList">
-					<li><a href=""><img src="img/${wl.thumbimg}"></a></li> <!-- 이미지 -->
-					
-					<li>
-					<div id="ptitle"><a href="">${wl.productname}</a></div><!-- 상품이름 -->
-					<div id="ptitleprice">원가: ${wl.productprice}원</div><!-- 상품가격 -->
-					<div id="ptitlediscount">할인가격: ${wl.saleprice}원</div><!-- 할인가격 -->
-				
-				    <c:if test="${wl.optionnum>0}">
-					<div id="optitle">추가옵션 :${wl.optionname}${wl.optionprice} x ${wl.wishoptionnum} 개  <span id="wishoptionCount"></span>  </div><!-- 옵션이름 --><!-- 옵션 수량 -->
-					</c:if>
-					
-					<c:if test="${wl.optionnum<=0}">
-					<div id="optitle">&nbsp;</div><!-- 옵션이름 --><!-- 옵션 수량 -->
-					</c:if>
-					
-					</li>
-				
-					<li>
-						    <input type="button" id="mbtn" class="mCount" value="-"/>
-							<input type="hidden" value="${((wl.productprice-wl.saleprice)*wl.wishnum)+(wl.optionprice*wl.wishoptionnum)}">
-							<span id="prtnum">${wl.wishnum}</span>
-						    <input type="button" id="pbtn" class="pCount" value="+"/>
-						    <input type="hidden" value="${wl.productprice}"><!-- 5 -->
-						    <input type="hidden" value="${wl.saleprice}"><!-- 6 -->
-							<input type="hidden" value="${wl.wishnum}"><!-- 7 -->
-							<input type="hidden" value="${wl.optionprice}"><!-- 8 -->
-							<input type="hidden" value="${wl.wishoptionnum}"><!-- 9 -->
-							<input type="hidden" value="${wl.productnum}"><!-- 10 -->
-							<input type="hidden" value="${wl.optionnum}"><!--11 -->
-							<input type="hidden" value="${wl.productname}"><!-- 12 -->
-							<input type="hidden" value="${wl.optionname}"><!-- 13 -->
-							<input type="hidden" value="${wl.deliveryoption}"><!-- 14 -->
+       <form method="post" id="reply">
+		      
+					<ul class="wishList">
+							<li><a href=""><img src="img/${wl.thumbimg}"></a></li> <!-- 이미지 -->
 							
-					</li><!-- 상품수량 -->
-					
-					<!--                                          상품가격         할인가격   *     상품갯수      옵션가격      *      옵션갯수     -->
-					<li><span id="oneproductTotalPrice">${((wl.productprice-wl.saleprice)*wl.wishnum)+(wl.optionprice*wl.wishoptionnum)}원</span></li><!-- 총가격 -->
-					
-					<li></li>
-					<!-- <li><input type="checkbox" name="checkbox" value=""/></li> -->
-					<li><input type="button" name="paybtn" id="paybtn" class="totalbuy" value="구매하기"/>
-					        <input type="hidden" value="${((wl.productprice-wl.saleprice)*wl.wishnum)+(wl.optionprice*wl.wishoptionnum)}">
-							<input type="hidden" value="${wl.productprice}">
-							<input type="hidden" value="${wl.saleprice}">
-							<input type="hidden" value="${wl.wishnum}">
-							<input type="hidden" value="${wl.optionprice}">
-					</li>
-					<li><input type="button" value="x" id="delbutton" /></li>
-					
-			</ul>
-			
+							<li>
+							<div id="ptitle"><a href="">${wl.productname}</a></div><!-- 상품이름 -->
+							<div id="ptitleprice">원가: ${wl.productprice}원</div><!-- 상품가격 -->
+							<div id="ptitlediscount">할인가격: ${wl.saleprice}원</div><!-- 할인가격 -->
+						
+						    <c:if test="${wl.optionnum>0}">
+							<div id="optitle">추가옵션 :${wl.optionname}${wl.optionprice} x ${wl.wishoptionnum} 개  <span id="wishoptionCount"></span>  </div><!-- 옵션이름 --><!-- 옵션 수량 -->
+							</c:if>
+							
+							<c:if test="${wl.optionnum<=0}">
+							<div id="optitle">&nbsp;</div><!-- 옵션이름 --><!-- 옵션 수량 -->
+							</c:if>
+							
+							</li>
+						
+							<li>
+							
+								   <input type="button" id="mbtn" class="mCount" value="-"/>
+								    
+									<input type="hidden" value="${((wl.productprice-wl.saleprice)*wl.wishnum)+(wl.optionprice*wl.wishoptionnum)}">
+									<span id="prtnum">${wl.wishnum}</span>
+								    <input type="button" id="pbtn" class="pCount" value="+"/>
+								    
+								    <input type="hidden" value="${wl.productprice}"><!-- 5 -->
+								    <input type="hidden" value="${wl.saleprice}"><!-- 6 -->
+									<input type="hidden" value="${wl.wishnum}"><!-- 7 -->
+									<input type="hidden" value="${wl.optionprice}"><!-- 8 -->
+									<input type="hidden" value="${wl.wishoptionnum}"><!-- 9 -->
+							
+							
+							</li><!-- 상품수량 -->
+							
+							<!--                                          상품가격         할인가격   *     상품갯수      옵션가격      *      옵션갯수     -->
+							<li><span id="oneproductTotalPrice">${((wl.productprice-wl.saleprice)*wl.wishnum)+(wl.optionprice*wl.wishoptionnum)}원</span></li><!-- 총가격 -->
+							
+							<li> <input type="hidden" value="${wl.productnum}"><!-- 10 -->
+									<input type="hidden" value="${wl.optionnum}"><!--11 -->
+									<input type="hidden" id="productname" name="productname" value="${wl.productname}"><!-- 12 -->
+									<input type="hidden" id="productname" name="optionname" value="${wl.optionname}"><!-- 13 -->
+									<input type="hidden" id="productname" name="deliveryoption" value="${wl.deliveryoption}"><!-- 14 -->
+							</li>
+							
+						
+							<li><input type="button" name="paybtn" id="paybtn" class="totalbuy" value="구매하기"/>
+								    
+								    <input type="hidden" value="${wl.productprice}"><!-- 5 -->
+								    <input type="hidden" value="${wl.saleprice}"><!-- 6 -->
+									<input type="hidden" value="${wl.wishnum}"><!-- 7 -->
+									<input type="hidden" value="${wl.optionprice}"><!-- 8 -->
+									<input type="hidden" value="${wl.wishoptionnum}"><!-- 9 -->
+							</li>
+							
+							<li><input type="button" value="x" id="delbutton" /></li>
+							
+					</ul>
+			</form>
 		</c:forEach>
 		<!-- 페이징 표시--------- -->
 		<div class="page_wrap">
