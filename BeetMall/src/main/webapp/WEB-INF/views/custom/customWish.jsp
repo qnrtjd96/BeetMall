@@ -497,6 +497,7 @@ $(function(){
 			success:function(result){
 				alert('장바구니 삭제');
 			/* 	location.replace="sshj/customWish"; */
+			
 				alert("끝남");
 			},error:function(e){
 				alert(e.responseText);
