@@ -44,6 +44,19 @@ public class SellerSalesController {
 		SellerSalesVO todayList = service.todayList(vo);
 		DecimalFormat formatter = new DecimalFormat("###,###");
 		
+		List<SellerSalesVO> list = service.sellerSalesAllData(vo);
+		
+		vo.setTotalRecord(list.size());
+		int check = service.sellerSalesAllDataLength(vo.getUserid());
+		
+		vo.setTotalRecord(check);
+		
+		if(check != 0) {
+			mav.addObject("pageVO",vo);
+		}
+		
+		
+		mav.addObject("mainData", list);
 		mav.addObject("todayMoney", formatter.format(todayList.getTodayMoney()));
 		mav.addObject("todayNum", formatter.format(todayList.getTodayNum()));
 		
