@@ -189,6 +189,7 @@ border-bottom:1px solid #eee;
 
 .page_nation {
 	display: inline-block;
+	padding-top:35px;
 }
 
 .page_nation .none {
@@ -374,7 +375,7 @@ $(function(){
 	 var totalCount=0;
 	 var totaldprtprice=0;
 	 
-	
+	/*
 	$(".pCount").click(function() {
 		///alert("productprice"+productprice);	
 		//alert("saleprice"+saleprice);	
@@ -439,7 +440,7 @@ $(function(){
 	     alert(pcount);
 	});
 	
-	
+	*/
 	$(".totalbuy").click(function(){
 		
 		
@@ -457,7 +458,8 @@ $(function(){
 	    ocount=$(this).parent().prev().children("input").eq(9).val();
 	    
 	    
-	    //pcount=$(this).parent().prev().children("input").eq(7).text(); //아무것도 안누르고 구매 눌렀을때
+	    pcount=$(this).parent().prev().children("input").eq(7).val(); //아무것도 안누르고 구매 눌렀을때
+	   // pcount=parseInt($(this).next().next('#prtnum').value())
 	    //+ -버튼누르고 구매 눌렀을때
 	    
 
@@ -478,6 +480,7 @@ $(function(){
 	    //location.href="/sshj/productPay?total="+toltalPrice+"&discountprice="+totaldprtprice+"&productnum=${pvo.productnum}&productname=${pvo.productname}&deliveryoption=${pvo.deliveryoption}&optionnum="+optprice+"&totalCount="+totalCount;
 	
 	});
+	
 	
 	
 	
@@ -506,12 +509,12 @@ $(function(){
        <form method="post" id="reply">
 		      
 					<ul class="wishList">
-							<li><a href=""><img src="img/${wl.thumbimg}"></a></li> <!-- 이미지 -->
+							<li><a href="customproduct?productnum=${wl.productnum}"><img src="img/${wl.thumbimg}"></a></li> <!-- 이미지 -->
 							
 							<li>
-							<div id="ptitle"><a href="">${wl.productname}</a></div><!-- 상품이름 -->
+							<div id="ptitle"><a href="customproduct?productnum=${wl.productnum}">${wl.productname}</a></div><!-- 상품이름 -->
 							<div id="ptitleprice">원가: ${wl.productprice}원</div><!-- 상품가격 -->
-							<div id="ptitlediscount">할인가격: ${wl.saleprice}원</div><!-- 할인가격 -->
+							<div id="ptitlediscount">할인가격: ${wl.saleprice*wl.wishnum}원</div><!-- 할인가격 -->
 						
 						    <c:if test="${wl.optionnum>0}">
 							<div id="optitle">추가옵션 :${wl.optionname}${wl.optionprice} x ${wl.wishoptionnum} 개  <span id="wishoptionCount"></span>  </div><!-- 옵션이름 --><!-- 옵션 수량 -->
@@ -525,11 +528,11 @@ $(function(){
 						
 							<li>
 							
-								   <input type="button" id="mbtn" class="mCount" value="-"/>
+								  <!-- <input type="button" id="mbtn" class="mCount" value="-"/>-->
 								    
 									<input type="hidden" value="${((wl.productprice-wl.saleprice)*wl.wishnum)+(wl.optionprice*wl.wishoptionnum)}">
 									<span id="prtnum">${wl.wishnum}</span>
-								    <input type="button" id="pbtn" class="pCount" value="+"/>
+								    <!--  <input type="button" id="pbtn" class="pCount" value="+"/>-->
 								    
 								    <input type="hidden" value="${wl.productprice}"><!-- 5 -->
 								    <input type="hidden" value="${wl.saleprice}"><!-- 6 -->
@@ -559,7 +562,7 @@ $(function(){
 							<li><input type="button" name="paybtn" id="paybtn" class="totalbuy" value="구매하기"/>
 							</li>
 							
-							<li><input type="button" value="x" id="delbutton" /></li>
+							<li><input type="button" value="x" id="delbutton" class="delbutton"/></li>
 							
 					</ul>
 			</form>
@@ -588,20 +591,20 @@ $(function(){
 		 </div>
 		 
          <!-- 페이징 표시--------- -->
-		 <!-- ----------------총가격------------------------ -->
+		 <!-- ----------------총가격------------------------ 
 
 		<div id="wishPriceTitle">
 		    <div id="wishone">상품 가격:</div>
 			<div id="wishtotal">총 구매가격:</div>
 			
-		<!-- 
+		
 			<div id="wishCenterButton">
 				 <input type="button" value="선택구매" id="swishbtn" />
 				 <input type="button" value="전체구매" id="twishbtn" />
 			</div>
-		 -->		
+		 		
 		</div>
-		
+		-->
 		
 		
 		</div>
