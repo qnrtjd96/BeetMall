@@ -15,8 +15,8 @@ public class SellerAskAdminServiceImp implements SellerAskAdminService {
 	 SellerAskAdminDAO sellerAskAdminDAO;
 	
 	@Override
-	public List<SellerAskAdminVO> askAllRecord(String userid) {
-		return sellerAskAdminDAO.askAllRecord(userid);
+	public List<SellerAskAdminVO> askAllRecord(SearchAndPageVO sapvo) {
+		return sellerAskAdminDAO.askAllRecord(sapvo);
 	}
 	
 	@Override
@@ -25,13 +25,13 @@ public class SellerAskAdminServiceImp implements SellerAskAdminService {
 	}
 	
 	@Override
-	public SellerAskAdminVO askSelect(String userid, int qnum) {
-		return sellerAskAdminDAO.askSelect(userid, qnum);
+	public SellerAskAdminVO askSelect(int qmnum) {
+		return sellerAskAdminDAO.askSelect(qmnum);
 	}
 	
 	@Override
-	public int askDelete(int qnum) {
-		return sellerAskAdminDAO.askDelete(qnum);
+	public int askDelete(int qmnum) {
+		return sellerAskAdminDAO.askDelete(qmnum);
 	}
 	
 	@Override
