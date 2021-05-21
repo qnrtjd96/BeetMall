@@ -30,6 +30,7 @@
 		padding:30px 0px;
 		margin:0px;
 		width:1080px;
+		
 	}
 	#pointUl>li{
 		width:180px;
@@ -37,6 +38,7 @@
 		line-height:60px;
 		margin:5px 0;
 		text-align:center;
+		border-bottom:1px solid #eee;
 	}
 	#pointUl>li:nth-child(1), #pointUl>li:nth-child(2), #pointUl>li:nth-child(3){
 		border-bottom:1px solid rgb(252,118,45);
@@ -259,7 +261,8 @@
 	/* 페이징처리끝 */
 	#chatIframe{
 		position:absolute;
-		top:600px;
+		top:400px;
+		left:800px;
 		width:502px;
 		height:662px;
 		padding:1px;
@@ -318,7 +321,7 @@
 		}
 		
 	})
-	$(document).on('click','input[value=조회]', function(){
+	$(document).on('click','input[value=대화하기]', function(){
 		var roomcode =$(this).prev().val();
 		var theyid = $(this).parent().prev().children().eq(0).text();
 		var myid = "${logId}";
@@ -379,7 +382,7 @@
 						<span class="chatttitle wordcut">${vo.receiver}</span><span class="chatdetail wordcut">${vo.otocontent}</span>
 					</c:if>
 					</li>
-					<li><input type="hidden" value="${vo.roomcode}"/><input type="button" class="btn" value="조회"/><input type="button" class="btn" value="삭제"/><input type="button" class="btn" value="신고하기"/></li>
+					<li><input type="hidden" value="${vo.roomcode}"/><input type="button" class="btn" value="대화하기"/><input type="button" class="btn" value="삭제"/><input type="button" class="btn" value="신고하기"/></li>
 				</c:forEach>
 			</ul>
 		</div>
@@ -412,4 +415,45 @@
 				<div id="chatInfoTitle"><span id="chatHeaderSpan"><span id="reportChat">신고하기</span><span id="theyId"></span>님과의 채팅입니다.</span><span id="closedivBtn">&times;</span></div>
 				<iframe src="" id="chatContainer" frameborder="0" ></iframe>
 	</div>
+	<!-- 신고하기 부분 -->
+	<div style="height:350px;width:500px;border:1px solid red;position:absolute;top:400px;left:800px;background-color:white;display:none;" id="reportDiv">
+		<form style="height:400px;width:500px;float:left;" method="post" action="customreport">
+			<h2 style="margin-left:10px;">신고하기</h2>
+			<span style="float:left;font-size:20px;margin-left:10px;">신고사유</span>
+				<input type="hidden" name="userid"/>												<!-- 신고자 아이디 -->
+				<input type="hidden" name="reporteduser"/>											<!-- 신고할 사람 아이디 -->
+				<input type="hidden" name="reportboard" value="1:1채팅"/>							<!-- 신고한 게시판 -->
+				<input type="hidden" name="reportboardnum"/>										<!-- 신고한 글 번호 -->
+				<select name="reportreason"  style="float:right;margin-right:10px;font-size:20px;">	<!-- 신고사유 -->
+					<option>비방/욕설</option>
+					<option>허위</option>
+					<option>성희롱</option>
+					<option>기타</option>
+				</select>
+			<textarea name="reportcontent" id="reportcontent" style="height:200px;width:480px;margin-left:10px; margin-right:10px;font-size:15px;"></textarea><!-- 신고내용 -->
+			<div style="font-size:20px;float:right;margin-right:10px;">
+				<input type="button" value="신고하기" style="background-color:#ff3a3a;color:white;border:1px solid #aaa;"id="reportsubmit"/>
+				<input type="button" value="닫기"style="background-color:#ddd;color:white;border:1px solid #aaa;"id="reportClose"/>
+			</div>
+		</form>
+	</div>
+	<!-- 신고하기 밑에 스크립트까지임 -->
+	<script>
+		$(function(){
+			$("#reportsubmit").click(function(){
+				
+				$("#reportcontent").val('');
+				$("#reportDiv").css("display","none");
+			})
+			$("#reportClose").click(function(){
+				$("#reportcontent").val('');
+				$("#reportDiv").css("display","none");
+			})
+			$(document).on('click','input[value=신고하기]', function(){
+				$("#reportDiv").css("display","block");
+				
+			});
+		})
+	</script>
+	<!-- 신고하기 끝 -->
 </div>

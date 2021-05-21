@@ -4,20 +4,20 @@
 	<select id="selectBuyList" resultType="com.beetmall.sshj.custom.vo.MyBuyListVO" parameterType="com.beetmall.sshj.custom.vo.PointPageVO">
 		select * from(
 		select * from(
-		select ord.orderdate as orderdate, ord.ordernum as ordernum, pro.productname as productname, pro.thumbimg as thumbimg, pro.productcontent as productcontent, det.orderprice as orderprice, det.orderstatus as orderstatus, del.invoice as invoice, pro.productnum, rev.ordernum as ordercnt
+		select ord.orderdate as orderdate, ord.ordernum as ordernum, pro.productname as productname, pro.thumbimg as thumbimg, pro.productcontent as productcontent, det.orderprice as orderprice, det.orderstatus as orderstatus, nvl(del.invoice,-1) as invoice, pro.productnum, rev.ordernum as ordercnt
 		from ordertbl ord
 		    join orderdetail det
 		        on ord.ordernum = det.ordernum
 		    join product pro
 		        on det.productnum = pro.productnum
-		    join delivery del
+		    left join delivery del
 		        on det.ordernum = del.ordernum
             left join review rev
                 on det.ordernum = rev.ordernum
 		where ord.userid=#{userid}
 		<if test="month>0">and ord.orderdate >= to_char(add_months(sysdate,-#{month}),'YYYY/MM/DD')</if>
 		order by ord.orderdate desc, ord.ordernum desc
-		)where rownum<![CDATA[<=]]>${pageNum}*${onePageRecord} order by orderdate desc, ordernum desc
+		)where rownum<![CDATA[<=]]>${pageNum}*${onePageRecord} order by orderdate asc, ordernum asc
 		)where rownum<![CDATA[<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
 								   <if test="pageNum!=totalPage">${onePageRecord}</if> 
 		order by orderdate desc, ordernum desc

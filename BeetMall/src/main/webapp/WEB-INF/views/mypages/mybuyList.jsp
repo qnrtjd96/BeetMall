@@ -10,7 +10,7 @@
 		display: block;
 	}
 	#mypointList{
-		height:1500px;
+		height:980px;
 		overflow:auto;
 		position: relative;
 	}
@@ -40,10 +40,11 @@
 	}
 	#pointUl>li{
 		width:135px;
-		height:60px;
+		height:65px;
 		line-height:60px;
 		margin:5px 0;
 		text-align:center;
+		border-bottom:1px solid #eee;
 	}
 	
 	#pointUl>li:nth-child(6n+1){
@@ -69,6 +70,7 @@
 		text-align:left;
 		float:left;
 		width:242px;
+		height:30px;
 	}
 	#pointUl>li:nth-child(6n+3) img{
 		line-height:60px;
@@ -100,11 +102,7 @@
 		font-size:0.9em;
 		color:#999;
 	}
-	.wordcut{
-		overflow:hidden;
-		white-space: nowrap;
-		text-overflow: ellipsis;
-	}
+	
 	.buybutton{
 		width:70px;
 		height:35px;
@@ -640,7 +638,7 @@
 	});
 	$(document).on('click','input[value=재구매]', function(){
 		var num = $(this).prev().prev().val();
-		location.href="customproduct?no="+num;
+		location.href="customproduct?productnum="+num;
 	});
 	$(document).on('click','input[value=문의작성]', function(){
 		var ordernum = $(this).parent().prev().prev().prev().prev().html();
@@ -652,6 +650,20 @@
 		
 	});
 	$(document).on('click','#questionBtn', function(){
+		var qtitle = '';
+		qtitle = $(".qtitleInput").val();
+		var qcontent = '';
+		qcontent = $("#summernoteQuestion").val();
+		if(qtitle == null || qtitle == ''){
+			alert("제목을 입력해주세요"+qtitle);
+			$(".qtitleInput").focus();
+			return false;
+		}
+		if(qcontent == null || qcontent == ''){
+			alert("내용을 입력해주세요"+qcontent);
+			$("#summernoteQuestion").focus();
+			return false;
+		}
 		$("#questionForm").submit();
 	});
 	$(document).on('click','#questionCloseBtn', function(){
@@ -755,6 +767,7 @@
 		}
 		location.href=lin;
 	}
+	
 </script>
 <div class="section">
 	<div id="mypointList">
@@ -783,11 +796,14 @@
 					<li><span class="pointdate">${vo.orderdate}</span></li>
 					<li>${vo.ordernum}</li>
 					<li>
-					<a href="customproduct?no=${vo.productnum}"><img src="/sshj/resources/sellerProductImgs/${vo.thumbimg}"></a><span class="buyttitle wordcut"><a href="customproduct?no=${vo.productnum}">${vo.productname}</a></span><span class="buydetail wordcut"><a href="customproduct?no=${vo.productnum}">${vo.productcontent}</a></span>
+					<a href="customproduct?productnum=${vo.productnum}"><img src="/sshj/resources/sellerProductImgs/${vo.thumbimg}"></a><span class="buyttitle wordcut"><a href="customproduct?productnum=${vo.productnum}">${vo.productname}</a></span><span class="buydetail wordcut"><a href="customproduct?productnum=${vo.productnum}">${vo.productcontent}</a></span>
 					</li>
 					<li><span class="pointprice">${vo.orderprice}</span>원</li>
 					<li>${vo.orderstatus}<input type="hidden" value="${vo.productnum}"/></li>
 					<c:if test="${vo.orderstatus == '준비중'}">
+					<li><input type="button" class="btn qnaWrite" value="문의작성"/><input type="button" class="btn" value="취소하기"/></li>
+					</c:if>
+					<c:if test="${vo.orderstatus == '결제완료'}">
 					<li><input type="button" class="btn qnaWrite" value="문의작성"/><input type="button" class="btn" value="취소하기"/></li>
 					</c:if>
 					<c:if test="${vo.orderstatus == '배송중'}">
@@ -981,7 +997,7 @@
 			<form id="questionForm" action="questionWrite" method="post">
 				<input type="hidden" name="productnum" value="" id="qboardnum"/>
 				<ul id="questionUl" style="text-align:left;">
-					<li>제목</li>		<li><input type="text" name="qtitle" style="width:335px;" placeholder="제목을 작성해주세요" maxlength="100"/></li>
+					<li>제목</li>		<li><input type="text" name="qtitle" style="width:335px;" placeholder="제목을 작성해주세요" maxlength="100" class="qtitleInput"/></li>
 					<li>상품번호</li>		<li><span id="productnum" class="qsetNum"></span></li>
 					<li>공개비공개 설정하기</li> 	<li>
 										<select name="qopen">
