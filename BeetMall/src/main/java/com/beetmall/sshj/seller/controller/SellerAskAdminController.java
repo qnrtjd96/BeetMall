@@ -77,8 +77,7 @@ public class SellerAskAdminController {
 	@RequestMapping(value = "/ask_admin_write_ok", method = RequestMethod.POST)
 	public ModelAndView askWrite(SellerAskAdminVO saavo, HttpServletRequest req, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		saavo.setUserid((String) session.getAttribute("logId"));
-		
+		saavo.setUserid((String) session.getAttribute("logId"));		
 		int result = sellerAskAdminService.askWrite(saavo);
 		if (result > 0) {
 			mav.setViewName("redirect:ask_admin_list");
