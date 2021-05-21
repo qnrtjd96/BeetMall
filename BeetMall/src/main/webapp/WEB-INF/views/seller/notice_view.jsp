@@ -107,8 +107,9 @@
                </div>
             </c:if>
          </div>   
+        <!-- 고객센터 상단 메뉴 판매자홈, 공지사항, 자주묻는질문, 문의하기 -->
          <ul id="seller_cs_menu">
-            <li><a href="#">BEETMALL</a></li>
+            <li><a href="<%=request.getContextPath()%>/sellerMain">Beetmall</a></li>
             <li><a href="notice">공지사항</a></li>
             <li><a href="faq">자주묻는 질문</a></li>
             <li><a href="ask_admin_list">문의하기</a></li>
