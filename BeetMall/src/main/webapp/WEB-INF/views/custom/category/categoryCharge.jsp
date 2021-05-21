@@ -392,8 +392,6 @@
        ///여기바꿔야함///////////////////////////////////////////////////////////////////////
        
        //지역넣어줄값
-       
-       
 		$('#Sequence').change(function(){
 			var hrefff ="/sshj/categoryCharge?"
 	   		if($('#Sequence option:selected').val() == "평점높은순"){
@@ -414,10 +412,10 @@
 			            	}
 		            	}
 	            	}
-	            	hrefff += "&type=1";
+	            	hrefff += "&type=1#aaaa";
 	            	location.href=hrefff;
 	            }else{
-	            	location.href="/sshj/categoryCharge?type=1"
+	            	location.href="/sshj/categoryCharge?type=1#aaaa"
 	            }
 	   		}else if($('#Sequence option:selected').val() == "평점낮은순"){
 	   			if($("#area").val() != null && $("#area").val()!=''){//지역이 널이아닐때
@@ -437,10 +435,10 @@
 			            	}
 		            	}
 	            	}
-	            	hrefff += "&type=2";
+	            	hrefff += "&type=2#aaaa";
 	            	location.href=hrefff;
 	            }else{
-	            	location.href="/sshj/categoryCharge?type=2"
+	            	location.href="/sshj/categoryCharge?type=2#aaaa"
 	            }
 	   		}else if($('#Sequence option:selected').val() == "리뷰많은순"){
 	   			if($("#area").val() != null && $("#area").val()!=''){//지역이 널이아닐때
@@ -460,10 +458,10 @@
 			            	}
 		            	}
 	            	}
-	            	hrefff += "&type=3";
+	            	hrefff += "&type=3#aaaa";
 	            	location.href=hrefff;
 	            }else{
-	            	location.href="/sshj/categoryCharge?type=3"
+	            	location.href="/sshj/categoryCharge?type=3#aaaa"
 	            }
 	   		}else if($('#Sequence option:selected').val() == "리뷰적은순"){
 	   			if($("#area").val() != null && $("#area").val()!=''){//지역이 널이아닐때
@@ -480,10 +478,10 @@
 			            	}
 		            	}
 	            	}
-	            	hrefff += "&type=4";
+	            	hrefff += "&type=4#aaaa";
 	            	location.href=hrefff;
 	            }else{
-	            	location.href="/sshj/categoryCharge?type=4";
+	            	location.href="/sshj/categoryCharge?type=4#aaaa";
 	            }
 	   		}
 		});
@@ -644,6 +642,11 @@
 		return loca;
 	}
 </script>
+<c:if test="${list2!=null}">
+	<script>
+		location.href="#aaaa";
+	</script>
+</c:if>
 	<div class="section">
 		<div id="main">
 	        <h1>지역별 보기</h1>
@@ -986,6 +989,7 @@
 		        <input type="submit" value="검색하기" id="boardUpddate" class="btn" style="margin-bottom: 20px;"/>
 	      	</form>
 	    </div>
+	    <span id="aaaa"><a href="#aaaa"></a></span>
 	    <hr/>
 	    <select id="Sequence">
 	        <option value="평점높은순">평점높은순</option>
@@ -1008,6 +1012,9 @@
 								</c:if>
 							</li>
 							<li>${data.productname}</li>
+							<c:if test="${data.totalscore==null}">
+								<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">☆☆☆☆☆</span></li>
+							</c:if>
 							<c:if test="${data.totalscore==1}">
 								<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★☆☆☆☆</span></li>
 							</c:if>

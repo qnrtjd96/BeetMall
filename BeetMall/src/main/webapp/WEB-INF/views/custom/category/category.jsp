@@ -24,6 +24,9 @@
 					</c:if>
 				</li>
 				<li>${data.productname}</li>
+				<c:if test="${data.totalscore==null}">
+					<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">☆☆☆☆☆</span></li>
+				</c:if>
 				<c:if test="${data.totalscore==1}">
 					<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★☆☆☆☆</span></li>
 				</c:if>

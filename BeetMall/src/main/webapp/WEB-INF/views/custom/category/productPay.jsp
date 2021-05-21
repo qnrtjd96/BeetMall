@@ -39,8 +39,10 @@
 		margin-bottom: 50px;
 	}
 	#payyy{
+	    font-size: 20px;
 	    width: 350px;
 	    height: 50px;
+	    color: white;
 	    background-color: rgb(252,118,45);
 	    border: 1px solid lightgray;
 	}
@@ -119,15 +121,22 @@
 			point = $("#usePoint").val();
 			asdf = tototaal-point;
 			if(asdf>=100){
+				hellopoint = havingPoint-point;
 				if(hellopoint>0){
 					if(point%100==0){
 						tototaal = tototaal-point;
 						hellopoint = havingPoint-point;
 						$("#totototo").empty();
 						$("#totototo").html("<h3>"+tototaal+"원</h3>");
-						$("#pointCheck").prop('readonly', true);
+						$("#pointCheck").attr("disabled", true);
+					}else{
+						alert("100원 단위로 사용가능합니다.");
 					}
+				}else{
+					alert("가진 포인트보다 많이 사용할수 없습니다.");
 				}
+			}else{
+				alert("100원은 결제하셔야합니다.");
 			}
 		});
 		
