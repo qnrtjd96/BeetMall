@@ -169,16 +169,24 @@ public class ProductViewController {
 	
 	@RequestMapping("customWishDelete")
 	@ResponseBody
-	public ModelAndView wishDel(HttpServletRequest req,HttpServletResponse res) {
-	
+	public int wishDel(HttpServletRequest req,HttpServletResponse res) {
+	    int result=0;
 		int num=Integer.parseInt(req.getParameter("wishcode"));
-		System.out.println(num);
-		ModelAndView mav=new ModelAndView();
+		System.out.println("넘어온 삭제 데이터="+num);
+		//ModelAndView mav=new ModelAndView();
 		
-		productViewService.wishDel(num);
+		//productViewService.wishDel(num);
 		
-		mav.setViewName("custom/customWish");
-		return mav;
+		result=productViewService.wishDel(num);
+		if(result>0) {
+			result=1;
+		}else {
+			result=0;
+		}
+		
+		System.out.println("넘어온 삭제 데이터2="+num);
+		//mav.setViewName("custom/customWish");
+		return result;
 		
 	}
 	
