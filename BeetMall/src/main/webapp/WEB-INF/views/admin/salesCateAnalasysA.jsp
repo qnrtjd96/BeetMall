@@ -69,8 +69,9 @@ button {
 
 /* 카테고리 검색 */
 #categoryList {
-	flex-basis: 50%;
+	flex-basis: 100%;
 	border: 1px solid #aaa;
+	margin: 50px 0 50px 50px;
 }
 
 #categoryListMiddle {
@@ -272,6 +273,7 @@ b {
 #excelContainer {
 	position: relative;
 	top: -60px;
+	margin-left: 25px !important;
 }
 
 #salesCateTitle, #sales1Title, #sales2Title {
@@ -286,7 +288,7 @@ b {
 #totalMoney{
 	width:100%;
 	text-align: right;
-	margin: 5px 5px 5px 0;
+	margin: 5px 5px 5px 25px;
 	font-weight: bold;
 	
 	border: 1px solid #ddd;
@@ -297,7 +299,9 @@ b {
     top: -60px;
 }
 
-
+.wrapContainer{
+	margin: 0px;
+}
 #excelViewNum{
 	float: right;
 	height: 30px;
