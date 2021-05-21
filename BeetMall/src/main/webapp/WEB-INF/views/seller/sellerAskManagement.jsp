@@ -471,7 +471,7 @@ function answerEdit(qnum, productname, qtitle, qcontent, userid, qwritedate, qan
 	tag += '<p>' + qcontent + '</p>';
 	tag += '</div>';
 	tag += '<div id="qAnswer">';
-	tag += '<div class="popupContentTitle">답글 내용</div>';
+	tag += '<div class="popupContentTitle">답글 내용 ()</div>';
 		tag += '<div id="qAnswer">';
 			tag += '<textarea id="qanswer" name="qanswer" rows="5" cols="50" style="width:100%;">'+qanswer+'</textarea>';
 		tag += '<div id="popupBtnContainer">';

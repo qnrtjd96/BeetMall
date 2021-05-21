@@ -61,7 +61,7 @@ public class SellerSalesController {
 		return service.salesDataList(vo);
 	}
 	
-	@RequestMapping("/excel_down")
+	@RequestMapping("/excel_down") // 엑셀 다운
 	@ResponseBody
 	public void excel_down(HttpServletRequest req) {
 		String[] excelData = req.getParameterValues("excelData");

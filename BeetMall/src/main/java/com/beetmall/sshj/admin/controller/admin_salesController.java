@@ -36,15 +36,20 @@ import org.springframework.web.servlet.ModelAndView;
 import com.beetmall.sshj.admin.service.Admin_SalesService;
 import com.beetmall.sshj.admin.service.Boardervice;
 import com.beetmall.sshj.admin.vo.Admin_SalesVO;
+import com.beetmall.sshj.seller.service.SellerSalesService;
 
 @Controller
 public class admin_salesController {
 	@Inject
 	Boardervice adminService;
-	////////////////////매출 관리////////////////////////////////
-	
+
+	// 매출관리 
 	@Autowired
 	Admin_SalesService salesService;
+	
+	// seller 카테고리 불러오기 위한 서비스
+	@Autowired
+	SellerSalesService sellerService;
 	 	
 	//판매내역 보기
 	@RequestMapping("/salesListA")
@@ -303,12 +308,20 @@ public class admin_salesController {
 	public ModelAndView salesCateAnalasysA() {
 		ModelAndView mav = new ModelAndView(); 
 		
-		
+		// 카테고리 리스트를 불러와서 리스트에 담는다
+		mav.addObject("cateList",sellerService.allCategoryList());		
+		mav.setViewName("seller/sellerSales");
 		
 		
 		mav.setViewName("/admin/salesCateAnalasysA");
 		return mav;
 	} 
+	
+	@RequestMapping("/adminSalesCateData")
+	public void adminSalesCateData() {
+		
+		
+	}
 		
 	
 }
