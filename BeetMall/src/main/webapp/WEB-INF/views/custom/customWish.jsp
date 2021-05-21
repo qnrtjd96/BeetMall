@@ -375,6 +375,8 @@ $(function(){
 	 var totalCount=0;
 	 var totaldprtprice=0;
 	 
+	 var wishcode=0;
+	 
 	/*
 	$(".pCount").click(function() {
 		///alert("productprice"+productprice);	
@@ -481,7 +483,32 @@ $(function(){
 	
 	});
 	
-	
+	$(".delbutton").click(function(){
+		
+		
+		
+		var wishcode=$(this).next("input").val();
+		
+		var url="customWishDelete";
+		if(confirm("해당 상품을 장바구니에서 제거하시겠습니까?")){
+			$.ajax({
+			url:url,
+			data: "wishcode="+wishcode,
+			success:function(result){
+				alert('장바구니 삭제');
+			/* 	location.replace="sshj/customWish"; */
+				alert("끝남");
+			},error:function(e){
+				alert(e.responseText);
+				alert("장바구니 삭제 실패");
+			}
+		})
+		}
+		
+		
+		
+		
+	});
 	
 	
 });
@@ -562,7 +589,11 @@ $(function(){
 							<li><input type="button" name="paybtn" id="paybtn" class="totalbuy" value="구매하기"/>
 							</li>
 							
-							<li><input type="button" value="x" id="delbutton" class="delbutton"/></li>
+							<li>
+							  <input type="button" value="x" id="delbutton" class="delbutton" />
+							  <input type="hidden" value="${wl.wishcode}">
+							</li>
+							
 							
 					</ul>
 			</form>

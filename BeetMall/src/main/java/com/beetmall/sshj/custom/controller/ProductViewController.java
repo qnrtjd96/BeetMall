@@ -164,7 +164,23 @@ public class ProductViewController {
 			return mav;
 	}
 	
+	///////////////상품 장바구니 삭제///////////////////////
+
 	
+	@RequestMapping("customWishDelete")
+	@ResponseBody
+	public ModelAndView wishDel(HttpServletRequest req,HttpServletResponse res) {
+	
+		int num=Integer.parseInt(req.getParameter("wishcode"));
+		System.out.println(num);
+		ModelAndView mav=new ModelAndView();
+		
+		productViewService.wishDel(num);
+		
+		mav.setViewName("custom/customWish");
+		return mav;
+		
+	}
 	
 	
 }

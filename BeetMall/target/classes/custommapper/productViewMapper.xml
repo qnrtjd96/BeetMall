@@ -104,6 +104,10 @@
         	order by productnum	asc					  				
      </select>
      
+  <!-- 장바구니 삭제 -->
+    <delete id="wishDel" parameterType="com.beetmall.sshj.custom.vo.PageProductVO">
+		delete from wish where wishcode=${param}
+	</delete>
  
     
     
