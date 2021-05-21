@@ -356,11 +356,11 @@ font-size:15px;
 
 $(function(){
 	
-	 var prtprice=$('.pCount').next().val();
-	 var dprtprice=$('.pCount').next().next().val();
-	 var pcount=$('.pCount').next().next().next().val();
-	 var optprice=$('.pCount').next().next().next().next().val();
-	 var ocount=$('.pCount').next().next().next().next().next().val();
+	 var prtprice=0;
+	 var dprtprice=0;
+	 var pcount=1;
+	 var optprice=0;
+	 var ocount=0;
 	 var tprice=0;
 	 var submitprice=0;
 	 
@@ -426,7 +426,7 @@ $(function(){
 		}
 		
 		$(this).next().next('#prtnum').text(pcount);
-		
+		//document.getElementById("#prtvalue").value = pcount;
 
 		tprice=(optprice*ocount)+((prtprice-dprtprice)*pcount); //총결제가격
 		totaldprtprice=dprtprice*pcount; //총할인가격
@@ -442,11 +442,7 @@ $(function(){
 	
 	$(".totalbuy").click(function(){
 		
-		prtprice=$(this).next().val();
-	    dprtprice=$(this).next().next().val();
-	    /////////pcount는 위에서 만들어줌
-	    optprice=$(this).next().next().next().next().val();
-	    ocount=$(this).next().next().next().next().next().val();
+		
 	   
 	    productnum=$(this).parent().prev().children("input").eq(0).val();
 	    optionnum=$(this).parent().prev().children("input").eq(1).val();
@@ -454,6 +450,17 @@ $(function(){
 	    optionname=$(this).parent().prev().children("input").eq(3).val();
 	    deliveryoption=$(this).parent().prev().children("input").eq(4).val();
 	    
+	    prtprice=$(this).parent().prev().children("input").eq(5).val();
+	    dprtprice=$(this).parent().prev().children("input").eq(6).val();
+	    /////////pcount는 위에서 만들어줌 
+	    optprice=$(this).parent().prev().children("input").eq(8).val();
+	    ocount=$(this).parent().prev().children("input").eq(9).val();
+	    
+	    
+	    //pcount=$(this).parent().prev().children("input").eq(7).text(); //아무것도 안누르고 구매 눌렀을때
+	    //+ -버튼누르고 구매 눌렀을때
+	    
+
 	    //alert("productnum"+ productnum+"/productname"+productname+"/optionname"+optionname+"/deliveryoption"+deliveryoption);
     
 	    tprice=(optprice*ocount)+((prtprice-dprtprice)*pcount); //총결제가격
@@ -465,9 +472,9 @@ $(function(){
 	    
 	    
 	    
-		//alert("상품가격="+prtprice+"/상품의 갯수="+pcount+"/옵션가격="+optprice+"/옵션의갯수="+ocount+"/본래할인가격"+dprtprice+"/총할인가격="+totaldprtprice+"/최종구매가격="+submitprice+"/productname="+productname+"/optionname="+optionname+"/deliveryoption="+deliveryoption);
+		alert("상품가격="+prtprice+"/상품의 갯수="+pcount+"/옵션가격="+optprice+"/옵션의갯수="+ocount+"/본래할인가격"+dprtprice+"/총할인가격="+totaldprtprice+"/최종구매가격="+submitprice+"/productname="+productname+"/optionname="+optionname+"/deliveryoption="+deliveryoption);
 		//alert("/sshj/productPay?total="+tprice+"&discountprice="+totaldprtprice+"&productnum="+productnum+"&productname="+productname+"&deliveryoption="+deliveryoption+"optionnum="+optprice+"&totalCount="+totalCount);
-   	    location.href="/sshj/productPay?total="+tprice+"&discountprice="+totaldprtprice+"&productnum="+productnum+"&productname="+productname+"&deliveryoption="+deliveryoption+"&optionnum="+optprice+"&totalCount="+totalCount;
+   	    location.href="/sshj/productPay?total="+tprice+"&discountprice="+totaldprtprice+"&productnum="+productnum+"&productname="+escape(productname)+"&deliveryoption="+deliveryoption+"&optionnum="+optprice+"&totalCount="+totalCount;
 	    //location.href="/sshj/productPay?total="+toltalPrice+"&discountprice="+totaldprtprice+"&productnum=${pvo.productnum}&productname=${pvo.productname}&deliveryoption=${pvo.deliveryoption}&optionnum="+optprice+"&totalCount="+totalCount;
 	
 	});
@@ -541,16 +548,15 @@ $(function(){
 									<input type="hidden" id="productname" name="productname" value="${wl.productname}"><!-- 12 -->
 									<input type="hidden" id="productname" name="optionname" value="${wl.optionname}"><!-- 13 -->
 									<input type="hidden" id="productname" name="deliveryoption" value="${wl.deliveryoption}"><!-- 14 -->
+									<input type="hidden" value="${wl.productprice}"><!-- 5 -->
+								    <input type="hidden" value="${wl.saleprice}"><!-- 6 -->
+									<input type="hidden" value="${wl.wishnum}"><!-- 7 데이터 속성 바뀨ㅣ는 애-->
+									<input type="hidden" value="${wl.optionprice}"><!-- 8 -->
+									<input type="hidden" value="${wl.wishoptionnum}"><!-- 9 -->
 							</li>
 							
 						
 							<li><input type="button" name="paybtn" id="paybtn" class="totalbuy" value="구매하기"/>
-								    
-								    <input type="hidden" value="${wl.productprice}"><!-- 5 -->
-								    <input type="hidden" value="${wl.saleprice}"><!-- 6 -->
-									<input type="hidden" value="${wl.wishnum}"><!-- 7 -->
-									<input type="hidden" value="${wl.optionprice}"><!-- 8 -->
-									<input type="hidden" value="${wl.wishoptionnum}"><!-- 9 -->
 							</li>
 							
 							<li><input type="button" value="x" id="delbutton" /></li>
