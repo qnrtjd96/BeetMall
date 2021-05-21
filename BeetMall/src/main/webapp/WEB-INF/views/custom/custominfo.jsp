@@ -407,12 +407,15 @@ $(function(){
 
 	
 	///////////////////비공개처리 업데이트////////////////
-	$(".lockbtn").click(function() {
+/*	
+	$(".lockbtn").click(function(data) {
 	
 		
 		if(confirm("게시글을 비공개 처리하시겠습니까?")){			
 			
-		var num=$(this).parent().next().val();
+		var num = $(this).parent().next("input[name=inum]").val() ;
+
+		//var num=$(data).parent().next().val();
 		var url = "lockinfo";
 			
 			console.log(url,num);
@@ -431,7 +434,34 @@ $(function(){
 		
 		
 	});
+
+	*/
+	/*
+	function lockf(this){
+		if(confirm("게시글을 비공개 처리하시겠습니까?")){			
+			
+			
+			var num=$(data).parent().next().val();
+			var url = "lockinfo";
+				
+				console.log(url,num);
+				
+				$.ajax({
+					url:url,
+					data:num,
+					success:function(result){
+						console.log('비공개처리 성공---> ');
+						alert(num);
+					},error:function(e){
+						console.log('비공개처리 실패---> ');
+					}
+				})
+			}
+			
 	
+	}
+	*/
+
 	
 });
 	
@@ -499,7 +529,7 @@ $(function(){
 				 		 <li>답변완료</li>
 				 	</c:if>
 				</ul>
-				<input type="hidden" value="${qlist.qnum}">
+				<input type="hidden" name="inum" value="${qlist.qnum}">
 				<div id="qnaViewbox" style="display:none" >
 			
 							<div id="qnatxtbox">				
