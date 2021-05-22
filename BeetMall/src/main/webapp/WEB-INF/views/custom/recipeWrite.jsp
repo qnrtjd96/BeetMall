@@ -42,6 +42,7 @@
 		border-top:2px solid lightgray;
 		border-bottom:2px solid lightgray;
 		font-size:15px;
+		margin-top:30px;
 	}
 	th, .th{
 		height:40px;
@@ -93,6 +94,20 @@
 	.td{
 		width:0;
 	}
+	
+	
+	.recititlew{
+	font-size:25px;
+	}
+	
+	#tbodyid>.tr_head>.td>input{
+	border: none;
+	}
+	
+	.tr_head>.td>input{
+	width:700px;
+	}
+	
 </style>
 
 <div class="section">
@@ -100,17 +115,17 @@
 		
 	<form method="post" action="/sshj/recipeWriteOk" enctype="multipart/form-data">
 		<table>
-			<tbody>
-				<tr>
-					<th colspan="4">레시피 작성</th>
+			<tbody id="tbodyid">
+				<tr class="bigrecititlew">
+					<th colspan="4" class="recititlew">레시피 작성</th>
 				</tr>
 				<tr class="tr_head">
 					<th class="menu" >제목</th>
-					<td class="td" colspan="3"><input type="text" name="recipetitle" id="recipetitle" placeholder="문의사항 제목을 입력해주세요."/></td>
+					<td class="td" colspan="3"><input type="text" name="recipetitle" id="recipetitle" placeholder="레시피 제목을 입력해 주세요"/></td>
 				</tr>
 				<tr class="tr_head">
 					<th class="menu">작성자</th>
-					<td  class="td"><span></span></td>
+					<td  class="td"><span id="idname">${logId}</span></td>
 				</tr>
 				<tr class="tr_head">
 					<th class="menu">대표이미지</th>
@@ -133,8 +148,12 @@
 			</div>
 		</form>
 </div>
+
 <script>
+
 $(document).ready(function() {
+	
+	
 	  $('.summernote').summernote({
 		  height: 500,                 // 에디터 높이 
 		  focus: true,
@@ -150,6 +169,12 @@ $(document).ready(function() {
         }
 	  });
 	});
+	
+	if(${logId==null}){
+		if(confirm("로그인후 이용해주세요")){
+			location.href="login"
+		}
+	}
 	
 </script>
 

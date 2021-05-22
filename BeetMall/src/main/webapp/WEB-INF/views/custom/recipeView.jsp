@@ -314,6 +314,13 @@ td, .td{
 	width:930px; line-height:50px;
 }
 
+#btnviewbox{
+width:100%;
+float:left;
+height:45px;
+padding-top:5px;
+paddig-bottom:5px;
+}
 
 </style>
 
@@ -387,8 +394,10 @@ td, .td{
 		</fieldset>
 		 
 		<c:if test="${logId==vo.userid}">
-				<input type="button"  value="수정하기" class="btn" onClick="location.href='<%=request.getContextPath() %>/recipeEdite?recipenum=${vo.recipenum}'"/>
-				<input type="button" value="삭제하기" class="btn" id="btn" onClick="Deletebtn()"/>
+			<div id="btnviewbox">
+					<input type="button"  value="수정하기" class="btn" onClick="location.href='<%=request.getContextPath() %>/recipeEdite?recipenum=${vo.recipenum}'"/>
+					<input type="button" value="삭제하기" class="btn" id="btn" onClick="Deletebtn()"/>
+			</div>
 		</c:if>
 		
 		
@@ -420,9 +429,35 @@ td, .td{
 <script>
 
 function Deletebtn(){
-	if(confirm("내가 쓴 레시피를 삭제하시겠습니까?")){
-		location.href="recipeDelete?recipenum=${vo.recipenum}"
-	}
+	
+		var recipenum=${vo.recipenum};
+        //alert(recipenum+"r");
+        
+		  var url = "recipeDelete";
+		  var data = "recipenum="+recipenum;
+		  
+			console.log(url,data);
+			if(confirm("해당 게시글을 삭제 하시겠습니까?")){
+				$.ajax({
+					url:url,
+					data:data,
+					success:function(result){
+						//console.log('내가쓴 레시피 삭제 성공');
+						if(result>0){//삭제
+							alert('내가쓴 레시피 삭제 성공');
+							location.href="/sshj/recipeList";
+						}else {//삭제실패
+							alert('실패');
+							location.href="/sshj/recipeList";
+						}
+						
+					},error:function(e){
+						console.log(e.responseText);
+						console.log("내가쓴 레시피 삭제 실패");
+					}
+				});
+			};
+	
 	
 };
 
