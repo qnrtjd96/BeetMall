@@ -18,7 +18,7 @@
 		text-align:center;
 		border-radius:7%;
 		margin-left:1px;
-	}
+	} 
 	#pointSelect>div{
 		float:left;
 	}
