@@ -75,6 +75,7 @@
 	} 
 	#container li:nth-of-type(4):not(#sortBox li:nth-of-type(4)){
 		width:20%;	
+		text-align: left;
 	}
 	#title>ul,.contentList{
 		position:relative; left:-20px;
@@ -244,48 +245,45 @@
 		<div id="contentList">
 			<c:forEach var="data" items="${list}">
 				<ul class="contentList">
-					<li><input type="checkbox" name="check" id="check"> </li>
-					<li>1286</li>
-					<li>리뷰</li>
-					<li class="wordCut"><a href="제목?">과일 상태 왜이래요 껍질이 너무 두꺼워서 일도 먹을게 없쟈나요</a></li>
-					<li>2021/03/21</li>
-					<li>2021/03/23</li>
-					<li>비방</li>
-					<li>asdghle</li>
-					<li>yuthgvf</li>
-				</ul>
-			</c:forEach>
-			<c:forEach var="data" items="${list}">
-				<ul class="contentList">
-					<li><input type="checkbox" name="check" id="check"> </li>
-					<li>1286</li>
-					<li>리뷰</li>
-					<li class="wordCut"><a href="제목?">과일 상태 왜이래요 껍질이 너무 두꺼워서 일도 먹을게 없쟈나요</a></li>
-					<li>2021/03/21</li>
-					<li>2021/03/23</li>
-					<li>비방</li>
-					<li>asdghle</li>
-					<li>yuthgvf</li>
+					<li><input type="checkbox" name="check" id="check"></li>
+					<li>${data.reportnum }</li>
+					<li>${data.reportboard }</li>
+					<li class="wordCut"><a href="sshj/">${data.reportcontent}</a></li>
+					<li>${data.reportdate }</li>
+					<li>
+						<c:if test="${data.completedate==null }">
+							처리요망
+						</c:if>
+						<c:if test="${data.completedate != null }">
+							${data.completedate }
+						</c:if>
+					</li>
+					<li>${data.reportreason }</li>
+					<li>${data.userid }</li>
+					<li>${data.reporteduser }</li>
 				</ul>
 			</c:forEach> 
 			</div>
 		</div>	 
 		<div class="page_wrap">
 			<div class="page_nation">
-			   <a class="arrow pprev" href="<%=request.getContextPath()%>/img/kpage_pprev.png"></a>
-			   <a class="arrow prev" href="#"></a>
-			   <a href="#" class="active">1</a>
-			   <a href="#">2</a>
-			   <a href="#">3</a>
-			   <a href="#">4</a>
-			   <a href="#">5</a>
-			   <a href="#">6</a>
-			   <a href="#">7</a>
-			   <a href="#">8</a>
-			   <a href="#">9</a>
-			   <a href="#">10</a>
-			   <a class="arrow next" href="#"></a>
-			   <a class="arrow nnext" href="#"></a>
+			   <c:if test="${pageVO.pageNum>1}"><!-- 이전페이지가 있을때 -->
+			   		<a class="arrow prev" href="/sshj/csreportListA?pageNum=${pageVO.pageNum-1}<c:if test="${pageVO.searchWord != null && pageVO.searchWord != ''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>"></a>
+			   </c:if>
+			   <!-- 페이지 번호                   1                                    5                     -->
+	           <c:forEach var="p" begin="${pageVO.startPageNum}" step="1" end="${pageVO.startPageNum + pageVO.onePageNum-1}">
+	              <c:if test="${p<=pageVO.totalPage}">
+	                 <c:if test="${p==pageVO.pageNum}"> <!-- 현재페이지일때 실행 -->
+	                    <a class="active">${p}</a>
+	                 </c:if>   
+	                 <c:if test="${p!=pageVO.pageNum}"> <!-- 현재페이지가 아닐때 실행 -->
+	                    <a href="/sshj/csreportListA?pageNum=${p}<c:if test="${pageVO.searchWord != null && pageVO.searchWord != ''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>">${p}</a>
+	                 </c:if>
+	              </c:if>
+	           </c:forEach>
+	           <c:if test="${pageVO.pageNum < pageVO.totalPage}">
+	              <a class="arrow next" href="/sshj/csreportListA?pageNum=${pageVO.pageNum+1}<c:if test="${pageVO.searchWord != null && pageVO.searchWord != ''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>"></a>
+	           </c:if>
 			</div>
 		 </div> 
 		 <div>

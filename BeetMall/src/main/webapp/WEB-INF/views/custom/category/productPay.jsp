@@ -88,6 +88,11 @@
 	#pointCheck{
 		margin-left: 15px;
 	}
+	.productname{
+		font-size: 18px;
+		font-weight: 600;
+		color: brown;
+	}
 </style>
 <script>
 	$(function(){
