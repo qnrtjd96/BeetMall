@@ -44,4 +44,19 @@
 	<insert id="member2Insert">
 		insert into member2(userid, exitdate) values(#{param1}, sysdate)
 	</insert>
+	<select id="idFind" resultType="com.beetmall.sshj.custom.vo.MemberVO">
+		select userid, useremail from member where useremail=#{param1}
+	</select>
+	<select id="pwdfind" resultType="Integer">
+		select count(*) from member where userid = #{param1} and useremail = #{param2}
+	</select>
+	<update id="pwdupdate">
+		update member set userpwd = #{param2} where userid = #{param1}
+	</update>
+	<select id="usertypetest" resultType="Integer">
+		select usertype from member where userid = #{param1}
+	</select>
+	<select id="checkuseridNpwd"  resultType="Integer">
+		select count(*) from member where userid=#{param1} and userpwd=#{param2}
+	</select>
 </mapper>
