@@ -1384,29 +1384,45 @@ function changeViewListNum(num){
 				<div class="wrapContainer">
 					<div id="chartContainer">
 						<canvas id="myChart" style="width: 1280px; height: 500px;"></canvas>
-	
-						<script> // 차트 선언, 카테고리, 날짜, 차트, 엑셀 관여하는 스크립트
-						
-						let ctx = document.getElementById("myChart").getContext("2d");
-						myChart = new Chart(ctx, {
-							type: 'line',
-							data:{
-								labels: [], // 몇년 몇월 몇일 표시하는 데이터
-								datasets: [] // 차트에 그려지는 데이터를 표시하는 데이터
-							},
-							options: {
-								responsive: false,
-								scales:{
-									y:{
-										beginAtZero: true // 차트 숫자는 0부터 표시
+							<script> // 차트 선언, 카테고리, 날짜, 차트, 엑셀 관여하는 스크립트
+							
+							let ctx = document.getElementById("myChart").getContext("2d");
+							myChart = new Chart(ctx, {
+								type: 'line',
+								data:{
+									labels: [], // 몇년 몇월 몇일 표시하는 데이터
+									datasets: [] // 차트에 그려지는 데이터를 표시하는 데이터
+								},
+								options: {
+									responsive: false,
+									scales:{
+										y:{
+											beginAtZero: true // 차트 숫자는 0부터 표시
+										}
+										
 									}
 									
 								}
+							});
+							
+							</script>
+						<c:if test="${resultStr0 != null || resultStr1 != null || resultStr !=null}">
+							<script>
 								
+							let data = {
+									label : '3개월 매출 내역',
+									data : [${resultStr0},${resultStr1},${resultStr2}],
+									borderColor : [
+										'rgba(255,99,132,1)',
+									]
 							}
-						});
-						
-						</script>
+							
+							myChart.data.labels.push('${resultDate0}','${resultDate1}','${resultDate2}');
+							myChart.data.datasets.push(data);
+							myChart.update();
+								
+							</script>
+						</c:if>
 						</div>
 				</div>
 				<!-- 수익 매출분석 끝 -->
@@ -1433,9 +1449,19 @@ function changeViewListNum(num){
 							<li>수량</li>
 							<li>단가</li>
 							<li>매출금액</li>
+							<c:if test="${mainData != null }">
+								<c:forEach var="initialData" items="#{mainData }">  
+									<li>${initialData.ordernum}</li>
+									<li>${initialData.orderconfirm}</li>
+									<li>${initialData.productname }</li>
+									<li>${initialData.orderquantityStr }</li>
+									<li>${initialData.orderpriceStr }</li>
+									<li>${initialData.realpaymentStr }</li>
+								</c:forEach>
+							</c:if>
 						</ul>
 					</div>
-					<div id="totalMoney"></div>
+					<div id="totalMoney"><c:if test="${totalMoney!=null }">총 합계금액 : ${totalMoney }</c:if></div>
 					<!--------------페이징 표시-------------------->
 					<c:if test="${pageVO != null }">
 						<div class="page_wrap">

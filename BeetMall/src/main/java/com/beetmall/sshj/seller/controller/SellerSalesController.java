@@ -28,7 +28,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.beetmall.sshj.seller.service.SellerSalesService;
+import com.beetmall.sshj.seller.vo.SellerMainVO;
 import com.beetmall.sshj.seller.vo.SellerSalesVO;
+
 
 
 @Controller
@@ -39,30 +41,73 @@ public class SellerSalesController {
 	@RequestMapping("/sellerSales")
 	public ModelAndView seller_sales(HttpSession session, SellerSalesVO vo) {
 		ModelAndView mav = new ModelAndView();
-		
-		vo.setUserid((String)session.getAttribute("logId"));
+		String userid=  (String)session.getAttribute("logId");
+		vo.setUserid(userid);
 		SellerSalesVO todayList = service.todayList(vo);
 		DecimalFormat formatter = new DecimalFormat("###,###");
 		
-		List<SellerSalesVO> list = service.sellerSalesAllData(vo);
+		if(userid != null) {
 		
-		vo.setTotalRecord(list.size());
+		// 데이터 보내기
+		// 1. 3개월치 전체 레코드수
 		int check = service.sellerSalesAllDataLength(vo.getUserid());
 		
 		vo.setTotalRecord(check);
-		
 		if(check != 0) {
 			mav.addObject("pageVO",vo);
 		}
+		// 2. 3개월치 엑셀 데이터
+		List<SellerSalesVO> list = service.sellerSalesAllData(vo);
+		if(list.size() != 0) {
+			for(int i =0; i < list.size(); i++) {
+				SellerSalesVO editVO = list.get(i);
+				editVO.setOrderquantityStr(formatter.format(editVO.getOrderquantity()));
+				editVO.setOrderpriceStr(formatter.format(editVO.getOrderprice()));
+				editVO.setRealpaymentStr(formatter.format(editVO.getRealpayment()));
+				mav.addObject("mainData", list);
+			}
+		}
 		
 		
-		mav.addObject("mainData", list);
+		// 3. 3개월치 차트 데이터
+		int num[] = {2,1,0};
+		long totalMoney = 0;
+		// data를 꺼내온다
+		for (int j=0; j<num.length; j++) {
+			List<SellerSalesVO> result = service.sellerSalesChartData(num[j], userid);
+			
+			int resultSum = 0;
+			if(result.size() != 0) {
+				for(int i =0; i < result.size(); i++) {
+					resultSum += result.get(i).getPayData();
+				}
+				totalMoney += resultSum;
+				System.out.println(j);
+				String resultStr = formatter.format(resultSum);
+				System.out.println(result.size());
+				System.out.println(resultStr);
+				String resultDate = result.get(0).getMonthData()+"월";
+				
+				mav.addObject("resultStr"+j,resultSum);
+				mav.addObject("resultDate"+j,resultDate);
+			} else {
+				mav.addObject("resultStr"+j,0);
+				mav.addObject("resultDate"+j,0);
+			}
+		}
+		
+		mav.addObject("totalMoney",formatter.format(totalMoney));
+		
+		// 오늘의 매출 보내기
 		mav.addObject("todayMoney", formatter.format(todayList.getTodayMoney()));
 		mav.addObject("todayNum", formatter.format(todayList.getTodayNum()));
 		
 		// 카테고리 리스트를 불러와서 리스트에 담는다
 		mav.addObject("cateList",service.allCategoryList());		
 		mav.setViewName("seller/sellerSales");
+		} else {
+			mav.setViewName("home");
+		}
 		return mav;
 	}
 	

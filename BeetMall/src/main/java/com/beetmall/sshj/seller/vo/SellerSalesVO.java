@@ -26,6 +26,14 @@ public class SellerSalesVO {
 	private int orderprice; // 구매한 가격
 	private String userid; // 유저아이디
 	private long realpayment; // 매출금액 합계
+	private String monthData; //처음에 불러온 데이터의 날짜
+	private long payData; //처음에 불러온 데이터의 합계
+	
+	
+	// 데이터 콤마 찍고 넣는다
+	private String orderquantityStr;
+	private String orderpriceStr;
+	private String realpaymentStr;
 	
 	// 날짜 데이터 저장할 변수
 	private String startCalendarDataValue;
@@ -109,12 +117,42 @@ public class SellerSalesVO {
 
 	
 	
+	public String getOrderquantityStr() {
+		return orderquantityStr;
+	}
+	public void setOrderquantityStr(String orderquantityStr) {
+		this.orderquantityStr = orderquantityStr;
+	}
+	public String getOrderpriceStr() {
+		return orderpriceStr;
+	}
+	public void setOrderpriceStr(String orderpriceStr) {
+		this.orderpriceStr = orderpriceStr;
+	}
+	public String getRealpaymentStr() {
+		return realpaymentStr;
+	}
+	public void setRealpaymentStr(String realpaymentStr) {
+		this.realpaymentStr = realpaymentStr;
+	}
+	public String getMonthData() {
+		return monthData;
+	}
+	public void setMonthData(String monthData) {
+		this.monthData = monthData;
+	}
 	public long getRealpayment() {
 		return realpayment;
 	}
 
 
 
+	public long getPayData() {
+		return payData;
+	}
+	public void setPayData(long payData) {
+		this.payData = payData;
+	}
 	public void setRealpayment(long realpayment) {
 		this.realpayment = realpayment;
 	}

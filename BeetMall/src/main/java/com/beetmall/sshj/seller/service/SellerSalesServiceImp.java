@@ -42,6 +42,13 @@ public class SellerSalesServiceImp implements SellerSalesService {
 		return dao.sellerSalesAllDataLength(userid);
 	}
 
+	@Override
+	public List<SellerSalesVO> sellerSalesChartData(int num, String userid) {
+		// TODO Auto-generated method stub
+		return dao.sellerSalesChartData(num, userid);
+	}
+
+
 
 
 }
