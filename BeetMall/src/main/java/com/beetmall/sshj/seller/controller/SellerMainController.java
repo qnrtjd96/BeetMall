@@ -70,17 +70,12 @@ public class SellerMainController {
 			// data를 꺼내온다
 			for (int j=0; j<num.length; j++) {
 				List<SellerMainVO> result = service.getPayData(num[j], userid);
-				System.out.println(j);
-				System.out.println("resultSize="+result.size());
 				int resultSum = 0;
 				if(result.size() != 0) {
 					for(int i =0; i < result.size(); i++) {
 						resultSum += result.get(i).getPayData();
 					}
-					System.out.println(j);
 					String resultStr = formatter.format(resultSum);
-					System.out.println(result.size());
-					System.out.println(resultStr);
 					String resultDate = result.get(0).getMonthData()+"월";
 					
 					mav.addObject("resultStr"+j,resultSum);
