@@ -698,7 +698,7 @@
 				</ul>
 				<img src="/sshj/img/dimgPrev.png" id="imgPrev"/>
 				<div id="imgPrevInfo"><span>위 이미지는 미리보기입니다.</span></div>
-				<div style="margin-bottom:20px; padding-top:20px"><input type="submit" value="가입하기" class="btnClass" id="infosubmit"></div>
+				<div style="margin-bottom:20px; padding-top:20px;margin-top: 20px;"><input type="submit" value="가입하기" class="btnClass" id="infosubmit"></div>
 			</div>
 		</form>
 		<div id="modal"></div>

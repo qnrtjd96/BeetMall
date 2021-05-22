@@ -117,7 +117,16 @@
 	#rollInfo>span{
 		text-align:center;
 	}
-	
+	#mypagePreviewDiv>ul>li{
+		width:82px;
+		height:24px;
+		line-height: 24px;
+		font-size:12px;
+		text-align: left;	
+	}
+	#mypagePreviewDiv>ul>li:hover {
+		background-color: rgb(230, 230, 230);
+	}
 	
 </style>
 <script>
@@ -131,7 +140,16 @@
 		$("input[value=로그아웃]").click(function(){
 			location.href="logout";
 		})
-		
+		$("#usermypage").hover(function(){
+			$("#mypagePreviewDiv").css("display","block");
+		}, function(){
+			$("#mypagePreviewDiv").css("display","none");
+		})
+		$("#mypagePreviewDiv").hover(function(){
+			$("#mypagePreviewDiv").css("display","block");
+ 		}, function(){
+			$("#mypagePreviewDiv").css("display","none");
+		})
 		/* 메뉴 바 내려오게 하기 */
 		$(document).on('scroll', function(){
 			var scroll = window.scrollY;
@@ -252,16 +270,28 @@
 		</div>
 	</c:if>
 	<c:if test="${logStatus == 'Y' }">
-		<div class="loginButtons section">	<!-- 로그인 후 -->
+		<div class="loginButtons section" style="position: relative;">	<!-- 로그인 후 -->
 			<c:if test="${logType==2}">
-				<input type="button" value="판매자 페이지로 이동하기" class="menuButtons btn"  onClick="location.href='<%=request.getContextPath() %>/sellerMain'"/>
+				<input type="button" value="판매자 페이지로 이동하기" class="menuButtons btn"  onClick="location.href='<%=request.getContextPath() %>/sellerMain'" style="float:left;margin-left:689px;"/>
 			</c:if>
 			<c:if test="${logType==3}">
-				<input type="button" value="관리자 페이지로 이동하기" class="menuButtons btn"  onClick="location.href='<%=request.getContextPath() %>/adminHome'"/>
+				<input type="button" value="관리자 페이지로 이동하기" class="menuButtons btn"  onClick="location.href='<%=request.getContextPath() %>/adminHome'" style="float:left;margin-left:689px;"/>
 			</c:if>
-			<a href="myinfoEdit">${logName}님</a><span id="usermypage">▼</span>
-			<input type="button" value="로그아웃" class="menuButtons btn"/>
-			<input type="button" value="고객센터" class="menuButtons btn"  onClick="location.href='<%=request.getContextPath() %>/ask_admin_list'"/>
+			<div style="float:left;margin-left: 10px;"><a href="mybuyList">${logName}님</a></div><div  id="usermypage" style="float:left;height:25px;margin-left: 2px;"><span>▼</span></div>
+				<div id="mypagePreviewDiv" style="background-color: rgb(250, 250, 250);border:1px solid black;position:absolute;width:84px;height:194px;top:34px;left:855px;z-index:100;display:none;">
+					<ul style="font-size: 12px;line-height:24px;">
+						<li><a href="myinfoEdit">정보수정</a></li>
+						<li><a href="customWish">장바구니</a></li>
+						<li><a href="mybuyList">구매내역</a></li>
+						<li><a href="mypoint">마이포인트</a></li>
+						<li><a href="myfavoriForm">즐겨찾는농장</a></li>
+						<li><a href="customMyrecipe">마이레시피</a></li>
+						<li><a href="myChatList">1:1대화</a></li>
+						<li><a href="custominfo">문의내역</a></li>
+					</ul>
+				</div>
+			<input type="button" value="로그아웃" class="menuButtons btn" style="margin-left: 5px;float:left;"/>
+			<input type="button" value="고객센터" class="menuButtons btn"  onClick="location.href='<%=request.getContextPath() %>/ask_admin_list'" style="margin-left: 5px;float:left;"/>
 		</div>
 	</c:if>
 	<div id="logoImg">			<!-- 사이트 로고 부분 -->
