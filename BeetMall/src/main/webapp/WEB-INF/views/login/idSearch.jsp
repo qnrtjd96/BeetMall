@@ -86,7 +86,11 @@
 					url : url,
 					data : param,
 					success :function(data){
-						alert("이메일로 아이디를 전송했습니다. 이메일을 확인해주세요!");
+						if(data == "성공"){
+							alert("이메일로 아이디를 전송했습니다. 이메일을 확인해주세요!");
+						}else{
+							alert("없는 이메일이거나, 잘못된 이메일입니다. ");
+						}
 					}, error : function(){
 						alert("없는 이메일이거나, 잘못된 이메일입니다. ");
 					}

@@ -86,10 +86,16 @@
 			</div>
 	<!-- 		<input type="button" value="회원가입" id="registerBtn"/> -->
 			<c:if test="${logStop != null}">
-				<script>alert(" 정지된 아이디 입니다...\n 정지 해제 예정일 : ${stopdate}")</script>
+				<script>alert(" 정지된 아이디 입니다\n 정지 해제 예정일 : ${stopdate}")</script>
 			</c:if>
 			<c:if test="${Type != null}">
-				<script>alert(" 탈퇴한 아이디 입니다...")</script>
+				<script>alert(" 탈퇴한 아이디 입니다")</script>
+			</c:if>
+			<c:if test="${logTry != null}">
+				<script>alert(" 아이디 또는 비밀번호가 잘못 입력되었습니다")</script>
+			</c:if>
+			<c:if test="${logId != null}">
+				<script>alert("이미 로그인 되어 있습니다");location.href="/sshj"</script>
 			</c:if>
 			<!-- <input type="button" value="Google 로그인" id="googleLogin" class="loginBtn"/>
 			<input type="button" value="네이버 로그인" id="naverLogin" class="loginBtn"/>
