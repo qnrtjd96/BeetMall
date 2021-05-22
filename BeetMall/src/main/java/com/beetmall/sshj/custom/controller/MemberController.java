@@ -93,27 +93,32 @@ public class MemberController {
 	public ModelAndView loginOk(String userid, String userpwd, HttpSession session) {
 		
 		ModelAndView mav = new ModelAndView();
-		MemberVO vo = memberservice.loginOk(userid, userpwd);
-		System.out.println(vo.getUserstop());
-		
-		if(vo.getUserstop().equals("N ") && vo.getUsertype()!=4 && vo.getUsertype()!=5) {
-			if(vo.getUserid()!= null && !vo.getUserid().equals("")) {
-				session.setAttribute("logId",vo.getUserid());
-				session.setAttribute("logName", vo.getUsername());
-				session.setAttribute("logStatus", "Y");
-				session.setAttribute("logType", vo.getUsertype());
-				mav.setViewName("redirect:/");
-			}else {
+		int okgogo = memberservice.checkuseridNpwd(userid, userpwd);
+		if(okgogo>=1) {
+			MemberVO vo = memberservice.loginOk(userid, userpwd);
+			System.out.println(vo.getUserstop());
+			if(vo.getUserstop().equals("N ") && vo.getUsertype()!=4 && vo.getUsertype()!=5) {
+				if(vo.getUserid()!= null && !vo.getUserid().equals("")) {
+					session.setAttribute("logId",vo.getUserid());
+					session.setAttribute("logName", vo.getUsername());
+					session.setAttribute("logStatus", "Y");
+					session.setAttribute("logType", vo.getUsertype());
+					mav.setViewName("redirect:/");
+				}else {
+					mav.setViewName("redirect:login");
+				}
+			}else if(vo.getUsertype() == 4 || vo.getUsertype() == 5){
+				System.out.println("4또는 5로 넘어옴");
+				session.setAttribute("Type", "탈퇴");
+				mav.setViewName("redirect:login");
+			}else if(vo.getUserstop().equals("Y ")) {
+				System.out.println("Y로 넘어옴");
+				session.setAttribute("logStop", "정지");
+				session.setAttribute("stopdate", memberservice.stopdate(userid));
 				mav.setViewName("redirect:login");
 			}
-		}else if(vo.getUsertype() == 4 || vo.getUsertype() == 5){
-			System.out.println("4또는 5로 넘어옴");
-			session.setAttribute("Type", "탈퇴");
-			mav.setViewName("redirect:login");
-		}else if(vo.getUserstop().equals("Y ")) {
-			System.out.println("Y로 넘어옴");
-			session.setAttribute("logStop", "정지");
-			session.setAttribute("stopdate", memberservice.stopdate(userid));
+		}else {
+			session.setAttribute("logTry","실패");
 			mav.setViewName("redirect:login");
 		}
 		return mav;
@@ -121,9 +126,11 @@ public class MemberController {
 	
 	// 로그아웃
 	@RequestMapping("logout")
-	public String logoutOk(HttpSession session) {
+	public ModelAndView logoutOk(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
 		session.invalidate();
-		return "home";
+		mav.setViewName("redirect:/");
+		return mav;
 	}
 	
 	// 회원가입
@@ -409,5 +416,89 @@ public class MemberController {
 	@RequestMapping("leaveMemberFin")
 	public String leaveMemberSuccess() {	// 회원탈퇴 성공페이지
 		return "mypages/leaveMemberSuccess";
+	}
+	
+	@RequestMapping("searchId")
+	public String searchId() {	// 아이디 찾기
+		return "login/idSearch";	
+	}
+	@RequestMapping(value="idemailSend", method=RequestMethod.GET, produces="application/text;charset=UTF-8" )
+	@ResponseBody
+	public String idemailSend(HttpSession session, HttpServletRequest req) {
+		String userEmail = req.getParameter("emailInput");
+		MemberVO vo = memberservice.idFind(userEmail);
+		String userid = vo.getUserid();
+		System.out.println("userid="+userid);
+		if(vo.getUserid() == null||vo.getUserid().length()<4) {
+			return "실패";
+		}else {
+			if(memberservice.usertypetest(userid)<=3) {
+				String subject = "[BeetMall]비트몰 구매자 이메일 인증"; // 메일 제목부분
+				String content =  "비트몰 아이디 찾기입니다.<br/>"
+								+ "아이디 : "+vo.getUserid();
+				try {
+					MimeMessage message = mailSender.createMimeMessage();
+					MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+					messageHelper.setFrom("beetamll0528@gmail.com");
+					messageHelper.setTo(userEmail);
+					messageHelper.setSubject(subject);
+					messageHelper.setText("text/html;charset=UTF-8", content);
+					mailSender.send(message);
+				}catch (Exception e) {
+					System.out.println(e.getMessage());
+					System.out.println("이메일 인증 오류");
+				}
+				return "성공";
+			}else {
+				return "실패";				
+			}
+		}
+	}
+	
+	@RequestMapping("searchPwd")
+	public String searchPwd() {	// 비밀번호 찾기
+		return "login/pwdSearch";	
+	}
+	
+	@RequestMapping(value="pwdemailSend", method=RequestMethod.GET, produces="application/text;charset=UTF-8" )
+	@ResponseBody
+	public String pwdemailSend(HttpSession session, HttpServletRequest req) {
+		String userEmail = req.getParameter("useremail");
+		String userid = req.getParameter("userid");
+		String result = "실패";
+		if(userid != null && userEmail != null && memberservice.usertypetest(userid)<=3) {		// 일단 입력되어있을 때 부분
+			if(memberservice.pwdfind(userid, userEmail)>0) {	// 1이 나와야 일치하는 것
+				UUID random = UUID.randomUUID();
+				String uuid = random.toString();
+				String emailCode = uuid.substring(0,12);
+				if(memberservice.pwdupdate(userid, emailCode)>=1) {
+					String subject = "[BeetMall]비트몰 이메일 인증"; // 메일 제목부분
+					String content =  "비트몰 임시 비밀번호입니다.<br/>"
+									+ "비밀번호 : "+emailCode ;
+					try {
+						MimeMessage message = mailSender.createMimeMessage();
+						MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+						messageHelper.setFrom("beetamll0528@gmail.com");
+						messageHelper.setTo(userEmail);
+						messageHelper.setSubject(subject);
+						messageHelper.setText("text/html;charset=UTF-8", content);
+						mailSender.send(message);
+						session.setAttribute("emailCode", emailCode);
+						result = "성공";
+					}catch (Exception e) {
+						System.out.println(e.getMessage());
+						System.out.println("이메일 인증 오류");
+						result = "실패";
+					}
+				}else {
+					result = "실패";
+				}
+			}else {
+				result = "실패";
+			}
+		}else {
+			result = "실패";
+		}
+		return result;
 	}
 }

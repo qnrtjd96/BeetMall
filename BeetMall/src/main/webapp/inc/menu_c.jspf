@@ -92,8 +92,10 @@
 	}
 	/* 여기서부터내꺼 */
 	#kcategoryMainName{
-		border-bottom: 1px solid rgb(252,118,45);
+		border-top: 3px solid rgb(252,118,45);
 		margin-bottom: 20px;
+		padding-top:10px;
+		padding-bottom:10px;
 	}
 	#kcategoryMainName>div{
 		font-size: 22px;
@@ -103,6 +105,9 @@
     #kcategoryMain{
         margin-left:20px;
     }
+    #kcategoryMain>div:last-child{
+    	border-bottom:3px solid rgb(252,118,45);
+   	}
     #kcategory{
         margin-bottom: 40px;
 	    padding-bottom: 30px;
@@ -112,7 +117,7 @@
     }
 
     #kCateMain{
-        padding-bottom: 40px;
+        padding-bottom: 20px;
     }
 
     #kmiddelname{
@@ -127,10 +132,11 @@
     #menuList{
        position:relative;
     }
+    
     #leftMenu{
        position: absolute;
        left:-200px;
-       top:300px;
+       top:150px;
        display: none;
        width:180px;
        padding-left:10px;
@@ -141,8 +147,9 @@
     }
     #menuListName{
     	font-weight:bold;
-    	border-bottom: 1px solid rgb(252,118,45);
+    	border-top: 3px solid rgb(252,118,45);
     	margin-bottom: 20px;
+    	padding-top:20px;
     }
     
     /* 공지사항 */
@@ -178,16 +185,17 @@
     #cMyPageLeft{
     	position: absolute;
     	left:-200px;
-    	top:130px;
+    	top:150px;
     	display: none;
     	width:180px;
-    	height:450px;
+    	height:520px;
     	color:black;
     	background-color:white;
     	padding-left:10px;
     	padding-right:10px;
     	font-size:21px;
     	line-height: 40px;
+    	border-bottom: 3px solid rgb(252,118,45);
     }
     #cMyPageLeft>div{
     	height:50px;
@@ -372,7 +380,7 @@
     #mypageMenubar{
     	position: absolute;
     	left:-200px;
-    	top:130px;
+    	top:150px;
     	display: none;
     	width:180px;
     	height:480px;
@@ -385,18 +393,21 @@
 	#menutext{
         margin-bottom: 30px;
 	    padding-bottom: 30px;
-	    border-bottom: 1px solid rgb(252,118,45);
+	    padding-top:20px;
+	    border-top: 3px solid rgb(252,118,45);
 	    font-size: 21px;
         font-weight: bold;
     }
 	#repcipevview{
-        padding-bottom: 40px;
+        padding-bottom: 20px;
         font-size: 16px;
     }
-    
+    #repcipevview:last-child{
+    	border-bottom:3px solid rgb(252,118,45);
+    }
     /* 상단 룰렛 */
     #rollDiv{
-    	display:block;
+    	display:none;
     }
     
     #recigogo{
@@ -513,7 +524,7 @@
 				</ul>
 				<div id="menuImgs">
 					<a href="mapping"><img src="/sshj/img/dmapBtn.png" class="menuImg" /></a>
-					<a href="카트아이콘"><img src="/sshj/img/dcartBtn.png"  class="menuImg"/></a>
+					<a href="recipeHome"><img src="/sshj/img/dcartBtn.png"  class="menuImg"/></a>
 					<div id="searchbar">
 						<form method="get" action="categoryMain" id="searchForm">
 							<input type="text" placeholder="원하시는 상품을 검색해보세요!" id="searchInputbox" name="searchWord"/>

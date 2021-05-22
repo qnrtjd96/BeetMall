@@ -70,17 +70,17 @@
 		/* color: #666666; */
 		color:black; 
 		background-color:#fff;
-		border:1px solid #eee;
 		border-radius: 8px;
-		box-shadow: 0 0px 3px 0 rgba(0,0,0,0.5);
+		/* box-shadow: 0 0px 3px 0 rgba(0,0,0,0.5); */
 		text-align: center;
  		text-decoration: none;
 		display: inline-block;
 		margin:0 3px;
+		border: 1px solid #ddd !important;
 	} 
 	/*버튼*/
 	.btn:hover{
-		/* background: rgb(252,118,45); */
+		/* background: rgb(252,118,45); */ 
 		/* color:white; */
 		border:1px solid rgb(252,118,45);
 		display: inline-block;
@@ -138,12 +138,22 @@
 			if(scroll>255){
 				$("#menuBar").css("position","absolute").css("top",scroll).css("z-index","90");
 				$("#categoriList").css("top",scroll+40);
-				
-				
+				$("#leftMenu").css("top",scroll);
+				$("#mypageMenubar").css("top",scroll);
+				$("#cMyPageLeft").css("top",scroll);
+				$("#chatIframe").css("top",scroll+50);
+				$(".buyListDiv").css("top", scroll+150);
+				$(".popupForm").css("top",scroll+250);
 			}else {
 				$("#menuBar").css("position","static");
-				$("#categoriList").css("top","285px")
+				$("#categoriList").css("top","285px");
+				$("#leftMenu").css("top","150px");
+				$("#mypageMenubar").css("top","150px");
+				$("#cMyPageLeft").css("top","150px");
+				$(".buyListDiv").css("top", scroll+150);
+				$(".popupForm").css("top","450px");
 			}
+			
 		});
 		
 		/*룰렛*/

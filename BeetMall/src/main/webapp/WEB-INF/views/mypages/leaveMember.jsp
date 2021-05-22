@@ -45,7 +45,11 @@
 	#leaveDiv{
 		padding-top:20px;
 		padding-left:20px;
-		height:900px;
+		height:670px;
+		width:1080px;
+	}
+	#leaveDiv>div{
+		margin-top:200px;
 	}
 	#leaveDiv>div>form{
 		margin-top:40px;
@@ -61,42 +65,8 @@
 	#leaveCheck, #leaveCancel{
 		margin-top:30px;		
 	}
-		/*버튼*/
-	button, .btn{
-		padding: 3px 10px;
-		color: #666666;
-		border-radius: 8px;
-		background:#fff;
-		box-shadow: 0 0px 3px 0 rgba(0,0,0,0.5);
-		text-align: center;
- 		text-decoration: none;
-		display: inline-block;
-		border:none;
-		width:100px;
-		height:40px;
-	}
-	.leavebtn{
-		padding: 3px 10px;
-		color: #666666;
-		border-radius: 8px;
-		background:#fff;
-		box-shadow: 0 0px 3px 0 rgba(0,0,0,0.5);
-		text-align: center;
- 		text-decoration: none;
-		display: inline-block;
-		border:none;
-		position:absolute;
-		width:100px;
-		height: 50px;
-		top:600px;
-		left:290px;
-	}
-	/*버튼*/
-	.btn:hover, .leavebtn:hover{
-		background: gray;
-		color:white;
-		display: inline-block;
-	}
+	
+
 	#buyCancelRollBack{
 		display:none;
 	}
