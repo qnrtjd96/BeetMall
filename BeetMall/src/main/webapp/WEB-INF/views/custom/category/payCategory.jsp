@@ -192,6 +192,11 @@
 	#coloor{
 		color:red;
 	}
+	.productname{
+		font-size: 18px;
+		font-weight: 600;
+		color: brown;
+	}
 </style>
 <script>
 	$(function(){
@@ -430,35 +435,35 @@
 					<div id="productDiv">
 						<ul style="width:200px;">
 							<li><img src="/sshj/img/${data.thumbimg}"></li>
-							<li>
+							<li class="productname" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">${data.productname}</li>
+							<li style="font-size: 14px; font-size: large; font-weight: bold;">
 								<c:if test="${data.saleprice==null || data.saleprice=='' || data.salefinish=='1' || data.salestart=='1'}">
 									${data.productprice}원
 								</c:if>
 								<c:if test="${data.saleprice != null && data.saleprice != '' && data.salefinish !='1' && data.salestart !='1'}">
-									${data.proprice}원
+									<span style="color:red; font-size: 14px;">${data.productprice-data.proprice}원 할인</span>&nbsp;${data.proprice}원
 								</c:if>
 							</li>
-							<li>${data.productname}</li>
-							<c:if test="${data.totalscore==null}">
-								<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">☆☆☆☆☆</span></li>
-							</c:if>
-							<c:if test="${data.totalscore==1}">
-								<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★☆☆☆☆</span></li>
-							</c:if>
-							<c:if test="${data.totalscore==2}">
-								<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★★☆☆☆</span></li>
-							</c:if>
-							<c:if test="${data.totalscore==3}">
-								<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★★★☆☆</span></li>
-							</c:if>
-							<c:if test="${data.totalscore==4}">
-								<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★★★★☆</span></li>
-							</c:if>
-							<c:if test="${data.totalscore==5}">
-								<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★★★★★</span></li>
-							</c:if>
+							<li style="text-decoration: line-through; color: gray;">${data.productprice}원</li>
+								<c:if test="${data.totalscore==null}">
+									<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">☆☆☆☆☆</span></li>
+								</c:if>
+								<c:if test="${data.totalscore==1}">
+									<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★☆☆☆☆</span></li>
+								</c:if>
+								<c:if test="${data.totalscore==2}">
+									<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★★☆☆☆</span></li>
+								</c:if>
+								<c:if test="${data.totalscore==3}">
+									<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★★★☆☆</span></li>
+								</c:if>
+								<c:if test="${data.totalscore==4}">
+									<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★★★★☆</span></li>
+								</c:if>
+								<c:if test="${data.totalscore==5}">
+									<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★★★★★</span></li>
+								</c:if>
 							<li>${data.storeaddr}</li>
-							<li>${data.username}</li>
 						</ul>
 					</div>
 				</a>
