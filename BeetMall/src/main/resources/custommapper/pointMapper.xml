@@ -14,11 +14,11 @@
 		    join product r
 		        on d.productnum = r.productnum
 		where p.userid=#{userid} 
-		order by p.ordernum desc
-		)where rownum<![CDATA[<=]]>${pageNum}*${onePageRecord} order by ordernum asc
+		order by p.orderdate desc
+		)where rownum<![CDATA[<=]]>${pageNum}*${onePageRecord} order by orderdate asc
 		)where rownum<![CDATA[<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
 								   <if test="pageNum!=totalPage">${onePageRecord}</if> 
-		order by ordernum desc
+		order by orderdate desc
 	</select>
 	<select id="countPoint" resultType="Integer">
 		select count(*)
@@ -73,10 +73,11 @@
 		where p.userid=#{userid} 
 		<if test="type!=null">and changepoint ${type} 0 </if> 
 		<if test="month>0">and o.orderdate >= to_char(add_months(sysdate,-#{month}),'YYYY/MM/DD')</if>
-		)where rownum<![CDATA[<=]]>${pageNum}*${onePageRecord} order by ordernum asc
+		order by orderdate desc
+		)where rownum<![CDATA[<=]]>${pageNum}*${onePageRecord} order by orderdate asc
 		)where rownum<![CDATA[<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
 								   <if test="pageNum!=totalPage">${onePageRecord}</if>
-		order by ordernum desc
+		order by orderdate desc
 	</select>
 	
 	<select id="countPointType" resultType="Integer">
