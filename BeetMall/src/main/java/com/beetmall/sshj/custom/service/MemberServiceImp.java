@@ -77,4 +77,9 @@ public class MemberServiceImp implements MemberService {
 		return memberDAO.member2Insert(userid);
 	}
 
+	@Override
+	public MemberVO idFind(String email) {
+		return memberDAO.idFind(email);
+	}
+
 }

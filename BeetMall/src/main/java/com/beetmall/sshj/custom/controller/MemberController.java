@@ -410,4 +410,40 @@ public class MemberController {
 	public String leaveMemberSuccess() {	// 회원탈퇴 성공페이지
 		return "mypages/leaveMemberSuccess";
 	}
+	
+	@RequestMapping("searchId")
+	public String searchId() {	// 아이디 찾기
+		return "login/idSearch";	
+	}
+	@RequestMapping(value="idemailSend", method=RequestMethod.GET, produces="application/text;charset=UTF-8" )
+	@ResponseBody
+	public String idemailSend(HttpSession session, HttpServletRequest req) {
+		String userEmail = req.getParameter("emailInput");
+		MemberVO vo = memberservice.idFind(userEmail);
+		if(vo.getUserid() == null||vo.getUserid().length()<4) {
+			return "실패";
+		}else {
+			String subject = "[BeetMall]비트몰 구매자 이메일 인증"; // 메일 제목부분
+			String content =  "비트몰 아이디 찾기입니다.<br/>"
+							+ "아이디 : "+vo.getUserid();
+			try {
+				MimeMessage message = mailSender.createMimeMessage();
+				MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+				messageHelper.setFrom("beetamll0528@gmail.com");
+				messageHelper.setTo(userEmail);
+				messageHelper.setSubject(subject);
+				messageHelper.setText("text/html;charset=UTF-8", content);
+				mailSender.send(message);
+			}catch (Exception e) {
+				System.out.println(e.getMessage());
+				System.out.println("이메일 인증 오류");
+			}
+			return "성공";
+		}
+	}
+	
+	@RequestMapping("searchPwd")
+	public String searchPwd() {	// 비밀번호 찾기
+		return "login/pwdSearch";	
+	}
 }

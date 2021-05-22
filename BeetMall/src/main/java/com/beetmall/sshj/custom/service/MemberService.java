@@ -16,4 +16,5 @@ public interface MemberService {
 	public int selectId(String userid, String userpwd);
 	public String stopdate(String userid);
 	public int member2Insert(String userid);
+	public MemberVO idFind(String email);// 아디찾기
 }
