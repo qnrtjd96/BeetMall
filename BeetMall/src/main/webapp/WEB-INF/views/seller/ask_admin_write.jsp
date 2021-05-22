@@ -1,3 +1,5 @@
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
 <head>
@@ -26,18 +28,51 @@
 
 <script>
 $(document).ready(function() {
-	  $('#summernote').summernote();
+	
+	//서머노트
+	 $('#summernote').summernote({
+		height: 500,                 
+		focus: true,
+		//콜백 함수
+	    callbacks : { 
+	      onImageUpload : function(files, editor, welEditable) {
+	      // 파일 업로드(다중업로드를 위해 반복문 사용)
+		      for (var i = files.length - 1; i >= 0; i--) {
+		      uploadSummernoteImageFile(files[i],
+		      this);
+		      }
+	      }
+	    }
+	 });
+	 //이미지 파일 업로드
+	 function uploadSummernoteImageFile(file, el) {
+			data = new FormData();
+			data.append("file", file);
+			$.ajax({
+				data : data,
+				type : "POST",
+				url : "uploadSummernoteImageFile",
+				contentType : false,
+				enctype : 'multipart/form-data',
+				processData : false,
+				success : function(data) {
+					$(el).summernote('editor.insertImage', data.url);
+				}
+			});
+		}
+	
 	  $("#askFrm").submit(function(){
-		 	 if($('#subject').val()=="" || #('#subject').val()==null){
+		 	 if($('#subject').val()=="" || $('#subject').val()==null){
 				alert("문의 제목을 입력해주세요.");
 				return false;
 			}
-			if($('#userid').val()=="" || #('#userid').val()==null){
+			if($('#summernote').val()=="" || $('#summernote').val()==null){
 				alert("문의 내용을 입력해주세요.");
 				return false;
 			}
 			return true;	
 	});
+});
 </script>
 <body>
 	<div class="main">
@@ -62,8 +97,9 @@ $(document).ready(function() {
                </div>
             </c:if>
          </div>   
+      <!-- 고객센터 상단 메뉴 판매자홈, 공지사항, 자주묻는질문, 문의하기 -->
          <ul id="seller_cs_menu">
-            <li><a href="#">BEETMALL</a></li>
+            <li><a href="<%=request.getContextPath()%>/sellerMain">Beetmall</a></li>
             <li><a href="notice">공지사항</a></li>
             <li><a href="faq">자주묻는 질문</a></li>
             <li><a href="ask_admin_list">문의하기</a></li>
@@ -92,7 +128,7 @@ $(document).ready(function() {
 					<th class="menu" >제목</th>
 					<td class="td"><input type="text" name="qmtitle" id="subject" placeholder="문의사항 제목을 입력해주세요."/></td>
 					<th class="menu">작성자</th>
-					<td  class="td"><span>${list.userid}</span></td>	
+					<td  class="td"><span>${logId}</span></td>	
 				</tr>
 				
 				<tr>
@@ -100,7 +136,7 @@ $(document).ready(function() {
 				</tr>
 				<tr>
 					<td class="question_content" colspan="4">
-						<textarea id="summernote"  name="qmcontent" placeholder="문의내용을 입력해주세요."></textarea>
+						<textarea id="summernote"  name="qmcontent" id="qmcontent" placeholder="문의내용을 입력해주세요."></textarea>
 					</td>	
 				</tr>
 			</tbody>
