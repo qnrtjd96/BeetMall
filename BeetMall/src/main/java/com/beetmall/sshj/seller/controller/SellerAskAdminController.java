@@ -32,9 +32,13 @@ public class SellerAskAdminController {
 	
 	// 내가 쓴 문의하기 글 목록
 	@RequestMapping("/ask_admin_list")
-	public ModelAndView askAllRecord(SearchAndPageVO sapvo, HttpSession session,HttpServletRequest req) {
+	public ModelAndView askAllRecord(SearchAndPageVO sapvo, SellerAskAdminVO saavo,HttpSession session,HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
-
+		// 페이징처리
+		String reqPageNum = req.getParameter("pageNum"); // pageNum = 1로 sapvo에 이미 기본값 세팅이 되어 있음
+		if (reqPageNum != null) { // 리퀘스트했을 때, 페이지번호가 있으면 세팅/ 없으면 기본 값=1
+			sapvo.setPageNum(Integer.parseInt(reqPageNum));
+		}
 		// 로그인한 회원의 문의목록만 보여주기
 		sapvo.setUserid((String) session.getAttribute("logId"));
 		// 검색어
@@ -42,13 +46,14 @@ public class SellerAskAdminController {
 		System.out.println("askadmin searchword->" + sapvo.getSearchWord());
 		//총 레코드 수 구하기 
 		sapvo.setTotalRecord(sellerAskAdminService.totalRecord(sapvo));
-		// 페이징처리
-		String reqPageNum = req.getParameter("pageNum"); // pageNum = 1로 sapvo에 이미 기본값 세팅이 되어 있음
-		if (reqPageNum != null) { // 리퀘스트했을 때, 페이지번호가 있으면 세팅/ 없으면 기본 값=1
-			sapvo.setPageNum(Integer.parseInt(reqPageNum));
-		}
+		
+		System.out.println("userid : " + sapvo.getUserid());
+		System.out.println("qmnum : "+ saavo.getQmnum());
+		System.out.println("qmdate:"+saavo.getQmdate());
+		
 		mav.addObject("list", sellerAskAdminService.askAllRecord(sapvo));	
 		mav.addObject("sapvo", sapvo);
+		
 		mav.setViewName("seller/ask_admin_list");
 		return mav;
 	}
@@ -77,7 +82,8 @@ public class SellerAskAdminController {
 	@RequestMapping(value = "/ask_admin_write_ok", method = RequestMethod.POST)
 	public ModelAndView askWrite(SellerAskAdminVO saavo, HttpServletRequest req, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		saavo.setUserid((String) session.getAttribute("logId"));		
+		saavo.setUserid((String) session.getAttribute("logId"));	
+		mav.addObject("logId", saavo.getUserid());
 		int result = sellerAskAdminService.askWrite(saavo);
 		if (result > 0) {
 			mav.setViewName("redirect:ask_admin_list");

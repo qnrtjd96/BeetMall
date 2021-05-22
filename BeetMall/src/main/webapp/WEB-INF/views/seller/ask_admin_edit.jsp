@@ -1,4 +1,7 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 <html>
 <head>
 		<meta charset="UTF-8">
@@ -113,7 +116,7 @@ $(document).ready(function() {
 			<span id="notice">고객님께서 작성하신 질문은 관리자가 답변을 한 후에는 수정 또는 삭제하실 수 없습니다.</span>
 		</div>
 		<!-- 수정폼 -->	
-		<form method="post" action="askEditOk">
+		<form method="post" action="ask_admin_edit_ok" id="askFrm">
 		<input type="hidden" name="qmnum" id="qmnum" value="${saavo.qmnum}"/>
 			<table>
 			
@@ -142,9 +145,8 @@ $(document).ready(function() {
 		
 				<div class="bottom_wrap">
 					<input type="button" value="취소" id="btn" onClick="location.href='<%=request.getContextPath() %>/ask_admin_list'"/>
-					<!-- 관리자 답변 후에는 수정불가능 -->
 					<input type="submit" id="btn" value="수정완료"/>
-					<input type="reset" value="초기화" class="btn" id="write_btn"/>
+					<input type="reset" value="초기화" id="btn" id="write_btn"/>
 				</div>
 			</form>
 		</div><!-- article end -->

@@ -1,4 +1,7 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 <html>
 <head>
 		<meta charset="UTF-8">
@@ -74,13 +77,13 @@
 	$(function(){
 		$("#searchForm").submit(function(){
 			//searchWord있는지 없는지 찾기 , 있을때만 데이터 넘기기
-			if($('#searchWord').val()=="" || #('#searchWord').val()==null){
+			if($('#searchWord').val()=="" || $('#searchWord').val()==null){
 				alert("검색어를 입력하세요.");
 				return false;
 			}
 			return true;
 		});
-
+	});
 </script>
 <body>
 <div class="main">
@@ -123,17 +126,21 @@
 				<a href="<%=request.getContextPath() %>/faq"><span id="link">자주묻는질문 바로가기 >></span></a><br/>
 				<br/>
 				고객님께서 비트몰에 문의하신 내용을 확인할 수 있습니다.<br/>
+				<br/>
+				<button id="ask_btn" onClick="location.href='<%=request.getContextPath()%>/ask_admin_write'">문의하기</button>
 			</div>
 			
 		<!-- 검색/ 문의하기 버튼 -->
 		
-			<div id="search_container">
+			<div id="search_container" style="height:30px;">
 				
 		
 				<!-- 검색하기 -->
 				<form method="get" action="ask_admin_list" id="searchForm">
 					<!--문의하기 버튼 -->
-					<button id="ask_btn" onClick="location.href='<%=request.getContextPath()%>/ask_admin_write'">문의하기</button>
+					
+					
+					
 					<span id="search_box">
 						<input type="text" id="searchWord" name="searchWord" placeholder="검색하기"><input type="submit" id="searchBtn" value="검색"/>
 					</span>
@@ -156,14 +163,13 @@
 				<tr>
 					<td class="number">${vo.qmnum}</td>
 					<td class=><a href="<%=request.getContextPath()%>/ask_admin_view?qmnum=${vo.qmnum}">${vo.qmtitle}</a></td>
-					<td>${saavo.qmdate }</td>
-					<c:if test="${vo.qmanswer!=null && vo.qmanswer!=''}">
+					<td>${vo.qmdate}</td>
+					<c:if test="${vo.qmanswer!=null || vo.qmanswer==''}">
 						<td><span class="answer_span" id="answer">답변완료</span></td>				
 					</c:if>
-					<c:if test="${vo.qmanswer==null && vo.qmanswer==''}">
-						<td><span class="answer_span" id="answer">답변대기중</span></td>				
+					<c:if test="${vo.qmanswer==null || vo.qmanswer!=''}">
+						<td><span class="answer_span" id="no_answer">답변대기중</span></td>				
 					</c:if>
-					<td><span class="answer_span" id="answer">답변대기중</span></td>	
 				</tr>
 			</c:forEach>	
 			</tbody>

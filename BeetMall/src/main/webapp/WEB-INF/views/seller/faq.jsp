@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 <html>
 <head>
 		<meta charset="UTF-8">
@@ -61,7 +63,7 @@
 	}
 	.answer_td{
 		padding: 20px 10px 20px 10px;
-		font-size:12px;
+		font-size:14px;
 	}
 	.answer_td:nth-child(1){
 		color:rgb(224,102,102);
@@ -96,7 +98,7 @@
 	#cs_search_q{
 		font-weight:bold;
 		color:gray;
-		font-size:17px;
+		font-size:20px;
 	}
 	select{
 		float:left; 

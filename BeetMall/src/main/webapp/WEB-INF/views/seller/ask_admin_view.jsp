@@ -1,3 +1,5 @@
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
 <head>
@@ -130,10 +132,10 @@
 								아직 답변이 도착하지않았습니다<br/>
 								 <br/>
 								</strong>
-							</c:if>
-							<c:if test="${vo.qmanswer!=null}">
-								${vo.qmanswer}
-							</c:if>
+								</c:if>
+								<c:if test="${vo.qmanswer!=null || vo.qmanswer!=''}">
+									${vo.qmanswer}
+								</c:if>
 							</span>
 						</td>	
 					</tr>

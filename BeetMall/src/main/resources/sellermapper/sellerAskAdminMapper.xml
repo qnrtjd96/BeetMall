@@ -7,14 +7,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from(
 		    select * from(
 		        select qmnum, userid, qmtitle, qmcontent, to_char(qmdate,'MM-DD HH:MI') as qmdate, qmanswer, qmoption 
-		        from qmboard 	        
+		        from qmboard 	 
+		        where qmoption = 2  and userid = '${userid}'     
 		        <choose>
 					<when test = 'searchWord!=null'>
-						where qmoption = 2 and userid = '${userid}' and qmtitle like '%${searchWord}%' 
+						  and qmtitle like '%${searchWord}%' 
 					</when>
-					<when test = 'searchWord==null'>
-						where qmoption = 2 and userid = '${userid}'
-					</when>
+					
 				</choose>
 		        order by qmnum desc)
 		    where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord} order by qmnum)
