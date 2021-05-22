@@ -124,6 +124,11 @@
 	.number2 {font-weight:bold;color:#00a0e9;} 
 	/* 지도부분끝 */
 	
+	.importan{
+		color: red;
+    	font-size: 18px;
+	}
+	
 </style>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=675d2e2b842e770a2d48d54759ba1d32&libraries=services,clusterer,drawing"></script>
 <script>
@@ -133,8 +138,8 @@
 <div class="section">
 	<div id="mainName"><h1>지도로 찾는 동네 농장</h1></div>
 	<div id="idididididididiidididi" style="height:700px;"></div>
-	<div>※실제 위치와 상이할수 있습니다.</div>
-	<div>※자신의 위치에서 마우스 왼쪽버튼을 누른후 목적지에서 오른쪽버튼을 누르면 직선거리가 표시됩니다.</div> 
+	<div style="margin-top: 10px;"><span class="importan">주의</span> &nbsp;&nbsp;실제 위치와 상이할수 있습니다.</div>
+	<div><span class="importan">직선거리보는방법</span> &nbsp;&nbsp;자신의 위치에서 마우스 왼쪽버튼을 누른후 목적지에서 오른쪽버튼을 누르면 직선거리가 표시됩니다.</div> 
 	<div class="main">
 			<hr/>
 		<div id="productMain">

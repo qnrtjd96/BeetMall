@@ -5,14 +5,13 @@
 <!-- include summernote css/js -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
- 
 <style>
 	#mypageMenubar{
 		display:block;
 	}
-	#topBar>h5{
-		padding-left: 310px;
-	    width: 500px !important; 
+	#topBar h5{
+		padding-left: 500px;
+	    width: 700px !important; 
     }  
 	a:hover, a:active, a:visited, a:link {
    		color: black;
@@ -44,10 +43,6 @@
 	  	top:200px;
 	  	left:-25px;
 	  	font-size:20px;
-  	}
-  	#topBar>p{
-  		padding-left:60px;
-  		color:white;
   	}
   	input{
   		border:none;
@@ -125,8 +120,7 @@
 		width:0;
 	}
 	#bottommm{
-		display:flex; 
-		left:-800px;
+		display:flex;  
 		top:30px; 
 	}
 	#bottommm>input{
@@ -163,8 +157,31 @@
 		position:relative;
 		top:-5px;
 	}
+	#recipeWriteDate{
+		font-weight:normal;
+	}
 </style>
 <script>
+/*$.ajax({
+	type:"GET",
+	url:"/resources/adminmapper/getInfonum.do",
+	contentType : "application/x-www-form-urlencoded; charset=utf-8",
+	success : function(res) { 
+       $("#noticeNum").text(res);   
+   },
+   error : function(request, status, error) {
+       alert("에러가 발생했습니다.\n error_code:BD5");
+   } 
+});*/
+//오늘날짜
+let today = new Date();   
+let year = today.getFullYear();  
+let month = today.getMonth() + 1;   
+let date = today.getDate();
+$(document).ready(function(){ 
+	$("#recipeWriteDate").html(year + '/' + month + '/' + date);
+}); 
+//파일명 추출
 $(document).ready(function(){ 
 	  var fileTarget = $('#file'); 
 	  fileTarget.on('change', function(){ // 값이 변경되면
@@ -177,6 +194,24 @@ $(document).ready(function(){
 	        $(this).siblings('.uploadFile').val(filename); 
 	    }); 
 	}); 
+	
+//공지 추가
+$(document).on('click',"#addBtn",function(){ 
+	location.href="noticeBoardList";
+	var url = "noticeBoardWrite";
+	$.ajax({
+		url : url, 
+		success : function(result){ 
+			if(result == 1){
+				location.href="noticeBoardList";
+			}else{
+				alert('공지 작성 실패했습니다 \n error_code:BD1');
+			}
+		}, error : function(){
+			alert('삭제 실패했습니다. \n error_code:BD2');
+		}
+	});
+});
 </script>
 	<div id="topBarContainer">
 	<div id="topBar">
@@ -187,51 +222,52 @@ $(document).ready(function(){
 <%@ include file="/inc/leftBar.jspf" %> 
 <div class="container">
 	<div id="box"> 	
-	<form method="post" action="noticeWriteOk">
-		<table>
-			<tbody> 
-				<tr class="tr_head">
-					<th class="menu" >공지 번호</th>
-					<td class="td" colspan="3"><div id="recipeNum">1532</div></td>
-				</tr>
-				<tr class="tr_head">
-					<th class="menu">제목</th>
-					<td  class="td"><input type="text" name="noticeSubject" id="noticeSubject" placeholder="공지 제목을 입력하세요"/></td>
-				</tr>
-				<tr class="tr_head">
-					<th class="menu">등록일</th>
-					<td  class="td"><div id="recipeWriteDate">21/05/21</div></td>
-				</tr>
-				<tr class="tr_head">
-					<th class="menu">첨부파일</th>
-					<td  class="td">
-						<div style="display:flex;">
-							<label for="file" id="attach"> 
-								<div>파일 첨부하기</div>
-							</label>
-							<input type="file" style="width: 500px;" id="file">
-							<input class="uploadFile" style="width: 500px;" id="uploadFile" >
-						</div>
-					</td> 
-				</tr>
-				
-				<tr>
-					<th id="smallTitle" colspan="4">공지 내용</th>
-				</tr>
-				<tr>
-					<td class="question_content" colspan="4">
-						<textarea id="qmcontent" name="qmcontent" class="summernote" placeholder="문의내용을 입력해주세요."></textarea>
-					</td>	
-				</tr>
-			</tbody>
-		</table>
-			<div id="bottommm">
-				<input type="submit" value="작성하기" class="btn write_btn" id="write_btn"/>	
-				<input type="reset" value="다시 쓰기" class="btn write_btn" id="reWrite_btn"/>	
-				<input type="button" value="취소" class="btn write_btn" id="cancle_btn" onClick="location.href='<%=request.getContextPath() %>/recipeView'"/>
-			</div>
+		<form method="post" action="noticeWriteOk" enctype="multipart/form-data">
+			<table>
+				<tbody> 
+					<tr class="tr_head">
+						<th class="menu" >공지 번호</th>
+						<td class="td" colspan="3" id="noticeNum"></td>
+					</tr>
+					<tr class="tr_head">
+						<th class="menu">제목</th>
+						<td  class="td"><input type="text" name="noticeSubject" id="noticeSubject" placeholder="공지 제목을 입력하세요"/></td>
+					</tr>
+					<tr class="tr_head">
+						<th class="menu">등록일</th>
+						<td  class="td" id="recipeWriteDate"></td>
+					</tr>
+					<tr class="tr_head">
+						<th class="menu">첨부파일</th>
+						<td  class="td">
+							<div style="display:flex;">
+								<label for="file" id="attach"> 
+									<div>파일 첨부하기</div>
+								</label>
+								<input type="file" style="width: 500px;" id="file">
+								<input class="uploadFile" style="width: 500px;" id="uploadFile" >
+							</div>
+						</td> 
+					</tr>
+					<tr>
+						<th id="smallTitle" colspan="4">공지 내용</th>
+					</tr>
+					<tr>
+						<td class="question_content" colspan="4">
+							<textarea id="qmcontent" name="qmcontent" class="summernote" placeholder="문의내용을 입력해주세요."></textarea>
+						</td>	
+					</tr>
+				</tbody>
+			</table>
+	<div id="bottommm">
+		<input type="submit" value="작성하기" class="btn write_btn" id="write_btn"/>
+		<input type="reset" value="다시 쓰기" class="btn write_btn" id="reWrite_btn"/>	
+		<input type="button" value="취소" class="btn write_btn" id="cancle_btn" onClick="location.href='<%=request.getContextPath() %>/noticeBoardList'"/>
+	</div>
+		<!--<c:if test="${logId !=null}">--><!--</c:if>	-->
 		</form>
-		</div>
+	</div>
+
 </div>
 </div>
 <script>

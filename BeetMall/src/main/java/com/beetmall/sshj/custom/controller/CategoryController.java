@@ -180,8 +180,10 @@ public class CategoryController {
 		String[] area = req.getParameterValues("area");
 		String typelist = req.getParameter("type");
 		
+		String nnanana = null;
 		if(area != null) {
 			pageVO.setArea(area);
+			nnanana="#aaaa";
 		}
 		
 		if(pageNumStr != null) {//페이지 번호가 있을때 숫자화, 없으면 1로 설정 설정되어있음.
@@ -210,6 +212,7 @@ public class CategoryController {
 		pageVO.setTotalRecord(categoryService.categoryChargeOnetotalRecord(pageVO));
 		
 		mav.addObject("list", categoryService.categoryCharge(pageVO));
+		mav.addObject("list2", nnanana);
 		
 		mav.setViewName("custom/category/categoryCharge");
 		mav.addObject("pageVO",pageVO);

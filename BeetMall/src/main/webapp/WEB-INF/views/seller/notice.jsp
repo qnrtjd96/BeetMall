@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 <html>
 <head>
 		<meta charset="UTF-8">
@@ -60,7 +62,7 @@
 	$(function(){
 		$("#searchForm").submit(function(){
 			//searchWord있는지 없는지 찾기 , 있을때만 데이터 넘기기
-			if($('#searchWord').val()=="" || #('#searchWord').val()==null){
+			if($('#searchWord').val()=="" || $('#searchWord').val()==null){
 				alert("검색어를 입력하세요.");
 				return false;
 			}
@@ -92,8 +94,9 @@
                </div>
             </c:if>
          </div>   
+          <!-- 고객센터 상단 메뉴 판매자홈, 공지사항, 자주묻는질문, 문의하기 -->
          <ul id="seller_cs_menu">
-            <li><a href="#">BEETMALL</a></li>
+            <li><a href="<%=request.getContextPath()%>/sellerMain">Beetmall</a></li>
             <li><a href="notice">공지사항</a></li>
             <li><a href="faq">자주묻는 질문</a></li>
             <li><a href="ask_admin_list">문의하기</a></li>

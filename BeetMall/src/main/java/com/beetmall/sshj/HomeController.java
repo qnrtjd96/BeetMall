@@ -20,6 +20,9 @@ public class HomeController {
 		if(session.getAttribute("stopdate") != null) {
 			session.removeAttribute("stopdate");
 		}
+		if(session.getAttribute("logTry") != null) {
+			session.removeAttribute("logTry");
+		}
 		return "home";
 	}
 }

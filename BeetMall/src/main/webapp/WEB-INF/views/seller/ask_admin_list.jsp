@@ -1,4 +1,7 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 <html>
 <head>
 		<meta charset="UTF-8">
@@ -41,7 +44,11 @@
 		margin-top:30px;
 		text-align:center;
 	}
-	#search_btn{padding:5px;border-left:1px solid lightgray;}
+	/*검색 basicStyle.css 와 안맞아서 수정*/
+	#search_box{border:none;}
+	#searchBtn{margin-left:-1px; background:white; width:50px; height:30px;}
+	#searchWord{height:30px; border: 1px solid lightgray;}
+	
 	#sel{margin-top:10px;}
 	/*답변대기중*/
 	#no_answer{color:rgb(224,102,102);}
@@ -66,39 +73,49 @@
 		});
 	 		
 	});
-
+	//검색어 확인
+	$(function(){
+		$("#searchForm").submit(function(){
+			//searchWord있는지 없는지 찾기 , 있을때만 데이터 넘기기
+			if($('#searchWord').val()=="" || $('#searchWord').val()==null){
+				alert("검색어를 입력하세요.");
+				return false;
+			}
+			return true;
+		});
+	});
 </script>
 <body>
 <div class="main">
 	<!------------------ 고객센터 상단 사이드바 ----------------------->
-         <nav>
-         <div id="headerMember">
-            <c:if test="${logStatus != 'Y'}">
-               <div class="sellerLoginBtn">   <!-- 로그인 전 -->
-                  <input type="button" value="회원가입" class="sellerMenuButtons"/>
-                  <input type="button" value="로그인" class="sellerMenuButtons"/>
-                  <input type="button" value="고객센터" class="sellerMenuButtons"/>
-               </div>
-            </c:if>
-            <c:if test="${logStatus == 'Y' }">
-               <div class="sellerLoginBtn">   <!-- 로그인 후 -->
-                  <c:if test="${logType==2}">
-                     <input type="button" value="판매자 페이지로 이동하기" class="sellerMenuButtons"/>
-                  </c:if>
-                  <a href="myinfoEdit">${logName}님</a><span id="sellerMenuButtons">▼</span>
-                  <input type="button" value="로그아웃" class="sellerMenuButtons"/>
-                  <input type="button" value="고객센터" class="sellerMenuButtons"  onClick="location.href='<%=request.getContextPath() %>/ask_admin_list'"/>
-               </div>
-            </c:if>
-         </div>   
+       <nav class="cs_nav">
+		<div id="headerMember">
+			<c:if test="${logStatus != 'Y'}">
+				<div class="sellerLoginBtn">
+					<!-- 로그인 전 -->
+					<input type="button" value="회원가입" class="sellerMenuButtons" /> <input type="button" value="로그인" class="sellerMenuButtons" /> <input type="button" value="고객센터" class="sellerMenuButtons" />
+				</div>
+			</c:if>
+			<c:if test="${logStatus == 'Y' }">
+				<div class="sellerLoginBtn">
+					<!-- 로그인 후 -->
+					<c:if test="${logType==2}">
+						<input type="button" value="판매자 페이지로 이동하기" class="sellerMenuButtons" />
+					</c:if>
+					<a href="myinfoEdit">${logName}님</a><span id="sellerMenuButtons">▼</span> <input type="button" value="로그아웃" class="sellerMenuButtons" /> <input type="button" value="고객센터" class="sellerMenuButtons" onClick="location.href='<%=request.getContextPath()%>/notice'" />
+				</div>
+			</c:if>
+		</div>
+         <!-- headerMember end -->
+           <!-- 고객센터 상단 메뉴 판매자홈, 공지사항, 자주묻는질문, 문의하기 -->
          <ul id="seller_cs_menu">
-            <li><a href="#">BEETMALL</a></li>
+            <li><a href="<%=request.getContextPath()%>/sellerMain">Beetmall</a></li>
             <li><a href="notice">공지사항</a></li>
             <li><a href="faq">자주묻는 질문</a></li>
             <li><a href="ask_admin_list">문의하기</a></li>
          </ul>
       </nav>
-   </div> 
+  
 	<!-- 가운데 메인 div -->
 	<div id="article">
 		<!-- 문의하기 -->
@@ -109,17 +126,28 @@
 				<a href="<%=request.getContextPath() %>/faq"><span id="link">자주묻는질문 바로가기 >></span></a><br/>
 				<br/>
 				고객님께서 비트몰에 문의하신 내용을 확인할 수 있습니다.<br/>
+				<br/>
+				<button id="ask_btn" onClick="location.href='<%=request.getContextPath()%>/ask_admin_write'">문의하기</button>
 			</div>
+			
 		<!-- 검색/ 문의하기 버튼 -->
-			<div id="search_container">
-			<!--문의하기 버튼 -->
-			<button id="ask_btn" onClick="location.href='<%=request.getContextPath()%>/ask_admin_write'">문의하기</button>
-	
-			<!-- 검색하기 -->
-				<span id="search_box">
-					<input type="text" id="search" name="search" placeholder="검색하기"><a href="#" onclick="return false;"><span id="search_btn">검색</span></a>
-				</span>
+		
+			<div id="search_container" style="height:30px;">
+				
+		
+				<!-- 검색하기 -->
+				<form method="get" action="ask_admin_list" id="searchForm">
+					<!--문의하기 버튼 -->
+					
+					
+					
+					<span id="search_box">
+						<input type="text" id="searchWord" name="searchWord" placeholder="검색하기"><input type="submit" id="searchBtn" value="검색"/>
+					</span>
+				</form>	
+		
 			</div>
+		<!-- search_container end -->
 		<fieldset>
 		<table>
 			<thead>
@@ -131,18 +159,17 @@
 				</tr>
 			</thead>
 			<tbody>
-			<c:forEach var="saavo" items="${list}">
+			<c:forEach var="vo" items="${list}">
 				<tr>
-					<td class="number">${saavo.qmnum}</td>
-					<td class=><a href="<%=request.getContextPath()%>/ask_admin_view?qmnum=${saavo.qmnum}">${saavo.qmtitle}</a></td>
-					<td>${saavo.qmdate }</td>
-					<c:if test="${ssavo.qmanswer!=null && ssavo.qmanswer!=''}">
+					<td class="number">${vo.qmnum}</td>
+					<td class=><a href="<%=request.getContextPath()%>/ask_admin_view?qmnum=${vo.qmnum}">${vo.qmtitle}</a></td>
+					<td>${vo.qmdate}</td>
+					<c:if test="${vo.qmanswer!=null || vo.qmanswer==''}">
 						<td><span class="answer_span" id="answer">답변완료</span></td>				
 					</c:if>
-					<c:if test="${ssavo.qmanswer==null && saavo.qmanswer==''}">
-						<td><span class="answer_span" id="answer">답변대기중</span></td>				
+					<c:if test="${vo.qmanswer==null || vo.qmanswer!=''}">
+						<td><span class="answer_span" id="no_answer">답변대기중</span></td>				
 					</c:if>
-					<td><span class="answer_span" id="answer">답변대기중</span></td>	
 				</tr>
 			</c:forEach>	
 			</tbody>
@@ -187,6 +214,6 @@
 		 <!-------------- 페이징 끝 --------------->
 		</fieldset>
 		</div>
-	</div>
+</div>
 </body>
 </html>
