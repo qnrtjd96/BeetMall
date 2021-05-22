@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.beetmall.sshj.admin.service.AdminReviewService; 
 import com.beetmall.sshj.admin.vo.AdminReviewVO;
 import com.beetmall.sshj.admin.vo.Admin_Board_PageVO;
+import com.beetmall.sshj.admin.vo.adminkPageSearchVO;
 import com.beetmall.sshj.seller.vo.SellerReviewVO; 
  
 
@@ -29,7 +30,7 @@ public class Admin_reviewController {
 	@RequestMapping("/reviewListA")
 	public ModelAndView reviewListA(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
-		Admin_Board_PageVO pageVO = new Admin_Board_PageVO();
+		adminkPageSearchVO pageVO = new adminkPageSearchVO();
 		
 		String pageNumStr = req.getParameter("pageNum");
 		if(pageNumStr != null) { 
@@ -38,7 +39,7 @@ public class Admin_reviewController {
 		 
 		pageVO.setSearchKey(req.getParameter("searchKey"));
 		pageVO.setSearchWord(req.getParameter("searchWord"));
-	//	pageVO.setTotalRecord(boardService.noticeAllRecord(pageVO));
+		pageVO.setTotalRecord(reviewService.reviewListOnetotalRecord(pageVO));
 		
 		mav.addObject("list", reviewService.reviewListA(pageVO));
 		mav.addObject("pageVO",pageVO);
