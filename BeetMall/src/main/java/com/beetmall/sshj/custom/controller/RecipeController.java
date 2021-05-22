@@ -44,7 +44,7 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 		mav.addObject("countrk",countrk);
 		mav.addObject("countrg",countrg);
 		
-		System.out.println("Ff");
+		//System.out.println("Ff");
 		
 		//뷰어전체
 	
@@ -62,13 +62,15 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 	}
 	
 	@RequestMapping(value="/recipeWriteOk", method=RequestMethod.POST)
-	public ModelAndView recipeWriteOk(RecipeVO vo, @RequestParam MultipartFile file, HttpServletRequest req) {
+	public ModelAndView recipeWriteOk(HttpSession session,RecipeVO vo, @RequestParam MultipartFile file, HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
 		
 		
     	//String userid = (String)req.getSession().getAttribute("logId");
 		//파일업로드
 		//저장 위치
+		String userid = (String)session.getAttribute("logId");
+		
 		String path = req.getSession().getServletContext().getRealPath("/upload");
 		System.out.println("path --> " + path);
 		
@@ -81,6 +83,7 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 			if(orgName != null && !orgName.equals("")) {
 				file.transferTo(new File(path, orgName));//파일업로드
 				vo.setRecipemainimg(orgName);
+				vo.setUserid(userid);
 			}
 		}catch (Exception e) {
 			System.out.println("파일업로드 에러발생 --> " + e.getMessage());
@@ -139,16 +142,16 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 //////////////////////////////////////////////////////////레시피 지우기///////////////////////////////////////////////////////////
 	
 	@RequestMapping("/recipeDelete")
-	public ModelAndView recipeDelete(int recipenum) {
-		ModelAndView mav = new ModelAndView();
+	@ResponseBody
+	public int recipeDelete(int recipenum) {
+		int result=0;
 		
 		if(recipeService.recipeDelete(recipenum)>0){//삭제
-			mav.setViewName("redirect:recipeHome");
+			result=1;
 		}else {//삭제실패
-			mav.addObject("recipenum", recipenum);
-			mav.setViewName("redirect:recipeList");
+			result=0;
 		}
-		return mav;
+		return result;
 		
 	}
 //////////////////////////////////////////////////////////레시피 리스트///////////////////////////////////////////////////////////	

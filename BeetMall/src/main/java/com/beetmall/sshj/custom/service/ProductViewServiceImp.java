@@ -116,6 +116,14 @@ public class ProductViewServiceImp implements ProductViewService {
 
 
 
+	@Override
+	public int wishDel(int num) {
+		return productVeiwDAO.wishDel(num);
+		
+	}
+
+
+
 
 
 
