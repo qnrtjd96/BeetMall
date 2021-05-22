@@ -9,10 +9,6 @@
 		 float:left; 
 		 width:9%; 
 	 }  
-	 #container li:nth-of-type(6):not(#sortBox li:nth-of-type(6)){ 
-	 	padding:10px 0;
-	 	text-align:left;
-	 } 
 	#contentBox{
 		top:-40px;
 	} 
@@ -361,29 +357,10 @@ let searchTxt =null;// 검색 데이터
 			<ul class="contentList">
 				<li><input type="checkbox" name="check" id="check"></li>
 				<li>${rvo.reviewnum}</li>
-				<li>  
-					<c:if test="${rvo.catenum==1}">
-						 건과류
-					</c:if>
-					<c:if test="${rvo.catenum==2}">
-						 견과류
-					</c:if>
-					<c:if test="${rvo.catenum==3}">
-						 과일
-					</c:if>
-					<c:if test="${rvo.catenum==4}">
-						 쌀
-					</c:if>
-					<c:if test="${rvo.catenum==5}">
-						 잡곡
-					</c:if>
-					<c:if test="${rvo.catenum==6}">
-						 채소
-					</c:if>  
-				</li>
+				<li>${rvo.mcatename}</li>
 				<li class="wordCut">${rvo.productname}</li>
-				<li>${rvo.sellerid}</li>
-				<li class="wordCut" id="reportDiv"><a href="회원정보?">${rvo.reviewcontent}</a></li>
+				<li>${rvo.seller}</li>
+				<li class="wordCut"><a href="회원정보?">${rvo.reviewcontent}</a></li>
 				<li>
 					<c:if test="${rvo.reviewanswer==null || data.reviewanswer==''}">
 						답변대기
@@ -391,27 +368,30 @@ let searchTxt =null;// 검색 데이터
 					<c:if test="${rvo.reviewanswer!=null && data.reviewanswer !=''}">
 						답변완료
 					</c:if></li>
-				<li>${rvo.customerid}</li>
+				<li>${rvo.reviewwriter}</li>
 				<li>${rvo.reviewwritedate}</li> 
 			</ul> 
 		</c:forEach> 	   
 		</div>	 
 		<div class="page_wrap">
 			<div class="page_nation">
-			   <a class="arrow pprev" href="<%=request.getContextPath()%>/img/kpage_pprev.png"></a>
-			   <a class="arrow prev" href="#"></a>
-			   <a href="#" class="active">1</a>
-			   <a href="#">2</a>
-			   <a href="#">3</a>
-			   <a href="#">4</a>
-			   <a href="#">5</a>
-			   <a href="#">6</a>
-			   <a href="#">7</a>
-			   <a href="#">8</a>
-			   <a href="#">9</a>
-			   <a href="#">10</a>
-			   <a class="arrow next" href="#"></a>
-			   <a class="arrow nnext" href="#"></a>
+			   <c:if test="${pageVO.pageNum>1}"><!-- 이전페이지가 있을때 -->
+			   		<a class="arrow prev" href="/sshj/reviewListA?pageNum=${pageVO.pageNum-1}<c:if test="${pageVO.searchWord != null && pageVO.searchWord != ''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>"></a>
+			   </c:if>
+			   <!-- 페이지 번호                   1                                    5                     -->
+	           <c:forEach var="p" begin="${pageVO.startPageNum}" step="1" end="${pageVO.startPageNum + pageVO.onePageNum-1}">
+	              <c:if test="${p<=pageVO.totalPage}">
+	                 <c:if test="${p==pageVO.pageNum}"> <!-- 현재페이지일때 실행 -->
+	                    <a class="active">${p}</a>
+	                 </c:if>   
+	                 <c:if test="${p!=pageVO.pageNum}"> <!-- 현재페이지가 아닐때 실행 -->
+	                    <a href="/sshj/reviewListA?pageNum=${p}<c:if test="${pageVO.searchWord != null && pageVO.searchWord != ''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>">${p}</a>
+	                 </c:if>
+	              </c:if>
+	           </c:forEach>
+	           <c:if test="${pageVO.pageNum < pageVO.totalPage}">
+	              <a class="arrow next" href="/sshj/reviewListA?pageNum=${pageVO.pageNum+1}<c:if test="${pageVO.searchWord != null && pageVO.searchWord != ''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>"></a>
+	           </c:if>
 			</div>
 		 </div> 
 		 <div>
@@ -516,3 +496,19 @@ let searchTxt =null;// 검색 데이터
 </div> 
 
 </html>
+<style>
+	#container li:nth-of-type(6):not(#sortBox li:nth-of-type(6)){ 
+	 	padding:10px 0;
+	 	text-align:left;
+	 	white-space: nowrap;
+	    overflow: hidden;
+	    text-overflow: ellipsis;
+	 } 
+</style>
+<script>
+	$(function(){
+		$("#closeBtn").click(function(){
+			$(this).parent().parent().css("display","none");
+		});
+	});
+</script>
