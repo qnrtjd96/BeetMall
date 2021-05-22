@@ -18,7 +18,7 @@
 		text-align:center;
 		border-radius:7%;
 		margin-left:1px;
-	}
+	} 
 	#pointSelect>div{
 		float:left;
 	}
@@ -66,6 +66,11 @@
 	.pointdetail{
 		font-size:0.9em;
 		color:#999;
+		width:300px;
+		height:35px;
+		overflow: hidden;
+	    text-overflow: ellipsis;
+	    white-space: nowrap;
 	}
 	.pointprice{
 		line-height:60px;
@@ -80,6 +85,11 @@
 	.pointdown{
 		color:blue;
 	}
+	.cutpoint{
+		overflow: hidden;
+	    text-overflow: ellipsis;
+	    white-space: nowrap;
+	}
 	.pointresult{
 		font-weight:bold;
 		line-height:60px;
@@ -92,9 +102,16 @@
 	#mypointListDiv{
 		overflow:auto;
 	}
-	#linkStop>a:link, #linkStop>a:active, #linkStop>a:visited, #linkStop>a:hover{
+	.linkStop>a:link, .linkStop>a:active, .linkStop>a:visited, .linkStop>a:hover{
 		text-decoration: none;
 		color:black;
+	}
+	.linkStop>a:last-child{
+		height:30px;
+		width: 457px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 	/* 페이징처리부분 */
 	.page_wrap {
@@ -233,10 +250,10 @@
 				<li>잔여<br/>마일리지</li>
 				<c:forEach var="vo" items="${list}">
 					<li><span class="pointdate">${vo.orderdate}</span></li>
-					<li id="linkStop">
+					<li class="linkStop wordcut">
 						<a href="customproduct?no=${vo.productnum}"><img src="/sshj/resources/sellerProductImgs/${vo.thumbimg}" style="margin-right:10px;"></a>
 						<a href="customproduct?no=${vo.productnum}"><span class="pointtitle wordcut">${vo.productname}</span><br/></a>
-						<a href="customproduct?no=${vo.productnum}"><span class="pointdetail wordcut">${vo.productcontent }</span></a>
+						<a href="customproduct?no=${vo.productnum}"><span class="pointdetail cutpoint">${vo.productcontent }</span></a>
 					</li>
 					<li><span class="pointprice">${vo.orderprice}</span>원</li>
 					<c:if test="${vo.changepoint > 0}">

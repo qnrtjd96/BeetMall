@@ -16,4 +16,9 @@ public interface MemberService {
 	public int selectId(String userid, String userpwd);
 	public String stopdate(String userid);
 	public int member2Insert(String userid);
+	public MemberVO idFind(String email);// 아디찾기
+	public int pwdfind(String userid, String useremail);	// 비번찾기
+	public int pwdupdate(String userid, String temppwd);	// 임시비번 설정
+	public int usertypetest(String userid);	// 유저 유형 검색
+	public int checkuseridNpwd(String userid, String pwd);	// 아이디가 있나 없나부터 확인
 }

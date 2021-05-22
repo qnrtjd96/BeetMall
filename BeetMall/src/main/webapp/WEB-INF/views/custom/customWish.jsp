@@ -489,8 +489,8 @@ $(function(){
 				<li><b>구매가격</b></li>
 			</ul>
 
+<<<<<<< HEAD
        <c:forEach var="wl" items="${wlist}">
-      
 			<ul class="wishList">
 					<li><a href=""><img src="img/${wl.thumbimg}"></a></li> <!-- 이미지 -->
 					
