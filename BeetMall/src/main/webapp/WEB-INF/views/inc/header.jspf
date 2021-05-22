@@ -142,14 +142,16 @@
 				$("#mypageMenubar").css("top",scroll);
 				$("#cMyPageLeft").css("top",scroll);
 				$("#chatIframe").css("top",scroll+50);
+				$(".buyListDiv").css("top", scroll+150);
 			}else {
 				$("#menuBar").css("position","static");
 				$("#categoriList").css("top","285px");
 				$("#leftMenu").css("top","150px");
 				$("#mypageMenubar").css("top","150px");
 				$("#cMyPageLeft").css("top","150px");
-				
+				$(".buyListDiv").css("top", scroll+150);
 			}
+			
 		});
 		
 		/*룰렛*/
