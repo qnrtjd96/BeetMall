@@ -82,10 +82,7 @@ public class SellerSalesController {
 					resultSum += result.get(i).getPayData();
 				}
 				totalMoney += resultSum;
-				System.out.println(j);
 				String resultStr = formatter.format(resultSum);
-				System.out.println(result.size());
-				System.out.println(resultStr);
 				String resultDate = result.get(0).getMonthData()+"월";
 				
 				mav.addObject("resultStr"+j,resultSum);
@@ -215,6 +212,9 @@ public class SellerSalesController {
 				}
 			}
 		}
+		String downloadFoler = System.getProperty("user.home")+"\\Downloads";
+		File mk = new File(downloadFoler);
+		mk.mkdirs();
 		System.out.println("파일 다운로드 위치 ===>"+System.getProperty("user.home")+"\\Downloads\\BEETMALL 매출관리.xlsx");
 		File file = new File(System.getProperty("user.home")+"\\Downloads\\BEETMALL 매출관리.xlsx");
 		try {

@@ -1252,7 +1252,7 @@ $(()=>{
 	// 엑셀저장
 	$('#excelDown').click( () => {
 		if($('#categoryManagement>li').length<1 || startCalendarDataValue=='' || endCalendarDataValue==''){
-			alert('선택된 데이터가 없습니다. 데이터를 선택 후 사용해 주시기 바랍니다.');
+			alert('데이터를 조회 및 선택된 데이터가 있을경우 다운로드가 가능합니다');
 			return false;
 		}
 		let excelData = [];
@@ -1331,6 +1331,16 @@ function changeViewListNum(num){
 						</ul>
 					</div>
 					<div id="categoryList">
+						<!-- 날짜 적용 할 수 있는 기능들 모여있는 컨테이너 -->
+						<div id="categorySearch_container">
+							<select class="categorySearch_item" id="categoryDate" name="categoryDate" onchange="typeChange(this)">
+								<option value="년별">년별</option>
+								<option value="월별" selected>월별</option>
+								<option value="일별">일별</option>
+							</select> <input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_start" /> <b>&nbsp;&nbsp;~&nbsp;&nbsp;</b> <input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_end" />
+							<button id="calendarApply" style="margin-left: 10px;">날짜 적용</button>
+						</div>
+					
 						<div id="categoryListMiddle">
 							<!-- 대분류 카테고리!!!! -->
 							<ul id="category">
@@ -1357,15 +1367,7 @@ function changeViewListNum(num){
 						<!-- 중분류 카테고리 선택하면 선택된 사항이 삽입되는 위치 -->
 						<ul id="categoryManagement"></ul>
 	
-						<!-- 날짜 적용 할 수 있는 기능들 모여있는 컨테이너 -->
-						<div id="categorySearch_container">
-							<select class="categorySearch_item" id="categoryDate" name="categoryDate" onchange="typeChange(this)">
-								<option value="년별">년별</option>
-								<option value="월별" selected>월별</option>
-								<option value="일별">일별</option>
-							</select> <input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_start" /> <b>&nbsp;&nbsp;~&nbsp;&nbsp;</b> <input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_end" />
-							<button id="calendarApply" style="margin-left: 10px;">날짜 적용</button>
-						</div>
+
 	
 					</div>
 					<!-- categoryList 끝 -->
@@ -1443,16 +1445,16 @@ function changeViewListNum(num){
 				<div class="wrapContainer">
 					<div id="excelContainer">
 						<ul id="excelList">
-							<li>주문번호</li>
 							<li>매출일자</li>
+							<li>주문번호</li>
 							<li>상품명</li>
 							<li>수량</li>
 							<li>단가</li>
 							<li>매출금액</li>
 							<c:if test="${mainData != null }">
 								<c:forEach var="initialData" items="#{mainData }">  
-									<li>${initialData.ordernum}</li>
 									<li>${initialData.orderconfirm}</li>
+									<li>${initialData.ordernum}</li>
 									<li>${initialData.productname }</li>
 									<li>${initialData.orderquantityStr }</li>
 									<li>${initialData.orderpriceStr }</li>

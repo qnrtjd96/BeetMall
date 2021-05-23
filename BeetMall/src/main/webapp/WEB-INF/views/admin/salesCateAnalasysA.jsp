@@ -19,6 +19,8 @@
 	<fmt:formatDate value="${today }" pattern="yyyy" />
 </c:set>
 <style>
+
+
 #topBar h5 {
 	padding-left: 190px;
 	width: 450px !important;
@@ -71,7 +73,7 @@ button {
 #categoryList {
 	flex-basis: 100%;
 	border: 1px solid #aaa;
-	margin: 50px 0 50px 50px;
+	margin: 20px 0 0 50px;
 }
 
 #categoryListMiddle {
@@ -79,11 +81,11 @@ button {
 	height: 170px;
 	display: flex;
 	flex-basis: 1;
-	margin-bottom: 10px;
 }
 
 #categoryListMiddle ul {
 	border-bottom: 1px solid #aaa;
+	border-top: 1px solid #aaa;
 	overflow: auto;
 	flex: 1;
 	display: flex;
@@ -116,6 +118,8 @@ button {
 
 #categoryManagement {
 	width: 100%;
+	height: 50px;
+	overflow: auto;
 	display: flex;
 	flex-wrap: wrap;
 }
@@ -148,7 +152,8 @@ button {
 
 #calendarApply {
 	border: 1px solid #aaa;
-	background-color: white;
+	background-color: #aaa;
+	color: white;
 	padding: 0 5px;
 }
 
@@ -156,8 +161,11 @@ button {
 	color: black;
 }
 
-#contentBox #category li:nth-of-type(5) {
+#category li:nth-child(5),#mcategory li:nth-child(5){
 	width: 100% !important;
+}
+
+#contentBox li:nth-of-type(5) {
 	font-weight: normal;
 }
 
@@ -294,7 +302,7 @@ b {
 	border: 1px solid #ddd;
 	border-radius: 5px;
 	padding: 10px;
-	
+	background-color: #f8faf7;
 	position: relative;
     top: -60px;
 }
@@ -356,8 +364,8 @@ b {
 }
 </style>
 <script>
-//////////////////////////////// 전역변수 선언 /////////////////////////////////
-// 선택된 날짜의 데이터를 저장해 높는 변수
+////////////////////////////////전역변수 선언 /////////////////////////////////
+//선택된 날짜의 데이터를 저장해 높는 변수
 let startCalendarDataValue = "";
 let endCalendarDataValue = "";
 
@@ -365,24 +373,24 @@ let endCalendarDataValue = "";
 //날짜 변경을 년별로 했었는지 체크하기 위한 yearCheck 변수 선언
 let yearCheck="";
 
-// 존재하는 품목이 없는것으로 확인되었을 경우 resultData[] 배열에 넣어서 데이터 산출 하는데 사용되어야 한다.
+//존재하는 품목이 없는것으로 확인되었을 경우 resultData[] 배열에 넣어서 데이터 산출 하는데 사용되어야 한다.
 let resultData = new Array();
-// 년별, 월별, 일별인지 체크하기 위한 변수 선언
+//년별, 월별, 일별인지 체크하기 위한 변수 선언
 let dateCheck = "";
 
-// 페이징 번호
+//페이징 번호
 let excelListNum = 0;
 
-// 엑셀에서 사용할 값이 들어있는 리스트 변수
+//엑셀에서 사용할 값이 들어있는 리스트 변수
 let excelArrList ;
 
-// 엑셀에서 사용할 표시되는 페이지 갯수 정하는 변수
+//엑셀에서 사용할 표시되는 페이지 갯수 정하는 변수
 let excelViewListNum;
 
 //엑셀 최대 페이지 갯수
 let excelMaxPage;
 
-// 엑셀 페이징 설정
+//엑셀 페이징 설정
 let MathNum;
 
 /////////////////////////////// 차트 함수 /////////////////////////////
@@ -390,18 +398,18 @@ let myChart ;
 
 
 
-// 기능
+//기능
 
 //차트 추가하기
 function addData(chart, data) {
-  chart.data.datasets.push(data);
-  chart.update();
+chart.data.datasets.push(data);
+chart.update();
 }
 
 //차트 삭제하기
 function removeData(chart,delData) {
-  chart.data.datasets.splice(delData,1);
-  chart.update();
+chart.data.datasets.splice(delData,1);
+chart.update();
 }
 
 //콤마 찍은 숫자 표현하기, 정규표현식
@@ -526,6 +534,8 @@ $( ()=>{
 		var reportPageHeight = $('#chartContainer').innerHeight();
 		var reportPageWidth = $('#chartContainer').innerWidth();
 
+		console.log(reportPageHeight);
+		console.log(reportPageWidth);
 		  // 캔버스 개체를 만든다.
 		  var pdfCanvas = $('<canvas />').attr({
 		    id: "canvaspdf",
@@ -839,7 +849,7 @@ $(function(){
 		
 		$.ajax({
 			type: "POST",
-			url: "getListData",
+			url: "getListData2",
 			traditional : true,
 			data: {
 				"resultData":resultData,
@@ -1381,7 +1391,7 @@ $(function(){
 })
 
 /////////////////////////////// 엑셀 기능 함수 /////////////////////////////////////
-//                   li갯수,    excelpageNum,  excel 1page당 보이는갯수 ,    excel last page
+//                li갯수,    excelpageNum,  excel 1page당 보이는갯수 ,    excel last page
 function excelPaging(num , excelPagingInit, excelViewListNum, excelMaxPage){
 	// excelPaging 할때, html 변화를 render
 	let excelPagingTag = '<a class="arrow pprev" href="javascript:void(0);" onclick="apprev(this);"></a> <a class="arrow prev" href="javascript:void(0);" onclick="aprev(this);"></a>';
@@ -1484,7 +1494,7 @@ function excelPaging(num , excelPagingInit, excelViewListNum, excelMaxPage){
 	$('.page_nation').html(excelPagingTag);
 }
 
-// 맨 첫페이지
+//맨 첫페이지
 function apprev(){
 	// excelList에 값이 10개 이상있으면 엑셀 페이징 초기 
 	if(excelListNum > excelViewListNum){
@@ -1492,7 +1502,7 @@ function apprev(){
 	}
 }
 
-// 이전 페이지 이동
+//이전 페이지 이동
 function aprev(){
 	if(excelListNum > excelViewListNum){
 		// 1이상이면 이전페이지로 한다.
@@ -1502,7 +1512,7 @@ function aprev(){
 	}
 }
 
-// 숫자 누르기
+//숫자 누르기
 function anum(clickNum){
 	// 누른 페이지 번호가 무엇인지 확인
 	if(excelListNum > excelViewListNum){
@@ -1510,7 +1520,7 @@ function anum(clickNum){
 	}
 }
 
-// 다음페이지
+//다음페이지
 function anext(){
 	if(excelListNum > excelViewListNum){
 		// MathNum 즉, 마지막페이지가 아닐 경우 다음페이지로 이동 가능하다.
@@ -1520,7 +1530,7 @@ function anext(){
 	}
 }
 
-// 맨 끝페이지
+//맨 끝페이지
 function annext(){
 	if(excelListNum > excelViewListNum){
 		// MathNum 즉, 마지막 페이지로 이동
@@ -1531,7 +1541,7 @@ $(()=>{
 	// 엑셀저장
 	$('#excelDown').click( () => {
 		if($('#categoryManagement>li').length<1 || startCalendarDataValue=='' || endCalendarDataValue==''){
-			alert('선택된 데이터가 없습니다. 데이터를 선택 후 사용해 주시기 바랍니다.');
+			alert('데이터를 조회 및 선택된 데이터가 있을경우 다운로드가 가능합니다');
 			return false;
 		}
 		let excelData = [];
@@ -1565,6 +1575,7 @@ function changeViewListNum(num){
 	excelPaging(excelListNum , 1, parseInt(excelViewListNum), excelMaxPage);
 }
 
+
 </script>
 <%@ include file="/inc/top.jspf"%>
 <div id="topBarContainer">
@@ -1590,9 +1601,18 @@ function changeViewListNum(num){
 							<div class="wrapTitle" style="">
 								<div id="salesCateTitle">카테고리</div>
 
-
 								<div class="wrapContainer" id="salesCateContainer">
 									<div id="categoryList">
+										<!-- 날짜 적용 할 수 있는 기능들 모여있는 컨테이너 -->
+										<div id="categorySearch_container">
+											<select class="categorySearch_item" id="categoryDate" name="categoryDate" onchange="typeChange(this)">
+												<option value="년별">년별</option>
+												<option value="월별" selected>월별</option>
+												<option value="일별">일별</option>
+											</select> <input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_start" /> <b style="top:0;">&nbsp;&nbsp;~&nbsp;&nbsp;</b> <input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_end" />
+											<button id="calendarApply" style="margin-left: 10px;">날짜 적용</button>
+										</div>
+									
 										<div id="categoryListMiddle">
 											<!-- 대분류 카테고리!!!! -->
 											<ul id="category">
@@ -1619,16 +1639,6 @@ function changeViewListNum(num){
 										<!-- 중분류 카테고리 선택하면 선택된 사항이 삽입되는 위치 -->
 										<ul id="categoryManagement"></ul>
 
-										<!-- 날짜 적용 할 수 있는 기능들 모여있는 컨테이너 -->
-										<div id="categorySearch_container">
-											<select class="categorySearch_item" id="categoryDate" name="categoryDate" onchange="typeChange(this)">
-												<option value="년별">년별</option>
-												<option value="월별" selected>월별</option>
-												<option value="일별">일별</option>
-											</select> <input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_start" /> <b style="top:0;">&nbsp;&nbsp;~&nbsp;&nbsp;</b> <input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_end" />
-											<button id="calendarApply" style="margin-left: 10px;">날짜 적용</button>
-										</div>
-
 									</div>
 									<!-- categoryList 끝 -->
 								</div>
@@ -1651,25 +1661,43 @@ function changeViewListNum(num){
 
 										<script> // 차트 선언, 카테고리, 날짜, 차트, 엑셀 관여하는 스크립트
 						
-						let ctx = document.getElementById("myChart").getContext("2d");
-						myChart = new Chart(ctx, {
-							type: 'line',
-							data:{
-								labels: [], // 몇년 몇월 몇일 표시하는 데이터
-								datasets: [] // 차트에 그려지는 데이터를 표시하는 데이터
-							},
-							options: {
-								scales:{
-									y:{
-										beginAtZero: true // 차트 숫자는 0부터 표시
-									}
-									
-								}
-								
-							}
-						});
-						
-						</script>
+										let ctx = document.getElementById("myChart").getContext("2d");
+										myChart = new Chart(ctx, {
+											type: 'line',
+											data:{
+												labels: [], // 몇년 몇월 몇일 표시하는 데이터
+												datasets: [] // 차트에 그려지는 데이터를 표시하는 데이터
+											},
+											options: {
+												scales:{
+													y:{
+														beginAtZero: true // 차트 숫자는 0부터 표시
+													}
+													
+												}
+												
+											}
+										});
+										
+										</script>
+										
+										<c:if test="${resultStr0 != null || resultStr1 != null || resultStr !=null}">
+											<script>
+												
+											let data = {
+													label : '3개월 매출 내역',
+													data : [${resultStr0},${resultStr1},${resultStr2}],
+													borderColor : [
+														'rgba(255,99,132,1)',
+													]
+											}
+											
+											myChart.data.labels.push('${resultDate0}','${resultDate1}','${resultDate2}');
+											myChart.data.datasets.push(data);
+											myChart.update();
+												
+											</script>
+										</c:if>
 									</div>
 								</div>
 							</div>
@@ -1683,7 +1711,7 @@ function changeViewListNum(num){
 										</p>
 									</div>
 									<button class="normalBtn" id="excelDown">엑셀 저장</button>
-									<select id="excelViewNum">
+									<select id="excelViewNum" onchange="javascript:changeViewListNum(this)">
 										<option selected="selected">10</option>
 										<option>50</option>
 										<option>100</option>
@@ -1692,21 +1720,58 @@ function changeViewListNum(num){
 								<div class="wrapContainer">
 									<div id="excelContainer">
 										<ul id="excelList">
-											<li>주문번호</li>
 											<li>매출일자</li>
+											<li>주문번호</li>
 											<li>상품명</li>
 											<li>수량</li>
 											<li>단가</li>
 											<li>매출금액</li>
+											<c:if test="${mainData != null }">
+												<c:forEach var="initialData" items="#{mainData }">  
+													<li>${initialData.orderconfirm}</li>
+													<li>${initialData.ordernum}</li>
+													<li>${initialData.productname }</li>
+													<li>${initialData.orderquantityStr }</li>
+													<li>${initialData.orderpriceStr }</li>
+													<li>${initialData.realpaymentStr }</li>
+												</c:forEach>
+											</c:if>
 										</ul>
 									</div>
-									<div id="totalMoney"></div>
+									<div id="totalMoney"><c:if test="${totalMoney!=null }">총 합계금액 : ${totalMoney }</c:if></div>
 									<!--------------페이징 표시-------------------->
-									<div class="page_wrap" style="margin-top: 60px;">
+									<c:if test="${pageVO != null }">
+										<div class="page_wrap">
+											<div class="page_nation">
+											   <c:if test="${pageVO.pageNum>1}"><!-- 이전페이지가 있을때 -->
+											   		<a class="arrow prev" href="/sshj/salesCateAnalasysA?pageNum=${pageVO.pageNum-1}"></a>
+											   </c:if>
+											   <!-- 페이지 번호                   1                                    5                     -->
+									           <c:forEach var="p" begin="${pageVO.startPageNum}" step="1" end="${pageVO.startPageNum + pageVO.onePageNum-1}">
+									              <c:if test="${p<=pageVO.totalPage}">
+									                 <c:if test="${p==pageVO.pageNum}"> <!-- 현재페이지일때 실행 -->
+									                    <a class="active">${p}</a>
+									                 </c:if>   
+									                 
+									                 <c:if test="${p!=pageVO.pageNum}"> <!-- 현재페이지가 아닐때 실행 -->
+									                    <a class="arrow" href="/sshj/salesCateAnalasysA?pageNum=${p}">${p}</a>
+									                 </c:if>
+									              </c:if>
+									           </c:forEach>
+									           <c:if test="${pageVO.pageNum < pageVO.totalPage}">
+									              <a class="arrow next" href="/sshj/salesCateAnalasysA?pageNum=${pageVO.pageNum+1}"></a>
+									           </c:if>
+											</div>
+									 	</div>
+									</c:if>
+									
+									<c:if test="${pageVO == null }">
+										<div class="page_wrap">
 										<div class="page_nation">
 											<a class="arrow pprev" href="#" onclick="return false;"></a> <a class="arrow prev" href="#" onclick="return false;"></a> <a class="active" href="#" onclick="return false;">1</a> <a class="arrow next" href="#" onclick="return false;"></a> <a class="arrow nnext" href="#" onclick="return false;"></a>
 										</div>
 									</div>
+									</c:if>
 								</div>
 							</div>
 						</div>

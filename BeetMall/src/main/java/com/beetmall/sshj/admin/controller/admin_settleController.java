@@ -22,7 +22,6 @@ public class admin_settleController {
 	@RequestMapping("/settleMng")
 	public ModelAndView settleMng() {
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("list", adminService.noticeList());
 		mav.setViewName("/admin/settleMng");
 		return mav;
 	}

@@ -2,12 +2,14 @@ package com.beetmall.sshj.admin.controller;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map.Entry;
 
 import javax.inject.Inject;
@@ -35,8 +37,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.beetmall.sshj.admin.service.Admin_SalesService;
 import com.beetmall.sshj.admin.service.Boardervice;
+import com.beetmall.sshj.admin.vo.Admin_CateSalesVO;
 import com.beetmall.sshj.admin.vo.Admin_SalesVO;
 import com.beetmall.sshj.seller.service.SellerSalesService;
+import com.beetmall.sshj.seller.vo.SellerSalesVO;
 
 @Controller
 public class admin_salesController {
@@ -207,6 +211,7 @@ public class admin_salesController {
 		return data;
 	}
 	
+	// 엑셀다운로드
 	@RequestMapping("/adminSalesExcelDown")
 	@ResponseBody
 	public void excel_down(HttpServletRequest req) {
@@ -287,6 +292,11 @@ public class admin_salesController {
 				xssfcell.setCellValue(excelData[ ((index+1)*columnLength)+j ]);
 			}
 		}
+		
+		String downloadFoler = System.getProperty("user.home")+"\\Downloads";
+		File mk = new File(downloadFoler);
+		mk.mkdirs();
+		
 		System.out.println("파일 다운로드 위치 ===>"+System.getProperty("user.home")+"\\Downloads\\BEETMALL 매출관리.xlsx");
 		File file = new File(System.getProperty("user.home")+"\\Downloads\\BEETMALL 매출관리.xlsx");
 		try {
@@ -305,17 +315,70 @@ public class admin_salesController {
 	
 	//카테고리별 매출 분석
 	@RequestMapping("/salesCateAnalasysA")
-	public ModelAndView salesCateAnalasysA() {
+	public ModelAndView salesCateAnalasysA(Admin_CateSalesVO vo) {
 		ModelAndView mav = new ModelAndView(); 
 		
+		
+		DecimalFormat formatter = new DecimalFormat("###,###");
+		
+		
+		// 데이터 보내기
+		// 1. 3개월치 전체 레코드수
+		int check = salesService.sellerSalesAllDataLength2();
+		
+		vo.setTotalRecord(check);
+		if(check != 0) {
+			mav.addObject("pageVO",vo);
+		}
+		// 2. 3개월치 엑셀 데이터
+		List<Admin_CateSalesVO> list = salesService.sellerSalesAllData2(vo);
+		if(list.size() != 0) {
+			for(int i =0; i < list.size(); i++) {
+				Admin_CateSalesVO editVO = list.get(i);
+				editVO.setOrderquantityStr(formatter.format(editVO.getOrderquantity()));
+				editVO.setOrderpriceStr(formatter.format(editVO.getOrderprice()));
+				editVO.setRealpaymentStr(formatter.format(editVO.getRealpayment()));
+				mav.addObject("mainData", list);
+			}
+		}
+		
+		
+		// 3. 3개월치 차트 데이터
+		int num[] = {2,1,0};
+		long totalMoney = 0;
+		// data를 꺼내온다
+		for (int j=0; j<num.length; j++) {
+			List<Admin_CateSalesVO> result = salesService.sellerSalesChartData2(num[j]);
+			
+			int resultSum = 0;
+			if(result.size() != 0) {
+				for(int i =0; i < result.size(); i++) {
+					resultSum += result.get(i).getPayData();
+				}
+				totalMoney += resultSum;
+				String resultStr = formatter.format(resultSum);
+				String resultDate = result.get(0).getMonthData()+"월";
+				
+				mav.addObject("resultStr"+j,resultSum);
+				mav.addObject("resultDate"+j,resultDate);
+			} else {
+				mav.addObject("resultStr"+j,0);
+				mav.addObject("resultDate"+j,0);
+			}
+		}
+		mav.addObject("totalMoney",formatter.format(totalMoney));
 		// 카테고리 리스트를 불러와서 리스트에 담는다
 		mav.addObject("cateList",sellerService.allCategoryList());		
-		mav.setViewName("seller/sellerSales");
-		
 		
 		mav.setViewName("/admin/salesCateAnalasysA");
 		return mav;
 	} 
+	
+	@RequestMapping("/getListData2")
+	@ResponseBody
+	public List<Admin_CateSalesVO> getListData2(Admin_CateSalesVO vo){
+		return salesService.cateSalesDataList(vo);
+	}
 	
 	@RequestMapping("/adminSalesCateData")
 	public void adminSalesCateData() {

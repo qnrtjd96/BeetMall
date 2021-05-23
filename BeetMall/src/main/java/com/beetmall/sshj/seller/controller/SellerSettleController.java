@@ -524,7 +524,9 @@ public class SellerSettleController {
 			}
 		}
 		
-
+		String downloadFoler = System.getProperty("user.home")+"\\Downloads";
+		File mk = new File(downloadFoler);
+		mk.mkdirs();
 		
 		System.out.println("파일 다운로드 위치 ===>"+System.getProperty("user.home")+"\\Downloads\\BEETMALL 정산관리.xlsx");
 		File file = new File(System.getProperty("user.home")+"\\Downloads\\BEETMALL 정산관리.xlsx");

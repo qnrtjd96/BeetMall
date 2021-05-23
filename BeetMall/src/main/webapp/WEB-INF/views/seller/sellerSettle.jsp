@@ -265,7 +265,7 @@ $(()=>{
 	$('#excelDown').click( () => {
 		
 		if(dataSubmitCheck==''){
-			alert('선택된 데이터가 없습니다. 데이터를 선택 후 사용해 주시기 바랍니다.');
+			alert('데이터를 조회 및 선택된 데이터가 있을경우 다운로드가 가능합니다');
 			return false;
 		}
 		
