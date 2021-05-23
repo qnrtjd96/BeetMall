@@ -174,9 +174,7 @@ let searchTxt =null;// 검색 데이터
 				sortStr = 2;
 				paging(1, 2, mcatenumDataArr, searchTxt, startDate, endDate);
 			} 
-		});	
-			
-			
+		});	 
 			
 		//날짜	
 		var date = new Date();
@@ -187,13 +185,15 @@ let searchTxt =null;// 검색 데이터
 			}else{
 				return value;
 			}
-		};	
-			 
-			
+		};	 
+		function pagelist(pagenum){
+			var lin = "noticeBoardList?pageNum="+pagenum;
+			location.href=lin;
+		}		
 			
 	//검색어 
-	$(document).on('click',"#searchFrm",function(){	  
-			if($('#searchWord').val()=="" || $('#searchWord').val()==null){
+	$(document).on('click',"searchBtn",function(){	  
+			if($('.searchWord').val()=="" || $('.searchWord').val()==null){
 				alert("검색어를 입력하세요.");
 				return false;
 			}
@@ -270,35 +270,40 @@ let searchTxt =null;// 검색 데이터
 				</ul>
 			</c:forEach> 
 		</form>
-		</div>	 
-		<div class="page_wrap">
+		</div>	
+		<div class="page_wrap">	
 			<div class="page_nation">
-			   <a class="arrow pprev" href="<%=request.getContextPath()%>/img/kpage_pprev.png"></a>
-			   <a class="arrow prev" href="#"></a>
-			   <a href="#" class="active">1</a>
-			   <a href="#">2</a>
-			   <a href="#">3</a>
-			   <a href="#">4</a>
-			   <a href="#">5</a>
-			   <a href="#">6</a>
-			   <a href="#">7</a>
-			   <a href="#">8</a>
-			   <a href="#">9</a>
-			   <a href="#">10</a>
-			   <a class="arrow next" href="#"></a>
-			   <a class="arrow nnext" href="#"></a>
+			   <c:if test="${pageVO.pageNum>1}"><!-- 이전페이지가 있을때 -->
+			   		<a class="arrow prev" href="javascript:pagelist(${pageVO.pageNum-1})"></a>
+			   </c:if>
+			   <!-- 페이지 번호                   1                                    5                     -->
+	           <c:forEach var="p" begin="${pageVO.startPageNum}" step="1" end="${pageVO.startPageNum + pageVO.onePageNum-1}">
+	              <c:if test="${p<=pageVO.totalPage}">
+	                 <c:if test="${p==pageVO.pageNum }"> <!-- 현재페이지일때 실행 -->
+	                    <a class="active">${p}</a>
+	                 </c:if>   
+	                 <c:if test="${p!=pageVO.pageNum}"> <!-- 현재페이지가 아닐때 실행 -->
+	                    <a href="javascript:pagelist(${p})">${p}</a>
+	                 </c:if>
+	              </c:if>
+	           </c:forEach>
+	           <c:if test="${pageVO.pageNum < pageVO.totalPage}">
+	              <a class="arrow next" href="javascript:pagelist(${pageVO.pageNum+1})"></a>
+	           </c:if>
 			</div>
-		 </div> 
+		 </div>
 		 <div>
-			<form method="get" class="searchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
+		 
+			<form method="get" class="searchFrm" action="<%=request.getContextPath() %>/noticeBoardList">
 				<select name="searchKey">
-					<option value="subject" selected>제목</option>
-	   				<option value="no">공지번호</option> 
-	   				<option value="who">대상</option> 
-	   				<option value="writedate">공지일</option> 
+					<option value="all" selected>전체</option>
+					<option value="title" >제목</option>
+	   				<option value="num">공지번호</option> 
+	   				<option value="type">대상</option> 
+	   				<option value="content">공지내용</option> 
 				</select>			
 				<input type="text" name="searchWord" id="searchWord"/>
-				<input type="submit" value="검색"/> 
+				<input type="submit" id="searchBtn" value="검색"/> 
 			</form> 
 		</div>  
 	</div>

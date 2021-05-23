@@ -6,7 +6,30 @@
  	<select id="noticeBoardList" resultType="com.beetmall.sshj.admin.vo.AdminBoardVO">
  		select * from(
 	    	select * from(
- 				select infonum, infotype, infotitle, to_char(infowritedate, 'YY/MM/DD') infowritedate from notice order by infonum desc
+ 				select infonum, infotype, infotitle, to_char(infowritedate, 'YY/MM/DD') infowritedate from notice 
+		        <choose>
+					<when test = 'searchWord!=null or searchWord == " " '>
+						<if test="searchKey == 'title'.toString()">
+							where infotitle like ('%${searchWord}%')
+						</if>
+						<if test="searchKey == 'num'.toString()">
+							where infonum like ('%${searchWord}%')
+						</if>
+						<if test="searchKey == 'type'.toString()">
+							where infotype like ('%${searchWord}%')
+						</if>
+						<if test="searchKey == 'content'.toString()">
+							and infocontent like ('%${searchWord}%')
+						</if>
+						<if test="searchKey == 'all'.toString()">
+							where (infotitle like ('%${searchWord}%')
+								or infonum like ('%${searchWord}%')
+								or infotype like ('%${searchWord}%')
+								or infocontent like ('%${searchWord}%'))
+						</if>
+					</when>
+				</choose>
+ 				order by infonum desc
 			)
 			where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord} order by infonum)
 			where <![CDATA[rownum<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
@@ -14,15 +37,40 @@
         order by infonum desc
  	</select>
  	<insert id="noticeWriteOk" parameterType="com.beetmall.sshj.admin.vo.AdminBoardVO">
- 		insert into notice(infonum, infotitle, infowritedate, infoattach, infocontent, infotype) values(noticesq.nextval, #{infotitle}, sysdate, #{infoattach}, #{infocontent}, #{infotype})
+ 		insert into notice(infonum, infotitle, infowritedate, filename, infocontent, infotype) values(noticesq.nextval, #{infotitle}, sysdate, #{filename}, #{infocontent}, #{infotype})
  	</insert>
  	<select id="noticeBoardView" resultType="com.beetmall.sshj.admin.vo.AdminBoardVO">
- 		select infonum, infotitle, infowritedate, infoattach, infocontent, infotype from notice where infonum=#{param1}
+ 		select infonum, infotitle, infowritedate, filename, infocontent, infotype from notice where infonum=#{param1}
  	</select> 
  	<update id="noticeBoardEditOk" parameterType="com.beetmall.sshj.admin.vo.AdminBoardVO">
- 		update notice set infocontent=#{infocontent}, infotitle=#{infotitle}, infotype=#{infotype}, infoattach=#{infoattach} where infonum=#{infonum} 
+ 		update notice set infocontent=#{infocontent}, infotitle=#{infotitle}, infotype=#{infotype}, filename=#{filename} where infonum=#{infonum} 
  	</update>
 	<delete id="noticeBoardDelete">
 		delete from notice where infonum=#{param1}
 	</delete>
+	<select id="noticeOnetotalRecord" parameterType="com.beetmall.sshj.custom.vo.PageSearchVO" resultType="int">
+		select count(infonum) from notice 
+		<choose>
+			<when test = 'searchWord!=null or searchWord == " " '>
+				<if test="searchKey == 'title'.toString()">
+					 where  infotitle like ('%${searchWord}%')
+				</if>
+				<if test="searchKey == 'num'.toString()">
+					 where  infonum like ('%', #{searchWord}, '%')
+				</if>
+				<if test="searchKey == 'type'.toString()">
+					 where  infotype like CONCAT('%${searchWord}%')
+				</if>
+				<if test="searchKey == 'content'.toString()">
+					 where  infocontent like ('%${searchWord}%'))
+				</if>
+				<if test="searchKey == 'all'.toString()">
+					 where  (infotitle like'%${searchWord}%'
+						or infonum like '%${searchWord}%'
+						or infotype like '%${searchWord}%'
+						or infocontent like '%${searchWord}%')
+				</if>
+			</when>
+		</choose>order by infonum desc
+	</select>
 </mapper>

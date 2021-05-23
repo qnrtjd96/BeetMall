@@ -263,21 +263,6 @@ function pagelist(pagenum){
 					</c:forEach>
 				</ul>
 			</div>
-			
-			
-			<!--  
-		<c:forEach var="data" items="${list}">
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 홍길동</li>
-				<li><a href="회원정보?">id</a></li>
-				<li>23</li>
-				<li>abc@email.com</li>  
-				<li>93-02-21</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16<br/></li> 
-			</ul>
-		</c:forEach>-->
 		</div>
 		<div class="page_wrap">	
 			<div class="page_nation">

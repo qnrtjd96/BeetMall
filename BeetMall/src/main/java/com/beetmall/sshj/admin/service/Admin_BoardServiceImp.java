@@ -1,13 +1,23 @@
 package com.beetmall.sshj.admin.service;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.beetmall.sshj.admin.dao.AdminBoardDAO; 
 import com.beetmall.sshj.admin.vo.AdminBoardVO;
@@ -46,28 +56,7 @@ public class Admin_BoardServiceImp implements Admin_BoardService {
 	}
 
 	@Override
-	public AdminBoardVO dataSelect(int infonum) { 
-		return null;
+	public int noticeOnetotalRecord(Admin_Board_PageVO pageVO) { 
+		return boardDAO.noticeOnetotalRecord(pageVO);
 	}
-
-	@Override
-	public AdminBoardVO getSelectFilename(int infonum) { 
-		return null;
-	}
-
-	@Override
-	public int dataUpdate(AdminBoardVO infonum) { 
-		return 0;
-	}
-
-	@Override
-	public int dataDelete(int infonum) { 
-		return 0;
-	}
- 
- 
-  
-	  
-	 
-	  
 }

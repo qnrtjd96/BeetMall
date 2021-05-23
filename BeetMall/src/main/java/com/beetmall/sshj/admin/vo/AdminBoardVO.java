@@ -1,4 +1,6 @@
  package com.beetmall.sshj.admin.vo;
+ 
+ import org.springframework.util.MimeType;
 
 public class AdminBoardVO {
 	private String userid;
@@ -8,7 +10,8 @@ public class AdminBoardVO {
 	private String infowritedate;
 	private int infohit;
 	private int infotype;
-	private String infoattach; 
+	private String filename;
+	private MimeType infofiletype;
 	
 	public int getInfonum() {
 		return infonum;
@@ -45,17 +48,24 @@ public class AdminBoardVO {
 	}
 	public void setInfotype(int infotype) {
 		this.infotype = infotype;
-	}
-	public String getInfoattach() {
-		return infoattach;
-	}
-	public void setInfoattach(String infoattach) {
-		this.infoattach = infoattach;
-	}
+	} 
 	public String getUserid() {
 		return userid;
 	}
 	public void setUserid(String userid) {
 		this.userid = userid;  
 	}
+	public MimeType getInfofiletype() {
+		return infofiletype;
+	}
+	public void setInfofiletype(String t) {
+		this.infofiletype = new MimeType(t);
+	}
+	public String getFilename() {
+		return filename;
+	}
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+	
 }	 

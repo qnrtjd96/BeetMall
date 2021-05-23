@@ -236,10 +236,10 @@ $(document).on('click',"#addBtn",function(){
 						<th class="menu">첨부파일</th>
 						<td  class="td">
 							<div style="display:flex;">
-								<label for="infoattach" id="attach"> 
+								<label for="filename" id="attach"> 
 									<div>파일 첨부하기</div>
 								</label>
-								<input type="file" style="width: 500px;" name="file" id="infoattach">
+								<input type="file" style="width: 500px;" name="file" id="filename">
 								<input class="uploadFile" style="width: 500px;" id="uploadFile" >
 							</div>
 						</td> 

@@ -123,7 +123,7 @@
 		display:flex;  
 		top:30px; 
 	}
-	#bottommm>input{
+	#bottommm>input, #bottommm input{
 		border:1px solid gray;
 		width:150px;
 	}
@@ -258,10 +258,8 @@ $(()=>{
 						<th class="menu">첨부파일</th>
 						<td  class="td">
 							<div style="display:flex;">
-								<label for="infoattach" id="attach" style="display:none;">  
-								</label>
-								<input type="file" style="width: 500px;" name="file" id="infoattach">
-								<input class="uploadFile" style="width: 500px;" id="uploadFile" readonly>
+								<input type="file" style="width: 500px;" name="file" id="filename"> 
+								${vo.filename}
 							</div>
 						</td> 
 					</tr>

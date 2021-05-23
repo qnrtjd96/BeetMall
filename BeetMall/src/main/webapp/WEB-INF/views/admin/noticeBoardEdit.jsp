@@ -262,10 +262,10 @@ function boardDel(){
 						<th class="menu">첨부파일</th>
 						<td  class="td">
 							<div style="display:flex;">
-								<label for="infoattach" id="attach">
+								<label for="filename" id="attach">
 									<div>파일 첨부하기</div>
-								</label> 
-                    				<input type="file" style="width: 500px;" name="file" id="infoattach">
+								</label> ${vo.filename}
+                    				<input type="file" style="width: 500px;" name="file" id="filename">
 									<input class="uploadFile" style="width: 500px;" id="uploadFile" readonly>
 								 
 							</div>
@@ -283,7 +283,7 @@ function boardDel(){
 			</table>
 	<div id="bottommm">
 		<input type="submit" value="수정하기" class="btn write_btn" id="write_btn"/> 
-		<input type="button" value="삭제하기" class="btn write_btn" id="reWrite_btn" onClick="boardDel()"/>
+		<a href="#" id="boardDel"><input type="button" value="삭제하기" class="btn write_btn" id="reWrite_btn"/></a>
 		<input type="button" value="목록보기" class="btn write_btn" id="cancle_btn" onClick="location.href='<%=request.getContextPath() %>/noticeBoardList'"/>
 	</div> 
 		</form>

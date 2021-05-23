@@ -19,15 +19,6 @@ public interface Admin_BoardService {
 	public int noticeWriteOk(AdminBoardVO vo); 
 	public AdminBoardVO noticeBoardView(int infonum);
 	public int noticeBoardDelete(int infonum);   
-	public int noticeBoardEditOk(AdminBoardVO vo);  
-	//파일 선택
-	public AdminBoardVO dataSelect(int infonum);
-	//파일명 선택
-	public AdminBoardVO getSelectFilename(int infonum);
-	//레코드 수정
-	public int dataUpdate(AdminBoardVO infonum);
-	//레코드 삭제
-	public int dataDelete(int infonum);
-	 
-	
+	public int noticeBoardEditOk(AdminBoardVO vo);  	
+	public int noticeOnetotalRecord(Admin_Board_PageVO pageVO);
 }
