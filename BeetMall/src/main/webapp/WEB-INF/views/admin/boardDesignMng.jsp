@@ -67,7 +67,105 @@
 	/*컨테이너 내 헤더*/
 	 #randomTitle, #bannerTitle, #todayHeader, #cateHeader, #popHeader{
 	 	padding-top:20px;
-	 } 
+	 }
+	 /*데이터 내용*/ 
+	.cartImg{
+		margin-left:10px;
+		height:20%;
+		width:25%;
+	}
+	#content input, textarea, select, #noticeSearchFrm input{
+		border:1px solid lightgray; 
+		border-radius: 3px;
+	}#content li, label{
+		list-style-type:none; 
+		padding-bottom:10px;
+	}
+	#content select{
+		height:28px;
+	} 
+	.contentList>li:nth-of-type(7){
+		padding-top:3px;
+	}
+	/*버튼*/
+	#btns{ 
+		top:-115px; 
+		left:460px; 
+	} 
+	#btns a>button, button:nth-of-type(4){ 
+		margin-left:900px; 
+	} 
+	#topBar Button:nth-of-type(1),
+	#topBar Button:nth-of-type(2),
+	#topBar Button:nth-of-type(3),
+	#topBar Button:nth-of-type(4){
+		padding:2px 7px;
+	}
+	#topBar h5{  
+		padding-left:120px;
+	}
+	#container li{  
+		 float:left; 
+		 width:10%; 
+	}   
+	#contentBox{
+		top:-40px;
+	} 
+	#contentBox li:nth-of-type(){ 
+		width:0%; 
+	}
+	#contentBox li:nth-of-type(4){ 
+		width:20%; 
+	}   
+	#topBar li:nth-of-type(6n){
+		width:12%;
+	} 
+	#topBar li:nth-of-type(4){
+		width:6%;
+	}   
+	
+	#sortBox {
+		margin: 80px 0 0 20px;
+	} 
+	#sortBox>ul{
+		width:1110px !important;
+	}
+	#sortBox li:nth-of-type(1), #sortBox li:nth-of-type(5) {
+		width: 10%;
+	}
+	#sortBox li:nth-of-type(2) {
+		display:flex;
+		width: 16%;
+	}
+	#sortBox li:nth-of-type(3) {
+		margin-right:44px;
+	}
+	#sortBox li:nth-of-type(4) {
+		margin-right:233px;
+	} 
+	#sortBox li:nth-of-type(7),#sortBox li:nth-of-type(8){
+		width: 3.5%;
+	}
+	#fromTo{
+		margin-left:14px;
+	}
+	/* 상품목록 */
+	.pul>li{
+		width:180px !important;
+		height:35px;
+		line-height: 35px;
+		padding:0px !important;
+	}
+	.pul{
+		margin-left:0px !important;
+		
+	}
+	#bannerContainer{
+		display:none;
+	}
+	#title{
+		border: none;
+	}
 </style>
 <script>
 $(document).ready(function(){ 
@@ -102,7 +200,7 @@ $(document).ready(function(){
 <div id="container">
 		<div id="contentBox">  
 		<!----------------------- 랜덤룰렛 파트 ------------------>
-	   		<div id="randomBox">
+	   		<!-- <div id="randomBox">
 		 	<div id="randomTitle"><div>랜덤룰렛</div></div>
 		 		<ul class="randomUl">
 		 			<li><div >
@@ -156,7 +254,7 @@ $(document).ready(function(){
 					<li><button class="success addBtn" value="" name="" >추가</button></li> 
 					<li><button class="success delBtn delBtn" value="" name="" >삭제</button></li> 
 		 		</ul> 
-		 	</div>
+		 	</div> -->
 		 	
 		 	<!----------------- 배너 이미지 파트 ------------------>
 	   		<div id="bannerContainer">
@@ -214,55 +312,85 @@ $(document).ready(function(){
 			 		</ul>		
 				</section> 	 
 		 	</div> 
-		 	
-		 	<!------------- 오늘의 상품 파트 --------------->
-		 	<div id="todayContainer">
-			 	<div id="todayHeader">오늘의 상품</div>
-			 	<section id="todayBox">		 
-					<ul>
-			 			<li>
-			 				<div class="todayImg">
-			 					<img src="<%=request.getContextPath()%>/img/y_tomato.jpg"/>
-			 				</div>
-			 			</li>
-			 			<li><button class="success addBtn" value="" name="" >추가</button>
-						<button class="success delBtn delBtn" value="" name="" >삭제</button></li> 
-		 				<li><input type="text" placeholder="링크 입력"></li>
-			 		</ul>	
-					<ul>
-			 			<li>
-			 				<div class="todayImg">
-			 					<img src="<%=request.getContextPath()%>/img/y_tomato.jpg"/>
-			 				</div>
-			 			</li>
-			 			<li><button class="success addBtn" value="" name="" >추가</button>
-						<button class="success delBtn delBtn" value="" name="" >삭제</button></li> 
-		 				<li><input type="text" placeholder="링크 입력"></li>
-			 		</ul>
-			 		<ul>
-			 			<li>
-			 				<div class="todayImg">
-			 					<img src="<%=request.getContextPath()%>/img/y_tomato.jpg"/>
-			 				</div>
-			 			</li>
-			 			<li><button class="success addBtn" value="" name="" >추가</button>
-						<button class="success delBtn delBtn" value="" name="" >삭제</button></li> 
-		 				<li><input type="text" placeholder="링크 입력"></li>
-			 		</ul>
-			 		<ul>
-			 			<li>
-			 				<div class="todayImg">
-			 					<img src="<%=request.getContextPath()%>/img/y_tomato.jpg"/>
-			 				</div>
-			 			</li>
-			 			<li><button class="success addBtn" value="" name="" >추가</button>
-						<button class="success delBtn delBtn" value="" name="" >삭제</button></li> 
-		 				<li><input type="text" placeholder="링크 입력"></li>
-			 		</ul>
-				</section> 	 
-		 	
+		 
+		<div class="productchange" style="width:1040px;position:absolute;top:0px;margin-bottom:10px;background-color:white;box-shadow: 4px 6px 15px -7px #c4c4c4;">
+			<div class="protop" style="width:1040px;text-align:center;font-weight: bold;font-size: 16px;letter-spacing: 2px;border-bottom: 1px solid lightgray;border-radius: 10px 10px 0px 0px;background-color: #FAF9F6;height: 60px;line-height:60px;margin-top:10px;">
+				<input type="text"/>
+			</div>
+			<div style="margin-top:10px;">
+				<c:forEach var="i" begin="0" end="11">
+					<div class="productPrev" style="width:260px;height:200px;float:left;">
+						<div class="imgprint" style="width:240px;height:160px; margin-left:10px;margin-right:10px;"></div>
+						<div class="buttons" style="width:70px;margin:5px auto;">
+							<input type="hidden" value="${i}"/>
+							<input type="button" value="추가" style="width:30px;height:20px;"/>
+							<input type="button" value="제거" style="width:30px;height:20px;margin-left:5px;"/>
+						</div>
+					</div>
+				</c:forEach>
+			</div>
+			<div class="contentBox"style=" margin-left: 0px;top:1050px;height: 520px;"> 	
+		<div id="title">
+			<ul class="pul">
+				<li>상품번호</li>
+				<li>카테고리</li>
+				<li id="kktitle">제목</li>
+				<li>상호명</li>
+				<li>등록일</li> 
+				<li>추가</li>
+			</ul>
+		</div>  
+			<ul class="pul">
+		<c:forEach var="data" items="${list}">
+				<li>${data.productnum}</li>
+				<li><c:if test="${data.mcatenum>=1 &&data.mcatenum<=7}">
+						건과류
+					</c:if>
+					<c:if test="${data.mcatenum>=8 &&data.mcatenum<=21}">
+						견과류
+					</c:if>
+					<c:if test="${data.mcatenum>=22 &&data.mcatenum<=50}">
+						과일
+					</c:if>
+					<c:if test="${data.mcatenum>=51 &&data.mcatenum<=68}">
+						쌀/잡곡
+					</c:if>
+					<c:if test="${data.mcatenum>=69 &&data.mcatenum<=104}">
+						야채
+					</c:if>
+				</li>
+				<li id="kktitle"><a href="/sshj/productEditA?productnum=${data.productnum}">${data.productname}</a></li>
+				<li>${data.storename}</li>
+				<li>${data.sellstart}</li> 
+				<li><input type="button" class="addproduct" value="추가"></li>
+		</c:forEach>
+			</ul>  
+		</div>	 
+		<div class="page_wrap">
+			<div class="page_nation">
+			   <c:if test="${pageVO.pageNum>1}"><!-- 이전페이지가 있을때 -->
+			   		<a class="arrow prev" href="/sshj/boardDesignMng?pageNum=${pageVO.pageNum-1}<c:if test="${pageVO.searchWord != null && pageVO.searchWord != ''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>"></a>
+			   </c:if>
+			   <!-- 페이지 번호                   1                                    5                     -->
+	           <c:forEach var="p" begin="${pageVO.startPageNum}" step="1" end="${pageVO.startPageNum + pageVO.onePageNum-1}">
+	              <c:if test="${p<=pageVO.totalPage}">
+	                 <c:if test="${p==pageVO.pageNum}"> <!-- 현재페이지일때 실행 -->
+	                    <a class="active">${p}</a>
+	                 </c:if>   
+	                 <c:if test="${p!=pageVO.pageNum}"> <!-- 현재페이지가 아닐때 실행 -->
+	                    <a href="/sshj/boardDesignMng?pageNum=${p}<c:if test="${pageVO.searchWord != null && pageVO.searchWord != ''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>">${p}</a>
+	                 </c:if>
+	              </c:if>
+	           </c:forEach>
+	           <c:if test="${pageVO.pageNum < pageVO.totalPage}">
+	              <a class="arrow next" href="/sshj/boardDesignMng?pageNum=${pageVO.pageNum+1}<c:if test="${pageVO.searchWord != null && pageVO.searchWord != ''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>"></a>
+	           </c:if>
+			</div>
+		 </div>
+		</div> 	 
+	 	
 		 	<!------------------ 카테고리 관리파트--------------------->
-			<div id="cateContainer">
+			<%-- <div id="cateContainer">
 				<div id="cateHeader">카테고리 관리</div>
 			 	<div id="sectionBox">	
 				 	<section id="cateBox1">	
@@ -380,7 +508,7 @@ $(document).ready(function(){
 				 		</div>
 				 	</section>
 				 </div>
-		 	</div>  
+		 	</div>   --%>
 				 	
 					<!----------------------- 팝업 파트 ------------------>
 				 	<div id="popContainer">
@@ -408,7 +536,7 @@ $(document).ready(function(){
 				 	</div>
 				 	 
 					<!----------------------- 이용안내 파트 ------------------>
-				 	<div id="useInfoContainer">
+				 	<%-- <div id="useInfoContainer">
 						<div id="useInfoHeader">이용안내 관리</div>
 					 	<div id="useInfoBox">	
 				 			<textarea name="summernote" class="summernote" ></textarea>				 			 
@@ -454,7 +582,7 @@ $(document).ready(function(){
 				 			<input type="button" value="취소" class="btn write_btn" id="cancle_btn" onClick="location.href='<%=request.getContextPath() %>/recipeView'"/>
 						</div>
 				 	</div> 
-				 </div>
+				 </div> --%>
 			</div>
 	</div>  
 </div> 
