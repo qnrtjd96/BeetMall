@@ -77,10 +77,10 @@
 	#sortBox li:nth-of-type(4) {
 		margin-right:243px;
 	} 
-	#sortBox li:nth-of-type(6) {
+	#sortBox li:nth-of-type(5) {
 		margin-right:12px;
 	}
-	#sortBox li:nth-of-type(7),#sortBox li:nth-of-type(8){
+	#sortBox li:nth-of-type(6),#sortBox li:nth-of-type(7){
 		width: 3.5%;
 	}
 	#fromTo{
@@ -347,30 +347,28 @@ let searchTxt =null;// 검색 데이터
 				<li>카테고리</li>
 				<li>상품명</li>
 				<li>판매자</li>
-				<li>리뷰내용</li>
 				<li>답변상태</li>
 				<li>작성자</li>
 				<li>등록일</li> 
 			</ul>
 		</div>   
 		 <c:forEach var="rvo" items="${list}">
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"></li>
-				<li>${rvo.reviewnum}</li>
-				<li>${rvo.mcatename}</li>
-				<li class="wordCut">${rvo.productname}</li>
-				<li>${rvo.seller}</li>
-				<li class="wordCut"><a href="회원정보?">${rvo.reviewcontent}</a></li>
-				<li>
-					<c:if test="${rvo.reviewanswer==null || data.reviewanswer==''}">
-						답변대기
-					</c:if>
-					<c:if test="${rvo.reviewanswer!=null && data.reviewanswer !=''}">
-						답변완료
-					</c:if></li>
-				<li>${rvo.reviewwriter}</li>
-				<li>${rvo.reviewwritedate}</li> 
-			</ul> 
+				<ul class="contentList">
+					<li><input type="checkbox" name="check" id="check"></li>
+					<li>${rvo.reviewnum}</li>
+					<li>${rvo.mcatename}</li>
+					<li class="wordCut">${rvo.productname}</li>
+					<li>${rvo.seller}</li>
+					<li>
+						<c:if test="${rvo.reviewanswer==null || data.reviewanswer==''}">
+							답변대기
+						</c:if>
+						<c:if test="${rvo.reviewanswer!=null && data.reviewanswer !=''}">
+							답변완료
+						</c:if></li>
+					<li>${rvo.reviewwriter}</li>
+					<li>${rvo.reviewwritedate}</li> 
+				</ul> 
 		</c:forEach> 	   
 		</div>	 
 		<div class="page_wrap">
@@ -504,6 +502,12 @@ let searchTxt =null;// 검색 데이터
 	    overflow: hidden;
 	    text-overflow: ellipsis;
 	 } 
+	 #title {
+	    width: 1000px;
+	    font-weight: bold;
+	    padding: 65px 0 25px 0;
+	    border-bottom: gray 1px solid;
+	}
 </style>
 <script>
 	$(function(){

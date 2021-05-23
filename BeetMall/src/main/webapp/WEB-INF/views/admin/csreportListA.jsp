@@ -123,6 +123,9 @@
 		width:500px;
 		margin:400px 0 0 450px;
 		z-index:1;
+		position: absolute;
+        top: -140px;
+	    background-color: aliceblue;
 	}
 	#modalHeader, #modalPastHeader{
 		background-color:lightgray;
@@ -239,7 +242,7 @@
 				<li>처리일</li>
 				<li>신고유형</li>
 				<li>신고인</li>
-				<li>신고받은이</li> 
+				<li>신고받은이(+)</li> 
 			</ul>
 		</div>  
 		<div id="contentList">
@@ -248,7 +251,7 @@
 					<li><input type="checkbox" name="check" id="check"></li>
 					<li>${data.reportnum }</li>
 					<li>${data.reportboard }</li>
-					<li class="wordCut"><a href="sshj/">${data.reportcontent}</a></li>
+					<li class="wordCut"><a href="/sshj/csReportSelect?reportnum=${data.reportnum}">${data.reportcontent}</a></li>
 					<li>${data.reportdate }</li>
 					<li>
 						<c:if test="${data.completedate==null }">
@@ -330,6 +333,12 @@
 			<hr>
 			<input type="text">&nbsp; 일 &nbsp;
 			<button class="success" value="" name="" id="">정지</button>
-			<button class="success" value="" name="" id="">닫기</button>
+			<button class="success" value="" id="modalcancel">닫기</button>
 		</div> 
-</html>
+<script>
+	$(function(){
+		$("#modalcancel").click(function(){
+			$(this).parent().css("display","none");
+		});
+	});
+</script>

@@ -25,5 +25,10 @@ public class ReportListServiceImp implements ReportListService{
 	public List<ReportListVO> csreportList(adminkPageSearchVO pageVO) {
 		return ReportListDAO.csreportList(pageVO);
 	}
+
+	@Override
+	public ReportListVO csreportSelect(int reportnum) {
+		return ReportListDAO.csreportSelect(reportnum);
+	}
 	
 }

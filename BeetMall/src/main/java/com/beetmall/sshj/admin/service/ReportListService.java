@@ -11,4 +11,6 @@ public interface ReportListService {
 
 	public List<ReportListVO> csreportList(adminkPageSearchVO pageVO);
 
+	public ReportListVO csreportSelect(int reportnum);
+
 }

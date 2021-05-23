@@ -47,5 +47,28 @@ public class ReportListController {
 		return mav;
 	}
 	
-	
+	//신고 목록보기에서 제목클릭하면 들어가는 페이지( 각 신고당한 페이지로 이동해야함)
+	@RequestMapping("/csReportSelect")
+	public ModelAndView csReportSelect(int reportnum) {
+		ModelAndView mav = new ModelAndView();
+		ReportListVO vo  = new ReportListVO();
+		
+		vo = reportListService.csreportSelect(reportnum);
+		
+		String boardname = vo.getReportboard();
+		System.out.println("boardname = " + boardname);
+		
+		int report = vo.getReportboardnum();
+		mav.addObject("report", report);
+		
+		if(boardname.equals("문의")) {
+			mav.setViewName("/custom/customproduct");
+		}else if(boardname.equals("리뷰")){
+			mav.setViewName("/custom/customproduct");
+		}else{//레시피
+			mav.setViewName("/custom/recipeView"); //이부분바꿔야함
+		}
+		
+		return mav;
+	}
 }

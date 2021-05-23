@@ -10,5 +10,7 @@ public interface ReportListDAO {
 	public int csreportOnetotalRecord(adminkPageSearchVO pageVO);
 
 	public List<ReportListVO> csreportList(adminkPageSearchVO pageVO);
+
+	public ReportListVO csreportSelect(int reportnum);
 	
 }

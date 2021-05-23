@@ -12,6 +12,8 @@ public class ReportListVO {
 	private String userid;
 	private String reporteduser;
 	private String reportreason;
+	private int reportboardnum;
+	
 	public int getReportnum() {
 		return reportnum;
 	}
@@ -65,6 +67,12 @@ public class ReportListVO {
 	}
 	public void setReportreason(String reportreason) {
 		this.reportreason = reportreason;
+	}
+	public int getReportboardnum() {
+		return reportboardnum;
+	}
+	public void setReportboardnum(int reportboardnum) {
+		this.reportboardnum = reportboardnum;
 	}
 	
 }
