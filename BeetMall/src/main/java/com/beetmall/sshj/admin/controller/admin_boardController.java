@@ -228,15 +228,14 @@ public class admin_boardController {
  	 	@Transactional(rollbackFor= {Exception.class, RuntimeException.class})
 	 	@RequestMapping(value="/noticeBoardEditOk", method=RequestMethod.POST)   
  		public ModelAndView noticeBoardEditOk(AdminBoardVO vo, HttpSession session, HttpServletRequest req) { 
- 	 		ModelAndView mav = new ModelAndView();
- 	 		admin_DataDAO dao = new admin_DataDAO();
+ 	 		ModelAndView mav = new ModelAndView(); 
+ 	 	 
  	 	//데이터베이스의 파일명을 가져온다
- 			admin_DataVO fileVO = dao.getSelectFilename(vo.getInfonum());
- 			List<String> selFile =  new ArrayList<String>();
- 			selFile.add(fileVO.getInfoattach());
+ 			AdminBoardVO vo1 = boardService.getSelectFilename(vo1.getInfonum());
+ 			String selFile =  vo1.getInfoattach(); 
  			
  			//삭제한 파일
- 			String delFile[] = req.getParameterValues("delFile");
+ 			String delFile = req.getParameter("delFile");
  			
  			//첨부파일 받아오기 
  			MultipartHttpServletRequest multireq = (MultipartHttpServletRequest)req;
@@ -253,13 +252,13 @@ public class admin_boardController {
  			System.out.println("path ->"+ path);
  			
  			//session userid
- 			vo.setUserid((String)session.getAttribute("logId"));
+ 			vo1.setUserid((String)session.getAttribute("logId"));
  			DefaultTransactionDefinition def = new DefaultTransactionDefinition();
  			def.setPropagationBehavior(DefaultTransactionDefinition.PROPAGATION_REQUIRED);
  			TransactionStatus status = transactionManager.getTransaction(def); 
  			
- 			List<String> newUpload = new ArrayList<String>();
- 			if(newUpload!=null && list.size()>0) {//새롭게 업로드 된 파일이 있는 경우
+ 			String newUpload = "";
+ 			if(newUpload!=null) {//새롭게 업로드 된 파일이 있는 경우
  				
 	 			try {		
 	 			//-----------------------이미지 등록 (파일 업로드)--------------------------------
@@ -290,17 +289,17 @@ public class admin_boardController {
 	 				e.printStackTrace();
 	 			}
 	 			//추가하지 않으면 값을 지정해서 넣어준다. 
-	 			vo.setInfoattach(orgName);
+	 			vo1.setInfoattach(orgName);
 	 			System.out.println("vo에 set해주는 이미지 이름 orgName -> "+orgName);
 	 			 
 	 			//공지수정 
-	 			int result = boardService.noticeBoardEditOk(vo);
+	 			int result = boardService.noticeBoardEditOk(vo1);
 	 			System.out.println("공지 수정 -> "+ result);
 	 			
 	 			if(result>0) { //글 등록 성공
 	 				System.out.println("[공지 수정 완료]");
 	 				transactionManager.commit(status); 
-	 	 			mav.addObject("vo", boardService.noticeBoardView(vo.getInfonum()));    
+	 	 			mav.addObject("vo", boardService.noticeBoardView(vo1.getInfonum()));    
 	 				mav.setViewName("/admin/noticeBoardView");
 	 			}else {//글 등록 실패
 	 				System.out.println("[공지 수정 실패]");
@@ -321,11 +320,11 @@ public class admin_boardController {
  			for(String newFile:newUpload) {
  				selFile.add(newFile);
  			}
- 			vo.setFilename1(selFile.get(0));
+ 			vo1.setFilename1(selFile.get(0));
  			if(selFile.size()>1) {
- 				vo.setFilename2(selFile.get(1));
+ 				vo1.setFilename2(selFile.get(1));
  			}
- 			if(dao.dataUpdate(vo)>0) { //수정
+ 			if(boardService.dataUpdate(vo1)>0) { //수정
  				if(delFile!=null){//삭제파일 지우기
  					for(String dFile:delFile) {
  						try {
@@ -338,7 +337,7 @@ public class admin_boardController {
  					}
  				}
  				//글 내용 보기
- 				mav.addObject("infonum", vo.getInfonum());
+ 				mav.addObject("infonum", vo1.getInfonum());
  				mav.setViewName("redirect:dataView");
  			}else {//수정실패
  				//새로 업로드 된파일 지우기

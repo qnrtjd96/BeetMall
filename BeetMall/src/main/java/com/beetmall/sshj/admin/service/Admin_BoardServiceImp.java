@@ -44,6 +44,26 @@ public class Admin_BoardServiceImp implements Admin_BoardService {
 	public int noticeBoardEditOk(AdminBoardVO vo) { 
 		return boardDAO.noticeBoardEditOk(vo);
 	}
+
+	@Override
+	public AdminBoardVO dataSelect(int infonum) { 
+		return null;
+	}
+
+	@Override
+	public AdminBoardVO getSelectFilename(int infonum) { 
+		return null;
+	}
+
+	@Override
+	public int dataUpdate(AdminBoardVO infonum) { 
+		return 0;
+	}
+
+	@Override
+	public int dataDelete(int infonum) { 
+		return 0;
+	}
  
  
   

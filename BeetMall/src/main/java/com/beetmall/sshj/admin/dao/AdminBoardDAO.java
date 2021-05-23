@@ -15,5 +15,8 @@ public interface AdminBoardDAO {
 	public int noticeWriteOk(AdminBoardVO vo); //새 공지 쓰기  
 	public int noticeBoardEditOk(AdminBoardVO vo);//공지 수정
 	public int noticeBoardDelete(int infonum); //공지 삭제 
-	 
+	public AdminBoardVO dataSelect(int infonum);
+	public AdminBoardVO getSelectFilename(int infonum);
+	public int dataUpdate(AdminBoardVO infonum);   
+	public int dataDelete(int infonum);
 }
