@@ -6,6 +6,13 @@ public class Admin_DesignVO {
 	private int catesort;
 	private int mcatenum;
 	private int productnum;
+	private String thumbimg;
+	public String getThumbimg() {
+		return thumbimg;
+	}
+	public void setThumbimg(String thumbimg) {
+		this.thumbimg = thumbimg;
+	}
 	public int getCatenum() {
 		return catenum;
 	}
