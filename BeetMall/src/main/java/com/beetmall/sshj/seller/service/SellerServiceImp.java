@@ -64,6 +64,19 @@ public class SellerServiceImp implements SellerSettleService{
 	}
 
 
+	@Override
+	public List<SellerSettleVO> initalData(SellerSettleVO vo) {
+		// TODO Auto-generated method stub
+		return dao.initalData(vo);
+	}
+
+	@Override
+	public List<SellerSettleVO> initalLength(String userid) {
+		// TODO Auto-generated method stub
+		return dao.initalLength(userid);
+	}
+
+
 	
 	
 	

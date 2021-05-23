@@ -12,6 +12,14 @@ public class SellerSettleVO {
 	private String startDate; // 시작날짜
 	private String endDate; // 종료날짜
 	private long totalMoney; // 정산금액 합계
+	private long dataLength; // 정산금액 합계의 금액
+	
+	// 데이터 숫자 콤마를 찍어서 넣는다
+	private String orderpriceStr;
+	private String realpayment1Str;
+	private String realpayment2Str;
+	private String realpayment3Str;
+	private String realpayment4Str;
 	
 	///////////////////////////////////////////////////////////////////////////
 	//페이징
@@ -84,8 +92,53 @@ public class SellerSettleVO {
 	
 	
 	//////////////////////////////////////////페이징 ///////////////////////////////////
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public long getTotalMoney() {
 		return totalMoney;
+	}
+	public long getDataLength() {
+		return dataLength;
+	}
+	public void setDataLength(long dataLength) {
+		this.dataLength = dataLength;
+	}
+	public String getOrderpriceStr() {
+		return orderpriceStr;
+	}
+	public void setOrderpriceStr(String orderpriceStr) {
+		this.orderpriceStr = orderpriceStr;
+	}
+	public String getRealpayment1Str() {
+		return realpayment1Str;
+	}
+	public void setRealpayment1Str(String realpayment1Str) {
+		this.realpayment1Str = realpayment1Str;
+	}
+	public String getRealpayment2Str() {
+		return realpayment2Str;
+	}
+	public void setRealpayment2Str(String realpayment2Str) {
+		this.realpayment2Str = realpayment2Str;
+	}
+	public String getRealpayment3Str() {
+		return realpayment3Str;
+	}
+	public void setRealpayment3Str(String realpayment3Str) {
+		this.realpayment3Str = realpayment3Str;
+	}
+	public String getRealpayment4Str() {
+		return realpayment4Str;
+	}
+	public void setRealpayment4Str(String realpayment4Str) {
+		this.realpayment4Str = realpayment4Str;
 	}
 	public void setTotalMoney(long totalMoney) {
 		this.totalMoney = totalMoney;
