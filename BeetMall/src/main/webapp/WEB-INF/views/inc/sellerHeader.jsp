@@ -60,13 +60,15 @@ nav>ul>li{
 	text-align: center;
 }
 
-nav>ul>li>a:hover,#sellerHeaderSubMenu>li>a:hover{
-	color: #5c5c5c;
-	font-weight: bold;
-	font-size: 19px;
+nav>ul>li a,#sellerHeaderSubMenu>li a{
+	font-size: 17px;
 }
 
-nav>ul>li:nth-child(1)>a{
+#seller_header a{
+	color: black;
+}
+
+#seller_header>nav>ul>li:nth-child(1)>a{
 	color: #3a7a36;
 	font-size: 40px;
 	font-weight: bold;
@@ -74,8 +76,9 @@ nav>ul>li:nth-child(1)>a{
 }
 
 #sellerHeaderSubMenu{
-	width: 130px;
+	width: 110px;
 	height: 90px;
+	font-size: 17px;
 	line-height: 40px;
 	border: 1px solid #aaa;
 	display: none;

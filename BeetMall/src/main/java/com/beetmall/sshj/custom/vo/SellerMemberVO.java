@@ -2,14 +2,14 @@ package com.beetmall.sshj.custom.vo;
 
 public class SellerMemberVO {
 	private String userid;
-	private int storenum;
+	private long storenum;
 	private String storename;
 	private String sellername;
-	private int sellerreginum;
+	private long sellerreginum;
 	private String sellerregiimg;
 	private String regiapproval;
 	private String regiapprovaldate;
-	private int storezipcode;
+	private long storezipcode;
 	private String storeaddr;
 	private String storedetailaddr;
 	private String storeemail;
@@ -22,7 +22,7 @@ public class SellerMemberVO {
 	public void setUserid(String userid) {
 		this.userid = userid;
 	}
-	public int getStorenum() {
+	public long getStorenum() {
 		return storenum;
 	}
 	public void setStorenum(int storenum) {
@@ -40,10 +40,10 @@ public class SellerMemberVO {
 	public void setSellername(String sellername) {
 		this.sellername = sellername;
 	}
-	public int getSellerreginum() {
+	public long getSellerreginum() {
 		return sellerreginum;
 	}
-	public void setSellerreginum(int sellerreginum) {
+	public void setSellerreginum(long sellerreginum) {
 		this.sellerreginum = sellerreginum;
 	}
 	public String getSellerregiimg() {
@@ -64,10 +64,10 @@ public class SellerMemberVO {
 	public void setRegiapprovaldate(String regiapprovaldate) {
 		this.regiapprovaldate = regiapprovaldate;
 	}
-	public int getStorezipcode() {
+	public long getStorezipcode() {
 		return storezipcode;
 	}
-	public void setStorezipcode(int storezipcode) {
+	public void setStorezipcode(long storezipcode) {
 		this.storezipcode = storezipcode;
 	}
 	public String getStoreaddr() {

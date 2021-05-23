@@ -91,7 +91,7 @@ public class MemberController {
 	// 로그인
 	@RequestMapping(value="loginOk", method=RequestMethod.POST)
 	public ModelAndView loginOk(String userid, String userpwd, HttpSession session) {
-		
+		System.out.println("ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ여기");
 		ModelAndView mav = new ModelAndView();
 		int okgogo = memberservice.checkuseridNpwd(userid, userpwd);
 		if(okgogo>=1) {
@@ -433,7 +433,7 @@ public class MemberController {
 			return "실패";
 		}else {
 			if(memberservice.usertypetest(userid)<=3) {
-				String subject = "[BeetMall]비트몰 구매자 이메일 인증"; // 메일 제목부분
+				String subject = "[BeetMall]비트몰 아이디 발송"; // 메일 제목부분
 				String content =  "비트몰 아이디 찾기입니다.<br/>"
 								+ "아이디 : "+vo.getUserid();
 				try {
@@ -472,7 +472,7 @@ public class MemberController {
 				String uuid = random.toString();
 				String emailCode = uuid.substring(0,12);
 				if(memberservice.pwdupdate(userid, emailCode)>=1) {
-					String subject = "[BeetMall]비트몰 이메일 인증"; // 메일 제목부분
+					String subject = "[BeetMall]비트몰 임시 비밀번호 발송"; // 메일 제목부분
 					String content =  "비트몰 임시 비밀번호입니다.<br/>"
 									+ "비밀번호 : "+emailCode ;
 					try {

@@ -113,19 +113,20 @@ function reqularExpression(num){
 						}
 					});
 				</script>
-				<c:if test="${resultStr0 != null}">
-					<script>
-					let data = {
-							label : '3개월 매출 내역',
-							data : [${resultStr0},${resultStr1},${resultStr2}],
-							borderColor : [
-								'rgba(255,99,132,1)',
-							]
-					}
-					myChart.data.labels.push('${resultDate0}','${resultDate1}','${resultDate2}');
-					myChart.data.datasets.push(data);
-					myChart.update();
-					</script>
+				<c:if test="${resultStr0 != null || resultStr1 != null || resultStr !=null}">
+						<script>
+						
+						let data = {
+								label : '3개월 매출 내역',
+								data : [${resultStr0},${resultStr1},${resultStr2}],
+								borderColor : [
+									'rgba(255,99,132,1)',
+								]
+						}
+						myChart.data.labels.push('${resultDate0}','${resultDate1}','${resultDate2}');
+						myChart.data.datasets.push(data);
+						myChart.update();
+						</script>
 				</c:if>
 				
 			</div>

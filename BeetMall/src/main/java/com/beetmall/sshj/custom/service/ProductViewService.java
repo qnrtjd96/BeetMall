@@ -42,6 +42,9 @@ public interface ProductViewService {
 	//////////장바구니 보기//////////////
 	public List<ProductViewVO> customWishView(PageProductVO pageVO1);
 
+	//////////장바구니 삭제//////
+	public int wishDel(int num);
+
 
 
 }

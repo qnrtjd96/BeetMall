@@ -177,7 +177,7 @@ function editCheck(){
 function menuEditOpen(){
 	window.name = "농장수정";
 	
-	window.open("sellerEditFarmListView", "대표메뉴 선택창", "width=1200, height=600, resizable = no, scrollbars = no");
+	window.open("sellerEditFarmListView", "대표메뉴 선택창", "width=1300, height=600, resizable = no, scrollbars = no");
 }
 
 // 대표메뉴 선택시 이미지 변경하는 함수
@@ -238,24 +238,126 @@ function imgChange(data){
 						<div>
 							<span class="spanstar">은행</span>
 							<select name="bank" id="bank">
-								<option value="index" disabled selected>은행명선택</option>
-								<option value="국민">국민</option>
-								<option value="비씨">비씨</option>
-								<option value="신한">신한</option>
-								<option value="현대">현대</option>
-								<option value="삼성">삼성</option>
-								<option value="롯데">롯데</option>
-								<option value="외환">외환</option>
-								<option value="NH">NH</option>
-								<option value="하나">하나</option>
-								<option value="우리">우리</option>
-								<option value="광주">광주</option>
-								<option value="수협">수협</option>
-								<option value="씨티">씨티</option>
-								<option value="전북">전북</option>
-								<option value="제주">제주</option>
-								<option value="카카오뱅크">카카오뱅크</option>
-								<option value="케이뱅크">케이뱅크</option>
+								<option value="index" disabled>은행명선택</option>
+								
+								<c:if test="${result.bank=='국민' }">
+									<option value="국민" selected>국민</option>
+								</c:if>
+								<c:if test="${result.bank!='국민' }">
+									<option value="국민">국민</option>
+								</c:if>
+						
+								<c:if test="${result.bank=='비씨' }">
+									<option value="비씨" selected>비씨</option>
+								</c:if>
+								<c:if test="${result.bank!='비씨' }">
+									<option value="비씨">비씨</option>
+								</c:if>
+								
+								<c:if test="${result.bank=='신한' }">
+									<option value="신한" selected>신한</option>
+								</c:if>
+								<c:if test="${result.bank!='신한' }">
+									<option value="신한">신한</option>
+								</c:if>
+								
+								<c:if test="${result.bank=='현대' }">
+									<option value="현대" selected>현대</option>
+								</c:if>
+								<c:if test="${result.bank!='현대' }">
+									<option value="현대">현대</option>
+								</c:if>
+								
+								<c:if test="${result.bank=='삼성' }">
+									<option value="삼성" selected>삼성</option>
+								</c:if>
+								<c:if test="${result.bank!='삼성' }">
+									<option value="삼성">삼성</option>
+								</c:if>
+								
+								<c:if test="${result.bank=='롯데' }">
+									<option value="롯데" selected>롯데</option>
+								</c:if>
+								<c:if test="${result.bank!='롯데' }">
+									<option value="롯데">롯데</option>
+								</c:if>
+								
+								<c:if test="${result.bank=='외환' }">
+									<option value="외환" selected>외환</option>
+								</c:if>
+								<c:if test="${result.bank!='외환' }">
+									<option value="외환">외환</option>
+								</c:if>
+								
+								<c:if test="${result.bank=='NH' }">
+									<option value="NH" selected>NH</option>
+								</c:if>
+								<c:if test="${result.bank!='NH' }">
+									<option value="NH">NH</option>
+								</c:if>
+								
+								<c:if test="${result.bank=='하나' }">
+									<option value="하나" selected>하나</option>
+								</c:if>
+								<c:if test="${result.bank!='하나' }">
+									<option value="하나">하나</option>
+								</c:if>
+								
+								<c:if test="${result.bank=='우리' }">
+									<option value="우리" selected>우리</option>
+								</c:if>
+								<c:if test="${result.bank!='우리' }">
+									<option value="우리">우리</option>
+								</c:if>
+								
+								<c:if test="${result.bank=='광주' }">
+									<option value="광주" selected>광주</option>
+								</c:if>
+								<c:if test="${result.bank!='광주' }">
+									<option value="광주">광주</option>
+								</c:if>
+								
+								<c:if test="${result.bank=='수협' }">
+									<option value="수협" selected>수협</option>
+								</c:if>
+								<c:if test="${result.bank!='수협' }">
+									<option value="수협">수협</option>
+								</c:if>
+								
+								<c:if test="${result.bank=='씨티' }">
+									<option value="씨티" selected>씨티</option>
+								</c:if>
+								<c:if test="${result.bank!='씨티' }">
+									<option value="씨티">씨티</option>
+								</c:if>
+								
+								<c:if test="${result.bank=='전북' }">
+									<option value="전북" selected>전북</option>
+								</c:if>
+								<c:if test="${result.bank!='전북' }">
+									<option value="전북">전북</option>
+								</c:if>
+								
+								<c:if test="${result.bank=='제주' }">
+									<option value="제주" selected>제주</option>
+								</c:if>
+								<c:if test="${result.bank!='제주' }">
+									<option value="제주">제주</option>
+								</c:if>
+								
+								<c:if test="${result.bank=='카카오뱅크' }">
+									<option value="카카오뱅크" selected>카카오뱅크</option>
+								</c:if>
+								<c:if test="${result.bank!='카카오뱅크' }">
+									<option value="카카오뱅크">카카오뱅크</option>
+								</c:if>
+								
+								<c:if test="${result.bank=='케이뱅크' }">
+									<option value="케이뱅크" selected>케이뱅크</option>
+								</c:if>
+								<c:if test="${result.bank!='케이뱅크' }">
+									<option value="케이뱅크">케이뱅크</option>
+								</c:if>
 							</select>
 						</div>
 						<div>
@@ -283,12 +385,11 @@ function imgChange(data){
 						<div>
 							<div id="openerProductname">${result.productname }</div>
 							<div>
-								<c:if test="${result1.saleselect != '0' && result1.saleselect != null}">
-									판매금액 : <div id="openerProductPrice">${ result.productprice - result1.saleprice }</div>원
-								</c:if>
-								<c:if test="${result1.saleselect == '0' || result1.saleselect == null }">
-									판매금액 : <div id="openerProductPrice">${result.productprice }</div>원
-								</c:if>
+								<div>
+									<div id="openerSaleprice">${ result1.saleprice }원 할인</div>
+									<div id="openerResultPay">${ result.productprice- result1.saleprice }원</div>
+								</div>
+								<div id="openerProductprice">${ result.productprice }원</div>
 							</div>
 						</div>
 					</div>

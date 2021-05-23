@@ -117,6 +117,7 @@ a:hover,a:active,a:visited,a:link{
 
 #categoryListMiddle ul{
 	border-bottom: 1px solid #aaa;
+	border-top: 1px solid #aaa;
 	overflow: auto;
 	flex: 1;
 	display: flex;
@@ -150,6 +151,8 @@ a:hover,a:active,a:visited,a:link{
 
 #categoryManagement{
 	width: 100%;
+	height: 50px;
+	overflow: auto;
 	display: flex;
 	flex-wrap: wrap;
 }
@@ -210,11 +213,11 @@ table tr{
 	display: flex;
 }
 
-table th:nth-child(1){
+table th:nth-child(2){
 	flex-basis: 15%;
 }
 
-table th:nth-child(2){
+table th:nth-child(1){
 	flex-basis: 55% 
 }
 
@@ -241,35 +244,35 @@ table td {
 	height: 80px;
 }
 
-table td:nth-child(1){
+table td:nth-child(2){
 	flex-basis: 15%;
 	color: red;
 	height: 80px;
 	line-height: 80px;
-	border-right: 1px solid #ddd;
 	text-align: center;
 }
 
-table td:nth-child(2){
+table td:nth-child(1){
 	flex-basis: 55%;
+	border-right: 1px solid #ddd;
 	display: flex;
 }
 
-table td:nth-child(2)>div:nth-child(1){
+table td:nth-child(1)>div:nth-child(1){
 	flex-basis: 10%;
 }
 
-table td:nth-child(2)>div:nth-child(2){
+table td:nth-child(1)>div:nth-child(2){
 	flex-basis: 90%;
 }
 
-table td:nth-child(2)>div:nth-child(1){
+table td:nth-child(1)>div:nth-child(1){
 	width:80px;
 	height:80px;
 	margin: 0 10px 0 10px;
 }
 
-table td:nth-child(2)>div:nth-child(2)>div:nth-child(1){
+table td:nth-child(1)>div:nth-child(2)>div:nth-child(1){
 	height:30px;
 	text-align: left;
 	font-weight: bold;
@@ -382,6 +385,7 @@ table tr:hover{
 	display: flex;
 	flex-direction: column;
 	margin-top: 30px;
+	border-top: 1px solid #ccc;
 }
 
 #reviewManagement>li{

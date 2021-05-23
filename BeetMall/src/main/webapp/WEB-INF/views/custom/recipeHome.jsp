@@ -113,24 +113,36 @@ font-size:17px;
 .bx-wrapper { -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none;}
 
 #slider>li{
- width:900px;
+ width:1070px;
  margin:0;
+ margin-top:20px;
  padding:0;
 }
 
 
 #slider>li>a>img{
-width:900px;
-height:550px;
+width:1070px;
+height:650px;
 margin:0 auto; 
+padding-top:20px;
+
 }
 
-#recipettile>b{
+#recipettile{
 float:left;
 width:100%;
-color:rgb(252,118,45);
-height:20px;
-margin-top:10px;
+color:black;
+height:50px;
+margin-top:30px;
+font-size:35px;
+margin-left:10px;
+text-align: center;
+margin-top:50px;
+}
+
+.bx-wrapper{
+border:none;
+background: none;
 }
 
 .bx-prev{
@@ -141,43 +153,19 @@ margin-top:10px;
 /* 탑서치부분----------------------------------------------                 */
 
 #searchLine{
-margin:0px; padding:0px; width:530px;
-height:50px;
-line-height:40px;
+margin:0px; padding:0px; width:100%;
+height:70px;
+line-height:60px;
 float:left;
-margin-bottom:5px;
+margin-bottom:30px;
+border-bottom:2px solid #ddd;
+text-align:center;
+
 }
 
-#searchLine2{
-float:left;
-margin:0px;  width:480px; height:50px; line-height:30px;
-margin-bottom:5px;
-padding-left:170px;
-margin-left:60px;
-psdding-top:5px;
-}
-#searchLine2>input,#searchLine2>a>input{
-line-height:40px;
-}
-#selectSearchid,#search{
-line-height:30px;
-height:30px;
-}
 
-#searchLine>li:nth-child(3n+1){
-margin-right:40px;
-}
 
-#top10{
-width:60px;
-margin-right:20px;
-}
-
-#new10,#searchbtn,#writebtn{
-height:30px; width:69px;
-}
-
-#top10,#new10{color:black; font-weight:bold; margin-bottom:20px;}
+#top10,#new10{color:#918aab; font-weight:bold; margin-bottom:10px; padding-bottom:10px; height:70px; font-size:25px; width:170px;}
 
 #writebtn{
 		padding: 3px 10px;
@@ -224,7 +212,8 @@ margin-top:3px;
 margin-left:3px;
 margin-bottom:3px;
 height:150px;
-border-bottom:1px solid #eee;
+border-bottom:2px solid #eee;
+
 }
 
 #recipeListul>li:nth-child(7n+1),#rtitleImg{
@@ -254,7 +243,7 @@ padding-bottom:10px;
 width:840px;
 height:55px;
 line-height:55px;
-font-weight:bold;
+font-size:25px;
 
 }
 
@@ -280,11 +269,18 @@ float:left;
 padding-left:450px;
 width:840px;
 height:25px;
+font-size:19px;
 }
 
 #section{
 font-size:17px;
 }
+
+#goodimg{
+width:20px;
+height:20px;
+}
+
 </style>
 
 <script>
@@ -304,8 +300,8 @@ $(function(){
 
 
 function top10(){ 
-	  $('#top10').css('color','black');	  	  
-	  $('#new10').css('color','#eee');	
+	  $('#top10').css('color','rgb(255 23 105)').css('font-size','40px').css('border-bottom','2px solid rgb(255 23 105)');	  	  
+	  $('#new10').css('color','#918aab').css('font-size','30px').css('border-bottom','none');	
 	  
 	  $(".recipeListTop").show()
 	  $(".recipeListNew").hide()
@@ -319,8 +315,8 @@ function top10(){
 
 function new10(){ 
 	  var txt1=""; 
-	  $('#new10').css('color','black');	  
-	  $('#top10').css('color','#eee');
+	  $('#new10').css('color','rgb(255 23 105)').css('font-size','40px').css('border-bottom','2px solid rgb(255 23 105)');	  
+	  $('#top10').css('color','#918aab').css('font-size','30px').css('border-bottom','none');
 	  
 	  $(".recipeListTop").hide()
 	  $(".recipeListNew").show()
@@ -340,7 +336,7 @@ function new10(){
   <div class="section" id="section">
   
 <!-- -------------------------슬라이더-------------------------------------- -->  
-	    <div id="recipettile"><b>HOME</b></div></br></br>
+	    <div id="recipettile">레시피 홈</div></br></br>
 	    
 	     <div class="bxslider">
 	      <ul id="slider" >
@@ -359,14 +355,7 @@ function new10(){
 	     
 	    </ul>
 	    
-	    <div id="searchLine2">
-	   
-	 
-	    <span id="search_box">
-				
-		</span>
-	    
-	    </div>
+	  
 	
 <!-- -------------------------레시피 리스트들-------------------------------------- -->	
         
@@ -380,7 +369,7 @@ function new10(){
 		              <li><a href="recipeView?recipenum=${data.recipenum}&id=${logId}">${data.recipetitle}</a></li>
 		              <li>${data.userid}</li>
 		              <li><a href="recipeView?recipenum=${data.recipenum}&id=${logId}"></a></li>
-		              <li>★추천해요 ${data.reciperecommend} 조회수${data.recipehit} ${data.recipewritedate}</li>
+		              <li><img src="img/dlike.png" id="goodimg">추천수: ${data.reciperecommend}  조회수: ${data.recipehit}  ${data.recipewritedate}</li>
 		            </ul>
 		         </c:forEach>  
 		         
@@ -417,7 +406,7 @@ function new10(){
 		              <li><a href="recipeView?recipenum=${data2.recipenum}&id=${logId}">${data2.recipetitle}</a></li>
 		              <li>${data2.userid}</li>
 		              <li><a href="recipeView?recipenum=${data2.recipenum}&id=${logId}"></a></li>
-		              <li>★추천해요 ${data2.reciperecommend} 조회수${data2.recipehit} ${data2.recipewritedate}</li>
+		              <li><img src="img/dlike.png" id="goodimg">추천수: ${data2.reciperecommend}  조회수: ${data2.recipehit}  ${data2.recipewritedate}</li>
 		            </ul>
 		         </c:forEach>  
 		           

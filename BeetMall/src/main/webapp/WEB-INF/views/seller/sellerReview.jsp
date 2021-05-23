@@ -18,6 +18,18 @@
 
 <script>
 ////////////////////////////////전역변수 선언 /////////////////////////////////
+let reviewnum ;
+let reviewcontent ;
+let productname ;
+let reviewscore ;
+let userid ;
+let reviewwritedate ;
+let reviewanswer ;
+let reviewimg ;
+	
+
+
+
 
 let sortStr = 0;// 정렬 기준을 위한 변수
 
@@ -320,8 +332,8 @@ function paging(pageNum, sortStr, mcatenumDataArr, searchTxt, startDate, endDate
 		success: function(result){
 			// 데이터 불러와 table 형식으로 만들기
 			let tag = "<thead><tr>";
-				tag += "<th>평점</th>";
 				tag += "<th>상품명/리뷰내용</th>";
+				tag += "<th>평점</th>";
 				tag += "<th>작성자/작성일</th>";
 				tag += "<th>답변여부</th>";
 				tag += "</tr></thead>";
@@ -330,26 +342,25 @@ function paging(pageNum, sortStr, mcatenumDataArr, searchTxt, startDate, endDate
 			result2.each( function (idx, vo){
 				
 				tag += "<tr>";
-					tag += "<td>" + starInsert(vo.reviewscore) +"</td>";
-					
 					tag += "<td>" ;
+						let data = vo.reviewimg;
 						if(vo.reviewimg != null){
-							let data = vo.reviewimg;
 							tag += "<div value=\'"+data+"\' style=\"background-image: url(\'<%=request.getContextPath()%>/resources/img/"+data+"\'); background-size: 100% 100%;\" )><input type='hidden' value=\'"+data+"\'></div>";
 						} else {
 							tag += "<div><input type='hidden' value=\'"+data+"\'>-</div>";
 						}
 						tag += "<div>";
-						tag += "<div>" + vo.productname + "</div>";
-						tag += "<div>"
-							tag += "<a href='javascript:void(0)' onclick='javascript:popupOpen(this)'><input type='hidden' name='reviewnum' value='"+vo.reviewnum+"' />"+vo.reviewcontent+"</a>";
+							tag += "<div>" + vo.productname + "</div>";
+							tag += "<div>"
+								tag += "<a href='javascript:void(0)' onclick='javascript:popupOpen(this)'><input type='hidden' name='reviewnum' value='"+vo.reviewnum+"' />"+vo.reviewcontent+"</a>";
 							tag += "</div>";
 						tag += "</div>";
-						tag += "</td>";
+					tag += "</td>";
+					tag += "<td>" + starInsert(vo.reviewscore) +"</td>";
 					tag += "<td>"; 
-						tag += "<div>" + vo.userid + "</div>";
-							tag += "<div>" + vo.reviewwritedate + "</div>";
-						tag += "</td>";
+						tag += "<div>" + vo.userid + "</div><br>";
+						tag += "<div>" + vo.reviewwritedate + "</div>";
+					tag += "</td>";
 					
 					if(vo.reviewanswer != null){
 						tag += "<td><input type='hidden' value='"+vo.reviewanswer+"' ><p>답변완료</p></td>";
@@ -405,17 +416,17 @@ function paging(pageNum, sortStr, mcatenumDataArr, searchTxt, startDate, endDate
 function popupOpen(data){
 	
 	// 상품명
-	let reviewnum = $(data).children().val();
-	let reviewcontent = $(data).text().trim();
-	let productname = $(data).parent().prev().text();
-	let reviewscore = $(data).parent().parent().parent().prev().text().trim();
-	let userid = $(data).parent().parent().parent().next().children('div:first-child').text();
-	let reviewwritedate = $(data).parent().parent().parent().next().children('div:last-child').text();
-	let reviewanswer = $(data).parent().parent().parent().next().next().children('p').text();
-	let reviewimg = $(data).parent().parent().prev().children().val();
+	reviewnum = $(data).children().val();
+	reviewcontent = $(data).html();
+	productname = $(data).parent().prev().text();
+	reviewscore = $(data).parent().parent().parent().next().text().trim();
+	userid = $(data).parent().parent().parent().next().next().children('div:first-child').text();
+	reviewwritedate = $(data).parent().parent().parent().next().next().children('div:last-child').text();
+	reviewanswer = $(data).parent().parent().parent().next().next().next().children('p').text();
+	reviewimg = $(data).parent().parent().prev().children().val();
 	
 	if(reviewanswer == '답변완료'){
-		reviewanswer = $(data).parent().parent().parent().next().next().children('input').val();
+		reviewanswer = $(data).parent().parent().parent().next().next().next().children('input').val();
 	}
 	
 	let tag = '<div class="wrapContainer_Edit1">';
@@ -448,7 +459,7 @@ function popupOpen(data){
 				tag += '<input class="answerBtn" type="button" onclick="popupClose()" value="닫기">';
 				tag += '<input class="answerBtn" type="button" onclick="popupreport(\''+reviewnum+'\',\''+userid+'\')" value="신고">';
 			} else {
-				tag += '<input class="answerBtn" type="button" onclick="answerEdit(\''+ reviewnum+'\',\''+productname+'\',\''+reviewscore+'\',\''+reviewcontent+'\',\''+userid+'\',\''+reviewwritedate+'\',\''+reviewanswer+'\',\''+reviewimg +'\')" value="수정" >';
+				tag += '<input class="answerBtn" type="button" onclick="answerEdit()" value="수정" >';
 				tag += '<input class="answerBtn" type="button" onclick="popupClose()" value="닫기">';
 				tag += '<input class="answerBtn" type="button" onclick="popupreport(\''+reviewnum+'\',\''+userid+'\')" value="신고">';
 			}
@@ -471,7 +482,7 @@ function popupOpen(data){
 
 
 //팝업창 수정 만들기! 
-function answerEdit(reviewnum, productname, reviewscore, reviewcontent, userid, reviewwritedate, reviewanswer, reviewimg){
+function answerEdit(){
 	
 	let tag = '<div class="wrapContainer_Edit1">';
 		tag += '<form method="post" action="javascript:reviewEdit()" id="popupFrm">';
@@ -776,6 +787,24 @@ function reportUpdate(){
 				</ul>
 				
 				<div id="categoryList">
+					<!-- 날짜 적용 할 수 있는 기능들 모여있는 컨테이너 -->
+					<div id="categorySearch_container" style='display:flex; justify-content: space-between'>
+						<div>
+							<select class="categorySearch_item" id="categoryDate" name="categoryDate" onchange="typeChange(this)">
+								<option value="년별">년별</option>
+								<option value="월별" selected>월별</option>
+								<option value="일별">일별</option>
+							</select> 
+							<input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_start" /> 
+							<b>&nbsp;&nbsp;~&nbsp;&nbsp;</b> 
+							<input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_end" />
+						</div>
+						<div>
+							<input type="text" id="searchTxt" name="searchTxt" size="13em" placeholder="작성자"/>
+							<button id="searchingBtn" style='margin:0 10px'>조회</button>
+						</div>
+					</div>
+					
 					<div id="categoryListMiddle">
 						<!-- 대분류 카테고리!!!! -->
 						<ul id="category">
@@ -802,25 +831,6 @@ function reportUpdate(){
 					<!-- 중분류 카테고리 선택하면 선택된 사항이 삽입되는 위치 -->
 					<ul id="categoryManagement"></ul>
 
-					<!-- 날짜 적용 할 수 있는 기능들 모여있는 컨테이너 -->
-					<div id="categorySearch_container" style='display:flex; justify-content: space-between'>
-						<div>
-							<select class="categorySearch_item" id="categoryDate" name="categoryDate" onchange="typeChange(this)">
-								<option value="년별">년별</option>
-								<option value="월별" selected>월별</option>
-								<option value="일별">일별</option>
-							</select> 
-							<input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_start" /> 
-							<b>&nbsp;&nbsp;~&nbsp;&nbsp;</b> 
-							<input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_end" />
-						</div>
-						<div>
-							<input type="text" id="searchTxt" name="searchTxt" size="13em" placeholder="작성자"/>
-							<button id="searchingBtn" style='margin:0 10px'>조회</button>
-						</div>
-					</div>
-					
-
 				</div>
 			</div>
 			<!-- 리뷰 보기 끝 -->
@@ -841,8 +851,8 @@ function reportUpdate(){
 			<table>
 				<thead>
 					<tr>
-						<th>평점</th>
 						<th>상품명/리뷰내용</th>
+						<th>평점</th>
 						<th>작성자/작성일</th>
 						<th>답변여부</th>
 					</tr>
@@ -851,9 +861,6 @@ function reportUpdate(){
 				<c:if test="${reviewList != null }">
 					<c:forEach var="result" items="${reviewList}" varStatus="i">
 						<tr>
-							<td>
-								<c:forEach var="star" begin="1" end="${result.reviewscore}">★</c:forEach>
-							</td>
 							<td>								
 								<c:if test="${result.reviewimg != null }">
 									<div style="background-image: url('<%=request.getContextPath()%>/resources/img/${result.reviewimg}'); background-size: 100% 100%;" )><input type="hidden" value="${result.reviewimg }"></div>
@@ -871,6 +878,9 @@ function reportUpdate(){
 									</div>
 									
 								</div>
+							</td>
+							<td>
+								<c:forEach var="star" begin="1" end="${result.reviewscore}">★</c:forEach>
 							</td>
 							<td>
 								<div>${result.userid }</div><br>

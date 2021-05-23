@@ -21,4 +21,5 @@ public interface MemberDAO {
 	public int pwdupdate(String userid, String temppwd);	// 임시비번 설정
 	public int usertypetest(String userid);	// 유저 유형 검색
 	public int checkuseridNpwd(String userid, String pwd);	// 아이디가 있나 없나부터 확인
+	
 }

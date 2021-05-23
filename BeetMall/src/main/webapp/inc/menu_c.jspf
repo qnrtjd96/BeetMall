@@ -524,7 +524,7 @@
 				</ul>
 				<div id="menuImgs">
 					<a href="mapping"><img src="/sshj/img/dmapBtn.png" class="menuImg" /></a>
-					<a href="recipeHome"><img src="/sshj/img/dcartBtn.png"  class="menuImg"/></a>
+					<a href="customWish"><img src="/sshj/img/dcartBtn.png"  class="menuImg"/></a>
 					<div id="searchbar">
 						<form method="get" action="categoryMain" id="searchForm">
 							<input type="text" placeholder="원하시는 상품을 검색해보세요!" id="searchInputbox" name="searchWord"/>
