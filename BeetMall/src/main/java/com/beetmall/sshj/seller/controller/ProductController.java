@@ -257,8 +257,7 @@ public class ProductController {
 		return "redirect:product_list";
 	}
 	
-//====================================== 수정 ===================================================
-	//수정하기 뷰로 이동
+
 	@RequestMapping("oneRecordSelect")
 	public ModelAndView onePageRecordSelect(int productnum) {
 		ModelAndView mav = new ModelAndView();
@@ -266,13 +265,21 @@ public class ProductController {
 		mav.setViewName("seller/product_edit");
 		return mav;
 	}
-	// 수정하기 
+	//====================================== 수정 ===================================================
+	//수정하기 뷰로 이동
 	@RequestMapping("/product_edit")
-	public ModelAndView product_edit(OrderSaleVO osvo) {
+	public ModelAndView product_edit(int productnum) {
+		ModelAndView mav = new ModelAndView();
+		//상품목록 담기
+		mav.addObject("vo", productService.productOneSelect(productnum));		
+		return mav;
+	}
+	//수정하기 처리
+	@RequestMapping("/product_edit_ok")
+	public ModelAndView product_edit_ok(OrderSaleVO osvo) {
 		ModelAndView mav = new ModelAndView();
 		
 		return mav;
 	}
-	
 
 }

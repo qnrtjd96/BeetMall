@@ -716,6 +716,7 @@ $('submit').click(function(){
 <body>
 	<div class="main">
 	<div id="article">
+
 	<div class="wrapTitle" style="font-size:20px">상품등록</div>
 		<!--검색하기 -->
 		<!-- 상품등록 -->
@@ -734,7 +735,7 @@ $('submit').click(function(){
 		</div>
 	<form method="post" name="product_regi_form" id="product_regi_form" action="product_regi_ok" enctype="multipart/form-data">
 	<!------------------------------------------ 카테고리------------------------------------------------->
-	
+	<input type="hidden" value="${vo.productnum}" name="productnum">
 	 <div class="category_title">카테고리</div>
 		<div class="category_wrap">
             <div id="categoryList">
@@ -760,9 +761,15 @@ $('submit').click(function(){
                   <!--카테고리에서 중분류 카테고리 선택-------------------------->
                   <ul id="mcategory"></ul>
                </div>
-  				<!--------------------------선택된 카테고리 항목-------------------------->
+  			<!--------------------------선택된 카테고리 항목-------------------------->	
             </div><!-- categoryList end -->
-			<ul id="categoryManagement"></ul>
+			<ul id="categoryManagement">
+				
+  				 <li value="${vo.mcatenum}">
+  				 	<input type='hidden' value="${vo.mcatename}"><a href='#' onclick='return false'><label for='categoryManagement' id='categoryManagement_label'>선택한 상품 카테고리 : </label>${vo.catename}&gt;${vo.mcatename}<span>⊠</span></a>
+  				 </li>
+  				 
+			</ul>
 			<span class="notice" style="margin-left:55px;">등록한 판매상품은 고객님이 선택하신 카테고리로 분류되어 홈페이지에 적용됩니다. 원하시는 상품 카테고리가 없거나, 변경을 원하는 경우 관리자에게 문의해주세요.</span>
 		</div><!-- categorySelection div end -->
 		
@@ -771,7 +778,7 @@ $('submit').click(function(){
 	<div class="category_wrap">
 			<ul>
 				<li><span class="categoryStar">*</span><label for="">상품명</label>&nbsp;
-					<input type="text" name="productname" id="product_register_name" maxlength="100" size="100"/>&nbsp;<span id="count"></span>/<span id="max_count">100</span><br/>
+					<input type="text" name="productname" id="product_register_name" value="${vo.productname}" maxlength="100" size="100"/>&nbsp;<span id="count"></span>/<span id="max_count">100</span><br/>
 					<span class="notice" >
 					판매 상품과 직접 관련이 없는 다른 상품명, 스팸성 키워드 입력 시 관리자에 의해 판매 금지될 수 있습니다.
 					유명 상품 유사문구를 무단으로 도용하여 기재하는 경우 별도 고지 없이 제재될 수 있습니다. 
@@ -784,12 +791,12 @@ $('submit').click(function(){
 	<div class="category_title">판매가격</div>
 	<div class="category_wrap">		
 		<ul>
-			<li><span class="categoryStar">*</span><label>판매가격 </label>&nbsp;<input type="number" name="productprice" id="productprice" min=100 placeholder="숫자만 입력하세요."/>&nbsp;<span>원</span></li>
+			<li><span class="categoryStar">*</span><label>판매가격 </label>&nbsp;<input type="number" name="productprice" id="productprice" value="${vo.productprice}" min=100 placeholder="숫자만 입력하세요."/>&nbsp;<span>원</span></li>
 	
 			<li> 
 				<span class="categoryStar">*</span><label>판매기간</label>&nbsp;&nbsp;<span class="notice">판매 기간을 설정해주세요. 미선택시 판매시작일은 등록일, 판매종료일은 2년이내로 지정됩니다.</span>
 			</li>
-			<li id="sell_start_finish"><label for="start_date" >판매시작일</label><input type="text" name="sellstart" id="sellstart" class="start_date" max="2099-12-31"/> ~ <label for="finish_date">판매종료일</label><input type="text" name="sellfinish" id="sellfinish" class="finish_date" max="2099-12-31"/></li>
+			<li id="sell_start_finish"><label for="start_date" >판매시작일</label><input type="text" name="sellstart" id="sellstart" class="start_date" value="${vo.sellstart}" max="2099-12-31"/> ~ <label for="finish_date">판매종료일</label><input type="text" name="sellfinish" id="sellfinish" class="finish_date" value="${vo.sellfinish}" max="2099-12-31"/></li>
 		
 			<li>
 				<span class="categoryStar">*</span><label>할인여부 </label>&nbsp;

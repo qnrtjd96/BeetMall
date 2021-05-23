@@ -23,6 +23,17 @@ public interface ProductService {
 	public int discountInsert(ProductVO vo);
 	//옵션 등록하기
 	public int optionInsert(ProductVO vo);
+	
+	
+	//상품 수정하기 뷰 
+	public ProductVO productOneSelect(int productnum);
+	//상품 수정하기
+	public int productUpdate(ProductVO vo);
+	//할인 수정
+	public int discountUpdate(ProductVO vo);
+	// 옵션 수정
+	public int optionUpdate(ProductVO vo);
+	
 	//상품 삭제하기
 	public int productDelete(int productnum);
 }

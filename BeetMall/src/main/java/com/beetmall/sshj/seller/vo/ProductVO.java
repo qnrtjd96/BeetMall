@@ -240,12 +240,21 @@ public class ProductVO {
 		return selloptionnum;
 	}
 	public void setSelloptionnum(String selloptionnum) {
+		String[] numArr = selloption.split("[a-z]");
+		for(int i = 0; i<numArr.length; i++) {
+			selloptionnum = numArr[i];
+		}
 		this.selloptionnum = selloptionnum;
+		
 	}
 	public String getSelloptionunit() {
 		return selloptionunit;
 	}
 	public void setSelloptionunit(String selloptionunit) {
+		String[] unitArr = selloption.split("[0-9]");
+		for(int i = 0 ; i<unitArr.length; i++) {
+			selloptionunit = unitArr[i];
+		}
 		this.selloptionunit = selloptionunit;
 	}
 	public String getSellweightnum() {
