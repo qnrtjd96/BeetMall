@@ -314,6 +314,13 @@ td, .td{
 	width:930px; line-height:50px;
 }
 
+#btnviewbox{
+width:100%;
+float:left;
+height:45px;
+padding-top:5px;
+paddig-bottom:5px;
+}
 
 </style>
 
@@ -386,12 +393,16 @@ td, .td{
 			</table>
 		</fieldset>
 		 
+		 
 		<c:if test="${logId==vo.userid}">
-				<input type="button"  value="수정하기" class="btn" onClick="location.href='<%=request.getContextPath() %>/recipeEdite?recipenum=${vo.recipenum}'"/>
-				<input type="button" value="삭제하기" class="btn" id="btn" onClick="Deletebtn()"/>
+			<div id="btnviewbox">
+					<input type="button"  value="수정하기" class="btn" onClick="location.href='<%=request.getContextPath() %>/recipeEdite?recipenum=${vo.recipenum}'"/>
+					<input type="button" value="삭제하기" class="btn" id="btn" onClick="Deletebtn()"/>
+			</div>
 		</c:if>
 		
 		
+
 
 		<!-- ------------------------하단 표시들----------------------------------- -->
 		<c:if test="${logId!=null}">
@@ -406,6 +417,8 @@ td, .td{
 			<li><a href=""><img src="img/cicon05.png"></a></li>
 		</ul>
 		
+		<div id="chatInfoTitle"><span id="chatHeaderSpan"><span id="reportChat">신고하기</span><span id="theyId"></span></span></div>
+		
 		
         </c:if>
 
@@ -415,14 +428,108 @@ td, .td{
 		</div>
 
 
+<!-- 신고하기 부분 -->
+	<div style="height:350px;width:500px;border:1px solid red;position:absolute;top:400px;left:800px;background-color:white;display:none;" id="reportDiv">
+		<form style="height:400px;width:500px;float:left;" method="post" action="customreport" id="reportForm">
+			<h2 style="margin-left:10px;">신고하기</h2>
+			<span style="float:left;font-size:20px;margin-left:10px;">신고사유</span>
+				<input type="hidden" name="userid" value="${logId}"/>												<!-- 신고자 아이디 -->
+				<input type="hidden" name="reporteduser" id="${vo.userid}"/>											<!-- 신고할 사람 아이디 -->
+				<input type="hidden" name="reportboard" value="레시피"/>							<!-- 신고한 게시판 -->
+				<input type="hidden" name="reportboardnum" id="reportboardnum" value="${vo.recipenum}"/>										<!-- 신고한 글 번호 -->
+				<select name="reportreason"  style="float:right;margin-right:10px;font-size:20px;">	<!-- 신고사유 -->
+					<option value="비방/욕설">비방/욕설</option>
+					<option value="허위">허위</option>
+					<option value="성희롱">성희롱</option>
+					<option value="기타">기타</option>
+				</select>
+			<textarea name="reportcontent" id="reportcontent" style="height:200px;width:480px;margin-left:10px; margin-right:10px;font-size:15px;" maxlength="149"></textarea><!-- 신고내용 -->
+			<div style="font-size:20px;float:right;margin-right:10px;">
+				<input type="button" value="신고하기" style="background-color:#ff3a3a;color:white;border:1px solid #aaa;"id="reportsubmit"/>
+				<input type="button" value="닫기"style="background-color:#ddd;color:white;border:1px solid #aaa;"id="reportClose"/>
+			</div>
+		</form>
+	</div>
+	<!-- 신고하기 밑에 스크립트까지임 -->
+
 	</div>
 	
 <script>
 
+$(document).on('click','#chatHeaderSpan', function(){
+	$("#reportDiv").css("display","block");
+});
+
+$(function(){
+	$("#reportsubmit").click(function(){	// 신고처리하는 ajax부분
+		var formdata = $("#reportForm").serialize();
+		console.log("formdata === "+formdata);
+		$.ajax({
+			url: "customreport",
+			type : "POST",
+			cache:false,
+			data:formdata,
+			success:function(result){
+				console.log(result);
+				if(result == 1){
+					alert('고객님의 신고가 접수되었습니다');
+					location.href="myChatList";
+				}else if(result != 1){
+					alert('신고에 실패했습니다. error_code : 176');
+					$("#reportcontent").val('');
+					$("#reportDiv").css("display","none");
+				}
+			}, error:function(error){
+				console.log(error);
+			}
+		})
+		$("#reportcontent").val('');
+		$("#reportDiv").css("display","none");
+	})
+	$("#reportClose").click(function(){			// 신고 닫기 부분
+		$("#reportcontent").val('');
+		$("#reportDiv").css("display","none");
+	})
+	$(document).on('click','input[value=신고하기]', function(){	// 신고창 여는 부분(여기서 신고할 유저아이디, 신고할 글번호 세팅해줌)
+		var reporteduser = $(this).parent().prev().children().eq(0).html();
+		$("#reporteduser").val(reporteduser);
+		var reportboardnum = $(this).prev().prev().prev().val();
+		$("#reportboardnum").val(reportboardnum);
+		$("#reportDiv").css("display","block");
+		
+	});
+})
+
 function Deletebtn(){
-	if(confirm("내가 쓴 레시피를 삭제하시겠습니까?")){
-		location.href="recipeDelete?recipenum=${vo.recipenum}"
-	}
+	
+		var recipenum=${vo.recipenum};
+        //alert(recipenum+"r");
+        
+		  var url = "recipeDelete";
+		  var data = "recipenum="+recipenum;
+		  
+			console.log(url,data);
+			if(confirm("해당 게시글을 삭제 하시겠습니까?")){
+				$.ajax({
+					url:url,
+					data:data,
+					success:function(result){
+						//console.log('내가쓴 레시피 삭제 성공');
+						if(result>0){//삭제
+							alert('내가쓴 레시피 삭제 성공');
+							location.href="/sshj/recipeList";
+						}else {//삭제실패
+							alert('실패');
+							location.href="/sshj/recipeList";
+						}
+						
+					},error:function(e){
+						console.log(e.responseText);
+						console.log("내가쓴 레시피 삭제 실패");
+					}
+				});
+			};
+	
 	
 };
 
