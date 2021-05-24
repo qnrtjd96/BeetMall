@@ -7,6 +7,14 @@ public class Admin_DesignVO {
 	private int mcatenum;
 	private int productnum;
 	private String thumbimg;
+	private String productname;
+	
+	public String getProductname() {
+		return productname;
+	}
+	public void setProductname(String productname) {
+		this.productname = productname;
+	}
 	public String getThumbimg() {
 		return thumbimg;
 	}

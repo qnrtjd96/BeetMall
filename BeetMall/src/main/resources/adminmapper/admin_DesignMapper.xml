@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.beetmall.sshj.admin.dao.Admin_DesignDAO">
 	<select id="designselect" resultType="com.beetmall.sshj.admin.vo.Admin_DesignVO">
-		select t.catenum, b.catesort, b.productnum, b.mcatenum, thumbimg
+		select t.catenum, b.catesort, b.productnum, b.mcatenum, thumbimg, productname
 		from maincategory t 
-		join mainmcategory b on t.catenum = b.catenum
-		join product p on b.productnum = p.productnum
+		left join mainmcategory b on t.catenum = b.catenum
+		left join product p on b.productnum = p.productnum
 		where b.catenum = #{param1}
 		order by b.catesort
 	</select>
@@ -42,7 +42,7 @@
 			where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord} order by productnum)
 			where <![CDATA[rownum<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
         							  <if test="pageNum!=totalPage">${onePageRecord}</if>
-        order by productnum
+        order by productnum desc
 	</select>
 	<select id="adminproductOnetotalRecord" parameterType="com.beetmall.sshj.admin.vo.adminkPageSearchVO" resultType="int">
 		select count(a.productnum)
@@ -65,5 +65,21 @@
 				where faqoption=1
 			</when>
 		</choose> -->
+	</select>
+	<update id="maincateEdit">
+		update mainmcategory set productnum = #{param3} where catenum=#{param2} and catesort=#{param1}
+	</update>
+	<update id="titleChange">
+		update maincategory set catename=#{param2} where catename = #{param1}
+	</update>
+	<delete id="popdel">
+		delete from mainlayout
+	</delete>
+	<insert id="popInsert" parameterType="com.beetmall.sshj.custom.vo.PopupVO">
+		insert into mainlayout(popupimg, popuplink, popupterm, popupheight, popupwidth)
+		values(#{popupimg}, #{popuplink}, #{popupterm}, #{popupheight}, #{popupwidth})
+	</insert>
+	<select id="popupSelect" resultType="com.beetmall.sshj.custom.vo.PopupVO">
+		select popupimg, popuplink, popupterm, popupheight, popupwidth from mainlayout
 	</select>
 </mapper>

@@ -168,7 +168,7 @@
 	}
 	#popupselect{
 		margin-left: 0px;
-		top:-70px;
+		top:-130px;
 		left:-100px;
 		height:700px;
 		position:absolute;
@@ -188,6 +188,23 @@
 		display:none;
 		margin:0 !important;
 		z-index:1;
+	}
+	/* 팝업창 설정 */
+	#popul{
+		margin:0;
+	}
+	#popul>li{
+		width:520px !important;
+		height:40px;
+		line-height: 40px;
+		float: left;
+		text-align:left;
+	}
+	#popul>li:nth-child(2){
+		line-height:20px;
+	}
+	#popul>li>input{
+		width:400px;
 	}
 </style>
 <script>
@@ -213,16 +230,86 @@ $(document).ready(function(){
 	  });
 	});
 	$(function(){
+		$("#popupselect").css("top","-150px");
 		$(document).on('scroll', function(){
 			var scroll = window.scrollY;
-			$("#popupselect").css("top",scroll);
+			$("#popupselect").css("top",scroll-150);
 		});
 		$(document).on('click', "input[value=수정]",function(){
 			$("#popupselect").css("display","block");
 			$("#modal").css("display","block");
 			$(document.body).css("overflow","hidden");
+			var catesort = $(this).prev().val();	/* srot넘 */
+			var catenum = $(this).prev().prev().val();/* 카테넘 */
+			$("#sorthidden").val(catesort);
+			$("#catehidden").val(catenum);
+			console.log($("#catehidden").val()+", "+$("#sorthidden").val());
+		})
+		$(document).on('click', "input[value=제목수정]",function(){
+			var orgtitle = $(this).prev().val();
+			var tmptitle = $(this).prev().prev().val();
+			console.log(title);
+			var url = 'catetitlechange';
+			var param = "orgtitle="+orgtitle+"&tmptitle="+tmptitle;
+			$.ajax({
+				url :url,
+				data : param,
+				success:function(){
+					alert('성공적으로 수정되었습니다.');
+					location.href="boardDesignMng";
+				}, error :function(){
+					alert('수정에 실패하였습니다. 잠시후 다시 시도해 주세요');					
+					location.href="boardDesignMng";
+				}
+			});
 		})
 		$(document).on('click', "input[value=선택]",function(){
+			var productnum = $(this).prev().val();
+			console.log(productnum);
+			var url = 'mcatechange'
+			var param = 'catesort='+$("#sorthidden").val()+"&catenum="+$("#catehidden").val()+"&productnum="+productnum;
+			console.log("param>>>"+param);
+			if(confirm('해당 상품번호로 수정하시겠습니까? 선택된 상품번호는 '+productnum+'입니다.')){
+				$.ajax({
+					url : url,
+					data : param,
+					success : function(result){
+						console.log("결과"+result);
+						location.href="boardDesignMng";
+					}, error : function(error){
+						console.log(error);
+						alert('오류가 발생했습니다...');
+						location.href="boardDesignMng";
+					}
+				});
+				$("#popupselect").css("display","none");
+				$("#modal").css("display","none");
+				$(document.body).css("overflow","visible");
+			}
+		})
+		$(document).on('click', "#popBtn", function(){
+			$("#popupform").submit();
+			alert('서브밋함');				
+		});
+		$(document).on('click', "input[value=제거]", function(){
+			var catesort = $(this).prev().prev().val();	/* srot넘 */
+			var catenum = $(this).prev().prev().prev().val();/* 카테넘 */
+			$("#sorthidden").val(catesort);
+			$("#catehidden").val(catenum);
+			var url = 'cateremove';
+			var param = 'catesort='+$("#sorthidden").val()+"&catenum="+$("#catehidden").val();
+			console.log(param);
+			$.ajax({
+				url : url,
+				data : param,
+				success: function(result){
+					location.href="boardDesignMng";
+				}, error : function(error){
+					location.href="boardDesignMng";
+				}
+			})
+		});
+		$(document).on('click', "input[value=창닫기]", function(){
 			$("#popupselect").css("display","none");
 			$("#modal").css("display","none");
 			$(document.body).css("overflow","visible");
@@ -239,11 +326,9 @@ $(document).ready(function(){
 			success : function(result){
 				var $result = $(result);
 				var tag = '';
-				console.log($result[0].pageVO.pageNum);
-				
-				
 				$result.each(function(idx, obj){
-					tag += "<div id='title'>"+
+					tag += '<div>수정할 상품을 선택해주세요<input type="hidden" value="" id="catehidden"/><input type="hidden" value="" id="sorthidden"/><input type="button" value="지우기" style="width:60px;height:30px;"/><input type="button" value="창닫기" style="width:60px;height:30px;"/></div>' +
+					"<div id='title'>"+
 					"<ul class='pul'>"+
 						"<li>상품번호</li>"+
 						"<li>카테고리</li>"+
@@ -273,7 +358,7 @@ $(document).ready(function(){
 						'<li id="kktitle"><a href="/sshj/productEditA?productnum='+data.productnum+'">'+data.productname+'</a></li>'+
 						'<li>'+data.storename+'</li>'+
 						'<li>'+data.sellstart+'</li>'+
-						'<li><input type="button" class="addproduct" value="선택" style="width:60px; height:35px;"></li>'+
+						'<li><input type="hidden" value="'+data.productnum+'"/><input type="button" class="addproduct" value="선택" style="width:60px; height:35px;"></li>'+
 						'</ul>';
 					}
 					var pageVO = $result[0].pageVO;
@@ -374,22 +459,24 @@ $(document).ready(function(){
 		 	</div> 
 		 
 		<div class="productchange" style="width:1040px;position:absolute;top:0px;margin-bottom:10px;background-color:white;box-shadow: 4px 6px 15px -7px #c4c4c4;">
+		<input type="hidden" value="" id="catehidden"/><input type="hidden" value="" id="sorthidden"/>
 			<div class="protop" style="width:1040px;text-align:center;font-weight: bold;font-size: 16px;letter-spacing: 2px;border-bottom: 1px solid lightgray;border-radius: 10px 10px 0px 0px;background-color: #FAF9F6;height: 60px;line-height:60px;margin-top:10px;">
-				<input type="text" value="${listTitleA}"/>
+				<input type="text" value="${listTitleA}"/><input type="hidden" value="${listTitleA}"/><input type="button" value="제목수정" style="width:80px;height:30px;line-height:30px;margin-left:10px;background-color:#85b8cb;color:white;border:none;"/>
 			</div>
 			<div style="margin-top:10px;">
 				<c:forEach var="vo" items="${listA}">
-					<div class="productPrev" style="width:260px;height:200px;float:left;">
+					<div class="productPrev" style="width:260px;height:210px;float:left;">
 						<div class="imgprint" style="width:240px;height:160px; margin-left:10px;margin-right:10px;">
 							<c:if test="${vo.thumbimg != null}">
-								<img src="resources/sellerProductImgs/${vo.thumbimg}"style="width:240px;height:160px;"/>
+								<img src="resources/sellerProductImgs/${vo.thumbimg}"style="width:240px;height:160px;"  onerror="this.src='/sshj/img/derror.png'"/>
 							</c:if>
 							<c:if test="${vo.thumbimg == null}">
-								<img src="resources/sellerProductImgs/dimgPrev"style="width:240px;height:160px;"/>
+								<img src="resources/sellerProductImgs/dimgPrev"style="width:240px;height:160px;"  onerror="this.src='/sshj/img/derror.png'"/>
 							</c:if>
 						</div>
-						
+						<div style="margin-left:10px;">${vo.productname}</div>
 						<div class="buttons" style="width:70px;margin:5px auto;">
+							<input type="hidden" value="${vo.catenum}"/>
 							<input type="hidden" value="${vo.catesort}"/>
 							<input type="button" value="수정" style="width:30px;height:20px;"/>
 							<input type="button" value="제거" style="width:30px;height:20px;margin-left:5px;"/>
@@ -398,7 +485,8 @@ $(document).ready(function(){
 				</c:forEach>
 			</div>
 			<!--$%^-->
-		<div class="contentBox" id = "popupselect"> 	
+		<div class="contentBox" id = "popupselect"> 
+		<div>수정할 상품을 선택해주세요<input type="button" value="지우기" style="width:60px;height:30px;"/><input type="button" value="창닫기" style="width:60px;height:30px;"/></div>	
 		<div id="title">
 			<ul class="pul">
 				<li>상품번호</li>
@@ -431,7 +519,7 @@ $(document).ready(function(){
 				<li id="kktitle"><a href="/sshj/productEditA?productnum=${data.productnum}">${data.productname}</a></li>
 				<li>${data.storename}</li>
 				<li>${data.sellstart}</li> 
-				<li><input type="button" class="addproduct" value="선택" style="width:60px; height:35px;"></li>
+				<li><input type="hidden" value="${data.productnum}"/><input type="button" class="addproduct" value="선택" style="width:60px; height:35px;"></li>
 		</c:forEach>
 			</ul>
 			<div class="page_wrap">
@@ -458,36 +546,81 @@ $(document).ready(function(){
 		</div>
 		<!--$%^-->
 		</div> 	 
-	 	
-		 	<!------------------ 카테고리 관리파트--------------------->
-			
-					<!----------------------- 팝업 파트 ------------------>
-				 	<div id="popContainer">
-						<div id="popHeader">팝업 관리</div>
-					 	<div id="popBox">	
-				 			<section id="popBox1">	
-				 					<img src="<%=request.getContextPath()%>/img/y_tomato.jpg"/>
-				 			</section>
-				 			<section id="popBox2">	
-				 				<div>
-									<label for="file" class="attach"> 
-										이미지 첨부하기
-									</label>
-									<input type="file" style="width: 500px;" id="file">
-									<input class="uploadFile"  value="" placeholder="이미지 파일만 업로드하세요">
-								</div>
-				 				<div id="popDate">
-				 					<input type="date" id="from">
-				 					<div id="fromTo">&nbsp;&nbsp;~&nbsp;&nbsp;</div>
-				 						<input type="date" id="todate"> 
-				 					</div>
-				 				<input type="text" value="링크 입력">
-				 			</section>
-				 		</div>
-				 	</div>
+		<div class="productchange" style="width:1040px;position:absolute;top:730px;margin-bottom:10px;background-color:white;box-shadow: 4px 6px 15px -7px #c4c4c4;">
+		<input type="hidden" value="" id="catehidden"/><input type="hidden" value="" id="sorthidden"/>
+			<div class="protop" style="width:1040px;text-align:center;font-weight: bold;font-size: 16px;letter-spacing: 2px;border-bottom: 1px solid lightgray;border-radius: 10px 10px 0px 0px;background-color: #FAF9F6;height: 60px;line-height:60px;margin-top:10px;">
+				<input type="text" value="${listTitleB}"/><input type="button" value="제목수정" style="width:80px;height:30px;line-height:30px;margin-left:10px;background-color:#85b8cb;color:white;border:none;"/>
+			</div>
+			<div style="margin-top:10px;">
+				<c:forEach var="vo" items="${listB}">
+					<div class="productPrev" style="width:260px;height:210px;float:left;">
+						<div class="imgprint" style="width:240px;height:160px; margin-left:10px;margin-right:10px;">
+							<c:if test="${vo.thumbimg != null}">
+								<img src="resources/sellerProductImgs/${vo.thumbimg}"style="width:240px;height:160px;"  onerror="this.src='/sshj/img/derror.png'"/>
+							</c:if>
+							<c:if test="${vo.thumbimg == null}">
+								<img src="resources/sellerProductImgs/dimgPrev"style="width:240px;height:160px;"  onerror="this.src='/sshj/img/derror.png'"/>
+							</c:if>
+						</div>
+						<div style="margin-left:10px;">${vo.productname}</div>
+						<div class="buttons" style="width:70px;margin:5px auto;">
+							<input type="hidden" value="${vo.catenum}"/>
+							<input type="hidden" value="${vo.catesort}"/>
+							<input type="button" value="수정" style="width:30px;height:20px;"/>
+							<input type="button" value="제거" style="width:30px;height:20px;margin-left:5px;"/>
+						</div>
+					</div>
+				</c:forEach>
+			</div>
+		</div> 	 
+		<div class="productchange" style="width:1040px;position:absolute;top:1460px;margin-bottom:10px;background-color:white;box-shadow: 4px 6px 15px -7px #c4c4c4;">
+		<input type="hidden" value="" id="catehidden"/><input type="hidden" value="" id="sorthidden"/>
+			<div class="protop" style="width:1040px;text-align:center;font-weight: bold;font-size: 16px;letter-spacing: 2px;border-bottom: 1px solid lightgray;border-radius: 10px 10px 0px 0px;background-color: #FAF9F6;height: 60px;line-height:60px;margin-top:10px;">
+				<input type="text" value="${listTitleC}"/><input type="button" value="제목수정" style="width:80px;height:30px;line-height:30px;margin-left:10px;background-color:#85b8cb;color:white;border:none;"/>
+			</div>
+			<div style="margin-top:10px;">
+				<c:forEach var="vo" items="${listC}">
+					<div class="productPrev" style="width:260px;height:210px;float:left;">
+						<div class="imgprint" style="width:240px;height:160px; margin-left:10px;margin-right:10px;">
+							<c:if test="${vo.thumbimg != null}">
+								<img src="resources/sellerProductImgs/${vo.thumbimg}"style="width:240px;height:160px;"  onerror="this.src='/sshj/img/derror.png'"/>
+							</c:if>
+							<c:if test="${vo.thumbimg == null}">
+								<img src="resources/sellerProductImgs/dimgPrev"style="width:240px;height:160px;"  onerror="this.src='/sshj/img/derror.png'"/>
+							</c:if>
+						</div>
+						<div style="margin-left:10px;">${vo.productname}</div>
+						<div class="buttons" style="width:70px;margin:5px auto;">
+							<input type="hidden" value="${vo.catenum}"/>
+							<input type="hidden" value="${vo.catesort}"/>
+							<input type="button" value="수정" style="width:30px;height:20px;"/>
+							<input type="button" value="제거" style="width:30px;height:20px;margin-left:5px;"/>
+						</div>
+					</div>
+				</c:forEach>
+			</div>
+		</div> 	 
+		<div class="productchange" style="width:1040px;position:absolute;top:2190px;margin-bottom:10px;background-color:white;box-shadow: 4px 6px 15px -7px #c4c4c4;">
+		<input type="hidden" value="" id="catehidden"/><input type="hidden" value="" id="sorthidden"/>
+			<div class="protop" style="width:1040px;text-align:center;font-weight: bold;font-size: 16px;letter-spacing: 2px;border-bottom: 1px solid lightgray;border-radius: 10px 10px 0px 0px;background-color: #FAF9F6;height: 60px;line-height:60px;margin-top:10px;">
+				팝업창 설정하기
+			</div>
+			<div style="margin-top:10px;">
+				<form action="popupsetting" method="post" style="display: block;height: 260px;" enctype="multipart/form-data" id="popupform">
+					<ul id="popul">
+						<li>팝업이미지</li>					<li><input type="file" name="file"/></li>
+						<li>팝업링크</li>						<li><input type="text" name="popuplink" value="${popup.popuplink}"/></li>
+						<li>팝업 재노출 주기(일 단위 입력)</li>	<li><input type="text" name="popupterm" value="${popup.popupterm}"/></li>
+						<li>팝업 가로 길이(px)</li>			<li><input type="text" name="popupheight" value="${popup.popupheight}"/></li>
+						<li>팝업 세로 길이(px)</li>			<li><input type="text" name="popupwidth" value="${popup.popupwidth}"/></li>
+					</ul>
+					<input type="button" value="적용하기" style="width:80px;height:30px;line-height:30px;margin-left:480px;margin-top:10px;background-color:#85b8cb;color:white;border:none;" id="popBtn"/>
+				</form>
+			</div>
+		</div> 	 
 				 	 
 					
-			</div>
+		</div>
 	</div>  
 </div> 
 </html>
