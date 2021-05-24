@@ -5,7 +5,7 @@
 <style>
 	header,#seller_header,footer{display:none;}
 	
-	#article{margin:0 auto;}
+	#article{width:1280px; margin:0 auto;}
 	#productName a{color:black; cursor:pointer;}
 	.table_wrap{margin-top:20px;}
 	.product_table,.table_wrap{
@@ -168,29 +168,26 @@ $(function(){
 		let sellprice = $(this).parent().parent().parent().next().next().next().next().next().next().find('#price_num').text();
 		let salepercent = $(this).parent().parent().parent().next().next().next().next().next().next().next().find('span').text();
 		let statusText = $(this).parent().parent().parent().next().next().next().next().next().next().next().next().next().find('span').text();
+		let result = productprice - saleprice;
 		
-		console.log(productnum);
-		console.log(productname);
-		console.log(productimg);
-		console.log(productprice);
-		console.log(saleprice);
-		console.log(sellprice);
-		console.log(salepercent);
-		console.log(statusText);
 		if(statusText != '판매중'){
 			alert('판매중인 상품만 선택 가능합니다');
 			return false;
 		}
-		
+		console.log(saleprice);
 		if(confirm('해당 삼품을 대표상품으로 선택하시겠습니까?')){
 			opener.document.getElementById('openerProductname').innerText = productname;
 			opener.imgChange('<%=request.getContextPath()%>/resources/img/'+productimg);
 			opener.document.getElementById('productnum').value = productnum;
-			if(salepercent != 0){
-				opener.document.getElementById('openerProductPrice').vale = (productprice-saleprice);
+			
+			if(saleprice !=null && saleprice != ''){
+				opener.document.getElementById('openerSaleprice').innerText = saleprice+"원";
 			} else {
-				opener.document.getElementById('openerProductPrice').vale = productprice;
+				opener.document.getElementById('openerSaleprice').innerText = "0원";
 			}
+			opener.document.getElementById('openerResultPay').innerText = productprice+"원";
+			
+			opener.document.getElementById('openerProductprice').innerText = result+"원";
 			window.close();
 		}
 		

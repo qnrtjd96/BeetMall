@@ -125,7 +125,7 @@ public class SellerAskController {
 	@RequestMapping(value = "/SellerAskAnswer",method = RequestMethod.POST)
 	@ResponseBody
 	public void answerUpdate(SellerAskManagementVO vo) {
-		int result = service.askUpdate(vo);
+		int result = service.askAnswerUpdate(vo);
 		
 		if(result == 1) {
 			System.out.println("문의 등록 성공");

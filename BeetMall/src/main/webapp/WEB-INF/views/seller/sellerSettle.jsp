@@ -265,7 +265,7 @@ $(()=>{
 	$('#excelDown').click( () => {
 		
 		if(dataSubmitCheck==''){
-			alert('선택된 데이터가 없습니다. 데이터를 선택 후 사용해 주시기 바랍니다.');
+			alert('데이터를 조회 및 선택된 데이터가 있을경우 다운로드가 가능합니다');
 			return false;
 		}
 		
@@ -329,17 +329,54 @@ $(()=>{
 								<th scope="col">정산날짜</th>
 							</tr>
 						</thead>
+						<tbody>
+						<c:if test="${initialData !=null }">
+							<c:forEach var="initialData" items="${initialData }">
+								<tr>
+									<td>${initialData.ordernum }</td>
+									<td>${initialData.orderdate }</td>
+									<td>${initialData.orderpriceStr }</td>
+									<td>${initialData.realpayment1Str }</td>
+									<td>${initialData.realpayment2Str }</td>
+									<td>${initialData.realpayment3Str }</td>
+									<td>${initialData.realpayment4Str }</td>
+									<c:if test="${initialData.settlecheck == 'Y ' }">
+										<td>${initialData.settledate }</td>
+									</c:if>
+									<c:if test="${initialData.settlecheck != 'Y ' }">
+										<td>-</td>
+									</c:if>
+								</tr>
+							</c:forEach>
+						</c:if>
+						</tbody>
 					</table>
-					<div id="totalMoney"></div>
-					<div class="page_wrap">
-						<div class="page_nation">
-							<a class="arrow pprev" href="#" onclick="return false;"></a> 
-							<a class="arrow prev" href="#" onclick="return false;"></a> 
-							<a class="active" href="#" onclick="return false;">1</a> 
-							<a class="arrow next" href="#" onclick="return false;"></a> 
-							<a class="arrow nnext" href="#" onclick="return false;"></a>
-						</div>
-					</div>
+					<div id="totalMoney"><c:if test="${resultpay != null }">총 합계금액 : ${resultpay }</c:if></div>
+					<!--------------페이징 표시-------------------->
+					<c:if test="${pageVO != null }">
+						<div class="page_wrap">
+							<div class="page_nation">
+							   <c:if test="${pageVO.pageNum>1}"><!-- 이전페이지가 있을때 -->
+							   		<a class="arrow prev" href="/sshj/sellerSettle?pageNum=${pageVO.pageNum-1}"></a>
+							   </c:if>
+							   <!-- 페이지 번호                   1                                    5                     -->
+					           <c:forEach var="p" begin="${pageVO.startPageNum}" step="1" end="${pageVO.startPageNum + pageVO.onePageNum-1}">
+					              <c:if test="${p<=pageVO.totalPage}">
+					                 <c:if test="${p==pageVO.pageNum}"> <!-- 현재페이지일때 실행 -->
+					                    <a class="active">${p}</a>
+					                 </c:if>   
+					                 
+					                 <c:if test="${p!=pageVO.pageNum}"> <!-- 현재페이지가 아닐때 실행 -->
+					                    <a class="arrow" href="/sshj/sellerSettle?pageNum=${p}">${p}</a>
+					                 </c:if>
+					              </c:if>
+					           </c:forEach>
+					           <c:if test="${pageVO.pageNum < pageVO.totalPage}">
+					              <a class="arrow next" href="/sshj/sellerSettle?pageNum=${pageVO.pageNum+1}"></a>
+					           </c:if>
+							</div>
+					 	</div>
+					</c:if>
 				</div>
 				
 			</div>
