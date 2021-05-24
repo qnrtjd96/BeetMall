@@ -1,13 +1,18 @@
 package com.beetmall.sshj;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.beetmall.sshj.admin.service.ReportListService;
+
 @Controller
 public class HomeController {
+	@Inject
+	ReportListService reportListService;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpSession session) {
@@ -23,6 +28,8 @@ public class HomeController {
 		if(session.getAttribute("logTry") != null) {
 			session.removeAttribute("logTry");
 		}
+		reportListService.UpdateMember();
+		
 		return "home";
 	}
 }
