@@ -627,9 +627,27 @@
 			</c:forEach>
 		</div>
 		<c:if test="${popup.popupimg !=null && popup.popupimg != ''}">
-			<div style="height:${popup.popupheight}px;width:${popup.popupwidth}px;">
-				<a href="${popup.popuplink }"><img src="<%=request.getContextPath()%>/${popup.popupimg}"/></a>
+			<div id="popupdiv" style="height:${popup.popupheight+25}px;width:${popup.popupwidth-2}px;border:1px solid black;position:absolute;top:40px;left:40px;background-color:white;display:none;">
+				<a href="${popup.popuplink }"><img src="/sshj/resources/popupimgs/${popup.popupimg}" style="height:${popup.popupheight}px;width:${popup.popupwidth-4}px;"/></a>
+				<div style="height:25px;line-height:25px;width:${popup.popupwidth-2}px;text-align:right;padding-right:10px;">${popup.popupterm}일간 보지 않기<input type="checkbox" id="popupclose"/>
+				<input type="hidden" value="${popup.popupterm}" id="datehidden"/><input type="hidden" value="${popup.popupimg}" id="popupimghidden"/></div>
 			</div>
+			<script>
+				$(function(){
+					var cookie = document.cookie;
+					if(cookie.indexOf("beet")==-1){
+						$("#popupdiv").css("display","block");
+					}
+					$("#popupclose").click(function(){
+						var now = new Date();
+						now.setDate(now.getDate+$("#datehidden").val());
+						document.cookie = "event=beet;path=/;expires="+now+";";
+						$("#popupdiv").css("display","none");
+					});
+					
+				});
+				
+			</script>
 		</c:if>
 		<div>
 			

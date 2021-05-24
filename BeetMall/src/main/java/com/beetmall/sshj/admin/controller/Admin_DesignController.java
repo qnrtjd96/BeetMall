@@ -143,7 +143,7 @@ public class Admin_DesignController {
 		System.out.println("getPopupwidth >>"+vo.getPopupwidth());
 		// 찍어본 부분
 		String orgName = file.getOriginalFilename();
-		String path = req.getSession().getServletContext().getRealPath("resources/sellerregiimgs");
+		String path = req.getSession().getServletContext().getRealPath("resources/popupimgs");
 		designservice.popdel();
 		
 		try {
