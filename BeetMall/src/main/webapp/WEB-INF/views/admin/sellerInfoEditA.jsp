@@ -24,18 +24,49 @@
     	top: -350px !important;
     }
     #infoBox li{
-    	padding-top: 19px !important;
+    	padding-top: 22px !important;
     }	
 	 #infoHeader{
-	 	padding-top:10px;
+	 	padding-top:13px;
 	 } 
+	 
+	 #infoHeader li{
+	 	padding-top:25px !important;
+	 }
+	 
+	 #infoHeader li:last-child{
+	 	padding-top:27px !important;
+	 }
+	 #info li:last-child{
+	 	padding-top:18px !important;
+	 }
 	 #info{
-	 	top:-285px;
+	 	top:-325px;
 	 	left:-250px;
 	 }
 	  #info li:nth-of-type(5){
 	 	padding-left:460px;
-	 } /*좌하 신고 정보*/
+	 } 
+	 
+	 #companyBox li{
+	 	padding-top: 10px;
+	 }
+	 
+	 #company>li{
+	 	padding-bottom:0;
+	 }
+	 
+	 #company input{
+	 	height: 23px;
+	 }
+	 #info input{
+	 	height:21px;
+	 }
+	 #info li:nth-of-type(5){
+	 	padding-left: 390px;
+	 }
+	 
+	 /*좌하 신고 정보*/
 	 #reportBox{
 	 	top:-470px !important; 
 	 	height:120px;
@@ -60,7 +91,9 @@
 	 	left:100px;
 	 }
 	 
-	 
+	 #infoBtns{
+	 	top: -300px !important;
+	 }
 	 
 	 #reportBox button{
 	 	top:-115px;
@@ -142,7 +175,7 @@
 		 			<li><input type="text" name="birthday" value="${sellerData.birthday }"></li>
 		 			<li><input type="text" name="userphone" value="${sellerData.userphone }"></li>
 		 			<li><input type="text" name="useremail" value="${sellerData.useremail }"></li>
-		 			<li><input type="text" name="useraddr" value="${sellerData.useraddr }">&nbsp;<input type="text" name="userdetailaddr" value="${sellerData.userdetailaddr }"></li>
+		 			<li><input type="text" name="useraddr" value="${sellerData.useraddr }"><br><input type="text" name="userdetailaddr" value="${sellerData.userdetailaddr }"></li>
 		 			<li><input type="text" name="joindate" value="${sellerData.joindate }"></li> 
 		 		</ul>
 		 		<div id="infoBtns">
@@ -182,8 +215,8 @@
 				<!-- info 컨테이너 묶기 width:700px 고정 -->
 				<div id="sellerEdit">
 					<div id="info_container">
-						<div id="profile_box">
-							<img src="<%=request.getContextPath()%>/resources/img/xprofile_img.png"/><br/>
+						<div id="profile_box" style="text-align:center;">
+							<img src="<%=request.getContextPath()%>/resources/img/xprofile_img.png" style="width: 100px; height:120px;"/><br/>
 							<input type="text" id="farmname" name="farmname" style="width:100px;height:25px" value="작은 농부 이강산"/>
 							<div>
 								방문자수 : ${farmvisitor }23명<br/>

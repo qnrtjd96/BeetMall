@@ -46,7 +46,7 @@ button {
 }
 
 #sortBox li:nth-of-type(3) {
-	margin: 30px 80px 0 10px;
+	margin: 30px 150px 0 10px;
 }
 
 #sortBox li:nth-of-type(5) {
@@ -221,13 +221,50 @@ button {
 }
 </style>
 <script>
+// url에 있는 쿼리 스트링 가져오기
+const URLSearch = new URLSearchParams(location.search);
+
  $(function(){
 	 $('#settleBtn').click(function(){
-		 if(confirm('현 시간 기준으로 정산하시겠습니까?')){
-			 
+		 if(confirm('현재 날짜, 시간 기준으로 정산하시겠습니까?')){
+			 location.href="adminSettleUpdate";
 		 }
 	 })
  })
+ 
+ $(()=>{
+	// 엑셀저장
+	$('#excelDown').click( () => {
+		
+		if(searchParam('startDate') != '' && searchParam('endDate') != '' ){
+			$.ajax({
+				type: "GET",
+				url: "Admin_settle_excelDown",
+				data: {
+					"startDate" : searchParam('startDate'),
+					"endDate" : searchParam('endDate'),
+					"checkBtn" : searchParam('checkBtn'),
+					"selectOption" : searchParam('selectOption'),
+					"searchTxt" : searchParam('searchTxt'),
+				},
+				success: function(result){
+					alert('BEETMALL 정산관리 엑셀파일이 다운로드에 성공하여 다운로드 폴더에 다운되었습니다.');
+				}, error: function(error){
+					alert('엑셀 다운로드 실패');
+				}
+			})	
+		} else {
+			alert('날짜를 선택 후 조회 후 다운로드 가능합니다');
+		}
+		
+		
+	});
+
+})
+
+function searchParam(key) {
+  return new URLSearchParams(location.search).get(key);
+};
 </script>
 <%@ include file="/inc/top.jspf"%>
 <div id="topBarContainer">
@@ -245,8 +282,8 @@ button {
 		<div id="sortBox">
 			<form method="get" action="settleMng">
 				<ul>
-					<li><input type="date" name="startDate" value="" /> <span>~&nbsp;</span></li>
-					<li><input type="date" name="endDate" value="" /></li>
+					<li><input type="date" id="startDate" name="startDate" /> <span>~&nbsp;</span></li>
+					<li><input type="date" id="endDate" name="endDate" /></li>
 					<li style="display: flex; line-height: 30px;"><input type="checkbox" name="checkBtn" value="구매확정" id="checkBtn" style="top: -3px;"><label for="checkBtn" style="background-color: white;">구매확정 목록</label></li>
 					<li><select id="selectOption" name="selectOption">
 							<option disabled="disabled" selected>검색분야</option>
@@ -255,9 +292,9 @@ button {
 							<option value="구매자">구매자 아이디</option>
 							<option value="법인명">법인명</option>
 					</select></li>
-					<li><input type="text" name="searchTxt" placeholder="검색어를 입력해주세요" /></li>
+					<li><input type="text" id="searchTxt" name="searchTxt" placeholder="검색어를 입력해주세요" /></li>
 					<li><button class="success" id="searchBtn">검색</button></li>
-					<li><button class="success" id="excelDown">엑셀로 다운</button></li>
+					<li><button class="success" id="excelDown" onclick="return false">엑셀로 다운</button></li>
 				</ul>
 			</form>
 		</div>

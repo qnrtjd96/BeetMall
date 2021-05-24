@@ -40,7 +40,7 @@
 		<if test="selectOption == '구매자'">
 			where userid like '%'||#{searchTxt}||'%'
 		</if>
-	
+		
 	</select>
 
 	<select id="getSettleList" resultType="com.beetmall.sshj.admin.vo.Admin_SettleVO">	
@@ -94,6 +94,51 @@
 		
 	</select>
 	
+	<select id="adminSettleExcel" resultType="com.beetmall.sshj.admin.vo.Admin_SettleVO">
+		select * from (
+		select * from(
+		select h.ordernum, mcatename, orderstatus, productname, userid, storename, to_char(orderconfirm,'yyyy-MM-dd') orderconfirm, to_char(settledate,'yyyy-MM-dd') settledate
+		from( select f.productnum, mcatename, orderstatus, productname, storename, orderconfirm, settledate, ordernum 
+		from ( select productnum, productname, storename, mcatename from mcategory c join 
+		(select productnum, productname, storename, mcatenum from product a join 
+		(select userid, storename from seller 
+		
+		<if test="selectOption == '법인명'">
+			where storename like '%'||#{searchTxt}||'%'
+		</if>
+		
+		) 
+		b on a.userid = b.userid) d on c.mcatenum = d.mcatenum
+		
+		<if test="selectOption == '상품명'"> 
+			where productname like '%'||#{searchTxt}||'%'
+		</if>
+		
+		) 
+		e join orderdetail f on e.productnum = f.productnum 
+		where orderconfirm between #{startDate} and #{endDate} 
+		
+		<if test="checkBtn == '구매확정'">
+			and orderstatus = '구매확정'
+		</if>
+		
+		<if test="selectOption == '구매번호'">
+			 and ordernum like '%'||#{searchTxt}||'%'
+		</if>
+				
+		order by orderconfirm desc, settledate desc, mcatename desc, productname desc, orderstatus desc)
+		g join ordertbl h on g.ordernum = h.ordernum	
+		
+		<if test="selectOption == '구매자'">
+			where userid like '%'||#{searchTxt}||'%'
+		</if>
+		
+		order by orderconfirm asc, settledate asc, mcatename asc, productname asc, orderstatus asc)
+
+		order by orderconfirm desc, settledate desc, mcatename desc, productname desc, orderstatus desc)
+		
+	</select>
+	
 	<select id="getSettleMoney" resultType="com.beetmall.sshj.admin.vo.Admin_SettleVO">
 		select nvl(sum(realpayment-(realpayment*0.05)-(realpayment*0.058)),0) sellerMoney, 
 			nvl(sum(realpayment*0.058),0) adminMoney from orderdetail a join ordertbl b on a.ordernum = b.ordernum
@@ -101,7 +146,7 @@
 	</select>
 
 	<update id="settleUpdate" parameterType="int">
-		update orderdetail set settledate = sysdate, settlecheck='Y' 
+		update orderdetail set settledate = sysdate, settlecheck='Y'  
 			where orderconfirm <![CDATA[<=]]> to_char(sysdate,'yyyy-MM-dd')
 	</update>
 

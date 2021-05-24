@@ -13,4 +13,6 @@ public interface Admin_SettleService {
 	public Admin_SettleVO getSettleMoney();
 	// 정산하기
 	public int settleUpdate();
+	// 엑셀 데이터
+	public List<Admin_SettleVO> adminSettleExcel(Admin_SettleVO vo);
 }

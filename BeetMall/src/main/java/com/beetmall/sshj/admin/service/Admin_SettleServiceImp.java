@@ -36,5 +36,11 @@ public class Admin_SettleServiceImp implements Admin_SettleService{
 		// TODO Auto-generated method stub
 		return dao.settleUpdate();
 	}
+
+	@Override
+	public List<Admin_SettleVO> adminSettleExcel(Admin_SettleVO vo) {
+		// TODO Auto-generated method stub
+		return dao.adminSettleExcel(vo);
+	}
 	
 }
