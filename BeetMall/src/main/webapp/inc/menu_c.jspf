@@ -538,7 +538,7 @@
 		<div id="menuList">
 			<div id="cMyPageLeft">
 				<div id="menuListName">마이페이지</div>
-				<div><a href="myinfoEdit">정보수정</a></div>
+				<div><a href="myInfoEdit">정보수정</a></div>
 				<div><a href="customWish">장바구니</a></div>
 				<div><a href="mybuyList">구매내역</a></div>
 				<div><a href="mypoint">마이포인트</a></div>

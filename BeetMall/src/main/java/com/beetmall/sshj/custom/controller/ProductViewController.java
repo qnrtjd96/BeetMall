@@ -114,7 +114,7 @@ public class ProductViewController {
 	//////////////상품장바구니 페이지////////////////
 	@RequestMapping("customWishInsert")
 	@ResponseBody
-	public String customWishInsert(HttpServletRequest req,HttpSession session) {
+	public int customWishInsert(HttpServletRequest req,HttpSession session) {
 		String id = (String)session.getAttribute("logId");
 		int productnum= Integer.parseInt(req.getParameter("productnum"));		
 		int optnum=Integer.parseInt(req.getParameter("optnum"));
@@ -128,7 +128,7 @@ public class ProductViewController {
 		//System.out.println(productViewService.customWishInsert());
 		System.out.println(productViewService.customWishInsert(id,productnum,optnum,pcount,ocount));
 		
-		return id+","+productnum+","+optnum+","+pcount+","+ocount;
+		return productViewService.customWishInsert(id,productnum,optnum,pcount,ocount);
 				
 	}
 	

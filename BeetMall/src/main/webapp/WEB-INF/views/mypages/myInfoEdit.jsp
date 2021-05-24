@@ -8,7 +8,6 @@
 	}
 	#myInfoDiv{
 		font-size:20px;
-		overflow:auto;
 		margin-bottom:100px;
 	}
 	.formUl>li:nth-child(2n+1){
@@ -96,6 +95,14 @@
 </style>
 <script>
 	$(function(){
+		
+		//var sphone="${vo3.userphone}";
+		//var sph=sphone;
+		//var userphoneArr=sph.split("-");
+		//var pnum1=parseInt(userphoneArr[0]);
+		//var pnum2=parseInt(userphoneArr[1]);
+		//var pnum3=parseInt(userphoneArr[2]);
+		
 		
 		
 		$("#infosubmit").click(function(){
@@ -275,8 +282,8 @@
 																			<option value="063">063</option>
 																			<option value="064">064</option>
 																			</select> -
-																			<input type="text" name="userphone2" id="userphone2" style="width:80px;" maxlength="4"  /> -
-																			<input type="text" name="userphone3" id="userphone3" style="width:80px;" maxlength="4" /></li>
+																			<input type="text" name="userphone2" id="userphone2" style="width:80px;" maxlength="4"  value="${pnum2}" /> -
+																			<input type="text" name="userphone3" id="userphone3" style="width:80px;" maxlength="4"  value="${pnum3}"/></li>
 				<li><span class="spanstar">*</span>주소</li>			<li><input type="button"  id="zipSearch" value="우편번호 검색" style="margin-right:5px;" class="btn"/>
 																		<input type="text" name="userzipcode" id="userzipcode" readonly  style="width:100px;" value="${vo3.userzipcode}"/>
 																		<input type="text" name="useraddr" id="useraddr" style="margin-top:5px; width:400px;" value="${vo3.useraddr}"/>

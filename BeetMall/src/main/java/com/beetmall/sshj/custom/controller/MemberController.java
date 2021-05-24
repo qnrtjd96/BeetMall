@@ -551,13 +551,13 @@ public class MemberController {
 			
 		mav.addObject("vo3",memberservice.editinfoOkView(vo3));
 
-		mav.setViewName("redirect:myinfoEdit");
+		mav.setViewName("redirect:myInfoEdit");
 		
 	
 	return mav;
 }
 
-	@RequestMapping("/myinfoEdit") // select해주는애
+	@RequestMapping("/myInfoEdit") // select해주는애
 	public ModelAndView editinfoOkView(HttpSession session,MemberVO vo, HttpServletRequest req) {
 		 ModelAndView mav = new ModelAndView();
 		 String userid = (String)session.getAttribute("logId");
@@ -567,7 +567,7 @@ public class MemberController {
 			System.out.println(dd.getUserpwd());
 		mav.addObject("vo3",memberservice.editinfoOkView(vo3));
 
-		mav.setViewName("mypages/myinfoEdit");
+		mav.setViewName("mypages/myInfoEdit");
 		return mav;
 	}
 	

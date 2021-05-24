@@ -155,7 +155,7 @@
 				    pg : 'html5_inicis',
 				    pay_method : 'card',
 				    merchant_uid : 'merchant_' + new Date().getTime(),
-				    name : 'unescape(${vo4})',
+				    name : '${vo4}',
 				    amount : tototaal,
 				    buyer_email : '${vo.useremail}',
 				    buyer_name : '${vo.username}',
