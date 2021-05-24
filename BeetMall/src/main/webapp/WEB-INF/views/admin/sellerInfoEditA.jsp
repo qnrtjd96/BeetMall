@@ -23,6 +23,9 @@
 	 #infoBox {
     	top: -350px !important;
     }
+    #infoBox li{
+    	padding-top: 19px !important;
+    }	
 	 #infoHeader{
 	 	padding-top:10px;
 	 } 
@@ -56,6 +59,9 @@
 	 	top:-45px;
 	 	left:100px;
 	 }
+	 
+	 
+	 
 	 #reportBox button{
 	 	top:-115px;
 	 	left:370px;
@@ -100,13 +106,21 @@
 		 			<li>사업장 소재지</li>
 		 			<li>사업자 인증</li> 
 		 		</ul>
-		 		<ul id="company">
-		 			<li><div>Suyeonfarm</div></li>
-		 			<li><div>kangsan Lee</div></li>
-		 			<li><div>123456-1234567</div></li>
-		 			<li><div>경식은행</div><div>15684-23-1454684</div></li>
-		 			<li><div>서울시 마포구 백범로 자바56길 132-56</div></li>
-		 			<li><div>대기중</div>
+		 		<ul id="company" style="padding-top:5px;">
+		 			<li><input type="text" name="storename" value="${sellerData.storename }"></li>
+		 			<li><input type="text" name="sellername" value="${sellerData.sellername }"></li>
+		 			<li><input type="text" name="sellerreginum" value="${sellerData.sellerreginum }"></li>
+		 			<li><input type="text" name="bank" value="${sellerData.bank }">&nbsp;
+		 				<input type="text" name="bankaccount" value="${sellerData.bankaccount }"></li>
+		 			<li><input type="text" name="storeaddr" value="${sellerData.storeaddr }&nbsp;${sellerData.storedetailaddr }"></li>
+		 			<li><div>
+		 				<c:choose>
+		 					<c:when test="${sellerData.regiapproval == '0 '}">미신청</c:when>
+		 					<c:when test="${sellerData.regiapproval == '1 '}">대기중</c:when>
+		 					<c:when test="${sellerData.regiapproval == '2 '}">완료</c:when>
+		 					<c:when test="${sellerData.regiapproval == '3 '}">반려</c:when>
+		 				</c:choose>
+		 			</div>
 		 				<button class="success" value="" name="" id="certiSee">보기</button>
 		 			</li> 
 		 		</ul>
@@ -123,13 +137,13 @@
 		 			<li>가입일</li> 
 		 		</ul>
 		 		<ul id="info">
-		 			<li><div>김윤수</div></li>
-		 			<li><div>yoonjoochacha</div></li>
-		 			<li><div>1993/02/23</div></li>
-		 			<li><div>010-3026-8562</div></li>
-		 			<li><div>seoyoon@google.com</div></li>
-		 			<li><div>서울시 마포구 백범로 자바56길 132-56</div></li>
-		 			<li><div>2020/01/26</div></li> 
+		 			<li><input type="text" name="username" value="${sellerData.username }"></li>
+		 			<li><input type="text" name="userid" value="${sellerData.userid }"></li>
+		 			<li><input type="text" name="birthday" value="${sellerData.birthday }"></li>
+		 			<li><input type="text" name="userphone" value="${sellerData.userphone }"></li>
+		 			<li><input type="text" name="useremail" value="${sellerData.useremail }"></li>
+		 			<li><input type="text" name="useraddr" value="${sellerData.useraddr }">&nbsp;<input type="text" name="userdetailaddr" value="${sellerData.userdetailaddr }"></li>
+		 			<li><input type="text" name="joindate" value="${sellerData.joindate }"></li> 
 		 		</ul>
 		 		<div id="infoBtns">
 		 			<button class="success" value="" name="" id="back">뒤로</button> 
@@ -145,8 +159,21 @@
 		 			<li>총 정지 일</li> 
 		 		</ul>
 		 		<ul id="report">
-		 			<li><div id="reportNum">1</div>회</li>
-		 			<li><div id="reportDays">7</div>일</li> 
+		 			<li><div id="reportNum">
+		 				<c:if test="${reportData.reportcount != null}">
+		 					${reportData.reportcount }
+		 				</c:if>
+		 				<c:if test="${reportData.reportcount == null}">
+		 					0
+		 				</c:if>
+		 				</div>회</li>
+		 			<li><div id="reportDays">
+			 			<c:if test="${reportData.reportsum != null}">
+		 					${reportData.reportsum }
+		 				</c:if>
+		 				<c:if test="${reportData.reportsum == null}">
+		 					0
+		 				</c:if></div>일</li> 
 		 		</ul>
 		 		<button class="success" value="" name="" id="reportCheck">자세히 보기</button>
 		 		

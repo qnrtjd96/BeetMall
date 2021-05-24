@@ -2,14 +2,16 @@ package com.beetmall.sshj.admin.controller;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession; 
- 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.beetmall.sshj.admin.service.Admin_MemberSellerService;
 import com.beetmall.sshj.admin.service.Admin_MemberServiceImp;
 import com.beetmall.sshj.admin.service.Boardervice;
 import com.beetmall.sshj.admin.vo.Admin_Member_PageVO;
@@ -23,6 +25,10 @@ public class admin_sellerController {
 	//////////////////////판매자 관리////////////////////////////////
 	@Inject
 	Admin_MemberServiceImp memberservice;
+	
+	@Autowired
+	Admin_MemberSellerService service;
+	
 	//목록보기
 		@RequestMapping("/sellerListA")
 		public ModelAndView sellerListA(HttpServletRequest req, HttpSession session) {
@@ -116,11 +122,18 @@ public class admin_sellerController {
 			mav.setViewName("/admin/sellerBlackList");
 			return mav;
 		} 
-	//판매자 정보 수정
+		
+		//판매자 정보 수정
 		@RequestMapping("/sellerInfoEditA")
 		public ModelAndView sellerInfoEditA() {
 			ModelAndView mav = new ModelAndView();
-			mav.addObject("list", adminService.noticeList());
+			String userid= "ghdrlfehd";
+			mav.addObject("reportData", service.getReportData(userid));
+			mav.addObject("discountSelect",service.discountSelect(userid));
+			mav.addObject("sellerData",service.getSellerData(userid));
+			mav.addObject("selectFavorite",service.selectFavorite(userid));
+			
+			
 			mav.setViewName("/admin/sellerInfoEditA");
 			return mav;
 		} 

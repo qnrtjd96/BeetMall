@@ -35,7 +35,7 @@ public class admin_settleController {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		DecimalFormat formatter = new DecimalFormat("###,###");
 		sd.add(Calendar.MONTH, -3);
-		System.out.println(vo.getStartDate());
+		
 		if(vo.getStartDate() != null) {
 			
 		} else {
@@ -57,7 +57,7 @@ public class admin_settleController {
 		mav.addObject("sellerMoney",formatter.format(moneyData.getSellerMoney()));
 		mav.addObject("pageVO",vo);
 		mav.addObject("result",service.getSettleList(vo));
-		mav.setViewName("/admin/settleMng");
+		mav.setViewName("admin/settleMng");
 		return mav;
 	}
 	

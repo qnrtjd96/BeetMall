@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beetmall.sshj.admin.dao.Admin_MemberSellerDAO">
+	<select id="getSellerData" resultType="com.beetmall.sshj.admin.vo.Admin_MemberSellerVO">
+		select productname, e.userid, storenum, storename, sellername, 
+			sellerreginum, sellerregiimg, regiapproval, regiapprovaldate, storezipcode, storeaddr,
+			storedetailaddr, storeemail, bank, bankname, bankaccount, farmname, farmintro, farmprofile, 
+			farmvisitor, productnum, saleselect, productprice, thumbimg, username, userphone, useremail, 
+            userzipcode, useraddr, userdetailaddr, to_char(birthday,'YYYY-MM-DD') birthday, to_char(joindate, 'YYYY-MM-DD') joindate
+            from (
+		select productname, c.userid userid, storenum, storename, sellername, 
+			sellerreginum, sellerregiimg, regiapproval, regiapprovaldate, storezipcode, storeaddr,
+			storedetailaddr, storeemail, bank, bankname, bankaccount, farmname, farmintro, farmprofile, 
+			farmvisitor, c.productnum, saleselect, productprice, thumbimg
+		from (select b.storenum, farmname,farmintro, farmprofile, farmvisitor, productnum, userid, 
+			storename, sellername, sellerreginum, sellerregiimg, regiapproval, regiapprovaldate, 
+			storezipcode, storeaddr, storedetailaddr, storeemail, bank, bankname, bankaccount 
+			from (select * from seller) a join farm b on a.storenum = b.storenum) c 
+		join product d on c.productnum = d.productnum where c.userid=#{userid}
+        ) e join member f on e.userid = f.userid
+	</select>
+	
+	<select id="getReportData" resultType="com.beetmall.sshj.admin.vo.Admin_MemberSellerVO">
+		select nvl(count(userid),0) reportcount, nvl(sum(reportdate),0) reportsum from reporttbl 
+		where userid = #{param1} group by userid, reportdate
+	</select>
+	
+	<select id="discountSelect" resultType="com.beetmall.sshj.admin.vo.Admin_MemberSellerVO">
+		select nvl(saleprice,0) saleprice from (
+        select productnum from (
+        select * from seller where userid=#{userid}) a join farm b on a.storenum = b.storenum
+        ) c join discount d on c.productnum = d.productnum(+)
+	</select>
+	
+	<select id="selectFavorite" resultType="int">
+		select count(storenum) storenum from favorite where storenum=(select storenum from seller where userid=#{userid})
+	</select>
+	
+</mapper>
