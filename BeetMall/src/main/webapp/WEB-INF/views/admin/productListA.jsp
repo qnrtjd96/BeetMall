@@ -191,8 +191,8 @@
 						야채
 					</c:if>
 				</li>
-				<li id="kktitle"><a href="/sshj/productEditA?productnum=${data.productnum}">${data.productname}</a></li>
-				<li>${data.storename}</li>
+				<li id="kktitle" class="wordcut"><a href="/sshj/productEditA?productnum=${data.productnum}">${data.productname}</a></li>
+				<li class="wordcut">${data.storename}</li>
 				<li>${data.sellername}</li>
 				<li>
 					<c:if test="${data.count == null}">
@@ -273,4 +273,5 @@
 	#contentBox ul {
 	    margin-left: 0;
 	}
+	.wordcut{white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
 </style>

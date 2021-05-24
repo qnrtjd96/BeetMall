@@ -179,9 +179,6 @@
 		background-color:#eee; 
 	}
 </style>
-<script>
- 
-</script> 
 <%@ include file="/inc/top.jspf" %>
 	<div id="topBarContainer">
 		<div id="topBar">
@@ -263,10 +260,10 @@
 					</li>
 					<li>${data.reportreason }</li>
 					<li>${data.userid }</li>
-					<li>${data.reporteduser }</li>
+					<li class="popup" style="cursor: pointer;">${data.reporteduser }</li>
 				</ul>
 			</c:forEach> 
-			</div>
+		</div>
 		</div>	 
 		<div class="page_wrap">
 			<div class="page_nation">
@@ -290,10 +287,10 @@
 			</div>
 		 </div> 
 		 <div>
-			<form method="get" class="searchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
+			<form method="get" class="searchFrm" action="/sshj/csreportListA">
 				 <select name="searchKey">
-					<option value="subject" selected>제목</option>
-	   				<option value="no">공지번호</option> 
+					<option value="subject" selected>내용</option>
+	   				<option value="no">신고인</option> 
 	   				<option value="who">대상</option> 
 	   				<option value="writedate">공지일</option> 
 				</select>			
@@ -304,7 +301,7 @@
 		</div>  
 	</div>
 		<!-- 신고 처리 모달창 -->
-		<div id="modal">
+		<div id="modal" style="display:none">
 			<div id="modalHeader">
 				회원 정지 처리
 			</div>
@@ -313,32 +310,94 @@
 					<li>신고인</li>
 					<li>신고사유</li>
 				</ul>
-				<ul>
-					<li><div>dlkfjhbu</div></li>
-					<li><div>비방</div></li>
-				</ul>
-				<ul>
-					<li>aosihnf</li>
-					<li>욕설</li>
+				<ul id="reason">
+					<!-- <li><div>dlkfjhbu</div></li>
+					<li><div>비방</div></li> -->
 				</ul>
 			</div>
 			<div id="modalPastHeader">정지 이력</div>
 			<div id="modalPast">
 				<ul>
-					<li>정지 : 총 <div >2</div>회</li>
-					<li>정지일 : 총 <div >8</div>일</li>
-					<li><button class="success" value="" name="" id="">내역 상세 보기</button></li>
+					<li>정지 : 총 <div id="tt2"></div>회</li>
+					<li>정지일 : 총 <div id="tt3"></div>일</li>
+					<li><button class="success">내역 상세 보기</button></li>
 				</ul>
 			</div>
 			<hr>
-			<input type="text">&nbsp; 일 &nbsp;
-			<button class="success" value="" name="" id="">정지</button>
-			<button class="success" value="" id="modalcancel">닫기</button>
+			<input type="text" value="" id="stopinput">&nbsp; 일 &nbsp;
+			<button class="success" id="modalstop">정지</button>
+			<button class="success" id="modalcancel">닫기</button>
 		</div> 
 <script>
 	$(function(){
 		$("#modalcancel").click(function(){
 			$(this).parent().css("display","none");
 		});
+		
+		var userid=""; //유저아이디
+		$('.popup').click(function(){
+			  $("#modal").css("display","block");
+			  userid = $(this).html();
+			  
+			  var url = "/sshj/modalSelect";
+			  var params = "reporteduser="+userid;
+			  $.ajax({
+				url:url,
+				data:params,
+				success:function(result){
+					console.log(result);
+					var $result = $(result); //vo, vo, vo, vo
+					
+					var tag="";
+					var tag2=0;
+					var tag3=0;
+					$result.each(function(idx, obj){
+						for(i=0; i<obj.list.length; i++){
+							tag += "<li class='kangsan'><div>"+ obj.list[i].userid+ "</div></li>";
+							tag += "<li class='kangsan'><div>"+ obj.list[i].reportreason+ "<div></li>";
+						}
+						if(obj.list2.length>=1){
+							tag2 = obj.list2[0].count
+							tag3 = obj.list2[0].reportdate
+						}
+					});
+					$("#reason").html(tag);
+					$("#tt2").html(tag2);
+					$("#tt3").html(tag3);
+				},error:function(){
+					console.log("가져오기 에러..");
+				}
+			}); 
+		});
+		$("#modalstop").click(function(){
+			var stopdate = $("#stopinput").val();
+			console.log("stopdate = " + stopdate);
+			$.ajax({
+				url: "/sshj/memberstop",
+				data: "stopdate="+ stopdate+ "&userid="+userid,
+				success:function(result){
+					console.log("성공 = " +result);
+					alert(userid +"는"+stopdate+"일 정지 처리되었습니다.");
+					$("#modal").css("display","none");
+				},error:function(){
+					console.log("정지 시켜주기 에러..");
+				}
+			}); 
+		});
 	});
 </script>
+<style>
+	.kangsan{
+	    width: 249px !important;
+	    text-align: center !important;
+	    display: block;
+	}
+	#reason{
+		display: block !important;
+		overflow:auto;
+	}
+	#reason>li{
+		float:left;
+		background-color: aliceblue;
+	}
+</style>

@@ -1,10 +1,15 @@
 package com.beetmall.sshj.admin.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.beetmall.sshj.admin.service.ReportListService;
@@ -39,8 +44,6 @@ public class ReportListController {
 		pageVO.setTotalRecord(reportListService.csreportOnetotalRecord(pageVO));
 		
 		mav.addObject("list", reportListService.csreportList(pageVO));
-		ReportListVO vo  = new ReportListVO();
-		System.out.println(vo.getReportboard());
 		mav.addObject("pageVO",pageVO);
 		
 		mav.setViewName("/admin/csreportListA");
@@ -70,5 +73,36 @@ public class ReportListController {
 		}
 		
 		return mav;
+	}
+	
+	//modalSelect
+	@RequestMapping("/modalSelect")
+	@ResponseBody
+	public Map<String, Object> modalSelect(String reporteduser){
+		List<ReportListVO> list = reportListService.modalSelect(reporteduser);
+		List<ReportListVO> list2 = reportListService.modalSelect2(reporteduser);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list);
+		map.put("list2", list2);
+		 
+		return map;
+	}
+	
+	@RequestMapping("/memberstop")
+	@ResponseBody
+	public int memberstop(int stopdate, String userid){
+		
+		int result=0;
+		if(reportListService.memberstop(stopdate, userid)>=1) {
+			result= reportListService.memberTableStop(userid);
+			if(result==0) {
+				System.out.println("member테이블에 userstop하기 에러");
+			}
+		}else {
+			System.out.println("신고테이블에 넣어주기 에러");
+		}
+		
+		return result;
 	}
 }

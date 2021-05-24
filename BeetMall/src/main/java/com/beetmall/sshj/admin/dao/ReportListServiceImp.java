@@ -30,5 +30,30 @@ public class ReportListServiceImp implements ReportListService{
 	public ReportListVO csreportSelect(int reportnum) {
 		return ReportListDAO.csreportSelect(reportnum);
 	}
-	
+
+	@Override
+	public List<ReportListVO> modalSelect(String reporteduser) {
+		return ReportListDAO.modalSelect(reporteduser);
+	}
+
+	@Override
+	public List<ReportListVO> modalSelect2(String reporteduser) {
+		return ReportListDAO.modalSelect2(reporteduser);
+	}
+
+	@Override
+	public int memberstop(int stopdate, String userid) {
+		return ReportListDAO.memberstop(stopdate, userid);
+	}
+
+	@Override
+	public int memberTableStop(String userid) {
+		return ReportListDAO.memberTableStop(userid);
+	}
+
+	//시간지나면 update쳐주기
+	@Override
+	public void UpdateMember() {
+		ReportListDAO.UpdateMember();
+	}
 }
