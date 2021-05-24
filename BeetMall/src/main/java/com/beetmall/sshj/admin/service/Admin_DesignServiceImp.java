@@ -30,6 +30,6 @@ public class Admin_DesignServiceImp implements Admin_DesignService {
 
 	@Override
 	public int adminproductOnetotalRecord(Admin_DesignPageVO pageVO) {
-		return designdao.adminproductOnetotalRecord(pageVO);
+		return designdao.adminproductOnetotalRecord(pageVO);//
 	}
 }
