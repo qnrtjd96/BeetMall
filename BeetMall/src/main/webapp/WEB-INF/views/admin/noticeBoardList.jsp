@@ -215,14 +215,11 @@ let searchTxt =null;// 검색 데이터
 	<div id="container">
 		<div id="sortBox">
 			<ul>
-				<li>
-					<select name="searchDate">   
-						<option value="regDate">등록일</option>
-					</select>  
+				<li> 
 				</li>
-				<li><input type="date" id="from"><div id="fromTo">~</div></li>
-				<li><input type="date" id="todate"></li>		
-				<li><input type="submit" value="검색" /></li>		
+				<li> </li>
+				<li> </li>		
+				<li> </li>		
 				<li><select name="sort1" id="sort1"> 
 		   				<option value="전체" selected>전체</option>
 		   				<option value="판매자">판매자</option>

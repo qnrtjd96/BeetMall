@@ -151,7 +151,8 @@
 		padding-left:15px;
 		border:1px solid gray;
 		border-radius:3px; 
-		font-weight:normal;
+		font-weight:normal; 
+		margin-right:10px;
 	}
 	#attach>div{
 		position:relative;

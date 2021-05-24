@@ -107,7 +107,7 @@ public class admin_boardController {
 			String paramName = file.getName();
 			System.out.println(paramName + " - 업로드 과정");
 			try {
-				if (orgName != null) {
+				if (orgName != null || orgName!="") {
 					System.out.println("이미지 업로드 try catch");
 					File f = new File(path, orgName);
 					int i = 1;

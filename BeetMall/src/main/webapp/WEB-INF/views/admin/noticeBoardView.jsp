@@ -259,7 +259,9 @@ $(()=>{
 						<td  class="td">
 							<div style="display:flex;">
 								<input type="file" style="width: 500px;" name="file" id="filename"> 
-								${vo.filename}
+								<c:if test="${vo.filename}!=null">
+									${vo.filename}
+								</c:if>
 							</div>
 						</td> 
 					</tr>
