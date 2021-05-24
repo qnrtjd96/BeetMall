@@ -37,6 +37,9 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v9.0"/>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/ojdbc8.jar"/>
+=======
+>>>>>>> branch 'develop' of https://github.com/kschoi93/BeetMall.git
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

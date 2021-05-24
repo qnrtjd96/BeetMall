@@ -45,12 +45,11 @@
 						<div>
 							<div>${result.productname }</div>
 							<div>
-								<c:if test="${result1.saleselect != '0' && result1.saleselect != null}">
-									판매금액 : <div>${ result.productprice - result1.saleprice }</div>원
-								</c:if>
-								<c:if test="${result1.saleselect == '0' || result1.saleselect == null }">
-									판매금액 : <div>${ result.productprice }</div>원
-								</c:if>
+								<div>
+									<div>${ result1.saleprice }원 할인</div>
+									<div>${ result.productprice- result1.saleprice }원</div>
+								</div>
+								<div>${ result.productprice }원</div>
 							</div>
 						</div>
 					</div>

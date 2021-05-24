@@ -2,11 +2,13 @@ package com.beetmall.sshj.seller.controller;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -38,8 +40,54 @@ public class SellerSettleController {
 	SellerSettleService service;
 	
 	@RequestMapping("/sellerSettle")
-	public String settlement() {
-		return "seller/sellerSettle";
+	public ModelAndView settlement(HttpSession session, SellerSettleVO vo) {
+		String userid = (String)session.getAttribute("logId");
+		DecimalFormat formatter = new DecimalFormat("###,###");
+		ModelAndView mav = new ModelAndView();
+		if(userid != null) {
+			List<SellerSettleVO> lengthData = service.initalLength(userid);
+			
+			if(lengthData.size() != 0) {
+				long resultpay = 0;
+				int resultLength = 0;
+				for(int i =0; i< lengthData.size(); i++) {
+					SellerSettleVO lengthDataList = lengthData.get(i);
+					resultLength += lengthDataList.getDataLength();
+					resultpay += lengthDataList.getRealpayment();
+				}
+				
+				mav.addObject("resultpay",formatter.format(resultpay));
+				vo.setTotalRecord(resultLength);
+				vo.setUserid(userid);
+				List<SellerSettleVO> listData = service.initalData(vo);
+				
+				if(listData.size() != 0) {
+					for(int i =0; i < listData.size(); i++) {
+						SellerSettleVO editVO = listData.get(i);
+						long realpayment = editVO.getOrderprice();
+						editVO.setOrderpriceStr(formatter.format(editVO.getOrderprice()));
+						editVO.setRealpayment1Str(formatter.format(realpayment));
+						editVO.setRealpayment2Str(formatter.format(Math.round(realpayment*0.05)));
+						editVO.setRealpayment3Str(formatter.format(Math.round(realpayment*0.058)));
+						editVO.setRealpayment4Str(formatter.format(Math.round(realpayment-(realpayment*0.05)-(realpayment*0.058) )));
+						listData.set(i, editVO);
+					}
+				}
+				
+				mav.addObject("initialData",listData);
+				
+				mav.addObject("pageVO",vo);
+				
+				mav.setViewName("seller/sellerSettle");
+			
+			} else {
+				mav.setViewName("home");
+			}
+			
+		} else {
+			mav.setViewName("home");
+		}
+		return mav;
 	}
 	
 	// 주문건별 매출일자 검색
@@ -476,7 +524,9 @@ public class SellerSettleController {
 			}
 		}
 		
-
+		String downloadFoler = System.getProperty("user.home")+"\\Downloads";
+		File mk = new File(downloadFoler);
+		mk.mkdirs();
 		
 		System.out.println("파일 다운로드 위치 ===>"+System.getProperty("user.home")+"\\Downloads\\BEETMALL 정산관리.xlsx");
 		File file = new File(System.getProperty("user.home")+"\\Downloads\\BEETMALL 정산관리.xlsx");

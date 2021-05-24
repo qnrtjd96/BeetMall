@@ -78,6 +78,10 @@ a:hover,a:active,a:visited,a:link{
 	justify-content: space-around;
 }
 
+p{
+	color: red;
+}
+
 /* 이미지와 건수 위치조정*/
 #orderContainer>ul>li{
 	margin:30px 0;

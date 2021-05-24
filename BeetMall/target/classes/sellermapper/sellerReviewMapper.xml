@@ -5,7 +5,7 @@
 <mapper namespace="com.beetmall.sshj.seller.dao.SellerReviewDAO">
 	<select id="breakdown" resultType="com.beetmall.sshj.seller.vo.SellerReviewVO">	
 		select 
-			to_char(reviewwritedate,'yyyy-MM-dd') reviewwritedate, 
+			reviewwritedate, 
 			reviewscore, reviewanswer
 		from (select * from product a join mcategory b on a.mcatenum = b.mcatenum 
 		
@@ -16,7 +16,7 @@
 		select * from ( 
 		select * from ( 
 		select reviewnum, ordernum, c.productnum productnum, reviewcontent, d.userid, 
-			to_char(reviewwritedate,'yyyy-MM-dd') reviewwritedate, reviewrecommend, 
+			reviewwritedate, reviewrecommend, 
 			reviewimg, reviewscore, reviewreport, reviewanswer, productname
 		from (select * from product a join mcategory b on a.mcatenum = b.mcatenum 
 		
