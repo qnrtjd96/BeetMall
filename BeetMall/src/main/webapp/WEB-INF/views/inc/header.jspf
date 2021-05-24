@@ -127,7 +127,9 @@
 	#mypagePreviewDiv>ul>li:hover {
 		background-color: rgb(230, 230, 230);
 	}
-	
+	.menuquick{
+		cursor: pointer;
+	}
 </style>
 <script>
 	$(function(){
@@ -188,6 +190,10 @@
 			$("#rollOpen").css("display","inline-block");
 			rollClose();
 		})
+		$(".menuquick").click(function(){
+			var link = $(this).children().attr('href');
+			location.href=link;
+		});
 	});
 	/* 룰렛 돌리기 */
 	var popup, eventY, divY, flag = false;
@@ -279,15 +285,15 @@
 			</c:if>
 			<div style="float:left;margin-left: 10px;"><a href="mybuyList">${logName}님</a></div><div  id="usermypage" style="float:left;height:25px;margin-left: 2px;"><span>▼</span></div>
 				<div id="mypagePreviewDiv" style="background-color: rgb(250, 250, 250);border:1px solid black;position:absolute;width:84px;height:194px;top:34px;left:855px;z-index:100;display:none;">
-					<ul style="font-size: 12px;line-height:24px;">
-						<li><a href="myinfoEdit">정보수정</a></li>
-						<li><a href="customWish">장바구니</a></li>
-						<li><a href="mybuyList">구매내역</a></li>
-						<li><a href="mypoint">마이포인트</a></li>
-						<li><a href="myfavoriForm">즐겨찾는농장</a></li>
-						<li><a href="customMyrecipe">마이레시피</a></li>
-						<li><a href="myChatList">1:1대화</a></li>
-						<li><a href="custominfo">문의내역</a></li>
+					<ul style="font-size: 12px;line-height:24px;" >
+						<li class="menuquick"><a href="myinfoEdit">정보수정</a></li>
+						<li class="menuquick"><a href="customWish">장바구니</a></li>
+						<li class="menuquick"><a href="mybuyList">구매내역</a></li>
+						<li class="menuquick"><a href="mypoint">마이포인트</a></li>
+						<li class="menuquick"><a href="myfavoriForm">즐겨찾는농장</a></li>
+						<li class="menuquick"><a href="customMyrecipe">마이레시피</a></li>
+						<li class="menuquick"><a href="myChatList">1:1대화</a></li>
+						<li class="menuquick"><a href="custominfo">문의내역</a></li>
 					</ul>
 				</div>
 			<input type="button" value="로그아웃" class="menuButtons btn" style="margin-left: 5px;float:left;"/>
