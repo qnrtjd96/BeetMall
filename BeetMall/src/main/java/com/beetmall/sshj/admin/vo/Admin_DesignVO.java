@@ -43,5 +43,5 @@ public class Admin_DesignVO {
 	public void setProductnum(int productnum) {
 		this.productnum = productnum;
 	}
-	
+	//
 }

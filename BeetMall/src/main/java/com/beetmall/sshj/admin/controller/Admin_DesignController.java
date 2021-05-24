@@ -74,7 +74,7 @@ public class Admin_DesignController {
 		adminkPageSearchVO pageVO = pageVOa;
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list);
-		map.put("pageVO", pageVO);
+		map.put("pageVO", pageVO); 
 		return map;
 	}
 }

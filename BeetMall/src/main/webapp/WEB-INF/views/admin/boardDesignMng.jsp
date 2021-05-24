@@ -299,7 +299,7 @@ $(document).ready(function(){
 					$("#popupselect").html(tag);
 				})
 			}, error : function(error){
-				console.log(error);
+				console.log(error); //
 			}
 		})	
 	}

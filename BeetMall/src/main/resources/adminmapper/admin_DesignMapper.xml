@@ -23,7 +23,7 @@
 				        from wish
 				        group by productnum) c
 				    on a.productnum = c.productnum 
-				where 1=1
+				where 1=1 
 				<!-- <choose>
 					<when test ='searchKey!=null'>
 						and faqcate = '${searchKey}' 

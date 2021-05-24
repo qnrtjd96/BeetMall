@@ -13,3 +13,4 @@ public interface Admin_DesignDAO {
 	public int adminproductOnetotalRecord(Admin_DesignPageVO pageVO);
 
 }
+ 
