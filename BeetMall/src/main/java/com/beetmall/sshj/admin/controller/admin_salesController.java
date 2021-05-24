@@ -54,14 +54,7 @@ public class admin_salesController {
 	// seller 카테고리 불러오기 위한 서비스
 	@Autowired
 	SellerSalesService sellerService;
-	 	
-	//판매내역 보기
-	@RequestMapping("/salesListA")
-	public ModelAndView salesListA() {
-		ModelAndView mav = new ModelAndView(); 
-		mav.setViewName("/admin/salesListA");
-		return mav;
-	}  	
+
 	//매출 분석
 	@RequestMapping("/salesAnalasysA")
 	public ModelAndView salesAnalasysA() {

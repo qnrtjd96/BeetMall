@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beetmall.sshj.admin.dao.Admin_SaleListDAO">
+<select id="saleList" resultType="com.beetmall.sshj.admin.vo.Admin_SaleListVO" parameterType="com.beetmall.sshj.admin.vo.Admin_SearchAndPageVO" >
+	select*from
+	(select*from
+	(select 
+	ordernum,  sellerid ,productname, productnum,orderquantity,userid, username, userphone,  orderprice, orderdate, orderstatus, claimstatus, deliverystatus
+	from
+	(select to_char(o.ordernum, '99999999999999') as ordernum, p.productname, p.userid as sellerid, od.productnum, o.userid as userid, o.username, o.userphone,
+	o.orderprice, o.orderdate ,  nvl(od.orderquantity, 0) as orderquantity ,od.orderstatus, c.claimstatus, dn.deliverystatus
+	from ordertbl o
+	left join orderdetail od on od.ordernum = o.ordernum
+	left join product p on od.productnum = p.productnum
+	left join discount d on d.productnum = od.productnum
+	left join optiontbl op on op.optionnum = o.optionnum
+	left join delivery de on de.ordernum = o.ordernum
+	left join deliverynow dn on dn.ordernum = o.ordernum
+	left join claim c on c.ordernum = o.ordernum  )
+			order by orderdate desc)	
+	<![CDATA[where rownum<=]]>(${pageNum}*${onePageRecord}) order by orderdate)
+        <![CDATA[where rownum<=]]>
+        <if test="pageNum==totalPage">${lastPageRecord}</if>
+        <if test="pageNum!=totalPage">${onePageRecord}</if>
+        order by orderdate desc
+</select>
+<select id="saleListTotalRecord" parameterType="com.beetmall.sshj.admin.vo.Admin_SearchAndPageVO"  resultType="int">
+		select count(ordernum) totalRecord from orderdetail join product on product.productnum = orderdetail.productnum where product.userid='${userid}'
+</select>
+<select id="saleListOneSelect" parameterType="com.beetmall.sshj.admin.vo.Admin_SearchListVO">
+	
+
+</select>
+</mapper>
