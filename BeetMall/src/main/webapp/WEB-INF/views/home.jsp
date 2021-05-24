@@ -13,7 +13,7 @@
 		height:450px;
 		position:relative;
 	}
-	.slider img{
+	.slider img{ 
 		height:450px;
 		margin:0;
 		padding:0;
@@ -119,7 +119,7 @@
 		text-decoration: none;
 	}
 	.product{
-		width:2120px;		/* 상품 전체 */
+		width:3180px;		/* 상품 전체 */
 		height:360px;
 		position:relative;
 	}
@@ -308,6 +308,7 @@
 			$(".slider>div").eq(1).animate({marginLeft:left+"px"},1000);
 		}
 		banner(ran);
+		
 		$("#prevBtn").click(function(){
 			ran--;
 			if(ran<0){
@@ -328,19 +329,20 @@
 			var left= -(idx*proWidth);
 			$("#todayProduct").eq(0).animate({marginLeft:left+"px"},1000);
 		}
+		
 		var todaySelect = 4;
 		todayProduct(todaySelect);
 		
 		$("#todayPrev").click(function(){
 			todaySelect-=4;
 			if(todaySelect < 0){
-				todaySelect = 4;
+				todaySelect = 8;
 			}
 			todayProduct(todaySelect);
 		});
 		$("#todayNext").click(function(){
 			todaySelect+=4;
-			if(todaySelect > 4){
+			if(todaySelect > 8){
 				todaySelect = 0;
 			}
 			todayProduct(todaySelect);
@@ -356,13 +358,13 @@
 		$("#newProductPrev").click(function(){
 			newProductSelect-=4;
 			if(newProductSelect < 0){
-				newProductSelect = 4;
+				newProductSelect = 8;
 			}
 			newProduct(newProductSelect);
 		});
 		$("#newProductNext").click(function(){
 			newProductSelect+=4;
-			if(newProductSelect > 4){
+			if(newProductSelect > 8){
 				newProductSelect = 0;
 			}
 			newProduct(newProductSelect);
@@ -378,13 +380,13 @@
 		$("#bestProductPrev").click(function(){
 			bestSelect-=4;
 			if(bestSelect < 0){
-				bestSelect = 4;
+				bestSelect = 8;
 			}
 			bestProduct(bestSelect);
 		});
 		$("#bestProductNext").click(function(){
 			bestSelect+=4;
-			if(bestSelect > 4){
+			if(bestSelect > 8){
 				bestSelect = 0;
 			}
 			bestProduct(bestSelect);
@@ -392,7 +394,7 @@
 		
 		
 		//좋아용 싫어용
-		$(".reciptList>div:nth-child(3n)>div:first-child").click(function(){
+		/* $(".reciptList>div:nth-child(3n)>div:first-child").click(function(){
 			console.log("이벤트");
 			if(ran%4==1){
 				$(this).toggleClass('like').toggleClass('unlike').animate({left:"276px", top:"-2px"},100).animate({left:"280px", top:"2px"},100);	
@@ -403,8 +405,7 @@
 			}else{
 				$(this).toggleClass('like').toggleClass('unlike').animate({left:"284px", top:"6px"},100).animate({left:"280px", top:"2px"},100);
 			}
-			
-		})
+		}) */
 	});
 	
 	$(window).resize(function(){
@@ -451,31 +452,51 @@
 	</video>
 </div>	
 <div class="section">
-	<h2>오늘의 상품<span id="numm"></span></h2>
+	<h2>${toptitle}<span id="numm"></span></h2>
 	<hr/>
 	<div class="productList">
 		<div class="prevBtn roundImg" id="todayPrev"></div>
 		<div class="productSetWidth">
 		<div class="product" id="todayProduct">
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/deggplant.jpg"/></a></div><div><a href="error">싱싱한 가지 1kg</a></div><div>1,200원</div><div>친환경으로 재배한 무농약 가지(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/dgalic1.jpg"/></a></div><div><a href="error">싱싱한 마늘 2kg</a></div><div>2,200원</div><div>친환경으로 재배한 무농약 마늘(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/dcabige.jpg"/></a></div><div><a href="error">싱싱한 쌈채소 3kg</a></div><div>3,200원</div><div>친환경으로 재배한 무농약 쌈채소(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/dtangerine.jpg"/></a></div><div><a href="error">싱싱한 귤 4kg</a></div><div>4,200원</div><div>친환경으로 재배한 무농약 귤(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/deggplant.jpg"/></a></div><div><a href="error">싱싱한 가지 5kg</a></div><div>1,200원</div><div>친환경으로 재배한 무농약 가지(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/dgalic1.jpg"/></a></div><div><a href="error">싱싱한 마늘 6kg</a></div><div>2,200원</div><div>친환경으로 재배한 무농약 마늘(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/dcabige.jpg"/></a></div><div><a href="error">싱싱한 쌈채소 7kg</a></div><div>3,200원</div><div>친환경으로 재배한 무농약 쌈채소(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/dtangerine.jpg"/></a></div><div><a href="error">싱싱한 귤 8kg</a></div><div>4,200원</div><div>친환경으로 재배한 무농약 귤(1kg)</div></div>
+			<c:forEach var="vo" items="${topList}">
+				<div class="productPanel">
+					<div>
+						<a href="customproduct?productnum=${vo.productnum}">
+							<img src="/sshj/resources/sellerProductImgs/${vo.thumbimg}" onerror="this.src='/sshj/img/derror.png'"/>
+						</a>
+					</div>
+					<div class="wordcut">
+						<a href="customproduct?productnum=${vo.productnum}" class="wordcut">${vo.productname}</a>
+					</div>
+						<c:if test="${vo.saleprice>0}">
+							<div><span style="margin-right:5px;font-size:12px;text-decoration: line-through;">${vo.productprice}원</span><span style="color:red;">${vo.productprice-vo.saleprice}원</span></div>	
+						</c:if>
+						<c:if test="${vo.saleprice==0}">
+							<div>${vo.productprice}원</div>
+						</c:if>
+					<div class="wordcut">${vo.productinfomation}</div>
+				</div>			
+			</c:forEach>
 		</div>
 		</div>
 		<div class="nextBtn roundImg" id="todayNext"></div>
 	</div>
 	<div>
-	<h2>오늘의 제철 레시피</h2>
+	<h2>가장 인기있는 레시피</h2>
 		<hr/>
 		<div class="todayRecipt">
-			<div class="reciptList"><div><img src="/sshj/img/dkimchi.jpg"/></div><div>김치 담그기!</div><div><div class="like"></div><span class="likeCount">999+</span></div></div>
-			<div class="reciptList"><div><img src="/sshj/img/dgamzajun.jpg"/></div><div>오늘 저녁은 감자전 어떠세요?</div><div><div class="unlike"></div><span class="likeCount">999+</span></div></div>
-			<div class="reciptList"><div><img src="/sshj/img/dotorimuk.jpg"/></div><div>더운날 생각나도 도토리묵</div><div><div class="unlike"></div><span class="likeCount">999+</span></div></div>
+			<c:forEach var="vo" items="${toprecipe}">
+				<div class="reciptList">
+					<div><a href="http://localhost:9090/sshj/recipeView?recipenum=${vo.recipenum}&id=<c:if test="${logId != null}">${logId}</c:if>"><img src="/sshj/img/${vo.recipemainimg}"onerror="this.src='/sshj/img/derror.png'"/></a></div>
+					<div><a href="http://localhost:9090/sshj/recipeView?recipenum=${vo.recipenum}&id=<c:if test="${logId != null}">${logId}</c:if>">${vo.recipetitle}</a></div>
+					<c:if test="${vo.recipehit > 999}">
+						<div><div class="like"></div><span class="likeCount">999+</span></div>
+					</c:if>
+					<c:if test="${vo.recipehit < 999}">
+						<div><div class="like"></div><span class="likeCount">${vo.recipehit}</span></div>
+					</c:if>
+				</div>
+			</c:forEach>
 		</div>
 	</div>
 </div>
@@ -491,48 +512,79 @@
 </div>
 <div class="section">
 	<br/>
-	<h2>신상품<span id="numm"></span></h2>
+	<h2>${midtitle}<span id="numm"></span></h2>
 	<hr/>
 	<div class="productList">
 		<div class="prevBtn roundImg" id="newProductPrev"></div>
 		<div class="productSetWidth">
 		<div class="product" id="newProduct">
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/deggplant.jpg"/></a></div><div><a href="error">싱싱한 가지 1kg</a></div><div>1,200원</div><div>친환경으로 재배한 무농약 가지(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/dgalic1.jpg"/></a></div><div><a href="error">싱싱한 마늘 2kg</a></div><div>2,200원</div><div>친환경으로 재배한 무농약 마늘(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/dcabige.jpg"/></a></div><div><a href="error">싱싱한 쌈채소 3kg</a></div><div>3,200원</div><div>친환경으로 재배한 무농약 쌈채소(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/dtangerine.jpg"/></a></div><div><a href="error">싱싱한 귤 4kg</a></div><div>4,200원</div><div>친환경으로 재배한 무농약 귤(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/deggplant.jpg"/></a></div><div><a href="error">싱싱한 가지 5kg</a></div><div>1,200원</div><div>친환경으로 재배한 무농약 가지(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/dgalic1.jpg"/></a></div><div><a href="error">싱싱한 마늘 6kg</a></div><div>2,200원</div><div>친환경으로 재배한 무농약 마늘(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/dcabige.jpg"/></a></div><div><a href="error">싱싱한 쌈채소 7kg</a></div><div>3,200원</div><div>친환경으로 재배한 무농약 쌈채소(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/dtangerine.jpg"/></a></div><div><a href="error">싱싱한 귤 8kg</a></div><div>4,200원</div><div>친환경으로 재배한 무농약 귤(1kg)</div></div>
+			<c:forEach var="vo" items="${midList}">
+				<div class="productPanel">
+					<div>
+						<a href="customproduct?productnum=${vo.productnum}">
+							<img src="/sshj/resources/sellerProductImgs/${vo.thumbimg}" onerror="this.src='/sshj/img/derror.png'"/>
+						</a>
+					</div>
+					<div class="wordcut">
+						<a href="customproduct?productnum=${vo.productnum}" class="wordcut">${vo.productname}</a>
+					</div>
+						<c:if test="${vo.saleprice>0}">
+							<div><span style="margin-right:5px;font-size:12px;text-decoration: line-through;">${vo.productprice}원</span><span style="color:red;">${vo.productprice-vo.saleprice}원</span></div>	
+						</c:if>
+						<c:if test="${vo.saleprice==0}">
+							<div>${vo.productprice}원</div>
+						</c:if>
+					<div class="wordcut">${vo.productinfomation}</div>
+				</div>			
+			</c:forEach>
 		</div>
 		</div>
 		<div class="nextBtn roundImg" id="newProductNext"></div>
 	</div>
 	<br/>
-	<h2>베스트 상품<span id="numm"></span></h2>
+	<h2>${bottomtitle}<span id="numm"></span></h2>
 	<hr/>
 	<div class="productList">
 		<div class="prevBtn roundImg" id="bestProductPrev"></div>
 		<div class="productSetWidth">
 		<div class="product" id="bestProduct">
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/deggplant.jpg"/></a></div><div><a href="error">싱싱한 가지 1kg</a></div><div>1,200원</div><div>친환경으로 재배한 무농약 가지(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/dgalic1.jpg"/></a></div><div><a href="error">싱싱한 마늘 2kg</a></div><div>2,200원</div><div>친환경으로 재배한 무농약 마늘(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/dcabige.jpg"/></a></div><div><a href="error">싱싱한 쌈채소 3kg</a></div><div>3,200원</div><div>친환경으로 재배한 무농약 쌈채소(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/dtangerine.jpg"/></a></div><div><a href="error">싱싱한 귤 4kg</a></div><div>4,200원</div><div>친환경으로 재배한 무농약 귤(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/deggplant.jpg"/></a></div><div><a href="error">싱싱한 가지 5kg</a></div><div>1,200원</div><div>친환경으로 재배한 무농약 가지(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/dgalic1.jpg"/></a></div><div><a href="error">싱싱한 마늘 6kg</a></div><div>2,200원</div><div>친환경으로 재배한 무농약 마늘(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/dcabige.jpg"/></a></div><div><a href="error">싱싱한 쌈채소 7kg</a></div><div>3,200원</div><div>친환경으로 재배한 무농약 쌈채소(1kg)</div></div>
-			<div class="productPanel"><div><a href="error"><img src="/sshj/img/dtangerine.jpg"/></a></div><div><a href="error">싱싱한 귤 8kg</a></div><div>4,200원</div><div>친환경으로 재배한 무농약 귤(1kg)</div></div>
+			<c:forEach var="vo" items="${bottomList}">
+				<div class="productPanel">
+					<div>
+						<a href="customproduct?productnum=${vo.productnum}">
+							<img src="/sshj/resources/sellerProductImgs/${vo.thumbimg}" onerror="this.src='/sshj/img/derror.png'"/>
+						</a>
+					</div>
+					<div class="wordcut">
+						<a href="customproduct?productnum=${vo.productnum}" class="wordcut">${vo.productname}</a>
+					</div>
+						<c:if test="${vo.saleprice>0}">
+							<div><span style="margin-right:5px;font-size:12px;text-decoration: line-through;">${vo.productprice}원</span><span style="color:red;">${vo.productprice-vo.saleprice}원</span></div>	
+						</c:if>
+						<c:if test="${vo.saleprice==0}">
+							<div>${vo.productprice}원</div>
+						</c:if>
+					<div class="wordcut">${vo.productinfomation}</div>
+				</div>			
+			</c:forEach>
 		</div>
 		</div>
 		<div class="nextBtn roundImg" id="bestProductNext"></div>
 	</div>
-		<h2>비트의 레시피</h2>
+		<h2>신규등록 레시피</h2>
 		<hr/>
 		<div class="todayRecipt">
-			<div class="reciptList"><div><img src="/sshj/img/dkimchi.jpg"/></div><div>김치 담그기!</div><div><div class="like"></div><span class="likeCount">999+</span></div></div>
-			<div class="reciptList"><div><img src="/sshj/img/dgamzajun.jpg"/></div><div>오늘 저녁은 감자전 어떠세요?</div><div><div class="unlike"></div><span class="likeCount">999+</span></div></div>
-			<div class="reciptList"><div><img src="/sshj/img/dotorimuk.jpg"/></div><div>더운날 생각나도 도토리묵</div><div><div class="unlike"></div><span class="likeCount">999+</span></div></div>
+			<c:forEach var="vo" items="${bottomrecipe}">
+				<div class="reciptList">
+					<div><a href="http://localhost:9090/sshj/recipeView?recipenum=${vo.recipenum}&id=<c:if test="${logId != null}">${logId}</c:if>"><img src="/sshj/img/${vo.recipemainimg}"onerror="this.src='/sshj/img/derror.png'"/></a></div>
+					<div><a href="http://localhost:9090/sshj/recipeView?recipenum=${vo.recipenum}&id=<c:if test="${logId != null}">${logId}</c:if>">${vo.recipetitle}</a></div>
+					<c:if test="${vo.recipehit > 999}">
+						<div><div class="like"></div><span class="likeCount">999+</span></div>
+					</c:if>
+					<c:if test="${vo.recipehit < 999}">
+						<div><div class="like"></div><span class="likeCount">${vo.recipehit}</span></div>
+					</c:if>
+				</div>
+			</c:forEach>
 		</div>
 </div>

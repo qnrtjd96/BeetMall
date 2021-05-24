@@ -21,8 +21,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import com.beetmall.sshj.admin.service.Admin_BoardService;
+import com.beetmall.sshj.admin.service.adminProductService;
 import com.beetmall.sshj.admin.vo.AdminBoardVO;
-import com.beetmall.sshj.admin.vo.Admin_Board_PageVO; 
+import com.beetmall.sshj.admin.vo.Admin_Board_PageVO;
+import com.beetmall.sshj.admin.vo.adminkPageSearchVO; 
  
 
 @Controller
@@ -31,6 +33,7 @@ public class admin_boardController {
 	Admin_BoardService boardService;
 	@Autowired
 	private DataSourceTransactionManager transactionManager;
+
 	
 	//////////////////////공지 관리///////////////////////////////////// 
 	//공지 목록 보기
@@ -184,7 +187,7 @@ public class admin_boardController {
 	}*/
 	
 	//공지 삭제하기
-	 @RequestMapping("/noticeBoardDelA")
+	@RequestMapping("/noticeBoardDelA")
 	public ModelAndView noticeBoardDel(int infonum) {  
 		 ModelAndView mav = new ModelAndView();
 		 
@@ -195,9 +198,7 @@ public class admin_boardController {
 			mav.setViewName("redirect:noticeBoardEdit");
 		}
 		return mav;
-	} 
-	  
-	
+	}
 }
 	
 	
