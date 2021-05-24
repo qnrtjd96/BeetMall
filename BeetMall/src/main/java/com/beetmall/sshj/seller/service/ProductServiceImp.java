@@ -34,7 +34,7 @@ public class ProductServiceImp implements ProductService {
 	}
 
 	@Override
-	public List<ProductVO> onePageRecordSelect(int productnum) {
+	public ProductVO onePageRecordSelect(int productnum) {
 		return productDAO.onePageRecordSelect(productnum);
 	}
 

@@ -41,6 +41,8 @@ public class ProductController {
 //====================================== 판매상품 목록 ===================================================
 	  @RequestMapping("/product_list") 
 	  public ModelAndView product_list(ProductVO vo, SearchAndPageVO sapvo, HttpSession session, HttpServletRequest req) { 
+		  
+		ModelAndView mav = new ModelAndView();
 		//로그인한 아이디가져오기
 		sapvo.setUserid((String)session.getAttribute("logId"));
 			
@@ -53,16 +55,14 @@ public class ProductController {
 		sapvo.setSearchWord(sapvo.getSearchWord());
 		//총 레코드 수 구하기 
 		sapvo.setTotalRecord(productService.totalRecord(sapvo));
-		  
-		ModelAndView mav = new ModelAndView();
-		
-		//상품목록 담기
-		mav.addObject("productList", productService.productAllSelect(sapvo));
-					
+
 		//검색어와 페이징를 담기
 		mav.addObject("searchWord",sapvo.getSearchWord());
 		mav.addObject("sapvo",sapvo);
-			
+
+		//상품목록 담기
+		mav.addObject("productList", productService.productAllSelect(sapvo));
+						
 		mav.setViewName("seller/product_list"); 
 		return mav; 
 	  }
@@ -173,12 +173,12 @@ public class ProductController {
 			
 //---------------------------insert & 조건-----------------------------------------		
 			// 못난이 할인을 선택하지 않았을 때,
-			if(vo.getSaleb()!='1' || vo.getSaleb()=='0') {
+			if(vo.getSaleb()!= 1 || vo.getSaleb()== 0) {
 				vo.setSaleb('0');
 			}
 			//배송옵션이 0이면 나머지 다 0으로 세팅
-			 if(vo.getDeliveryoption()=="1" || vo.getDeliveryoption().equals(1)) { 
-				vo.setPaymentoption("0");
+			 if(vo.getDeliveryoption()==1 ) { 
+				vo.setPaymentoption(0);
 				vo.setDeliveryprice(0); 
 			}			
 			
@@ -262,6 +262,8 @@ public class ProductController {
 	@RequestMapping("/product_edit")
 	public ModelAndView onePageRecordSelect(@RequestParam(value="productnum") int productnum) {
 		ModelAndView mav = new ModelAndView();
+		ProductVO vo = new ProductVO();
+		
 		mav.addObject("vo", productService.onePageRecordSelect(productnum));
 		mav.setViewName("seller/product_edit");
 		return mav;
@@ -270,7 +272,7 @@ public class ProductController {
 
 	public ModelAndView product_edit(ProductVO vo, int productnum) {
 		ModelAndView mav = new ModelAndView();
-		//상품목록 담기
+		//상품목록 담기dmd
 		mav.addObject("vo", productService.productOneSelect(vo));		
 		return mav;
 	}

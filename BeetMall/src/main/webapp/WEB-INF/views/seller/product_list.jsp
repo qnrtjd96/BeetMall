@@ -75,7 +75,7 @@
 		width:3%;
 	}
 	*/
-	.product_table th:nth-child(3){width:17%}
+	.product_table th:nth-child(3){width:18%; text-align:left;}
 	.product_table th:nth-child(6){width:14%}
 	.product_table th:nth-child(2),.product_table th:nth-child(5),.product_table th:last-child{width:6%}
 	.product_table th:first-child{width:5%}
@@ -94,6 +94,7 @@
 		width:130px;	
 		border:1px solid lightgray;
 		margin-top:5px;	
+		 background:white;
 	}
 	select, .btn{ 
 		margin-top:5px; 
@@ -115,31 +116,40 @@
  	.lastDetailTr{border-bottom:1px solid lgihtgray; height:20px;}
  	#detailTr td{height:50px;}
  	.detailTrHead{background:#f8faf7; }
- 	/* #detailPlusTr{display:none;} */
- 	#detailPlusTd{padding:5px; border-top:1px solid lightgray;}
+ 	#detailPlusTr{display:none;} 
+ 	#detailPlusTd{padding:5px; border-top:1px solid lightgray; background:#f8faf7;}
  	#detailPlusTd ul li{font-size:16px; margin:15px; float:left; color:black; }
  	#detailPlusTd ul{
  		float:center;
- 		background:#f8faf7;
  	}
- 	#detailPlusTd[input type="button"]{padding:0px; margin:0px;}
+ 	#detailPlusTd[input type="button"]{padding:0px; margin:0px; }
  	.detailName{font-weight:bold; padding-right:15px; color:darkgray;}
  	#editBtn{
  		margin:0; 
  		font-weight:bold;
- 		 height:30px; 
- 		 border:none; 
- 		 color:darkgreen;
- 	    background:#f8faf7;
+ 		height:30px; 
+ 		border:none; 
+ 		color:coral;
+ 		background:none;
 	    width: 150px;
     }
+    #editBtnWrap{
+    	color:coral;
+    	float:right;
+    }
+  
+    .page_nation .nnext {
+    
+		background: #f8f8f8
+			url('<%=request.getContextPath()%>/img/kpage_nnext.png') no-repeat center center;
+		margin-right: 0;
+	}
 </style>
 <script>
 //상품목록 상세보기 토글
 $(function(){
 	//선택한 tr열고 닫히기    
 	$("#showDetailPlus").click(function() {
-		console.log("click 상세보기")
 		$(this).parent().next().toggle(
 			function(){
 				$(this).parent().next().css("display", " "); 
@@ -300,7 +310,7 @@ $(document).ready(function(){
 						<c:if test="${vo.saleb == 0}">
 						<td class="tbl_line_cell"> N </td>
 						</c:if>
-						<c:if test="${vo.saleb == '1'}">
+						<c:if test="${vo.saleb == 1}">
 						<td class="tbl_line_cell"> Y </td>
 						</c:if>
 						<!-- 판매상태 -->
@@ -310,7 +320,7 @@ $(document).ready(function(){
 						<c:if test ="${vo.nowstock==0}">
 						<td class="tbl_line_cell"><div id="saleStatus"><span id="statusText" style="color:red">판매종료</span></div></td>
 						</c:if>
-						<td id="showDetailPlus">상세보기</td>
+						<td id="showDetailPlus" style="color:coral" >상세보기</td>
 					</tr>
 					<tr id="detailPlusTr">
 					<td colspan="10" id="detailPlusTd" >
@@ -333,13 +343,13 @@ $(document).ready(function(){
 							<li><span class="detailName">옵션가격</span>${vo.optionprice}</li>
 							<!-- 배송방법 -->
 							<li><span class="detailName">배송방법</span>
-								<c:if test="${vo.deliveryoption==1 || vo.deliveryoption eq '1'}">
+								<c:if test="${vo.deliveryoption == 1}">
 									픽업
 								</c:if>
-								<c:if test="${vo.deliveryoption==2|| vo.deliveryoption eq '2'}">
+								<c:if test="${vo.deliveryoption== 2}">
 									택배
 								</c:if>
-								<c:if test="${vo.deliveryoption==3 || vo.deliveryoption eq '3'}">
+								<c:if test="${vo.deliveryoption==3 }">
 									택배/픽업
 								</c:if>
 							</li>
@@ -347,13 +357,13 @@ $(document).ready(function(){
 							<li><span class="detailName">배송비</span>${vo.deliveryprice}<span id="won">원</span></li>
 							<!-- 배송비 결제 방식 -->
 							<li><span class="detailName">배송비결제방식</span>
-								<c:if test="${vo.paymentoption eq '1'}">
+								<c:if test="${vo.paymentoption == 1}">
 									착불
 								</c:if>
-								<c:if test="${vo.paymentoption eq '2'}">
+								<c:if test="${vo.paymentoption  == 2}">
 									선결제
 								</c:if>
-								<c:if test="${vo.paymentoption eq '3'}">
+								<c:if test="${vo.paymentoption  == 3}">
 									착불/선결제
 								</c:if>
 							</li>
@@ -374,7 +384,7 @@ $(document).ready(function(){
 							<li><span class="detailName">상품정보</span>${vo.productinfomation}</li>
 							<li><span class="detailName">보관방법</span>${vo.prevention}</li>
 							<li><span class="detailName">유통기한</span>${vo.deadline}</li>
-							<li><input type="button" value="등록상품 수정하기 "id="editBtn" onClick="location.href='<%=request.getContextPath()%>/product_edit?productnum=${vo.productnum}'"/></li>
+							<li id="editBtnWrap"><input type="button" value="등록상품 수정하기 "id="editBtn" onClick="location.href='<%=request.getContextPath()%>/product_edit?productnum=${vo.productnum}'"/></li>
 																						
 						</ul>
 				
