@@ -541,6 +541,31 @@ $(function(){
 		}//if else end
 	});
 });
+
+//Ajax 
+$(function(){
+	$('#goModal').click(function(){
+		modalAjax();
+	});
+});
+function modalAjax(){
+	var ordernum = $('#orderNumTd').val();
+	var url = window.loaction.href;
+	$.ajax({
+		url:url,
+		type:'post',
+		data:{
+			'ordernum':ordernum
+		},
+		success : function(data){
+			console.log('success ajax');
+			$('#hiddenOrderNum').html(ordernum);
+		}, error: function(e){
+			console.log('ajax error -->' + e.status);
+		}
+	});
+	
+}
 </script>
 
 	<div id="topBarContainer">
@@ -668,7 +693,7 @@ $(function(){
 						<tbody>
 						<c:forEach var="list" items="${list}">
 							<tr>
-								<td><a href="javascript:modal(${list.ordernum})">${list.ordernum}</a></td><!-- id="popup_open_btn" -->
+								<td id="orderNumTd"><a href="javascript:modal()" id="goModal">${list.ordernum}</a></td><!-- id="popup_open_btn" -->
 								<td>${list.productnum}</td>
 								<td>${list.productname}</td>
 								<td>${list.orderquantity}</td>
@@ -739,7 +764,7 @@ $(function(){
 </div><!-- body1 end -->
 	<!------------------ 주문 상세정보 modal ------------------------>
 		<div class="detail_modal" id="my_modal">
-		<input type="hidden" value="${oneList.ordernum}" name="ordernum">
+		<input type="hidden" value="${oneList.ordernum}" id="hiddenOrderNum" name="ordernum">
 			<table  class="detail_table" style="background:white" >
 				<thead class="detail_head1">
 					<tr>
