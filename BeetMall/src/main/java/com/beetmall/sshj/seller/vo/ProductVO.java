@@ -226,8 +226,14 @@ public class ProductVO {
 		return selloption;
 	}
 	public void setSelloption(String selloption) {
-		
-		
+		String[] numArr = selloption.split("[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]");
+		for(int i = 0; i<numArr.length; i++) {
+			selloptionnum = numArr[0];
+		}
+		String[] unitArr = selloption.split("[0-9]");
+		for(int i = 0 ; i<unitArr.length; i++) {
+			selloptionunit = unitArr[1];
+		}	
 		this.selloption = selloptionnum + selloptionunit;
 	}
 	
@@ -237,7 +243,14 @@ public class ProductVO {
 		return sellweight;
 	}
 	public void setSellweight(String sellweight) {
-	
+		String[] numArr = sellweight.split("[a-z]");
+		for(int i = 0; i<numArr.length; i++) {
+			sellweightnum  = numArr[0];
+		}
+		String[] unitArr = sellweight.split("[0-9]");
+		for(int i = 0 ; i<unitArr.length; i++) {
+			sellweightunit = unitArr[1];
+		}	
 		this.sellweight = sellweightnum + sellweightunit;
 	}
 	//상품내용 숫자+단위
@@ -245,10 +258,7 @@ public class ProductVO {
 		return selloptionnum;
 	}
 	public void setSelloptionnum(String selloptionnum) {
-		String[] numArr = selloption.split("[a-z]");
-		for(int i = 0; i<numArr.length; i++) {
-			selloptionnum = numArr[0];
-		}
+		
 		this.selloptionnum = selloptionnum;
 		
 	}
@@ -256,30 +266,25 @@ public class ProductVO {
 		return selloptionunit;
 	}
 	public void setSelloptionunit(String selloptionunit) {
-		String[] unitArr = selloption.split("[0-9]");
-		for(int i = 0 ; i<unitArr.length; i++) {
-			selloptionunit = unitArr[1];
-		}	
+		
 		this.selloptionunit = selloptionunit;
 	}
 	public String getSellweightnum() {
-		return sellweightnum;
-	}
-	public void setSellweightnum(String sellweightnum) {
 		String[] numArr = sellweight.split("[a-z]");
 		for(int i = 0; i<numArr.length; i++) {
 			sellweightnum  = numArr[0];
 		}
+		return sellweightnum;
+	}
+	public void setSellweightnum(String sellweightnum) {
+	
 		this.sellweightnum = sellweightnum;
 	}
 	public String getSellweightunit() {
 		return sellweightunit;
 	}
 	public void setSellweightunit(String sellweightunit) {
-		String[] unitArr = sellweight.split("[0-9]");
-		for(int i = 0 ; i<unitArr.length; i++) {
-			sellweightunit = unitArr[1];
-		}	
+		
 		this.sellweightunit = sellweightunit;
 	}
 	//상품내용

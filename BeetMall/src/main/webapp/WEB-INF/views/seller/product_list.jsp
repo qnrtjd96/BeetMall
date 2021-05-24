@@ -368,7 +368,7 @@ $(document).ready(function(){
 								</c:if>
 							</li>
 							<li><span class="detailName">판매단위</span>${vo.selloptionnum} ${vo.selloptionunit}</li>
-							<li><span class="detailName">중량/용량</span>${vo.sellweight} ${vo.sellweightunit}</li>
+							<li><span class="detailName">중량/용량</span>${vo.sellweight} </li>
 							<!-- 보관/포장 -->
 							<li><span class="detailName">보관/포장</span>
 								<c:if test="${vo.wrapping eq '1' }">
