@@ -16,6 +16,8 @@ public class Admin_SettleVO {
 	private String checkBtn; // 선택한 버튼
 	private String selectOption; // 선택한 옵션
 	private String searchTxt; // 검색어
+	private long sellerMoney; // 정산 판매자 금액
+	private long adminMoney; // 정산 관리자 금액
 	
 	///////////////////////////////////////////////////////////////////////////
 	//페이징
@@ -98,6 +100,18 @@ public class Admin_SettleVO {
 	
 	public long getOrdernum() {
 		return ordernum;
+	}
+	public long getSellerMoney() {
+		return sellerMoney;
+	}
+	public void setSellerMoney(long sellerMoney) {
+		this.sellerMoney = sellerMoney;
+	}
+	public long getAdminMoney() {
+		return adminMoney;
+	}
+	public void setAdminMoney(long adminMoney) {
+		this.adminMoney = adminMoney;
 	}
 	public String getCheckBtn() {
 		return checkBtn;

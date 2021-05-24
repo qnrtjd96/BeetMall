@@ -24,5 +24,17 @@ public class Admin_SettleServiceImp implements Admin_SettleService{
 		// TODO Auto-generated method stub
 		return dao.getSettleList(vo);
 	}
+
+	@Override
+	public Admin_SettleVO getSettleMoney() {
+		// TODO Auto-generated method stub
+		return dao.getSettleMoney();
+	}
+
+	@Override
+	public int settleUpdate() {
+		// TODO Auto-generated method stub
+		return dao.settleUpdate();
+	}
 	
 }

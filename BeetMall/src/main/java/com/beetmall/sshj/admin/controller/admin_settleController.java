@@ -1,5 +1,6 @@
 package com.beetmall.sshj.admin.controller;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -32,9 +33,10 @@ public class admin_settleController {
 		Calendar ed = Calendar.getInstance();
 		
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		DecimalFormat formatter = new DecimalFormat("###,###");
 		sd.add(Calendar.MONTH, -3);
-		
-		if(req.getAttribute("startDate") != null) {
+		System.out.println(vo.getStartDate());
+		if(vo.getStartDate() != null) {
 			
 		} else {
 			String startDate =format.format(sd.getTime());
@@ -43,18 +45,30 @@ public class admin_settleController {
 			vo.setStartDate(startDate);
 			vo.setEndDate(endDate);
 		}
-		System.out.println(vo.getSelectOption());
-		System.out.println(vo.getStartDate());
-		System.out.println(vo.getEndDate());
-		System.out.println(vo.getCheckBtn());
 		
 		int result = service.getSettleLength(vo);
 		
 		vo.setTotalRecord(result);
+
+		Admin_SettleVO moneyData = service.getSettleMoney();
 		
+		
+		mav.addObject("adminMoney",formatter.format(moneyData.getAdminMoney()));
+		mav.addObject("sellerMoney",formatter.format(moneyData.getSellerMoney()));
 		mav.addObject("pageVO",vo);
 		mav.addObject("result",service.getSettleList(vo));
 		mav.setViewName("/admin/settleMng");
+		return mav;
+	}
+	
+	@RequestMapping("/adminSettleUpdate")
+	public ModelAndView adminSettleUpdate() {
+		ModelAndView mav = new ModelAndView();
+		
+		service.settleUpdate();
+		
+		mav.setViewName("admin/settleMng");
+		
 		return mav;
 	}
 	

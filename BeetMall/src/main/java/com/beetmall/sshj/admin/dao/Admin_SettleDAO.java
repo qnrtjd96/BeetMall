@@ -9,4 +9,8 @@ public interface Admin_SettleDAO {
 	public int getSettleLength(Admin_SettleVO vo);
 	// 데이터 리스트
 	public List<Admin_SettleVO> getSettleList(Admin_SettleVO vo);
+	// 정산금액 가져오기
+	public Admin_SettleVO getSettleMoney();
+	// 정산하기
+	public int settleUpdate();
 }
