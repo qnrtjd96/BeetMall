@@ -32,21 +32,27 @@ public class Admin_SaleListController {
 		sapvo.setSearchWord(sapvo.getSearchWord());
 		//총 레코드수
 		sapvo.setTotalRecord(saleListService.saleListTotalRecord(sapvo));
+		
 		//판매내역 목록
 		List<Admin_SaleListVO> list = saleListService.saleList(sapvo);
 		for(int i = 0; i<list.size(); i++) {
 			asvo = list.get(i);
 			//System.out.println("구매자 아이디 : "+ asvo.getUserid() + "/ 구매자 이름 : "+asvo.getUsername());
 		}
+		//레코드 한개 보기 
+		mav.addObject("oneList", saleListService.saleListOneSelect(asvo));
 		//리스트담기
 		mav.addObject("list", list);
-		
 		//검색어와 페이징 담기
 		mav.addObject("searchWord",sapvo.getSearchWord());
 		mav.addObject("sapvo",sapvo);
 		
-		//레코드 한개 보기 
-		mav.addObject("oneList", saleListService.saleListOneSelect(asvo));
+		System.out.println("startpage --->" + sapvo.getStartPageNum());
+		System.out.println("totalrecord--->"+ sapvo.getTotalRecord());
+		System.out.println("onePageNum-->"+ sapvo.getOnePageNum());
+		System.out.println("onePageRecord-->"+sapvo.getOnePageRecord());
+		System.out.println("totalpage--->"+ sapvo.getTotalPage());
+		
 		mav.setViewName("/admin/salesListA");
 		return mav;
 	}  	

@@ -7,10 +7,10 @@
 	select*from
 	(select*from
 	(select 
-	ordernum,  sellerid ,productname, productnum,orderquantity,userid, username, userphone,  orderprice, orderdate, orderstatus, claimstatus, deliverystatus
+	ordernum,  sellerid ,productname, productnum,orderquantity,userid, username, userphone,  orderprice, orderdate, orderstatus, claimstatus, deliverystatus, storename
 	from
 	(select to_char(o.ordernum, '99999999999999') as ordernum, p.productname, p.userid as sellerid, od.productnum, o.userid as userid, o.username, o.userphone,
-	o.orderprice, o.orderdate ,  nvl(od.orderquantity, 0) as orderquantity ,od.orderstatus, c.claimstatus, dn.deliverystatus
+	o.orderprice, o.orderdate ,  nvl(od.orderquantity, 0) as orderquantity ,od.orderstatus, c.claimstatus, dn.deliverystatus, s.storename
 	from ordertbl o
 	left join orderdetail od on od.ordernum = o.ordernum
 	left join product p on od.productnum = p.productnum
@@ -18,19 +18,44 @@
 	left join optiontbl op on op.optionnum = o.optionnum
 	left join delivery de on de.ordernum = o.ordernum
 	left join deliverynow dn on dn.ordernum = o.ordernum
-	left join claim c on c.ordernum = o.ordernum  )
-			order by orderdate desc)	
-	<![CDATA[where rownum<=]]>(${pageNum}*${onePageRecord}) order by orderdate)
-        <![CDATA[where rownum<=]]>
-        <if test="pageNum==totalPage">${lastPageRecord}</if>
-        <if test="pageNum!=totalPage">${onePageRecord}</if>
-        order by orderdate desc
+	left join claim c on c.ordernum = o.ordernum  
+	left join seller s on p.userid = s.userid )
+			order by ordernum desc)	
+	where <![CDATA[rownum<=]]>(${pageNum}*${onePageRecord}) order by ordernum)
+    where <![CDATA[rownum<=]]>
+   <if test="pageNum==totalPage">${lastPageRecord}</if>
+   <if test="pageNum!=totalPage">${onePageRecord}</if>
+   order by ordernum desc
 </select>
 <select id="saleListTotalRecord" parameterType="com.beetmall.sshj.admin.vo.Admin_SearchAndPageVO"  resultType="int">
-		select count(ordernum) totalRecord from orderdetail join product on product.productnum = orderdetail.productnum where product.userid='${userid}'
+select count(ordernum) totalRecord from orderdetail join product on product.productnum = orderdetail.productnum
 </select>
-<select id="saleListOneSelect" parameterType="com.beetmall.sshj.admin.vo.Admin_SearchListVO">
-	
-
+<select id="saleListOneSelect" resultType="com.beetmall.sshj.admin.vo.Admin_SaleListVO">
+select 
+ordernum, productname, sellerid, productnum, userid, username, userphone, deliverymemo, orderprice, orderdate, 
+usedpoint, paymentoption, orderquantity, optionname, optionnum, optionprice, optionstock, orderstatus, saleprice
+receiver, receiverphone, deliverynum ,deliveryzipcode, deliveryaddr, deliverydetailaddr, deliverycompany, invoice, deliveryprice,deliverystatus, deliverydate,
+totalsaleprice, realpayment, realtotalpayment, claimkind, claimstatus, claimcontent, claimdate
+from
+	(select to_char(o.ordernum, '99999999999999') as ordernum, p.productname, p.userid as sellerid, od.productnum, o.userid as userid, o.username, o.userphone, 
+		o.deliverymemo,o.orderprice, o.orderdate, nvl(o.usedpoint,0) as usedpoint, o.paymentoption, od.orderquantity,
+		op.optionname, op.optionnum, nvl(op.optionprice, 0) as optionprice, op.optionstock, 
+		od.orderstatus, nvl(d.saleprice,0) as saleprice,
+		o.receiver, o.receiverphone, o.deliveryzipcode, o.deliveryaddr,o.deliverydetailaddr, to_char(de.deliverynum, '999999999999')as deliverynum,
+		de.deliverycompany, to_char(de.invoice,'9999999999999') as invoice , o.deliveryprice, dn.deliverystatus, dn.deliverydate,
+		to_number(nvl(d.saleprice,0) * nvl(od.orderquantity, 0)) as totalsaleprice, 
+		to_number((o.orderprice - nvl(d.saleprice,0))*nvl(od.orderquantity,0) + nvl(op.optionprice, 0) - nvl(o.usedpoint, 0)) as realpayment,
+		to_number((o.orderprice - nvl(d.saleprice,0))*nvl(od.orderquantity,0) + nvl(op.optionprice, 0) - nvl(o.usedpoint, 0) + nvl(o.deliveryprice, 0)) as realtotalpayment,
+		c.claimkind, c.claimstatus, c.claimcontent, c.claimdate
+	from ordertbl o
+	left join orderdetail od on od.ordernum = o.ordernum
+	left join product p on od.productnum = p.productnum
+	left join discount d on d.productnum = od.productnum
+	left join optiontbl op on op.optionnum = o.optionnum
+	left join delivery de on de.ordernum = o.ordernum
+	left join deliverynow dn on dn.ordernum = o.ordernum
+	left join claim c on c.ordernum = o.ordernum
+	where o.ordernum ='${ordernum}' )
+order by ordernum desc
 </select>
 </mapper>

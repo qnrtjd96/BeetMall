@@ -56,6 +56,11 @@ public class Admin_SaleListVO {
 			public String claimContent; //클레임 내용
 			public String claimdate; //클레임 날짜
 			public String delivery; //배송
+			
+		//seller
+			public String storename;
+			
+			
 			public String getOrdernum() {
 				return ordernum;
 			}
@@ -307,6 +312,12 @@ public class Admin_SaleListVO {
 			}
 			public void setDelivery(String delivery) {
 				this.delivery = delivery;
+			}
+			public String getStorename() {
+				return storename;
+			}
+			public void setStorename(String storename) {
+				this.storename = storename;
 			}
 			
 			

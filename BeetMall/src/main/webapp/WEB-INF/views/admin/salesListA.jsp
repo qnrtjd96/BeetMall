@@ -72,20 +72,23 @@
 	}
 	
 	/*페이징 이미지 링크*/
+	
 	.page_nation .pprev{
 		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_pprev.png') no-repeat center center;
 		margin-left:0;
 	}
+	
 	.page_nation .prev{
 		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_prev.png') no-repeat center center;
 		margin-right:7px;
 	}
+	
 	.page_nation .next{
 		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_next.png') no-repeat center center;
 		margin-left:7px;
 	}
 	.page_nation .nnext{
-		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_nnext.png') no-repeat center center;
+		background:#f8f8f8 url("<%=request.getContextPath()%>/img/kpage_nnext.png") no-repeat center center;
 		margin-right:0;
 	}
  
@@ -126,6 +129,7 @@
 	}
 	
 	/*주문관리 탭*/
+	
 	.management_container{
 		margin: 10px;
 		text-align:center;
@@ -256,6 +260,7 @@
 		font-weight: bold;
 	}
 	/*닫기버튼*/
+	
 	#close{
 		font-weight:bold;
 		font-size:16px;
@@ -351,7 +356,6 @@
 		border:1px solid lightgray;
 		border-radius:5px;
 	}
-	
 </style>
 <script>
 //탭
@@ -647,13 +651,14 @@ $(function(){
 							<thead>
 								<tr id="tblHead">
 									<th>주문번호</th>
-									<th>판매자ID</th>
+									<th>상품번호</th>
 									<th>상품명</th>
 									<th>수량</th>
 									<th>주문일</th>
 									<th>주문자명/ID</th>
+									<th>주문자연락처</th>
 									<th>법인명</th>
-									<th>배송요청</th>
+									<th>판매자ID</th>
 									<th>결제금액</th>
 									<th>주문현황</th>
 									<th>클레임현황</th>
@@ -663,14 +668,15 @@ $(function(){
 						<tbody>
 						<c:forEach var="list" items="${list}">
 							<tr>
-								<td><a href="javascript:modal()">${list.ordernum}</a></td><!-- id="popup_open_btn" -->
-								<td>${list.sellerid }</td>
+								<td><a href="javascript:modal(${list.ordernum})">${list.ordernum}</a></td><!-- id="popup_open_btn" -->
 								<td>${list.productnum}</td>
 								<td>${list.productname}</td>
 								<td>${list.orderquantity}</td>
 								<td>${list.orderdate}</td>
 								<td>${list.userid}<span>/</span>${list.username}</td>
 								<td>${list.userphone}</td>
+								<td>${list.storename }</td>
+								<td>${list.sellerid }</td>
 								<td><span>${list.orderprice}</span>원 </td>
 								<td><span>${list.orderstatus}</span></td>
 							
@@ -733,6 +739,7 @@ $(function(){
 </div><!-- body1 end -->
 	<!------------------ 주문 상세정보 modal ------------------------>
 		<div class="detail_modal" id="my_modal">
+		<input type="hidden" value="${oneList.ordernum}" name="ordernum">
 			<table  class="detail_table" style="background:white" >
 				<thead class="detail_head1">
 					<tr>
@@ -797,7 +804,7 @@ $(function(){
 					</tr>
 					<tr class="detail_line8">
 						<td><span class="detail_menu">배송지</span></td>
-						<td>(${oneList.deliveryzipcode}) ${oneList.deliveryaddr}, ${oneList.deliverdetailaddr}</td>
+						<td>(${oneList.deliveryzipcode}) ${oneList.deliveryaddr}, ${oneList.deliverydetailaddr}</td>
 						<td><span class="detail_menu">베송 메모</span></td>
 						<td>${oneList.deliverymemo}</td>
 					</tr>
@@ -828,12 +835,12 @@ $(function(){
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="deliverynow" items="${iist}">
+					
 					<tr>
-						<td colspan="2">${deliverynow.deliverystatus}</td>
-						<td colspan="2">${deliverynow.deliverydate}</td>		
+						<td colspan="2">${oneList.deliverystatus}</td>
+						<td colspan="2">${oneList.deliverydate}</td>		
 					</tr>
-					</c:forEach>
+					
 				
 				</tbody>
 				

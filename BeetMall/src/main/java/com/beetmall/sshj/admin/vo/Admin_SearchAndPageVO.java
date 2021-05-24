@@ -28,127 +28,117 @@ private String userid;
 	// 정렬 
 	private String sortRecord;
 
-	public String getUserid() {
-		return userid;
-	}
-
-	public void setUserid(String userid) {
-		this.userid = userid;
-	}
-
 	public String getSearchKey() {
 		return searchKey;
 	}
-
 	public void setSearchKey(String searchKey) {
 		this.searchKey = searchKey;
 	}
-
 	public String getSearchWord() {
 		return searchWord;
 	}
-
 	public void setSearchWord(String searchWord) {
 		this.searchWord = searchWord;
 	}
-
+	
+	//페이징
 	public int getPageNum() {
 		return pageNum;
 	}
-
 	public void setPageNum(int pageNum) {
 		this.pageNum = pageNum;
+		//미리 계산하기 -> 시점만 구해서 그 메소드 안에서 구하면됨
+				//시작페이지 번호 계산
+				startPageNum =  (pageNum-1)/onePageNum*onePageNum+1; //1, 11, 21 한페이지당 출력할 넘버수만큼 알아서 n페이지가 찍혀야함
 	}
-
 	public int getOnePageNum() {
 		return onePageNum;
 	}
-
 	public void setOnePageNum(int onePageNum) {
 		this.onePageNum = onePageNum;
 	}
-
 	public int getOnePageRecord() {
 		return onePageRecord;
 	}
-
 	public void setOnePageRecord(int onePageRecord) {
 		this.onePageRecord = onePageRecord;
 	}
-
 	public int getTotalRecord() {
 		return totalRecord;
 	}
-
 	public void setTotalRecord(int totalRecord) {
 		this.totalRecord = totalRecord;
+		
+		//미리 계산
+			//총 레코드수를 이용하여 총 페이지수를 계산
+			totalPage = (int)Math.ceil(totalRecord/(double)onePageRecord) ; //실수로 계산하고 그다음에 올림하고 정수로 바꿈
+			
+			//마지막페이지 레코드수  
+			if(totalRecord % onePageRecord == 0) { //짜투리가 없는것 (남아있는 레코드가 없을 때 10의 배수)
+				lastPageRecord = onePageRecord;
+			}else { //짜투리가 있으면 
+				lastPageRecord = totalRecord%onePageRecord; //마지막페이지의 남은 레코드 수 
+			}
 	}
-
 	public int getTotalPage() {
 		return totalPage;
 	}
-
 	public void setTotalPage(int totalPage) {
 		this.totalPage = totalPage;
 	}
-
 	public int getStartPageNum() {
 		return startPageNum;
 	}
-
 	public void setStartPageNum(int startPageNum) {
 		this.startPageNum = startPageNum;
 	}
-
 	public int getLastPageRecord() {
 		return lastPageRecord;
 	}
-
 	public void setLastPageRecord(int lastPageRecord) {
 		this.lastPageRecord = lastPageRecord;
 	}
-
+	
+	//이전글 다음글
+	
+	
 	public int getPrevNo() {
 		return prevNo;
 	}
-
 	public void setPrevNo(int prevNo) {
 		this.prevNo = prevNo;
 	}
-
 	public String getPrevSubject() {
 		return prevSubject;
 	}
-
 	public void setPrevSubject(String prevSubject) {
 		this.prevSubject = prevSubject;
 	}
-
 	public int getNextNo() {
 		return nextNo;
 	}
-
 	public void setNextNo(int nextNo) {
 		this.nextNo = nextNo;
 	}
-
 	public String getNextSubject() {
 		return nextSubject;
 	}
-
 	public void setNextSubject(String nextSubject) {
 		this.nextSubject = nextSubject;
 	}
-
+	//정렬
 	public String getSortRecord() {
 		return sortRecord;
 	}
-
 	public void setSortRecord(String sortRecord) {
 		this.sortRecord = sortRecord;
 	}
-	
-	
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
 	
 	
 }
