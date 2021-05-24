@@ -501,4 +501,74 @@ public class MemberController {
 		}
 		return result;
 	}
+	
+	/////회원정보 수정///////////////
+
+	@RequestMapping("/editinfoOk") //update해주는애
+	@ResponseBody
+	public ModelAndView editinfoOk(HttpSession session,MemberVO vo, HttpServletRequest req) {
+		
+		int result=0;
+		String userid = (String)session.getAttribute("logId");
+		
+		MemberVO vo2=new MemberVO();
+		
+		String userpwd = req.getParameter("userpwd");
+		String username = req.getParameter("username");
+		String useremail = req.getParameter("useremail");
+		String tel1 = req.getParameter("userphone1");
+		String tel2 = req.getParameter("userphone2");
+		String tel3 = req.getParameter("userphone3");
+		int userzipcode = 0;
+		if(req.getParameter("userzipcode") != null) {
+			userzipcode = Integer.parseInt(req.getParameter("userzipcode"));
+		}
+		String useraddr = req.getParameter("useraddr");
+		String userdetailaddr = req.getParameter("userdetailaddr");
+		
+		vo2.setUserpwd(userpwd);
+		vo2.setUsername(username);
+		vo2.setUseremail(useremail);
+		vo2.setUserzipcode(userzipcode);
+		vo2.setUseraddr(useraddr);
+		vo2.setUserdetailaddr(userdetailaddr);
+		vo2.setUserphone(tel1+"-"+tel2+"-"+tel3);
+		vo2.setUsertype(1);
+		vo2.setUserid(userid);
+		
+		result=memberservice.editinfoOk(vo2);
+		if(result>0) {
+			result=1;
+		}else {
+			result=0;
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		String userid2 = (String)session.getAttribute("logId");
+		MemberVO vo3=new MemberVO();
+		vo3.setUserid(userid2);
+	
+			
+		mav.addObject("vo3",memberservice.editinfoOkView(vo3));
+
+		mav.setViewName("redirect:myinfoEdit");
+		
+	
+	return mav;
+}
+
+	@RequestMapping("/myinfoEdit") // select해주는애
+	public ModelAndView editinfoOkView(HttpSession session,MemberVO vo, HttpServletRequest req) {
+		 ModelAndView mav = new ModelAndView();
+		 String userid = (String)session.getAttribute("logId");
+		 MemberVO vo3=new MemberVO();
+		 vo3.setUserid(userid);
+		 MemberVO dd= memberservice.editinfoOkView(vo3);
+			System.out.println(dd.getUserpwd());
+		mav.addObject("vo3",memberservice.editinfoOkView(vo3));
+
+		mav.setViewName("mypages/myinfoEdit");
+		return mav;
+	}
+	
 }
