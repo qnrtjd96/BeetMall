@@ -13,7 +13,7 @@
 		height:450px;
 		position:relative;
 	}
-	.slider img{
+	.slider img{ 
 		height:450px;
 		margin:0;
 		padding:0;
