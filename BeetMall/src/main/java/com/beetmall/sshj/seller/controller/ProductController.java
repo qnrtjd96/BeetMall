@@ -257,21 +257,21 @@ public class ProductController {
 		return "redirect:product_list";
 	}
 	
-
-	@RequestMapping("oneRecordSelect")
-	public ModelAndView onePageRecordSelect(int productnum) {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("productnum", productService.onePageRecordSelect(productnum));
-		mav.setViewName("seller/product_edit");
-		return mav;
-	}
 	//====================================== 수정 ===================================================
 	//수정하기 뷰로 이동
 	@RequestMapping("/product_edit")
-	public ModelAndView product_edit(int productnum) {
+	public ModelAndView onePageRecordSelect(@RequestParam(value="productnum") int productnum) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("vo", productService.onePageRecordSelect(productnum));
+		mav.setViewName("seller/product_edit");
+		return mav;
+	}
+
+
+	public ModelAndView product_edit(ProductVO vo, int productnum) {
 		ModelAndView mav = new ModelAndView();
 		//상품목록 담기
-		mav.addObject("vo", productService.productOneSelect(productnum));		
+		mav.addObject("vo", productService.productOneSelect(vo));		
 		return mav;
 	}
 	//수정하기 처리

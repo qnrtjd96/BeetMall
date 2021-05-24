@@ -54,8 +54,8 @@ public class ProductServiceImp implements ProductService {
 	}
 
 	@Override
-	public ProductVO productOneSelect(int productnum) {
-		return productDAO.productOneSelect(productnum);
+	public ProductVO productOneSelect(ProductVO vo) {
+		return productDAO.productOneSelect(vo);
 	}
 
 	@Override

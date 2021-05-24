@@ -26,7 +26,7 @@ public interface ProductService {
 	
 	
 	//상품 수정하기 뷰 
-	public ProductVO productOneSelect(int productnum);
+	public ProductVO productOneSelect(ProductVO vo);
 	//상품 수정하기
 	public int productUpdate(ProductVO vo);
 	//할인 수정
