@@ -393,12 +393,11 @@ let searchTxt =null;// 검색 데이터
 			</div>
 		 </div> 
 		 <div>
-			<form method="get" class="searchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
+			<form method="get" class="searchFrm" action="/sshj/reviewListA">
 				<select name="searchKey">
-					<option value="subject" selected>제목</option>
-	   				<option value="no">공지번호</option> 
-	   				<option value="who">대상</option> 
-	   				<option value="writedate">공지일</option> 
+					<option value="productname" selected>상품명</option>
+	   				<option value="c.userid">작성자</option> 
+	   				<option value="d.userid">판매자</option> 
 				</select>			
 				<input type="text" name="searchWord" id="searchWord"/>
 				<input type="submit" value="검색"/> 
@@ -507,6 +506,11 @@ let searchTxt =null;// 검색 데이터
 	    font-weight: bold;
 	    padding: 65px 0 25px 0;
 	    border-bottom: gray 1px solid;
+	}
+	.page_nation {
+	    display: inline-block;
+	    padding-top: 0px;
+	    margin-bottom: 15px;
 	}
 </style>
 <script>

@@ -289,10 +289,11 @@
 		 <div>
 			<form method="get" class="searchFrm" action="/sshj/csreportListA">
 				 <select name="searchKey">
-					<option value="subject" selected>내용</option>
-	   				<option value="no">신고인</option> 
-	   				<option value="who">대상</option> 
-	   				<option value="writedate">공지일</option> 
+					<option value="reportcontent" selected>내용</option>
+	   				<option value="userid">신고인</option> 
+	   				<option value="reporteduser">신고받은사람</option> 
+	   				<option value="reportreason">신고유형</option> 
+	   				<option value="reportboard">게시판</option>
 				</select>			
 				<input type="text" name="searchWord" id="searchWord"/>
 				<input type="submit" value="검색"/> 
