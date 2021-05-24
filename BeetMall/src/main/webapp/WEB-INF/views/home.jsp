@@ -297,8 +297,8 @@
 </head>
 <script>
 	var wid100= window.outerWidth;
-	var bannerLength = 12; // 배너 개수
-	var maxRan = 11;	// 랜덤 범위(최대값 - 1)
+	var bannerLength = 8; // 배너 개수
+	var maxRan = 7;	// 랜덤 범위(최대값 - 1)
 	var ran = parseInt(Math.random()*maxRan);	// 배너의 수에 따라 조절할 수 있어야함
 	var proWidth = 265; /* 상품 너비 */ 
 	$(function(){		
