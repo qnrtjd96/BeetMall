@@ -154,6 +154,8 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 		return result;
 		
 	}
+	
+	
 //////////////////////////////////////////////////////////레시피 리스트///////////////////////////////////////////////////////////	
 		
 	@RequestMapping("/recipeList")
@@ -298,7 +300,25 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 	}
 
 	
-	
+////////////////////////////////////장바구니 담은 레시피 삭제/////////////////////////////////
+
+@RequestMapping("/recikeepDelete")
+@ResponseBody
+public int recikeepDelete(int recipenum,HttpSession session) {
+int result=0;	
+String userid = (String)session.getAttribute("logId");
+
+result=recipeService.recikeepDelete(recipenum,userid);
+
+if(result>0){//삭제
+result=1;
+}else {//삭제실패
+result=0;
+}
+return result;
+}
+
+
 	/////////////////////////////////////레시피 추천 수 올리기///////////////////////////////////////
 	
 	@RequestMapping("/recigoodOk")
@@ -377,20 +397,6 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 	
 	
 	
-   ////////////////////////////////////장바구니 담은 레시피 삭제/////////////////////////////////
-
-	@RequestMapping("/recikeepDelete")
-	@ResponseBody
-	public int recikeepDelete(HttpServletRequest req) {
-				
-		String id=req.getParameter("id");
-		int num=Integer.parseInt(req.getParameter("num"));
-		
-		return recipeService.recikeepDelete(num,id);
-		
-		
-		
-	}
 
 	
 }

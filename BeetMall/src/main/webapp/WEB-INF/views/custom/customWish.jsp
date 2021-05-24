@@ -534,68 +534,7 @@ $(function(){
 			</ul>
 
        <c:forEach var="wl" items="${wlist}">
-			  <form method="post" id="reply">
-		      
-					<ul class="wishList">
-							<li><a href="customproduct?productnum=${wl.productnum}"><img src="img/${wl.thumbimg}"></a></li> <!-- 이미지 -->
-							
-							<li>
-							<div id="ptitle"><a href="customproduct?productnum=${wl.productnum}">${wl.productname}</a></div><!-- 상품이름 -->
-							<div id="ptitleprice">원가: ${wl.productprice}원</div><!-- 상품가격 -->
-							<div id="ptitlediscount">할인가격: ${wl.saleprice*wl.wishnum}원</div><!-- 할인가격 -->
-						
-						    <c:if test="${wl.optionnum>0}">
-							<div id="optitle">추가옵션 :${wl.optionname}${wl.optionprice} x ${wl.wishoptionnum} 개  <span id="wishoptionCount"></span>  </div><!-- 옵션이름 --><!-- 옵션 수량 -->
-							</c:if>
-							
-							<c:if test="${wl.optionnum<=0}">
-							<div id="optitle">&nbsp;</div><!-- 옵션이름 --><!-- 옵션 수량 -->
-							</c:if>
-							
-							</li>
-						
-							<li>
-							
-								  <!-- <input type="button" id="mbtn" class="mCount" value="-"/>-->
-								    
-									<input type="hidden" value="${((wl.productprice-wl.saleprice)*wl.wishnum)+(wl.optionprice*wl.wishoptionnum)}">
-									<span id="prtnum">${wl.wishnum}</span>
-								    <!--  <input type="button" id="pbtn" class="pCount" value="+"/>-->
-								    
-								    <input type="hidden" value="${wl.productprice}"><!-- 5 -->
-								    <input type="hidden" value="${wl.saleprice}"><!-- 6 -->
-									<input type="hidden" value="${wl.wishnum}"><!-- 7 -->
-									<input type="hidden" value="${wl.optionprice}"><!-- 8 -->
-									<input type="hidden" value="${wl.wishoptionnum}"><!-- 9 -->
-							
-							
-							</li><!-- 상품수량 -->
-							
-							<!--                                          상품가격         할인가격   *     상품갯수      옵션가격      *      옵션갯수     -->
-							<li><span id="oneproductTotalPrice">${((wl.productprice-wl.saleprice)*wl.wishnum)+(wl.optionprice*wl.wishoptionnum)}원</span></li><!-- 총가격 -->
-							
-							<li> <input type="hidden" value="${wl.productnum}"><!-- 10 -->
-									<input type="hidden" value="${wl.optionnum}"><!--11 -->
-									<input type="hidden" id="productname" name="productname" value="${wl.productname}"><!-- 12 -->
-									<input type="hidden" id="productname" name="optionname" value="${wl.optionname}"><!-- 13 -->
-									<input type="hidden" id="productname" name="deliveryoption" value="${wl.deliveryoption}"><!-- 14 -->
-									<input type="hidden" value="${wl.productprice}"><!-- 5 -->
-								    <input type="hidden" value="${wl.saleprice}"><!-- 6 -->
-									<input type="hidden" value="${wl.wishnum}"><!-- 7 데이터 속성 바뀨ㅣ는 애-->
-									<input type="hidden" value="${wl.optionprice}"><!-- 8 -->
-									<input type="hidden" value="${wl.wishoptionnum}"><!-- 9 -->
-							</li>
-							
-						
-							<li><input type="button" name="paybtn" id="paybtn" class="totalbuy" value="구매하기"/>
-							</li>
-							
-							<li>
-							  <input type="button" value="x" id="delbutton" class="delbutton" />
-							  <input type="hidden" value="${wl.wishcode}">
-							</li>
-							
-							
+			
        <form method="post" id="reply">
 		      
 					<ul class="wishList">

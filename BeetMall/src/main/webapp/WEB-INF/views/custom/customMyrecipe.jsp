@@ -330,34 +330,43 @@ $(document).ready(function(){
         });
     });
  
- /////////////장바구니 레시피 제거////////////
-/*
-        $('#norebtnkeep').click(function () {
 
+/////////////장바구니 레시피 제거////////////
+$(document).ready(function(){	
+        $('.norebtnkeep').click(function () {
           //var check = $('input:checkbox[id="#myrcheck"]').is(':checked');
+          var recipenum=$(this).next("input").val();
          
   		  var url = "recikeepDelete";		
-		  var  = $('#myrcheck2').val();
+  		  var data = "recipenum="+recipenum;
 		  
-			console.log(url,data);
-			$.ajax({
-				url:url,
-				data:data,
-				success:function(result){
-					console.log('내가 담은 레시피 삭제 성공');
-					
-					
-				},error:function(e){
-					console.log(e.responseText);
-					console.log("내가 담은 레시피 삭제 실패");
-				}
-			})
+	  		console.log(url,data);
+			if(confirm("해당 즐겨찾기를 삭제 하시겠습니까?")){
+				$.ajax({
+					url:url,
+					data:data,
+					success:function(result){
+						//console.log('내가쓴 레시피 삭제 성공');
+						if(result>0){//삭제
+							//alert('내가쓴 레시피 삭제 성공');
+						
+							location.href="/sshj/customMyrecipe?rpageNum2=2";
+						}else {//삭제실패
+							//alert('실패');
+							location.href="/sshj/customMyrecipe?rpageNum2=2";
+						}
+						
+					},error:function(e){
+						console.log(e.responseText);
+						console.log("내가쓴 레시피 삭제 실패");
+					}
+				});
+			};
           
           
         });
-  */ 
- 
   
+});
 </script>
 
 
