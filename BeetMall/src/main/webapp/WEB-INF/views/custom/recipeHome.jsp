@@ -281,6 +281,10 @@ width:20px;
 height:20px;
 }
 
+#retili>a{
+overflow:hidden;
+}
+
 </style>
 
 <script>
@@ -365,8 +369,12 @@ function new10(){
    <!-- <img src="img/${data.recipemainimg}" id="rtitleImg"/> -->
 		         <c:forEach var="data" items="${list}">   
 		             <ul id="recipeListul">
-		              <li><a href="recipeView?recipenum=${data.recipenum}&id=${logId}"><img src="img/${data.recipemainimg}" id="rtitleImg"/></a></li>
-		              <li><a href="recipeView?recipenum=${data.recipenum}&id=${logId}">${data.recipetitle}</a></li>
+		              <li>
+		                  <a href="recipeView?recipenum=${data.recipenum}&id=${logId}">
+		                    <img src="img/${data.recipemainimg}" id="rtitleImg"/>
+		                  </a>
+		              </li>
+		              <li id="retili"><a href="recipeView?recipenum=${data.recipenum}&id=${logId}">${data.recipetitle}</a></li>
 		              <li>${data.userid}</li>
 		              <li><a href="recipeView?recipenum=${data.recipenum}&id=${logId}"></a></li>
 		              <li><img src="img/dlike.png" id="goodimg">추천수: ${data.reciperecommend}  조회수: ${data.recipehit}  ${data.recipewritedate}</li>
@@ -403,7 +411,7 @@ function new10(){
 		         <c:forEach var="data2" items="${list2}">   
 		             <ul id="recipeListul">
 		              <li><a href="recipeView?recipenum=${data2.recipenum}&id=${logId}"><img src="img/${data2.recipemainimg}" id="rtitleImg"/></a></li>
-		              <li><a href="recipeView?recipenum=${data2.recipenum}&id=${logId}">${data2.recipetitle}</a></li>
+		              <li id="retili"><a href="recipeView?recipenum=${data2.recipenum}&id=${logId}">${data2.recipetitle}</a></li>
 		              <li>${data2.userid}</li>
 		              <li><a href="recipeView?recipenum=${data2.recipenum}&id=${logId}"></a></li>
 		              <li><img src="img/dlike.png" id="goodimg">추천수: ${data2.reciperecommend}  조회수: ${data2.recipehit}  ${data2.recipewritedate}</li>

@@ -7,9 +7,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="CustomInfoAllRecord" parameterType="com.beetmall.sshj.custom.vo.PageProductVO" resultType="com.beetmall.sshj.custom.vo.ProductViewVO">
       select * from(
 	    select * from(
-		        select q.qnum as qnum,p.productname,q.userid,q.qcontent,to_char(q.qwritedate,'MM-DD HH:MI')qwritedate,q.qopen,q.qanswer,q.qtitle 
+		        select q.qnum as qnum,p.productname,p.productnum,p.userid as selleruserid,q.userid,q.qcontent,to_char(q.qwritedate,'MM-DD HH:MI')qwritedate,q.qopen,q.qanswer,q.qtitle 
             from userqboard q
-            left join product p 
+            left join product p
             on q.productnum = p.productnum
             where q.userid=#{userid}
             order by qnum desc)

@@ -184,6 +184,11 @@ float:left;
 	margin-top: 5px;
 	padding-right:30px;
 	padding-left:30px;
+	height:60px;
+	overflow: hidden
+}
+#recipebox>ul>li:nth-child(5n+2)>a,#recipebox2>ul>li:nth-child(5n+2)>a{
+height:60px;
 }
 
 #recipebox>ul>li:nth-child(5n+3),#recipebox2>ul>li:nth-child(5n+3){
@@ -246,6 +251,10 @@ float:left;
 input{
 background-color:white;
 
+}
+
+#retili>a{
+overflow:hidden;
 }
 
 </style>
@@ -330,34 +339,43 @@ $(document).ready(function(){
         });
     });
  
- /////////////장바구니 레시피 제거////////////
-/*
-        $('#norebtnkeep').click(function () {
 
+/////////////장바구니 레시피 제거////////////
+$(document).ready(function(){	
+        $('.norebtnkeep').click(function () {
           //var check = $('input:checkbox[id="#myrcheck"]').is(':checked');
+          var recipenum=$(this).next("input").val();
          
   		  var url = "recikeepDelete";		
-		  var  = $('#myrcheck2').val();
+  		  var data = "recipenum="+recipenum;
 		  
-			console.log(url,data);
-			$.ajax({
-				url:url,
-				data:data,
-				success:function(result){
-					console.log('내가 담은 레시피 삭제 성공');
-					
-					
-				},error:function(e){
-					console.log(e.responseText);
-					console.log("내가 담은 레시피 삭제 실패");
-				}
-			})
+	  		console.log(url,data);
+			if(confirm("해당 즐겨찾기를 삭제 하시겠습니까?")){
+				$.ajax({
+					url:url,
+					data:data,
+					success:function(result){
+						//console.log('내가쓴 레시피 삭제 성공');
+						if(result>0){//삭제
+							//alert('내가쓴 레시피 삭제 성공');
+						
+							location.href="/sshj/customMyrecipe?rpageNum2=2";
+						}else {//삭제실패
+							//alert('실패');
+							location.href="/sshj/customMyrecipe?rpageNum2=2";
+						}
+						
+					},error:function(e){
+						console.log(e.responseText);
+						console.log("내가쓴 레시피 삭제 실패");
+					}
+				});
+			};
           
           
         });
-  */ 
- 
   
+});
 </script>
 
 
@@ -388,7 +406,7 @@ $(document).ready(function(){
 					      
 									<ul>
 										<li><a href="recipeView?recipenum=${data.recipenum}&id=${logId}"><img src="img/${data.recipemainimg}" id="rtitleImg"/></a></li>
-										<li><a href="recipeView?recipenum=${data.recipenum}&id=${logId}">${data.recipetitle}</a></li>
+										<li id="retili"><a href="recipeView?recipenum=${data.recipenum}&id=${logId}">${data.recipetitle}</a></li>
 										<li>${data.userid}</li>
 										<li>추천수${data.reciperecommend} 조회수 ${data.recipehit}</li>
 										<li>
@@ -436,7 +454,7 @@ $(document).ready(function(){
 						      
 										<ul>
 											<li><a href="recipeView?recipenum=${data2.recipenum}&id=${logId}"><img src="img/${data2.recipemainimg}" id="rtitleImg"/></a></li>
-											<li><a href="recipeView?recipenum=${data2.recipenum}&id=${logId}">${data2.recipetitle}</a></li>
+											<li id="retili"><a href="recipeView?recipenum=${data2.recipenum}&id=${logId}">${data2.recipetitle}</a></li>
 											<li>${data2.userid}</li>
 											<li>추천수${data2.reciperecommend} 조회수 ${data2.recipehit}</li>
 										<li>

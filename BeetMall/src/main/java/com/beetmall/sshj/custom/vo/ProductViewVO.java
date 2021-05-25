@@ -89,6 +89,7 @@ public class ProductViewVO {
         private int qopen;
         private String qanswer;
         private String qtitle;
+        private String selleruserid;
         //
         private int wishnum;
         private int wishoptionnum;
@@ -99,6 +100,12 @@ public class ProductViewVO {
         
         
         
+		public String getSelleruserid() {
+			return selleruserid;
+		}
+		public void setSelleruserid(String selleruserid) {
+			this.selleruserid = selleruserid;
+		}
 		public int getWishcode() {
 			return wishcode;
 		}

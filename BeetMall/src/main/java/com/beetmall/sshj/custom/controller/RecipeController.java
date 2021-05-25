@@ -124,15 +124,20 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 			return mav;
 		}
 		
-		//수정하기
+		//수정하기///////////////////////////////////////////////////////////
 		@RequestMapping("/recipeEditeOk")
-		public ModelAndView recipeEditeOk(RecipeVO vo) {
+		public ModelAndView recipeEditeOk(RecipeVO vo,HttpSession session) {
+			
+			String id = (String)session.getAttribute("logId");
+			vo.setUserid(id);
+			
 			ModelAndView mav = new ModelAndView();
 			int result = recipeService.recipeEditeOk(vo);
 			mav.addObject("recipenum", vo.getRecipenum());
+			//System.out.println("recipenum2222222222"+vo.getRecipenum());레시피 숫자 잘 나옴
 			
 			if(result>0) {
-				mav.setViewName("redirect:recipeView");
+				mav.setViewName("redirect:recipeList");
 			}else {
 				mav.setViewName("redirect:recipeEdite");
 			}
@@ -154,6 +159,8 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 		return result;
 		
 	}
+	
+	
 //////////////////////////////////////////////////////////레시피 리스트///////////////////////////////////////////////////////////	
 		
 	@RequestMapping("/recipeList")
@@ -298,7 +305,25 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 	}
 
 	
-	
+////////////////////////////////////장바구니 담은 레시피 삭제/////////////////////////////////
+
+@RequestMapping("/recikeepDelete")
+@ResponseBody
+public int recikeepDelete(int recipenum,HttpSession session) {
+int result=0;	
+String userid = (String)session.getAttribute("logId");
+
+result=recipeService.recikeepDelete(recipenum,userid);
+
+if(result>0){//삭제
+result=1;
+}else {//삭제실패
+result=0;
+}
+return result;
+}
+
+
 	/////////////////////////////////////레시피 추천 수 올리기///////////////////////////////////////
 	
 	@RequestMapping("/recigoodOk")
@@ -377,20 +402,6 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 	
 	
 	
-   ////////////////////////////////////장바구니 담은 레시피 삭제/////////////////////////////////
-
-	@RequestMapping("/recikeepDelete")
-	@ResponseBody
-	public int recikeepDelete(HttpServletRequest req) {
-				
-		String id=req.getParameter("id");
-		int num=Integer.parseInt(req.getParameter("num"));
-		
-		return recipeService.recikeepDelete(num,id);
-		
-		
-		
-	}
 
 	
 }
