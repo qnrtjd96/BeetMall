@@ -19,6 +19,7 @@ import com.beetmall.sshj.admin.service.Admin_MemberServiceImp;
 import com.beetmall.sshj.admin.service.Boardervice;
 import com.beetmall.sshj.admin.vo.Admin_MemberVO;
 import com.beetmall.sshj.admin.vo.Admin_Member_PageVO;
+import com.beetmall.sshj.admin.vo.Admin_reportVO;
 
 @Controller
 public class admin_customerController {
@@ -262,5 +263,15 @@ public class admin_customerController {
 		result = memberservice.countreport(userid);
 		return result;
 	}  
-	 
+	
+	@RequestMapping("userstopsubmit")
+	public ModelAndView userstopsubmit(Admin_reportVO vo){
+		ModelAndView mav = new ModelAndView();
+		String userid = vo.getUserid();
+		int reportdate = vo.getReportdate();
+		memberservice.insertreport(userid, reportdate);
+		memberservice.updateuserstop(userid);
+		mav.setViewName("redirect:csReportChat");
+		return mav;
+	}
 }

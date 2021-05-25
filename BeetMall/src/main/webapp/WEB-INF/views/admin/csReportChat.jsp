@@ -375,7 +375,7 @@
 	<div id="topBarContainer">
 		<div id="topBar">
 			<ul>
-				<li><h5><strong><a href="csReportChat">신고 채팅 관리</a></strong></h5></li> 
+				<li><h5><strong><a href="csReportChat">채팅 관리</a></strong></h5></li> 
 					<li><button class="success" value="add" name="add" id="blind">비공개</button></li>
 				<li><button class="success" value="del" name="del" id="delBtn">정지</button></li> 
 			</ul>
@@ -523,7 +523,7 @@
 						<option class="senderid" value=""></option>
 						<option class="receiverid" value=""></option>
 					</select>
-					<input id="stopdateinput" type="text" name="stopdate" style="width:200px;height:52px;text-align:right;padding-right:10px;font-size:17px;" placeholder="정지 일수 입력"/><br/>
+					<input id="stopdateinput" type="text" name="reportdate" style="width:200px;height:52px;text-align:right;padding-right:10px;font-size:17px;" placeholder="정지 일수 입력"/><br/>
 					<input type="submit" value="정지"class="reportBtn"/><input type="reset" value="닫기" class="reportBtn"/>
 					</form>
 				</div>

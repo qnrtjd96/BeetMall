@@ -50,4 +50,6 @@ public interface Admin_MemberService {
 	public List<Admin_ChatVO> chatList(Admin_Member_PageVO pageVO);
 	public int countreport(String userid);// 신고횟수 가져오기
 	public int sumreport(String userid); // 정지일수 가져오기
+	public int insertreport(String userid, int reportdate);	// reporttbl에 작성하고
+	public int updateuserstop(String userid);	// member테이블 수정하기
 }

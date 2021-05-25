@@ -186,5 +186,15 @@ public class Admin_MemberServiceImp implements Admin_MemberService {
 		return memberdao.sumreport(userid);
 	}
 
+	@Override
+	public int insertreport(String userid, int reportdate) {
+		return memberdao.insertreport(userid, reportdate);
+	}
+
+	@Override
+	public int updateuserstop(String userid) {
+		return memberdao.updateuserstop(userid);
+	}
+
 
 }

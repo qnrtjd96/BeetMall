@@ -314,5 +314,11 @@
 	<select id="sumreport" resultType="Integer">
 		select nvl(sum(reportdate),0) from reporttbl where userid=#{param1}
 	</select>
-	
+	<insert id="insertreport">
+		insert into reporttbl(userid, reportstart, reportfin, reportdate)
+		values(#{param1}, sysdate, to_date(sysdate+#{param2}), #{param2})
+	</insert>
+	<update id="updateuserstop">
+		update member set userstop='Y' where userid = #{param1}
+	</update>
 </mapper>

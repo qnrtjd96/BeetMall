@@ -18,6 +18,14 @@ public class Admin_reportVO {
 	private int age;
 	private String reportfin;
 	private int reportcount;
+	private int reportdate;
+	
+	public int getReportdate() {
+		return reportdate;
+	}
+	public void setReportdate(int reportdate) {
+		this.reportdate = reportdate;
+	}
 	public String getReportfin() {
 		return reportfin;
 	}
