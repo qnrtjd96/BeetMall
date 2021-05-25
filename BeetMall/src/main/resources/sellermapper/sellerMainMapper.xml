@@ -28,7 +28,7 @@
         and reviewanswer is null group by reviewanswer
 	</select>
 	<select id="getQboard" resultType="com.beetmall.sshj.seller.vo.SellerMainVO">
-		select nvl(sum(count(*)),0) qasnwer from userqboard where productnum in 
+		select nvl(sum(count(*)),0) qanswer from userqboard where productnum in 
 		(select productnum from product where userid=#{userid})
         and qanswer is null group by qanswer
 	</select>
