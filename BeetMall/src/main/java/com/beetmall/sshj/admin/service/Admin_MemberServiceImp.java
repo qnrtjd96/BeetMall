@@ -154,4 +154,5 @@ public class Admin_MemberServiceImp implements Admin_MemberService {
 		return memberdao.memberEdit(vo);
 	}
 
+
 }

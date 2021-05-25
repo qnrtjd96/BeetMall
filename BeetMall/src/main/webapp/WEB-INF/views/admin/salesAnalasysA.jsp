@@ -14,9 +14,8 @@
 <c:set var='yearCheck'>
 	<fmt:formatDate value="${today }" pattern="yyyy" />
 </c:set>
-<c:set var='monthThree' value="<%=new Date(new Date().getTime() - 60*60*24*1000*90L ) %>"/>
 <c:set var="monthThreePtn">
-	<fmt:formatDate value="${monthThree }" pattern="yyyy-MM" />
+	<fmt:formatDate value="<%=new Date(new Date().getTime() - 60*60*24*1000*90L ) %>" pattern="yyyy-MM" />
 </c:set>
 
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/xstyle_sellerSales.css">

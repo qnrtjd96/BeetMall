@@ -40,4 +40,5 @@ public interface Admin_MemberService {
 	// 장바구니 부분
 	public int wishCount(String userid);
 	public List<Admin_WishVO> wishListSelect(Admin_Member_PageVO pageVO);
+
 }
