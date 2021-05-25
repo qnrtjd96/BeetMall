@@ -169,7 +169,6 @@ public class admin_sellerController {
 		
 		@RequestMapping(value="/adminEditFarmUpdate",method= RequestMethod.POST)
 		public ModelAndView adminEditFarmUpdate(HttpSession session, HttpServletRequest req, Admin_MemberSellerVO vo) {
-			System.out.println(req.getParameter("userid"));
 			ModelAndView mav = new ModelAndView();
 			
 			// 저장위치를 구한다
@@ -228,7 +227,7 @@ public class admin_sellerController {
 						e.printStackTrace();
 					}
 					
-					mav.setViewName("redirect:sellerInfoEditA");
+					mav.setViewName("redirect:sellerInfoEditA?userid="+vo.getUserid());
 				} else {
 					// 수정 실패
 					
@@ -238,7 +237,7 @@ public class admin_sellerController {
 					}catch(Exception e) {
 						e.printStackTrace();
 					}
-					mav.setViewName("redirect:sellerInfoEditA");
+					mav.setViewName("redirect:sellerInfoEditA?userid="+vo.getUserid());
 				}
 				
 			} else {
@@ -260,11 +259,11 @@ public class admin_sellerController {
 				if( result1>0 && result2>0) {
 					//수정 성공
 					
-					mav.setViewName("redirect:sellerInfoEditA");
+					mav.setViewName("redirect:sellerInfoEditA?userid="+vo.getUserid());
 				} else {
 					// 수정 실패
 					
-					mav.setViewName("redirect:sellerInfoEditA");
+					mav.setViewName("redirect:sellerInfoEditA?userid="+vo.getUserid());
 				}		
 			}
 			
