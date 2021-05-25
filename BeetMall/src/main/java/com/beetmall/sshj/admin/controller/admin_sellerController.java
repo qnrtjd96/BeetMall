@@ -139,6 +139,7 @@ public class admin_sellerController {
 		public ModelAndView sellerInfoEditA(HttpServletRequest req) {
 			ModelAndView mav = new ModelAndView();
 			String userid= req.getParameter("userid");
+			System.out.println(userid);
 			mav.addObject("reportData", service.getReportData(userid));
 			mav.addObject("discountSelect",service.discountSelect(userid));
 			mav.addObject("sellerData",service.getSellerData(userid));
@@ -155,8 +156,7 @@ public class admin_sellerController {
 		public int regiapprovalUpdate(HttpServletRequest req) {
 			int num = Integer.parseInt((String)req.getParameter("num"));
 			String userid = (String)req.getParameter("userid");
-			System.out.println(num);
-			userid = "ghdrlfehd";
+			
 			int result = 0;
 			if( num == 1) {
 				result = service.regiapprovalOkUpdate(userid);
@@ -244,15 +244,6 @@ public class admin_sellerController {
 				// 새로운 이미지를 등록하지 않는다
 				// 업데이트문
 				int result1 = service.farmUpdate(vo);
-				System.out.println(vo.getStorename());
-				System.out.println(vo.getSellername());
-				System.out.println(vo.getBank());
-				System.out.println(vo.getBankaccount());
-				System.out.println(vo.getBankname());
-				System.out.println(vo.getStoreemail());
-				System.out.println(vo.getStorezipcode());
-				System.out.println(vo.getStoreaddr());
-				System.out.println(vo.getStoredetailaddr());
 				
 				int result2 = service.sellerUpdate(vo);
 				
