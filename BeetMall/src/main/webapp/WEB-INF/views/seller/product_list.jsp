@@ -298,7 +298,7 @@ $(document).ready(function(){
 						<td class="tbl_line_cell"><div id="product"><span id="productName"><a href="customproduct?productnum=${vo.productnum}">${vo.productname}</a></span></div></td>	
 						
 						
-						<!-- 상품이미지 -->
+						<!--  상품이미지 -->
 						<td class="tbl_line_cell"><div id="thumbnail"><img src="<%=request.getContextPath()%>/resources/sellerProductImgs/${vo.thumbimg}"/></div></td>
 						<!-- 재고 -->
 						<td class="tbl_line_cell"><div id="stock"><span id="unsoldStock">${vo.nowstock}</span>/<span id="totalStock">${vo.totalstock }</span></div></td>
@@ -307,10 +307,10 @@ $(document).ready(function(){
 						<!-- 최종판매가 -->
 						<td class="tbl_line_cell"><div id="sellprice"><span id="sellprice">${vo.sellprice }</span><span id="won">원</span></div></td>
 						<!-- 못난이 할인 여부 -->
-						<c:if test="${vo.saleb == 0}">
+						<c:if test="${vo.saleb < 1}">
 						<td class="tbl_line_cell"> N </td>
 						</c:if>
-						<c:if test="${vo.saleb == 1}">
+						<c:if test="${vo.saleb > 1}">
 						<td class="tbl_line_cell"> Y </td>
 						</c:if>
 						<!-- 판매상태 -->
@@ -442,3 +442,9 @@ $(document).ready(function(){
 		</fieldset>	
 	</div><!-- article div end -->
 </div> <!-- main div end -->
+<style>
+.page_nation .prev {
+		background:#f8f8f8 url('<%=request.getContextPath()%>/img/kpage_prev.png') no-repeat center center;
+		margin-right: 7px;
+	}
+</style>
