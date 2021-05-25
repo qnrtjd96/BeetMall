@@ -27,6 +27,7 @@ import com.beetmall.sshj.seller.service.ProductService;
 import com.beetmall.sshj.seller.vo.OrderSaleVO;
 import com.beetmall.sshj.seller.vo.ProductVO;
 import com.beetmall.sshj.seller.vo.SearchAndPageVO;
+import com.beetmall.sshj.seller.vo.SellerSettleVO;
 
 
 @Controller
@@ -62,30 +63,28 @@ public class ProductController {
 		mav.addObject("searchWord",sapvo.getSearchWord());
 		mav.addObject("sapvo",sapvo);
 
+		 //selloption = selloptionnum + selloptionunit / sellweight = sellweightnum +sellweightunit 
+		//List<ProductVO> pvo = productService.productAllSelect(sapvo);
+		//for(int i = 0 ; i < pvo.size(); i++) {
+		//	String selloption = pvo.get(i).getSelloption();
+		//	 System.out.println("product controller selloption------> " + selloption);
+			  //옵션 숫자 
+		//	 String[] numArr = selloption.split("[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]"); 
+		//	 String selloptionnum = numArr[0];
+			  //옵션 단위 
+		//	 String[] unitArr = selloption.split("[0-9]"); 
+		//	 String selloptionunit =  unitArr[1];
+		//	 vo.setSelloptionnum(selloptionnum); vo.setSelloptionunit(selloptionunit);
+		//	 System.out.println("selloptionnum--->" + selloptionnum);
+		//	 System.out.println("selloptionunit--->" + selloptionunit);  
+		//	 String sellweight = pvo.get(i).getSellweight();
+		//	 System.out.println("product controller sellweight------>" + sellweight);
+		//}
+
+		 
 		//상품목록 담기
 		mav.addObject("productList", productService.productAllSelect(sapvo));
-						
-		/*
-		 * //selloption = selloptionnum + selloptionunit / sellweight = sellweightnum +
-		 * sellweightunit String selloption = vo.getSelloption();
-		 * System.out.println("product controller selloption------> " + selloption);
-		 * 
-		 * //옵션 숫자 String[] numArr = selloption.split("[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]"); String
-		 * selloptionnum = numArr[0];
-		 * 
-		 * //옵션 단위 String[] unitArr = selloption.split("[0-9]"); String selloptionunit =
-		 * unitArr[1];
-		 * 
-		 * vo.setSelloptionnum(selloptionnum); vo.setSelloptionunit(selloptionunit);
-		 * System.out.println("selloptionnum--->" + selloptionnum);
-		 * System.out.println("selloptionunit--->" + selloptionunit);
-		 * 
-		 * String sellweight = vo.getSellweight();
-		 * System.out.println("product controller sellweight------>" + sellweight);
-		 */
-				
-		
-		
+					
 		mav.setViewName("seller/product_list"); 
 		return mav; 
 	  }
@@ -209,8 +208,11 @@ public class ProductController {
 			 if(vo.getDeliveryoption()==1 ) { 
 				vo.setPaymentoption(0);
 				vo.setDeliveryprice(0); 
-			}			
-			
+			}		
+			 //orgin
+			if(vo.getOrigin()==null) {
+				vo.setOrigin("국내산");
+			}
 			//상품등록 
 			int result = productService.productInsert(vo);
 			System.out.println("상품 insert 결과 -> "+ result);

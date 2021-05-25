@@ -89,7 +89,7 @@
 		insert into optiontbl
 		(optionnum, productnum, optionname, optionstock, optionnowstock, optionprice)
 		values
-		(optionsq.nextval, productsq.currval, '${optioname}' ,${optionstock}, ${optionstock}, ${optionprice} )
+		(optionsq.nextval, productsq.currval, '${optionname}' ,${optionstock}, ${optionstock}, ${optionprice} )
 	</insert>
 	<delete id="productDelete">
 		delete from product where productnum=#{param1}
