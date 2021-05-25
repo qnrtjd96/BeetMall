@@ -249,7 +249,7 @@
 			
 				<li></li>
 				<li>${vo.storenum}</li>
-				<li><a href="${vo.userid}">${vo.sellername}</a></li>
+				<li><a href="sellerInfoEditA?userid=${vo.userid}">${vo.sellername}</a></li>
 				<li>${vo.userid}</li>
 				<li>${vo.storeemail}</li>
 				<li>${vo.storename}</li>
