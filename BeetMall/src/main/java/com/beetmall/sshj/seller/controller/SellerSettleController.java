@@ -81,7 +81,7 @@ public class SellerSettleController {
 				mav.setViewName("seller/sellerSettle");
 			
 			} else {
-				mav.setViewName("home");
+				mav.setViewName("seller/sellerSettle");
 			}
 			
 		} else {
