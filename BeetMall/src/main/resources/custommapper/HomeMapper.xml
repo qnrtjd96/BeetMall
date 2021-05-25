@@ -31,4 +31,7 @@
 		</if>
 		) where rownum <![CDATA[<=]]> 3
 	</select>
+	<select id="popupselect" resultType="com.beetmall.sshj.custom.vo.PopupVO">
+		select popupimg, popuplink, popupterm, popupheight, popupwidth from mainlayout
+	</select>
 </mapper>
