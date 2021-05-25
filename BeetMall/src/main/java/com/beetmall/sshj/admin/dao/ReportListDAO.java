@@ -21,6 +21,6 @@ public interface ReportListDAO {
 
 	public int memberTableStop(String userid);
 
-	public void UpdateMember();
+	public int sysdateInsert(int reportnum);
 	
 }

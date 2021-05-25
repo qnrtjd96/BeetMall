@@ -923,7 +923,7 @@ color:black;
     	  var productname="${pvo.productname}";
     	  var toltalPrice = (prtprice * pcount) + (optprice* ocount);
     	  var totalCount = pcount+optprice;
-    	  location.href="/sshj/productPay?total="+toltalPrice+"&discountprice="+totaldprtprice+"&productnum=${pvo.productnum}&productname="+escape(productname)+"&deliveryoption=${pvo.deliveryoption}&optionnum="+optprice+"&totalCount="+totalCount;
+    	  location.href="/sshj/productPay?total="+toltalPrice+"&discountprice="+totaldprtprice+"&productnum=${pvo.productnum}&productname="+productname+"&deliveryoption=${pvo.deliveryoption}&optionnum="+optprice+"&totalCount="+totalCount;
       });
       ///////////////////////////장바구니에 등록하기/////////////////////////////
       ////장바구니에 넘겨야할 데이터-> 아이디/상품코드/상품가격/상품의갯수/할인가격/옵션코드/옵션가격/옵션의갯수/최종구매가격

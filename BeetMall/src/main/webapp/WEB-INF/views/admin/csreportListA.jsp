@@ -336,10 +336,11 @@
 		});
 		
 		var userid=""; //유저아이디
+		var reportnum=0; //번호
 		$('.popup').click(function(){
 			  $("#modal").css("display","block");
 			  userid = $(this).html();
-			  
+			  reportnum = $(this).prev().prev().prev().prev().prev().prev().prev().html();
 			  var url = "/sshj/modalSelect";
 			  var params = "reporteduser="+userid;
 			  $.ajax({
@@ -375,11 +376,11 @@
 			console.log("stopdate = " + stopdate);
 			$.ajax({
 				url: "/sshj/memberstop",
-				data: "stopdate="+ stopdate+ "&userid="+userid,
+				data: "stopdate="+ stopdate+ "&userid="+userid +"&reportnum="+reportnum,
 				success:function(result){
 					console.log("성공 = " +result);
 					alert(userid +"는"+stopdate+"일 정지 처리되었습니다.");
-					$("#modal").css("display","none");
+					location.href="/sshj/csreportListA";
 				},error:function(){
 					console.log("정지 시켜주기 에러..");
 				}

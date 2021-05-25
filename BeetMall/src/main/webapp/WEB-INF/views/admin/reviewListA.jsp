@@ -354,20 +354,22 @@ let searchTxt =null;// 검색 데이터
 		</div>   
 		 <c:forEach var="rvo" items="${list}">
 				<ul class="contentList">
-					<li><input type="checkbox" name="check" id="check"></li>
-					<li>${rvo.reviewnum}</li>
-					<li>${rvo.mcatename}</li>
-					<li class="wordCut">${rvo.productname}</li>
-					<li>${rvo.seller}</li>
-					<li>
-						<c:if test="${rvo.reviewanswer==null || data.reviewanswer==''}">
-							답변대기
-						</c:if>
-						<c:if test="${rvo.reviewanswer!=null && data.reviewanswer !=''}">
-							답변완료
-						</c:if></li>
-					<li>${rvo.reviewwriter}</li>
-					<li>${rvo.reviewwritedate}</li> 
+					<a href="">
+						<li><input type="checkbox" name="check" id="check"></li>
+						<li>${rvo.reviewnum}</li>
+						<li>${rvo.mcatename}</li>
+						<li class="wordCut">${rvo.productname}</li>
+						<li>${rvo.seller}</li>
+						<li>
+							<c:if test="${rvo.reviewanswer==null || data.reviewanswer==''}">
+								답변대기
+							</c:if>
+							<c:if test="${rvo.reviewanswer!=null && data.reviewanswer !=''}">
+								답변완료
+							</c:if></li>
+						<li>${rvo.reviewwriter}</li>
+						<li>${rvo.reviewwritedate}</li> 
+					</a>
 				</ul> 
 		</c:forEach> 	   
 		</div>	 
@@ -396,8 +398,8 @@ let searchTxt =null;// 검색 데이터
 			<form method="get" class="searchFrm" action="/sshj/reviewListA">
 				<select name="searchKey">
 					<option value="productname" selected>상품명</option>
-	   				<option value="c.userid">작성자</option> 
-	   				<option value="d.userid">판매자</option> 
+	   				<option value="d.userid">작성자</option> 
+	   				<option value="c.userid">판매자</option> 
 				</select>			
 				<input type="text" name="searchWord" id="searchWord"/>
 				<input type="submit" value="검색"/> 
@@ -518,5 +520,7 @@ let searchTxt =null;// 검색 데이터
 		$("#closeBtn").click(function(){
 			$(this).parent().parent().css("display","none");
 		});
+		
+		
 	});
 </script>

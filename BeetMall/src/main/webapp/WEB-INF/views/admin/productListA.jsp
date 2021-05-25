@@ -134,7 +134,8 @@
 				<li><input type="date" id="from"><div id="fromTo">~</div></li>
 				<li><input type="date" id="todate"></li>  
 				<li><input type="submit" value="검색" /></li>
-				<li><select name="sort" > 
+				<li>
+					<select id="category"> 
 		   				<option value="카테고리" selected>카테고리</option>
 		   				<option value="과일">과일</option>  
 		   				<option value="건과류">건과류</option>   
@@ -144,7 +145,8 @@
 		   				<option value="견과류">견과류</option>     
 				  	</select> 
 		   		</li> 
-		   		<li><select name="sort" > 
+		   		<li>
+		   			<select name="sort" > 
 		   				<option value="정렬하기" selected>정렬하기</option>
 		   				<option value="상품번호">상품번호</option>
 		   				<option value="제목">제목</option>
@@ -238,12 +240,11 @@
 			</div>
 		 </div>
 		 <div>
-			<form method="get" class="searchFrm" action="<%=request.getContextPath()%>/board/noticeBoardList.jsp">
+			<form method="get" class="searchFrm" action="/sshj/productListA">
 				<select name="searchKey">
-					<option value="subject" selected>제목</option>
-	   				<option value="no">공지번호</option> 
-	   				<option value="who">대상</option> 
-	   				<option value="writedate">공지일</option> 
+					<option value="a.productname" selected>제목</option>
+	   				<option value="b.sellername">판매자</option> 
+	   				<option value="b.storename">상호명</option>  
 				</select>			
 				<input type="text" name="searchWord" id="searchWord"/>
 				<input type="submit" value="검색"/> 
@@ -275,3 +276,24 @@
 	}
 	.wordcut{white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
 </style>
+<script>
+	$(function(){
+		 /* $('#category').change(function(){
+		   		if($('#category option:selected').val() == "카테고리"){
+					location.href="/sshj/productListA?category=카테고리"
+		   		}else if($('#category option:selected').val() == "과일"){
+		   			location.href="/sshj/productListA?category=과일"
+		   		}else if($('#category option:selected').val() == "건과류"){
+		   			location.href="/sshj/productListA?category=건과류"
+		   		}else if($('#category option:selected').val() == "채소"){
+		   			location.href="/sshj/productListA?category=채소"
+		   		}else if($('#category option:selected').val() == "쌀"){
+		   			location.href="/sshj/productListA?category=쌀"
+		   		}else if($('#category option:selected').val() == "잡곡"){
+		   			location.href="/sshj/productListA?category=잡곡"
+		   		}else if($('#category option:selected').val() == "견과류"){
+		   			location.href="/sshj/productListA?category=견과류"
+		   		}
+		 }); */
+	});
+</script>

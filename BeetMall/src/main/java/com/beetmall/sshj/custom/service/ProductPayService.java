@@ -19,5 +19,7 @@ public interface ProductPayService {
 	public void usedPoint(ProductPayVO pro);
 
 	public void savePoint(ProductPayVO pro);
+
+	public void wishDelete(ProductPayVO pro);
 	
 }

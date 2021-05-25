@@ -52,4 +52,9 @@ public class ProductPayServiceImp implements ProductPayService {
 	public void savePoint(ProductPayVO pro) {
 		productPayDAO.savePoint(pro);
 	}
+
+	@Override
+	public void wishDelete(ProductPayVO pro) {
+		productPayDAO.wishDelete(pro);
+	}
 }

@@ -50,7 +50,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="memberTableStop">
 		update member set userstop='Y' where userid=#{param1}
 	</update>
-	<update id="UpdateMember">
-		update member 
+	<update id="sysdateInsert">
+		update report set completedate=sysdate where reportnum=${param1} 
 	</update>
 </mapper>

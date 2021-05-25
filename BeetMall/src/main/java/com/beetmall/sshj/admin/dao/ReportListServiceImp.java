@@ -51,9 +51,8 @@ public class ReportListServiceImp implements ReportListService{
 		return ReportListDAO.memberTableStop(userid);
 	}
 
-	//시간지나면 update쳐주기
 	@Override
-	public void UpdateMember() {
-		ReportListDAO.UpdateMember();
+	public int sysdateInsert(int reportnum) {
+		return ReportListDAO.sysdateInsert(reportnum);
 	}
 }

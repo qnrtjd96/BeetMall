@@ -34,5 +34,7 @@
 	<insert id="savePoint" parameterType="com.beetmall.sshj.custom.vo.ProductPayVO">
 		insert into point values(${productnum}, ${ordernum}, #{userid}, ${orderprice}, 0)
 	</insert>
-	
+	<delete id="wishDelete" parameterType="com.beetmall.sshj.custom.vo.ProductPayVO">
+		delete from wish where userid=#{userid} and productnum=${productnum}
+	</delete>
 </mapper>

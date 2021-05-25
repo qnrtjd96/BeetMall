@@ -48,6 +48,9 @@ public class Admin_reviewController {
 		
 		return mav;
 	}
+	
+	//모달창 띄어주기
+	
 }
 	
 	

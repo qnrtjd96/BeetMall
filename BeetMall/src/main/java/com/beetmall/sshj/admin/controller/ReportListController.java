@@ -91,18 +91,21 @@ public class ReportListController {
 	
 	@RequestMapping("/memberstop")
 	@ResponseBody
-	public int memberstop(int stopdate, String userid){
+	public int memberstop(int stopdate, String userid, int reportnum){
 		
 		int result=0;
-		if(reportListService.memberstop(stopdate, userid)>=1) {
-			result= reportListService.memberTableStop(userid);
-			if(result==0) {
-				System.out.println("member테이블에 userstop하기 에러");
+		if(reportListService.sysdateInsert(reportnum)>=1) {
+			if(reportListService.memberstop(stopdate, userid)>=1) {
+				result= reportListService.memberTableStop(userid);
+				if(result==0) {
+					System.out.println("member테이블에 userstop하기 에러");
+				}
+			}else {
+				System.out.println("신고테이블에 넣어주기 에러");
 			}
 		}else {
-			System.out.println("신고테이블에 넣어주기 에러");
+			System.out.println("신고테이블에 해당일자 sysdate넣기 실패");
 		}
-		
 		return result;
 	}
 }
