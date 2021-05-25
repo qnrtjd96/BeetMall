@@ -381,7 +381,7 @@ $('#thumbimg').on('change',function(){
 		});
 //못난이 할인 default 
 		if($('#saleb').val() != '1' || $('#saleb').val()==' '){
-			$('#saleb').val('0');
+			$('#saleb').val(0);
 		}
 //국내산, 수입산
 		$('#import').on('click',function(){
@@ -451,8 +451,8 @@ $('#thumbimg').on('change',function(){
 		});// 옵션 선택 end
 		
 // 못난이할인
-	 	if($('#saleb').val()!='1'){
-	 		$('$saleb').val() =='0';
+	 	if($('#saleb').val()!= 1){
+	 		$('$saleb').val() == 0 ;
 	 		console.log('못난이할인 noncheck saleb value -> ',$('$saleb').val());
 	 	}
 

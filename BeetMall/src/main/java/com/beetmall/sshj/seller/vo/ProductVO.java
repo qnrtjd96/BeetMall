@@ -221,47 +221,30 @@ public class ProductVO {
 	}
 	//상품내용
 	// selloption 판매단위
-	public String getSelloption() {
-		this.selloption = selloptionnum + selloptionunit;
-		return selloption;
-	}
-	public void setSelloption(String selloption) {
-		this.selloption = selloption;
-
-		//옵션 숫자
-		String[] numArr = selloption.split("[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]");
-		selloptionnum = numArr[0];
-	
-		//옵션 단위
-		String[] unitArr = selloption.split("[0-9]");
-		selloptionunit = unitArr[1];
-	
+		public String getSelloption() {
+			this.selloption = selloptionnum + selloptionunit;
+			return selloption;
+		}
+		public void setSelloption(String selloption) {
+			this.selloption = selloption;
+		}
 		
-	}
-	
-	// sellweight 중량/용량
-	public String getSellweight() {
-		this.sellweight = sellweightnum + sellweightunit;
-		return sellweight;
-	}
-	public void setSellweight(String sellweight) {
-		this.sellweight = sellweight;
-
-		//중량/용량 숫자
-		String[] numArr = sellweight.split("[a-z]");
-		sellweightnum  = numArr[0];
-
-		
-		//중량용량 단위
-		String[] unitArr = sellweight.split("[0-9]");
-		sellweightunit = unitArr[1];
-
-	}
+		// sellweight 중량/용량
+		public String getSellweight() {
+			this.sellweight = sellweightnum + sellweightunit;
+			return sellweight;
+		}
+		public void setSellweight(String sellweight) {
+			this.sellweight = sellweight;
+		}
+		//상품내용 숫자+단위
 	//상품내용 숫자+단위
 	public String getSelloptionnum() { 
+		System.out.println("selloptionnum5555-->"+selloptionnum);
 		return selloptionnum;
 	}
 	public void setSelloptionnum(String selloptionnum) {
+		System.out.println("selloptionnum-6666->"+selloptionnum);
 		this.selloptionnum = selloptionnum;
 		
 	}
