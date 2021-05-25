@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.beetmall.sshj.custom.dao.HomeDAO;
 import com.beetmall.sshj.custom.vo.HomeVO;
+import com.beetmall.sshj.custom.vo.PopupVO;
 import com.beetmall.sshj.custom.vo.RecipeVO;
 
 @Service
@@ -28,6 +29,11 @@ public class HomeServiceImp implements HomeService {
 	@Override
 	public List<RecipeVO> homerecipe(int recipeposition) {
 		return homedao.homerecipe(recipeposition);
+	}
+
+	@Override
+	public PopupVO popupselect() {
+		return homedao.popupselect();
 	}
 
 }
