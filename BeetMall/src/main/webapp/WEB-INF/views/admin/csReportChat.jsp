@@ -304,7 +304,10 @@
 	}
 </style>
 <script>
-	
+	function pagelist(pagenum){
+		var lin = "csReportChat?pageNum="+pagenum;
+		location.href=lin;
+	}
 	$(function(){
 		function reportPrev(){
 			alert('실행됨');
@@ -456,40 +459,42 @@
 			</c:forEach>
 			</div>
 		</div>	 
-		<div class="page_wrap">
+		<div class="page_wrap">	
 			<div class="page_nation">
-			   <a class="arrow pprev" href="<%=request.getContextPath()%>/img/kpage_pprev.png"></a>
-			   <a class="arrow prev" href="#"></a>
-			   <a href="#" class="active">1</a>
-			   <a href="#">2</a>
-			   <a href="#">3</a>
-			   <a href="#">4</a>
-			   <a href="#">5</a>
-			   <a href="#">6</a>
-			   <a href="#">7</a>
-			   <a href="#">8</a>
-			   <a href="#">9</a>
-			   <a href="#">10</a>
-			   <a class="arrow next" href="#"></a>
-			   <a class="arrow nnext" href="#"></a>
+			   <c:if test="${pageVO.pageNum>1}"><!-- 이전페이지가 있을때 -->
+			   		<a class="arrow prev" href="javascript:pagelist(${pageVO.pageNum-1})"></a>
+			   </c:if>
+			   <!-- 페이지 번호                   1                                    5                     -->
+	           <c:forEach var="p" begin="${pageVO.startPageNum}" step="1" end="${pageVO.startPageNum + pageVO.onePageNum-1}">
+	              <c:if test="${p<=pageVO.totalPage}">
+	                 <c:if test="${p==pageVO.pageNum }"> <!-- 현재페이지일때 실행 -->
+	                    <a class="active">${p}</a>
+	                 </c:if>   
+	                 <c:if test="${p!=pageVO.pageNum}"> <!-- 현재페이지가 아닐때 실행 -->
+	                    <a href="javascript:pagelist(${p})">${p}</a>
+	                 </c:if>
+	              </c:if>
+	           </c:forEach>
+	           <c:if test="${pageVO.pageNum < pageVO.totalPage}">
+	              <a class="arrow next" href="javascript:pagelist(${pageVO.pageNum+1})"></a>
+	           </c:if>
 			</div>
+			
 		 </div> 
 		 <div>
-			<form method="get" class="searchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
-				 <select name="searchKey">
-					<option value="subject" selected>제목</option>
-	   				<option value="no">공지번호</option> 
-	   				<option value="who">대상</option> 
-	   				<option value="writedate">공지일</option> 
-				</select>			
-				<input type="text" name="searchWord" id="searchWord"/>
-				<input type="submit" value="검색"/> 
+			<form method="get" class="searchFrm" action="csReportChat"> 
+				<select name="searchKey">
+					<option value="roomcode" selected>채팅방번호</option>
+					<option value="creator">생성자</option> 
+					<option value="receiver">참여자</option> 
+				</select> <input type="text" name="searchWord" id="searchWord" /> 
+				<input type="submit" value="검색" />
 			</form>
 			
 		</div>  
 	</div>
 		<!-- 신고된 채팅 보기 모달창 -->
-		<div id="modal">
+		<div id="modal" style="display:none;">
 			<select name="reportChoice"> 
 				<option value="선택" selected>선택</option>
 		   		<option value="dlkfjhbu">dlkfjhbu</option>

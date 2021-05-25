@@ -49,14 +49,18 @@ public class admin_sellerController {
 			int selType = 2; // 판매자회원
 			pageVO.setUserType(2); // 판매자회원만 조회할거라서 2;
 			String pageNumStr = req.getParameter("pageNum");
+			//검색어, 검색키
+			String searchKey = req.getParameter("searchKey");
 			
+			pageVO.setSearchKey(searchKey);
+			pageVO.setSearchWord(req.getParameter("searchWord"));
+			System.out.println("getSearchKey>>>>>"+pageVO.getSearchKey());
+			System.out.println("getSearchWord>>>>>"+pageVO.getSearchWord());
 			if(pageNumStr == null) {
 				pageVO.setPageNum(1);
 			}else if(pageNumStr != null) {
 				pageVO.setPageNum(Integer.parseInt(pageNumStr));
 			}
-			
-			
 			//pageVO.setTotalRecord();
 			if(session.getAttribute("logType")!=null) {
 				logType = (int)session.getAttribute("logType");
@@ -64,7 +68,7 @@ public class admin_sellerController {
 				logType = 0;
 			}
 			logType=3;
-			int re = memberservice.memberCountSeller(logType,  selType);
+			int re = memberservice.memberCountSeller(pageVO);
 			pageVO.setTotalRecord(re);
 			System.out.println("re="+re);
 			mav.addObject("list", memberservice.memberselectSellerAll(pageVO));
@@ -82,7 +86,13 @@ public class admin_sellerController {
 			int selType = 5; // 탈퇴한 판매자회원
 			pageVO.setUserType(5); // 탈퇴한 판매자회원만 조회할거라서 5;
 			String pageNumStr = req.getParameter("pageNum");
+			//검색어, 검색키
+			String searchKey = req.getParameter("searchKey");
 			
+			pageVO.setSearchKey(searchKey);
+			pageVO.setSearchWord(req.getParameter("searchWord"));
+			System.out.println("getSearchKey>>>>>"+pageVO.getSearchKey());
+			System.out.println("getSearchWord>>>>>"+pageVO.getSearchWord());
 			if(pageNumStr == null) {
 				pageVO.setPageNum(1);
 			}else if(pageNumStr != null) {
@@ -94,7 +104,7 @@ public class admin_sellerController {
 			}else {
 				logType = 0;
 			}
-			int re = memberservice.memberCountSeller(logType,  selType);
+			int re = memberservice.memberCountSeller(pageVO);
 			pageVO.setTotalRecord(re);
 			
 			mav.addObject("list", memberservice.memberselectSeller(pageVO));
@@ -110,13 +120,19 @@ public class admin_sellerController {
 			int selType = 2; // 정지된 판매자회원
 			pageVO.setUserType(2); // 정지된 판매자회원만 조회할거라서 2;
 			String pageNumStr = req.getParameter("pageNum");
+			//검색어, 검색키
+			String searchKey = req.getParameter("searchKey");
 			
+			pageVO.setSearchKey(searchKey);
+			pageVO.setSearchWord(req.getParameter("searchWord"));
+			System.out.println("getSearchKey>>>>>"+pageVO.getSearchKey());
+			System.out.println("getSearchWord>>>>>"+pageVO.getSearchWord());
 			if(pageNumStr == null) {
 				pageVO.setPageNum(1);
 			}else if(pageNumStr != null) {
 				pageVO.setPageNum(Integer.parseInt(pageNumStr));
 			}
-			int re = memberservice.reportPageNum(selType);
+			int re = memberservice.reportPageNum(pageVO);
 			pageVO.setTotalRecord(re);
 			
 			mav.addObject("list", memberservice.reportselect(pageVO));

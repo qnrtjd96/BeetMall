@@ -194,16 +194,14 @@
 			</div>
 		 </div>
 		 <div>
-			<form method="get" class="searchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
+			<form method="get" class="searchFrm" action="customerLeaveList"> 
 				<select name="searchKey">
-					<option value="username" selected>이름</option>
-	   				<option value="userid">아이디</option> 
-	   				<option value="useremail">이메일</option> 
-	   				<option value="useraddr">주소</option> 
-				</select>			
-				<input type="text" name="searchWord" id="searchWord"/>
-				<input type="submit" value="검색"/> 
-			</form> 
+					<option value="userid" selected>아이디</option>
+					<option value="useremail">이메일</option> 
+					<option value="username">이름</option> 
+				</select> <input type="text" name="searchWord" id="searchWord" /> 
+				<input type="submit" value="검색" />
+			</form>
 		</div>  
 	</div>
 </div>
