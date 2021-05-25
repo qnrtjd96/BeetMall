@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beetmall.sshj.admin.dao.Admin_FaqDAO">
+	<select id="getList" resultType="com.beetmall.sshj.admin.vo.Admin_FaqVO">
+		select * from
+		(select * from 
+		(select faqnum, faqcate, faqtitle, faqoption from faq order by faqnum desc) 
+		where rownum <![CDATA[ <= ]]> ${pageNum*onePageRecord}
+       	order by faqnum asc )
+		<if test="#{pageNum} == #{totalPage}">
+        	where rownum <![CDATA[ <= ]]> ${lastPageRecord} 
+       	</if>
+       	<if test="#{pageNum} != #{totalPage}">
+			where rownum <![CDATA[ <= ]]> ${onePageRecord}
+		</if> 
+       	
+  <!--      	<if test="selectKey != null">
+			and userid like '%'||#{searchTxt}||'%'
+		</if>
+		<if test="selectKey == null">
+			and userid like '%'||#{searchTxt}||'%'
+		</if> -->
+		
+       	
+       	order by faqnum desc
+	</select>
+	
+	<select id="getLength" resultType="int">
+		select count(faqnum) from faq 
+	</select>
+</mapper>
