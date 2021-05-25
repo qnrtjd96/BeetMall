@@ -8,7 +8,6 @@
 
 <!-- css -->
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/sshj_admin_2.css" type="text/css">
-<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/xstyle_farm.css">
 <style>
 #topBar>h5 {
 	padding-left: 240px;
@@ -20,7 +19,7 @@
 }
 
 #contentBox {
-	height: 1580px;
+	height: 1680px;
 	top: 30px;
 }
 
@@ -127,7 +126,7 @@
 	position: relative;
 	top: -320px;
 	border-radius: 10px;
-	height: 800px;
+	height: 900px;
 }
 
 #farmInfo>h5 {
@@ -166,16 +165,30 @@ hr {
 }
 
 /* 농장 소개 */
-
-#farm_contact>div:nth-child(1),#farm_repMenu>div:nth-child(2){
+#info_container{
+	padding: 0 100px;
+	margin: 0 important;
+}
+#profile_box{
+	width: 90%;
+}
+#farm_info>div,#farm_contact>div:nth-child(1),#farm_repMenu>div:nth-child(2){
 	width: 150px;
 	font-size: 20px;
 	font-family: 나눔고딕;
 	font-weight: bold;
 }
 
+#farm_info{
+	margin-bottom: 20px;
+	width: 90%;
+}
+
+#farm_contact{
+	width: 90%;
+}
 #farm_info textarea{
-	width: 100%;
+	width: 80%;
 	height: 100px;
 }
 
@@ -183,7 +196,7 @@ hr {
 	display: flex;
 }
 #contact_content{
-	width: 90%;
+	width: 80%;
 	border: 1px solid #ddd;
 	padding: 10px;
 }
@@ -560,9 +573,21 @@ function regiaUpdate(num){
 }
 
 function reportPageMove(){
-	location.href="csreportListA?pageNum=1&searchKey=who&searchWord=${sellerData.userid }";
+	location.href="csreportListA?pageNum=1&searchKey=reporteduser&searchWord=${sellerData.userid }";
 }
 
+function productListPageMove(){
+	location.href="productListA?pageNum=1&searchKey=b.sellername&searchWord=${sellerData.username }";
+	
+}
+
+function backPage(){
+	window.history.back();
+}
+
+function editPage(){
+	location.href="boardCustomerInfoEdit?userid=${sellerData.userid}&prevPageNum=1"
+}
 </script>
 <%@ include file="/inc/top.jspf"%>
 <div id="topBarContainer">
@@ -628,9 +653,9 @@ function reportPageMove(){
 					<li><div>${sellerData.joindate }</div></li>
 				</ul>
 				<div id="infoBtns">
-					<button class="success" value="" name="" id="back">뒤로</button>
-					<button class="success" value="" name="" id=" ">판매 상품 보기</button>
-					<button class="success" value="" name="" id=" e">수정</button>
+					<button class="success" onclick="javascript:backPage()">뒤로</button>
+					<button class="success" onclick="javascript:productListPageMove()">판매 상품 보기</button>
+					<button class="success" onclick="javascript:editPage()">수정</button>
 				</div>
 			</div>
 			<div id="reportBox">
@@ -669,182 +694,188 @@ function reportPageMove(){
 			</div>
 			<!-- info 컨테이너 묶기 width:700px 고정 -->
 			<div id="sellerEdit">
-				<div id="info_container" style="margin:0 100px;">
-					<div id="profile_box">
-						<input type="hidden" name="farmprofile" value="${sellerData.farmprofile}" >
-						<input type="file" id="farmprofile" name="filename" style="display: none;" onchange="javascript:check(this)" accept="image/png, image/jpg, image/jpeg, image/gif"/> 
-						<a href="javascript:selectImg(this)"><img id="nowImg" src="<%=request.getContextPath()%>/resources/img/${sellerData.farmprofile}" /></a><br /> 
-						*프로필 이미지 클릭시 파일첨부<br /> <input type="text" id="farmname" name="farmname" value="${sellerData.farmname }" style="width: 100px; height: 25px" />
-						<div id="profileData">
-							방문 : ${sellerData.farmvisitor}명 | 농장 즐겨찾기 : ${selectFavorite}명
+				<form action="adminEditFarmUpdate" method="post" enctype="multipart/form-data">
+					<input type="hidden" name="userid" value="${sellerData.userid }"/>
+					<input type="hidden" name="storenum" value="${sellerData.storenum}" />
+					<div id="info_container">
+						<div id="profile_box">
+							<input type="hidden" name="farmprofile" value="${sellerData.farmprofile}" >
+							<input type="file" id="farmprofile" name="filename" style="display: none;" onchange="javascript:check(this)" accept="image/png, image/jpg, image/jpeg, image/gif"/> 
+							<a href="javascript:selectImg(this)"><img id="nowImg" src="<%=request.getContextPath()%>/resources/img/${sellerData.farmprofile}" /></a><br /> 
+							*프로필 이미지 클릭시 파일첨부<br /> <input type="text" id="farmname" name="farmname" value="${sellerData.farmname }" style="width: 100px; height: 25px" />
+							<div id="profileData">
+								방문 : ${sellerData.farmvisitor}명 | 농장 즐겨찾기 : ${selectFavorite}명
+							</div>
 						</div>
-					</div>
-					<br>
-					<br>
-					<!-- profile_box 종료 -->
-					<hr />
-					<!-- farm_info 종료 -->
-					<div id="farm_contact">
-						<div>CONTACT</div>
-						<div id="contact_content">
-							<b>스토어 정보</b>
-							<div>
-								<span>상호명</span><input type="text" id="storename" name="storename" value="${sellerData.storename }" style="width: 400px" />
-							</div>
-							<div>
-								<span>대표자</span><input type="text" id="sellername" name="sellername" value="${sellerData.sellername}" style="width: 400px" />
-							</div>
-							<div>
-								<span>사업자등록번호</span>
-								<input type="text" id="sellerreginum" name="sellerreginum" value="${sellerData.sellerreginum }">
-							</div>
-							<div>
-								<span>사업장 소재지</span>
+						<br>
+						<br>
+						<!-- profile_box 종료 -->
+						<div id="farm_info">
+							<div>INFO</div>
+							<textarea name="farmintro">${sellerData.farmintro }</textarea>
+						</div>
+						<!-- farm_info 종료 -->
+						<div id="farm_contact">
+							<div>CONTACT</div>
+							<div id="contact_content">
+								<b>스토어 정보</b>
 								<div>
-									<input type="button" id="sellerzipSearch" value="우편번호 검색" style="margin-right: 5px;" class="btn" /> <input type="text" name="storezipcode" id="storezipcode" readonly style="width: 100px;" value="${sellerData.storezipcode }" /> <input type="text" name="storeaddr" id="storeaddr" style="margin-top: 5px; width: 302px;" readonly placeholder="우편 번호 검색을 통해 입력해주세요" value="${sellerData.storeaddr }" /> <input type="text" name="storedetailaddr" id="storedetailaddr" style="margin-top: 5px; width: 540px;" placeholder="상세 주소 입력" value="${sellerData.storedetailaddr }" />
+									<span>상호명</span><input type="text" id="storename" name="storename" value="${sellerData.storename }" style="width: 400px" />
+								</div>
+								<div>
+									<span>대표자</span><input type="text" id="sellername" name="sellername" value="${sellerData.sellername}" style="width: 400px" />
+								</div>
+								<div>
+									<span>사업자등록번호</span>
+									<input type="text" id="sellerreginum" name="sellerreginum" value="${sellerData.sellerreginum }">
+								</div>
+								<div>
+									<span>사업장 소재지</span>
+									<div>
+										<input type="button" id="sellerzipSearch" value="우편번호 검색" style="margin-right: 5px;" class="btn" /> <input type="text" name="storezipcode" id="storezipcode" readonly style="width: 100px;" value="${sellerData.storezipcode }" /> <input type="text" name="storeaddr" id="storeaddr" style="margin-top: 5px; width: 302px;" readonly placeholder="우편 번호 검색을 통해 입력해주세요" value="${sellerData.storeaddr }" /> <input type="text" name="storedetailaddr" id="storedetailaddr" style="margin-top: 5px; width: 540px;" placeholder="상세 주소 입력" value="${sellerData.storedetailaddr }" />
+									</div>
+								</div>
+								<div>
+									<span class="spanstar">은행</span> <select name="bank" id="bank">
+										<option value="index" disabled>은행명선택</option>
+	
+										<c:if test="${sellerData.bank=='국민' }">
+											<option value="국민" selected>국민</option>
+										</c:if>
+										<c:if test="${sellerData.bank!='국민' }">
+											<option value="국민">국민</option>
+										</c:if>
+	
+										<c:if test="${sellerData.bank=='비씨' }">
+											<option value="비씨" selected>비씨</option>
+										</c:if>
+										<c:if test="${sellerData.bank!='비씨' }">
+											<option value="비씨">비씨</option>
+										</c:if>
+	
+										<c:if test="${sellerData.bank=='신한' }">
+											<option value="신한" selected>신한</option>
+										</c:if>
+										<c:if test="${sellerData.bank!='신한' }">
+											<option value="신한">신한</option>
+										</c:if>
+	
+										<c:if test="${sellerData.bank=='현대' }">
+											<option value="현대" selected>현대</option>
+										</c:if>
+										<c:if test="${sellerData.bank!='현대' }">
+											<option value="현대">현대</option>
+										</c:if>
+	
+										<c:if test="${sellerData.bank=='삼성' }">
+											<option value="삼성" selected>삼성</option>
+										</c:if>
+										<c:if test="${sellerData.bank!='삼성' }">
+											<option value="삼성">삼성</option>
+										</c:if>
+	
+										<c:if test="${sellerData.bank=='롯데' }">
+											<option value="롯데" selected>롯데</option>
+										</c:if>
+										<c:if test="${sellerData.bank!='롯데' }">
+											<option value="롯데">롯데</option>
+										</c:if>
+	
+										<c:if test="${sellerData.bank=='외환' }">
+											<option value="외환" selected>외환</option>
+										</c:if>
+										<c:if test="${sellerData.bank!='외환' }">
+											<option value="외환">외환</option>
+										</c:if>
+	
+										<c:if test="${sellerData.bank=='NH' }">
+											<option value="NH" selected>NH</option>
+										</c:if>
+										<c:if test="${sellerData.bank!='NH' }">
+											<option value="NH">NH</option>
+										</c:if>
+	
+										<c:if test="${sellerData.bank=='하나' }">
+											<option value="하나" selected>하나</option>
+										</c:if>
+										<c:if test="${sellerData.bank!='하나' }">
+											<option value="하나">하나</option>
+										</c:if>
+	
+										<c:if test="${sellerData.bank=='우리' }">
+											<option value="우리" selected>우리</option>
+										</c:if>
+										<c:if test="${sellerData.bank!='우리' }">
+											<option value="우리">우리</option>
+										</c:if>
+	
+										<c:if test="${sellerData.bank=='광주' }">
+											<option value="광주" selected>광주</option>
+										</c:if>
+										<c:if test="${sellerData.bank!='광주' }">
+											<option value="광주">광주</option>
+										</c:if>
+	
+										<c:if test="${sellerData.bank=='수협' }">
+											<option value="수협" selected>수협</option>
+										</c:if>
+										<c:if test="${sellerData.bank!='수협' }">
+											<option value="수협">수협</option>
+										</c:if>
+	
+										<c:if test="${sellerData.bank=='씨티' }">
+											<option value="씨티" selected>씨티</option>
+										</c:if>
+										<c:if test="${sellerData.bank!='씨티' }">
+											<option value="씨티">씨티</option>
+										</c:if>
+	
+										<c:if test="${sellerData.bank=='전북' }">
+											<option value="전북" selected>전북</option>
+										</c:if>
+										<c:if test="${sellerData.bank!='전북' }">
+											<option value="전북">전북</option>
+										</c:if>
+	
+										<c:if test="${sellerData.bank=='제주' }">
+											<option value="제주" selected>제주</option>
+										</c:if>
+										<c:if test="${sellerData.bank!='제주' }">
+											<option value="제주">제주</option>
+										</c:if>
+	
+										<c:if test="${sellerData.bank=='카카오뱅크' }">
+											<option value="카카오뱅크" selected>카카오뱅크</option>
+										</c:if>
+										<c:if test="${sellerData.bank!='카카오뱅크' }">
+											<option value="카카오뱅크">카카오뱅크</option>
+										</c:if>
+	
+										<c:if test="${sellerData.bank=='케이뱅크' }">
+											<option value="케이뱅크" selected>케이뱅크</option>
+										</c:if>
+										<c:if test="${sellerData.bank!='케이뱅크' }">
+											<option value="케이뱅크">케이뱅크</option>
+										</c:if>
+									</select>
+								</div>
+								<div>
+									<span class="spanstar">계좌번호</span><input type="text" name="bankaccount" id="bankaccount" value="${sellerData.bankaccount }" />
+								</div>
+								<div>
+									<span class="spanstar">예금주</span><input type="text" name="bankname" id="bankname" value="${sellerData.bankname }" />
+								</div>
+								<div>
+									<span class="spanstar">이메일</span><input type="text" name="storeemail" id="storeemail" style="margin-right: 5px;" value="${sellerData.storeemail }" />
 								</div>
 							</div>
-							<div>
-								<span class="spanstar">은행</span> <select name="bank" id="bank">
-									<option value="index" disabled>은행명선택</option>
-
-									<c:if test="${sellerData.bank=='국민' }">
-										<option value="국민" selected>국민</option>
-									</c:if>
-									<c:if test="${sellerData.bank!='국민' }">
-										<option value="국민">국민</option>
-									</c:if>
-
-									<c:if test="${sellerData.bank=='비씨' }">
-										<option value="비씨" selected>비씨</option>
-									</c:if>
-									<c:if test="${sellerData.bank!='비씨' }">
-										<option value="비씨">비씨</option>
-									</c:if>
-
-									<c:if test="${sellerData.bank=='신한' }">
-										<option value="신한" selected>신한</option>
-									</c:if>
-									<c:if test="${sellerData.bank!='신한' }">
-										<option value="신한">신한</option>
-									</c:if>
-
-									<c:if test="${sellerData.bank=='현대' }">
-										<option value="현대" selected>현대</option>
-									</c:if>
-									<c:if test="${sellerData.bank!='현대' }">
-										<option value="현대">현대</option>
-									</c:if>
-
-									<c:if test="${sellerData.bank=='삼성' }">
-										<option value="삼성" selected>삼성</option>
-									</c:if>
-									<c:if test="${sellerData.bank!='삼성' }">
-										<option value="삼성">삼성</option>
-									</c:if>
-
-									<c:if test="${sellerData.bank=='롯데' }">
-										<option value="롯데" selected>롯데</option>
-									</c:if>
-									<c:if test="${sellerData.bank!='롯데' }">
-										<option value="롯데">롯데</option>
-									</c:if>
-
-									<c:if test="${sellerData.bank=='외환' }">
-										<option value="외환" selected>외환</option>
-									</c:if>
-									<c:if test="${sellerData.bank!='외환' }">
-										<option value="외환">외환</option>
-									</c:if>
-
-									<c:if test="${sellerData.bank=='NH' }">
-										<option value="NH" selected>NH</option>
-									</c:if>
-									<c:if test="${sellerData.bank!='NH' }">
-										<option value="NH">NH</option>
-									</c:if>
-
-									<c:if test="${sellerData.bank=='하나' }">
-										<option value="하나" selected>하나</option>
-									</c:if>
-									<c:if test="${sellerData.bank!='하나' }">
-										<option value="하나">하나</option>
-									</c:if>
-
-									<c:if test="${sellerData.bank=='우리' }">
-										<option value="우리" selected>우리</option>
-									</c:if>
-									<c:if test="${sellerData.bank!='우리' }">
-										<option value="우리">우리</option>
-									</c:if>
-
-									<c:if test="${sellerData.bank=='광주' }">
-										<option value="광주" selected>광주</option>
-									</c:if>
-									<c:if test="${sellerData.bank!='광주' }">
-										<option value="광주">광주</option>
-									</c:if>
-
-									<c:if test="${sellerData.bank=='수협' }">
-										<option value="수협" selected>수협</option>
-									</c:if>
-									<c:if test="${sellerData.bank!='수협' }">
-										<option value="수협">수협</option>
-									</c:if>
-
-									<c:if test="${sellerData.bank=='씨티' }">
-										<option value="씨티" selected>씨티</option>
-									</c:if>
-									<c:if test="${sellerData.bank!='씨티' }">
-										<option value="씨티">씨티</option>
-									</c:if>
-
-									<c:if test="${sellerData.bank=='전북' }">
-										<option value="전북" selected>전북</option>
-									</c:if>
-									<c:if test="${sellerData.bank!='전북' }">
-										<option value="전북">전북</option>
-									</c:if>
-
-									<c:if test="${sellerData.bank=='제주' }">
-										<option value="제주" selected>제주</option>
-									</c:if>
-									<c:if test="${sellerData.bank!='제주' }">
-										<option value="제주">제주</option>
-									</c:if>
-
-									<c:if test="${sellerData.bank=='카카오뱅크' }">
-										<option value="카카오뱅크" selected>카카오뱅크</option>
-									</c:if>
-									<c:if test="${sellerData.bank!='카카오뱅크' }">
-										<option value="카카오뱅크">카카오뱅크</option>
-									</c:if>
-
-									<c:if test="${sellerData.bank=='케이뱅크' }">
-										<option value="케이뱅크" selected>케이뱅크</option>
-									</c:if>
-									<c:if test="${sellerData.bank!='케이뱅크' }">
-										<option value="케이뱅크">케이뱅크</option>
-									</c:if>
-								</select>
-							</div>
-							<div>
-								<span class="spanstar">계좌번호</span><input type="text" name="bankaccount" id="bankaccount" value="${sellerData.bankaccount }" />
-							</div>
-							<div>
-								<span class="spanstar">예금주</span><input type="text" name="bankname" id="bankname" value="${sellerData.bankname }" />
-							</div>
-							<div>
-								<span class="spanstar">이메일</span><input type="text" name="storeemail" id="storeemail" style="margin-right: 5px;" value="${sellerData.storeemail }" />
-							</div>
+						</div>
+	
+						<div id="bottommm" style="margin-top:50px; position:static;">
+							<input type="submit" value="수정하기" class="btn write_btn" id="write_btn"/>	
 						</div>
 					</div>
-
-					<div id="bottommm" style="margin-top:50px; position:static;">
-						<input type="submit" value="수정하기" class="btn write_btn" id="write_btn"/>	
-						<input type="button" value="취소" class="btn write_btn" id="cancel_btn" onClick="location.href='<%=request.getContextPath() %>/recipeView'"/>
-					</div>
-				</div>
+				</form>
 			</div>
 			<!-- info_container 종료 -->
 			

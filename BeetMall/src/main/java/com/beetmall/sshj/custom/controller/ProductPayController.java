@@ -45,6 +45,12 @@ public class ProductPayController {
 		int deliveryoption = Integer.parseInt(req.getParameter("deliveryoption")); 
 		int optionnum = Integer.parseInt(req.getParameter("optionnum"));
 		int totalCount = Integer.parseInt(req.getParameter("totalCount"));
+		int jangba=0;
+		if(req.getParameter("jangba")!=null) {
+			jangba = Integer.parseInt(req.getParameter("jangba"));
+		}
+		
+		System.out.println("jangba = " + jangba);
 		if(totalCount==2) {
 			totalCount=1;
 		}
@@ -69,6 +75,7 @@ public class ProductPayController {
 		mav.addObject("vo5", productPayVO.getDeliveryoption());
 		mav.addObject("vo6", productPayVO.getOptionnum());
 		mav.addObject("vo7", productPayVO.getOrderquantity());
+		mav.addObject("vo8", jangba);
 		
 		mav.setViewName("custom/category/productPay");
 	
@@ -142,6 +149,7 @@ public class ProductPayController {
 			pro.setRealpayment(Integer.parseInt(req.getParameter("realpayment")));
 			pro.setOptionnum(Integer.parseInt(req.getParameter("optionnum")));
 			
+			int jangba = Integer.parseInt(req.getParameter("jangba"));
 			//order테이블에 넣어주기
 			productPayService.insertordertbl(pro);
 			
@@ -171,8 +179,14 @@ public class ProductPayController {
 			
 			
 			pro.setOrderprice(orderprice2);
+			
 			//적립금 적립하는거 테이블에 넣어준다.
 			productPayService.savePoint(pro);
+			
+			//장바구니삭제
+			if(jangba==1) {
+				productPayService.wishDelete(pro);
+			}
 			
 			//정상구현되면 commit 실행
 			transsactionManager.commit(status);

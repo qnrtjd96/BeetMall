@@ -16,6 +16,9 @@ public class adminkPageSearchVO {
 	private String searchKey;//검색키
 	private String searchWord;//검색어
 	
+// category 카테고리 정보
+	private String category; //카테고리 정렬할때 쓰는것
+	
 	public int getPageNum() {
 		return pageNum;
 	}
@@ -85,4 +88,11 @@ public class adminkPageSearchVO {
 	public void setSearchWord(String searchWord) {
 		this.searchWord = searchWord;
 	}
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	
 }

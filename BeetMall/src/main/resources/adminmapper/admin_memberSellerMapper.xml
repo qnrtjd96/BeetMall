@@ -44,4 +44,16 @@
 		update seller set regiapproval = 3 where userid= #{userid}
 	</update>
 	
+	<update id="farmUpdate" parameterType="com.beetmall.sshj.admin.vo.Admin_MemberSellerVO">
+        update farm set farmname = #{farmname}, farmintro = #{farmintro}, farmprofile = #{farmprofile}
+                   where storenum = ${storenum}
+	</update>
+	<update id="sellerUpdate" parameterType="com.beetmall.sshj.admin.vo.Admin_MemberSellerVO">
+		update seller set storename = #{storename}, sellername = #{sellername},
+                    bank = #{bank}, bankaccount = #{bankaccount}, bankname = #{bankname},
+                    storeemail = #{storeemail}, storezipcode =${storezipcode}, 
+                    storeaddr = #{storeaddr}, storedetailaddr= #{storedetailaddr}
+                    where userid = #{userid}
+	</update>
+	
 </mapper>

@@ -49,5 +49,17 @@ public class Admin_MemberSellerServiceImp implements Admin_MemberSellerService{
 		return dao.regiapprovalNoUpdate(userid);
 	}
 
+	@Override
+	public int farmUpdate(Admin_MemberSellerVO vo) {
+		// TODO Auto-generated method stub
+		return dao.farmUpdate(vo);
+	}
+
+	@Override
+	public int sellerUpdate(Admin_MemberSellerVO vo) {
+		// TODO Auto-generated method stub
+		return dao.sellerUpdate(vo);
+	}
+
 
 }

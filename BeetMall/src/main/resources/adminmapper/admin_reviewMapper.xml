@@ -3,7 +3,7 @@
   	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.beetmall.sshj.admin.dao.AdminReviewDAO">
- 	<select id="reviewListA" resultType="com.beetmall.sshj.admin.vo.AdminReviewVO" parameterType="com.beetmall.sshj.admin.vo.adminkPageSearchVO">
+ 	<select id="reviewListABC" resultType="com.beetmall.sshj.admin.vo.AdminReviewVO" parameterType="com.beetmall.sshj.admin.vo.adminkPageSearchVO">
  		select * from(
 	    	select * from(
 		 		select d.reviewnum, d.reviewcontent, d.reviewanswer, d.userid as reviewwriter, to_char(d.reviewwritedate, 'YYYY/MM/DD') reviewwritedate, c.productname, c.mcatename, c.userid seller
@@ -15,6 +15,11 @@
 		                            on a.mcatenum=b.mcatenum) c
 		                on d.productnum=c.productnum
 		                where 1=1
+		                <choose>
+							<when test = 'searchWord!=null and searchKey!=null'>
+								and ${searchKey} like '%${searchWord}%'
+							</when>
+						</choose>
 		                order by reviewnum desc)
 		          where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord} order by reviewnum)
 			where <![CDATA[rownum<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
@@ -30,6 +35,13 @@
                             join (select mcatenum, mcatename 
                                    from mcategory) b
                             on a.mcatenum=b.mcatenum) c
-                on d.productnum=c.productnum)
+                on d.productnum=c.productnum
+                where 1=1
+                <choose>
+					<when test = 'searchWord!=null and searchKey!=null'>
+						and ${searchKey} like '%${searchWord}%'
+					</when>
+				</choose>
+				)
  	</select>
 </mapper>

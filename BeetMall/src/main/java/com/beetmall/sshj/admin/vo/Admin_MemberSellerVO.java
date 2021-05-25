@@ -31,16 +31,28 @@ public class Admin_MemberSellerVO  {
 	private String birthday;
 	private String joindate;
 	private int reportcount;
+	private int reportsum;
 	private int reportdate;
 	private int productnum;
 	private long productprice;
 	private long saleprice;
-	
+	private String farmintro;
 	private String farmprofile;
 	private String farmname;
+
 	
-	
-	
+	public String getFarmintro() {
+		return farmintro;
+	}
+	public void setFarmintro(String farmintro) {
+		this.farmintro = farmintro;
+	}
+	public int getReportsum() {
+		return reportsum;
+	}
+	public void setReportsum(int reportsum) {
+		this.reportsum = reportsum;
+	}
 	public String getFarmname() {
 		return farmname;
 	}

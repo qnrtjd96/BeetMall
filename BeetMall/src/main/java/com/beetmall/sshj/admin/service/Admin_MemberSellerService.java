@@ -17,4 +17,9 @@ public interface Admin_MemberSellerService {
 	public Integer regiapprovalOkUpdate(String userid);
 	// 사업자 등록 인증 반려
 	public Integer regiapprovalNoUpdate(String userid);
+	
+	// 농장 업데이트
+	public int farmUpdate(Admin_MemberSellerVO vo);
+	// 사업자 업데이트
+	public int sellerUpdate(Admin_MemberSellerVO vo);
 }

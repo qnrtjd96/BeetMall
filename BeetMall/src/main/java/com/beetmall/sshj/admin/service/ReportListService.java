@@ -11,4 +11,16 @@ public interface ReportListService {
 
 	public List<ReportListVO> csreportList(adminkPageSearchVO pageVO);
 
+	public ReportListVO csreportSelect(int reportnum);
+
+	public List<ReportListVO> modalSelect(String reporteduser);
+
+	public List<ReportListVO> modalSelect2(String reporteduser);
+
+	public int memberstop(int stopdate, String userid);
+
+	public int memberTableStop(String userid);
+
+	public int sysdateInsert(int reportnum);
+
 }
