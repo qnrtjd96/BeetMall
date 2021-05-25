@@ -138,8 +138,7 @@ public class admin_sellerController {
 		@RequestMapping("/sellerInfoEditA")
 		public ModelAndView sellerInfoEditA(HttpServletRequest req) {
 			ModelAndView mav = new ModelAndView();
-			//String userid= req.getParameter("userid");
-			String userid= "ghdrlfehd";
+			String userid= req.getParameter("userid");
 			mav.addObject("reportData", service.getReportData(userid));
 			mav.addObject("discountSelect",service.discountSelect(userid));
 			mav.addObject("sellerData",service.getSellerData(userid));
