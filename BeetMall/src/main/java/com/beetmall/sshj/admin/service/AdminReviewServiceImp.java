@@ -23,12 +23,11 @@ public class AdminReviewServiceImp implements AdminReviewService {
 
 	@Override
 	public int reviewListOnetotalRecord(adminkPageSearchVO pageVO) {
-		// TODO Auto-generated method stub
 		return dao.reviewListOnetotalRecord(pageVO);
 	}
 
- 
-	  
-	 
-	  
+	@Override
+	public AdminReviewVO reviewselect(int reviewnum) {
+		return dao.reviewselect(reviewnum);
+	}  
 }

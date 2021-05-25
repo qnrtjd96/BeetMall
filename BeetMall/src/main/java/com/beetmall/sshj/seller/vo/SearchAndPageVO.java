@@ -6,7 +6,8 @@ public class SearchAndPageVO {
 	//검색어와 검색키
 	private String searchKey;
 	private String searchWord;
-	
+	private String searchid;
+	private String searchnum;
 	//페이지
 	// 총레코드수가 발생하면, 총페이지수를 구하기 가능 -> 총페이지수가 나오면 마지막페이지에 레코드가 몇개 남았는지 확인 -> 그럼 시작페이지알수있음
 	private int pageNum=1;//현재페이지 					초기 세팅해줘야하는 값 3개
@@ -141,6 +142,18 @@ public class SearchAndPageVO {
 	}
 	public void setUserid(String userid) {
 		this.userid = userid;
+	}
+	public String getSearchid() {
+		return searchid;
+	}
+	public void setSearchid(String searchid) {
+		this.searchid = searchid;
+	}
+	public String getSearchnum() {
+		return searchnum;
+	}
+	public void setSearchnum(String searchnum) {
+		this.searchnum = searchnum;
 	}
 	
 }

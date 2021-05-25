@@ -88,7 +88,7 @@
      <select id="customWishView" parameterType="com.beetmall.sshj.custom.vo.PageProductVO" resultType="com.beetmall.sshj.custom.vo.ProductViewVO">
     select * from(
 	    select * from(
-		  select distinct nvl(d.saleprice,0)saleprice,w.userid, w.productnum as productnum, w.optionnum,nvl(o.optionname,'')optionname,nvl(o.optionprice,0)optionprice, w.wishnum, w.wishoptionnum, w.wishcode,p.productname, p.productprice,p.deliveryoption, p.thumbimg,p.optionselect, to_char(p.productcontent) as productcontent 
+		  select distinct nvl(d.saleprice,0)saleprice,w.userid, w.productnum as productnum, w.optionnum,nvl(o.optionname,'')optionname,nvl(o.optionprice,0)optionprice, w.wishnum, w.wishoptionnum, w.wishcode as wishcode,p.productname, p.productprice,p.deliveryoption, p.thumbimg,p.optionselect, to_char(p.productcontent) as productcontent 
 				from wish w  
 				left join product p 
 				    on p.productnum = w.productnum 
@@ -97,11 +97,11 @@
 				left join discount d
 				    on w.productnum = d.productnum
 				where w.userid = #{userid}
-				order by w.productnum)
-			 where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord} order by productnum desc)
+				order by w.wishcode)
+			 where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord} order by wishcode desc)
 			 where <![CDATA[rownum<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
         							  <if test="pageNum!=totalPage">${onePageRecord}</if>
-        	order by productnum	asc					  				
+        	order by wishcode asc					  				
      </select>
      
   <!-- 장바구니 삭제 -->

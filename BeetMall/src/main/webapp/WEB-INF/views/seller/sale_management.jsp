@@ -70,14 +70,36 @@
 				},
 				success : function(){
 					alert('주문상태가 변경되었습니다.');
-					location.replace('order_management');
+					location.replace('sale_management');
 				}, error : function(){
 					alert('주문상태 변경이 취소되었습니다.');
 				}
 			}); //ajax end
 		}
 	}// function end
-    	
+ function orderNumSend(){
+		console.log('orderNum 1 ->', $('#orderNumGetTD').text());
+		var url = "sale_management";
+		var ordernum = $('#orderNumGetTD').val();
+	console.log('orderNum 2 ->', ordernum);
+	
+		$.ajax({
+			url:url,
+			type:'POST',
+			traditional:true,
+			data:{
+				ordernum : ordernum
+			}, success :function(){
+				console.log('modal data input success');
+				
+			}, error : { 
+				function(e){
+					console.log("error >>", e.status)
+				}
+			}
+		});	
+	}  	
+
 //검색하기
 	//1. 카테고리 변경
 	$(function(){
@@ -200,7 +222,7 @@
 	<div id="article">
 	<div class="wrapTitle">판매관리</div>
 		<!-- 상단 검색 옵션 : 접수일/ 카테고리/ 주문번호/ 고객ID/ 검색 -->
-		<form>
+		<form action="sale_management" method="get" id="searchForm">
 		<div class="search">
 			<ul class="search_wrap">
 				<li><label for="">주문접수일</label><br/>
@@ -229,14 +251,14 @@
 					<!-- 채소 -->
 				</li>
 				<li><label for="">주문번호</label><br/>
-					<input type="text" size="15" name="" class="search_num" placeholder="주문번호를 입력해주세요."/>
+					<input type="text" size="15" name="searchnum" class="search_num" placeholder="주문번호를 입력해주세요."/>
 				</li>
 				<li><label for="">구매자 ID</label><br/>
-					<input type="text" size="15" name="" class="search_id" placeholder="ID를 입력해주세요."/>
+					<input type="text" size="15" name="searchid" class="search_id" placeholder="ID를 입력해주세요."/>
 				</li>
 				<li>
 					<input type="button" name="" class="save_excel" value="엑셀로 저장" onclick="save_excel()"/>
-					<input type="button" name="" class="search_btn" value="검색"/><br/>				
+					<input type="submit" name="submit" class="search_btn" value="검색"/><br/>				
 				</li>
 			</ul>
 		
@@ -271,6 +293,7 @@
 									<th>주문자명/ID</th>
 									<th>전화번호</th>
 									<th>결제금액</th>
+									<th>주문상태</th>
 									<th>클레임날짜</th>
 									<th>클레임정보</th>
 									<th><input type="checkbox"  id="listAllCheck" checked/></th>
@@ -279,13 +302,14 @@
 						<tbody>
 						<c:forEach var="list" items="${list}">
 							<tr>
-								<td><a href="javascript:modal();">${list.ordernum}</a></td>
+								<td id="orderNumGetTD"><a href="javascript:modal();">${list.ordernum}</a></td>
 								<td>${list.productname}</td>
 								<td>${list.orderquantity}</td>
 								<td>${list.orderdate}</td>
 								<td>${list.userid}<span>/</span>${list.username}</td>
 								<td>${list.userphone}</td>
 								<td><span>${list.orderprice}</span>원 </td>
+								<td><span>${list.orderstatus}</span></td>
 								<td><span>${list.claimdate}</span></td>
 								<td  class="claim"><span>${list.claimstatus}</span></td>
 								<td><input type="checkbox" checked title="${list.ordernum}" value="${list.ordernum}" id="oneOrderCheck" name="oneOrderCheck" class="table_checkbox"/></td>
@@ -352,42 +376,44 @@
 						<th colspan="2">정보</th>
 					</tr>
 				</thead>
-				<tbody>
+					<tbody>
 					<tr class="detail_line1">
 						<td><span class="detail_menu">주문번호</span></td>
-						<td>202104190402</td>
+						<td>${oneList.ordernum}</td>
 						<td><span class="detail_menu">주문일</span></td>
-						<td>21/04/19 16:02</td>
+						<td>${oneList.orderdate}</td>
 					</tr>
 					<tr class="detail_line2">
 						<td><span class="detail_menu">주문상품명</span></td>
-						<td>햅쌀</td>
+						<td>${oneList.productname}</td>
 						<td><span class="detail_menu">결제일</span></td>
-						<td>21/04/19 16:02</td>
+						<td>${orderList.orderdate}</td>
 					</tr>
 					<tr class="detail_line3">
 						<td><span class="detail_menu">수량</span></td>
-						<td><span>1<span>kg</span></td>
+						<td>${oneList.orderquantity}</td>
 						<td><span class="detail_menu">결제금액</span></td>
-						<td>36,000<span class="won">원</span></td>
+						<td>${oneList.orderprice}<span class="won">원</span></td>
 					</tr>
 					<tr class="detail_line4">
-						<td><span class="detail_menu">옵션</span></td>
-						<td>-</td>
-						<td><span class="etail_menu">포인트 사용</span></td>
-						<td>3,000<span class="point">.P</span></td>
+						<td><span class="detail_menu">옵션</span></td><!-- 구매한 옵션의 수량은 어떻게 구하죠? -->
+						<td>${oneList.optionname}<span>|</span>${v.optionprice}</td>
+						<td><span class="detail_menu">포인트 사용</span></td>
+						<td>${oneList.usedpoint}<span class="point">.P</span></td>
 					</tr>
 					<tr class="detail_line5">
 						<td><span class="detail_menu">결제방법</span></td>
-						<td><span>1<span>무통장입금</span></td>
+						<td><span>${oneList.paymentoption}</span></td>
 						<td><span class="detail_menu">할인금액</span></td>
-						<td>1,000<span class="won">원</span></td>
+						<td>${oneList.saleprice}<span class="won">원</span></td>
 					</tr>
 					<tr class="detail_line6">
-						<td colspan="2"></td>
-						<td><span class="detail_menu">실결제금액</span></td>
-						<td>32,000<span class="won">원</span></td>
+						<td><span class="detail_menu">상품실결제금액</span></td>
+						<td>${oneList.realpayment}<span class="won">원</span></td>
+						<td><span class="detail_menu">배송비포함실결제금액</span></td>
+						<td>${oneList.realtotalpayment}<span class="won">원</span></td>
 					</tr>
+			
 				</tbody>
 				<thead class="detail_head2">
 					<tr>
@@ -398,34 +424,35 @@
 				<tbody>
 					<tr class="detail_line7">
 						<td><span class="detail_menu">받는분</span></td>
-						<td>한싱싱</td>
+						<td>${oneList.receiver}</td>
 						<td><span class="detail_menu">받는분 연락처</span></td>
-						<td>010-1234-5678</td>
+						<td>${oneList.receiverphone}</td>
 					</tr>
 					<tr class="detail_line8">
 						<td><span class="detail_menu">배송지</span></td>
-						<td>집</td>
+						<td>(${oneList.deliveryzipcode}) ${oneList.deliveryaddr}, ${oneList.deliverdetailaddr}</td>
 						<td><span class="detail_menu">베송 메모</span></td>
-						<td>부재시 경비실에 맡겨주세요.</td>
+						<td>${oneList.deliverymemo}</td>
 					</tr>
 					<tr class="detail_line10">
 						<td><span class="detail_menu">주문자명</span></td>
-						<td>한싱싱</td>
+						<td>${oneList.username}</td>
 						<td><span class="detail_menu">주문자 연락처</span></td>
-						<td>010-1234-5678</td>
+						<td>${oneList.userphone}</td>
 					</tr>
 					<tr class="detail_line11">
 						<td><span class="detail_menu">주문자 ID</span></td>
-						<td>singsing</td>
+						<td>${oneList.userid}</td>
 						<td><span class="detail_menu">택배사</span></td>
-						<td>대한통운</td>
+						<td>${oneList.deliverycompany}</td>
 					</tr>
 					<tr class="detail_line12">
 						<td><span class="detail_menu">송장번호</span></td>
-						<td>12345678</td>
+						<td>${oneList.invoice}</td>
 						<td><span class="detail_menu">배송비</span></td>
-						<td>무료배송</td>
+						<td>${oneList.deliveryprice}</td>
 					</tr>
+	
 				</tbody>
 				<thead class="detail_head3">
 					<tr>
@@ -435,17 +462,10 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td colspan="2">21/04/19 18:12</td>
-						<td colspan="2">배송준비중</td>
+						<td colspan="2">${oneList.deliverystatus}</td>
+						<td colspan="2">${oneList.deliverydate}</td>		
 					</tr>
-					<tr>
-						<td colspan="2">21/04/19 22:00</td>
-						<td colspan="2">배송출발</td>
-					</tr>
-					<tr>
-						<td colspan="2">21/04/20 15:12</td>
-						<td colspan="2">배송완료</td>
-					</tr>
+					
 					<thead class="detail_head4">
 					<tr>
 						<th colspan="2">클레임 정보</th>
@@ -454,15 +474,15 @@
 					<tbody>
 					<tr class="claim_line">
 						<td colspan="2" class="detail_menu">클레임종류</td>
-						<td colspan="2">반품</td>
+						<td colspan="2">${oneList.claimkind }</td>
 					</tr>
 					<tr>
 						<td colspan="2" class="detail_menu">클레임사유</td>
-						<td colspan="2">전부 다 썩었어요</td>
+						<td colspan="2">${oneList.claimcontent }</td>
 					</tr>
 					<tr>
-						<td colspan="2" >21/04/19 19:11</td>
-						<td colspan="2"  class="claim">반품진행</td>
+						<td colspan="2" >${oneList.claimdate }</td>
+						<td colspan="2"  class="claim">${oneList.claimstatus}</td>
 					</tr>
 					</tbody>
 				</thead>

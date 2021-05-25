@@ -93,4 +93,14 @@ public class MemberServiceImp implements MemberService {
 		return memberDAO.checkuseridNpwd(userid, pwd);
 	}
 
+	@Override
+	public int editinfoOk(MemberVO vo2) {
+		return memberDAO.editinfoOk(vo2);
+	}
+
+	@Override
+	public MemberVO editinfoOkView(MemberVO vo3) {
+		return memberDAO.editinfoOkView(vo3);
+	}
+
 }

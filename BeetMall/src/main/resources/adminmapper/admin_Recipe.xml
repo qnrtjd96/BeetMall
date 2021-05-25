@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beetmall.sshj.admin.dao.adminRecipeDAO">
+    <select id="adminRecipeAllList" resultType="com.beetmall.sshj.admin.vo.adminRecipeVO" parameterType="com.beetmall.sshj.admin.vo.adminPageRecipeVO">
+    select * from(
+		    select * from(
+			     select recipenum ,userid ,recipetitle ,recipecontent ,recipemainimg, 
+		         to_char(recipewritedate,'MM-DD HH:MI')recipewritedate,reciperecommend,recipehit 
+		         from recipe
+		         order by recipenum desc )
+		         where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord} order by recipenum asc)
+				 where <![CDATA[rownum<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
+        							       <if test="pageNum!=totalPage">${onePageRecord}</if>  
+        		 order by recipenum desc
+    </select>
+    <insert id="adminrecipeWriteOk" parameterType="com.beetmall.sshj.admin.vo.adminRecipeVO">
+       insert into recipe 
+       values(recipesq.nextval,#{userid},#{recipetitle},#{recipecontent},#{recipemainimg},sysdate,0,0)
+    </insert>
+    
+    <delete id="adminrecipeDelete">
+		delete from recipe where recipenum=#{param1}
+	</delete>
+	
+	<update id="adminrecipeEditeOk" parameterType="com.beetmall.sshj.admin.vo.adminRecipeVO">
+		update recipe set recipetitle=#{recipetitle}, recipecontent=#{recipecontent} where recipenum=#{recipenum}
+	</update>
+    
+    <select id="adminselectLastSelect" resultType="com.beetmall.sshj.admin.vo.adminRecipeVO">
+    select recipenum from( select * from (recipe) order by recipeWritedate DESC)where ROWNUM = 1    
+    </select> 
+    <select id="adminRecipeSelect" resultType="com.beetmall.sshj.admin.vo.adminRecipeVO">
+    select recipenum, userid, recipetitle, recipecontent, recipemainimg, to_char(recipewritedate,'YY/MM/DD HH:MI') as recipewritedate,reciperecommend,recipehit from recipe where recipenum=${param}
+    </select>  
+     
+    <update id="adminrecipeHit" parameterType="com.beetmall.sshj.admin.vo.adminRecipeVO">
+       update recipe set recipehit=recipehit+1 where recipenum=#{param1}
+    </update>
+    
+    <!--        페이지 총 레코드 수 구하기           -->
+    <select id="admintotalRecord4" parameterType="com.beetmall.sshj.admin.vo.adminRecipeVO" resultType="int">
+		select count(*) totalRecord from recipe
+	</select>
+	
+	<select id="admintotalRecord5" parameterType="com.beetmall.sshj.admin.vo.adminRecipeVO" resultType="int">
+		select count(*) totalRecord from recipe
+	</select>
+	
+	<select id="admintotalRecord6" parameterType="com.beetmall.sshj.admin.vo.adminRecipeVO" resultType="int">
+		select count(*) from recipe where userid=#{userid}
+	</select>
+    
+    <select id="admintotalRecord7" parameterType="com.beetmall.sshj.admin.vo.adminRecipeVO" resultType="int">
+		select count(r.recipenum) from recipe r
+        left join favorite f
+        on r.recipenum=f.recipenum
+        where f.userid=#{userid}
+	</select>
+	
+	<select id="admintotalRecord8" parameterType="com.beetmall.sshj.admin.vo.adminRecipeVO" resultType="int">
+		select count(*) totalRecord from recipe
+	</select>
+    
+    
+    
+ 
+  </mapper>

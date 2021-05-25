@@ -1,12 +1,13 @@
 package com.beetmall.sshj.admin.vo;
 
 public class AdminReviewVO {
-//	d.reviewnum, d.reviewcontent, d.reviewanswer, d.userid as reviewwriter, d.reviewwritedate, c.productname, c.mcatename, c.userid seller 
-	////////////////////////////////////////////////////////////////////////////////////////////////////////
-	/*
-	 * 이부분은 content부분을 잘라주어야 하기 때문에 페이지 목록 조회부분에서만 써야한다.
-	 */
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*목록뽑아낼때 쓰는것	d.reviewnum, d.reviewcontent, d.reviewanswer, 
+  d.userid as reviewwriter, d.reviewwritedate, c.productname, 
+  c.mcatename, c.userid seller 
+  팝업창 띄울때 쓰는것 a.reviewnum, a.productnum, a.userid as reviewwrite, 
+  a.reviewwritedate, a.reviewscore, a.reviewreport, a.reviewcontent, 
+  a.reviewanswer, b.reviewcount, c.reportreason, d.seller
+*/
 	private int reviewnum; //번호
 	private String reviewcontent; //컨텐츠부분인데 이건 잘라줘야함
 	private String reviewanswer; //답변상태이걸로확인하자
@@ -14,7 +15,11 @@ public class AdminReviewVO {
 	private String reviewwritedate; //리뷰작성일
 	private String productname; //상품명
 	private String mcatename; //카테고리 이름
-	private String seller;  //판매자 아이디
+	private String seller;
+	private int productnum;  //상품번호
+	private String reviewscore;  //리뷰 평점
+	private String reviewcount;  //추천수
+	private String reportreason;  //신고종류
 	
 	public int getReviewnum() {
 		return reviewnum;
@@ -63,5 +68,29 @@ public class AdminReviewVO {
 	}
 	public void setSeller(String seller) {
 		this.seller = seller;
+	}
+	public int getProductnum() {
+		return productnum;
+	}
+	public void setProductnum(int productnum) {
+		this.productnum = productnum;
+	}
+	public String getReviewscore() {
+		return reviewscore;
+	}
+	public void setReviewscore(String reviewscore) {
+		this.reviewscore = reviewscore;
+	}
+	public String getReviewcount() {
+		return reviewcount;
+	}
+	public void setReviewcount(String reviewcount) {
+		this.reviewcount = reviewcount;
+	}
+	public String getReportreason() {
+		return reportreason;
+	}
+	public void setReportreason(String reportreason) {
+		this.reportreason = reportreason;
 	}
 }

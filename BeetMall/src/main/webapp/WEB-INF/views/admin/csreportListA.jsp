@@ -338,7 +338,6 @@
 		var userid=""; //유저아이디
 		var reportnum=0; //번호
 		$('.popup').click(function(){
-			  $("#modal").css("display","block");
 			  userid = $(this).html();
 			  reportnum = $(this).prev().prev().prev().prev().prev().prev().prev().html();
 			  var url = "/sshj/modalSelect";
@@ -366,6 +365,7 @@
 					$("#reason").html(tag);
 					$("#tt2").html(tag2);
 					$("#tt3").html(tag3);
+					$("#modal").css("display","block");
 				},error:function(){
 					console.log("가져오기 에러..");
 				}
