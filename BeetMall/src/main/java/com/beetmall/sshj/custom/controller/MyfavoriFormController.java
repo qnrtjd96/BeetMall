@@ -2,7 +2,6 @@ package com.beetmall.sshj.custom.controller;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +37,7 @@ public class MyfavoriFormController {
 		myfavoriFormservies.farmHit(storenum);
 		
 		mav.addObject("result", myfavoriFormservies.selectInfo2(storenum)); // 전체 데이터 불러오기
+		mav.addObject("result1",myfavoriFormservies.discountSelect2(storenum)); // 디스카운트 확인
 		mav.addObject("favorite", myfavoriFormservies.selectFavorite2(storenum)); // 즐겨찾기 수 불러오기
 		mav.setViewName("mypages/customFarm");
 		return mav;

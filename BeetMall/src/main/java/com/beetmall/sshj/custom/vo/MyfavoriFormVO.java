@@ -17,6 +17,11 @@ public class MyfavoriFormVO {
 	private String farmvisitor;
 	private String sellername;
 	private String bank;
+	private int saleprice;
+	private int productnum;
+	private String thumbimg;
+	private String productname;
+	private String productprice;
 	
 	public int getStorenum() {
 		return storenum;
@@ -113,6 +118,36 @@ public class MyfavoriFormVO {
 	}
 	public void setBank(String bank) {
 		this.bank = bank;
+	}
+	public int getSaleprice() {
+		return saleprice;
+	}
+	public void setSaleprice(int saleprice) {
+		this.saleprice = saleprice;
+	}
+	public int getProductnum() {
+		return productnum;
+	}
+	public void setProductnum(int productnum) {
+		this.productnum = productnum;
+	}
+	public String getThumbimg() {
+		return thumbimg;
+	}
+	public void setThumbimg(String thumbimg) {
+		this.thumbimg = thumbimg;
+	}
+	public String getProductname() {
+		return productname;
+	}
+	public void setProductname(String productname) {
+		this.productname = productname;
+	}
+	public String getProductprice() {
+		return productprice;
+	}
+	public void setProductprice(String productprice) {
+		this.productprice = productprice;
 	}
 	
 }

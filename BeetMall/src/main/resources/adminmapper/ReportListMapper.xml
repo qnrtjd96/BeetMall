@@ -4,43 +4,53 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.beetmall.sshj.admin.dao.ReportListDAO">
 	<select id="csreportOnetotalRecord" parameterType="com.beetmall.sshj.admin.vo.adminkPageSearchVO" resultType="int">
-		select count(*) from (select * from report)
-		<!-- <choose>
+		select count(*) from (select * from report where not reportboard ='1:1채팅'
+		<choose>
 			<when test = 'searchWord!=null and searchKey!=null'>
-				where faqtitle like '%${searchWord}%' and faqoption=1 and faqcate=${searchKey}
+				and ${searchKey} like '%${searchWord}%'
 			</when>
-			<when test = 'searchWord!=null'>
-				where faqtitle like '%${searchWord}%' and faqoption=1 
-			</when>
-			<when test = 'searchWord==null'>
-				where faqoption=1
-			</when>
-		</choose> -->
+		</choose>)
 	</select>
 	<select id="csreportList" resultType="com.beetmall.sshj.admin.vo.ReportListVO" parameterType="com.beetmall.sshj.admin.vo.adminkPageSearchVO">
 		select * from(
 	    	select * from(
 				select reportnum, reportboard, reportcontent, reportreason, to_char(reportdate, 'YYYY/MM/DD') reportdate, to_char(completedate, 'YYYY/MM/DD') completedate, reportselect, userid, reporteduser
 				from report
-				where 1=1
-				<!-- <choose>
-					<when test ='searchKey!=null'>
-						and faqcate = '${searchKey}' 
+				where not reportboard ='1:1채팅'
+				<choose>
+					<when test = 'searchWord!=null and searchKey!=null'>
+						and ${searchKey} like '%${searchWord}%'
 					</when>
-					<when test ='searchKey!=null and searchWord==null'>
-						where faqcate = '${searchKey}' and faqoption = 1
-					</when>
-					<when test ='searchWord!=null'>
-						where faqtitle like '%${searchWord}%' and faqoption = 1
-					</when>
-					<when test ='searchWord==null'>
-						where faqoption = 1
-					</when>
-				</choose> -->
+				</choose>
 				order by reportnum desc)
 			where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord} order by reportnum)
 			where <![CDATA[rownum<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
         							  <if test="pageNum!=totalPage">${onePageRecord}</if>
         order by reportnum desc
 	</select>
+	<select id="csreportSelect" resultType="com.beetmall.sshj.admin.vo.ReportListVO">
+		select reportnum, userid, reporteduser, reportboard, reportboardnum, reportreason, reportcontent, reportdate, reportselect, completedate
+		from report
+		where reportnum=${param1} 
+	</select>
+	<select id="modalSelect" resultType="com.beetmall.sshj.admin.vo.ReportListVO">
+		select userid, reportreason
+		from report
+		where reporteduser='${param1}'
+	</select>
+	<select id="modalSelect2" resultType="com.beetmall.sshj.admin.vo.ReportListVO">
+		select count(*) as count, reportdate
+		from reporttbl 
+		where userid = '${param1}'
+		group by reportdate 
+	</select>
+	<insert id="memberstop">
+		insert into reporttbl values(#{param2}, sysdate, sysdate+${param1}, ${param1})
+	</insert>
+	<update id="memberTableStop">
+		update member set userstop='Y' where userid=#{param1}
+	</update>
+	<update id="sysdateInsert">
+		update report set completedate=sysdate where reportnum=${param1} 
+	</update>
 </mapper>

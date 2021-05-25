@@ -3,7 +3,7 @@
   	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.beetmall.sshj.admin.dao.AdminReviewDAO">
- 	<select id="reviewListA" resultType="com.beetmall.sshj.admin.vo.AdminReviewVO" parameterType="com.beetmall.sshj.admin.vo.adminkPageSearchVO">
+ 	<select id="reviewListABC" resultType="com.beetmall.sshj.admin.vo.AdminReviewVO" parameterType="com.beetmall.sshj.admin.vo.adminkPageSearchVO">
  		select * from(
 	    	select * from(
 		 		select d.reviewnum, d.reviewcontent, d.reviewanswer, d.userid as reviewwriter, to_char(d.reviewwritedate, 'YYYY/MM/DD') reviewwritedate, c.productname, c.mcatename, c.userid seller
@@ -15,6 +15,11 @@
 		                            on a.mcatenum=b.mcatenum) c
 		                on d.productnum=c.productnum
 		                where 1=1
+		                <choose>
+							<when test = 'searchWord!=null and searchKey!=null'>
+								and ${searchKey} like '%${searchWord}%'
+							</when>
+						</choose>
 		                order by reviewnum desc)
 		          where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord} order by reviewnum)
 			where <![CDATA[rownum<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
@@ -30,6 +35,36 @@
                             join (select mcatenum, mcatename 
                                    from mcategory) b
                             on a.mcatenum=b.mcatenum) c
-                on d.productnum=c.productnum)
+                on d.productnum=c.productnum
+                where 1=1
+                <choose>
+					<when test = 'searchWord!=null and searchKey!=null'>
+						and ${searchKey} like '%${searchWord}%'
+					</when>
+				</choose>
+				)
+ 	</select>
+ 	<select id="reviewselect" resultType="com.beetmall.sshj.admin.vo.AdminReviewVO">
+ 		select a.reviewnum, a.productnum, a.userid as reviewwriter, to_char(a.reviewwritedate, 'YYYY-MM-DD') as reviewwritedate, a.reviewscore, a.reviewreport, a.reviewcontent, a.reviewanswer, b.reviewcount, c.reportreason, d.seller, d.productname
+		from review a
+		    left outer join (select reviewnum, userid, productnum, reviewgood, count(reviewnum) as reviewcount
+		                            from reviewlike
+		                            group by reviewnum, userid, productnum,reviewgood) b
+		      on a.reviewnum=b.reviewnum <!-- 추천수 가지고오기위해서 조인한 테이블 reviewcount만씀 -->
+		    left outer join (select b.reviewnum, reportreason 
+		                            from report a
+		                            join (select * from review where reviewreport=1) b
+		                                on 1=1
+		                            where a.reportboard='리뷰'
+		                            group by b.reviewnum, reportreason)c
+		      on a.reviewnum=c.reviewnum <!-- reportreason을 가지고오기위해서 조인한테이블 -->
+		    left outer join (select a.productnum, b.productname, b.userid as seller
+		                            from review a
+		                            left outer join product b
+		                                on a.productnum=b.productnum
+		                            group by a.productnum, b.userid, b.productname) d
+		      on a.productnum=d.productnum <!-- seller를 가지고오기위해서 가지고온 테이블 (이건 농장연결해줄때랑 판매자 아이디 띄어줄떄 쓸꺼임) -->
+		    where a.reviewnum=${param1} and rownum=1
+		    order by a.reviewnum
  	</select>
 </mapper>

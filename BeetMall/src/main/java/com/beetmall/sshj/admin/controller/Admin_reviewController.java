@@ -48,6 +48,15 @@ public class Admin_reviewController {
 		
 		return mav;
 	}
+	
+	//모달창 띄어주기
+	@RequestMapping("/reviewselect")
+	@ResponseBody
+	public AdminReviewVO reviewselect(int reviewnum) {
+		AdminReviewVO vo = reviewService.reviewselect(reviewnum);
+		
+		return vo; 
+	}
 }
 	
 	

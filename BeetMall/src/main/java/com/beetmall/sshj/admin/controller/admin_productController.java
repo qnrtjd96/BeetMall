@@ -24,6 +24,13 @@ public class admin_productController {
 		ModelAndView mav = new ModelAndView();
 		adminkPageSearchVO pageVO = new adminkPageSearchVO();
 		
+		//타입넘어왔는지 보고 세팅해주기
+		String category=req.getParameter("category");
+		System.out.println("category = " + category);
+		pageVO.setCategory(category);
+		
+		System.out.println("getCategory = "+ pageVO.getCategory());
+		
 		String pageNumStr = req.getParameter("pageNum");
 		if(pageNumStr != null) {//페이지 번호가 있을때 숫자화, 없으면 1로 설정 설정되어있음.
 			pageVO.setPageNum(Integer.parseInt(pageNumStr));

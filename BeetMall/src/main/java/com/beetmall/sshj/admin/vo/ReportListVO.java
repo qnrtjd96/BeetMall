@@ -12,6 +12,11 @@ public class ReportListVO {
 	private String userid;
 	private String reporteduser;
 	private String reportreason;
+	private int reportboardnum;
+	private String reportstart;
+	private String reportfin;
+	private int count;
+	
 	public int getReportnum() {
 		return reportnum;
 	}
@@ -66,5 +71,30 @@ public class ReportListVO {
 	public void setReportreason(String reportreason) {
 		this.reportreason = reportreason;
 	}
+	public int getReportboardnum() {
+		return reportboardnum;
+	}
+	public void setReportboardnum(int reportboardnum) {
+		this.reportboardnum = reportboardnum;
+	}
+	public String getReportstart() {
+		return reportstart;
+	}
+	public void setReportstart(String reportstart) {
+		this.reportstart = reportstart;
+	}
+	public String getReportfin() {
+		return reportfin;
+	}
+	public void setReportfin(String reportfin) {
+		this.reportfin = reportfin;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
+	
 	
 }

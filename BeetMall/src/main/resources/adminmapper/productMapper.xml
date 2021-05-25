@@ -15,21 +15,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				        group by productnum) c
 				    on a.productnum = c.productnum 
 				where 1=1
-				<!-- <choose>
-					<when test ='searchKey!=null'>
-						and faqcate = '${searchKey}' 
+				<choose>
+					<when test = 'searchWord!=null and searchKey!=null'>
+						and ${searchKey} like '%${searchWord}%'
 					</when>
-					<when test ='searchKey!=null and searchWord==null'>
-						where faqcate = '${searchKey}' and faqoption = 1
-					</when>
-					<when test ='searchWord!=null'>
-						where faqtitle like '%${searchWord}%' and faqoption = 1
-					</when>
-					<when test ='searchWord==null'>
-						where faqoption = 1
-					</when>
-				</choose> -->
-				order by productnum desc)
+				</choose>
+				<if test="category==null">
+					and 1=1
+				</if>
+				<if test="category!=null">
+					<if test="category=='카테고리'">and 1=1</if>
+					<if test="category=='과일'">and <![CDATA[a.mcatenum>=]]>22 and <![CDATA[a.mcatenum<=]]>50</if>
+					<if test="category=='건과류'">and <![CDATA[a.mcatenum>=]]>1 and <![CDATA[a.mcatenum<=]]>7</if>
+					<if test="category=='채소'">and <![CDATA[a.mcatenum>=]]>69 and <![CDATA[a.mcatenum<=]]>104</if>
+					<if test="category=='쌀'">and <![CDATA[a.mcatenum>=]]>51 and <![CDATA[a.mcatenum<=]]>68</if>
+					<if test="category=='잡곡'">and <![CDATA[a.mcatenum>=]]>51 and <![CDATA[a.mcatenum<=]]>68</if>
+					<if test="category=='견과류'">and <![CDATA[a.mcatenum>=]]>8 and <![CDATA[a.mcatenum<=]]>21</if>
+				</if>
+				order by productnum desc
+						 )
 			where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord} order by productnum)
 			where <![CDATA[rownum<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
         							  <if test="pageNum!=totalPage">${onePageRecord}</if>
@@ -44,17 +48,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		        from wish
 		        group by productnum) c
 		    on a.productnum = c.productnum
-		order by a.productnum desc
-		<!-- <choose>
+		    where 1=1
+		    <if test="category!=null">
+				<if test="category=='카테고리'">and 1=1</if>
+				<if test="category=='과일'">and <![CDATA[a.mcatenum>=]]>22 and <![CDATA[a.mcatenum<=]]>50</if>
+				<if test="category=='건과류'">and <![CDATA[a.mcatenum>=]]>1 and <![CDATA[a.mcatenum<=]]>7</if>
+				<if test="category=='채소'">and <![CDATA[a.mcatenum>=]]>69 and <![CDATA[a.mcatenum<=]]>104</if>
+				<if test="category=='쌀'">and <![CDATA[a.mcatenum>=]]>51 and <![CDATA[a.mcatenum<=]]>68</if>
+				<if test="category=='잡곡'">and <![CDATA[a.mcatenum>=]]>51 and <![CDATA[a.mcatenum<=]]>68</if>
+				<if test="category=='견과류'">and <![CDATA[a.mcatenum>=]]>8 and <![CDATA[a.mcatenum<=]]>21</if>
+			</if>
+		<choose>
 			<when test = 'searchWord!=null and searchKey!=null'>
-				where faqtitle like '%${searchWord}%' and faqoption=1 and faqcate=${searchKey}
+				and ${searchKey} like '%${searchWord}%'
 			</when>
-			<when test = 'searchWord!=null'>
-				where faqtitle like '%${searchWord}%' and faqoption=1 
-			</when>
-			<when test = 'searchWord==null'>
-				where faqoption=1
-			</when>
-		</choose> -->
+		</choose>
+		order by a.productnum desc
 	</select>
 </mapper>
