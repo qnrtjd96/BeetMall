@@ -750,8 +750,11 @@ $('submit').click(function(){
                                  i를 더해주어 다음 조건을 만들어 다음 번호 것만 가져오게 한다 -->
                            <c:forEach var="categoryList" items="${cateList}">
                               <c:if test="${categoryList.catenum==i}">
-                                 <li value="${categoryList.catenum}"><a href="#" onclick="return false">${categoryList.catename}</a><span>&gt;</span></li>
+                                
                                  <c:set var="i" value="${i+1 }"/>
+                              </c:if>
+                              <c:if test="${categoryList.catenum!=i}">
+                                <li value="${categoryList.catenum}"><a href="#" onclick="return false">${categoryList.catename}</a><span>&gt;</span></li>
                               </c:if>
                            </c:forEach>
                         <c:remove var="i"/>
@@ -903,9 +906,9 @@ $('submit').click(function(){
 				<li><span class="notice"> 등록 상품의 배송방법을 선택해주세요.</span></li>
 				<li><label><span class="categoryStar">*</span>배송방법</label>&nbsp; 
 					<select name="deliveryoption" id="deliverysel" >
-						<option value="1" id="pickup" <c:if test="${vo.deliveryoption==1}">checked</c:if>>픽업</option>
-						<option value="2" id="delivery" <c:if test="${vo.deliveryoption==2}">checked</c:if> >택배</option>
-						<option value="3" id="delandpick" <c:if test="${vo.deliveryoption==3}">checked</c:if>>택배/픽업</option>
+						<option value="1" id="pickup" <c:if test="${vo.deliveryoption==1}">selected</c:if>>픽업</option>
+						<option value="2" id="delivery" <c:if test="${vo.deliveryoption==2}">selected</c:if> >택배</option>
+						<option value="3" id="delandpick" <c:if test="${vo.deliveryoption==3}">selected</c:if>>택배/픽업</option>
 					</select>
 				</li>
 				<li id="delivery_option" style="display:none; background-color:#fcfcfc;">
@@ -930,17 +933,17 @@ $('submit').click(function(){
 				<li><span class="categoryStar">*</span><label for="">판매단위</label>&nbsp;
 					<input type="number" name="selloptionnum" id="selloption"  value="${vo.selloptionnum}" min="0" onchange="javascript:removeCommaReturn(this);"/>
 					<select id="select_unit" name="selloptionunit" onchange="javascript:removeCommaReturn(this);">
-						<option value=" " <c:if test="${vo.selloptionunit eq ''}">checked</c:if>>해당없음</option>
-						<option value="팩" <c:if test="${vo.selloptionunit eq '팩'}">checked</c:if>>팩</option>
-						<option value="박스" <c:if test="${vo.selloptionunit eq '박스'}">checked</c:if>>박스</option>
+						<option value=" " <c:if test="${vo.selloptionunit eq ''}">selected</c:if>>해당없음</option>
+						<option value="팩" <c:if test="${vo.selloptionunit eq '팩'}">selected</c:if>>팩</option>
+						<option value="박스" <c:if test="${vo.selloptionunit eq '박스'}">selected</c:if>>박스</option>
 					</select>
 					<input type="hidden" name="selloption" value="${vo.selloption}" id="selloption_hidden"/>
 				</li>
 				<li><span class="categoryStar">*</span><label for="">중량/용량</label>&nbsp;
-					<input type="number" name="sellweightnum" id="sellweight" min="0" value="${vo.sellweight}" onchange="javascript:removeCommaReturn(this);"/>
+					<input type="number" name="sellweightnum" id="sellweight" min="0" value="${vo.sellweightnum}" onchange="javascript:removeCommaReturn(this);"/>
 					<select id="select_weight" name="sellweightunit" onchange="javascript:removeCommaReturn(this);">
-						<option value="g">g</option>
-						<option value="kg">kg</option>
+						<option value="g" <c:if test="${vo.sellweightunit eq 'g'}">selected</c:if> >g</option>
+						<option value="kg" <c:if test="${vo.sellweightunit eq 'kg'}">selected</c:if> >kg</option>
 					</select>
 					<input type="hidden" name="sellweight" id="sellweight_hidden"/>
 				</li>
@@ -959,9 +962,9 @@ $('submit').click(function(){
 			
 				<li><span class="categoryStar">*</span><label for="보관/포장타입">보관/ 포장타입</label>&nbsp;
 					<select id="select_packing" name="wrapping">
-						<option value='0' <c:if test="${vo.wrapping==1}">checked</c:if>>실온</option>
-						<option value='1' <c:if test="${vo.wrapping==2}">checked</c:if>>냉장</option>
-						<option value='2' <c:if test="${vo.wrapping==3}">checked</c:if>>냉동</option>
+						<option value='0' <c:if test="${vo.wrapping==1}">selected</c:if>>실온</option>
+						<option value='1' <c:if test="${vo.wrapping==2}">selected</c:if>>냉장</option>
+						<option value='2' <c:if test="${vo.wrapping==3}">selected</c:if>>냉동</option>
 					</select>
 				</li>
 				<li><span class="categoryStar">*</span><label for="">상품정보</label><br/>

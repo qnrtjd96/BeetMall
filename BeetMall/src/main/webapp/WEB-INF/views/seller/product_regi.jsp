@@ -381,7 +381,7 @@ $('#thumbimg').on('change',function(){
 		});
 //못난이 할인 default 
 		if($('#saleb').val() != '1' || $('#saleb').val()==' '){
-			$('#saleb').val('0');
+			$('#saleb').val(0);
 		}
 //국내산, 수입산
 		$('#import').on('click',function(){
@@ -451,8 +451,8 @@ $('#thumbimg').on('change',function(){
 		});// 옵션 선택 end
 		
 // 못난이할인
-	 	if($('#saleb').val()!='1'){
-	 		$('$saleb').val() =='0';
+	 	if($('#saleb').val()!= 1){
+	 		$('$saleb').val() == 0 ;
 	 		console.log('못난이할인 noncheck saleb value -> ',$('$saleb').val());
 	 	}
 
@@ -506,7 +506,7 @@ function priceAjax(){
 	}
 });//function end
 
-//판매기간/ 할인기간 날짜 설정
+//판매기간/ 할인기간 날짜 설정	$().remove();
 
 $(function(){
 	//오늘 날짜 구하기
@@ -572,11 +572,11 @@ $(function(){
 	        date = null;
 	      }
 	      return date;
-	    }
-});
-$(function(){
-//submit 등록하기 전 유효성검사
-$('submit').click(function(){
+	    };
+	    
+
+//--------------------------------------------------- submit 유효성검사 --------------------------------------------------------------------
+	$('#product_regi_form').on('submit', function(){
 	
 	//유효성검사 
 	//전체
@@ -585,33 +585,34 @@ $('submit').click(function(){
 	//-------카테고리 선택-------
 	//카테고리가 선택되지 않은 경우
 	if($('#categoryManagement>li').val()==null){
-		return alert('판매 상품 카테고리를 선택해주세요');
+		alert('판매 상품 카테고리를 선택해주세요');
+		return false;
 	}
 	//-------상품명------------
-	//상품명이 공백일 경우
-	if($('#product_register_name').text()=='' || $('#product_register_name').val()==null || $('#product_register_name').val() == '' ){
-       return alert('상품명을 입력해주세요.'); 
+	//상품명이 공백일 경우 $('#product_register_name').text()==' ' || 
+	if($('#product_register_name').val()==null || $('#product_register_name').val() == '' ){
+        alert('상품명을 입력해주세요.'); 
        return false;
   }
 	//상품명이 100자가 넘는 경우
-	if($('#product_register_name').text().length>100){
-      return alert('상품명은 100자 이내로 작성해주세요.'); 
+	if($('#product_register_name').text().length > 100){
+       alert('상품명은 100자 이내로 작성해주세요.'); 
       return false;
- }
- //--------판매가격-------
- //판매가격이 입력되지 않은 경우
-	if($("#productprice").val()==null || $("#productprice").val()=='' || $("#productprice").val()<0  || $("#productprice").text()==''){ 
-		alert("판매 금액을 입력해주세요."); 
-		return false;
-	} 
- if($("input[name=saleselect]:checked").val() == ''){
-	   alert("할인 적용 여부를 선택해주세요."); 
-		return false;
- }
+	 }
+	 //--------판매가격-------
+	 //판매가격이 입력되지 않은 경우
+	if($("#productprice").val()==null || $("#productprice").val()=='' || $("#productprice").val()<0 ){ 
+		alert("판매 가격을 입력해주세요."); 
+			return false;
+		} 
+	 if($("input[name=saleselect]:checked").val() == ''){
+		  alert("할인 적용 여부를 선택해주세요."); 
+			return false;
+	 }
 	//할인설정 
 	if($("input[name=saleselect]:checked").val() == 1){
 	   //할인금액이 입력되지 않은 경우
-		if($("#saleprice").val()==null || $("#saleprice").val()=='' || $("#saleprice").val()<0  || $("#saleprice").text()==''){ 
+		if($("#saleprice").val()==null || $("#saleprice").val()=='' || $("#saleprice").val()<0 ){ 
 			alert("할인 금액을 입력해주세요."); 
 			return false;
 		} 
@@ -619,28 +620,28 @@ $('submit').click(function(){
 	
 	//날짜를 입력하지 않은 경우
 	   if($('.start_date').val()==null || $('start_date').val()==''){
-		   return alert('판매 날짜를 입력해주세요');
+		   alert('판매 날짜를 입력해주세요');
 		   return false;
 	   }
 	//--------재고수량---------
 	//재고수량을 입력하지 않은 경우
-	if($('#totalstock').text('') || $('#totalstock').val()==null || $("#totalstock").val()<0 || $("#totalstock").text()==''){
-		return alert('재고 수량을 입력해주세요.');
+	if($('#totalstock').val()==null || $("#totalstock").val()<0 ){
+		alert('재고 수량을 입력해주세요.');
 		return false;
 	}
 	//-------옵션------------
 	if($("input[name=optionselect]:checked").val() == ''||$("input[name=optionselect]:checked").val() == null){
-		return alert('옵션 적용 여부를 선택해주세요.');
+		alert('옵션 적용 여부를 선택해주세요.');
 		return false;
 	}
 	//옵션 선택 후 값을 입력하지 않은 경우
 	if($("input[name=optionselect]:checked").val() == '1'){
 		if($('#select_option').val()=='0'){
-			return alert('추가할 옵션 갯수을 선택해주세요.');
+			alert('추가할 옵션 갯수을 선택해주세요.');
 			return false;
 		}
 		if($('#optionname').val()=='' && $('#optionstock').val()=='' && $('#optionprice').val()==''){
-			return alert('옵션 목록을 정확히 입력해주세요.');
+			alert('옵션 목록을 정확히 입력해주세요.');
 			return false;
 		}
 		
@@ -653,10 +654,10 @@ $('submit').click(function(){
 	}
 	//------상세설명---------
 	//상세설명이 빈칸인 경우
-	if($("#productcontent").val()==null || $("#username").val()==''){ 
-		alert("상품 상세 설명을 입력해주세요"); 
-		return false;
-	}
+	//if($("#productcontent").val()==null || $("#productcontent").val()==''){ 
+	//	alert("상품 상세 설명을 입력해주세요"); 
+	//	return false;
+	//}
 	//-------배송-----------
 	//택배 또는 픽업 버튼 중 어느것도 선택하지 않은 경우
 	if($("#deliverysel").val()==null || $("#deliverysel").val()==''){ 
@@ -664,8 +665,8 @@ $('submit').click(function(){
 		return false;
 	}
 	//택비 설정
-	//배송비를 입력하지 않은 경우
-	if($("#deliveryprice").val()==null || $("#deliveryprice").val()=='' || $("#deliveryprice").val()<0 || $("#deliveryprice").text()==''){ 
+	/*배송비를 입력하지 않은 경우
+	if($("#deliveryprice").val()==null || $("#deliveryprice").val()=='' || $("#deliveryprice").val()<0 ){ 
 		alert("배송비를 입력해주세요"); 
 		return false;
 	}
@@ -674,6 +675,7 @@ $('submit').click(function(){
 		alert("배송방법을 선택해주세요"); 
 		return false;
 	}
+	*/
 	//-------상품내용-------------
 	//판매단위를 입력하지 않은 경우
 	if($("#selloption").val()==null || $("#selloption").val()==''){ 
@@ -686,7 +688,7 @@ $('submit').click(function(){
 		return false;
 	}
 	
-	//원산지 선택하지 않은 경우
+	/*원산지 선택하지 않은 경우
 	if($("#origin").val()==null || $("#origin").val()==''){ 
 		alert("원산지를 선택해주세요"); 
 		return false;
@@ -696,6 +698,7 @@ $('submit').click(function(){
 		alert("보관/포장타입을 선택해주세요"); 
 		return false;
 	}
+	*/
 	//상품정보, 주의사항, 보관방법, 유통기한이 빈칸일 경우
 	if($("#productinfomation").val()==null || $("#productinfomation").val()==''){ 
 		alert("상품정보를 입력해주세요"); 
@@ -710,8 +713,11 @@ $('submit').click(function(){
 		return false;
 	}
 	return true;
-	}); //submit 유효성검사 end
+	}); 
+//---------------------------------------------------submit 유효성검사 end-------------------------------------------
+
 });
+
 </script>
 <body>
 	<div class="main">
@@ -919,8 +925,8 @@ $('submit').click(function(){
 	<div class="category_wrap">
 			<ul>
 				<li><span class="categoryStar">*</span><label for="">판매단위</label>&nbsp;
-					<input type="number" name="selloptionnum" id="selloption"  min="0" onchange="javascript:removeCommaReturn(this);"/>
-					<select id="select_unit" name="selloptionunit" onchange="javascript:removeCommaReturn(this);">
+					<input type="text" name="selloptionnum" id="selloption"  min="0"/>
+					<select id="select_unit" name="selloptionunit" >
 						<option value=" ">해당없음</option>
 						<option value="팩">팩</option>
 						<option value="박스">박스</option>
@@ -928,8 +934,8 @@ $('submit').click(function(){
 					<input type="hidden" name="selloption" id="selloption_hidden"/>
 				</li>
 				<li><span class="categoryStar">*</span><label for="">중량/용량</label>&nbsp;
-					<input type="number" name="sellweightnum" id="sellweight" min="0" onchange="javascript:removeCommaReturn(this);"/>
-					<select id="select_weight" name="sellweightunit" onchange="javascript:removeCommaReturn(this);">
+					<input type="text" name="sellweightnum" id="sellweight" min="0"/>
+					<select id="select_weight" name="sellweightunit" >
 						<option value="g">g</option>
 						<option value="kg">kg</option>
 					</select>
@@ -977,7 +983,7 @@ $('submit').click(function(){
 			<input type="button" id="cancel_btn" class="btn" value="취소" onclick="location.href='seller/product_list'">
 			<input type="submit" name="submit" value="등록하기" id="save_btn" class="btn"/>
 		</div>
-	</form>
+	</form> <!-- form end -->
 	</div><!-- article end -->
 	</div><!-- main end -->
 </body>
