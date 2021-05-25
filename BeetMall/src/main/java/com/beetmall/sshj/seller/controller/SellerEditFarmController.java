@@ -29,7 +29,7 @@ public class SellerEditFarmController {
 	ProductService productService;
 	
 	@RequestMapping("/sellerEditFarm")
-	public ModelAndView edit_farm(HttpSession session, ProductVO vo, SearchAndPageVO spvo) {
+	public ModelAndView edit_farm(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 	
 		if(session.getAttribute("logId")!=null) {
@@ -41,12 +41,12 @@ public class SellerEditFarmController {
 				mav.addObject("favorite", service.selectFavorite(userid)); // 즐겨찾기 수 불러오기
 				mav.setViewName("seller/sellerEditFarm");
 			}	else {
-				mav.setViewName("redirect:/");
+				mav.setViewName("seller/sellerEditFarm");
 				
 			}
 			
 		} else {
-			mav.setViewName("redirect:/");
+			mav.setViewName("home");
 			
 		}
 		
@@ -90,7 +90,7 @@ public class SellerEditFarmController {
 		ModelAndView mav = new ModelAndView();
 		
 		// 저장위치를 구한다
-		String path = session.getServletContext().getRealPath("/upload");
+		String path = session.getServletContext().getRealPath("/sellerprofileimg");
 		
 		MultipartHttpServletRequest mr = (MultipartHttpServletRequest)req;
 		

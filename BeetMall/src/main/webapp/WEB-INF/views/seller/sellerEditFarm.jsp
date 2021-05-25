@@ -199,7 +199,7 @@ function imgChange(data){
 				<div id="profile_box">
 					<input type="hidden" name="farmprofile" value="${result.farmprofile}" >
 					<input type="file" id="farmprofile" name="filename" style="display: none;" onchange="javascript:check(this)" accept="image/png, image/jpg, image/jpeg, image/gif"/> 
-					<a href="javascript:selectImg(this)"><img id="nowImg" src="<%=request.getContextPath()%>/resources/img/${result.farmprofile}" /></a><br /> 
+					<a href="javascript:selectImg(this)"><img id="nowImg" src="<%=request.getContextPath()%>/resources/sellerprofileimg/${result.farmprofile}" onerror="this.src='/sshj/img/derror.png'"/></a><br /> 
 					*프로필 이미지 클릭시 파일첨부<br /> <input type="text" id="farmname" name="farmname" value="${result.farmname }" style="width: 100px; height: 25px" />
 					<div id="profileData">
 						방문 : ${result.farmvisitor}명 | 농장 즐겨찾기 : ${favorite}명
@@ -381,7 +381,7 @@ function imgChange(data){
 					<input type="hidden" id="productnum" name="productnum" value="${result.productnum }" />
 					<div>대표메뉴<br><input type="button" value="대표메뉴 수정" id="MenuEditBtn" onclick="javascript:menuEditOpen()"></div>
 					<div id="repMenu_content">
-						<img src="<%=request.getContextPath()%>/resources/img/${result.thumbimg}" name="thumbimg"/>
+						<img src="<%=request.getContextPath()%>/resources/fileupload/${result.thumbimg}" name="thumbimg" onerror="this.src='/sshj/img/derror.png'"/>
 						<div>
 							<div id="openerProductname">${result.productname }</div>
 							<div>

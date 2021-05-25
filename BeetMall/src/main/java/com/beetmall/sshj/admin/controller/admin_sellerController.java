@@ -172,7 +172,7 @@ public class admin_sellerController {
 			ModelAndView mav = new ModelAndView();
 			
 			// 저장위치를 구한다
-			String path = session.getServletContext().getRealPath("/upload");
+			String path = session.getServletContext().getRealPath("/sellerprofileimg");
 			
 			MultipartHttpServletRequest mr = (MultipartHttpServletRequest)req;
 			
