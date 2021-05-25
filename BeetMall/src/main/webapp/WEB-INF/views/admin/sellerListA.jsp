@@ -179,13 +179,61 @@
 	#contentBox>div>ul>li:nth-child(1), #contentBox>div>ul>li:nth-child(2), #contentBox>div>ul>li:nth-child(3), #contentBox>div>ul>li:nth-child(4), #contentBox>div>ul>li:nth-child(5), #contentBox>div>ul>li:nth-child(6), #contentBox>div>ul>li:nth-child(7), #contentBox>div>ul>li:nth-child(8) {
 		border-top:1px solid #eee;
 	}
+	.foreachUL>li:nth-child(8n+1), #forachtitle>li:nth-child(8n+1){
+		width:0px !important;
+	}
+	.foreachUL>li:nth-child(8n+2), #forachtitle>li:nth-child(8n+2){
+		width:62px !important;
+	}
+	.foreachUL>li:nth-child(8n+3), #forachtitle>li:nth-child(8n+3){
+		width:122px !important;
+	}
+	.foreachUL>li:nth-child(8n+4), #forachtitle>li:nth-child(8n+4){
+		width:142px !important;
+	}
+	.foreachUL>li:nth-child(8n+5), #forachtitle>li:nth-child(8n+5){
+		width:182px !important;
+	}
+	.foreachUL>li:nth-child(8n+6), #forachtitle>li:nth-child(8n+6){
+		width:142px !important;
+		white-space: nowrap;
+		overflow:hidden;
+		text-overflow: ellipsis;
+	}
+	.foreachUL>li:nth-child(8n+7), #forachtitle>li:nth-child(8n+7){
+		width:242px !important;
+		white-space: nowrap;
+		overflow:hidden;
+		text-overflow: ellipsis;
+	}
+	.foreachUL>li:nth-child(8n), #forachtitle>li:nth-child(8n){
+		width:142px !important;
+	}
+	.foreachUL{
+		cursor: pointer !important;
+		height:40px !important;
+		line-height: 40px;
+		margin: 0px !important;
+		padding:0px !important;
+		width:1040px !important;
+	}
+	#title, #forachtitle{
+		height:40px!important;
+		line-height: 40px;
+	}
 </style>
 <script>
 	function pagelist(pagenum){
 		var lin = "sellerListA?pageNum="+pagenum;
-		
 		location.href=lin;
 	}
+	$(function(){
+		$(".foreachUL").click(function(){
+			var userid = $(this).children().eq(0).children().val();
+			//location.href="sellerInfoEditA?userid="+userid;
+			location.href="sellerInfoEditA?userid="+userid;
+		});
+	})
 </script>
  
  
@@ -233,37 +281,37 @@
 					<li><button class="success" value="desc" name="desc" id="descBtn">▼</button></li>
 				</ul>
 			</div>
-   		<div id="contentBox"> 	
-		<div id="">
-			<ul>
-				<li></li>
-				<li>농장번호</li> 
-				<li>판매자명</li>
-				<li>아이디</li>
-				<li>이메일</li>
-				<li>상호명</li>
-				<li>주소</li> 
-				<li>인증여부</li> 
-				
-				<c:forEach var="vo" items="${list}">
-			
-				<li></li>
-				<li>${vo.storenum}</li>
-				<li><a href="${vo.userid}">${vo.sellername}</a></li>
-				<li>${vo.userid}</li>
-				<li>${vo.storeemail}</li>
-				<li>${vo.storename}</li>
-				<li class="wordcut">(${vo.storezipcode})${vo.storeaddr} ${vo.storedetailaddr}</li>
-				<li>
-					<c:if test="${vo.regiapproval == 0}"><span class="reginone">미등록</span></c:if>
-					<c:if test="${vo.regiapproval == 1}"><span class="regiwait">대기중</span></c:if>
-					<c:if test="${vo.regiapproval == 2}"><span class="regifin">완료</span><span class="regidate">(${vo.regiapprovaldate})</span></c:if>
-					<c:if test="${vo.regiapproval == 3}"><span class="registop">반려</span></c:if>
-				</li> 
-				</c:forEach>
-			</ul>
+		<div id="contentBox"> 	
+			<div id="" style="border-bottom:none;width:1040px;">
+				<ul id="forachtitle">
+					<li></li>
+					<li>농장번호</li> 
+					<li>판매자명</li>
+					<li>아이디</li>
+					<li>이메일</li>
+					<li>상호명</li>
+					<li>주소</li> 
+					<li>인증여부</li> 
+				</ul>
+			</div>  
+			<c:forEach var="vo" items="${list}">
+				<ul class="contentList foreachUL">
+					<li><input type="hidden" value="${vo.userid}"/></li>
+					<li>${vo.storenum}</li>
+					<li>${vo.sellername}</li>
+					<li>${vo.userid}</li>
+					<li>${vo.storeemail}</li>
+					<li>${vo.storename}</li>
+					<li>(${vo.storezipcode})${vo.storeaddr} ${vo.storedetailaddr}</li>
+					<li>
+						<c:if test="${vo.sellerregiimg == null || vo.regiapproval == 0}"><span class="reginone">미등록</span></c:if>
+						<c:if test="${vo.regiapproval == 1}"><span class="regiwait">대기중</span></c:if>
+						<c:if test="${vo.regiapproval == 2}"><span class="regifin">완료</span><span class="regidate">(${vo.regiapprovaldate})</span></c:if>
+						<c:if test="${vo.regiapproval == 3}"><span class="registop">반려</span></c:if>
+					</li> 
+				</ul>
+			</c:forEach> 
 		</div>
-		</div>	
 		
 		<div class="page_wrap">	
 			<div class="page_nation">
@@ -303,3 +351,14 @@
 </div>
 </body>
 </html>
+
+<style>
+	.foreachUL {
+	    cursor: pointer !important;
+	    height: 60px !important;
+	    /* line-height: 40px; */
+	    margin: 0px !important;
+	    padding: 0px !important;
+	    width: 1040px !important;
+	}
+</style>

@@ -43,13 +43,7 @@ public class admin_csController {
 		mav.setViewName("/admin/csChat");
 		return mav;
 	} 
-	//신고 채팅 보기
-	@RequestMapping("/csReportChat")
-	public ModelAndView csReportChat() {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("/admin/csReportChat");
-		return mav;
-	} 
+	
 	
 	
 	

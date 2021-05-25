@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.beetmall.sshj.admin.dao.Admin_MemberDAO">
 	<select id="memberCountall" resultType="Integer">
-		select count(*) from member where #{param1}=3 and userstop='N' and userid!='master'
+		select count(*) from member where usertype in(1,2) and userstop !='Y' and userid !='master'
 	</select>
 	<select id="memberselectall" parameterType="com.beetmall.sshj.admin.vo.Admin_Member_PageVO" resultType="com.beetmall.sshj.admin.vo.Admin_MemberVO">
 		select * from(
@@ -256,4 +256,63 @@
 		set username = #{username}, userid=#{userid}, useremail=#{useremail}, userzipcode=#{userzipcode},
 		useraddr = #{useraddr}, userdetailaddr = #{userdetailaddr} where userid=#{userid}
 	</update>
+	<select id="reportPageNum" resultType="Integer">
+		select count(*) from(
+		select m.userid, m.userpwd, m.username, m.userphone, m.useremail, m.userzipcode, m.useraddr, m.userdetailaddr, to_char(m.birthday, 'YYYY/MM/DD') as birthday,  
+		to_char(joindate, 'YY/MM/DD HH:MI') as joindate, usertype, userstop, point, to_char(sysdate,'YYYY') - to_char(birthday,'YYYY') +1 as age ,
+		r.reportfin, r.reportcount
+		from member m
+		left join (
+		select a.userid, a.reportfin, b.reportcount
+		from (select userid, max(reportfin) as reportfin from reporttbl group by userid) a
+		join (select userid, count(reportdate) as reportcount from reporttbl group by userid) b
+		on a.userid = b.userid
+		) r
+		on m.userid=r.userid
+		where m.usertype = #{param1} and m.userstop='Y'
+		order by username desc)
+	</select>
+	<select id="reportselect" parameterType="com.beetmall.sshj.admin.vo.Admin_Member_PageVO" resultType="com.beetmall.sshj.admin.vo.Admin_reportVO">
+		select * from (
+		select * from (
+		select m.userid, m.userpwd, m.username, m.userphone, m.useremail, m.userzipcode, m.useraddr, m.userdetailaddr, to_char(m.birthday, 'YYYY/MM/DD') as birthday,  
+		to_char(joindate, 'YY/MM/DD HH:MI') as joindate, usertype, userstop, point, to_char(sysdate,'YYYY') - to_char(birthday,'YYYY') +1 as age ,
+		to_char(r.reportfin, 'YYYY/MM/DD') as reportfin, r.reportcount
+		from member m
+		left join (
+		select a.userid, a.reportfin, b.reportcount
+		from (select userid, max(reportfin) as reportfin from reporttbl group by userid) a
+		join (select userid, count(reportdate) as reportcount from reporttbl group by userid) b
+		on a.userid = b.userid) r
+		on m.userid=r.userid
+		where m.usertype = #{userType} and m.userstop='Y'
+		order by username desc
+		)where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord} order by username asc
+		)where <![CDATA[rownum<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
+       							  <if test="pageNum!=totalPage">${onePageRecord}</if>
+       	order by username desc
+	</select>
+	<select id="chatTotal" resultType="Integer">
+		select count(*) from roomoto
+	</select>
+	<select id="chatList" parameterType="com.beetmall.sshj.admin.vo.Admin_Member_PageVO" resultType="com.beetmall.sshj.admin.vo.Admin_ChatVO">
+		select * from (
+		select * from (
+		select roomcode, creator, receiver as room_receiver, to_char(roomdate, 'YYYY/MM/DD') as roomdate , cre_out, rec_out, count(r.reporteduser) as creport, count(c.reporteduser) as rreport from roomoto o
+		left join (select distinct reporteduser, reportboardnum from report where reportselect = 1 and reportboard='1:1채팅') r on r.reportboardnum = o.roomcode and r.reporteduser=o.creator
+		left join (select distinct reporteduser, reportboardnum from report where reportselect = 1 and reportboard='1:1채팅') c on c.reportboardnum = o.roomcode and c.reporteduser=o.receiver
+		group by  roomcode, creator, receiver, roomdate, cre_out, rec_out
+		order by roomcode desc
+		)where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord} order by roomcode asc
+		)where <![CDATA[rownum<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
+       							  <if test="pageNum!=totalPage">${onePageRecord}</if>
+       	order by roomcode desc
+	</select>
+	<select id="countreport" resultType="Integer">
+		select count(reportdate) from reporttbl where userid=#{param1}
+	</select>
+	<select id="sumreport" resultType="Integer">
+		select nvl(sum(reportdate),0) from reporttbl where userid=#{param1}
+	</select>
+	
 </mapper>
