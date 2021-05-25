@@ -25,7 +25,6 @@ public class admin_csController {
  @RequestMapping("/csFAQ")
 	public ModelAndView csFAQ() {
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("list", adminService.noticeList());
 		mav.setViewName("/admin/csFAQ");
 		return mav;
 	}
