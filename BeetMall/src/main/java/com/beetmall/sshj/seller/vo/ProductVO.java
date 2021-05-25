@@ -221,34 +221,30 @@ public class ProductVO {
 	}
 	//상품내용
 	// selloption 판매단위
-	public String getSelloption() {
-		this.selloption = selloptionnum + selloptionunit;
-		return selloption;
-	}
-	public void setSelloption(String selloption) {
+		public String getSelloption() {
+			this.selloption = selloptionnum + selloptionunit;
+			return selloption;
+		}
+		public void setSelloption(String selloption) {
+			this.selloption = selloption;
+		}
 		
-		
-		this.selloption = selloptionnum + selloptionunit;
-	}
-	
-	// sellweight 중량/용량
-	public String getSellweight() {
-		this.sellweight = sellweightnum + sellweightunit;
-		return sellweight;
-	}
-	public void setSellweight(String sellweight) {
-	
-		this.sellweight = sellweightnum + sellweightunit;
-	}
+		// sellweight 중량/용량
+		public String getSellweight() {
+			this.sellweight = sellweightnum + sellweightunit;
+			return sellweight;
+		}
+		public void setSellweight(String sellweight) {
+			this.sellweight = sellweight;
+		}
+		//상품내용 숫자+단위
 	//상품내용 숫자+단위
 	public String getSelloptionnum() { 
+		System.out.println("selloptionnum5555-->"+selloptionnum);
 		return selloptionnum;
 	}
 	public void setSelloptionnum(String selloptionnum) {
-		String[] numArr = selloption.split("[a-z]");
-		for(int i = 0; i<numArr.length; i++) {
-			selloptionnum = numArr[0];
-		}
+		System.out.println("selloptionnum-6666->"+selloptionnum);
 		this.selloptionnum = selloptionnum;
 		
 	}
@@ -256,35 +252,24 @@ public class ProductVO {
 		return selloptionunit;
 	}
 	public void setSelloptionunit(String selloptionunit) {
-		String[] unitArr = selloption.split("[0-9]");
-		for(int i = 0 ; i<unitArr.length; i++) {
-			selloptionunit = unitArr[1];
-		}	
 		this.selloptionunit = selloptionunit;
 	}
 	public String getSellweightnum() {
 		return sellweightnum;
 	}
 	public void setSellweightnum(String sellweightnum) {
-		String[] numArr = sellweight.split("[a-z]");
-		for(int i = 0; i<numArr.length; i++) {
-			sellweightnum  = numArr[0];
-		}
+	
 		this.sellweightnum = sellweightnum;
 	}
 	public String getSellweightunit() {
 		return sellweightunit;
 	}
 	public void setSellweightunit(String sellweightunit) {
-		String[] unitArr = sellweight.split("[0-9]");
-		for(int i = 0 ; i<unitArr.length; i++) {
-			sellweightunit = unitArr[1];
-		}	
+		
 		this.sellweightunit = sellweightunit;
 	}
 	//상품내용
-	
-	
+
 	public String getOrigin() {
 		return origin;
 	}
