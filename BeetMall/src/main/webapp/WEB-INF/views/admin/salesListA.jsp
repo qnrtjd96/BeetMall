@@ -1,15 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="/inc/top.jspf" %>
- <head>
- <meta name="viewport" content="width=device-width, initial-scale=1">
+<c:set var="today" value="<%=new java.util.Date()%>"/>
+<c:set var="now"><fmt:formatDate value="${today}" pattern="yyyy-MM-dd"/></c:set>
+
+
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  </head>
+ 
 <style> 
 	/*맨 위 회색 top Bar*/
+	
 	#topBar h5{  
 		padding-left:120px;
 	}
@@ -21,6 +24,7 @@
 	}  
 	
 	/*정렬 컨테이너*/
+	
 	#sortBox {
 		margin:40px 0 0 900px;
 	}
@@ -105,13 +109,14 @@
 		height:130px;
 		font-size:14px;
 	}
-	.search_num, .search_id{
-		width:160px;
+	.searchnum, .searchid, #usertype{
+		width:180px;
 	}
 	.search_date, .search_category, .search_sub_category{
 		font-size:12px;
 		width:125px;
 	}
+	#usertype{margin-bottom:9px;}
 	label{
 		font-size:16px;
 		margin-bottom:8px;
@@ -127,7 +132,9 @@
 	.search_wrap>li:last-child{
 		width:13%;
 	}
-	
+	#searchBtns{
+		float:center;
+	}
 	/*주문관리 탭*/
 	
 	.management_container{
@@ -152,7 +159,6 @@
 	    border-right: 0;
 	    box-sizing: border-box;
 	}
-	
 	.management_category li.on{
 		border-color: #b7bfc8 !important;
 	    border-right: 1px solid #b7bfc8;
@@ -236,9 +242,8 @@
 	}
 	
 /*주문상세 테이블 modal*/ 
-
  .detail_modal{display:none;}   
- .detail_modal{width:30%;}
+ .detail_modal{width:50%;}
 	.detail_table{
 		width:100%;
 		font-size:12px;
@@ -247,15 +252,16 @@
 	.detail_table td{
 		width:20%;
 		height:30px;
+		padding:10px;
+		border-left:1px solid lightgray;
+		
 	}
 	.detail_table th{
 		font-size:15px;
 		font-weight:bold;
 		height:30px;
 	}
-	.detail_table td{
-		border-left:1px solid lightgray;
-	}
+	
 	.detail_menu{
 		font-weight: bold;
 	}
@@ -325,6 +331,7 @@
 	}
 	#searchBtn{
 		margin-top:5px;
+		width:86px;
 	}
 	
 	/*데이터 테이블*/
@@ -410,6 +417,12 @@ function selectOrderStatusUpdate(){
 
 //모달
 function modal(id) {
+	console.log('oneOrderCheck text ->',$('#oneOrderCheck').text());
+	console.log('oneOrderCheck value ->',$('#oneOrderCheck').val());
+	console.log('oneOrderCheck text ->',$('#orderNumSetTd').text());
+	console.log('oneOrderCheck value ->',$('#orderNumSetTd').val());
+	modalAjax();
+
     var zIndex = 9999;
     var modal = $('#' + id);
 
@@ -544,22 +557,25 @@ $(function(){
 
 //Ajax 
 $(function(){
-	$('#goModal').click(function(){
-		modalAjax();
-	});
+
 });
 function modalAjax(){
-	var ordernum = $('#orderNumTd').val();
-	var url = window.loaction.href;
+	console.log('oneOrderCheck text ->',$('#oneOrderCheck').text());
+	console.log('oneOrderCheck value ->',$('#oneOrderCheck').val());
+	var ordernum = $('#oneOrderCheck').val();
+	var url = window.location.href;
+	var tag;
 	$.ajax({
 		url:url,
 		type:'post',
 		data:{
-			'ordernum':ordernum
+			ordernum:ordernum
 		},
 		success : function(data){
 			console.log('success ajax');
-			$('#hiddenOrderNum').html(ordernum);
+			console.log('ajax ordernum->',ordernum);
+			tag = '<span>'+ordernum+'<span>' ;
+			$('#orderNumSetTd').html(tag);
 		}, error: function(e){
 			console.log('ajax error -->' + e.status);
 		}
@@ -603,7 +619,7 @@ function modalAjax(){
 			<ul class="search_wrap">
 				<li><label for="">주문접수일</label><br/>
 						<div class="flexType">
-							<input type="date" name="" class="search_date"/>~<input type="date" name="" class="search_date" />
+							<input type="date" name="" class="search_date" max="${now}" /> ~ <input type="date" name="" class="search_date" max="${now}" />
 						</div></li>
 				<li><label for="">카테고리</label><br/>
 					<div class="flexType">
@@ -620,13 +636,7 @@ function modalAjax(){
 						<!-- 건과류 -->
 						<select class="search_sub_category">
 							<option>중분류 선택</option>
-							<option> 1</option>
-							<option> 2</option>
-							<option> 3</option>
-							<option> 4</option>
-							<option> 5</option>
-							<option> 6</option>
-							<option> 7</option> 
+					
 						</select>
 						<!-- 견과류 -->
 						<!-- 과일 -->
@@ -636,19 +646,19 @@ function modalAjax(){
 					</div>
 				</li>
 				<li><label for="">주문번호</label><br/>
-					<input type="text" size="15" name="" class="search_num" placeholder="주문번호를 입력해주세요."/>
+					<input type="text" size="15" name="searchnum" class="searchnum" placeholder="주문번호를 입력해주세요."/>
 				</li>
 				<li>
-					<select id="chooseId">
-						<option value="customerId">구매자 아이디</option>
-						<option value="sellerId">판매자 아이디</option>
+					<select id="usertype" name="usertype">
+						<option value="1">구매자 아이디</option>
+						<option value="2">판매자 아이디</option>
 					</select>
-					<input type="text" size="15" name="" class="search_id" placeholder="ID를 입력해주세요."/>
+					<input type="text" size="15" name="searchid" class="searchid" placeholder="ID를 입력해주세요."/>
 				</li>
-				<li>
+				<li style="margin-top:10px;">
 					<div id="searchBtns">
 						<input type="button" name="" class="save_excel" value="엑셀로 저장" onclick="save_excel()"/>
-						<input type="button" name="" class="search_btn" value="검색" id="searchBtn"/><br/>				
+						<input type="submit" name="" class="search_btn" value="검색" id="searchBtn"/><br/>				
 					</div>
 				</li>
 			</ul>
@@ -693,7 +703,7 @@ function modalAjax(){
 						<tbody>
 						<c:forEach var="list" items="${list}">
 							<tr>
-								<td id="orderNumTd"><a href="javascript:modal()" id="goModal">${list.ordernum}</a></td><!-- id="popup_open_btn" -->
+								<td id="orderNumTd"><a href="javascript:modal()"><span id="orderNumGet">${list.ordernum}</span></a></td><!-- id="popup_open_btn" -->
 								<td>${list.productnum}</td>
 								<td>${list.productname}</td>
 								<td>${list.orderquantity}</td>
@@ -778,7 +788,7 @@ function modalAjax(){
 				<tbody>
 					<tr class="detail_line1">
 						<td><span class="detail_menu">주문번호</span></td>
-						<td>${oneList.ordernum}</td>
+						<td id="orderNumSetTd">${oneList.ordernum}</td>
 						<td><span class="detail_menu">주문일</span></td>
 						<td>${oneList.orderdate}</td>
 					</tr>
@@ -796,7 +806,7 @@ function modalAjax(){
 					</tr>
 					<tr class="detail_line4">
 						<td><span class="detail_menu">옵션</span></td><!-- 구매한 옵션의 수량은 어떻게 구하죠? -->
-						<td>${oneList.optionname}<span>|</span>${v.optionprice}</td>
+						<td>${oneList.optionname}<span></span>${v.optionprice}</td>
 						<td><span class="detail_menu">포인트 사용</span></td>
 						<td>${oneList.usedpoint}<span class="point">.P</span></td>
 					</tr>

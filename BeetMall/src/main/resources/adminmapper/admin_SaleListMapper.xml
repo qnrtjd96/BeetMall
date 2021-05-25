@@ -20,6 +20,18 @@
 	left join deliverynow dn on dn.ordernum = o.ordernum
 	left join claim c on c.ordernum = o.ordernum  
 	left join seller s on p.userid = s.userid )
+	
+	<choose>
+	<when test='searchnum != null'>
+		where ordernum = '${searchnum}'
+	</when>
+	<when test='usertype = 1 and searchid != null '>
+		where userid = '${searchid}'
+	</when >
+	<when test='usertype = 2 and searchid != null '>
+		where sellerid = '${searchid}'
+	</when >
+	</choose>
 			order by ordernum desc)	
 	where <![CDATA[rownum<=]]>(${pageNum}*${onePageRecord}) order by ordernum)
     where <![CDATA[rownum<=]]>

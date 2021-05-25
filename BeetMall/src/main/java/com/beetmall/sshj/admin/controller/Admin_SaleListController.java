@@ -27,6 +27,7 @@ public class Admin_SaleListController {
 		String reqPageNum = req.getParameter("pageNum");
 		if(reqPageNum!=null) {
 			sapvo.setPageNum(Integer.parseInt(reqPageNum));
+			System.out.println(reqPageNum + "<--reqPageNum");
 		}
 		//검색어
 		sapvo.setSearchWord(sapvo.getSearchWord());
@@ -47,11 +48,6 @@ public class Admin_SaleListController {
 		mav.addObject("searchWord",sapvo.getSearchWord());
 		mav.addObject("sapvo",sapvo);
 		
-		System.out.println("startpage --->" + sapvo.getStartPageNum());
-		System.out.println("totalrecord--->"+ sapvo.getTotalRecord());
-		System.out.println("onePageNum-->"+ sapvo.getOnePageNum());
-		System.out.println("onePageRecord-->"+sapvo.getOnePageRecord());
-		System.out.println("totalpage--->"+ sapvo.getTotalPage());
 		
 		mav.setViewName("/admin/salesListA");
 		return mav;
