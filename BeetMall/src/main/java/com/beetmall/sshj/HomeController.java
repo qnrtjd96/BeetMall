@@ -42,6 +42,7 @@ public class HomeController {
 		mav.addObject("bottomtitle",homeservice.homeProductTitle(3));
 		mav.addObject("toprecipe", homeservice.homerecipe(0));
 		mav.addObject("bottomrecipe", homeservice.homerecipe(1));
+		mav.addObject("popup", homeservice.popupselect());
 		
 		mav.setViewName("home");
 		return mav;

@@ -238,7 +238,7 @@ footer{
 	}
 	#search_container, #select_container{width:100%; margin:0 auto; margin-bottom:10px;}
 	#select_container{margin:0 auto; height:60px;}
-	select{float:right; border:1px solid lightgray;}
+	select{float:right; border:1px solid lightgray;  background:white;}
 	/*버튼*/
 	.bottom_wrap{margin:10px auto; width:90%;  text-align:center;}
 	#ask_btn, #btn{
