@@ -750,8 +750,11 @@ $('submit').click(function(){
                                  i를 더해주어 다음 조건을 만들어 다음 번호 것만 가져오게 한다 -->
                            <c:forEach var="categoryList" items="${cateList}">
                               <c:if test="${categoryList.catenum==i}">
-                                 <li value="${categoryList.catenum}"><a href="#" onclick="return false">${categoryList.catename}</a><span>&gt;</span></li>
+                                
                                  <c:set var="i" value="${i+1 }"/>
+                              </c:if>
+                              <c:if test="${categoryList.catenum!=i}">
+                                <li value="${categoryList.catenum}"><a href="#" onclick="return false">${categoryList.catename}</a><span>&gt;</span></li>
                               </c:if>
                            </c:forEach>
                         <c:remove var="i"/>

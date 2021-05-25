@@ -85,6 +85,8 @@ public class ProductController {
 	@Transactional(rollbackFor= {Exception.class, RuntimeException.class})
 	@RequestMapping(value="/product_regi_ok", method=RequestMethod.POST)
 	public ModelAndView product_regi(ProductVO vo, HttpSession session, HttpServletRequest req) {
+
+		
 		System.out.println("product_regi_ok까지는 넘어옴");
 		//첨부파일 받아오기 
 				MultipartHttpServletRequest multireq = (MultipartHttpServletRequest)req;
@@ -167,7 +169,9 @@ public class ProductController {
 			System.out.println("productcontent ->"+vo.getProductcontent());
 			System.out.println("origin ->" +vo.getOrigin());
 			System.out.println("selloption->"+vo.getSelloption());
+			System.out.println("selloptionunit-->"+vo.getSelloptionunit());
 			System.out.println("sellWeight->"+vo.getSellweight());
+			System.out.println("sellweightunit-->"+vo.getSelloptionunit());
 			System.out.println("wrapping -> "+ vo.getWrapping());
 			
 			
@@ -263,6 +267,9 @@ public class ProductController {
 	public ModelAndView onePageRecordSelect(@RequestParam(value="productnum") int productnum) {
 		ModelAndView mav = new ModelAndView();
 		ProductVO vo = new ProductVO();
+		
+		// 카테고리 리스트
+		mav.addObject("cateList",farmService.allCategoryList());	
 		
 		mav.addObject("vo", productService.onePageRecordSelect(productnum));
 		mav.setViewName("seller/product_edit");

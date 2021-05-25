@@ -226,15 +226,17 @@ public class ProductVO {
 		return selloption;
 	}
 	public void setSelloption(String selloption) {
+		this.selloption = selloption;
+
+		//옵션 숫자
 		String[] numArr = selloption.split("[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]");
-		for(int i = 0; i<numArr.length; i++) {
-			selloptionnum = numArr[0];
-		}
+		selloptionnum = numArr[0];
+	
+		//옵션 단위
 		String[] unitArr = selloption.split("[0-9]");
-		for(int i = 0 ; i<unitArr.length; i++) {
-			selloptionunit = unitArr[1];
-		}	
-		this.selloption = selloptionnum + selloptionunit;
+		selloptionunit = unitArr[1];
+	
+		
 	}
 	
 	// sellweight 중량/용량
@@ -243,22 +245,23 @@ public class ProductVO {
 		return sellweight;
 	}
 	public void setSellweight(String sellweight) {
+		this.sellweight = sellweight;
+
+		//중량/용량 숫자
 		String[] numArr = sellweight.split("[a-z]");
-		for(int i = 0; i<numArr.length; i++) {
-			sellweightnum  = numArr[0];
-		}
+		sellweightnum  = numArr[0];
+
+		
+		//중량용량 단위
 		String[] unitArr = sellweight.split("[0-9]");
-		for(int i = 0 ; i<unitArr.length; i++) {
-			sellweightunit = unitArr[1];
-		}	
-		this.sellweight = sellweightnum + sellweightunit;
+		sellweightunit = unitArr[1];
+
 	}
 	//상품내용 숫자+단위
 	public String getSelloptionnum() { 
 		return selloptionnum;
 	}
 	public void setSelloptionnum(String selloptionnum) {
-		
 		this.selloptionnum = selloptionnum;
 		
 	}
@@ -266,14 +269,9 @@ public class ProductVO {
 		return selloptionunit;
 	}
 	public void setSelloptionunit(String selloptionunit) {
-		
 		this.selloptionunit = selloptionunit;
 	}
 	public String getSellweightnum() {
-		String[] numArr = sellweight.split("[a-z]");
-		for(int i = 0; i<numArr.length; i++) {
-			sellweightnum  = numArr[0];
-		}
 		return sellweightnum;
 	}
 	public void setSellweightnum(String sellweightnum) {
@@ -288,8 +286,7 @@ public class ProductVO {
 		this.sellweightunit = sellweightunit;
 	}
 	//상품내용
-	
-	
+
 	public String getOrigin() {
 		return origin;
 	}

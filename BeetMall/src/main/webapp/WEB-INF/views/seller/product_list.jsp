@@ -75,7 +75,7 @@
 		width:3%;
 	}
 	*/
-	.product_table th:nth-child(3){width:18%; text-align:left;}
+	.product_table th:nth-child(3){width:18%; }
 	.product_table th:nth-child(6){width:14%}
 	.product_table th:nth-child(2),.product_table th:nth-child(5),.product_table th:last-child{width:6%}
 	.product_table th:first-child{width:5%}
@@ -149,15 +149,14 @@
 //상품목록 상세보기 토글
 $(function(){
 	//선택한 tr열고 닫히기    
-	$("#showDetailPlus").click(function() {
-		$(this).parent().next().toggle(
+	$("#showDetailPlus").on('click' ,function() {
+		$("#showDetailPlus").parent().next().toggle(
+		//$(this).parent().next().toggle(
 			function(){
 				$(this).parent().next().css("display", " "); 
-			},
-			function(){
 				$(this).parent().next().css("display", "hide"); 
 			}
-		);
+		)
 	});
 });
 
