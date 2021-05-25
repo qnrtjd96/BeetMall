@@ -54,7 +54,6 @@ public class admin_salesController {
 	// seller 카테고리 불러오기 위한 서비스
 	@Autowired
 	SellerSalesService sellerService;
-	 	
 
 	//매출 분석
 	@RequestMapping("/salesAnalasysA")

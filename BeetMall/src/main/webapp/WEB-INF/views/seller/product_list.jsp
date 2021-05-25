@@ -75,7 +75,7 @@
 		width:3%;
 	}
 	*/
-	.product_table th:nth-child(3){width:18%; }
+	.product_table th:nth-child(3){width:18%; text-align:left;}
 	.product_table th:nth-child(6){width:14%}
 	.product_table th:nth-child(2),.product_table th:nth-child(5),.product_table th:last-child{width:6%}
 	.product_table th:first-child{width:5%}
@@ -152,11 +152,15 @@ $(function(){
 	$("#showDetailPlus").on('click' ,function() {
 		$("#showDetailPlus").parent().next().toggle(
 		//$(this).parent().next().toggle(
+	$(document).on('click','#showDetailPlus',function() {
+		$(this).parent().next().toggle(
 			function(){
 				$(this).parent().next().css("display", " "); 
+			},
+			function(){
 				$(this).parent().next().css("display", "hide"); 
 			}
-		)
+		);
 	});
 });
 
@@ -367,7 +371,7 @@ $(document).ready(function(){
 								</c:if>
 							</li>
 							<li><span class="detailName">판매단위</span>${vo.selloptionnum} ${vo.selloptionunit}</li>
-							<li><span class="detailName">중량/용량</span>${vo.sellweight} </li>
+							<li><span class="detailName">중량/용량</span>${vo.sellweight} ${vo.sellweightunit}</li>
 							<!-- 보관/포장 -->
 							<li><span class="detailName">보관/포장</span>
 								<c:if test="${vo.wrapping eq '1' }">

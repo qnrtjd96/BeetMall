@@ -1,13 +1,15 @@
-package com.beetmall.sshj.seller.vo;
+package com.beetmall.sshj.admin.vo;
 
-public class SearchAndPageVO {
-	private String userid;
+public class Admin_SearchAndPageVO {
+private String userid;
 	
 	//검색어와 검색키
 	private String searchKey;
 	private String searchWord;
 	private String searchid;
 	private String searchnum;
+	private int usertype;
+	
 	//페이지
 	// 총레코드수가 발생하면, 총페이지수를 구하기 가능 -> 총페이지수가 나오면 마지막페이지에 레코드가 몇개 남았는지 확인 -> 그럼 시작페이지알수있음
 	private int pageNum=1;//현재페이지 					초기 세팅해줘야하는 값 3개
@@ -28,10 +30,7 @@ public class SearchAndPageVO {
 	
 	// 정렬 
 	private String sortRecord;
-	
-	
-	//getter setter
-	//검색
+
 	public String getSearchKey() {
 		return searchKey;
 	}
@@ -149,11 +148,19 @@ public class SearchAndPageVO {
 	public void setSearchid(String searchid) {
 		this.searchid = searchid;
 	}
+
+	public int getUsertype() {
+		return usertype;
+	}
+	public void setUsertype(int usertype) {
+		this.usertype = usertype;
+	}
 	public String getSearchnum() {
 		return searchnum;
 	}
 	public void setSearchnum(String searchnum) {
 		this.searchnum = searchnum;
 	}
+	
 	
 }

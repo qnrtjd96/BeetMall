@@ -16,21 +16,28 @@ public class OrderServiceImp implements OrderService {
 
 	@Override
 	public List<OrderSaleVO> orderList(SearchAndPageVO sapvo) {
+		// TODO Auto-generated method stub
 		return orderDAO.orderList(sapvo);
 	}
 
 	@Override
+	public OrderSaleVO oneOrderSelect(OrderSaleVO osvo){
+		// TODO Auto-generated method stub
+		return orderDAO.oneOrderSelect(osvo);
+	}
+
+	@Override
 	public int totalRecord(SearchAndPageVO sapvo) {
+		// TODO Auto-generated method stub
 		return orderDAO.totalRecord(sapvo);
 	}
 
 	@Override
-	public List<OrderSaleVO> oneRecordSelect(String ordernum) {
-		return orderDAO.oneRecordSelect(ordernum);
-	}
-
-	@Override
 	public int orderStatusUpdate(String ordernum, String orderstatus) {
+		// TODO Auto-generated method stub
 		return orderDAO.orderStatusUpdate(ordernum, orderstatus);
 	}
+
+
+
 }
