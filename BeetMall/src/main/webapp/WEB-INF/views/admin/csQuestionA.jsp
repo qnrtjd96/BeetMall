@@ -111,7 +111,7 @@
 		<div id="topBar">
 			<ul>
 				<li><h5><strong><a href="csQuestionA">고객 문의</a></strong></h5></li> 
-				<li><button class="success" value="del" name="del" id="delBtn">비공개</button></li>
+				<li><button class="success" value="del" name="del" id="delBtn" style="visibility: hidden;">비공개</button></li>
 			</ul> 
 		</div>  
 		</div>
@@ -148,7 +148,7 @@
    		<div id="contentBox"> 	
 		<div id="title">
 			<ul>
-				<li><input type="checkbox" name="check"></li>
+				<li><input type="checkbox" name="check" style="visibility: hidden;"></li>
 				<li>문의번호</li>
 				<li>문의주체</li>
 				<li>제목</li>
@@ -158,7 +158,7 @@
 		</div>
 		<c:forEach var="data" items="${list}">  
 			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"></li>
+				<li><input type="checkbox" name="check" id="check" style="visibility: hidden;"></li>
 				<li>${data.qmnum}</li>
 				<li>
 					<c:if test="${data.qmoption==1 }">
@@ -168,7 +168,7 @@
 						판매자
 					</c:if>
 				</li>
-				<li class="subjectLine"><a href="/sshj/csAnswerA?qmnum=${data.qmnum}">${data.qmtitle}</a></li>
+				<li class="subjectLine wordcut"><a href="/sshj/csAnswerA?qmnum=${data.qmnum}">${data.qmtitle}</a></li>
 				<li>${data.userid}</li> 
 				<li>${data.qmdate}</li>
 			</ul> 
@@ -196,12 +196,10 @@
 			</div>
 		 </div> 
 		 <div>
-			<form method="get" class="searchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
+			<form method="get" class="searchFrm" action="/sshj/csQuestionA">
 				<select name="searchKey">
-					<option value="subject" selected>제목</option>
-	   				<option value="no">공지번호</option> 
-	   				<option value="who">대상</option> 
-	   				<option value="writedate">공지일</option> 
+					<option value="qmtitle" selected>제목</option>
+	   				<option value="userid">작성자</option> 
 				</select>			
 				<input type="text" name="searchWord" id="searchWord"/>
 				<input type="submit" value="검색"/> 
@@ -232,4 +230,11 @@
 	    width: 37%;
 	    text-align: left;
 	}
+	#contentBox {
+	    width: 1090px;
+	    margin: 0 0 30px;
+	    font-size: 14px;
+	}
+	
+	.wordcut{white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
 </style>

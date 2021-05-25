@@ -14,4 +14,6 @@ public interface MyfavoriFormService {
 
 	public int farmHit(int storenum);
 
+	public MyfavoriFormVO discountSelect2(int storenum);
+
 }

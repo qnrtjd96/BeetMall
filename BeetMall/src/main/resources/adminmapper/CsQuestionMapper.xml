@@ -9,20 +9,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 select qmnum, userid, qmtitle, to_char(qmdate, 'YYYY-MM-DD') qmdate, qmoption 
                 from qmboard
 				where 1=1
-				<!-- <choose>
-					<when test ='searchKey!=null'>
-						and faqcate = '${searchKey}' 
+				<choose>
+					<when test = 'searchWord!=null and searchKey!=null'>
+						and ${searchKey} like '%${searchWord}%'
 					</when>
-					<when test ='searchKey!=null and searchWord==null'>
-						where faqcate = '${searchKey}' and faqoption = 1
-					</when>
-					<when test ='searchWord!=null'>
-						where faqtitle like '%${searchWord}%' and faqoption = 1
-					</when>
-					<when test ='searchWord==null'>
-						where faqoption = 1
-					</when>
-				</choose> -->
+				</choose>
 				order by qmnum desc)
 			where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord} order by qmnum)
 			where <![CDATA[rownum<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
@@ -32,18 +23,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="csQuestOnetotalRecord" parameterType="com.beetmall.sshj.admin.vo.adminkPageSearchVO" resultType="int">
 		select count(*) 
 		from (select qmnum, userid, qmtitle, to_char(qmdate, 'YYYY-MM-DD') qmdate, qmoption 
-              from qmboard)
-		<!-- <choose>
+              from qmboard
+              where 1=1
+        <choose>
 			<when test = 'searchWord!=null and searchKey!=null'>
-				where faqtitle like '%${searchWord}%' and faqoption=1 and faqcate=${searchKey}
+				and ${searchKey} like '%${searchWord}%'
 			</when>
-			<when test = 'searchWord!=null'>
-				where faqtitle like '%${searchWord}%' and faqoption=1 
-			</when>
-			<when test = 'searchWord==null'>
-				where faqoption=1
-			</when>
-		</choose> -->
+		</choose>)
 	</select>
 	<select id="csAnswerWrite" resultType="com.beetmall.sshj.admin.vo.CsQuestionVO">
 		select qmnum, qmoption, userid, qmtitle, to_char(qmdate, 'YYYY-MM-DD') qmdate, qmcontent, qmanswer
