@@ -31,6 +31,13 @@ public class Admin_MemberVO {
 	private String bank;
 	private String bankname;
 	private long bankaccount;
+	
+	public String getSellerregiimg() {
+		return sellerregiimg;
+	}
+	public void setSellerregiimg(String sellerregiimg) {
+		this.sellerregiimg = sellerregiimg;
+	}
 	// -- 회원정보 수정때문에 추가한 부분 //
 	private int ordercount;
 	private String orderstatus;
@@ -88,12 +95,6 @@ public class Admin_MemberVO {
 	}
 	public void setSellerreginum(int sellerreginum) {
 		this.sellerreginum = sellerreginum;
-	}
-	public String getSellerregiimg() {
-		return sellerregiimg;
-	}
-	public void setSellerregiimg(String sellerregiimg) {
-		this.sellerregiimg = sellerregiimg;
 	}
 	public int getRegiapproval() {
 		return regiapproval;
