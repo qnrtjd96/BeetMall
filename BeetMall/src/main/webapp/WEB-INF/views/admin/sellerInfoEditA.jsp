@@ -701,7 +701,7 @@ function editPage(){
 						<div id="profile_box">
 							<input type="hidden" name="farmprofile" value="${sellerData.farmprofile}" >
 							<input type="file" id="farmprofile" name="filename" style="display: none;" onchange="javascript:check(this)" accept="image/png, image/jpg, image/jpeg, image/gif"/> 
-							<a href="javascript:selectImg(this)"><img id="nowImg" src="<%=request.getContextPath()%>/resources/img/${sellerData.farmprofile}" /></a><br /> 
+							<a href="javascript:selectImg(this)"><img id="nowImg" src="<%=request.getContextPath()%>/resources/sellerprofileimg/${sellerData.farmprofile}" onerror="this.src='/sshj/img/derror.png'"/></a><br /> 
 							*프로필 이미지 클릭시 파일첨부<br /> <input type="text" id="farmname" name="farmname" value="${sellerData.farmname }" style="width: 100px; height: 25px" />
 							<div id="profileData">
 								방문 : ${sellerData.farmvisitor}명 | 농장 즐겨찾기 : ${selectFavorite}명
