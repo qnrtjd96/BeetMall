@@ -47,11 +47,13 @@ a:hover, a:active, a:visited, a:link {
 	}
 
 /* ------------------페이징처리부분-------------------- */
-.page_wrap {
+.page_wrap,.page_wrap2 {
 	text-align: center;
 	font-size: 0;
 	padding-bottom: 30px;
 }
+
+
 
 .page_nation {
 	display: inline-block;
@@ -257,6 +259,17 @@ background-color:white;
 overflow:hidden;
 }
 
+
+
+#reciborder{
+margin-bottom:60px;
+width:980;
+height:1px;
+background-color:#F2EAEC;
+margin-left:50px;
+margin-right:50px;
+}
+
 </style>
 <script>
 
@@ -272,16 +285,17 @@ $(document).ready(function logno(){
 /////////내가쓴 레시피///////////////
 
 
+
 	 
 $(document).ready(function(){	
 	
 	
 	
 	  $("#myrbtn").click(function(){
-		   $("#recimainTOPbox").show()
-		   $("#recimainTOPbox2").hide()
-		   $("#myrbtn").css("color","black").css("border-bottom","5px solid #ffc116") ///클릭됨
-		   $("#goodrbtn").css("color","gray").css("border-bottom","5px solid #eee")
+		   //$("#recimainTOPbox").show()
+		   //$("#recimainTOPbox2").hide()
+		   //$("#myrbtn").css("color","black").css("border-bottom","5px solid #ffc116") ///클릭됨
+		   //$("#goodrbtn").css("color","gray").css("border-bottom","5px solid #eee")
 		   
 	
 	
@@ -294,13 +308,14 @@ $(document).ready(function(){
 	
 	  $("#goodrbtn").click(function(){
 		  
-		   $("#recimainTOPbox").hide()
-		   $("#recimainTOPbox2").show()
-		   $("#myrbtn").css("color","gray").css("border-bottom","5px solid #eee")
-		   $("#goodrbtn").css("color","black").css("border-bottom","5px solid #ffc116")//클릭됨
-		   
+		  // $("#recimainTOPbox").hide()
+		  // $("#recimainTOPbox2").show()
+		  // $("#myrbtn").css("color","gray").css("border-bottom","5px solid #eee")
+		  // $("#goodrbtn").css("color","black").css("border-bottom","5px solid #ffc116")//클릭됨
+	  
 		 
  });
+	
 });	
      
  ///////////내가쓴 레시피 제거/////////////// 
@@ -388,8 +403,8 @@ $(document).ready(function(){
 			<!--------------상단 메뉴바들-------------------->
 			<div id="recitb">
 				<div id="myrecipeTop">
-					<input type="button" id="myrbtn" value="나의 레시피" style="border-bottom:5px solid #ffc116"/> 
-					<input type="button" id="goodrbtn" value="즐겨찾기 레시피" />
+					<a href="#recimainTOPbox"><input type="button" id="myrbtn" value="나의 레시피" style="border-bottom:5px solid #ffc116; color:black"/></a> 
+					<a href="#recimainTOPbox2"><input type="button" id="goodrbtn" value="즐겨찾기 레시피" /></a>
 				</div>
 				<ul id="myrecipeTop2">
 					
@@ -423,7 +438,7 @@ $(document).ready(function(){
 			<div class="page_wrap">
 					<div class="page_nation">
 					   <c:if test="${pageVO1.pageNum2>1}"><!-- 이전페이지가 있을때 -->
-					   		<a class="arrow prev" href="/sshj/customMyrecipe?rpageNum1=${pageVO1.pageNum2-1}<c:if test="${pageVO1.searchWord2 != null && pageVO1.searchWord2 != ''}">&searchKey=${pageVO1.searchKey2}&searchWord=${pageVO1.searchWord2}</c:if>"></a>
+					   		<a class="arrow prev" href="/sshj/customMyrecipe?rpageNum1=${pageVO1.pageNum2-1}#recimainTOPbox<c:if test="${pageVO1.searchWord2 != null && pageVO1.searchWord2 != ''}">&searchKey=${pageVO1.searchKey2}&searchWord=${pageVO1.searchWord2}</c:if>"></a>
 					   </c:if>
 					   <!-- 페이지 번호                   1                                    5                     -->
 			           <c:forEach var="p" begin="${pageVO1.startPageNum2}" step="1" end="${pageVO1.startPageNum2 + pageVO1.onePageNum2-1}">
@@ -432,20 +447,34 @@ $(document).ready(function(){
 			                    <a class="active">${p}</a>
 			                 </c:if>   
 			                 <c:if test="${p!=pageVO1.pageNum2}"> <!-- 현재페이지가 아닐때 실행 -->
-			                    <a href="/sshj/customMyrecipe?rpageNum1=${p}<c:if test="${pageVO1.searchWord2 != null && pageVO1.searchWord2 != ''}">&searchKey=${pageVO1.searchKey2}&searchWord=${pageVO1.searchWord2}</c:if>">${p}</a>
+			                    <a href="/sshj/customMyrecipe?rpageNum1=${p}#recimainTOPbox<c:if test="${pageVO1.searchWord2 != null && pageVO1.searchWord2 != ''}">&searchKey=${pageVO1.searchKey2}&searchWord=${pageVO1.searchWord2}</c:if>">${p}</a>
 			                 </c:if>
 			              </c:if>
 			           </c:forEach>
 			           <c:if test="${pageVO1.pageNum2 < pageVO1.totalPage2}">
-			              <a class="arrow next" href="/sshj/customMyrecipe?rpageNum1=${pageVO1.pageNum2+1}<c:if test="${pageVO1.searchWord2 != null && pageVO1.searchWord2 != ''}">&searchKey=${pageVO1.searchKey2}&searchWord=${pageVO1.searchWord2}</c:if>"></a>
+			              <a class="arrow next" href="/sshj/customMyrecipe?rpageNum1=${pageVO1.pageNum2+1}#recimainTOPbox<c:if test="${pageVO1.searchWord2 != null && pageVO1.searchWord2 != ''}">&searchKey=${pageVO1.searchKey2}&searchWord=${pageVO1.searchWord2}</c:if>"></a>
 			           </c:if>
 					</div>
-			 </div>  
+			 </div> 
         
 		</div>
 		
+		<!-- 상단 페이징 선들------------ -->
+		
+		<div id="reciborder"></div>
+		
+		 <!--------------상단 메뉴바들-------------------->
+			<div id="recitb">
+				<div id="myrecipeTop">
+					<a href="#recimainTOPbox"><input type="button" id="myrbtn" value="나의 레시피" /></a> 
+					<a href="#recimainTOPbox2"><input type="button" id="goodrbtn" value="즐겨찾기 레시피" style="border-bottom:5px solid #ffc116; color:black" /></a>
+				</div>
+				<ul id="myrecipeTop2">
+					
+				</ul>
+			</div>
 		<!--------------즐겨찾기 게시판 이미지들-------------------->
-		<div id="recimainTOPbox2" style="display:none">
+		<div id="recimainTOPbox2">
 		
 		    <div id="recimainbox2">
 				    <c:forEach var="data2" items="${list2}">
@@ -468,10 +497,11 @@ $(document).ready(function(){
 				</c:forEach>
 				</div>
 				
-					<div class="page_wrap">
+					
+	<div class="page_wrap2">
 						<div class="page_nation">
 						   <c:if test="${pageVO2.pageNum2>1}"><!-- 이전페이지가 있을때 -->
-						   		<a class="arrow prev" href="/sshj/customMyrecipe?rpageNum2=${pageVO2.pageNum2-1}<c:if test="${pageVO2.searchWord2 != null && pageVO2.searchWord2 != ''}">&searchKey=${pageVO2.searchKey2}&searchWord=${pageVO2.searchWord2}</c:if>"></a>
+						   		<a class="arrow prev" href="/sshj/customMyrecipe?rpageNum2=${pageVO2.pageNum2-1}#recimainTOPbox2<c:if test="${pageVO2.searchWord2 != null && pageVO2.searchWord2 != ''}">&searchKey=${pageVO2.searchKey2}&searchWord=${pageVO2.searchWord2}</c:if>"></a>
 						   </c:if>
 						   <!-- 페이지 번호                   1                                    5                     -->
 				           <c:forEach var="p" begin="${pageVO2.startPageNum2}" step="1" end="${pageVO2.startPageNum2 + pageVO2.onePageNum2-1}">
@@ -480,22 +510,20 @@ $(document).ready(function(){
 				                    <a class="active">${p}</a>
 				                 </c:if>   
 				                 <c:if test="${p!=pageVO2.pageNum2}"> <!-- 현재페이지가 아닐때 실행 -->
-				                    <a href="/sshj/customMyrecipe?rpageNum2=${p}<c:if test="${pageVO2.searchWord2 != null && pageVO2.searchWord2 != ''}">&searchKey=${pageVO2.searchKey2}&searchWord=${pageVO2.searchWord2}</c:if>">${p}</a>
+				                    <a href="/sshj/customMyrecipe?rpageNum2=${p}#recimainTOPbox2<c:if test="${pageVO2.searchWord2 != null && pageVO2.searchWord2 != ''}">&searchKey=${pageVO2.searchKey2}&searchWord=${pageVO2.searchWord2}</c:if>">${p}</a>
 				                 </c:if>
 				              </c:if>
 				           </c:forEach>
 				           <c:if test="${pageVO2.pageNum2 < pageVO2.totalPage2}">
-				              <a class="arrow next" href="/sshj/customMyrecipe?rpageNum2=${pageVO2.pageNum2+1}<c:if test="${pageVO2.searchWord2 != null && pageVO2.searchWord2 != ''}">&searchKey=${pageVO2.searchKey2}&searchWord=${pageVO2.searchWord2}</c:if>"></a>
+				              <a class="arrow next" href="/sshj/customMyrecipe?rpageNum2=${pageVO2.pageNum2+1}#recimainTOPbox2<c:if test="${pageVO2.searchWord2 != null && pageVO2.searchWord2 != ''}">&searchKey=${pageVO2.searchKey2}&searchWord=${pageVO2.searchWord2}</c:if>"></a>
 				           </c:if>
 						</div>
 					 </div>
-	
+
+
+
+
+	</div>
 			
 	</div>
 
-
-
-
-
-
-	</div>

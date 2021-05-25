@@ -80,11 +80,13 @@ a:hover, a:active, a:visited, a:link {
 	padding-left:20px;
 	margin-bottom:20px;;
 	font-size:14px;
+	overflow:hidden;
 	
 }
 
 #sprofile>a{
 color:gray;
+overflow:hidden;
 }
 
 #simg {
@@ -178,8 +180,8 @@ padding-left:20px;
 	padding-left:240px;
 	margin-bottom:25px;
 	font-weight:bold;
-    color:red;
-	font-size:35px;
+    color:black;
+	font-size:30px;
 
 	
 }
@@ -698,16 +700,19 @@ float:left;
     #chatbtn{
 	background-color:#2aa1b7;
 	color:white;
+	font-weight:bold;
 	}
 	
 	#wishbtn{
-	background-color:#1aa687;
+	background-color:#F96167;
 	color:white;
+	font-weight:bold;
 	}
 	
 	#totalbuy{
 	background-color:#ff414d;
 	color:white;
+	font-weight:bold;
 	}
 
   input>.btn{
@@ -773,6 +778,11 @@ line-height:50px;
 margin-left:1010px;
 font-size:15px;
 color:black;
+}
+
+#spanTotalPrice{
+font-size:40px;
+color:red;
 }
 
 /* 채팅 */
@@ -858,7 +868,7 @@ color:black;
 
     		var tprice=(optprice*ocount)+((prtprice-dprtprice)*pcount);			
     		//alert("pcount="+pcount+"tprice="+tprice);
-    		$("#productTotalPrice").html("구매가격:"+tprice+"원");
+    		$("#spanTotalPrice").html(tprice);
     		$("#productTotalPrice2").html("할인된가격: - "+(dprtprice*pcount)+"원");
     		$("#productTotalPrice4").html("상품"+prtprice+"원 x"+pcount+"개");
     		$("#productTotalPrice3").html("옵션가격:"+(optprice*ocount)+"원("+optprice+"x"+ocount+"개)");
@@ -880,7 +890,7 @@ color:black;
 	
     		tprice=(optprice*ocount)+((prtprice-dprtprice)*pcount);
     		//alert("pcount="+pcount+"tprice="+tprice); 		 		
-    		$("#productTotalPrice").html("구매가격:"+tprice+"원");
+    		$("#spanTotalPrice").html(tprice);
     		$("#productTotalPrice2").html("할인된가격: - "+(dprtprice*pcount)+"원");
     		$("#productTotalPrice4").html("상품"+prtprice+"원 x"+pcount+"개");
     		$("#productTotalPrice3").html("옵션가격:"+(optprice*ocount)+"원("+optprice+"x"+ocount+"개)");
@@ -909,7 +919,7 @@ color:black;
 			var tprice=(optprice*ocount)+((prtprice-dprtprice)*pcount);
 			//alert("옵션바뀔때 가격"+optprice+",tprice="+tprice);
 			
-			$("#productTotalPrice").html("구매가격:"+tprice+"원");
+			$("#spanTotalPrice").html(tprice);
 			$("#productTotalPrice2").html("할인된가격: - "+(dprtprice*pcount)+"원");
 			$("#productTotalPrice4").html("상품"+prtprice+"원 x"+pcount+"개");
 			$("#productTotalPrice3").html("옵션가격:"+(optprice*ocount)+"원("+optprice+"x"+ocount+"개)");
@@ -926,7 +936,7 @@ color:black;
 		 tprice=(optprice*ocount)+((prtprice-dprtprice)*pcount);    		 
 
 		 $("#productTotalPrice3").html("옵션가격:"+(optprice*ocount)+"원("+optprice+"x"+ocount+"개)");
-		 $("#productTotalPrice").html("구매가격:"+tprice+"원");
+		 $("#spanTotalPrice").html(tprice);
   		 $("#productTotalPrice2").html("할인된가격: - "+(dprtprice*pcount)+"원");
   		 $("#productTotalPrice4").html("상품"+prtprice+"원 x"+pcount+"개");
 
@@ -947,7 +957,7 @@ color:black;
  		 tprice=(optprice*ocount)+((prtprice-dprtprice)*pcount);    		 
 
  		 $("#productTotalPrice3").html("옵션가격:"+(optprice*ocount)+"원("+optprice+"x"+ocount+"개)");
- 		 $("#productTotalPrice").html("구매가격:"+tprice+"원");
+ 		 $("#spanTotalPrice").html(tprice);
    		 $("#productTotalPrice2").html("할인된가격: - "+(dprtprice*pcount)+"원");
    		 $("#productTotalPrice4").html("상품"+prtprice+"원 x"+pcount+"개");
 
@@ -1143,7 +1153,7 @@ color:black;
 
 
 			<div id=productImgBox>
-				<img src="img/${pvo.thumbimg}"/>
+				<img src="resources/sellerProductImgs/${pvo.thumbimg}"/>
 			</div>
 
 
@@ -1167,7 +1177,7 @@ color:black;
 					<a href="#">${pvo.userid}</a>  <!-- 판매자 아이디 -->
 				</div>
 				<div id="simg">
-					<a href="#"><img src="img/${fvo.farmprofile}"/></a>  <!-- 프사 -->
+					<a href="#"><img src="resource/sellerprofileimg/${fvo.farmprofile}"/></a>  <!-- 프사 -->
 				</div>
 				
 				
@@ -1216,7 +1226,7 @@ color:black;
                 <div id=productTotalPrice4></div>
                 <div id=productTotalPrice2>할인된가격:- ${Dprice} 원</div>
                 <div id=productTotalPrice3>옵션가격:</div>
-				<div id=productTotalPrice>구매가격: <span id="spanTotalPrice"></span> 원</div>
+				<div id=productTotalPrice>구매가격: <span id="spanTotalPrice" style="font-size:40px; color:red"></span> 원</div>
 				
 				<div id=productBtn>
 					<input type="button" value="1:1대화하기"  class="btn" id="chatbtn"/>

@@ -641,9 +641,9 @@ $(function(){
 
  
 <!-- 신고하기 부분-->
-	<div style="height:350px;width:500px;border:1px solid red;position:absolute;top:400px;left:800px;background-color:white;display:none;" id="reportDiv" class="reportDiv">
+	<div style="height:350px;width:500px;border:2px solid #ddd;position:absolute;top:400px;left:800px;background-color:white;display:none;" id="reportDiv" class="reportDiv">
 		<form style="height:400px;width:500px;float:left;" method="post" action="customreport" id="reportForm" class="reportForm">
-			<h2 style="margin-left:10px;">신고하기</h2>
+			<h2 style="margin-left:10px; color:#50586C; font-weight:bold">신고하기</h2>
 			<span style="float:left;font-size:20px;margin-left:10px;">신고사유</span>
 				<input type="hidden" name="userid" value="${logId}"/>												<!-- 신고자 아이디 -->
 				<input type="hidden" name="reporteduser" id="reporteduser" value=""/>											<!-- 신고할 사람 아이디 -->
@@ -656,9 +656,9 @@ $(function(){
 					<option value="기타">기타</option>
 				</select>
 			<textarea name="reportcontent" id="reportcontent" style="height:200px;width:480px;margin-left:10px; margin-right:10px;font-size:15px;" maxlength="149"></textarea><!-- 신고내용 -->
-			<div style="font-size:20px;float:right;margin-right:10px;">
-				<input type="button" value="신고하기" style="background-color:#ff3a3a;color:white;border:1px solid #aaa;"id="reportsubmit" class="reportsubmit"/><!-- 신고버튼 -->
-				<input type="button" value="닫기"style="background-color:#ddd;color:white;border:1px solid #aaa;"id="reportClose"/>
+			<div style="font-size:18px;float:right;margin-right:10px;">
+				<input type="button" value="신고하기" style="background-color:#ff3a3a;color:white;border:1px solid #fff;"id="reportsubmit" class="reportsubmit"/><!-- 신고버튼 -->
+				<input type="button" value="닫기"style="background-color:gray;color:white;border:1px solid #fff;"id="reportClose"/>
 				
 			</div>
 		</form>

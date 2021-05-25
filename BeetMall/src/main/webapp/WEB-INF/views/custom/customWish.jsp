@@ -317,7 +317,7 @@ font-weight:bold;
 }
 
 #ptitleprice{
-color:gray;
+color:#CC313D;
 }
 
 #optitle{
@@ -347,6 +347,15 @@ border:none;
 height:30px;
 border:1px solid #ddd;
 font-size:15px;
+background-color:#EE4234;
+color:#fff;
+border-radius:4px;
+width:70px;
+}
+
+#oneproductTotalPrice{
+color:red;
+font-weight:bold;
 }
 
 </style>
@@ -538,7 +547,7 @@ $(function(){
        <form method="post" id="reply">
 		      
 					<ul class="wishList">
-							<li><a href="customproduct?productnum=${wl.productnum}"><img src="img/${wl.thumbimg}"></a></li> <!-- 이미지 -->
+							<li><a href="customproduct?productnum=${wl.productnum}"><img src="resources/sellerProductImgs/${wl.thumbimg}"></a></li> <!-- 이미지 -->
 							
 							<li>
 							<div id="ptitle"><a href="customproduct?productnum=${wl.productnum}">${wl.productname}</a></div><!-- 상품이름 -->
