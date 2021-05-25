@@ -184,6 +184,11 @@ float:left;
 	margin-top: 5px;
 	padding-right:30px;
 	padding-left:30px;
+	height:60px;
+	overflow: hidden
+}
+#recipebox>ul>li:nth-child(5n+2)>a,#recipebox2>ul>li:nth-child(5n+2)>a{
+height:60px;
 }
 
 #recipebox>ul>li:nth-child(5n+3),#recipebox2>ul>li:nth-child(5n+3){

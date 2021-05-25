@@ -31,6 +31,7 @@ public class CustomInfoController {
 			
 			PageProductVO pageVO2=new PageProductVO();
 			pageVO2.setUserid(userid);
+			
 			System.out.println("userid"+userid);
 			//리퀘스트했을 때, 페이지번호가 있으면 세팅/ 없으면 기본 값=1
 			String reqPageNum = req.getParameter("fpageNum"); //pageNum = 1로 sapvo에 이미 기본값 세팅이 되어 있음
