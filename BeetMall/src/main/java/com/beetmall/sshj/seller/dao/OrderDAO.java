@@ -10,7 +10,7 @@ public interface OrderDAO {
 	//목록 전체보기
 	public List<OrderSaleVO> orderList(SearchAndPageVO sapvo);
 	//주문 정보 1개의 레코드만 보기
-	public List<OrderSaleVO> oneRecordSelect(String ordernum);
+	public OrderSaleVO oneOrderSelect(OrderSaleVO osvo);
 	//주문 상품 갯수( 총 레코드수)
 	public int totalRecord(SearchAndPageVO sapvo);
 	//해당 주문상태 업데이트

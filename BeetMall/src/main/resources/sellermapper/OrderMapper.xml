@@ -19,7 +19,18 @@
 	left join delivery de on de.ordernum = o.ordernum
 	left join deliverynow dn on dn.ordernum = o.ordernum
 	where p.userid='${userid}' )
+	
+	<choose>
+	<when test='searchnum != null '>
+		where ordernum like '%${searchnum}%'
+	</when>
+	<when test='searchid != null'>
+		where userid like '%${searchid}%'
+	</when >
+
+	</choose>
 			order by ordernum desc )	
+
 	<![CDATA[where rownum<=]]>(${pageNum}*${onePageRecord}) order by ordernum)
         <![CDATA[where rownum<=]]>
         <if test="pageNum==totalPage">${lastPageRecord}</if>
@@ -49,7 +60,7 @@
 	left join optiontbl op on op.optionnum = o.optionnum
 	left join delivery de on de.ordernum = o.ordernum
 	left join deliverynow dn on dn.ordernum = o.ordernum
-	where o.ordernum = '${param1}')
+	where o.ordernum = '${ordernum}')
 	order by ordernum desc
 
 	</select>
