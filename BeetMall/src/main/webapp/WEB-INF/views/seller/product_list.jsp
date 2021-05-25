@@ -298,7 +298,7 @@ $(document).ready(function(){
 						<td class="tbl_line_cell"><div id="product"><span id="productName"><a href="customproduct?productnum=${vo.productnum}">${vo.productname}</a></span></div></td>	
 						
 						
-						<!-- 상품이미지 -->
+						<!--  상품이미지 -->
 						<td class="tbl_line_cell"><div id="thumbnail"><img src="<%=request.getContextPath()%>/resources/sellerProductImgs/${vo.thumbimg}"/></div></td>
 						<!-- 재고 -->
 						<td class="tbl_line_cell"><div id="stock"><span id="unsoldStock">${vo.nowstock}</span>/<span id="totalStock">${vo.totalstock }</span></div></td>
