@@ -325,7 +325,11 @@ paddig-bottom:5px;
 </style>
 
 <body onload="countg()">
-
+<c:if test="${report != null }">
+	<script>
+		 location.href='recipeView?recipenum='+${report }+'&id=master';
+	</script>
+</c:if>
 	<div class="section">
 
 		<!-- ------------------------큰제목----------------------------------- -->
