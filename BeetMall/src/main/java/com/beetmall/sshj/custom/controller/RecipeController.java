@@ -124,15 +124,20 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 			return mav;
 		}
 		
-		//수정하기
+		//수정하기///////////////////////////////////////////////////////////
 		@RequestMapping("/recipeEditeOk")
-		public ModelAndView recipeEditeOk(RecipeVO vo) {
+		public ModelAndView recipeEditeOk(RecipeVO vo,HttpSession session) {
+			
+			String id = (String)session.getAttribute("logId");
+			vo.setUserid(id);
+			
 			ModelAndView mav = new ModelAndView();
 			int result = recipeService.recipeEditeOk(vo);
 			mav.addObject("recipenum", vo.getRecipenum());
+			//System.out.println("recipenum2222222222"+vo.getRecipenum());레시피 숫자 잘 나옴
 			
 			if(result>0) {
-				mav.setViewName("redirect:recipeView");
+				mav.setViewName("redirect:recipeList");
 			}else {
 				mav.setViewName("redirect:recipeEdite");
 			}

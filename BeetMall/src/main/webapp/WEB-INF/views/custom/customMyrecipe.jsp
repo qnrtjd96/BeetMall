@@ -248,6 +248,10 @@ background-color:white;
 
 }
 
+#retili>a{
+overflow:hidden;
+}
+
 </style>
 <script>
 
@@ -397,7 +401,7 @@ $(document).ready(function(){
 					      
 									<ul>
 										<li><a href="recipeView?recipenum=${data.recipenum}&id=${logId}"><img src="img/${data.recipemainimg}" id="rtitleImg"/></a></li>
-										<li><a href="recipeView?recipenum=${data.recipenum}&id=${logId}">${data.recipetitle}</a></li>
+										<li id="retili"><a href="recipeView?recipenum=${data.recipenum}&id=${logId}">${data.recipetitle}</a></li>
 										<li>${data.userid}</li>
 										<li>추천수${data.reciperecommend} 조회수 ${data.recipehit}</li>
 										<li>
@@ -445,7 +449,7 @@ $(document).ready(function(){
 						      
 										<ul>
 											<li><a href="recipeView?recipenum=${data2.recipenum}&id=${logId}"><img src="img/${data2.recipemainimg}" id="rtitleImg"/></a></li>
-											<li><a href="recipeView?recipenum=${data2.recipenum}&id=${logId}">${data2.recipetitle}</a></li>
+											<li id="retili"><a href="recipeView?recipenum=${data2.recipenum}&id=${logId}">${data2.recipetitle}</a></li>
 											<li>${data2.userid}</li>
 											<li>추천수${data2.reciperecommend} 조회수 ${data2.recipehit}</li>
 										<li>

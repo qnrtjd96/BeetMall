@@ -72,10 +72,10 @@ public class ProductViewController {
 		//sapvo.setSearchKey(sapvo.getSearchKey());
 		//총 레코드 수 구하기 
 		pageVO1.setTotalRecord(productViewService.totalRecord(pageVO1));
-		System.out.println("totalrecord ->" +  productViewService.totalRecord(pageVO1)); //여기까지 나옴
+		//System.out.println("totalrecord ->" +  productViewService.totalRecord(pageVO1)); //여기까지 나옴
 		
 		pageVO2.setTotalRecord(productViewService.totalRecord(pageVO2));
-		System.out.println("totalrecord2 ->" +  productViewService.totalRecord2(pageVO2)); //여기까지 나옴
+		//System.out.println("totalrecord2 ->" +  productViewService.totalRecord2(pageVO2)); //여기까지 나옴
 				
 		//상품후기 구하기
 		mav.addObject("reviewlist",productViewService.ProductViewReview(pageVO1));
@@ -120,13 +120,13 @@ public class ProductViewController {
 		int optnum=Integer.parseInt(req.getParameter("optnum"));
 		int pcount=Integer.parseInt(req.getParameter("pcount"));
 		int ocount=Integer.parseInt(req.getParameter("ocount"));
-//		System.out.println(id);
-//		System.out.println(productnum);
-//		System.out.println(pcount);
-//		System.out.println(optnum);
-//		System.out.println(ocount); //다 나오는거 확인함//넣기만 하면됨 
-		//System.out.println(productViewService.customWishInsert());
-		System.out.println(productViewService.customWishInsert(id,productnum,optnum,pcount,ocount));
+	    System.out.println(id);
+		System.out.println(productnum);
+	    System.out.println(pcount);
+		System.out.println(optnum);
+		System.out.println(ocount); //다 나오는거 확인함//넣기만 하면됨 
+        //System.out.println(productViewService.customWishInsert());
+		//System.out.println(productViewService.customWishInsert(id,productnum,optnum,pcount,ocount));
 		
 		return productViewService.customWishInsert(id,productnum,optnum,pcount,ocount);
 				
