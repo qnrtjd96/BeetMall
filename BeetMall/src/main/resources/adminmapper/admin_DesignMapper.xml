@@ -6,7 +6,7 @@
 		from maincategory t 
 		left join mainmcategory b on t.catenum = b.catenum
 		left join product p on b.productnum = p.productnum
-		where b.catenum = #{param1}
+		where b.catenum = #{param1} 
 		order by b.catesort
 	</select>
 	<select id="designname" resultType="String">
