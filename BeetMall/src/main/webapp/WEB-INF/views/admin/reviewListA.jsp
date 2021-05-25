@@ -216,6 +216,7 @@
 		margin:5px 5px 5px 0;
 		height:250px;	 
 		padding:20px;
+		overflow:auto;
 	} 
 	#reviewContent{
 		width:650px;
@@ -276,6 +277,7 @@
 	#blindBtn2{ 
 	    top: -40px;
 	    left: 750px; 
+	    visibility: hidden;
 	}
 </style> 
 <script>
@@ -354,7 +356,6 @@ let searchTxt =null;// 검색 데이터
 		</div>   
 		 <c:forEach var="rvo" items="${list}">
 				<ul class="contentList">
-					<a href="">
 						<li><input type="checkbox" name="check" id="check"></li>
 						<li>${rvo.reviewnum}</li>
 						<li>${rvo.mcatename}</li>
@@ -369,7 +370,6 @@ let searchTxt =null;// 검색 데이터
 							</c:if></li>
 						<li>${rvo.reviewwriter}</li>
 						<li>${rvo.reviewwritedate}</li> 
-					</a>
 				</ul> 
 		</c:forEach> 	   
 		</div>	 
@@ -408,7 +408,7 @@ let searchTxt =null;// 검색 데이터
 	</div> 
 	<!---------------------------- 모달 ------------------------------>
 	<div>
-		<div id="reviewModal">
+		<div id="reviewModal" style="display:none;">
 			<div id="modalHeader">
 				리뷰 관리
 			</div>
@@ -422,18 +422,17 @@ let searchTxt =null;// 검색 데이터
 			<thead>
 			  <tr>
 			    <th class="tg-2vng">구매 상품</th>
-			    <th class="tg-2vng" id="imgBox"><img src="<%=request.getContextPath()%>/img/y_tomato.jpg"></th>
-			    <th class="tg-9wgu">[자정 특가]  대저짭짤이 왕토마토 10kg<br>    [옵션] 1개</th>
+			    <th colspan="2" class="tg-9wgu" id="productname">[자정 특가]  대저짭짤이 왕토마토 10kg<br>    [옵션] 1개</th>
 			  </tr>
 			</thead>
 			<tbody>
 			  <tr>
 			    <td class="tg-2vng">작성자</td>
-			    <td class="tg-9wgu" colspan="2">kingtomato</td>
+			    <td class="tg-9wgu" colspan="2" id="write">kingtomato</td>
 			  </tr>
 			  <tr>
 			    <td class="tg-2vng">작성일</td>
-			    <td class="tg-9wgu" colspan="2">2021/05/23</td>
+			    <td class="tg-9wgu" colspan="2" id="reviewwritedate">2021/05/23</td>
 			  </tr>
 			  <tr>
 			    <td class="tg-2vng last">평점</td>
@@ -444,14 +443,14 @@ let searchTxt =null;// 검색 데이터
 			    		<img src="<%=request.getContextPath()%>/img/y_star.png">
 			    		<img src="<%=request.getContextPath()%>/img/y_star.png">
 			    	</div>
-			    	<div id="score">4.3</div>
+			    	<div id="score" >4.3</div>
 			    </td>
 			    <td class="tg-9wgu last">
 			    	<div id="likeBox">
 			    			<img src="<%=request.getContextPath()%>/img/y_like.png">
 			    	</div>
 			     	<div id="likeNumBox">
-			     		추천 수 : <div id="likeNum">2</div>
+			     		추천 수 : <div id="likeNum">0</div>
 			     	</div>			     
 			     </td>
 			  </tr>
@@ -460,17 +459,8 @@ let searchTxt =null;// 검색 데이터
 			<div id="reviewPart">
 				<div id="reviewBox">
 					<div id="reviewContentBox">
-						<div id="reviewContent">
 						토마토 처음 시켜봤는데요 된장 젠장
-						</div>
 					</div>
-					<div id="reviewImg">
-						<img src="<%=request.getContextPath()%>/img/y_tomato.jpg">
-					</div>
-					<div id="reasonBuyer">
-						신고사유 : 비방
-					</div>
-					<button class="success" value="blind" name="blind" id="blindBtn1">비공개</button>
 				</div>
 			</div>
 			<div id="replyPart">
@@ -481,13 +471,13 @@ let searchTxt =null;// 검색 데이터
 					판매자의 답글
 				</div>
 				<div id="answerContent">
-					고객님 안 좋은 말을 사용하시다니 유감입니다
+					아직 답변이없습니다.
 				</div>
 					<div id="reasonSeller">
 						신고사유 : 비방
 					</div>
-				<button class="success" value="blind" name="blind" id="blindBtn2">비공개</button>
-				<button class="success" value="" name="" id="farmGo">판매자 농장 방문</button>
+				<button class="success" value="" name="blind" id="blindBtn2">비공개</button>
+				<button class="success" value="" id="farmGo">판매자 농장 방문</button>
 				<button class="success" value="" name="" id="closeBtn">닫기</button>
 			</div>
 		</div>
@@ -514,13 +504,99 @@ let searchTxt =null;// 검색 데이터
 	    padding-top: 0px;
 	    margin-bottom: 15px;
 	}
+	#reviewModal {
+	    width: 857px;
+	    position: absolute;
+	    top: 20px;
+	    left: 300px;
+	    background-color: white;
+	}
+	#reasonBuyer, #reasonSeller {
+	    position: unset;
+	    height: 30px;
+	    background-color: #f5f541ad;
+	    padding: 5px;
+	    width: 830px;
+	}
+	#blindBtn1 {
+	    top: -30px;
+	    left: 750px;
+	}
+	#reviewContentBox, #answerContent {
+	    background-color: white;
+	    margin: 5px 5px 5px 0;
+	    height: 280px;
+	    padding: 20px;
+	    overflow: auto;
+	}
 </style>
 <script>
 	$(function(){
 		$("#closeBtn").click(function(){
 			$(this).parent().parent().css("display","none");
 		});
+		$(".contentList").click(function(){
+			$("#reviewModal").css("display","block");
+			var reviewnum = $(this).children().eq(1).html();
+			var url = "/sshj/reviewselect";
+		    var params = "reviewnum="+reviewnum;
+			$.ajax({
+				url:url,
+				data:params,
+				success:function(result){
+					$("#productname").html(result.productname); //구매상품 이름넣기
+					$("#write").html(result.reviewwriter); //작성자 넣기
+					$("#reviewwritedate").html(result.reviewwritedate); //작성일 넣기
+					if(result.reviewscore==1){ //평점부분
+						$("#stars").html("<img src='<%=request.getContextPath()%>/img/y_star.png'>");
+						$("#score").html(result.reviewscore);
+					}else if(result.reviewscore==2){
+						$("#stars").html("<img src='<%=request.getContextPath()%>/img/y_star.png'><img src='<%=request.getContextPath()%>/img/y_star.png'>");
+						$("#score").html(result.reviewscore);
+					}else if(result.reviewscore==3){
+						$("#stars").html("<img src='<%=request.getContextPath()%>/img/y_star.png'><img src='<%=request.getContextPath()%>/img/y_star.png'><img src='<%=request.getContextPath()%>/img/y_star.png'>");
+						$("#score").html(result.reviewscore);
+					}else if(result.reviewscore==4){
+						$("#stars").html("<img src='<%=request.getContextPath()%>/img/y_star.png'><img src='<%=request.getContextPath()%>/img/y_star.png'><img src='<%=request.getContextPath()%>/img/y_star.png'><img src='<%=request.getContextPath()%>/img/y_star.png'>");
+						$("#score").html(result.reviewscore);
+					}else if(result.reviewscore==5){
+						$("#stars").html("<img src='<%=request.getContextPath()%>/img/y_star.png'><img src='<%=request.getContextPath()%>/img/y_star.png'><img src='<%=request.getContextPath()%>/img/y_star.png'><img src='<%=request.getContextPath()%>/img/y_star.png'><img src='<%=request.getContextPath()%>/img/y_star.png'>");
+						$("#score").html(result.reviewscore);
+					}else{
+						$("#score").html("점수없슴");
+					}
+					if(result.reviewcount=="undefined"){ //추천수부분
+						$("#likeNum").html(0);
+					}else{
+						$("#likeNum").html(result.reviewcount);
+					}
+					$("#reviewContentBox").html(result.reviewcontent); // 리뷰내용넣기
+					$("#seller").html(result.seller);//판매자 아이디
+					$("#answerContent").html(result.reviewanswer);//판매자 답변
+					if(typeof result.reportreason== "undefined" || str == null || str == ""){
+						$("#reasonSeller").html("신고 내역이 없습니다.");
+					}else{
+						$("#reasonSeller").html("신고사유 : "+result.reportreason);//신고사유바꾸기
+					}
+					$("#farmGo").val(result.seller);
+					$("#blindBtn2").val(reviewnum);
+					typeof
+					$("#modal").css("display","block");
+				},error:function(){
+					console.log("가져오기 에러..");
+				}
+			}); 
+		});
 		
+		$("#farmGo").click(function(){
+			var move=$("#farmGo").val();
+			
+			/* 여기 바꿔야함~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+			location.href= "url넣어야함"+move;
+		});
 		
+		$("#blindBtn2").click(function(){
+			
+		});
 	});
 </script>

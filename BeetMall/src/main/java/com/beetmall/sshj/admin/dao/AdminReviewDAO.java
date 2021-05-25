@@ -9,4 +9,6 @@ public interface AdminReviewDAO {
 	public int reviewListOnetotalRecord(adminkPageSearchVO pageVO);
 
 	public List<AdminReviewVO> reviewListABC(adminkPageSearchVO pageVO);
+
+	public AdminReviewVO reviewselect(int reviewnum);
 }
