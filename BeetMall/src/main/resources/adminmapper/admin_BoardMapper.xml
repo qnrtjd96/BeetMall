@@ -29,7 +29,40 @@
 						</if>
 					</when>
 				</choose>
- 				order by infonum desc
+				<choose>
+					<when test="sort1 == 'all'.toString()">
+							and usertype==1 or usertype==2
+					</when>
+					<when test="sort1 == 'seller'.toString()">
+							and usertype==2 
+					</when>
+					<when test="sort1 == 'customer'.toString()">
+							and usertype==1
+					</when>
+				</choose>
+				<choose>
+					<when test="sort2 == 'infonum'.toString()">
+						order by infonum	 
+						<if test="asc=='asc'.toString()">
+							asc
+						</if> 
+						<if test="desc=='desc'.toString()">
+							desc
+						</if>
+					</when>
+					<when test="sort2 == 'infotitle'.toString()">
+						order by infotitle	 
+						<if test="asc =='asc'.toString()">
+							asc
+						</if> 
+						<if test="desc =='desc'.toString()">
+							desc
+						</if> 
+					</when>
+					<otherwise>
+ 						order by infonum desc 
+					</otherwise> 
+				</choose>
 			)
 			where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord} order by infonum)
 			where <![CDATA[rownum<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>

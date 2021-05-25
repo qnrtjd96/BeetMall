@@ -258,9 +258,14 @@ $(()=>{
 						<th class="menu">첨부파일</th>
 						<td  class="td">
 							<div style="display:flex;">
-								<input type="file" style="width: 500px;" name="file" id="filename"> 
-								<c:if test="${vo.filename}!=null">
-									${vo.filename}
+										${vo.filename} 나오는지 확인
+								<c:if test="${vo.filename!=null}">
+									<a href="/sshj/upload/${vo.filename}" download><label id="attach">
+										<div>파일 다운로드</div>
+									</label></a> 
+										${vo.filename}
+								</c:if>
+								<c:if test="${null eq vo.filename} || ${empty vo.filename}">  <c:out value="첨부파일 없음1" />첨부파일 없음
 								</c:if>
 							</div>
 						</td> 

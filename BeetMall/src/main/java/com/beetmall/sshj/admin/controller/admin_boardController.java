@@ -82,13 +82,9 @@ public class admin_boardController {
 	// 공지 작성하기
 	@Transactional(rollbackFor = { Exception.class, RuntimeException.class })
 	@RequestMapping(value = "/noticeWriteOk", method = RequestMethod.POST)
-	public ModelAndView noticeBoardWriteOk(AdminBoardVO vo, HttpSession session, HttpServletRequest req) {
-		ModelAndView mav = new ModelAndView();
-		// 첨부파일 받아오기
-		MultipartHttpServletRequest multireq = (MultipartHttpServletRequest) req;
-		MultipartFile file = multireq.getFile("file");
-		vo.setFilename(file.getOriginalFilename());
-		System.out.println("multireq ->" + multireq);
+	public ModelAndView noticeBoardWriteOk(AdminBoardVO vo, @RequestParam MultipartFile file, HttpSession session, HttpServletRequest req) {
+		 // 첨부파일 받아오기
+		vo.setFilename(file.getOriginalFilename()); 
 		System.out.println("file -> " + file);
 
 		// 이미지 파일 변수 및 저장 위치 
@@ -96,7 +92,8 @@ public class admin_boardController {
 		System.out.println("orgName ->" + orgName); 
 		String path = req.getSession().getServletContext().getRealPath("resources/adminImg");
 		System.out.println("path ->" + path);
-
+		ModelAndView mav = new ModelAndView();
+		
 		// session userid
 		vo.setUserid((String) session.getAttribute("logId"));
 		DefaultTransactionDefinition def = new DefaultTransactionDefinition();
@@ -108,7 +105,7 @@ public class admin_boardController {
 			System.out.println(paramName + " - 업로드 과정");
 			try {
 				if (orgName != null || orgName!="") {
-					System.out.println("이미지 업로드 try catch");
+					System.out.println("이미지 업로드 시작");
 					File f = new File(path, orgName);
 					int i = 1;
 					while (f.exists()) {
@@ -132,15 +129,15 @@ public class admin_boardController {
 			}
 			// 추가하지 않으면 값을 지정해서 넣어준다.
 			System.out.println("vo에 set해주는 이미지 이름 orgName -> " + orgName);
-
+			vo.setFilename(orgName);
 			// 공지등록
 			int result = boardService.noticeWriteOk(vo);
-			System.out.println("공지 insert -> " + result);
+			System.out.println("공지 insert 1=성공 -> " + result);
 
 			if (result > 0) { // 글 등록 성공
 				System.out.println("[공지 등록 완료]");
 				transactionManager.commit(status);
-				mav.setViewName("/admin/noticeBoardList");
+				mav.setViewName("redirect:noticeBoardList");
 			} else {// 글 등록 실패
 				System.out.println("[공지 등록 실패]");
 				mav.setViewName("/admin/noticeBoardWrite");
@@ -148,6 +145,10 @@ public class admin_boardController {
 		} catch (Exception e) {
 			System.out.println("<<공지등록 트랜잭션 에러 발생>>");
 			e.printStackTrace();
+			if(orgName != null) {
+				File delf = new File(path, orgName);
+				delf.delete();
+			}
 		}
 		return mav;
 	}
@@ -156,51 +157,12 @@ public class admin_boardController {
 	@RequestMapping("noticeBoardView")
 	public ModelAndView noticeBoardView(int infonum) {
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("vo", boardService.noticeBoardView(infonum));
+		mav.addObject("vo", boardService.noticeBoardView(infonum)); 
 		mav.setViewName("admin/noticeBoardView");
 		return mav;
 	}
 
-	// 파일 다운로드
-	@RequestMapping("/filedownload")
-	public void fileDownload(HttpServletRequest request, HttpServletResponse response) {
-		String saveDir = request.getSession().getServletContext().getRealPath("/resources/adminimg");
-		String fileName = "20190223-223005277_939.jpg";
-		File file = new File(saveDir + "/" + fileName);
-		FileInputStream fis = null;
-		BufferedInputStream bis = null;
-		ServletOutputStream sos = null;
-		try {
-			fis = new FileInputStream(file);
-			bis = new BufferedInputStream(fis);
-			sos = response.getOutputStream();
-			String reFilename = "";
-			boolean isMSIE = request.getHeader("user-agent").indexOf("MSIE") != -1
-					|| request.getHeader("user-agent").indexOf("Trident") != -1;
-			if (isMSIE) {
-				reFilename = URLEncoder.encode("이미지 파일.jpg", "utf-8");
-				reFilename = reFilename.replaceAll("\\+", "%20");
-			} else {
-				reFilename = new String("이미지 파일.jpg".getBytes("utf-8"), "ISO-8859-1");
-			}
-			response.setContentType("application/octet-stream;charset=utf-8");
-			response.addHeader("Content-Disposition", "attachment;filename=\"" + reFilename + "\"");
-			response.setContentLength((int) file.length());
-			int read = 0;
-			while ((read = bis.read()) != -1) {
-				sos.write(read);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				sos.close();
-				bis.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
+	
 
 	// 공지 수정하기로 이동
 	@RequestMapping("/noticeBoardEdit")

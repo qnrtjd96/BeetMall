@@ -214,27 +214,27 @@ let searchTxt =null;// 검색 데이터
 <%@ include file="/inc/leftBar.jspf" %>
 	<div id="container">
 		<div id="sortBox">
-			<ul>
-				<li> 
-				</li>
-				<li> </li>
-				<li> </li>		
-				<li> </li>		
-				<li><select name="sort1" id="sort1"> 
-		   				<option value="전체" selected>전체</option>
-		   				<option value="판매자">판매자</option>
-		   				<option value="구매자">구매자</option>   
-			  		</select> 
-	   			</li> 
-	   			<li><select name="sort2" id="sort2"> 
-		   				<option value="공지 번호" name="infonum" selected>공지 번호</option>
-		   				<option value="제목">제목</option>
-		   				<option value="내용">내용</option>        
-			  		</select> 
-	   			</li> 
-				<li><button class="success" value="asc" name="asc" id="ascBtn">▲</button></li>
-				<li><button class="success" value="desc" name="desc" id="descBtn">▼</button></li>
-		 	</ul>
+			<form method="get" class="sortFrm" action="<%=request.getContextPath() %>/noticeBoardList">
+				<ul>
+					<li></li>
+					<li></li>
+					<li></li>		
+					<li></li>		
+					<li><select name="sort1" id="sort1"> 
+			   				<option value="all" selected>전체</option>
+			   				<option value="seller">판매자</option>
+			   				<option value="customer">구매자</option>   
+				  		</select> 
+		   			</li> 
+		   			<li><select name="sort2" id="sort2"> 
+			   				<option value="infonum" selected>공지 번호</option>
+			   				<option value="infotitle">제목</option>        
+				  		</select> 
+		   			</li> 
+					<li><button class="success" value="asc" name="asc" id="ascBtn">▲</button></li>
+					<li><button class="success" value="desc" name="desc" id="descBtn">▼</button></li>
+			 	</ul>
+			 </form>
 		</div>
    		<div id="contentBox"> 	
 		<div id="title">
@@ -253,7 +253,7 @@ let searchTxt =null;// 검색 데이터
 					<li>${avo.infonum}</li>
 					<li>
 						<c:if test="${avo.infotype==1}">
-							소비자
+							구매자
 						</c:if>
 						<c:if test="${avo.infotype==2}">
 							판매자
@@ -274,7 +274,7 @@ let searchTxt =null;// 검색 데이터
 			   		<a class="arrow prev" href="javascript:pagelist(${pageVO.pageNum-1})"></a>
 			   </c:if>
 			   <!-- 페이지 번호                   1                                    5                     -->
-	           <c:forEach var="p" begin="${pageVO.startPageNum}" step="1" end="${pageVO.startPageNum + pageVO.onePageNum-1}">
+	           <c:forEach var="p" begin="${pageVO.startPageNum}" step="1" end="${(pageVO.startPageNum + pageVO.onePageNum)-1}">
 	              <c:if test="${p<=pageVO.totalPage}">
 	                 <c:if test="${p==pageVO.pageNum }"> <!-- 현재페이지일때 실행 -->
 	                    <a class="active">${p}</a>
@@ -289,8 +289,7 @@ let searchTxt =null;// 검색 데이터
 	           </c:if>
 			</div>
 		 </div>
-		 <div>
-		 
+		 <div>  
 			<form method="get" class="searchFrm" action="<%=request.getContextPath() %>/noticeBoardList">
 				<select name="searchKey">
 					<option value="all" selected>전체</option>
