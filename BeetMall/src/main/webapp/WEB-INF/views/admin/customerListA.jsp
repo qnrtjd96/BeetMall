@@ -186,12 +186,52 @@
 	#choose{
 		margin: 50px 0 0 20px !important;
 	}
+	#foreachUL>li:nth-child(8n+1), #forachtitle>li:nth-child(8n+1){
+		width:0px !important;
+	}
+	#foreachUL>li:nth-child(8n+2), #forachtitle>li:nth-child(8n+2){
+		width:102px;
+	}
+	#foreachUL>li:nth-child(8n+3), #forachtitle>li:nth-child(8n+3){
+		width:142px;
+	}
+	#foreachUL>li:nth-child(8n+4), #forachtitle>li:nth-child(8n+4){
+		width:142px;
+	}
+	#foreachUL>li:nth-child(8n+5), #forachtitle>li:nth-child(8n+5){
+		width:42px !important;
+	}
+	#foreachUL>li:nth-child(8n+6), #forachtitle>li:nth-child(8n+6){
+		width:202px;
+	}
+	#foreachUL>li:nth-child(8n+7), #forachtitle>li:nth-child(8n+7){
+		width:262px;
+		white-space: nowrap;
+		overflow:hidden;
+		text-overflow: ellipsis;
+	}
+	#foreachUL>li:nth-child(8n), #forachtitle>li:nth-child(8n){
+		width:142px;
+	}
+	#foreachUL>li{
+		cursor: pointer;
+	}
+	#foreachUL{
+		margin:0px !important;
+		padding:0px !important;
+	}
 </style>
 <script>
-function pagelist(pagenum){
-	var lin = "customerListA?pageNum="+pagenum;
-	location.href=lin;
-}
+	function pagelist(pagenum){
+		var lin = "customerListA?pageNum="+pagenum;
+		location.href=lin;
+	}
+	$(function(){
+		$(".contentList").click(function(){
+			var userid = $(this).children().eq(0).children().val();
+			location.href="boardCustomerInfoEdit?userid="+userid;
+		});
+	})
 </script>
 <%@ include file="/inc/top.jspf"%>
 	<div id="topBarContainer">
@@ -241,44 +281,32 @@ function pagelist(pagenum){
 						id="descBtn">▼</button></li>
 			</ul>
 		</div>
-		<div id="">
-			<div id="">
-				<ul id="listul">
+		<div id="contentBox"> 	
+			<div id="title">
+				<ul id="forachtitle">
+					<li></li>
 					<li>구분</li>
 					<li>이름</li>
 					<li>아이디</li>
-					<!-- <li>나이</li> -->
-					<li>이메일</li>
 					<li>포인트</li>
+					<li>이메일</li>
 					<li>주소</li>
 					<li>가입일</li>
-					<c:forEach var="vo" items="${list}">
-						<li><c:if test="${vo.storenum<0}">구매자</c:if><c:if test="${vo.storenum>=0}">판매자</c:if></li>
-						<li>${vo.username}</li>
-						<li><a href="boardCustomerInfoEdit?userid=${vo.userid}&prevPageNum=${pageVO.pageNum}">${vo.userid}</a></li>
-						<li>${vo.useremail}</li>
-						<li>${vo.point}</li>
-						<li class="wordcut">(${vo.userzipcode})${vo.useraddr} ${vo.userdetailaddr}</li>
-						<li>${vo.joindate }<br /></li>
-					</c:forEach>
 				</ul>
-			</div>
-			
-			
-			<!--  
-		<c:forEach var="data" items="${list}">
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 홍길동</li>
-				<li><a href="회원정보?">id</a></li>
-				<li>23</li>
-				<li>abc@email.com</li>  
-				<li>93-02-21</li>
-				<li>서울시 마포구 백범로</li>
-				<li>2021-02-16<br/></li> 
-			</ul>
-		</c:forEach>-->
-		</div>
+			</div>  
+			<c:forEach var="vo" items="${list}">
+				<ul class="contentList" id="foreachUL">
+					<li><input type="hidden" value="${vo.userid}"/></li>
+					<li><c:if test="${vo.storenum<0}">구매자</c:if><c:if test="${vo.storenum>=0}">판매자</c:if></li>
+					<li>${vo.username}</li>
+					<li>${vo.userid}</li>
+					<li>${vo.point}</li>
+					<li>${vo.useremail}</li>
+					<li class="wordcut">(${vo.userzipcode})${vo.useraddr} ${vo.userdetailaddr}</li>
+					<li>${vo.joindate }<br /></li>
+				</ul>
+			</c:forEach> 
+		</div>	 
 		<div class="page_wrap">	
 			<div class="page_nation">
 			   <c:if test="${pageVO.pageNum>1}"><!-- 이전페이지가 있을때 -->

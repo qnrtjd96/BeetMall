@@ -107,7 +107,6 @@ public class admin_sellerController {
 		public ModelAndView sellerBlackList(HttpServletRequest req, HttpSession session) {
 			ModelAndView mav = new ModelAndView();
 			Admin_Member_PageVO pageVO = new Admin_Member_PageVO();
-			int logType = 0;
 			int selType = 2; // 정지된 판매자회원
 			pageVO.setUserType(2); // 정지된 판매자회원만 조회할거라서 2;
 			String pageNumStr = req.getParameter("pageNum");
@@ -117,18 +116,10 @@ public class admin_sellerController {
 			}else if(pageNumStr != null) {
 				pageVO.setPageNum(Integer.parseInt(pageNumStr));
 			}
-			
-			
-			//pageVO.setTotalRecord();
-			if(session.getAttribute("logType")!=null) {
-				logType = (int)session.getAttribute("logType");
-			}else {
-				logType = 0;
-			}
-			int re = memberservice.memberCountBlack(logType,  selType);
+			int re = memberservice.reportPageNum(selType);
 			pageVO.setTotalRecord(re);
 			
-			mav.addObject("list", memberservice.memberselectblack(pageVO));
+			mav.addObject("list", memberservice.reportselect(pageVO));
 			mav.addObject("pageVO", pageVO);
 			mav.setViewName("/admin/sellerBlackList");
 			return mav;

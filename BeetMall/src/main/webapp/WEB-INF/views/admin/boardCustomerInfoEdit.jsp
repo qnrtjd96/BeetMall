@@ -1320,8 +1320,8 @@
 			 		</ul>
 				</form>  
 		 		<div class="btns">
-					<button class="success" value="회원 목록" name="customerList" id="userlist" >회원 목록</button>
-					<button class="success" value="수정" id="useredit" >수정</button>
+					<button class="success" value="회원 목록" name="customerList" id="userlist" style="visibility: hidden;">회원 목록</button>
+					<button class="success" value="수정" id="useredit">수정</button>
 					<button class="success" value="정지" name="del" id="userstop">정지</button>
 				</div>
 		 	</div>
