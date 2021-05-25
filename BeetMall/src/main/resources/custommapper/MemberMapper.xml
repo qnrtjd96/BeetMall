@@ -59,4 +59,11 @@
 	<select id="checkuseridNpwd"  resultType="Integer">
 		select count(*) from member where userid=#{param1} and userpwd=#{param2}
 	</select>
+	<update id="editinfoOk">
+		update member set userpwd=#{userpwd},username=#{username},userphone=#{userphone},useremail=#{useremail},userzipcode=${userzipcode},useraddr=#{useraddr},userdetailaddr=#{userdetailaddr}
+		where userid=#{userid}
+	</update>
+	<select id="editinfoOkView" resultType="com.beetmall.sshj.custom.vo.MemberVO">
+	  select userid,userpwd,username,userphone,useremail,userzipcode,useraddr,userdetailaddr,birthday from member where userid=#{userid}
+	</select>
 </mapper>

@@ -8,7 +8,6 @@
 	}
 	#myInfoDiv{
 		font-size:20px;
-		overflow:auto;
 		margin-bottom:100px;
 	}
 	.formUl>li:nth-child(2n+1){
@@ -97,6 +96,14 @@
 <script>
 	$(function(){
 		
+		//var sphone="${vo3.userphone}";
+		//var sph=sphone;
+		//var userphoneArr=sph.split("-");
+		//var pnum1=parseInt(userphoneArr[0]);
+		//var pnum2=parseInt(userphoneArr[1]);
+		//var pnum3=parseInt(userphoneArr[2]);
+		
+		
 		
 		$("#infosubmit").click(function(){
 	
@@ -135,14 +142,11 @@
 	
 			
 			
-			
-			// 맨 밑부분
-			if(regCheck()==false){
+			if(regCheck() == false){
 				return false;
-			}else{
-				$("#regiFrm").submit();
 			}
-			return true;
+			alert("2342343");
+			
 		});
 		
 
@@ -251,21 +255,49 @@
 	<div id="userinputDiv">
 		<h2>정보수정</h2><span class="spanstar">*</span>표시는 필수입력항목입니다
 		<hr/>
-		<form>	
+<form method="post" id="regiFrm" action="editinfoOk">	
 			<ul class="formUl">
 				<li><span class="spanstar">*</span>아이디</li> 		<li><input type="text" name="userid" style="margin-right:5px;" disabled value="${logId}"/></li>
-				<li><span class="spanstar">*</span>비밀번호</li>		<li><input type="text" name="userpwd" id="userpwd"/></li>	
-				<li><span class="spanstar">*</span>비밀번호 확인</li>	<li><input type="text" name="userpwd2" style="float:left"/><div id="passwordCheck" style="margin-left:200px"></div></li>	
-				<li><span class="spanstar">*</span>이름</li>			<li><input type="text" name="username" value="username"/></li>		
-				<li><span class="spanstar">*</span>이메일</li>			<li><input type="text" name="useremail" style="margin-right:5px;"/><input type="button" class="btn" value="인증하기"/></li>			
-				<li><span class="spanstar">*</span>휴대폰</li>			<li><input type="text" name="userphone"/></li>			
-				<li><span class="spanstar">*</span>주소</li>			<li><input type="button" name="userzipcode" class="btn"  style="width:145px;"value="우편번호 검색" style="margin-right:5px;"/><input type="text" name="useraddr" readonly/><br/><input type="text" name="userdetailaddr" style="margin-top:5px; width:302px;"></li>				
+				<li><span class="spanstar">*</span>비밀번호</li>		<li><input type="password" name="userpwd" id="userpwd"/></li>	
+				<li><span class="spanstar">*</span>비밀번호 확인</li>	<li><input type="password" name="userpwd2" id="userpwd2" style="float:left"/><div id="passwordCheck" style="margin-left:200px"></div></li>	
+				<li><span class="spanstar">*</span>이름</li>			<li><input type="text" name="username" id="username" value="${vo3.username}" /></li>		
+				<li><span class="spanstar">*</span>이메일</li>			<li><input type="text" name="useremail" style="margin-right:5px;" value="${vo3.useremail}"/><input type="button" class="btn" value="인증하기"/></li>			
+				<li><span class="spanstar">*</span>휴대폰</li>			<li><select  id="userphone1" name="userphone1" style="height:30px;">
+																			<option value="010">010</option>
+																			 <option value="02">02</option>
+																			<option value="031">031</option>
+																			<option value="032">032</option>
+																			<option value="033">033</option>
+																			<option value="041">041</option>
+																			<option value="042">042</option>
+																			<option value="043">043</option>
+																			<option value="044">044</option>
+																			<option value="051">051</option>
+																			<option value="052">052</option>
+																			<option value="053">053</option>
+																			<option value="054">054</option>
+																			<option value="055">055</option>
+																			<option value="061">061</option>
+																			<option value="062">062</option>
+																			<option value="063">063</option>
+																			<option value="064">064</option>
+																			</select> -
+																			<input type="text" name="userphone2" id="userphone2" style="width:80px;" maxlength="4"  value="${pnum2}" /> -
+																			<input type="text" name="userphone3" id="userphone3" style="width:80px;" maxlength="4"  value="${pnum3}"/></li>
+				<li><span class="spanstar">*</span>주소</li>			<li><input type="button"  id="zipSearch" value="우편번호 검색" style="margin-right:5px;" class="btn"/>
+																		<input type="text" name="userzipcode" id="userzipcode" readonly  style="width:100px;" value="${vo3.userzipcode}"/>
+																		<input type="text" name="useraddr" id="useraddr" style="margin-top:5px; width:400px;" value="${vo3.useraddr}"/>
+																		<input type="text" name="userdetailaddr" id="userdetailaddr" style="margin-top:5px; width:420px;" value="${vo3.userdetailaddr}"/></li>			
 			</ul>
+			
+			
+			<div id="infoCheckDiv">
+			<div style="margin-bottom:60px;margin-top: 70px;"><input type="submit" value="수정하기" class="btnClass" id="infosubmit"></div>
+		    </div>
+		    
 		</form>
 		</div>
 		
-		<div id="infoCheckDiv">
-			<div style="margin-bottom:60px;margin-top: 70px;"><input type="submit" value="수정하기" class="btnClass" id="infosubmit"></div>
-		</div>
+	
 		
 </div>

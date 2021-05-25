@@ -31,6 +31,8 @@ public class CustomInfoController {
 			
 			PageProductVO pageVO2=new PageProductVO();
 			pageVO2.setUserid(userid);
+			
+			
 			System.out.println("userid"+userid);
 			//리퀘스트했을 때, 페이지번호가 있으면 세팅/ 없으면 기본 값=1
 			String reqPageNum = req.getParameter("fpageNum"); //pageNum = 1로 sapvo에 이미 기본값 세팅이 되어 있음
@@ -45,7 +47,7 @@ public class CustomInfoController {
 			pageVO2.setTotalRecord(customInfoService.totalRecord8(userid));
 			System.out.println("totalrecord 인포센터 ->" +  customInfoService.totalRecord8(userid)); //여기까지 나옴
 			mav.addObject("pageVO2", pageVO2);
-			
+
 			mav.addObject("faqlist",customInfoService.CustomInfoAllRecord(pageVO2));
 			mav.setViewName("custom/custominfo");
 			return mav;

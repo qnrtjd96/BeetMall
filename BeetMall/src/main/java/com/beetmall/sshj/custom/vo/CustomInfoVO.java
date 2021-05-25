@@ -5,10 +5,21 @@ public class CustomInfoVO {
 	private int qnum;
 	private int productnum;
 	private String userid;
+	private String selleruserid;
 	private String qcontent;
 	private String qwritedate;
 	private String qopen;
 	private String qanswer;
+	
+	
+
+
+	public String getSelleruserid() {
+		return selleruserid;
+	}
+	public void setSelleruserid(String selleruserid) {
+		this.selleruserid = selleruserid;
+	}
 	public int getQnum() {
 		return qnum;
 	}

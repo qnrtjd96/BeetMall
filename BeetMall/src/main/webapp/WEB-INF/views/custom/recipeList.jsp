@@ -319,6 +319,9 @@ width:100%;
 float:left;
 }
 
+#retili>a,#retili{
+overflow:hidden;
+}
 
 </style>
 <script>
@@ -333,7 +336,7 @@ float:left;
 
 		<!-- ------------------------큰제목----------------------------------- -->
 		<div id="recipettile">
-			<b>레시피를 올리는 곳입니다.</b>
+			<b></b>
 		</div>
 		
 	<!-- ------------------------검색 기능----------------------------------- -->
@@ -365,7 +368,7 @@ float:left;
 				<ul id="reciList">
 					<c:forEach var="data" items="${list}">
 					<li>${data.recipenum}</li>
-					<li><a href="recipeView?recipenum=${data.recipenum}&id=${logId}">${data.recipetitle}</a></li>
+					<li id="retili"><a href="recipeView?recipenum=${data.recipenum}&id=${logId}">${data.recipetitle}</a></li>
 					<li>${data.userid}</li>
 					<li>${data.reciperecommend}</li>
 					<li>${data.recipehit}</li>
