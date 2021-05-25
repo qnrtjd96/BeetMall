@@ -471,7 +471,7 @@ $(function(){
 				console.log(result);
 				if(result == 1){
 					alert('고객님의 신고가 접수되었습니다');
-					location.href="myChatList";
+					location.href="recipeView?recipenum=${vo.recipenum}&id=${logId}";
 				}else if(result != 1){
 					alert('신고에 실패했습니다. error_code : 176');
 					$("#reportcontent").val('');
