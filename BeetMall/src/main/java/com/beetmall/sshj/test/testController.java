@@ -73,11 +73,11 @@ public class testController {
 		return "etc/error";
 	}
 	
-	
+	/*
 	@RequestMapping("myinfoEdit")
 	public String myInfoEdit() {	// 내 정보
 		return "mypages/myInfoEdit";
 	}
-	
+	*/
 	
 }

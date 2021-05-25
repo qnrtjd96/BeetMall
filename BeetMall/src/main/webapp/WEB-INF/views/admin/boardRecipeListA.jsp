@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ include file="/inc/top.jspf" %>
+
 <style> 
 	 /*회색 바*/   
 	#topBar h5{  
@@ -177,171 +179,43 @@
 				<li>등록일</li> 
 			</ul>
 		</div>      
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li class="wordCut"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
-				<li>12</li>
-				<li>1362</li>
-				<li>123<img class="cartImg" src="./img/y_heart.png" ></li>
-			
-				<li>greenlike</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li class="wordCut"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
-				<li>12</li>
-				<li>1362</li>
-				<li>123<img class="cartImg" src="./img/y_heart.png" ></li>
-			
-				<li>greenlike</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li class="wordCut"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
-				<li>12</li>
-				<li>1362</li>
-				<li>123<img class="cartImg" src="./img/y_heart.png" ></li>
-			
-				<li>greenlike</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li class="wordCut"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
-				<li>12</li>
-				<li>1362</li>
-				<li>123<img class="cartImg" src="./img/y_heart.png" ></li>
-			
-				<li>greenlike</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li class="wordCut"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
-				<li>12</li>
-				<li>1362</li>
-				<li>123<img class="cartImg" src="./img/y_heart.png" ></li>
-			
-				<li>greenlike</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li class="wordCut"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
-				<li>12</li>
-				<li>1362</li>
-				<li>123<img class="cartImg" src="./img/y_heart.png" ></li>
-			
-				<li>greenlike</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li class="wordCut"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
-				<li>12</li>
-				<li>1362</li>
-				<li>123<img class="cartImg" src="./img/y_heart.png" ></li>
-			
-				<li>greenlike</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li class="wordCut"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
-				<li>12</li>
-				<li>1362</li>
-				<li>123<img class="cartImg" src="./img/y_heart.png" ></li>
-			
-				<li>greenlike</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li class="wordCut"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
-				<li>12</li>
-				<li>1362</li>
-				<li>123<img class="cartImg" src="./img/y_heart.png" ></li>
-			
-				<li>greenlike</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li class="wordCut"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
-				<li>12</li>
-				<li>1362</li>
-				<li>123<img class="cartImg" src="./img/y_heart.png" ></li>
-			
-				<li>greenlike</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li class="wordCut"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
-				<li>12</li>
-				<li>1362</li>
-				<li>123<img class="cartImg" src="./img/y_heart.png" ></li>
-			
-				<li>greenlike</li>
-				<li>2021/04/26</li> 
-			</ul> 
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li class="wordCut"><a href="회원정보?">우리집 봄여름 나물 더 맛있게 먹는 레시피 공유합니다...!!</a> </li>
-				<li>12</li>
-				<li>1362</li>
-				<li>123<img class="cartImg" src="./img/y_heart.png" ></li> 
-				<li>greenlike</li>
-				<li>2021/04/26</li> 
-			</ul> 
-		 
-		 
-
-
- 
-		<!--  
-		<c:forEach var="data" items="${list}">
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li>1569723</li>
-				<li>판매자</li>
-				<li><a href="회원정보?">[판매자 공지] 판매자 사업증 등록시 유의사항</a></li>
-				<li>2021/05/23</li> 
+			<ul id="reciList">
+					<c:forEach var="data" items="${list}">
+					<li>${data.recipenum}</li>
+					<li><a href="recipeView?recipenum=${data.recipenum}&id=${logId}">${data.recipetitle}</a></li>
+					<li>${data.userid}</li>
+					<li>${data.reciperecommend}</li>
+					<li>${data.recipehit}</li>
+					<li>${data.recipewritedate}</li>
+					</c:forEach>
 			</ul>
-		</c:forEach>-->
+		
 		</div>	 
-		<div class="page_wrap">
-			<div class="page_nation">
-			   <a class="arrow pprev" href="<%=request.getContextPath()%>/img/kpage_pprev.png"></a>
-			   <a class="arrow prev" href="#"></a>
-			   <a href="#" class="active">1</a>
-			   <a href="#">2</a>
-			   <a href="#">3</a>
-			   <a href="#">4</a>
-			   <a href="#">5</a>
-			   <a href="#">6</a>
-			   <a href="#">7</a>
-			   <a href="#">8</a>
-			   <a href="#">9</a>
-			   <a href="#">10</a>
-			   <a class="arrow next" href="#"></a>
-			   <a class="arrow nnext" href="#"></a>
-			</div>
-		 </div> 
+	<!-- -----------------------------페이지 표시----------------------------------------- -->
+
+	    <div class="page_wrap">
+					<div class="page_nation">
+					   <c:if test="${pageVO1.pageNum>1}"><!-- 이전페이지가 있을때 -->
+					   		<a class="arrow prev" href="/sshj/boardRecipeListA?pageNum=${pageVO1.pageNum-1}<c:if test="${pageVO1.searchWord != null && pageVO1.searchWord != ''}">&searchKey=${pageVO1.searchKey}&searchWord=${pageVO1.searchWord}</c:if>"></a>
+					   </c:if>
+					   <!-- 페이지 번호                   1                                    5                     -->
+			           <c:forEach var="p" begin="${pageVO1.startPageNum}" step="1" end="${pageVO1.startPageNum + pageVO1.onePageNum-1}">
+			              <c:if test="${p<=pageVO1.totalPage}">
+			                 <c:if test="${p==pageVO1.pageNum}"> <!-- 현재페이지일때 실행 -->
+			                    <a class="active">${p}</a>
+			                 </c:if>   
+			                 <c:if test="${p!=pageVO1.pageNum}"> <!-- 현재페이지가 아닐때 실행 -->
+			                    <a href="/sshj/boardRecipeListA?pageNum=${p}<c:if test="${pageVO1.searchWord != null && pageVO1.searchWord != ''}">&searchKey=${pageVO1.searchKey}&searchWord=${pageVO1.searchWord}</c:if>">${p}</a>
+			                 </c:if>
+			              </c:if>
+			           </c:forEach>
+			           <c:if test="${pageVO1.pageNum < pageVO1.totalPage}">
+			              <a class="arrow next" href="/sshjboardRecipeListA?pageNum=${pageVO1.pageNum+1}<c:if test="${pageVO1.searchWord != null && pageVO1.searchWord != ''}">&searchKey=${pageVO1.searchKey}&searchWord=${pageVO1.searchWord}</c:if>"></a>
+			           </c:if>
+					</div>
+			 </div>  
+			 
+			 <!-- --------------------------- --> 
 		 <div>
 			<form method="get" class="searchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
 				 <select name="searchKey">

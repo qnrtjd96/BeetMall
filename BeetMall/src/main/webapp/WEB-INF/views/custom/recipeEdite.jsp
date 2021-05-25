@@ -115,7 +115,7 @@
 				</tr>
 				<tr class="tr_head">
 					<th class="menu">대표이미지</th>
-					<td  class="td"><input type="file" value="파일첨부하기" name="file" style="width: 500px;"></td>
+					<td  class="td"><input type="file" value="${vo.recipemainimg}" name="file" style="width: 500px;"></td>
 				</tr>
 				<tr>
 					<th colspan="4">레시피 내용</th>
@@ -129,7 +129,7 @@
 		</table>
 			<div id="bottommm">
 				<input type="button" value="취소" class="btn" id="write_btn" onClick="location.href='<%=request.getContextPath() %>/recipeList'"/>
-				<input type="submit" value="작성하기" class="btn" id="write_btn"/>				
+				<input type="submit" value="수정하기" class="btn" id="write_btn"/>				
 			</div>
 		</form>
 </div>
