@@ -27,9 +27,9 @@ public class SaleServiceImp implements SaleService {
 	}
 
 	@Override
-	public List<OrderSaleVO> oneRecordSelect(String ordernum) {
+	public OrderSaleVO oneSaleSelect(OrderSaleVO osvo) {
 		// TODO Auto-generated method stub
-		return saleDAO.oneRecordSelect(ordernum);
+		return saleDAO.oneSaleSelect(osvo);
 	}
 
 	@Override

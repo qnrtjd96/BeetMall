@@ -6,6 +6,21 @@ public class Admin_DesignVO {
 	private int catesort;
 	private int mcatenum;
 	private int productnum;
+	private String thumbimg;
+	private String productname;
+	
+	public String getProductname() {
+		return productname;
+	}
+	public void setProductname(String productname) {
+		this.productname = productname;
+	}
+	public String getThumbimg() {
+		return thumbimg;
+	}
+	public void setThumbimg(String thumbimg) {
+		this.thumbimg = thumbimg;
+	}
 	public int getCatenum() {
 		return catenum;
 	}
@@ -36,5 +51,5 @@ public class Admin_DesignVO {
 	public void setProductnum(int productnum) {
 		this.productnum = productnum;
 	}
-	
+	//
 }

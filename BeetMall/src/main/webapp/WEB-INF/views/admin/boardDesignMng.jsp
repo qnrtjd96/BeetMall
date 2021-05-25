@@ -166,6 +166,46 @@
 	#title{
 		border: none;
 	}
+	#popupselect{
+		margin-left: 0px;
+		top:-130px;
+		left:-100px;
+		height:700px;
+		position:absolute;
+		background-color:white;
+		display:none;
+		z-index:2;
+	}
+	/* 모달 처리 */
+	#modal{
+		background-color: gray;
+		opacity: 0.6;
+		position: fixed;
+		left:0px;
+		top:0px;
+		width:100%;
+		height:100%;
+		display:none;
+		margin:0 !important;
+		z-index:1;
+	}
+	/* 팝업창 설정 */
+	#popul{
+		margin:0;
+	}
+	#popul>li{
+		width:520px !important;
+		height:40px;
+		line-height: 40px;
+		float: left;
+		text-align:left;
+	}
+	#popul>li:nth-child(2){
+		line-height:20px;
+	}
+	#popul>li>input{
+		width:400px;
+	}
 </style>
 <script>
 $(document).ready(function(){ 
@@ -189,7 +229,168 @@ $(document).ready(function(){
 		  focus: false,  
 	  });
 	});
+	$(function(){
+		$("#popupselect").css("top","-150px");
+		$(document).on('scroll', function(){
+			var scroll = window.scrollY;
+			$("#popupselect").css("top",scroll-150);
+		});
+		$(document).on('click', "input[value=수정]",function(){
+			$("#popupselect").css("display","block");
+			$("#modal").css("display","block");
+			$(document.body).css("overflow","hidden");
+			var catesort = $(this).prev().val();	/* srot넘 */
+			var catenum = $(this).prev().prev().val();/* 카테넘 */
+			$("#sorthidden").val(catesort);
+			$("#catehidden").val(catenum);
+			console.log($("#catehidden").val()+", "+$("#sorthidden").val());
+		})
+		$(document).on('click', "input[value=제목수정]",function(){
+			var orgtitle = $(this).prev().val();
+			var tmptitle = $(this).prev().prev().val();
+			console.log(title);
+			var url = 'catetitlechange';
+			var param = "orgtitle="+orgtitle+"&tmptitle="+tmptitle;
+			$.ajax({
+				url :url,
+				data : param,
+				success:function(){
+					alert('성공적으로 수정되었습니다.');
+					location.href="boardDesignMng";
+				}, error :function(){
+					alert('수정에 실패하였습니다. 잠시후 다시 시도해 주세요');					
+					location.href="boardDesignMng";
+				}
+			});
+		})
+		$(document).on('click', "input[value=선택]",function(){
+			var productnum = $(this).prev().val();
+			console.log(productnum);
+			var url = 'mcatechange'
+			var param = 'catesort='+$("#sorthidden").val()+"&catenum="+$("#catehidden").val()+"&productnum="+productnum;
+			console.log("param>>>"+param);
+			if(confirm('해당 상품번호로 수정하시겠습니까? 선택된 상품번호는 '+productnum+'입니다.')){
+				$.ajax({
+					url : url,
+					data : param,
+					success : function(result){
+						console.log("결과"+result);
+						location.href="boardDesignMng";
+					}, error : function(error){
+						console.log(error);
+						alert('오류가 발생했습니다...');
+						location.href="boardDesignMng";
+					}
+				});
+				$("#popupselect").css("display","none");
+				$("#modal").css("display","none");
+				$(document.body).css("overflow","visible");
+			}
+		})
+		$(document).on('click', "#popBtn", function(){
+			$("#popupform").submit();
+			alert('서브밋함');				
+		});
+		$(document).on('click', "input[value=제거]", function(){
+			var catesort = $(this).prev().prev().val();	/* srot넘 */
+			var catenum = $(this).prev().prev().prev().val();/* 카테넘 */
+			$("#sorthidden").val(catesort);
+			$("#catehidden").val(catenum);
+			var url = 'cateremove';
+			var param = 'catesort='+$("#sorthidden").val()+"&catenum="+$("#catehidden").val();
+			console.log(param);
+			$.ajax({
+				url : url,
+				data : param,
+				success: function(result){
+					location.href="boardDesignMng";
+				}, error : function(error){
+					location.href="boardDesignMng";
+				}
+			})
+		});
+		$(document).on('click', "input[value=창닫기]", function(){
+			$("#popupselect").css("display","none");
+			$("#modal").css("display","none");
+			$(document.body).css("overflow","visible");
+		})
+	})
+	function pagemove(num){
+		var url = "/sshj/designPageing";
+		var param = "pageNum="+num;
+		$.ajax({
+			url :url,
+			data : param,
+			contentType:'application/json',
+	        dataType:'json',
+			success : function(result){
+				var $result = $(result);
+				var tag = '';
+				$result.each(function(idx, obj){
+					tag += '<div>수정할 상품을 선택해주세요<input type="hidden" value="" id="catehidden"/><input type="hidden" value="" id="sorthidden"/><input type="button" value="지우기" style="width:60px;height:30px;"/><input type="button" value="창닫기" style="width:60px;height:30px;"/></div>' +
+					"<div id='title'>"+
+					"<ul class='pul'>"+
+						"<li>상품번호</li>"+
+						"<li>카테고리</li>"+
+						"<li id='kktitle'>제목</li>"+
+						"<li>상호명</li>"+
+						"<li>등록일</li>"+
+						"<li>추가</li>"
+					for(i = 0; i < obj.list.length;i++){
+						var data = obj.list[i];
+						tag += "</ul>"+
+						"</div>"+
+						"<ul class='pul'>"+
+						"<li>"+data.productnum+"</li>"+
+						"<li>"
+						if(data.mcatenum>=1 && data.mcatenum<=7){
+							tag +="건과류";
+						}else if(data.mcatenum>=8 &&data.mcatenum<=21){
+							tag +="견과류";
+						}else if(data.mcatenum>=22 &&data.mcatenum<=50){
+							tag +="과일";
+						}else if(data.mcatenum>=51 &&data.mcatenum<=68){
+							tag +="쌀/잡곡";
+						}else if(data.mcatenum>=69 &&data.mcatenum<=104){
+							tag +="야채";
+						}
+						tag += "</li>"+
+						'<li id="kktitle"><a href="/sshj/productEditA?productnum='+data.productnum+'">'+data.productname+'</a></li>'+
+						'<li>'+data.storename+'</li>'+
+						'<li>'+data.sellstart+'</li>'+
+						'<li><input type="hidden" value="'+data.productnum+'"/><input type="button" class="addproduct" value="선택" style="width:60px; height:35px;"></li>'+
+						'</ul>';
+					}
+					var pageVO = $result[0].pageVO;
+					tag +='<div class="page_wrap">'+
+							'<div class="page_nation">'
+							  if(pageVO.pageNum>1){
+								  tag += '<a class="arrow prev" href="javascript:pagemove('+(pageVO.pageNum-1)+')"></a>';
+							  }
+							for(var p = pageVO.startPageNum; p<=(pageVO.startPageNum + pageVO.onePageNum-1);p++){
+					            if(p<=pageVO.totalPage){
+					            	if(p==pageVO.pageNum){
+					            		tag += '<a class="active">'+p+'</a>';
+					            	}
+					            }
+								if(p != pageVO.pageNum){
+									tag += '<a href="javascript:pagemove('+p+')">'+p+'</a>';
+								}
+							}
+							if(pageVO.pageNum < pageVO.totalPage){
+								tag += '<a class="arrow next" href="javascript:pagemove('+(pageVO.pageNum+1)+')"></a>';
+							}
+							tag +='</div></div>';
+					$("#popupselect").html(tag);
+				})
+			}, error : function(error){
+				console.log(error); //
+			}
+		})	
+	}
+
 </script>  
+	<div id="modal"></div>
 	<div id="topBarContainer">
 		<div id="topBar">			
 			<h5><strong><a href="boardDesignMng">디자인 관리</a></strong></h5>			
@@ -199,62 +400,6 @@ $(document).ready(function(){
 <%@ include file="/inc/leftBar.jspf" %>  
 <div id="container">
 		<div id="contentBox">  
-		<!----------------------- 랜덤룰렛 파트 ------------------>
-	   		<!-- <div id="randomBox">
-		 	<div id="randomTitle"><div>랜덤룰렛</div></div>
-		 		<ul class="randomUl">
-		 			<li><div >
-							<label for="file" class="attach"> 
-								이미지 첨부하기
-							</label>
-							<input type="file" style="width: 500px;" id="file">
-							<input class="uploadFile" value="" placeholder="이미지 파일만 업로드하세요">
-						</div>
-					</li> 
-					<li><input type="text" value="" placeholder="링크 입력"/></li> 
-					<li><button class="success addBtn" value="" name="" >추가</button></li> 
-					<li><button class="success delBtn" value="" name="" >삭제</button></li> 
-		 		</ul>
-		 		<ul class="randomUl">
-		 			<li><div >
-							<label for="file" class="attach"> 
-								이미지 첨부하기
-							</label>
-							<input type="file" style="width: 500px;" id="file">
-							<input class="uploadFile"  value="" placeholder="이미지 파일만 업로드하세요">
-						</div>
-					</li> 
-					<li><input type="text" value="" placeholder="링크 입력"/></li> 
-					<li><button class="success addBtn" value="" name="" >추가</button></li> 
-					<li><button class="success delBtn" value="" name="" >삭제</button></li> 
-		 		</ul>
-		 		<ul class="randomUl">
-		 			<li><div >
-							<label for="file" class="attach"> 
-								이미지 첨부하기
-							</label>
-							<input type="file" style="width: 500px;" id="file">
-							<input class="uploadFile"  value="" placeholder="이미지 파일만 업로드하세요">
-						</div>
-					</li> 
-					<li><input type="text" value="" placeholder="링크 입력"/></li> 
-					<li><button class="success addBtn" value="" name="" >추가</button></li> 
-					<li><button class="success delBtn" value="" name="" >삭제</button></li> 
-		 		</ul>
-		 		<ul class="randomUl">
-		 			<li><div >
-							<label for="file" class="attach"> 
-								이미지 첨부하기
-							</label>
-							<input type="file" style="width: 500px;" id="file">
-							<input class="uploadFile"  value="" placeholder="이미지 파일만 업로드하세요">
-						</div>
-					</li> 
-					<li><input type="text" value="" placeholder="링크 입력"/></li> 
-					<li><button class="success addBtn" value="" name="" >추가</button></li> 
-					<li><button class="success delBtn delBtn" value="" name="" >삭제</button></li> 
-		 		</ul> 
-		 	</div> -->
 		 	
 		 	<!----------------- 배너 이미지 파트 ------------------>
 	   		<div id="bannerContainer">
@@ -314,22 +459,34 @@ $(document).ready(function(){
 		 	</div> 
 		 
 		<div class="productchange" style="width:1040px;position:absolute;top:0px;margin-bottom:10px;background-color:white;box-shadow: 4px 6px 15px -7px #c4c4c4;">
+		<input type="hidden" value="" id="catehidden"/><input type="hidden" value="" id="sorthidden"/>
 			<div class="protop" style="width:1040px;text-align:center;font-weight: bold;font-size: 16px;letter-spacing: 2px;border-bottom: 1px solid lightgray;border-radius: 10px 10px 0px 0px;background-color: #FAF9F6;height: 60px;line-height:60px;margin-top:10px;">
-				<input type="text"/>
+				<input type="text" value="${listTitleA}"/><input type="hidden" value="${listTitleA}"/><input type="button" value="제목수정" style="width:80px;height:30px;line-height:30px;margin-left:10px;background-color:#85b8cb;color:white;border:none;"/>
 			</div>
 			<div style="margin-top:10px;">
-				<c:forEach var="i" begin="0" end="11">
-					<div class="productPrev" style="width:260px;height:200px;float:left;">
-						<div class="imgprint" style="width:240px;height:160px; margin-left:10px;margin-right:10px;"></div>
+				<c:forEach var="vo" items="${listA}">
+					<div class="productPrev" style="width:260px;height:210px;float:left;">
+						<div class="imgprint" style="width:240px;height:160px; margin-left:10px;margin-right:10px;">
+							<c:if test="${vo.thumbimg != null}">
+								<img src="resources/sellerProductImgs/${vo.thumbimg}"style="width:240px;height:160px;"  onerror="this.src='/sshj/img/derror.png'"/>
+							</c:if>
+							<c:if test="${vo.thumbimg == null}">
+								<img src="resources/sellerProductImgs/dimgPrev"style="width:240px;height:160px;"  onerror="this.src='/sshj/img/derror.png'"/>
+							</c:if>
+						</div>
+						<div style="margin-left:10px;">${vo.productname}</div>
 						<div class="buttons" style="width:70px;margin:5px auto;">
-							<input type="hidden" value="${i}"/>
-							<input type="button" value="추가" style="width:30px;height:20px;"/>
+							<input type="hidden" value="${vo.catenum}"/>
+							<input type="hidden" value="${vo.catesort}"/>
+							<input type="button" value="수정" style="width:30px;height:20px;"/>
 							<input type="button" value="제거" style="width:30px;height:20px;margin-left:5px;"/>
 						</div>
 					</div>
 				</c:forEach>
 			</div>
-			<div class="contentBox"style=" margin-left: 0px;top:1050px;height: 520px;"> 	
+			<!--$%^-->
+		<div class="contentBox" id = "popupselect"> 
+		<div>수정할 상품을 선택해주세요<input type="button" value="지우기" style="width:60px;height:30px;"/><input type="button" value="창닫기" style="width:60px;height:30px;"/></div>	
 		<div id="title">
 			<ul class="pul">
 				<li>상품번호</li>
@@ -341,7 +498,7 @@ $(document).ready(function(){
 			</ul>
 		</div>  
 			<ul class="pul">
-		<c:forEach var="data" items="${list}">
+			<c:forEach var="data" items="${list}">
 				<li>${data.productnum}</li>
 				<li><c:if test="${data.mcatenum>=1 &&data.mcatenum<=7}">
 						건과류
@@ -362,228 +519,108 @@ $(document).ready(function(){
 				<li id="kktitle"><a href="/sshj/productEditA?productnum=${data.productnum}">${data.productname}</a></li>
 				<li>${data.storename}</li>
 				<li>${data.sellstart}</li> 
-				<li><input type="button" class="addproduct" value="추가"></li>
+				<li><input type="hidden" value="${data.productnum}"/><input type="button" class="addproduct" value="선택" style="width:60px; height:35px;"></li>
 		</c:forEach>
-			</ul>  
-		</div>	 
-		<div class="page_wrap">
-			<div class="page_nation">
-			   <c:if test="${pageVO.pageNum>1}"><!-- 이전페이지가 있을때 -->
-			   		<a class="arrow prev" href="/sshj/boardDesignMng?pageNum=${pageVO.pageNum-1}<c:if test="${pageVO.searchWord != null && pageVO.searchWord != ''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>"></a>
-			   </c:if>
-			   <!-- 페이지 번호                   1                                    5                     -->
-	           <c:forEach var="p" begin="${pageVO.startPageNum}" step="1" end="${pageVO.startPageNum + pageVO.onePageNum-1}">
-	              <c:if test="${p<=pageVO.totalPage}">
-	                 <c:if test="${p==pageVO.pageNum}"> <!-- 현재페이지일때 실행 -->
-	                    <a class="active">${p}</a>
-	                 </c:if>   
-	                 <c:if test="${p!=pageVO.pageNum}"> <!-- 현재페이지가 아닐때 실행 -->
-	                    <a href="/sshj/boardDesignMng?pageNum=${p}<c:if test="${pageVO.searchWord != null && pageVO.searchWord != ''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>">${p}</a>
-	                 </c:if>
-	              </c:if>
-	           </c:forEach>
-	           <c:if test="${pageVO.pageNum < pageVO.totalPage}">
-	              <a class="arrow next" href="/sshj/boardDesignMng?pageNum=${pageVO.pageNum+1}<c:if test="${pageVO.searchWord != null && pageVO.searchWord != ''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>"></a>
-	           </c:if>
-			</div>
-		 </div>
+			</ul>
+			<div class="page_wrap">
+				<div class="page_nation">
+				   <c:if test="${pageVO.pageNum>1}"><!-- 이전페이지가 있을때 -->
+				   		<a class="arrow prev" href="javascript:pagemove(${pageVO.pageNum-1})<c:if test="${pageVO.searchWord != null && pageVO.searchWord != ''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>"></a>
+				   </c:if>
+				   <!-- 페이지 번호                   1                                    5                     -->
+		           <c:forEach var="p" begin="${pageVO.startPageNum}" step="1" end="${pageVO.startPageNum + pageVO.onePageNum-1}">
+		              <c:if test="${p<=pageVO.totalPage}">
+		                 <c:if test="${p==pageVO.pageNum}"> <!-- 현재페이지일때 실행 -->
+		                    <a class="active">${p}</a>
+		                 </c:if>   
+		                 <c:if test="${p!=pageVO.pageNum}"> <!-- 현재페이지가 아닐때 실행 -->
+		                    <a href="javascript:pagemove(${p})<c:if test="${pageVO.searchWord != null && pageVO.searchWord != ''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>">${p}</a>
+		                 </c:if>
+		              </c:if>
+		           </c:forEach>
+		           <c:if test="${pageVO.pageNum < pageVO.totalPage}">
+		              <a class="arrow next" href="javascript:pagemove(${pageVO.pageNum+1})<c:if test="${pageVO.searchWord != null && pageVO.searchWord != ''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>"></a>
+	          	 </c:if>
+				</div>
+		 	</div>  
+		</div>
+		<!--$%^-->
 		</div> 	 
-	 	
-		 	<!------------------ 카테고리 관리파트--------------------->
-			<%-- <div id="cateContainer">
-				<div id="cateHeader">카테고리 관리</div>
-			 	<div id="sectionBox">	
-				 	<section id="cateBox1">	
-				 		<label>대분류 카테고리</label>	
-				 		<div class="cateSmHeader">
-							<span>순서</span>
-							<span>카테고리</span>
-						</div>
-						<hr class="hr">
-						<div>
-							<ul>
-					 			<li><input type="text" value="1"></li>
-					 			<li><input type="text" value="쌀/잡곡"></li>
-					 			<li><button class="success delBtn" value="" name="" >삭제</button></li> 
-				 			</ul>
-					 		<ul>
-					 			<li><input type="text" value="2"></li>
-					 			<li><input type="text" value="과일"></li>
-					 			<li><button class="success delBtn" value="" name="" >삭제</button></li> 
-					 		</ul>
-					 		<ul>
-					 			<li><input type="text" value="3"></li>
-					 			<li><input type="text" value="채소"></li>
-					 			<li><button class="success delBtn" value="" name="" >삭제</button></li> 
-					 		</ul>
-					 		<ul>
-					 			<li><input type="text" value="4"></li>
-					 			<li><input type="text" value="견과류"></li>
-					 			<li><button class="success delBtn" value="" name="" >삭제</button></li> 
-					 		</ul>
-				 		</div>
-						<hr class="hr">
-				 		<div class="addCate">
-				 			<input type="text" placeholder="새 카테고리를 입력해주세요">
-				 			<button class="success addBtn " value="" name="" >추가</button>
-				 		</div>
-				 	</section>
-				 	<!-- 오른쪽 2차 카테고리 관리 -->
-				 		<section id="cateBox2">	
-				 		<label>중분류 카테고리</label>	 
-						<div class="cateSmHeader">
-							<span>순서</span>
-							<span>카테고리</span>
-						</div>
-						<hr class="hr">
-						<table class="tg" style="undefined;table-layout: fixed; width: 390px">
-							<colgroup>
-							<col style="width: 100px">
-							<col style="width: 45px">
-							<col style="width: 140px">
-							<col style="width: 110px">
-							</colgroup>
-							<thead>
-							  <tr>
-							    <th class="tg-7eit cateMainName" rowspan="4"> <input type="text" value="쌀"> </th>
-							    <th class="tg-7eit cateNum"> <input type="text" value="1"> </th>
-							    <th class="tg-7eit cateName"> <input type="text" value="백미"> </th>
-							    <th class="tg-7eit"> <button class="success delBtn" value="" name="" >삭제</button> </th>
-							  </tr>
-							  <tr>
-							    <td class="tg-7eit cateNum"> <input type="text" value="2"> </td>
-							    <td class="tg-7eit cateName"> <input type="text" value="현미"> </td>
-							    <td class="tg-7eit"> <button class="success delBtn" value="" name="" >삭제</button> </td>
-							  </tr>
-							  <tr>
-							    <td class="tg-7eit cateNum"> <input type="text" value="3"> </td>
-							    <td class="tg-7eit cateName"> <input type="text" value="햅쌀"> </td>
-							    <td class="tg-7eit"> <button class="success delBtn" value="" name="" >삭제</button> </td>
-							  </tr>
-							  <tr>
-							    <td class="tg-7eit cateNum"> <input type="text" value="4"> </td>
-							    <td class="tg-7eit cateName"> <input type="text" value="잡곡"> </td>
-							    <td class="tg-7eit"> <button class="success delBtn" value="" name="" >삭제</button> </td>
-							  </tr>
-							</thead>
-						</table> 
-						<hr class="hr">
-						<table class="tg" style="undefined;table-layout: fixed; width: 390px">
-							<colgroup>
-							<col style="width: 100px">
-							<col style="width: 45px">
-							<col style="width: 140px">
-							<col style="width: 110px">
-							</colgroup>
-							<thead>
-							  <tr>
-							    <th class="tg-7eit cateMainName" rowspan="4"> <input type="text" value="과일"> </th>
-							    <th class="tg-7eit cateNum"> <input type="text" value="1"> </th>
-							    <th class="tg-7eit cateName"> <input type="text" value="딸기"> </th>
-							    <th class="tg-7eit"> <button class="success delBtn" value="" name="" >삭제</button> </th>
-							  </tr>
-							  <tr>
-							    <td class="tg-7eit cateNum"> <input type="text" value="2"> </td>
-							    <td class="tg-7eit cateName"> <input type="text" value="사과"> </td>
-							    <td class="tg-7eit"> <button class="success delBtn" value="" name="" >삭제</button> </td>
-							  </tr>
-							  <tr>
-							    <td class="tg-7eit cateNum"> <input type="text" value="3"> </td>
-							    <td class="tg-7eit cateName"> <input type="text" value="포도"> </td>
-							    <td class="tg-7eit"> <button class="success delBtn" value="" name="" >삭제</button> </td>
-							  </tr> 
-							</thead>
-						</table> 	
-						<hr class="hr">
-				 		<div class="addCate">
-					 		<select name="sort" > 
-				   				<option value="대분류" selected>대분류</option>
-				   				<option value="쌀">쌀</option>
-				   				<option value="과일">과일</option> 
-				   				<option value="곡식">곡식</option> 
-				   				<option value="채소">채소</option>  
-				  			</select>
-				 			<input type="text" placeholder="새 카테고리를 입력해주세요">
-				 			<button class="success addBtn " value="" name="" >추가</button>
-				 		</div>
-				 	</section>
-				 </div>
-		 	</div>   --%>
-				 	
-					<!----------------------- 팝업 파트 ------------------>
-				 	<div id="popContainer">
-						<div id="popHeader">팝업 관리</div>
-					 	<div id="popBox">	
-				 			<section id="popBox1">	
-				 					<img src="<%=request.getContextPath()%>/img/y_tomato.jpg"/>
-				 			</section>
-				 			<section id="popBox2">	
-				 				<div>
-									<label for="file" class="attach"> 
-										이미지 첨부하기
-									</label>
-									<input type="file" style="width: 500px;" id="file">
-									<input class="uploadFile"  value="" placeholder="이미지 파일만 업로드하세요">
-								</div>
-				 				<div id="popDate">
-				 					<input type="date" id="from">
-				 					<div id="fromTo">&nbsp;&nbsp;~&nbsp;&nbsp;</div>
-				 						<input type="date" id="todate"> 
-				 					</div>
-				 				<input type="text" value="링크 입력">
-				 			</section>
-				 		</div>
-				 	</div>
-				 	 
-					<!----------------------- 이용안내 파트 ------------------>
-				 	<%-- <div id="useInfoContainer">
-						<div id="useInfoHeader">이용안내 관리</div>
-					 	<div id="useInfoBox">	
-				 			<textarea name="summernote" class="summernote" ></textarea>				 			 
-				 		</div>
-				 		<div class="bottommm">
-				 			<input type="submit" value="작성하기" class="btn write_btn" id="write_btn"/>
-				 			<input type="button" value="취소" class="btn write_btn" id="cancle_btn" onClick="location.href='<%=request.getContextPath() %>/recipeView'"/>
-						</div>
-				 	</div>
-				 	 
-				 	 <!----------------------- 개인정보 처리방침 파트 ------------------>
-				 	<div id="infoHandleContainer">
-						<div id="infoHandleHeader">개인정보 처리방침 관리</div>
-					 	<div id="infoHandleBox">	 
-				 			<textarea name="summernote" class="summernote" ></textarea>	
-				 		</div>
-				 		<div class="bottommm">
-				 			<input type="submit" value="작성하기" class="btn write_btn" id="write_btn"/>
-				 			<input type="button" value="취소" class="btn write_btn" id="cancle_btn" onClick="location.href='<%=request.getContextPath() %>/recipeView'"/>
-						</div>
-				 	</div> 
-				 	 
-				 	 <!----------------------- 사이트 이용약관 파트 ------------------>
-				 	<div id="useTermsContainer">
-						<div id="useTermsHeader">사이트 이용약관 관리</div>
-					 	<div id="useTermsBox">	
-				 			<textarea name="summernote" class="summernote" ></textarea>	
-				 		</div>
-				 		<div class="bottommm">
-				 			<input type="submit" value="작성하기" class="btn write_btn" id="write_btn"/>
-				 			<input type="button" value="취소" class="btn write_btn" id="cancle_btn" onClick="location.href='<%=request.getContextPath() %>/recipeView'"/>
-						</div>
-				 	</div>
-				 	
-				 	 <!----------------------- 전자금융거래 이용약관 파트 ------------------>
-				 	<div id="financialContainer">
-						<div id="financialHeader">전자금융거래 이용약관 관리</div>
-					 	<div id="financialBox">	
-				 			<textarea name="summernote" class="summernote" ></textarea>	
-				 		</div>
-				 		<div class="bottommm">
-				 			<input type="submit" value="작성하기" class="btn write_btn" id="write_btn"/>
-				 			<input type="button" value="취소" class="btn write_btn" id="cancle_btn" onClick="location.href='<%=request.getContextPath() %>/recipeView'"/>
-						</div>
-				 	</div> 
-				 </div> --%>
+		<div class="productchange" style="width:1040px;position:absolute;top:730px;margin-bottom:10px;background-color:white;box-shadow: 4px 6px 15px -7px #c4c4c4;">
+		<input type="hidden" value="" id="catehidden"/><input type="hidden" value="" id="sorthidden"/>
+			<div class="protop" style="width:1040px;text-align:center;font-weight: bold;font-size: 16px;letter-spacing: 2px;border-bottom: 1px solid lightgray;border-radius: 10px 10px 0px 0px;background-color: #FAF9F6;height: 60px;line-height:60px;margin-top:10px;">
+				<input type="text" value="${listTitleB}"/><input type="button" value="제목수정" style="width:80px;height:30px;line-height:30px;margin-left:10px;background-color:#85b8cb;color:white;border:none;"/>
 			</div>
+			<div style="margin-top:10px;">
+				<c:forEach var="vo" items="${listB}">
+					<div class="productPrev" style="width:260px;height:210px;float:left;">
+						<div class="imgprint" style="width:240px;height:160px; margin-left:10px;margin-right:10px;">
+							<c:if test="${vo.thumbimg != null}">
+								<img src="resources/sellerProductImgs/${vo.thumbimg}"style="width:240px;height:160px;"  onerror="this.src='/sshj/img/derror.png'"/>
+							</c:if>
+							<c:if test="${vo.thumbimg == null}">
+								<img src="resources/sellerProductImgs/dimgPrev"style="width:240px;height:160px;"  onerror="this.src='/sshj/img/derror.png'"/>
+							</c:if>
+						</div>
+						<div style="margin-left:10px;">${vo.productname}</div>
+						<div class="buttons" style="width:70px;margin:5px auto;">
+							<input type="hidden" value="${vo.catenum}"/>
+							<input type="hidden" value="${vo.catesort}"/>
+							<input type="button" value="수정" style="width:30px;height:20px;"/>
+							<input type="button" value="제거" style="width:30px;height:20px;margin-left:5px;"/>
+						</div>
+					</div>
+				</c:forEach>
+			</div>
+		</div> 	 
+		<div class="productchange" style="width:1040px;position:absolute;top:1460px;margin-bottom:10px;background-color:white;box-shadow: 4px 6px 15px -7px #c4c4c4;">
+		<input type="hidden" value="" id="catehidden"/><input type="hidden" value="" id="sorthidden"/>
+			<div class="protop" style="width:1040px;text-align:center;font-weight: bold;font-size: 16px;letter-spacing: 2px;border-bottom: 1px solid lightgray;border-radius: 10px 10px 0px 0px;background-color: #FAF9F6;height: 60px;line-height:60px;margin-top:10px;">
+				<input type="text" value="${listTitleC}"/><input type="button" value="제목수정" style="width:80px;height:30px;line-height:30px;margin-left:10px;background-color:#85b8cb;color:white;border:none;"/>
+			</div>
+			<div style="margin-top:10px;">
+				<c:forEach var="vo" items="${listC}">
+					<div class="productPrev" style="width:260px;height:210px;float:left;">
+						<div class="imgprint" style="width:240px;height:160px; margin-left:10px;margin-right:10px;">
+							<c:if test="${vo.thumbimg != null}">
+								<img src="resources/sellerProductImgs/${vo.thumbimg}"style="width:240px;height:160px;"  onerror="this.src='/sshj/img/derror.png'"/>
+							</c:if>
+							<c:if test="${vo.thumbimg == null}">
+								<img src="resources/sellerProductImgs/dimgPrev"style="width:240px;height:160px;"  onerror="this.src='/sshj/img/derror.png'"/>
+							</c:if>
+						</div>
+						<div style="margin-left:10px;">${vo.productname}</div>
+						<div class="buttons" style="width:70px;margin:5px auto;">
+							<input type="hidden" value="${vo.catenum}"/>
+							<input type="hidden" value="${vo.catesort}"/>
+							<input type="button" value="수정" style="width:30px;height:20px;"/>
+							<input type="button" value="제거" style="width:30px;height:20px;margin-left:5px;"/>
+						</div>
+					</div>
+				</c:forEach>
+			</div>
+		</div> 	 
+		<div class="productchange" style="width:1040px;position:absolute;top:2190px;margin-bottom:10px;background-color:white;box-shadow: 4px 6px 15px -7px #c4c4c4;">
+		<input type="hidden" value="" id="catehidden"/><input type="hidden" value="" id="sorthidden"/>
+			<div class="protop" style="width:1040px;text-align:center;font-weight: bold;font-size: 16px;letter-spacing: 2px;border-bottom: 1px solid lightgray;border-radius: 10px 10px 0px 0px;background-color: #FAF9F6;height: 60px;line-height:60px;margin-top:10px;">
+				팝업창 설정하기
+			</div>
+			<div style="margin-top:10px;">
+				<form action="popupsetting" method="post" style="display: block;height: 260px;" enctype="multipart/form-data" id="popupform">
+					<ul id="popul">
+						<li>팝업이미지</li>					<li><input type="file" name="file"/></li>
+						<li>팝업링크</li>						<li><input type="text" name="popuplink" value="${popup.popuplink}"/></li>
+						<li>팝업 재노출 주기(일 단위 입력)</li>	<li><input type="text" name="popupterm" value="${popup.popupterm}"/></li>
+						<li>팝업 가로 길이(px)</li>			<li><input type="text" name="popupheight" value="${popup.popupheight}"/></li>
+						<li>팝업 세로 길이(px)</li>			<li><input type="text" name="popupwidth" value="${popup.popupwidth}"/></li>
+					</ul>
+					<input type="button" value="적용하기" style="width:80px;height:30px;line-height:30px;margin-left:480px;margin-top:10px;background-color:#85b8cb;color:white;border:none;" id="popBtn"/>
+				</form>
+			</div>
+		</div> 	 
+				 	 
+					
+		</div>
 	</div>  
 </div> 
 </html>

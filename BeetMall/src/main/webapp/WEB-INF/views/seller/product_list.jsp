@@ -149,7 +149,7 @@
 //상품목록 상세보기 토글
 $(function(){
 	//선택한 tr열고 닫히기    
-	$("#showDetailPlus").click(function() {
+	$(document).on('click','#showDetailPlus',function() {
 		$(this).parent().next().toggle(
 			function(){
 				$(this).parent().next().css("display", " "); 

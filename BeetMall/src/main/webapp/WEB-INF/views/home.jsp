@@ -293,6 +293,9 @@
 		height:450px;
 		object-fit:fill;
 	}
+	nonlink:active {
+	
+	}
 </style>
 </head>
 <script>
@@ -461,12 +464,24 @@
 			<c:forEach var="vo" items="${topList}">
 				<div class="productPanel">
 					<div>
-						<a href="customproduct?productnum=${vo.productnum}">
-							<img src="/sshj/resources/sellerProductImgs/${vo.thumbimg}" onerror="this.src='/sshj/img/derror.png'"/>
-						</a>
+						<c:if test="${vo.productnum>0}">
+							<a href="customproduct?productnum=${vo.productnum}">
+								<img src="/sshj/resources/sellerProductImgs/${vo.thumbimg}" onerror="this.src='/sshj/img/derror.png'"/>
+							</a>
+						</c:if>
+						<c:if test="${vo.productnum<0}">
+							<a href=""onclick="return false;">
+								<img src="/sshj/resources/sellerProductImgs/${vo.thumbimg}" onerror="this.src='/sshj/img/derror.png'"/>
+							</a>
+						</c:if>
 					</div>
 					<div class="wordcut">
-						<a href="customproduct?productnum=${vo.productnum}" class="wordcut">${vo.productname}</a>
+						<c:if test="${vo.productnum>0}">
+							<a href="customproduct?productnum=${vo.productnum}" class="wordcut">${vo.productname}</a>
+						</c:if>
+						<c:if test="${vo.productnum<0}">
+							<a href="" class="wordcut" onclick="return false;">${vo.productname}</a>
+						</c:if>
 					</div>
 						<c:if test="${vo.saleprice>0}">
 							<div><span style="margin-right:5px;font-size:12px;text-decoration: line-through;">${vo.productprice}원</span><span style="color:red;">${vo.productprice-vo.saleprice}원</span></div>	
@@ -521,12 +536,24 @@
 			<c:forEach var="vo" items="${midList}">
 				<div class="productPanel">
 					<div>
-						<a href="customproduct?productnum=${vo.productnum}">
-							<img src="/sshj/resources/sellerProductImgs/${vo.thumbimg}" onerror="this.src='/sshj/img/derror.png'"/>
-						</a>
+						<c:if test="${vo.productnum>0}">
+							<a href="customproduct?productnum=${vo.productnum}">
+								<img src="/sshj/resources/sellerProductImgs/${vo.thumbimg}" onerror="this.src='/sshj/img/derror.png'"/>
+							</a>
+						</c:if>
+						<c:if test="${vo.productnum<0}">
+							<a href=""onclick="return false;">
+								<img src="/sshj/resources/sellerProductImgs/${vo.thumbimg}" onerror="this.src='/sshj/img/derror.png'"/>
+							</a>
+						</c:if>
 					</div>
 					<div class="wordcut">
-						<a href="customproduct?productnum=${vo.productnum}" class="wordcut">${vo.productname}</a>
+						<c:if test="${vo.productnum>0}">
+							<a href="customproduct?productnum=${vo.productnum}" class="wordcut">${vo.productname}</a>
+						</c:if>
+						<c:if test="${vo.productnum<0}">
+							<a href="" class="wordcut" onclick="return false;">${vo.productname}</a>
+						</c:if>
 					</div>
 						<c:if test="${vo.saleprice>0}">
 							<div><span style="margin-right:5px;font-size:12px;text-decoration: line-through;">${vo.productprice}원</span><span style="color:red;">${vo.productprice-vo.saleprice}원</span></div>	
@@ -551,12 +578,24 @@
 			<c:forEach var="vo" items="${bottomList}">
 				<div class="productPanel">
 					<div>
-						<a href="customproduct?productnum=${vo.productnum}">
-							<img src="/sshj/resources/sellerProductImgs/${vo.thumbimg}" onerror="this.src='/sshj/img/derror.png'"/>
-						</a>
+						<c:if test="${vo.productnum>0}">
+							<a href="customproduct?productnum=${vo.productnum}">
+								<img src="/sshj/resources/sellerProductImgs/${vo.thumbimg}" onerror="this.src='/sshj/img/derror.png'"/>
+							</a>
+						</c:if>
+						<c:if test="${vo.productnum<0}">
+							<a href=""onclick="return false;">
+								<img src="/sshj/resources/sellerProductImgs/${vo.thumbimg}" onerror="this.src='/sshj/img/derror.png'"/>
+							</a>
+						</c:if>
 					</div>
 					<div class="wordcut">
-						<a href="customproduct?productnum=${vo.productnum}" class="wordcut">${vo.productname}</a>
+						<c:if test="${vo.productnum>0}">
+							<a href="customproduct?productnum=${vo.productnum}" class="wordcut">${vo.productname}</a>
+						</c:if>
+						<c:if test="${vo.productnum<0}">
+							<a href="" class="wordcut" onclick="return false;">${vo.productname}</a>
+						</c:if>
 					</div>
 						<c:if test="${vo.saleprice>0}">
 							<div><span style="margin-right:5px;font-size:12px;text-decoration: line-through;">${vo.productprice}원</span><span style="color:red;">${vo.productprice-vo.saleprice}원</span></div>	
@@ -586,5 +625,31 @@
 					</c:if>
 				</div>
 			</c:forEach>
+		</div>
+		<c:if test="${popup.popupimg !=null && popup.popupimg != ''}">
+			<div id="popupdiv" style="height:${popup.popupheight+25}px;width:${popup.popupwidth-2}px;border:1px solid black;position:absolute;top:40px;left:40px;background-color:white;display:none;">
+				<a href="${popup.popuplink }"><img src="/sshj/resources/popupimgs/${popup.popupimg}" style="height:${popup.popupheight}px;width:${popup.popupwidth-4}px;"/></a>
+				<div style="height:25px;line-height:25px;width:${popup.popupwidth-2}px;text-align:right;padding-right:10px;">${popup.popupterm}일간 보지 않기<input type="checkbox" id="popupclose"/>
+				<input type="hidden" value="${popup.popupterm}" id="datehidden"/><input type="hidden" value="${popup.popupimg}" id="popupimghidden"/></div>
+			</div>
+			<script>
+				$(function(){
+					var cookie = document.cookie;
+					if(cookie.indexOf("beet")==-1){
+						$("#popupdiv").css("display","block");
+					}
+					$("#popupclose").click(function(){
+						var now = new Date();
+						now.setDate(now.getDate+$("#datehidden").val());
+						document.cookie = "event=beet;path=/;expires="+now+";";
+						$("#popupdiv").css("display","none");
+					});
+					
+				});
+				
+			</script>
+		</c:if>
+		<div>
+			
 		</div>
 </div>
