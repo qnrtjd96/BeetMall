@@ -20,7 +20,7 @@ public class Admin_MemberSellerServiceImp implements Admin_MemberSellerService{
 	}
 
 	@Override
-	public int selectFavorite(String userid) {
+	public Long selectFavorite(String userid) {
 		// TODO Auto-generated method stub
 		return dao.selectFavorite(userid);
 	}
@@ -36,5 +36,18 @@ public class Admin_MemberSellerServiceImp implements Admin_MemberSellerService{
 		// TODO Auto-generated method stub
 		return dao.discountSelect(userid);
 	}
-	
+
+	@Override
+	public Integer regiapprovalOkUpdate(String userid) {
+		// TODO Auto-generated method stub
+		return dao.regiapprovalOkUpdate(userid);
+	}
+
+	@Override
+	public Integer regiapprovalNoUpdate(String userid) {
+		// TODO Auto-generated method stub
+		return dao.regiapprovalNoUpdate(userid);
+	}
+
+
 }

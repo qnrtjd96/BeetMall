@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.beetmall.sshj.admin.service.Admin_MemberSellerService;
@@ -125,7 +126,7 @@ public class admin_sellerController {
 		
 		//판매자 정보 수정
 		@RequestMapping("/sellerInfoEditA")
-		public ModelAndView sellerInfoEditA() {
+		public ModelAndView sellerInfoEditA(HttpServletRequest req) {
 			ModelAndView mav = new ModelAndView();
 			String userid= "ghdrlfehd";
 			mav.addObject("reportData", service.getReportData(userid));
@@ -138,6 +139,22 @@ public class admin_sellerController {
 			return mav;
 		} 
 		 
-		 
+		// 사업자 등록 업데이트
+		@RequestMapping("/AdminSellerRegiaUpdate")
+		@ResponseBody
+		public int regiapprovalUpdate(HttpServletRequest req) {
+			int num = Integer.parseInt((String)req.getParameter("num"));
+			String userid = (String)req.getParameter("userid");
+			System.out.println(num);
+			userid = "ghdrlfehd";
+			int result = 0;
+			if( num == 1) {
+				result = service.regiapprovalOkUpdate(userid);
+			} else {
+				result = service.regiapprovalNoUpdate(userid);
+			}
+			
+			return result;
+		}
 	 
 }

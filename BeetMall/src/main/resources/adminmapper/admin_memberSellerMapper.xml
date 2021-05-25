@@ -32,8 +32,16 @@
         ) c join discount d on c.productnum = d.productnum(+)
 	</select>
 	
-	<select id="selectFavorite" resultType="int">
+	<select id="selectFavorite" resultType="long">
 		select count(storenum) storenum from favorite where storenum=(select storenum from seller where userid=#{userid})
 	</select>
+	
+	<update id="regiapprovalOkUpdate" parameterType="String">
+		update seller set regiapproval = 2 where userid= #{userid}
+	</update>
+	
+	<update id="regiapprovalNoUpdate" parameterType="String">
+		update seller set regiapproval = 3 where userid= #{userid}
+	</update>
 	
 </mapper>

@@ -1,19 +1,5 @@
 package com.beetmall.sshj.admin.vo;
 
-import java.util.List;
-
-import javax.inject.Inject;
-
-import org.springframework.stereotype.Service;
-
-import com.beetmall.sshj.admin.dao.Admin_MemberDAO;
-import com.beetmall.sshj.admin.service.Admin_MemberService;
-import com.beetmall.sshj.admin.vo.Admin_MemberVO;
-import com.beetmall.sshj.admin.vo.Admin_Member_PageVO;
-import com.beetmall.sshj.admin.vo.Admin_PointVO;
-import com.beetmall.sshj.admin.vo.Admin_WishVO;
-import com.beetmall.sshj.admin.vo.Admin_farmVO;
-
 public class Admin_MemberSellerVO  {
 	private String productname;
 	private String userid;
@@ -26,14 +12,16 @@ public class Admin_MemberSellerVO  {
 	private String regiapprovaldate;
 	private String storezipcode;
 	private String storeaddr;
+	private String storeemail;
 	private String storedetailaddr;
-	private String farmvisitor;
+	private long farmvisitor;
 	private String saleselect;
+
 	private String bank;
 	private String bankname;
 	private long bankaccount;
 	private long productpice;
-	private String thumimg;
+	private String thumbimg;
 	private String username;
 	private String userphone;
 	private String useremail;
@@ -44,7 +32,51 @@ public class Admin_MemberSellerVO  {
 	private String joindate;
 	private int reportcount;
 	private int reportdate;
+	private int productnum;
+	private long productprice;
+	private long saleprice;
 	
+	private String farmprofile;
+	private String farmname;
+	
+	
+	
+	public String getFarmname() {
+		return farmname;
+	}
+	public void setFarmname(String farmname) {
+		this.farmname = farmname;
+	}
+	public String getFarmprofile() {
+		return farmprofile;
+	}
+	public void setFarmprofile(String farmprofile) {
+		this.farmprofile = farmprofile;
+	}
+	public long getProductprice() {
+		return productprice;
+	}
+	public void setProductprice(long productprice) {
+		this.productprice = productprice;
+	}
+	public long getSaleprice() {
+		return saleprice;
+	}
+	public void setSaleprice(long saleprice) {
+		this.saleprice = saleprice;
+	}
+	public int getProductnum() {
+		return productnum;
+	}
+	public void setProductnum(int productnum) {
+		this.productnum = productnum;
+	}
+	public String getStoreemail() {
+		return storeemail;
+	}
+	public void setStoreemail(String storeemail) {
+		this.storeemail = storeemail;
+	}
 	public String getStoredetailaddr() {
 		return storedetailaddr;
 	}
@@ -135,10 +167,10 @@ public class Admin_MemberSellerVO  {
 	public void setStoreaddr(String storeaddr) {
 		this.storeaddr = storeaddr;
 	}
-	public String getFarmvisitor() {
+	public long getFarmvisitor() {
 		return farmvisitor;
 	}
-	public void setFarmvisitor(String farmvisitor) {
+	public void setFarmvisitor(long farmvisitor) {
 		this.farmvisitor = farmvisitor;
 	}
 	public String getSaleselect() {
@@ -153,11 +185,11 @@ public class Admin_MemberSellerVO  {
 	public void setProductpice(long productpice) {
 		this.productpice = productpice;
 	}
-	public String getThumimg() {
-		return thumimg;
+	public String getThumbimg() {
+		return thumbimg;
 	}
-	public void setThumimg(String thumimg) {
-		this.thumimg = thumimg;
+	public void setThumbimg(String thumbimg) {
+		this.thumbimg = thumbimg;
 	}
 	public String getUsername() {
 		return username;
