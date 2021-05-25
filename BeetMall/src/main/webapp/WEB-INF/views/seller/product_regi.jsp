@@ -183,7 +183,7 @@ input[type=file] {
 		height:700px;
 	}
 	.note-editable, .note_editor {
-		height:500px; width:80%;
+		height:500px; width:100%;
 	}
 /*배송*/
 	#pay{height:50px; line-height:35px;}
@@ -831,7 +831,7 @@ $(function(){
 	 <div class="category_title">재고수량</div>
 	<div class="category_wrap">
 			<ul>
-				<li><span class="categoryStar">*</span><label>재고수량</label>&nbsp; <input type="number" name="totalstock" id="totalstock" min="0" value="0"/>&nbsp;<span>개</span></li>
+				<li><span class="categoryStar">*</span><label>재고수량</label>&nbsp; <input type="number" name="totalstock" id="totalstock" min="0" value="0" value="1000"/>&nbsp;<span>개</span></li>
 				<li><span class="notice">판매할 총 재고량을 입력하세요.</span></li>
 			</ul>			
 	</div>	
@@ -900,7 +900,7 @@ $(function(){
 				<li><span class="notice"> 등록 상품의 배송방법을 선택해주세요.</span></li>
 				<li><label><span class="categoryStar">*</span>배송방법</label>&nbsp; 
 					<select name="deliveryoption" id="deliverysel" >
-						<option value="1" id="pickup">픽업</option>
+						<option value="1" id="pickup" seleted>픽업</option>
 						<option value="2" id="delivery">택배</option>
 						<option value="3" id="delandpick">택배/픽업</option>
 					</select>
@@ -911,7 +911,7 @@ $(function(){
 						<input type="number" name="deliveryprice" id="deliveryprice" min=0  />&nbsp;<span>원</span>	 <!-- 픽업 선택시 배송비 0원 고정 -->
 					</li>
 					<li id="pay"><span class="categoryStar">*</span><label>결제방식</label>&nbsp;
-						<input type="radio" name="paymentoption" id="delivery_price_option" value="1"/><label for="착불">착불</label>&nbsp;
+						<input type="radio" name="paymentoption" id="delivery_price_option" value="1" seleted/><label for="착불">착불</label>&nbsp;
 						<input type="radio" name="paymentoption" id="delivery_price_option" value="2"/><label for="선결제">선결제</label>&nbsp;
 						<input type="radio" name="paymentoption" id="delivery_price_option"  value="3"/><label for="착불또는선결제">착불 또는 선결제</label>
 					</li>
@@ -965,10 +965,10 @@ $(function(){
 					<textarea placeholder="간략한 상품정보를 입력해주세요." id ="productinfomation" name="productinfomation"></textarea>
 				</li>
 				<li><span class="categoryStar">*</span><label for="">주의사항</label><br/>
-					<textarea placeholder="주의사항을 입력해주세요. 예)제품 수령 후 반드시 냉장보관해주세요. " id="prevention" name="prevention"></textarea>
+					<textarea placeholder="주의사항을 입력해주세요. 예)제품 수령 후 반드시 냉장보관해주세요. " id="prevention" name="prevention">제품 수령 후 반드시 냉장보관해주세요.</textarea>
 				</li>
 				<li><span class="categoryStar">*</span><label for="">유통기한</label><br/>
-					<textarea placeholder="유통기한을 입력해주세요. 예) 수령후 일주일 또는, 신선식품이므로 가능한 빨리 드시기를 바랍니다." id="deadline" name="deadline" value=""></textarea>
+					<textarea placeholder="유통기한을 입력해주세요. 예) 수령후 일주일 또는, 신선식품이므로 가능한 빨리 드시기를 바랍니다." id="deadline" name="deadline" value="">수령후 일주일 또는, 신선식품이므로 가능한 빨리 드시기를 바랍니다.</textarea>
 				</li>
 			</ul>
 		</div>

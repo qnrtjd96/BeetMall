@@ -7,7 +7,7 @@ public class NoticeVO {
 	private String infowritedate;
 	private int infohit;
 	private String infotype;
-	private String infoattach;
+	private String filename;
 	
 	//공지사항에서필요
 	//이전글 다음글
@@ -52,11 +52,11 @@ public class NoticeVO {
 	public void setInfotype(String infotype) {
 		this.infotype = infotype;
 	}
-	public String getInfoattach() {
-		return infoattach;
+	public String getFilename() {
+		return filename;
 	}
-	public void setInfoattach(String infoattach) {
-		this.infoattach = infoattach;
+	public void setFilename(String filename) {
+		this.filename = filename;
 	}
 	public int getPrevNo() {
 		return prevNo;

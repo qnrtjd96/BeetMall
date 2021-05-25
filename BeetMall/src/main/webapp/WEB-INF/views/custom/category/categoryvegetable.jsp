@@ -477,7 +477,7 @@
 				<a href="/sshj/customproduct?productnum=${data.productnum}" id="taag">
 					<div id="productDiv">
 						<ul style="width:200px;">
-							<li><img src="/sshj/img/${data.thumbimg}"></li>
+							<li><img src="/sshj/resources/sellerProductImgs/${data.thumbimg}"></li>
 							<li class="productname" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">${data.productname}</li>
 							<li style="font-size: 14px; font-size: large; font-weight: bold;">
 								<c:if test="${data.saleprice==null || data.saleprice=='' || data.salefinish=='1' || data.salestart=='1'}">
