@@ -185,7 +185,6 @@ $(function(){
 			<ul id="links05">
 				<li><a href="noticeBoardList">공지 관리</a></li>
 				<li><a href="reviewListA">소비자 리뷰</a></li>
-				<li><a href="boardRecipeListA">레시피 관리</a></li>
 				<li><a href="boardDesignMng">디자인 관리</a></li>
 			</ul>
 			<label for="menu_bar06">고객센터
