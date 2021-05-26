@@ -1,5 +1,7 @@
 package com.beetmall.sshj.admin.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
@@ -81,7 +83,7 @@ public class admin_productController {
 		
 		if( vo2.getOptionselect() != 0) {
 			// 옵션 셀렉트가 0이 아니면 옵션이 있다!
-			Admin_ProductVO vo3 = service.productOptionData(productnum);
+			List<Admin_ProductVO> vo3 = service.productOptionData(productnum);
 			mav.addObject("op",vo3);
 		}
 		

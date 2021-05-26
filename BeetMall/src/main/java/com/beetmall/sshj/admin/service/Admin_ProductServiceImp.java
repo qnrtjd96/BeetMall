@@ -1,5 +1,7 @@
 package com.beetmall.sshj.admin.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +21,7 @@ public class Admin_ProductServiceImp implements Admin_ProductService{
 	}
 
 	@Override
-	public Admin_ProductVO productOptionData(int productnum) {
+	public List<Admin_ProductVO> productOptionData(int productnum) {
 		// TODO Auto-generated method stub
 		return dao.productOptionData(productnum);
 	}
