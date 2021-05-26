@@ -200,20 +200,6 @@ $(function(){
 				<li><a href="csChat">1:1 대화하기</a></li>
 				<li><a href="csreportListA">신고 관리</a></li>
 				<li><a href="csReportChat">신고 채팅 관리</a></li>
-			</ul>
-			<label for="menu_bar07">임시
-				<div id="tri">
-					<img id="more" src="<%=request.getContextPath()%>/img/y_more_gray.png">
-				</div>
-			</label> <input type="checkbox" id="menu_bar07" class="accordion" />
-			<ul id="links07">
-				<li><a href="boardCustomerInfoEdit">회원정보수정</a></li>
-				<li><a href="sellerInfoEditA">판매자정보수정</a></li>
-				<li><a href="noticeBoardWrite">공지 작성</a></li>
-				<li><a href="csAnswerA">문의 답변 작성</a></li>
-				<li><a href="csQOpen">상품문의 보기</a></li>
-				<li><a href="csFAQWrite">FAQ작성</a></li>
-				<li><a href="recipeWriteA">레시피 작성</a></li>
-			</ul>
+			</ul> 
 		</div>
 	</div>
