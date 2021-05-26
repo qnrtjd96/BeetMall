@@ -717,7 +717,7 @@ $('submit').click(function(){
 	<div class="main">
 	<div id="article">
 
-	<div class="wrapTitle" style="font-size:20px">상품등록</div>
+	<div class="wrapTitle" style="font-size:20px">상품 수정</div>
 		<!--검색하기 -->
 		<!-- 상품등록 -->
 		<!-- 카테고리 -->
