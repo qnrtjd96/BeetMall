@@ -71,28 +71,35 @@
 		border:1px solid #42454c;
 	}
 	/* 페이징처리끝 */
+	.contentList{
+		cursor: pointer;
+	}
 </style>
 <script>
-function pagelist(pagenum){
-	var lin = "customerLeaveList?pageNum="+pagenum;
-	
-	if($("#searchWordhidden").val()!=null && $("#searchWordhidden").val()!=''){
-		lin += "&searchKey="+$("#searchKeyhidden").val();
-		lin += "&searchWord="+$("#searchWordhidden").val();
+	function pagelist(pagenum){
+		var lin = "customerLeaveList?pageNum="+pagenum;
+		
+		if($("#searchWordhidden").val()!=null && $("#searchWordhidden").val()!=''){
+			lin += "&searchKey="+$("#searchKeyhidden").val();
+			lin += "&searchWord="+$("#searchWordhidden").val();
+		}
+		location.href=lin;
 	}
-	location.href=lin;
-}
-$(function(){
-	$("#searchKeyhidden").val($("#searchKey").val());
-	$("#searchKey").change(function(){
-		console.log('searchKey바뀜');
+	$(function(){
 		$("#searchKeyhidden").val($("#searchKey").val());
+		$("#searchKey").change(function(){
+			console.log('searchKey바뀜');
+			$("#searchKeyhidden").val($("#searchKey").val());
+		});
+		$("#searchWord").keyup(function(){
+			console.log('searchWord바뀜');
+			$("#searchWordhidden").val($("#searchWord").val());
+		})
+		$(".contentList").click(function(){
+			var userid = $(this).children().eq(0).children().val();
+			location.href="boardCustomerInfoEdit?userid="+userid;
+		})
 	});
-	$("#searchWord").keyup(function(){
-		console.log('searchWord바뀜');
-		$("#searchWordhidden").val($("#searchWord").val());
-	})
-});
 </script>
  
  
@@ -155,9 +162,9 @@ $(function(){
 		</div>  
 		<c:forEach var="vo" items="${list}">
 		<ul class="contentList">
-			<li><input type="checkbox" name="check" id="check"></li>
+			<li><input type="hidden" value="${vo.userid}"></li>
 			<li>${vo.username}</li>
-			<li><a href="회원정보?">${vo.userid}</a></li>
+			<li>${vo.userid}</li>
 			<li>${vo.age}</li>
 			<li>${vo.useremail}</li>
 			<li>${vo.point}</li>

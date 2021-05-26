@@ -12,7 +12,7 @@
 			<!-- info 컨테이너 묶기 width:700px 고정 -->
 			<div id="info_container">
 				<div id="profile_box">
-					<img src="<%=request.getContextPath()%>/resources/img/${result.farmprofile}" onerror="this.src='/sshj/img/derror.png'"/>
+					<img src="<%=request.getContextPath()%>/resources/sellerprofileimg/${result.farmprofile}" onerror="this.src='/sshj/img/derror.png'"/>
 					<div id="farmname" name="farmname">${result.farmname }</div>
 					<div>
 						방문 : ${result.farmvisitor}명 | 농장 즐겨찾기 : ${favorite}명
@@ -41,7 +41,7 @@
 					<input type="hidden" name="productnum" value="${result.productnum }"/> 
 					<div>대표메뉴</div>
 					<div id="repMenu_content">
-						<img src="<%=request.getContextPath()%>/resources/img/${result.thumbimg}" name="thumbimg" onerror="this.src='/sshj/img/derror.png'"/>
+						<img src="<%=request.getContextPath()%>/resources/fileupload/${result.thumbimg}" name="thumbimg" onerror="this.src='/sshj/img/derror.png'"/>
 						<div>
 							<div>${result.productname }</div>
 							<div>

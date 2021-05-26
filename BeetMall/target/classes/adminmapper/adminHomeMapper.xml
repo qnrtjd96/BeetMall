@@ -5,7 +5,8 @@
 <mapper namespace="com.beetmall.sshj.admin.dao.Admin_HomeDAO">
 	<select id="getDeliveryClaim" resultType="com.beetmall.sshj.admin.vo.Admin_HomeVO">	
 		select orderstatus, nvl(count(orderstatus),0) ordercount from orderdetail 
-			where orderconfirm >= to_char(sysdate,'YYYY-MM-DD') group by orderstatus
+			where orderconfirm <![CDATA[<=]]> to_char(ADD_MONTHS(LAST_DAY(sysdate), 0),'YYYY-MM-DD') 
+			and orderstatus not in('구매확정','결제완료') group by orderstatus
 	</select>
 	<select id="getOrderSales" resultType="com.beetmall.sshj.admin.vo.Admin_HomeVO">	
 		select nvl(sum(realpayment),0) realpayment, sum(count(orderdate)) ordercount from ordertbl 
