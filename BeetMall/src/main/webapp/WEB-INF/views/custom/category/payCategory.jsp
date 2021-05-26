@@ -7,6 +7,10 @@
 <style>
 	*{margin:0px; padding:0px; list-style-type :none; font-family: 'Nanum Gothic', sans-serif;}
 	#leftMenu{ display:block;}
+	#productMain {
+		width:1200px !important;
+		overflow:visible !important;
+	}
 	/*버튼*/
 	button, .btn{
 		padding: 3px 10px;
@@ -101,7 +105,7 @@
 		padding-top: 3px;
 	}
 	#productDiv>ul>li:nth-child(5n+2){
-	    font-size: x-large;
+	    font-size: 14px;
 	    font-weight: bold;
 	}
 	#productDiv>ul>li:nth-child(5n+1){

@@ -7,6 +7,10 @@
 <style>
 	*{margin:0px; padding:0px; list-style-type :none; font-family: 'Nanum Gothic', sans-serif;}
 	#leftMenu{ display:block;}
+	#productMain {
+		width:1200px !important;
+		overflow:visible !important;
+	}
 	/* 페이징처리부분 */
 	.page_wrap {
 		text-align:center;
@@ -84,7 +88,7 @@
 		padding-top: 3px;
 	}
 	#productDiv>ul>li:nth-child(5n+2){
-	    font-size: x-large;
+	    font-size: 14px;
 	    font-weight: bold;
 	}
 	#productDiv>ul>li:nth-child(5n+1){
@@ -447,7 +451,7 @@
 		<input type="hidden" id="pageNum" value="${pageVO.pageNum}"/>
 	</c:if>
 	<div class="main">
-		<div id="mainName"><h1>상품 품목별(야채)</h1></div>
+		<div id="mainName"><h1>상품 품목별(채소)</h1></div>
 			<ul id="category">
 				<li><a href="categoryMain"><span id="categoryAll" style="cursor:pointer"><img src="/sshj/img/kmain.png"><br/><br/>전체</span></a></li>
 				<li><a href="categoryMain?item=Fruit"><span id="categoryFruit" style="cursor:pointer"><img src="/sshj/img/kfruit.png"><br/><br/>과일</span></a></li>

@@ -17,6 +17,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					<when test = 'searchWord!=null'>
 						and qmtitle like '%${searchWord}%' 
 					</when>
+					<when test = 'userid!=null'>
+						and userid = #{userid} 
+					</when>
 				</choose>
 		        order by qmnum desc)
 		    where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord} order by qmnum)
@@ -38,6 +41,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<choose>
 			<when test = 'searchWord!=null'>
 				and qmtitle like '%${searchWord}%' 
+			</when>
+			<when test = 'userid!=null'>
+				and userid = #{userid} 
 			</when>
 		</choose>
 	</select>

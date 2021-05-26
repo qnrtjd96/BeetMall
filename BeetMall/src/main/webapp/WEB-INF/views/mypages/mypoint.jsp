@@ -253,7 +253,7 @@
 					<li class="linkStop wordcut">
 						<a href="customproduct?no=${vo.productnum}"><img src="/sshj/resources/sellerProductImgs/${vo.thumbimg}" style="margin-right:10px;"></a>
 						<a href="customproduct?no=${vo.productnum}"><span class="pointtitle wordcut">${vo.productname}</span><br/></a>
-						<a href="customproduct?no=${vo.productnum}"><span class="pointdetail cutpoint">${vo.productcontent }</span></a>
+						<a href="customproduct?no=${vo.productnum}"><span class="pointdetail cutpoint">${vo.productinfomation }</span></a>
 					</li>
 					<li><span class="pointprice">${vo.orderprice}</span>원</li>
 					<c:if test="${vo.changepoint > 0}">
