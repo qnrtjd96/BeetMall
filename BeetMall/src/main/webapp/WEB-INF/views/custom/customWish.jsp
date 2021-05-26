@@ -317,7 +317,7 @@ font-weight:bold;
 }
 
 #ptitleprice{
-color:gray;
+color:#CC313D;
 }
 
 #optitle{
@@ -347,6 +347,15 @@ border:none;
 height:30px;
 border:1px solid #ddd;
 font-size:15px;
+background-color:#EE4234;
+color:#fff;
+border-radius:4px;
+width:70px;
+}
+
+#oneproductTotalPrice{
+color:red;
+font-weight:bold;
 }
 
 </style>
@@ -476,7 +485,7 @@ $(function(){
 	    
 	    
 	    
-		alert("상품가격="+prtprice+"/상품의 갯수="+pcount+"/옵션가격="+optprice+"/옵션의갯수="+ocount+"/본래할인가격"+dprtprice+"/총할인가격="+totaldprtprice+"/최종구매가격="+tprice+"/productname="+productname+"/optionname="+optionname+"/deliveryoption="+deliveryoption);
+		//alert("상품가격="+prtprice+"/상품의 갯수="+pcount+"/옵션가격="+optprice+"/옵션의갯수="+ocount+"/본래할인가격"+dprtprice+"/총할인가격="+totaldprtprice+"/최종구매가격="+tprice+"/productname="+productname+"/optionname="+optionname+"/deliveryoption="+deliveryoption);
 		//alert("/sshj/productPay?total="+tprice+"&discountprice="+totaldprtprice+"&productnum="+productnum+"&productname="+productname+"&deliveryoption="+deliveryoption+"optionnum="+optprice+"&totalCount="+totalCount);
    	    location.href="/sshj/productPay?total="+tprice+"&discountprice="+totaldprtprice+"&productnum="+productnum+"&productname="+productname+"&deliveryoption="+deliveryoption+"&optionnum="+optprice+"&totalCount="+totalCount+"&jangba=1";
 	    //location.href="/sshj/productPay?total="+toltalPrice+"&discountprice="+totaldprtprice+"&productnum=${pvo.productnum}&productname=${pvo.productname}&deliveryoption=${pvo.deliveryoption}&optionnum="+optprice+"&totalCount="+totalCount;
@@ -538,7 +547,7 @@ $(function(){
        <form method="post" id="reply">
 		      
 					<ul class="wishList">
-							<li><a href="customproduct?productnum=${wl.productnum}"><img src="img/${wl.thumbimg}"></a></li> <!-- 이미지 -->
+							<li><a href="customproduct?productnum=${wl.productnum}"><img src="resources/sellerProductImgs/${wl.thumbimg}"></a></li> <!-- 이미지 -->
 							
 							<li>
 							<div id="ptitle"><a href="customproduct?productnum=${wl.productnum}">${wl.productname}</a></div><!-- 상품이름 -->
