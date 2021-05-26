@@ -176,6 +176,7 @@ public class admin_sellerController {
 		public int regiapprovalUpdate(HttpServletRequest req) {
 			int num = Integer.parseInt((String)req.getParameter("num"));
 			String userid = (String)req.getParameter("userid");
+			System.out.println(userid);
 			
 			int result = 0;
 			if( num == 1) {
