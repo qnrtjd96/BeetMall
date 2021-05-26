@@ -285,6 +285,17 @@ input::placeholder { font-size: 90%; padding-left:5px;}
 			color:white;
 			display: inline-block;
 		} 
+		
+		
+		
+		
+		form {
+			display: block !important;
+		}
+		
+		#contentBox li{
+			text-align: left !important;
+		}
 </style> 
 <script>
 $(function(){
@@ -324,15 +335,16 @@ $(function(){
          
           // 선택한 목록의 중분류 이름, 번호 구하기
           let selectName = $(this).text();
-          let selectNum = $(this).children().val();
+          let selectNum = $(this).prev().val();
           // li 개수 구하여 상품 등록은 한 개의 카테고리만 선택 가능
           let liLength = $('#categoryManagement>li').length;
           if(liLength>=1){
-             return alert('판매 상품 등록은 한 가지 카테고리만 선택해주세요.\n원하시는 품목이 없으신 경우 관리자에게 문의해주세요.'); 
+             alert('판매 상품 등록은 한 가지 카테고리만 선택해주세요.\n원하시는 품목이 없으신 경우 관리자에게 문의해주세요.'); 
+             return false;
           }
           // 선택된 목록 [카테고리 선택] 하단에 보여주기 
-        //  let tag = "<li value="+${vo.mcatenum}+">"+"<input type='hidden' value="+${vo.mcatename}+">"+"<a href='#' onclick='return false'><label for='categoryManagement' id='categoryManagement_label'>선택한 상품 카테고리 : </label>"+$(this).attr('value')+"&gt;"+selectName+"<span>⊠</span></a></li>";
-        //  $('#categoryManagement').append(tag);
+          let tag = "<li value="+selectNum+">"+"<input type='hidden' value="+selectNum+">"+"<a href='#' onclick='return false'><label for='categoryManagement' id='categoryManagement_label'>선택한 상품 카테고리 : </label>"+$(this).attr('value')+"&gt;"+selectName+"<span>⊠</span></a></li>";
+          $('#categoryManagement').append(tag);
       });  //2 end
       
       //3. 선택한 중분류 삭제
@@ -843,7 +855,7 @@ $('submit').click(function(){
 			<ul id="categoryManagement">
 				
   				 <li value="${vo.mcatenum}">
-  				 	<input type='hidden' value="${vo.mcatename}"><a href='#' onclick='return false'><label for='categoryManagement' id='categoryManagement_label'>선택한 상품 카테고리 : </label>${vo.catename}&gt;${vo.mcatename}<span>⊠</span></a>
+  				 	<input type='hidden' value="${vo.mcatename}"><a href='#' onclick='return false'><label for='categoryManagement' id='categoryManagement_label'>선택한 상품 카테고리 : </label>${list.catename}&gt;${list.mcatename}<span>⊠</span></a>
   				 </li>
   				 
 			</ul>
@@ -855,7 +867,7 @@ $('submit').click(function(){
 	<div class="category_wrap">
 			<ul>
 				<li><span class="categoryStar">*</span><label for="">상품명</label>&nbsp;
-					<input type="text" name="productname" id="product_register_name" value="${vo.productname}" maxlength="100" size="100"/>&nbsp;<span id="count"></span>/<span id="max_count">100</span><br/>
+					<input type="text" name="productname" id="product_register_name" value="${list.productname}" maxlength="100" size="100"/>&nbsp;<span id="count"></span>/<span id="max_count">100</span><br/>
 					<span class="notice" >
 					판매 상품과 직접 관련이 없는 다른 상품명, 스팸성 키워드 입력 시 관리자에 의해 판매 금지될 수 있습니다.
 					유명 상품 유사문구를 무단으로 도용하여 기재하는 경우 별도 고지 없이 제재될 수 있습니다. 
@@ -868,38 +880,38 @@ $('submit').click(function(){
 	<div class="category_title">판매가격</div>
 	<div class="category_wrap">		
 		<ul>
-			<li><span class="categoryStar">*</span><label>판매가격 </label>&nbsp;<input type="number" name="productprice" id="productprice" value="${vo.productprice}" min=100 placeholder="숫자만 입력하세요."/>&nbsp;<span>원</span></li>
+			<li><span class="categoryStar">*</span><label>판매가격 </label>&nbsp;<input type="number" name="productprice" id="productprice" value="${list.productprice}" min=100 placeholder="숫자만 입력하세요."/>&nbsp;<span>원</span></li>
 	
 			<li> 
 				<span class="categoryStar">*</span><label>판매기간</label>&nbsp;&nbsp;<span class="notice">판매 기간을 설정해주세요. 미선택시 판매시작일은 등록일, 판매종료일은 2년이내로 지정됩니다.</span>
 			</li>
-			<li id="sell_start_finish"><label for="start_date" >판매시작일</label><input type="text" name="sellstart" id="sellstart" class="start_date" value="${vo.sellstart}" max="2099-12-31"/> ~ <label for="finish_date">판매종료일</label><input type="text" name="sellfinish" id="sellfinish" class="finish_date" value="${vo.sellfinish}" max="2099-12-31"/></li>
+			<li id="sell_start_finish"><label for="start_date" >판매시작일</label><input type="text" name="sellstart" id="sellstart" class="start_date" value="${list.sellstart}" max="2099-12-31"/> ~ <label for="finish_date">판매종료일</label><input type="text" name="sellfinish" id="sellfinish" class="finish_date" value="${list.sellfinish}" max="2099-12-31"/></li>
 		
 			<li>
 				<span class="categoryStar">*</span><label>할인여부 </label>&nbsp;
-				<input type="radio" value="1" name="saleselect" id="sale_check"><label for="설정" <c:if test="${vo.saleselect==1}">checked</c:if>>설정</label>
-				<input type="radio" value="0" name="saleselect" id="sale_uncheck"><label for="설정안함" <c:if test="${vo.saleselect==0}">checked</c:if>>설정안함</label>
+				<input type="radio" value="1" name="saleselect" id="sale_check"><label for="설정" <c:if test="${list.saleselect==1}">checked</c:if>>설정</label>
+				<input type="radio" value="0" name="saleselect" id="sale_uncheck"><label for="설정안함" <c:if test="${list.saleselect==0}">checked</c:if>>설정안함</label>
 			</li>
 			<li>
 				<ul id="sale_ul" style="display:none; background-color:#fcfcfc;">
 					<li>
 						<span class="categoryStar">*</span><label>할인금액 </label>&nbsp;
-						<input type="number" name="saleprice" id="saleprice" placeholder="할인적용금액" value="${vo.saleprice}" min=0 />&nbsp;<span>원</span>&nbsp;<span>할인</span>
+						<input type="number" name="saleprice" id="saleprice" placeholder="할인적용금액" value="${list.saleprice}" min=0 />&nbsp;<span>원</span>&nbsp;<span>할인</span>
 					</li>
 					<li>
 						<span class="notice">원하시는 할인 시작일과 할인 종료일을 설정하고 싶으시면, 특정기간만 할인을 선택해주세요. 미선택시 할인시작일은 등록일, 할인종료일은 2년이내로 지정됩니다.</span>
 					</li>
 					<li id="sale_period">
-						<label for="start_date">할인시작일</label><input type="text" name="salestart" id="salestart"  class="start_date " value="${vo.salestart}" max="2099-12-31"/> ~  <label for="finish_date">할인종료일</label><input type="text" name="salefinish" id="saledate" class="finish_date" value="${vo.salefinish}" max="2099-12-31"/>
+						<label for="start_date">할인시작일</label><input type="text" name="salestart" id="salestart"  class="start_date " value="${list.salestart}" max="2099-12-31"/> ~  <label for="finish_date">할인종료일</label><input type="text" name="salefinish" id="saledate" class="finish_date" value="${list.salefinish}" max="2099-12-31"/>
 						<span class="notice">특정기간이 지난후에는 판매가로 적용됩니다.</span>
 					</li>
 					
-					<li><input type="checkbox" name="saleb" id="saleb" value="1" <c:if test="${vo.saleb==1}">checked</c:if>/><label for="saleb">못난이 할인 상품으로 등록</label></li> 
+					<li><input type="checkbox" name="saleb" id="saleb" value="1" <c:if test="${list.saleb==1}">checked</c:if>/><label for="saleb">못난이 할인 상품으로 등록</label></li> 
 					<!-- default = 0 , 컨트롤러에서 선택 안하면 0으로 값이 지정되도록 설정할 것-->
 				</ul>
 			</li>
 			<li>
-				<label for="">최종 판매가격</label>&nbsp; <span id="total_price" >${vo.sellprice}</span>&nbsp;원 &nbsp;(-<span id="discount_price"></span>원 할인) 
+				<label for="">최종 판매가격</label>&nbsp; <span id="total_price" >${list.sellprice}</span>&nbsp;원 &nbsp;(-<span id="discount_price"></span>원 할인) 
 				<span class="notice">수수료는 전체매출에서 2%차감된금액입니다.&nbsp;<a href="">안내 바로가기</a></span>
 			</li>
 		</ul>
@@ -909,7 +921,7 @@ $('submit').click(function(){
 	 <div class="category_title">재고수량</div>
 	<div class="category_wrap">
 			<ul>
-				<li><span class="categoryStar">*</span><label>재고수량</label>&nbsp; <input type="number" name="totalstock" id="totalstock" min="0" value="${vo.totalstock}"/>&nbsp;<span>개</span></li>
+				<li><span class="categoryStar">*</span><label>재고수량</label>&nbsp; <input type="number" name="totalstock" id="totalstock" min="0" value="${list.totalstock}"/>&nbsp;<span>개</span></li>
 				<li><span class="notice">판매할 총 재고량을 입력하세요.</span></li>
 			</ul>			
 	</div>	
@@ -918,8 +930,8 @@ $('submit').click(function(){
 	<div class="category_wrap">
 			<ul class="regi_option_wrap">
 				<li><span class="categoryStar">*</span>
-					<input type="radio" value="1" name="optionselect" id="add_option" <c:if test="${vo.optionselect==1}">checked</c:if>/><label for="옵션추가">옵션추가</label>
-					<input type="radio" value="0" name="optionselect" id="none_option" <c:if test="${vo.optionselect==2}">checked</c:if>/><label for="추가안함">추가안함</label>
+					<input type="radio" value="1" name="optionselect" id="add_option" <c:if test="${op.optionselect==1}">checked</c:if>/><label for="옵션추가">옵션추가</label>
+					<input type="radio" value="0" name="optionselect" id="none_option" <c:if test="${op.optionselect==2}">checked</c:if>/><label for="추가안함">추가안함</label>
 				</li>
 				<li>
 					<ul id="add_option_ul" style="display:none; background-color:#fcfcfc;">
