@@ -56,7 +56,7 @@ a:hover, a:active, a:visited, a:link {
 
 #productMainTiltle {
 	width: 480px;
-	height: 70px;
+	height: 140px;
 	line-height: 70px;
 	float: left;
 	margin-right: 70px;
@@ -772,11 +772,20 @@ td, .td{
 #pagelibtn{
 float:left;
 width:70px;
-height:50px;
+height:29px;
 line-height:50px;
 margin-left:1010px;
 font-size:15px;
 color:black;
+}
+
+#pagelibtn>a{
+float:left;
+width:70px;
+height:28px;
+line-height:28px;
+font-size:15px;
+margin-right:4px;
 }
 
 #spanTotalPrice{
@@ -845,12 +854,13 @@ color:red;
 		width:680px;
 	}
 	.buyListBar{		
-		height:50px;
-		background-color: rgb(252,118,45);
-		position:absolute;
-		color:white;
-		text-align: center;
-		line-height: 50px;
+	height: 50px;
+    background-color: #86aec3;
+    position: absolute;
+    color: black;
+    text-align: center;
+    line-height: 50px;
+    font-weight: bold;
 	}
 	.buyListBarClose{
 		height:50px;
@@ -865,7 +875,7 @@ color:red;
 	}
 	.buyListContent{
 		height:700px;
-		border:1px solid rgb(252,118,45);
+		border:2px solid rgb(162 179 185);
 	}
 	.buyListBtn{
 		position:absolute;
@@ -1366,7 +1376,7 @@ color:red;
 		<!-- -------------------------------------상세정보박스 상단 버튼-------------------------------------------------------- -->
 
 		<div class="infoBtnb">
-			<a href="#productTotalPrice"><input type="button" id="infoBtn1" value="상품설명" class="btn" /></a>
+			<a href="#productTotalPrice"><input type="button" id="infoBtn1" value="상품설명" class="btn" style="background-color:#ff6464; color:white"/></a>
 			<a href="#productInfoPage2"><input type="button" id="infoBtn2" value="고객후기"  class="btn"/></a>
 			<a href="#productInfoPage3"><input type="button" id="infoBtn3" value="상품문의"  class="btn"/></a>
 		</div>
@@ -1418,8 +1428,8 @@ color:red;
          <!-- -------------------------------------상세정보박스 상단 버튼-------------------------------------------------------- -->
 
 	<div class="infoBtnb">
-			<a href="#productTotalPrice"><input type="button" id="infoBtn1" value="상품설명" class="btn" /></a>
-			<a href="#productInfoPage2"><input type="button" id="infoBtn2" value="고객후기"  class="btn"/></a>
+			<a href="#productTotalPrice"><input type="button" id="infoBtn1" value="상품설명" class="btn"/></a>
+			<a href="#productInfoPage2"><input type="button" id="infoBtn2" value="고객후기"  class="btn" style="background-color:#ff6464; color:white"/></a>
 			<a href="#productInfoPage3"><input type="button" id="infoBtn3" value="상품문의"  class="btn"/></a>
 		</div>
 
@@ -1479,7 +1489,7 @@ color:red;
              </c:forEach>
                
           <!-- 신고하기 부분-->
-				<div style="height:350px;width:500px;border:1px solid red;position:absolute;top:400px;left:800px;background-color:white;display:none;" id="reviewreportDiv" class="reviewreportDiv">
+				<div style="height:350px;width:500px;border:1px solid #e2d1d1;position:absolute;top:400px;left:800px;background-color:white;display:none;" id="reviewreportDiv" class="reviewreportDiv">
 					<form style="height:400px;width:500px;float:left;" method="post" action="customreport" id="reviewreportForm" class="reviewreportForm">
 						<h2 style="margin-left:10px;">신고하기</h2>
 						<span style="float:left;font-size:20px;margin-left:10px;">신고사유</span>
@@ -1495,15 +1505,15 @@ color:red;
 							</select>
 						<textarea name="reportcontent" id="reportcontent" style="height:200px;width:480px;margin-left:10px; margin-right:10px;font-size:15px;" maxlength="149"></textarea><!-- 신고내용 -->
 						<div style="font-size:20px;float:right;margin-right:10px;">
-							<input type="button" value="리뷰신고" style="background-color:#ff3a3a;color:white;border:1px solid #aaa;"id="reviewreportsubmit" class="reviewreportsubmit"/><!-- 신고버튼 -->
-							<input type="button" value="닫기"style="background-color:#ddd;color:white;border:1px solid #aaa;"id="reviewreportClose"/>
+							<input type="button" value="리뷰신고" style="background-color:#ff3a3a;color:white;border:1px solid #fff;"id="reviewreportsubmit" class="reviewreportsubmit"/><!-- 신고버튼 -->
+							<input type="button" value="닫기"style="background-color:#ddd;color:white;border:1px solid #fff;"id="reviewreportClose"/>
 							
 						</div>
 					</form>
 				</div>
            <!--  신고하기 밑에 스크립트까지임 -->	
                
-               <div id="pagelibtn"><a href="/sshj/mybuyList">후기 작성</a></div>
+               <div id="pagelibtn" class="btn"><a href="/sshj/mybuyList">후기 작성</a></div>
                
 		       <div id="nonebox">   </div>
 
@@ -1553,7 +1563,7 @@ color:red;
         <div class="infoBtnb">
 			<a href="#productTotalPrice"><input type="button" id="infoBtn1" value="상품설명" class="btn" /></a>
 			<a href="#productInfoPage2"><input type="button" id="infoBtn2" value="고객후기"  class="btn"/></a>
-			<a href="#productInfoPage3"><input type="button" id="infoBtn3" value="상품문의"  class="btn"/></a>
+			<a href="#productInfoPage3"><input type="button" id="infoBtn3" value="상품문의"  class="btn" style="background-color:#ff6464; color:white"/></a>
 		</div>
 	
 		<!-- -------------------------------------상세정보박스3  시작-------------------------------------------------------- -->

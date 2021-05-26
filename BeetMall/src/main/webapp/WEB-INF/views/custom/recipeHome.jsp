@@ -266,7 +266,7 @@ padding-top:0px;
 
 #recipeListul>li:nth-child(5n+5){
 float:left;
-padding-left:520px;
+padding-left:490px;
 width:840px;
 height:25px;
 font-size:19px;
@@ -371,7 +371,7 @@ function new10(){
 		             <ul id="recipeListul">
 		              <li>
 		                  <a href="recipeView?recipenum=${data.recipenum}&id=${logId}">
-		                    <img src="img/${data.recipemainimg}" id="rtitleImg"/>
+		                    <img src="resources/fileupload/${data.recipemainimg}" id="rtitleImg"/>
 		                  </a>
 		              </li>
 		              <li id="retili"><a href="recipeView?recipenum=${data.recipenum}&id=${logId}">${data.recipetitle}</a></li>
@@ -410,7 +410,7 @@ function new10(){
    <!-- <img src="img/${data.recipemainimg}" id="rtitleImg"/> -->
 		         <c:forEach var="data2" items="${list2}">   
 		             <ul id="recipeListul">
-		              <li><a href="recipeView?recipenum=${data2.recipenum}&id=${logId}"><img src="img/${data2.recipemainimg}" id="rtitleImg"/></a></li>
+		              <li><a href="recipeView?recipenum=${data2.recipenum}&id=${logId}"><img src="resources/fileupload/${data2.recipemainimg}" id="rtitleImg"/></a></li>
 		              <li id="retili"><a href="recipeView?recipenum=${data2.recipenum}&id=${logId}">${data2.recipetitle}</a></li>
 		              <li>${data2.userid}</li>
 		              <li><a href="recipeView?recipenum=${data2.recipenum}&id=${logId}"></a></li>
