@@ -399,56 +399,77 @@ overflow:hidden;
 
 
 $(function(){	
-	//var reporteduser=0;
-	//var reportboardnum=0;
+	var reporteduser=0;
+	var reportboardnum=0;
 	
 	$(document).on('click','.chatHeaderSpan', function(){
-	
-		$("#reportDiv").css("display","block");
-		//reporteduser=$(this).parent().next().val();
-		//reportboardnum=$(this).parent().next().next().val();
-		//alert("id"+reporteduser+"num"+reportboardnum);
-    });
-	
-	$(".reportsubmit").click(function(){	// 신고처리하는 ajax부분
-		var formdata = $(".reportForm").serialize();
-		console.log("formdata === "+formdata);
-		$.ajax({
-			url: "customreport",
-			type : "POST",
-			cache:false,
-			data:formdata,
-			success:function(result){
-				console.log(result);
-				if(result == 1){
-					alert('고객님의 신고가 접수되었습니다');
-					location.href="custominfo";
-				}else if(result != 1){
-					alert('신고에 실패했습니다. error_code : 176');
-					$("#reportcontent").val('');
-					$("#reportDiv").css("display","none");
-				}
-			}, error:function(error){
-				console.log(error);
-			}
-		})
-		$("#reportcontent").val('');
-		$("#reportDiv").css("display","none");
-	})
-	$("#reportClose").click(function(){			// 신고 닫기 부분
-		$("#reportcontent").val('');
-		$("#reportDiv").css("display","none");
-	})
-	
-	$(document).on('click','input[value=신고하기]', function(){	// 신고창 여는 부분(여기서 신고할 유저아이디, 신고할 글번호 세팅해줌)
-		//alert("id2"+reporteduser+"num2"+reportboardnum);
-		var reporteduser=$(this).parent().parent().parent().prev().children().eq(0).value();
-		var reportboardnum=$(this).parent().parent().parent().prev().children().eq(1).value();
 		
-		alert(reporteduser+reportboardnum);
-		$("#reportDiv").css("display","block");
+		var scroll = window.scrollY;
+		if(scroll>255){
+			$("#reportDiv").css("top",scroll+250);
+		}else {
+			$("#reportDiv").css("top",scroll+250);
+		}
+		
 	
-	});
+		$("#reportDiv").css("display","block");
+		reporteduser=$(this).parent().next().val();
+		reportboardnum=$(this).parent().next().next().val();
+		//alert("id"+reporteduser+"num"+reportboardnum);
+		$("#reporteduser").val(reporteduser);
+		$("#reportboardnum").val(reportboardnum);
+		
+	   	$(document).on('click','input[value=신고하기]', function(){	// 신고창 여는 부분(여기서 신고할 유저아이디, 신고할 글번호 세팅해줌)
+			//alert("id2"+reporteduser+"num2"+reportboardnum);
+			//var reporteduser=$(this).parent().parent().parent().prev().children().eq(0).value();
+			//var reportboardnum=$(this).parent().parent().parent().prev().children().eq(1).value();
+			
+			//alert(reporteduser+reportboardnum+여기까지옴);
+			$("#reportDiv").css("display","block");
+	
+	      });
+		
+		
+		$(".reportsubmit").click(function(){	// 신고처리하는 ajax부분
+			
+			var formdata = $(".reportForm").serialize();
+			//alert("formdata === "+formdata);
+			$.ajax({
+				url: "customreport",
+				type : "POST",
+				cache:false,
+				data:formdata,
+				success:function(result){
+					console.log(result);
+					if(result == 1){
+						alert('고객님의 신고가 접수되었습니다');
+						location.href="custominfo";
+					}else if(result != 1){
+						alert('신고에 실패했습니다. error_code : 176');
+						$("#reportcontent").val('');
+						$("#reportDiv").css("display","none");
+					}
+				}, error:function(error){
+					console.log(error);
+				}
+			})
+			$("#reportcontent").val('');
+			$("#reportDiv").css("display","none");
+		})
+		
+		
+		
+		$("#reportClose").click(function(){			// 신고 닫기 부분
+		$("#reportcontent").val('');
+		$("#reportDiv").css("display","none");
+	     })
+	     
+	     
+	  
+    });
+
+	
+
 	
 	
 		$(".qnaViewbtn").click(function() {
@@ -464,6 +485,8 @@ $(function(){
 		  				}
 		  			);
 		  		});
+		
+		
 
 	
 	///////////////////비공개처리 업데이트////////////////
@@ -609,17 +632,23 @@ $(function(){
 							     ${qlist.qanswer}
 							</div>
 							<div id="chatInfoTitle"><span id="chatHeaderSpan" class="chatHeaderSpan"><span id="reportChat">신고하기</span><span id="theyId"></span></span></div>
+							<input type=hidden value="${qlist.selleruserid}">
+							<input type=hidden value="${qlist.qnum}">
+						</c:if>		
+				</div>
+		  </c:forEach>		 
+		  </c:if>
 
-					
-<!-- 신고하기 부분 -->
-	<div style="height:350px;width:500px;border:1px solid red;position:absolute;top:400px;left:800px;background-color:white;display:none;" id="reportDiv" class="reportDiv">
+ 
+<!-- 신고하기 부분-->
+	<div style="height:350px;width:500px;border:2px solid #ddd;position:absolute;top:400px;left:800px;background-color:white;display:none;" id="reportDiv" class="reportDiv">
 		<form style="height:400px;width:500px;float:left;" method="post" action="customreport" id="reportForm" class="reportForm">
-			<h2 style="margin-left:10px;">신고하기</h2>
+			<h2 style="margin-left:10px; color:#50586C; font-weight:bold">신고하기</h2>
 			<span style="float:left;font-size:20px;margin-left:10px;">신고사유</span>
 				<input type="hidden" name="userid" value="${logId}"/>												<!-- 신고자 아이디 -->
-				<input type="hidden" name="reporteduser" id="reporteduser" value="${qlist.selleruserid}"/>											<!-- 신고할 사람 아이디 -->
+				<input type="hidden" name="reporteduser" id="reporteduser" value=""/>											<!-- 신고할 사람 아이디 -->
 				<input type="hidden" name="reportboard" value="문의"/>							<!-- 신고한 게시판 -->
-				<input type="hidden" name="reportboardnum" id="reportboardnum" value="${qlist.qnum}"/>										<!-- 신고한 글 번호 -->
+				<input type="hidden" name="reportboardnum" id="reportboardnum" value=""/>										<!-- 신고한 글 번호 -->
 				<select name="reportreason"  style="float:right;margin-right:10px;font-size:20px;">	<!-- 신고사유 -->
 					<option value="비방/욕설">비방/욕설</option>
 					<option value="허위">허위</option>
@@ -627,30 +656,15 @@ $(function(){
 					<option value="기타">기타</option>
 				</select>
 			<textarea name="reportcontent" id="reportcontent" style="height:200px;width:480px;margin-left:10px; margin-right:10px;font-size:15px;" maxlength="149"></textarea><!-- 신고내용 -->
-			<div style="font-size:20px;float:right;margin-right:10px;">
-				<input type="button" value="신고하기" style="background-color:#ff3a3a;color:white;border:1px solid #aaa;"id="reportsubmit" class="reportsubmit"/><!-- 신고버튼 -->
-				<input type="button" value="닫기"style="background-color:#ddd;color:white;border:1px solid #aaa;"id="reportClose"/>
+			<div style="font-size:18px;float:right;margin-right:10px;">
+				<input type="button" value="신고하기" style="background-color:#ff3a3a;color:white;border:1px solid #fff;"id="reportsubmit" class="reportsubmit"/><!-- 신고버튼 -->
+				<input type="button" value="닫기"style="background-color:gray;color:white;border:1px solid #fff;"id="reportClose"/>
 				
 			</div>
 		</form>
 	</div>
-<!-- 신고하기 밑에 스크립트까지임 -->	
-						</c:if>	
-	
-				</div>
-				
-				
-		  </c:forEach>	
-		  
-	
-		  
-		  
-		  
-		  </c:if>
-
-	
-
-				
+ <!--  신고하기 밑에 스크립트까지임 -->	
+		
 
 	
 	<div id="nonebox">   </div>

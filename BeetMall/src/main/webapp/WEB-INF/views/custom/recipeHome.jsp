@@ -266,7 +266,7 @@ padding-top:0px;
 
 #recipeListul>li:nth-child(5n+5){
 float:left;
-padding-left:450px;
+padding-left:520px;
 width:840px;
 height:25px;
 font-size:19px;
@@ -420,16 +420,16 @@ function new10(){
 		           
 			<div class="page_wrap">
 					<div class="page_nation">
-					   <c:if test="${pageVO2.pageNum>1}"><!-- 이전페이지가 있을때 -->
+					   <c:if test="${pageVO2.pageNum>1}">
 					   		<a class="arrow prev" href="/sshj/recipeHome?pageNum=${pageVO2.pageNum-1}<c:if test="${pageVO2.searchWord != null && pageVO2.searchWord != ''}">&searchKey=${pageVO2.searchKey}&searchWord=${pageVO2.searchWord}</c:if>"></a>
 					   </c:if>
 					   <!-- 페이지 번호                   1                                    5                     -->
 			           <c:forEach var="p" begin="${pageVO2.startPageNum}" step="1" end="${pageVO2.startPageNum + pageVO2.onePageNum-1}">
 			              <c:if test="${p<=pageVO2.totalPage}">
-			                 <c:if test="${p==pageVO2.pageNum}"> <!-- 현재페이지일때 실행 -->
+			                 <c:if test="${p==pageVO2.pageNum}"> 
 			                    <a class="active">${p}</a>
 			                 </c:if>   
-			                 <c:if test="${p!=pageVO2.pageNum}"> <!-- 현재페이지가 아닐때 실행 -->
+			                 <c:if test="${p!=pageVO2.pageNum}">
 			                    <a href="/sshj/recipeHome?pageNum=${p}<c:if test="${pageVO2.searchWord != null && pageVO2.searchWord != ''}">&searchKey=${pageVO2.searchKey}&searchWord=${pageVO2.searchWord}</c:if>">${p}</a>
 			                 </c:if>
 			              </c:if>
