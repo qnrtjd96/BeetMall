@@ -522,8 +522,8 @@ function popupOpen(data){
 	let tag = '<div id="modalHeader">사업자 등록증</div>';
 		tag += '<img src="<%=request.getContextPath()%>/resources/sellerregiimgs/${sellerData.sellerregiimg}" style="width: 100%; height: 100%;">';
 		tag += '<div id="popupDiv">';
-		tag += '<button class="success" onclick="javascript:regiaUpdate(1)" >인증 확인</button>';
-		tag += '<button class="success" onclick="javascript:regiaUpdate(2)" >반려</button>';
+		tag += '<button class="success" onclick="javascript:regiaUpdate(1,\'${sellerData.userid}\')" >인증 확인</button>';
+		tag += '<button class="success" onclick="javascript:regiaUpdate(2,\'${sellerData.userid}\')" >반려</button>';
 		tag += '<button class="success" onclick="javascript:popupClose()">취소</button>';
 		tag += '</div>';
 	
@@ -548,13 +548,13 @@ function popupClose(){
 	$('#popup').css('display','none');
 }
 
-function regiaUpdate(num){
-	console.log(num);
+function regiaUpdate(num,userid){
 	$.ajax({
 		type:'GET',
 		url: "AdminSellerRegiaUpdate",
 		data: {
-			num : num
+			num : num,
+			userid : userid
 		},
 		success: function(result){
 			if(result == 1){
@@ -695,7 +695,7 @@ function editPage(){
 			<!-- info 컨테이너 묶기 width:700px 고정 -->
 			<div id="sellerEdit">
 				<form action="adminEditFarmUpdate" method="post" enctype="multipart/form-data">
-					<input type="hidden" name="userid" value="${sellerData.userid }"/>
+					<input type="hidden" name="userid" id="userid" value="${sellerData.userid }"/>
 					<input type="hidden" name="storenum" value="${sellerData.storenum}" />
 					<div id="info_container">
 						<div id="profile_box">
