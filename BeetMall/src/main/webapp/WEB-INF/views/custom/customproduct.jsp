@@ -1292,14 +1292,12 @@ margin-left:5px;
    });
    
 </script>
-<body>
-<!--  
+<body> 
 <c:if test="${report != null }">
    <script>
        location.href='customproduct?productnum='+${report };
    </script>
 </c:if>
--->
    <div class="section" id="productPageDiv">
       
 

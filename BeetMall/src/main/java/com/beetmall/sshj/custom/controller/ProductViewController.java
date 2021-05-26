@@ -35,6 +35,8 @@ public class ProductViewController {
 		//테이블이 product/들어가는 수: productnum int/나오는 값 1개
 		//sellfinish,thumbimg,productname,productprice,selloption,sellweight,
 		//deliveryoption,origin,wrapping
+		productnum = Integer.parseInt(req.getParameter("productnum"));
+		
 		PageProductVO pageVO1=new PageProductVO();
 		pageVO1.setProductnum(productnum);
 		
