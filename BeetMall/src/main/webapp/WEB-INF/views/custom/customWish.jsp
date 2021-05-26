@@ -32,15 +32,11 @@
 	float: left;
 	width: 100%;
 	height: 20px;
-	margin-top: 10px;
-	font-weight: bold;
+	margin-top: 20px;
 	margin-bottom: 30px;
+	font-size:30px;
 }
-#wisht>b{
-	padding-top:20px;
-	padding-left:20px;
-	
-}
+
 .wishListTitle {
 	width: 100%;
 	border-bottom: 2px solid #ddd;
@@ -530,7 +526,7 @@ $(function(){
 	<div class="section" id="whisListPage">
 		<!-- 큰제목 ---------------------------------------------->
 		<div id="wisht">
-			<b>${logId}님 의 장바구니 입니다.</b>
+			${logId}님 의 장바구니 입니다.
 		</div>
 		<!-- ----------------게시판------------------------ -->
 		<!--  <input type="button" value="선택상품제거" id="nogetbutton" /> -->
@@ -547,7 +543,7 @@ $(function(){
        <form method="post" id="reply">
 		      
 					<ul class="wishList">
-							<li><a href="customproduct?productnum=${wl.productnum}"><img src="resources/sellerProductImgs/${wl.thumbimg}"></a></li> <!-- 이미지 -->
+							<li><a href="customproduct?productnum=${wl.productnum}"><img src="resources/sellerProductImgs/${wl.thumbimg}" onerror="this.src='/sshj/img/derror.png'"></a></li> <!-- 이미지 -->
 							
 							<li>
 							<div id="ptitle"><a href="customproduct?productnum=${wl.productnum}">${wl.productname}</a></div><!-- 상품이름 -->
