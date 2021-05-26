@@ -12,12 +12,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.beetmall.sshj.admin.service.Admin_BoardService;
 import com.beetmall.sshj.admin.service.Admin_FaqService;
+import com.beetmall.sshj.admin.vo.Admin_Board_PageVO;
 import com.beetmall.sshj.admin.vo.Admin_FaqVO; 
 
 @Controller
 public class admin_csController {
-
+	@Inject
+	Admin_BoardService adminService;
 	
 	@Autowired
 	Admin_FaqService service;
@@ -26,6 +29,8 @@ public class admin_csController {
 	@RequestMapping("/csQuestionBrowse")
 	public ModelAndView csQuestionBrowse() {
 		ModelAndView mav = new ModelAndView();
+		Admin_Board_PageVO vo = new Admin_Board_PageVO();
+		mav.addObject("list", adminService.noticeBoardList(vo));
 		mav.setViewName("/admin/csQuestionBrowse");
 		return mav;
 	}
