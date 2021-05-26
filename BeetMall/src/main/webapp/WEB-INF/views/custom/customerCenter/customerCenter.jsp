@@ -264,7 +264,7 @@
 					<td class="number">${data.qmnum}</td>
 					<td class=><a href="<%=request.getContextPath()%>/customerCenterView?qmnum=${data.qmnum}">${data.qmtitle}</a></td>
 					<td>${data.qmdate}</td>
-					<td>
+					<td style="text-align: center;">
 						<c:if test="${data.qmanswer==null}">
 							<span class="answer_span" id="no_answer">답변대기중</span>
 						</c:if>
