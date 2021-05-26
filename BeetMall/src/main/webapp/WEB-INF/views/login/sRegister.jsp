@@ -180,7 +180,7 @@
 		top:45px;
 	}
 	#imgPrevInfo{
-		top:210px;
+		top:15px;
 		font-size:13px;
 		text-align: center;
 		color:blue;
@@ -697,7 +697,7 @@
 					<li></li>													<li><input type="text" name="storeemailCheck" id="storeemailCheck" style="margin-right:5px;"/><input type="button" value="인증하기" id="storeemailCheckBtn" class="btn"/></li>
 				</ul>
 				<img src="/sshj/img/dimgPrev.png" id="imgPrev"/>
-				<div id="imgPrevInfo"><span>위 이미지는 미리보기입니다.</span></div>
+				<div id="imgPrevInfo"><span>아래 이미지는 미리보기입니다.</span></div>
 				<div style="margin-bottom:20px; padding-top:20px;margin-top: 20px;"><input type="submit" value="가입하기" class="btnClass" id="infosubmit"></div>
 			</div>
 		</form>

@@ -52,6 +52,11 @@
 		font-size:25px;
 		margin-left: 10px;
 	}
+	.regiFinBtn{
+		border: none;
+	}
+	
+	
 </style>
 <script>
 	$(function(){
@@ -72,7 +77,7 @@
 		<div class="regiFinInfo"><img src="/sshj/img/dstore.png"/><div class="regiFinInfoTxt">우리동네<br/>가까운 농장을<br/>찾아보세요</div></div>
 		<div class="regiFinInfo"><img src="/sshj/img/dtruck.png"/><div class="regiFinInfoTxt">빠르고<br/>신선한<br/>배송</div></div>
 		<div class="regiFinInfo"><img src="/sshj/img/dcoins.png"/><div class="regiFinInfoTxt">구매 건당<br/>1% 적립</div></div>
-		<div class="regiFinInfo"><img src="/sshj/img/dvegetables.png"/><div class="regiFinInfoTxt">유통단계를<br/>거치지 않고<br/>저렵하게 구매가능한<br/>신선한 과일 야채</div></div>
+		<div class="regiFinInfo"><img src="/sshj/img/dvegetables.png"/><div class="regiFinInfoTxt">유통단계를<br/>거치지 않고<br/>저렵하게 구매가능한<br/>신선한 과일 채소</div></div>
 	</div>
 	<div id="regiFinBtnDiv">
 		<input type="button" value="홈으로" class="regiFinBtn" id="goHomeBtn"/>

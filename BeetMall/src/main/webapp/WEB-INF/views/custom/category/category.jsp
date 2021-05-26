@@ -15,6 +15,7 @@
 		font-weight: 600;
 		color: brown;
 	}
+	
 	#productMain div{
 		text-align: left;
 		margin-right: 65px;

@@ -629,7 +629,7 @@ float:left;
 	padding-left: 0px;
 }
 
-	button, .btn{
+	button{
 		padding: 3px 10px;
 		color: #666666;
 		text-align: center;

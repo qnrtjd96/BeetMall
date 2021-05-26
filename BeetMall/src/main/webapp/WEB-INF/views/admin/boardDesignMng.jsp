@@ -352,7 +352,7 @@ $(document).ready(function(){
 						}else if(data.mcatenum>=51 &&data.mcatenum<=68){
 							tag +="쌀/잡곡";
 						}else if(data.mcatenum>=69 &&data.mcatenum<=104){
-							tag +="야채";
+							tag +="채소";
 						}
 						tag += "</li>"+
 						'<li id="kktitle"><a href="/sshj/productEditA?productnum='+data.productnum+'">'+data.productname+'</a></li>'+
@@ -513,7 +513,7 @@ $(document).ready(function(){
 						쌀/잡곡
 					</c:if>
 					<c:if test="${data.mcatenum>=69 &&data.mcatenum<=104}">
-						야채
+						채소
 					</c:if>
 				</li>
 				<li id="kktitle"><a href="/sshj/productEditA?productnum=${data.productnum}">${data.productname}</a></li>

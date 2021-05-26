@@ -1,44 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.beetmall.sshj.admin.dao.Admin_MemberDAO">
-	<select id="memberCountall" resultType="Integer">
-		select count(*) from member where usertype in(1,2) and userstop !='Y' and userid !='master'
+	<select id="memberCountall" resultType="Integer" parameterType="com.beetmall.sshj.admin.vo.Admin_Member_PageVO">
+		select count(*) from member where usertype in(1,2) and userstop !='Y' and userid !='master' <if test="searchWord != null"> and ${searchKey} like '%${searchWord}%' </if>
 	</select>
 	<select id="memberselectall" parameterType="com.beetmall.sshj.admin.vo.Admin_Member_PageVO" resultType="com.beetmall.sshj.admin.vo.Admin_MemberVO">
 		select * from(
 		select * from(
-		select nvl(storenum, -1) as storenum ,m.userid, userpwd, username, userphone, useremail, userzipcode, useraddr, userdetailaddr, birthday,  to_char(joindate, 'YY/MM/DD HH:MI') as joindate, usertype, userstop, point, to_char(sysdate,'YYYY') - to_char(birthday,'YYYY') +1 as age from member m left join seller s on m.userid=s.userid where userstop='N' and m.userid!='master' order by username asc
+		select nvl(storenum, -1) as storenum ,m.userid, userpwd, username, userphone, useremail, userzipcode, useraddr, userdetailaddr, birthday,  to_char(joindate, 'YY/MM/DD HH:MI') as joindate, usertype, userstop, point, to_char(sysdate,'YYYY') - to_char(birthday,'YYYY') +1 as age 
+		from member m left join seller s on m.userid=s.userid 
+		where userstop='N' and m.userid!='master' 
+		<if test="searchWord != null"> and m.${searchKey} like '%${searchWord}%' </if>
+		order by username asc
 		)where rownum<![CDATA[<=]]>${pageNum}*${onePageRecord} order by username desc
 		)where rownum<![CDATA[<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
 								   <if test="pageNum!=totalPage">${onePageRecord}</if>
 		order by username asc
 	</select>
-	<select id="memberCount" resultType="Integer">
-		select count(*) from member where #{param1}=3 and usertype=#{param2} and userid!='master'
+	<select id="memberCount" resultType="Integer" parameterType="com.beetmall.sshj.admin.vo.Admin_Member_PageVO">
+		select count(*) from member where usertype=#{userType} and userid!='master'<if test="searchWord != null"> and ${searchKey} like '%${searchWord}%' </if>
 	</select>
 	<select id="memberselect" parameterType="com.beetmall.sshj.admin.vo.Admin_Member_PageVO" resultType="com.beetmall.sshj.admin.vo.Admin_MemberVO">
 		select * from(
 		select * from(
-		select userid, userpwd, username, userphone, useremail, userzipcode, useraddr, userdetailaddr, birthday,  to_char(joindate, 'YY/MM/DD HH:MI') as joindate, usertype, userstop, point, to_char(sysdate,'YYYY') - to_char(birthday,'YYYY') +1 as age from member where usertype = #{userType} and userstop='N' and userid!='master' order by username asc
+		select userid, userpwd, username, userphone, useremail, userzipcode, useraddr, userdetailaddr, birthday,  to_char(joindate, 'YY/MM/DD HH:MI') as joindate, usertype, userstop, point, to_char(sysdate,'YYYY') - to_char(birthday,'YYYY') +1 as age 
+		from member 
+		where usertype = #{userType} and userstop='N' and userid!='master' <if test="searchWord != null"> and ${searchKey} like '%${searchWord}%' </if> order by username asc
 		)where rownum<![CDATA[<=]]>${pageNum}*${onePageRecord} order by username desc
 		)where rownum<![CDATA[<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
 								   <if test="pageNum!=totalPage">${onePageRecord}</if>
 		order by username asc
 	</select>
-	<select id="memberCountBlack" resultType="Integer">
-		select count(*) from member where #{param1}=3 and usertype=#{param2} and userstop = 'Y'
+	<select id="memberCountBlack" resultType="Integer" parameterType="com.beetmall.sshj.admin.vo.Admin_Member_PageVO">
+		select count(*) from member where usertype=#{userType} and userstop = 'Y'<if test="searchWord != null"> and ${searchKey} like '%${searchWord}%' </if>
 	</select>
 	<select id="memberselectblack" parameterType="com.beetmall.sshj.admin.vo.Admin_Member_PageVO" resultType="com.beetmall.sshj.admin.vo.Admin_MemberVO">
 		select * from(
 		select * from(
-		select userid, userpwd, username, userphone, useremail, userzipcode, useraddr, userdetailaddr, birthday,  to_char(joindate, 'YY/MM/DD HH:MI') as joindate, usertype, userstop, point, to_char(sysdate,'YYYY') - to_char(birthday,'YYYY') +1 as age from member where usertype = #{userType} and userstop='Y' and userid!='master' order by username asc
+		select userid, userpwd, username, userphone, useremail, userzipcode, useraddr, userdetailaddr, birthday,  to_char(joindate, 'YY/MM/DD HH:MI') as joindate, usertype, userstop, point, to_char(sysdate,'YYYY') - to_char(birthday,'YYYY') +1 as age from member 
+		where usertype = #{userType} and userstop='Y' and userid!='master'<if test="searchWord != null"> and ${searchKey} like '%${searchWord}%' </if>order by username asc
 		)where rownum<![CDATA[<=]]>${pageNum}*${onePageRecord} order by username desc
 		)where rownum<![CDATA[<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
 								   <if test="pageNum!=totalPage">${onePageRecord}</if>
 		order by username asc
 	</select>
-	<select id="memberCountSeller" resultType="Integer">
-		select count(*) from member where #{param1}=3 and usertype=#{param2} <if test="param2 > 3">and userstop = 'N'</if>
+	<select id="memberCountSeller" resultType="Integer" parameterType="com.beetmall.sshj.admin.vo.Admin_Member_PageVO">
+		select count(*) from member m join seller s on m.userid=s.userid where usertype=#{userType} <if test="userType > 3">and userstop = 'N'</if><if test="searchWord != null"> and s.${searchKey} like '%${searchWord}%' </if>
 	</select>
 	<select id="memberselectSellerAll" parameterType="com.beetmall.sshj.admin.vo.Admin_Member_PageVO" resultType="com.beetmall.sshj.admin.vo.Admin_MemberVO">
 		select * from(
@@ -47,6 +54,7 @@
 		s.storeemail, s.storename, storezipcode, storeaddr, storedetailaddr, bank, bankname, bankaccount, regiapproval, 
 		to_char(regiapprovaldate, 'YYYY/MM/DD') as regiapprovaldate, sellerregiimg , usertype
 		from member m join seller s on m.userid = s.userid
+		<if test="searchWord != null"> where s.${searchKey} like '%${searchWord}%' </if>
 		)where rownum<![CDATA[<=]]>${pageNum}*${onePageRecord} order by sellername desc
 		)where rownum<![CDATA[<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
 								   <if test="pageNum!=totalPage">${onePageRecord}</if>
@@ -55,14 +63,13 @@
 	<select id="memberselectSeller" parameterType="com.beetmall.sshj.admin.vo.Admin_Member_PageVO" resultType="com.beetmall.sshj.admin.vo.Admin_MemberVO">
 		select * from(
 		select * from(
-		
 		select s.storenum as storenum, s.sellername as sellername, s.userid as userid, to_char(sysdate,'YYYY') - to_char(birthday,'YYYY') +1 as age, 
 		s.storeemail, s.storename, storezipcode, storeaddr, storedetailaddr, bank, bankname, bankaccount, regiapproval, 
 		to_char(regiapprovaldate, 'YYYY/MM/DD') as regiapprovaldate, sellerregiimg , usertype
 		<if test="#{userType==5}">, to_char(exitdate, 'YYYY/MM/DD') as exitdate</if>  
 		from member m join seller s on m.userid = s.userid <if test="{userType==5}">join member2 m2 on m.userid = m2.userid</if>
 		<if test="#{userType==5}"> where usertype = 5</if>
-		
+		<if test="searchWord != null"> and s.${searchKey} like '%${searchWord}%' </if>
 		)where rownum<![CDATA[<=]]>${pageNum}*${onePageRecord} order by sellername desc
 		)where rownum<![CDATA[<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
 								   <if test="pageNum!=totalPage">${onePageRecord}</if>
@@ -75,14 +82,14 @@
 	</select>
 	<select id="orderinfoSelect"  resultType="com.beetmall.sshj.admin.vo.Admin_MemberVO">
 		select orderstatus, count(userid) as ordercount from orderdetail od join ordertbl ot on od.ordernum = ot.ordernum
-		where userid = #{param1}
+		where userid = #{userid} <if test="searchWord != null"> and ${searchKey} like '%${searchWord}%' </if>
 		group by orderstatus
 		order by orderstatus
 	</select>
 	<select id="reportinfoSelect" resultType="com.beetmall.sshj.admin.vo.Admin_MemberVO">
-		select count(userid) as reportcount , sum(reportdate) as reportsum from reporttbl where userid = #{param1}
+		select count(userid) as reportcount , sum(reportdate) as reportsum from reporttbl where userid = #{param1} 
 	</select>
-	<select id="orderstatusSelect"  resultType="Integer">
+	<select id="orderstatusSelect"  resultType="Integer" parameterType="com.beetmall.sshj.admin.vo.Admin_Member_PageVO">
 		select count(nvl(userid,0)) as ordercount from orderdetail od join ordertbl ot on od.ordernum = ot.ordernum
 		where userid = #{param1} and orderstatus = #{param2}
 	</select>
@@ -122,7 +129,7 @@
 	</select>
 	<select id="selectPointType"  resultType="com.beetmall.sshj.admin.vo.Admin_PointVO">
 		select p.productnum as productnum , p.ordernum as ordernum , p.changepoint as changepoint , p.usedpoint as usedpoint, 
-			 o.orderdate as orderdate, r.thumbimg as thumbimg, r.productname as productname, r.productcontent as productcontent, d.orderprice as orderprice
+			 o.orderdate as orderdate, r.thumbimg as thumbimg, r.productname as productname, r.productcontent as productcontent, d.orderprice as orderprice, productinfomation
 		from point p
 		    join ordertbl o
 		        on p.ordernum = o.ordernum
@@ -135,7 +142,7 @@
 	</select>
 	<select id="selectPointMonth" resultType="com.beetmall.sshj.admin.vo.Admin_PointVO">
 		select p.productnum as productnum , p.ordernum as ordernum , p.changepoint as changepoint , p.usedpoint as usedpoint, 
-			 o.orderdate as orderdate, r.thumbimg as thumbimg, r.productname as productname, r.productcontent as productcontent, d.orderprice as orderprice
+			 o.orderdate as orderdate, r.thumbimg as thumbimg, r.productname as productname, r.productcontent as productcontent, d.orderprice as orderprice, productinfomation
 		from point p
 		    join ordertbl o
 		        on p.ordernum = o.ordernum
@@ -150,7 +157,7 @@
 		select * from(
 		select * from(
 		select p.productnum as productnum , p.ordernum as ordernum , p.changepoint as changepoint , p.usedpoint as usedpoint, 
-			 o.orderdate as orderdate, r.thumbimg as thumbimg, r.productname as productname, r.productcontent as productcontent, d.orderprice as orderprice
+			 o.orderdate as orderdate, r.thumbimg as thumbimg, r.productname as productname, r.productcontent as productcontent, d.orderprice as orderprice, productinfomation
 		from point p
 		    join ordertbl o
 		        on p.ordernum = o.ordernum
@@ -251,12 +258,11 @@
        							  <if test="pageNum!=totalPage">${onePageRecord}</if>
        	order by productnum	asc
 	</select>
-	<update id="memberEdit">
-		update member 
-		set username = #{username}, userid=#{userid}, useremail=#{useremail}, userzipcode=#{userzipcode},
+	<update id="memberEdit" parameterType="com.beetmall.sshj.admin.vo.Admin_MemberVO">
+		update member set username = #{username}, useremail=#{useremail}, userzipcode=#{userzipcode},
 		useraddr = #{useraddr}, userdetailaddr = #{userdetailaddr} where userid=#{userid}
 	</update>
-	<select id="reportPageNum" resultType="Integer">
+	<select id="reportPageNum" resultType="Integer" parameterType="com.beetmall.sshj.admin.vo.Admin_Member_PageVO">
 		select count(*) from(
 		select m.userid, m.userpwd, m.username, m.userphone, m.useremail, m.userzipcode, m.useraddr, m.userdetailaddr, to_char(m.birthday, 'YYYY/MM/DD') as birthday,  
 		to_char(joindate, 'YY/MM/DD HH:MI') as joindate, usertype, userstop, point, to_char(sysdate,'YYYY') - to_char(birthday,'YYYY') +1 as age ,
@@ -269,7 +275,7 @@
 		on a.userid = b.userid
 		) r
 		on m.userid=r.userid
-		where m.usertype = #{param1} and m.userstop='Y'
+		where m.usertype = #{userType} and m.userstop='Y'<if test="searchWord != null"> and m.${searchKey} like '%${searchWord}%' </if>
 		order by username desc)
 	</select>
 	<select id="reportselect" parameterType="com.beetmall.sshj.admin.vo.Admin_Member_PageVO" resultType="com.beetmall.sshj.admin.vo.Admin_reportVO">
@@ -286,14 +292,15 @@
 		on a.userid = b.userid) r
 		on m.userid=r.userid
 		where m.usertype = #{userType} and m.userstop='Y'
+		<if test="searchWord != null"> and m.${searchKey} like '%${searchWord}%' </if>
 		order by username desc
 		)where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord} order by username asc
 		)where <![CDATA[rownum<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
        							  <if test="pageNum!=totalPage">${onePageRecord}</if>
        	order by username desc
 	</select>
-	<select id="chatTotal" resultType="Integer">
-		select count(*) from roomoto
+	<select id="chatTotal" resultType="Integer" parameterType="com.beetmall.sshj.admin.vo.Admin_Member_PageVO">
+		select count(*) from roomoto <if test="searchWord != null"> where ${searchKey} like '%${searchWord}%' </if>
 	</select>
 	<select id="chatList" parameterType="com.beetmall.sshj.admin.vo.Admin_Member_PageVO" resultType="com.beetmall.sshj.admin.vo.Admin_ChatVO">
 		select * from (
@@ -301,6 +308,7 @@
 		select roomcode, creator, receiver as room_receiver, to_char(roomdate, 'YYYY/MM/DD') as roomdate , cre_out, rec_out, count(r.reporteduser) as creport, count(c.reporteduser) as rreport from roomoto o
 		left join (select distinct reporteduser, reportboardnum from report where reportselect = 1 and reportboard='1:1채팅') r on r.reportboardnum = o.roomcode and r.reporteduser=o.creator
 		left join (select distinct reporteduser, reportboardnum from report where reportselect = 1 and reportboard='1:1채팅') c on c.reportboardnum = o.roomcode and c.reporteduser=o.receiver
+		<if test="searchWord != null"> where o.${searchKey} like '%${searchWord}%' </if>
 		group by  roomcode, creator, receiver, roomdate, cre_out, rec_out
 		order by roomcode desc
 		)where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord} order by roomcode asc

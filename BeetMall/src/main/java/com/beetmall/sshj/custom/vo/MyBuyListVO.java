@@ -11,7 +11,14 @@ public class MyBuyListVO {
 	private int productnum;
 	private long invoice;
 	private int ordercnt;
+	private String productinfomation;
 	
+	public String getProductinfomation() {
+		return productinfomation;
+	}
+	public void setProductinfomation(String productinfomation) {
+		this.productinfomation = productinfomation;
+	}
 	public String getOrderdate() {
 		return orderdate;
 	}
