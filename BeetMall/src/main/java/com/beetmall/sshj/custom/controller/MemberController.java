@@ -511,7 +511,7 @@ public class MemberController {
 							+ "비밀번호 : "+emailCode
 							+ "      </div>\r\n"
 							+ "   </div>\r\n"
-							+ "</div>";
+							+ "</div>"; 
 					try {
 						MimeMessage message = mailSender.createMimeMessage();
 						MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
