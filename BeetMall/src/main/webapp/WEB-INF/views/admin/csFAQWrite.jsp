@@ -148,26 +148,17 @@
 <%@ include file="/inc/leftBar.jspf" %>    
 <div class="container">
 	<div id="box"> 	
-	<form method="post" action="noticeWriteOk">
+	<form method="post" action="csFAQInsert">
 		<table>
 			<tbody> 
-				<tr class="tr_head">
-					<th class="menu" >FAQ 번호</th>
-					<td class="td" colspan="3">
-						<div id="faqNum">
-							65812
-						</div>
-					</td>
-				</tr>
 				
 			<tr class="tr_head">
 				<th class="menu" >대상</th>
 				<td class="td" colspan="3">
 					<div id="cate">
-					<select>
-						<option value="전체" selected>전체</option> 
-						<option value="소비자" >소비자</option>
-						<option value="판매자">판매자</option> 
+					<select name="faqoption">
+						<option value="1" selected>소비자</option>
+						<option value="2">판매자</option> 
 					</select>
 					</div>
 				</td>
@@ -176,8 +167,7 @@
 				<th class="menu" >카테고리</th>
 				<td class="td" colspan="3">
 					<div id="cate">
-					<select>
-						<option value="카테고리" selected>카테고리</option> 
+					<select name="faqcate">
 						<option value="상품" >상품</option>
 						<option value="회원/포인트">회원/포인트</option>
 						<option value="판매">판매</option>
@@ -190,22 +180,15 @@
 			</tr>
 				<tr class="tr_head">
 					<th class="menu">제목</th>
-					<td  class="td"><input type="text" name="noticeSubject" id="noticeSubject" placeholder="제목을 입력하세요"/></td>
+					<td  class="td"><input type="text" name="faqtitle" placeholder="제목을 입력하세요"/></td>
 				</tr>
-				<tr class="tr_head">
-					<th class="menu">등록일</th>
-					<td  class="td">
-						<div id="writedate">
-							21/02/23
-						</div>
-					</td>
-				</tr> 
+
 				<tr>
 					<th id="smallTitle" colspan="4">자주 묻는 질문 내용</th>
 				</tr>
 				<tr>
 					<td class="question_content" colspan="4">
-						<textarea id="qmcontent" name="qmcontent" class="summernote" placeholder="자주 묻는 질문 내용을 입력해주세요."></textarea>
+						<textarea id="qmcontent" name="faqcontent" class="summernote" placeholder="자주 묻는 질문 내용을 입력해주세요."></textarea>
 					</td>	
 				</tr>
 			</tbody>
@@ -213,7 +196,7 @@
 			<div id="bottommm">
 				<input type="submit" value="작성하기" class="btn write_btn" id="write_btn"/>	
 				<input type="reset" value="다시 쓰기" class="btn write_btn" id="reset_btn"/>	
-				<input type="button" value="취소" class="btn write_btn" id="cancle_btn" onClick="location.href='<%=request.getContextPath() %>/recipeView'"/>
+				<input type="button" value="취소" class="btn write_btn" id="cancle_btn" onClick="location.href='javascript:history.back()'"/>
 			</div>
 		</form>
 		</div>

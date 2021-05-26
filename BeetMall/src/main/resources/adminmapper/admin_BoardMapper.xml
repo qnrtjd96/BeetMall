@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beetmall.sshj.admin.dao.AdminBoardDAO">
+ 	<select id="noticeBoardList" resultType="com.beetmall.sshj.admin.vo.AdminBoardVO">
+ 		select * from(
+	    	select * from(
+ 				select infonum, infotype, infotitle, to_char(infowritedate, 'YY/MM/DD') infowritedate from notice 
+		        <choose>
+					<when test = 'searchWord!=null or searchWord == " " '>
+						<if test="searchKey == 'title'.toString()">
+							where infotitle like ('%${searchWord}%')
+						</if>
+						<if test="searchKey == 'num'.toString()">
+							where infonum like ('%${searchWord}%')
+						</if>
+						<if test="searchKey == 'type'.toString()">
+							where infotype like ('%${searchWord}%')
+						</if>
+						<if test="searchKey == 'content'.toString()">
+							and infocontent like ('%${searchWord}%')
+						</if>
+						<if test="searchKey == 'all'.toString()">
+							where (infotitle like ('%${searchWord}%')
+								or infonum like ('%${searchWord}%')
+								or infotype like ('%${searchWord}%')
+								or infocontent like ('%${searchWord}%'))
+						</if>
+					</when>
+				</choose>
+				<choose>
+					<when test="sort1 == 'all'.toString()">
+							and usertype==1 or usertype==2
+					</when>
+					<when test="sort1 == 'seller'.toString()">
+							and usertype==2 
+					</when>
+					<when test="sort1 == 'customer'.toString()">
+							and usertype==1
+					</when>
+				</choose>
+				<choose>
+					<when test="sort2 == 'infonum'.toString()">
+						order by infonum	 
+						<if test="asc=='asc'.toString()">
+							asc
+						</if> 
+						<if test="desc=='desc'.toString()">
+							desc
+						</if>
+					</when>
+					<when test="sort2 == 'infotitle'.toString()">
+						order by infotitle	 
+						<if test="asc =='asc'.toString()">
+							asc
+						</if> 
+						<if test="desc =='desc'.toString()">
+							desc
+						</if> 
+					</when>
+					<otherwise>
+ 						order by infonum desc 
+					</otherwise> 
+				</choose>
+			)
+			where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord} order by infonum)
+			where <![CDATA[rownum<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
+        							  <if test="pageNum!=totalPage">${onePageRecord}</if>
+        order by infonum desc
+ 	</select>
+ 	<insert id="noticeWriteOk" parameterType="com.beetmall.sshj.admin.vo.AdminBoardVO">
+ 		insert into notice(infonum, infotitle, infowritedate, filename, infocontent, infotype) values(noticesq.nextval, #{infotitle}, sysdate, #{filename}, #{infocontent}, #{infotype})
+ 	</insert>
+ 	<select id="noticeBoardView" resultType="com.beetmall.sshj.admin.vo.AdminBoardVO">
+ 		select infonum, infotitle, infowritedate, filename, infocontent, infotype from notice where infonum=#{param1}
+ 	</select> 
+ 	<update id="noticeBoardEditOk" parameterType="com.beetmall.sshj.admin.vo.AdminBoardVO">
+ 		update notice set infocontent=#{infocontent}, infotitle=#{infotitle}, infotype=#{infotype}, filename=#{filename} where infonum=#{infonum} 
+ 	</update>
+	<delete id="noticeBoardDelete">
+		delete from notice where infonum=#{param1}
+	</delete>
+	<select id="noticeOnetotalRecord" parameterType="com.beetmall.sshj.custom.vo.PageSearchVO" resultType="int">
+		select count(infonum) from notice 
+		<choose>
+			<when test = 'searchWord!=null or searchWord == " " '>
+				<if test="searchKey == 'title'.toString()">
+					 where  infotitle like ('%${searchWord}%')
+				</if>
+				<if test="searchKey == 'num'.toString()">
+					 where  infonum like ('%', #{searchWord}, '%')
+				</if>
+				<if test="searchKey == 'type'.toString()">
+					 where  infotype like CONCAT('%${searchWord}%')
+				</if>
+				<if test="searchKey == 'content'.toString()">
+					 where  infocontent like ('%${searchWord}%'))
+				</if>
+				<if test="searchKey == 'all'.toString()">
+					 where  (infotitle like'%${searchWord}%'
+						or infonum like '%${searchWord}%'
+						or infotype like '%${searchWord}%'
+						or infocontent like '%${searchWord}%')
+				</if>
+			</when>
+		</choose>order by infonum desc
+	</select>
+</mapper>
