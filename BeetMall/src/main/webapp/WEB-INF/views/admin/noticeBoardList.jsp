@@ -305,3 +305,20 @@ let searchTxt =null;// 검색 데이터
 	</div>
 </div> 
 </html>
+<script>
+	$(function(){
+		$("#sort1").change(function(){
+			var params = "type=all";
+			$.ajax({
+		    	  url: "/sshj/noticeBoardList",
+		    	  data: params,
+		    	  success:function(result){
+					  console.log("성공");
+					  alert("result = "+ result)
+				  },error:function(e){
+					  console.log("가져오기 실패");
+				  }		    	  
+		      });
+		});
+	});
+</script>

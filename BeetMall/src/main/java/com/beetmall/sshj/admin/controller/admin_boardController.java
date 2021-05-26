@@ -60,7 +60,8 @@ public class admin_boardController {
 		if (pageNumStr != null) {
 			pageVO.setPageNum(Integer.parseInt(pageNumStr));
 		}
-
+		String type = req.getParameter("type");
+		System.out.println("type = " + type);
 		pageVO.setSearchKey(req.getParameter("searchKey"));
 		pageVO.setSearchWord(req.getParameter("searchWord"));
 		pageVO.setTotalRecord(boardService.noticeOnetotalRecord(pageVO));
@@ -104,7 +105,8 @@ public class admin_boardController {
 			String paramName = file.getName();
 			System.out.println(paramName + " - 업로드 과정");
 			try {
-				if (orgName != null || orgName!="") {
+				System.out.println("orgName1111111111111111 = " + orgName);
+				if (orgName != null && orgName!="") {
 					System.out.println("이미지 업로드 시작");
 					File f = new File(path, orgName);
 					int i = 1;
