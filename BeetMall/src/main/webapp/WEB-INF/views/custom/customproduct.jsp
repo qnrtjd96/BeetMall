@@ -3,6 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="/inc/menu_c.jspf"%>
 
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+
 <style>
 
 /*  기본설정----------------------------------------------                 */
@@ -53,7 +56,7 @@ a:hover, a:active, a:visited, a:link {
 
 #productMainTiltle {
 	width: 480px;
-	height: 70px;
+	height: 140px;
 	line-height: 70px;
 	float: left;
 	margin-right: 70px;
@@ -692,10 +695,6 @@ float:left;
 	width:160px;
 	}
 	
-	#productBtn>.btn:hover{
-	background-color:#ff0000;
-	color:white;
-	}
 
     #chatbtn{
 	background-color:#2aa1b7;
@@ -773,11 +772,20 @@ td, .td{
 #pagelibtn{
 float:left;
 width:70px;
-height:50px;
+height:29px;
 line-height:50px;
 margin-left:1010px;
 font-size:15px;
 color:black;
+}
+
+#pagelibtn>a{
+float:left;
+width:70px;
+height:28px;
+line-height:28px;
+font-size:15px;
+margin-right:4px;
 }
 
 #spanTotalPrice{
@@ -835,6 +843,77 @@ color:red;
 		font-size:17px;
 		margin-right:5px;
 	}
+	
+	/*  -----------------여기부터 문의하기                  */
+	.buyListDiv{
+		position:absolute;
+		top:500px;
+		background-color: white;
+	}
+	.buyListDiv, .buyListBar, .buyListContent{
+		width:680px;
+	}
+	.buyListBar{		
+	height: 50px;
+    background-color: #86aec3;
+    position: absolute;
+    color: black;
+    text-align: center;
+    line-height: 50px;
+    font-weight: bold;
+	}
+	.buyListBarClose{
+		height:50px;
+		width:50px;
+		background-color: white;
+		position:absolute;
+		font-size:40px;
+		line-height:40px;
+		text-align:center;
+		border:1px solid rgb(252,118,45);
+		left:630px;
+	}
+	.buyListContent{
+		height:700px;
+		border:2px solid rgb(162 179 185);
+	}
+	.buyListBtn{
+		position:absolute;
+		width:100px;
+		height: 50px;
+		top:600px;
+		left:290px;
+		background-color:rgb(252,118,45);
+		color:white;
+		border:none;
+	}
+	
+	#questionUl>li:nth-child(2n+1){
+		width:200px;
+		text-align:left;
+		padding-left:10px;
+		border-bottom:1px solid rgb(250, 250, 250);
+		font-size:17px;
+	}
+	#questionUl>li:nth-child(2n){
+		width:348px;
+		border-bottom:1px solid rgb(250, 250, 250);
+		font-size:17px;
+	}
+	#questionUl>li:last-child{
+		width:548px;
+		height:480px;		
+		background-color: rgb(250, 250, 250);
+		padding-top:5px;
+		padding-left:10px;
+		padding-right:10px;
+		margin-bottom:15px;
+	}
+	#questionDiv{
+		display:none;
+	}
+	
+	
 </style>
 <script>
     var productnump=${pvo.productnum};
@@ -849,6 +928,28 @@ color:red;
 	var totaldprtprice=0;
 	
 	$(function(){
+		
+		$(".buyListBtn").click(function(){
+			$(this).parent().parent().css('display',"none");
+		})
+		$(".buyListBarClose").click(function(){
+			$(this).parent().css("display","none");
+			$("#buylistmodal").css("display","none");
+			$(document.body).css("overflow","visible");
+		})
+		$(".thumbsupNo").click(function(){
+			$(this).toggleClass("thumbsupNo");
+			$(this).toggleClass("thumbsupYes");
+		})
+		$(".thumbsupYes").click(function(){
+			$(this).toggleClass("thumbsupNo");
+			$(this).toggleClass("thumbsupYes");
+		})
+		$(".nonBtn").attr("readonly",true);
+		$("#divcloseBtn").click(function(){
+			$("#buyCancelRollBack").css("display","none");
+		})
+		///////////////////////위에가 문의작성////////
 		prtprice=${pvo.productprice}; //상품본래가격
 		
 		//상품할인가격
@@ -1131,7 +1232,38 @@ color:red;
 	$(document).on('click','#reviewchatHeaderSpan', function(){
 		$("#reviewreportDiv").css("display","block");
 	});
-	
+	///////////////////////문의하기//////////////////
+	$(document).on('click','input[value=문의작성]', function(){
+		$("#qboardnum").val(productnump);
+		$(".qsetNum").html(productnump);
+		$("#questionDiv").css("display","block");
+		$("#buylistmodal").css("display","block");
+		$(document.body).css("overflow","hidden");
+	});
+	$(document).on('click','#questionBtn', function(){
+		var qtitle = '';
+		qtitle = $(".qtitleInput").val();
+		var qcontent = '';
+		qcontent = $("#summernoteQuestion").val();
+		if(qtitle == null || qtitle == ''){
+			alert("제목을 입력해주세요"+qtitle);
+			$(".qtitleInput").focus();
+			return false;
+		}
+		if(qcontent == null || qcontent == ''){
+			alert("내용을 입력해주세요"+qcontent);
+			$("#summernoteQuestion").focus();
+			return false;
+		}
+		$("#questionForm").submit();
+		$("#buylistmodal").css("display","none");
+		$(document.body).css("overflow","visible");
+	});
+	$(document).on('click','#questionCloseBtn', function(){
+		$("#questionDiv").css("display","none");
+		$("#buylistmodal").css("display","none");
+		$(document.body).css("overflow","visible");
+	});
 	
 </script>
 <body>
@@ -1246,7 +1378,7 @@ color:red;
 		<!-- -------------------------------------상세정보박스 상단 버튼-------------------------------------------------------- -->
 
 		<div class="infoBtnb">
-			<a href="#productTotalPrice"><input type="button" id="infoBtn1" value="상품설명" class="btn" /></a>
+			<a href="#productTotalPrice"><input type="button" id="infoBtn1" value="상품설명" class="btn" style="background-color:#ff6464; color:white"/></a>
 			<a href="#productInfoPage2"><input type="button" id="infoBtn2" value="고객후기"  class="btn"/></a>
 			<a href="#productInfoPage3"><input type="button" id="infoBtn3" value="상품문의"  class="btn"/></a>
 		</div>
@@ -1298,8 +1430,8 @@ color:red;
          <!-- -------------------------------------상세정보박스 상단 버튼-------------------------------------------------------- -->
 
 	<div class="infoBtnb">
-			<a href="#productTotalPrice"><input type="button" id="infoBtn1" value="상품설명" class="btn" /></a>
-			<a href="#productInfoPage2"><input type="button" id="infoBtn2" value="고객후기"  class="btn"/></a>
+			<a href="#productTotalPrice"><input type="button" id="infoBtn1" value="상품설명" class="btn"/></a>
+			<a href="#productInfoPage2"><input type="button" id="infoBtn2" value="고객후기"  class="btn" style="background-color:#ff6464; color:white"/></a>
 			<a href="#productInfoPage3"><input type="button" id="infoBtn3" value="상품문의"  class="btn"/></a>
 		</div>
 
@@ -1359,7 +1491,7 @@ color:red;
              </c:forEach>
                
           <!-- 신고하기 부분-->
-				<div style="height:350px;width:500px;border:1px solid red;position:absolute;top:400px;left:800px;background-color:white;display:none;" id="reviewreportDiv" class="reviewreportDiv">
+				<div style="height:350px;width:500px;border:1px solid #e2d1d1;position:absolute;top:400px;left:800px;background-color:white;display:none;" id="reviewreportDiv" class="reviewreportDiv">
 					<form style="height:400px;width:500px;float:left;" method="post" action="customreport" id="reviewreportForm" class="reviewreportForm">
 						<h2 style="margin-left:10px;">신고하기</h2>
 						<span style="float:left;font-size:20px;margin-left:10px;">신고사유</span>
@@ -1375,15 +1507,15 @@ color:red;
 							</select>
 						<textarea name="reportcontent" id="reportcontent" style="height:200px;width:480px;margin-left:10px; margin-right:10px;font-size:15px;" maxlength="149"></textarea><!-- 신고내용 -->
 						<div style="font-size:20px;float:right;margin-right:10px;">
-							<input type="button" value="리뷰신고" style="background-color:#ff3a3a;color:white;border:1px solid #aaa;"id="reviewreportsubmit" class="reviewreportsubmit"/><!-- 신고버튼 -->
-							<input type="button" value="닫기"style="background-color:#ddd;color:white;border:1px solid #aaa;"id="reviewreportClose"/>
+							<input type="button" value="리뷰신고" style="background-color:#ff3a3a;color:white;border:1px solid #fff;"id="reviewreportsubmit" class="reviewreportsubmit"/><!-- 신고버튼 -->
+							<input type="button" value="닫기"style="background-color:#ddd;color:white;border:1px solid #fff;"id="reviewreportClose"/>
 							
 						</div>
 					</form>
 				</div>
            <!--  신고하기 밑에 스크립트까지임 -->	
                
-               <div id="pagelibtn"><a href="/sshj/mybuyList">후기 작성</a></div>
+               <div id="pagelibtn" class="btn"><a href="/sshj/mybuyList">후기 작성</a></div>
                
 		       <div id="nonebox">   </div>
 
@@ -1433,7 +1565,7 @@ color:red;
         <div class="infoBtnb">
 			<a href="#productTotalPrice"><input type="button" id="infoBtn1" value="상품설명" class="btn" /></a>
 			<a href="#productInfoPage2"><input type="button" id="infoBtn2" value="고객후기"  class="btn"/></a>
-			<a href="#productInfoPage3"><input type="button" id="infoBtn3" value="상품문의"  class="btn"/></a>
+			<a href="#productInfoPage3"><input type="button" id="infoBtn3" value="상품문의"  class="btn" style="background-color:#ff6464; color:white"/></a>
 		</div>
 	
 		<!-- -------------------------------------상세정보박스3  시작-------------------------------------------------------- -->
@@ -1503,7 +1635,8 @@ color:red;
 				
 		  </c:forEach>	
 
-				<div id="pagelibtn"><a href="/sshj/mybuyList">문의 작성</a></div>
+				<div id="pagelibtn"><input type="button" class="btn qnaWrite" value="문의작성"/></div>
+				
 				
 				<div id="nonebox">   </div>
 
@@ -1548,6 +1681,30 @@ color:red;
 				<iframe src="" id="chatContainer" frameborder="0" ></iframe>
 			</div>
 			
+			<!--문의 ----------------------------------------------------------- -->
+		<div class="buyListDiv" id="questionDiv" style="width:550px;left:765px;top:100px;">
+			<div class="buyListBar" style="font-size:21px;width:550px;">문의하기</div><div class="buyListBarClose" style="left:500px;">&times;</div>
+			<div class="buyListContent" style="padding-top:60px; height:700px;background-color:white; text-align: center;width:550px;">
+			<form id="questionForm" action="pquestionWrite" method="post">
+				<input type="hidden" name="productnum" value="" id="qboardnum"/>
+				<ul id="questionUl" style="text-align:left;">
+					<li>제목</li>		<li><input type="text" name="qtitle" style="width:335px;" placeholder="제목을 작성해주세요" maxlength="100" class="qtitleInput"/></li>
+					<li>상품번호</li>		<li><span id="productnum" class="qsetNum"></span></li>
+					<li>공개비공개 설정하기</li> 	<li>
+										<select name="qopen">
+											<option value="1">공개</option>
+											<option value="0">비공개</option>
+										</select>
+										</li>
+					<li><textarea id="summernoteQuestion" name="qcontent"></textarea></li>
+				</ul> 
+				
+				<div id="" style="width:1060px;"></div>
+				<input type="button" value="문의하기" class="btn" style="top:660px;" id="questionBtn"/>
+				<input type="button" value="닫기" class="btn" style="top:600px;margin-top: 0px;" id="questionCloseBtn"/>
+			</form>
+			</div>
+		</div>
 			
 
 						
@@ -1559,4 +1716,69 @@ color:red;
 
 	<div style="clear: both;"></div>
 </body>
+
+<script>
+$(document).ready(function() {
+	  $('.summernote').summernote({
+		  height: 330,                 // 에디터 높이
+		  maxHeight:330,
+		  minHeight:330,
+		  width:660,
+		  focus: true,
+		  placeholder:'가로+세로+높이=120cm, 10kg 규격 초과 시 현장수거 불가할 수 있으며, 강제수거요청 시 판매자가 추가비용 별도 청구할 수 있습니다. <br/> 이미지를 끌어서 놓으시면 이미지도 첨부가 가능합니다.',
+		  //콜백 함수
+      callbacks : { 
+      	onImageUpload : function(files, editor, welEditable) {
+      // 파일 업로드(다중업로드를 위해 반복문 사용)
+      for (var i = files.length - 1; i >= 0; i--) {
+      uploadSummernoteImageFile(files[i],
+      this);
+      		}
+      	}
+      }
+	  });
+	});
+$(document).ready(function() {
+	  $('#summernoteQuestion').summernote({
+		  height: 370,                 // 에디터 높이
+		  maxHeight:370,
+		  minHeight:370,
+		  width:530,
+		  focus: true,
+		  placeholder:'고객님의 문의를 작성해주세요 단, 무분별한 비난, 욕설 등이 포함된 문의는 숨김처리 또는 삭제 될 수 있습니다.',
+		  //콜백 함수
+      callbacks : { 
+      	onImageUpload : function(files, editor, welEditable) {
+      // 파일 업로드(다중업로드를 위해 반복문 사용)
+      for (var i = files.length - 1; i >= 0; i--) {
+      uploadSummernoteImageFile(files[i],
+      this);
+      		}
+      	}
+      }
+	  });
+	});
+
+</script>
+
+<script>
+function uploadSummernoteImageFile(file, el) {
+	data = new FormData();
+	data.append("file", file);
+	$.ajax({
+		data : data,
+		type : "POST",
+		url : "uploadSummernoteImageFile",
+		contentType : false,
+		enctype : 'multipart/form-data',
+		processData : false,
+		success : function(data) {
+			$(el).summernote('editor.insertImage', data.url);
+		}, error: function(){
+			
+		}
+	});
+}
+</script>
+
 </html>

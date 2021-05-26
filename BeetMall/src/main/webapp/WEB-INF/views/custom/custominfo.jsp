@@ -49,6 +49,7 @@ float:left;
 padding-left:30px;
 padding-bottom:10px;
 border-bottom:1px solid #ddd;
+margin-bottom:20px;
 }
 
 /* 리뷰이미지 설정*/
@@ -343,6 +344,7 @@ overflow:hidden;
 		font-size:0;
 		padding-bottom: 30px;
 		padding-top: 50px;
+	
 	}
 	.page_nation {
 		display:inline-block;
@@ -669,6 +671,13 @@ $(function(){
 	
 	<div id="nonebox">   </div>
 
+		
+
+			</div>
+			<!--productInfoPage3  -->
+
+		</div>
+		<!--productInfoPage  -->
 			<c:if test="${not empty faqlist}">
 			
 				<!-- 페이징 표시--------- -->
@@ -695,12 +704,6 @@ $(function(){
 	 </div>
 				<!-- 페이징 표시--------- -->
   			</c:if>
-
-			</div>
-			<!--productInfoPage3  -->
-
-		</div>
-		<!--productInfoPage  -->
 	</div>
 </div>
 
