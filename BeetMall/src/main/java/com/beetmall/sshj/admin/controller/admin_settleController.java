@@ -31,14 +31,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.beetmall.sshj.admin.service.Admin_SettleService;
-import com.beetmall.sshj.admin.service.Boardervice;
+import com.beetmall.sshj.admin.service.BoardService;
 import com.beetmall.sshj.admin.vo.Admin_SettleVO;
 import com.beetmall.sshj.seller.vo.SellerSettleVO;
 
 @Controller
 public class admin_settleController {
 	@Inject
-	Boardervice adminService;
+	BoardService adminService;
 	
 	@Autowired
 	Admin_SettleService service;

@@ -10,7 +10,7 @@
 		 width:20%; 
 	 }   
 	#contentBox{
-	 	top:-10px;
+	 	top:-90px;
 	 }
 	#contentBox li:nth-of-type(5n-4){ 
 		width:0%; 
@@ -97,6 +97,13 @@
 	}  
 	form{
 		display:block !important;
+	}
+	#addBtn{ 
+		left:1500px !important;
+	} 
+	.page_wrap, .searchFrm{
+		position:relative;
+		top:-80px;
 	}
 	/* 페이징처리부분 */ 
 	.page_nation .pprev {
@@ -206,7 +213,6 @@ let searchTxt =null;// 검색 데이터
 			<ul>
 				<li><h5><strong><a href="noticeBoardList">공지 관리</a></strong></h5></li> 
 				<li><button class="success" value="addBtn" name="addBtn" id="addBtn" onClick="location.href='<%=request.getContextPath() %>/noticeBoardWrite'">추가</button></li>
-				<li><button class="success" value="delBtn" name="delBtn" id="delBtn" onClick="DeleteCheck()">삭제</button></li>
 		 	</ul> 
 		</div>  
 		</div>
@@ -214,7 +220,7 @@ let searchTxt =null;// 검색 데이터
 <%@ include file="/inc/leftBar.jspf" %>
 	<div id="container">
 		<div id="sortBox">
-			<form method="get" class="sortFrm" action="<%=request.getContextPath() %>/noticeBoardList">
+			<!-- <form method="get" class="sortFrm" action="<%=request.getContextPath() %>/noticeBoardList">
 				<ul>
 					<li></li>
 					<li></li>
@@ -234,7 +240,7 @@ let searchTxt =null;// 검색 데이터
 					<li><button class="success" value="asc" name="asc" id="ascBtn">▲</button></li>
 					<li><button class="success" value="desc" name="desc" id="descBtn">▼</button></li>
 			 	</ul>
-			 </form>
+			 </form> -->
 		</div>
    		<div id="contentBox"> 	
 		<div id="title">
