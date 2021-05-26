@@ -90,20 +90,24 @@ margin-bottom:20px;
 #nonebox{
 float:left;
  width:100%;
- height:30px;
- line-height:30px;
- margin:10px;
+ height:2px;
+ line-height:2px;
+ margin-top:50px;
+ margin-bottom:150px;
+ background-color:#eee;
 }
 	/* ---------------상세정보박스3시잗-------------------- */
 #productInfoPage3 {
+   float:left;
 	width: 100%;
+	height:700px;
 }
 
 #productInfoPage3>#qtitle {
 	width: 100%;
 	float: left;
-	margin-top:30px;
-	margin-bottom: 50px;
+	margin-top:5px;
+	
 }
 
 #qnaTitle {
@@ -357,6 +361,8 @@ overflow:hidden;
 		border:1px solid #42454c;
 	}
 	/* 페이징처리끝 */
+	
+	
 </style>
 
 <script>
