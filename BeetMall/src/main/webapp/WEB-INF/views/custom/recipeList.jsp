@@ -172,8 +172,16 @@ margin-bottom:10px;
 	line-height:50px;
 }
 
-#reciList>li:nth-child(6n+2), #reciListT>li:nth-child(6n+2) {
+#reciList>li:nth-child(6n+2){
 	width: 50%;
+}
+
+#reciListT>li:nth-child(6n+2) {
+	width: 500px;
+	}
+	
+#reciListT>li:nth-child(6n+6) {
+	width: 145px;
 }
 
 
