@@ -65,7 +65,7 @@ a:hover, a:active, a:visited, a:link {
 
 #productPrice {
 	float: left;
-	width: 50%;
+	width: 250px;
 	height: 40px;
 	line-height: 40px;
 	font-size:21px;
@@ -77,7 +77,7 @@ a:hover, a:active, a:visited, a:link {
 
 #sprofile {
 	float: left;
-	width: 250px;
+	width: 300px;
 	height: 40px;
 	line-height: 40px;
 	padding-left:20px;
@@ -1317,7 +1317,7 @@ margin-left:5px;
 
 
 			<div id=productImgBox>
-				<img src="resources/sellerProductImgs/${pvo.thumbimg}"/>
+				<img src="resources/sellerProductImgs/${pvo.thumbimg}" onerror="this.src='/sshj/img/derror.png'"/>
 			</div>
 
 
@@ -1337,11 +1337,11 @@ margin-left:5px;
 				
 				<div id=productPrice>원가: ${pvo.productprice}</div>  <!-- 가격 -->
 				<div id="sprofile">
-					<a href="#">${fvo.farmname}</a>  <!--농장이름 -->
+					<a href="#">${fvo.farmname} / </a><!--농장이름 -->
 					<a href="#">${pvo.userid}</a>  <!-- 판매자 아이디 -->
-				</div>
-				<div id="simg">
-					<a href="#"><img src="resources/sellerprofileimg/${fvo.farmprofile}"/></a>  <!-- 프사 -->
+					<div id="simg">
+					   <a href="#"><img src="resources/sellerprofileimg/${fvo.farmprofile}" onerror="this.src='/sshj/img/derror.png'"/></a>  <!-- 프사 -->
+				    </div>
 				</div>
 				
 				

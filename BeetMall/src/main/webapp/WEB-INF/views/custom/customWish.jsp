@@ -543,7 +543,7 @@ $(function(){
        <form method="post" id="reply">
 		      
 					<ul class="wishList">
-							<li><a href="customproduct?productnum=${wl.productnum}"><img src="resources/sellerProductImgs/${wl.thumbimg}"></a></li> <!-- 이미지 -->
+							<li><a href="customproduct?productnum=${wl.productnum}"><img src="resources/sellerProductImgs/${wl.thumbimg}" onerror="this.src='/sshj/img/derror.png'"></a></li> <!-- 이미지 -->
 							
 							<li>
 							<div id="ptitle"><a href="customproduct?productnum=${wl.productnum}">${wl.productname}</a></div><!-- 상품이름 -->

@@ -419,7 +419,7 @@ $(document).ready(function(){
 					<div id="recipebox">
 					      
 									<ul>
-										<li><a href="recipeView?recipenum=${data.recipenum}&id=${logId}"><img src="upload/${data.recipemainimg}" id="rtitleImg"/></a></li>
+										<li><a href="recipeView?recipenum=${data.recipenum}&id=${logId}"><img src="upload/${data.recipemainimg}" onerror="this.src='/sshj/img/derror.png'" id="rtitleImg"/></a></li>
 										<li id="retili"><a href="recipeView?recipenum=${data.recipenum}&id=${logId}">${data.recipetitle}</a></li>
 										<li>${data.userid}</li>
 										<li>추천수${data.reciperecommend} 조회수 ${data.recipehit}</li>
@@ -481,7 +481,7 @@ $(document).ready(function(){
 						<div id="recipebox">
 						      
 										<ul>
-											<li><a href="recipeView?recipenum=${data2.recipenum}&id=${logId}"><img src="upload/${data2.recipemainimg}" id="rtitleImg"/></a></li>
+											<li><a href="recipeView?recipenum=${data2.recipenum}&id=${logId}"><img src="upload/${data2.recipemainimg}" onerror="this.src='/sshj/img/derror.png'" id="rtitleImg"/></a></li>
 											<li id="retili"><a href="recipeView?recipenum=${data2.recipenum}&id=${logId}">${data2.recipetitle}</a></li>
 											<li>${data2.userid}</li>
 											<li>추천수${data2.reciperecommend} 조회수 ${data2.recipehit}</li>
