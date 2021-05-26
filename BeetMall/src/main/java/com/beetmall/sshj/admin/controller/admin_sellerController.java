@@ -18,17 +18,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.beetmall.sshj.admin.service.Admin_MemberSellerService;
 import com.beetmall.sshj.admin.service.Admin_MemberServiceImp;
-import com.beetmall.sshj.admin.service.Boardervice;
 import com.beetmall.sshj.admin.vo.Admin_MemberSellerVO;
 import com.beetmall.sshj.admin.vo.Admin_Member_PageVO;
-import com.beetmall.sshj.admin.vo.BoardVO;
 import com.beetmall.sshj.seller.service.SellerEditFarmService;
 import com.beetmall.sshj.seller.vo.SellerEditFarmVO; 
 
 @Controller
 public class admin_sellerController {
-	@Inject
-	Boardervice adminService;
 	 
 	//////////////////////판매자 관리////////////////////////////////
 	@Inject

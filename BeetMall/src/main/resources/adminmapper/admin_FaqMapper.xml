@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beetmall.sshj.admin.dao.Admin_FaqDAO">
+	<select id="getList" resultType="com.beetmall.sshj.admin.vo.Admin_FaqVO">
+		select * from
+		(select * from 
+		(select faqnum, faqcate, faqtitle, faqoption from faq 
+		
+		<if test="'subject'.equals(searchKey)">
+			where faqtitle like '%${searchWord}%'
+		</if>
+		<if test="'who'.equals(searchKey)">
+			where faqoption like '%${searchWord}%'
+		</if>
+		<if test="'content'.equals(searchKey)">
+			where faqcontent like '%${searchWord}%'
+		</if>
+		<if test="'no'.equals(searchKey)">
+			where faqnum like '%${searchWord}%'
+		</if>
+		
+		order by faqnum desc) 
+		where rownum <![CDATA[ <= ]]> ${pageNum*onePageRecord}
+       	order by faqnum asc )
+		<if test="#{pageNum} == #{totalPage}">
+        	where rownum <![CDATA[ <= ]]> ${lastPageRecord} 
+       	</if>
+       	<if test="#{pageNum} != #{totalPage}">
+			where rownum <![CDATA[ <= ]]> ${onePageRecord}
+		</if> 
+       	
+       	order by faqnum desc
+	</select>
+	
+	<select id="getLength" resultType="int">
+		select count(faqnum) from faq 
+       	
+  		<if test="'subject'.equals(searchKey)">
+			where faqtitle like '%${searchWord}%'
+		</if>
+		<if test="'who'.equals(searchKey)">
+			where faqoption like '%${searchWord}%'
+		</if>
+		<if test="'content'.equals(searchKey)">
+			where faqcontent like '%${searchWord}%'
+		</if>
+		<if test="'no'.equals(searchKey)">
+			where faqnum like '%${searchWord}%'
+		</if>
+	</select>
+	
+	<select id="getBoard" resultType="com.beetmall.sshj.admin.vo.Admin_FaqVO">
+		select * from faq where faqnum = ${faqnum}
+	</select>
+	
+	<delete id="deleteBoard" parameterType="int">
+		delete from faq where faqnum in
+		<foreach collection="check" item="c" open="(" separator="," close=")">
+			${c}
+		</foreach>
+	</delete>
+	
+	
+	<insert id="insertBoard" parameterType="int">
+		insert into faq(faqnum, faqoption, faqcate, faqtitle, faqcontent)
+			values(faqsq.nextval, ${faqoption}, #{faqcate}, #{faqtitle}, #{faqcontent})
+	</insert>
+	
+	<update id="updateBoard" parameterType="int">
+		update faq set faqtitle = #{faqtitle}, faqcate=#{faqcate}, faqcontent=#{faqcontent}
+			, faqoption = ${faqoption} where faqnum = ${faqnum}
+	</update>
+</mapper>
