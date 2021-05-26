@@ -1,4 +1,4 @@
-package com.beetmall.sshj.admin.controller;
+ package com.beetmall.sshj.admin.controller;
 
 import javax.inject.Inject; 
  
