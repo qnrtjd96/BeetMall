@@ -54,13 +54,14 @@ a:hover, a:active, a:visited, a:link {
 	padding-top:70px;
 }
 
-#productMainTiltle {
+#productMainTiltle>b{
 	width: 480px;
-	height: 140px;
+	height: 70px;
 	line-height: 70px;
 	float: left;
 	margin-right: 70px;
 	font-size:35px;
+	overflow:hidden;
 }
 
 #productPrice {
