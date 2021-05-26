@@ -861,11 +861,11 @@
 					<li><span class="pointdate">${vo.orderdate}</span></li>
 					<li>${vo.ordernum}</li>
 					<li>
-					<a href="customproduct?productnum=${vo.productnum}"><img src="/sshj/resources/sellerProductImgs/${vo.thumbimg}"></a><span class="buyttitle wordcut"><a href="customproduct?productnum=${vo.productnum}">${vo.productname}</a></span><span class="buydetail wordcut"><a href="customproduct?productnum=${vo.productnum}">${vo.productcontent}</a></span>
+					<a href="customproduct?productnum=${vo.productnum}"><img src="/sshj/resources/sellerProductImgs/${vo.thumbimg}"></a><span class="buyttitle wordcut"><a href="customproduct?productnum=${vo.productnum}">${vo.productname}</a></span><span class="buydetail wordcut"><a href="customproduct?productnum=${vo.productnum}">${vo.productinfomation}</a></span>
 					</li>
 					<li><span class="pointprice">${vo.orderprice}</span>원</li>
 					<li>${vo.orderstatus}<input type="hidden" value="${vo.productnum}"/></li>
-					<c:if test="${vo.orderstatus == '준비중'}">
+					<c:if test="${vo.orderstatus == '배송준비중'}">
 					<li><input type="button" class="btn qnaWrite" value="문의작성"/><input type="button" class="btn" value="취소하기"/></li>
 					</c:if>
 					<c:if test="${vo.orderstatus == '결제완료'}">

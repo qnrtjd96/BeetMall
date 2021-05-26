@@ -82,7 +82,7 @@
 			<input type="submit" value="로그인" id="loginBtn"/>
 			<div id="logStatus">
 				<!-- <input type="checkbox" name="logalways"/>로그인상태유지 -->
-				<div><a href="searchId" id="searchId">아이디찾기</a> | <a href="searchPwd" id="searchPwd">비밀번호찾기</a> | <a href="searchPwd" id="register">회원가입</a></div>
+				<div><a href="searchId" id="searchId">아이디찾기</a> | <a href="searchPwd" id="searchPwd">비밀번호찾기</a> | <a href="register" id="register">회원가입</a></div>
 			</div>
 	<!-- 		<input type="button" value="회원가입" id="registerBtn"/> -->
 			<c:if test="${logStop != null}">

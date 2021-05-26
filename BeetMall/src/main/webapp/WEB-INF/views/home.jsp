@@ -503,7 +503,7 @@
 			<c:forEach var="vo" items="${toprecipe}">
 				<div class="reciptList">
 					<div><a href="http://localhost:9090/sshj/recipeView?recipenum=${vo.recipenum}&id=<c:if test="${logId != null}">${logId}</c:if>"><img src="/sshj/img/${vo.recipemainimg}"onerror="this.src='/sshj/img/derror.png'"/></a></div>
-					<div><a href="http://localhost:9090/sshj/recipeView?recipenum=${vo.recipenum}&id=<c:if test="${logId != null}">${logId}</c:if>">${vo.recipetitle}</a></div>
+					<div class="wordcut"><a href="http://localhost:9090/sshj/recipeView?recipenum=${vo.recipenum}&id=<c:if test="${logId != null}">${logId}</c:if>">${vo.recipetitle}</a></div>
 					<c:if test="${vo.recipehit > 999}">
 						<div><div class="like"></div><span class="likeCount">999+</span></div>
 					</c:if>
@@ -616,7 +616,7 @@
 			<c:forEach var="vo" items="${bottomrecipe}">
 				<div class="reciptList">
 					<div><a href="http://localhost:9090/sshj/recipeView?recipenum=${vo.recipenum}&id=<c:if test="${logId != null}">${logId}</c:if>"><img src="/sshj/img/${vo.recipemainimg}"onerror="this.src='/sshj/img/derror.png'"/></a></div>
-					<div><a href="http://localhost:9090/sshj/recipeView?recipenum=${vo.recipenum}&id=<c:if test="${logId != null}">${logId}</c:if>">${vo.recipetitle}</a></div>
+					<div class="wordcut"><a href="http://localhost:9090/sshj/recipeView?recipenum=${vo.recipenum}&id=<c:if test="${logId != null}">${logId}</c:if>">${vo.recipetitle}</a></div>
 					<c:if test="${vo.recipehit > 999}">
 						<div><div class="like"></div><span class="likeCount">999+</span></div>
 					</c:if>
@@ -629,7 +629,7 @@
 		<c:if test="${popup.popupimg !=null && popup.popupimg != ''}">
 			<div id="popupdiv" style="height:${popup.popupheight+25}px;width:${popup.popupwidth-2}px;border:1px solid black;position:absolute;top:40px;left:40px;background-color:white;display:none;">
 				<a href="${popup.popuplink }"><img src="/sshj/resources/popupimgs/${popup.popupimg}" style="height:${popup.popupheight}px;width:${popup.popupwidth-4}px;"/></a>
-				<div style="height:25px;line-height:25px;width:${popup.popupwidth-2}px;text-align:right;padding-right:10px;">${popup.popupterm}일간 보지 않기<input type="checkbox" id="popupclose"/>
+				<div style="height:25px;line-height:25px;width:${popup.popupwidth-2}px;text-align:right;padding-right:10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${popup.popupterm}일간 보지 않기<input type="checkbox" id="popupclose"/>
 				<input type="hidden" value="${popup.popupterm}" id="datehidden"/><input type="hidden" value="${popup.popupimg}" id="popupimghidden"/></div>
 			</div>
 			<script>
@@ -644,9 +644,7 @@
 						document.cookie = "event=beet;path=/;expires="+now+";";
 						$("#popupdiv").css("display","none");
 					});
-					
 				});
-				
 			</script>
 		</c:if>
 		<div>

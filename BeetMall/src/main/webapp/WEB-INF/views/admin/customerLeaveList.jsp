@@ -74,6 +74,12 @@
 	.contentList{
 		cursor: pointer;
 	}
+	#sortBox{
+		display:none;
+	}
+	#addBtn, #delBtn{
+		visibility: hidden;
+	}
 </style>
 <script>
 	function pagelist(pagenum){

@@ -44,15 +44,6 @@ public class admin_customerController {
 		}
 		//검색어, 검색키
 		String searchKey = req.getParameter("searchKey");
-		if(searchKey != null) {
-			if(searchKey.equals("userid")) {
-				searchKey = "m.userid";
-			}else if(searchKey.equals("useremail")) {
-				searchKey = "m.useremail";
-			}else if(searchKey.equals("userid")) {
-				searchKey = "m.username";
-			}
-		}
 		pageVO.setSearchKey(searchKey);
 		pageVO.setSearchWord(req.getParameter("searchWord"));
 		System.out.println("getSearchKey>>>>>"+pageVO.getSearchKey());
@@ -176,6 +167,13 @@ public class admin_customerController {
 	@RequestMapping("userinfoupdate")
 	public ModelAndView customerEdit(Admin_MemberVO vo) {
 		ModelAndView mav = new ModelAndView();
+		System.out.println(">>>>>>>>>>>>>><<<<<<<<<<<<<<<");
+		System.out.println(vo.getUseraddr());
+		System.out.println(vo.getUsername());
+		System.out.println(vo.getUserid());
+		System.out.println(vo.getUseremail());
+		System.out.println(vo.getUserzipcode());
+		System.out.println(vo.getUserdetailaddr());
 		if(memberservice.memberEdit(vo)>0) {
 			mav.addObject("editOk","Y");
 		}else {

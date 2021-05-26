@@ -5,7 +5,7 @@
 		select * from(
 		select * from(
 		select p.productnum as productnum , p.ordernum as ordernum , p.changepoint as changepoint , p.usedpoint as usedpoint, 
-			 o.orderdate as orderdate, r.thumbimg as thumbimg, r.productname as productname, r.productcontent as productcontent, d.orderprice as orderprice
+			 o.orderdate as orderdate, r.thumbimg as thumbimg, r.productname as productname, r.productcontent as productcontent, d.orderprice as orderprice, productinfomation
 		from point p
 		    join ordertbl o
 		        on p.ordernum = o.ordernum
@@ -34,7 +34,7 @@
 	</select>
 	<select id="selectPointType" resultType="com.beetmall.sshj.custom.vo.PointVO">
 		select p.productnum as productnum , p.ordernum as ordernum , p.changepoint as changepoint , p.usedpoint as usedpoint, 
-			 o.orderdate as orderdate, r.thumbimg as thumbimg, r.productname as productname, r.productcontent as productcontent, d.orderprice as orderprice
+			 o.orderdate as orderdate, r.thumbimg as thumbimg, r.productname as productname, r.productcontent as productcontent, d.orderprice as orderprice, productinfomation
 		from point p
 		    join ordertbl o
 		        on p.ordernum = o.ordernum
@@ -47,7 +47,7 @@
 	</select>
 	<select id="selectPointMonth" resultType="com.beetmall.sshj.custom.vo.PointVO">
 		select p.productnum as productnum , p.ordernum as ordernum , p.changepoint as changepoint , p.usedpoint as usedpoint, 
-			 o.orderdate as orderdate, r.thumbimg as thumbimg, r.productname as productname, r.productcontent as productcontent, d.orderprice as orderprice
+			 o.orderdate as orderdate, r.thumbimg as thumbimg, r.productname as productname, r.productcontent as productcontent, d.orderprice as orderprice, productinfomation
 		from point p
 		    join ordertbl o
 		        on p.ordernum = o.ordernum
@@ -62,7 +62,7 @@
 		select * from(
 		select * from(
 		select p.productnum as productnum , p.ordernum as ordernum , p.changepoint as changepoint , p.usedpoint as usedpoint, 
-			 o.orderdate as orderdate, r.thumbimg as thumbimg, r.productname as productname, r.productcontent as productcontent, d.orderprice as orderprice
+			 o.orderdate as orderdate, r.thumbimg as thumbimg, r.productname as productname, r.productcontent as productcontent, d.orderprice as orderprice, productinfomation
 		from point p
 		    join ordertbl o
 		        on p.ordernum = o.ordernum

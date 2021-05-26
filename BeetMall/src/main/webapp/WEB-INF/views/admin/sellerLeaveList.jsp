@@ -115,6 +115,12 @@
 	#foreachUL>li{
 		cursor: pointer;
 	}
+	#addBtn, #delBtn{
+		visibility: hidden;
+	}
+	#sortBox{
+		display:none;
+	}
 </style>
 <script>
 	function pagelist(pagenum){

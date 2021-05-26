@@ -215,10 +215,15 @@
 	}
 	#foreachUL>li{
 		cursor: pointer;
+		
+		height:40px;
 	}
 	#foreachUL{
 		margin:0px !important;
 		padding:0px !important;
+	}
+	#sortBox{
+		display:none;
 	}
 </style>
 <script>

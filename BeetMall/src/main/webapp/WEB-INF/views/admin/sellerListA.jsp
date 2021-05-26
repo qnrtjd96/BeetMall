@@ -162,14 +162,8 @@
 	}
 	#container{
 		height:1080px;
-		overflow:auto;
-		overflow-x: hidden;
 	}
-	#contentBox{
-		overflow: auto;
-	    height: 550px;
-	    overflow-x: hidden;
-	}
+	
 	#addBtn, #delBtn{
 		visibility: hidden;
 	}
@@ -213,13 +207,17 @@
 		cursor: pointer !important;
 		height:40px !important;
 		line-height: 40px;
-		margin: 0px !important;
+		
+		margin-left:36px !important;
 		padding:0px !important;
 		width:1040px !important;
 	}
 	#title, #forachtitle{
 		height:40px!important;
 		line-height: 40px;
+	}
+	#addBtn, #delBtn{
+		visibility: hidden;
 	}
 </style>
 <script>
@@ -353,7 +351,7 @@
 	    cursor: pointer !important;
 	    height: 60px !important;
 	    /* line-height: 40px; */
-	    margin: 0px !important;
+	    
 	    padding: 0px !important;
 	    width: 1040px !important;
 	}

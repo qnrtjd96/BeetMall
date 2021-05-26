@@ -51,7 +51,15 @@ public class admin_sellerController {
 			String pageNumStr = req.getParameter("pageNum");
 			//검색어, 검색키
 			String searchKey = req.getParameter("searchKey");
-			
+			if(searchKey != null) {
+				if(searchKey.equals("userid")) {
+					searchKey = "userid";
+				}else if(searchKey.equals("useremail")) {
+					searchKey = "storeemail";
+				}else if(searchKey.equals("username")) {
+					searchKey = "sellername";
+				}
+			}
 			pageVO.setSearchKey(searchKey);
 			pageVO.setSearchWord(req.getParameter("searchWord"));
 			System.out.println("getSearchKey>>>>>"+pageVO.getSearchKey());
@@ -71,6 +79,7 @@ public class admin_sellerController {
 			int re = memberservice.memberCountSeller(pageVO);
 			pageVO.setTotalRecord(re);
 			System.out.println("re="+re);
+			
 			mav.addObject("list", memberservice.memberselectSellerAll(pageVO));
 			mav.addObject("pageVO", pageVO);
 			mav.setViewName("/admin/sellerListA");
@@ -88,7 +97,15 @@ public class admin_sellerController {
 			String pageNumStr = req.getParameter("pageNum");
 			//검색어, 검색키
 			String searchKey = req.getParameter("searchKey");
-			
+			if(searchKey != null) {
+				if(searchKey.equals("userid")) {
+					searchKey = "userid";
+				}else if(searchKey.equals("useremail")) {
+					searchKey = "storeemail";
+				}else if(searchKey.equals("username")) {
+					searchKey = "sellername";
+				}
+			}
 			pageVO.setSearchKey(searchKey);
 			pageVO.setSearchWord(req.getParameter("searchWord"));
 			System.out.println("getSearchKey>>>>>"+pageVO.getSearchKey());

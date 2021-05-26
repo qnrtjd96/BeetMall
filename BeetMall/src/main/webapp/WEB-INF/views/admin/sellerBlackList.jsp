@@ -118,6 +118,9 @@
 	.foreachUL>li{
 		cursor: pointer;
 	}
+	#addBtn, #delBtn{
+		visibility: hidden;
+	}
 </style>
 <script>
 $(function(){

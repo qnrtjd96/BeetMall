@@ -7,6 +7,10 @@
 <style>
 	*{margin:0px; padding:0px; list-style-type :none; font-family: 'Nanum Gothic', sans-serif;}
 	#leftMenu{ display:block;}
+	#productMain {
+		width:1200px !important;
+		overflow:visible !important;
+	}
 	/* 페이징처리부분 */
 	.page_wrap {
 		text-align:center;
