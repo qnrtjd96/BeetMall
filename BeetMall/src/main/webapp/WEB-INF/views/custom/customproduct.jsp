@@ -979,7 +979,7 @@ color:red;
       ///////////////////////////장바구니에 등록하기/////////////////////////////
       ////장바구니에 넘겨야할 데이터-> 아이디/상품코드/상품가격/상품의갯수/할인가격/옵션코드/옵션가격/옵션의갯수/최종구매가격
 		$("#wishbtn").click(function() {
-			alert("아이디="+"${logId}"+"상품코드"+productnump+"상품가격="+prtprice+"/상품의 갯수="+pcount+"/옵션가격="+optprice+"/옵션의갯수="+ocount+"/최종구매가격="+submitprice+"/옵션코드="+optnum+"/본래할인가격"+dprtprice+"/총할인가격="+(dprtprice*pcount));
+			//alert("아이디="+"${logId}"+"상품코드"+productnump+"상품가격="+prtprice+"/상품의 갯수="+pcount+"/옵션가격="+optprice+"/옵션의갯수="+ocount+"/최종구매가격="+submitprice+"/옵션코드="+optnum+"/본래할인가격"+dprtprice+"/총할인가격="+(dprtprice*pcount));
 			var data= "userid=${logId}&productnum=${pvo.productnum}&prtprice="+prtprice+"&optnum="+optnum+"&pcount="+pcount+"&optprice="+optprice+"&ocount="+ocount+"&submitprice="+submitprice+"&dprtprice="+dprtprice;
 			var url="customWishInsert";
 			//alert(data);

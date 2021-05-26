@@ -433,7 +433,7 @@ $(function(){
 		$(".reportsubmit").click(function(){	// 신고처리하는 ajax부분
 			
 			var formdata = $(".reportForm").serialize();
-			alert("formdata === "+formdata);
+			//alert("formdata === "+formdata);
 			$.ajax({
 				url: "customreport",
 				type : "POST",
