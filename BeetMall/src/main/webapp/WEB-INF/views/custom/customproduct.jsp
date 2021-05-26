@@ -34,7 +34,7 @@ a:hover, a:active, a:visited, a:link {
 #productImgBox {
 	float: left;
 	margin-left:80px;
-	margin-top: 130px;
+	margin-top:170px;
 	width: 400px;
 	height: 500px; 
 }
@@ -55,11 +55,10 @@ a:hover, a:active, a:visited, a:link {
 }
 
 #productMainTiltle>b{
-	width: 480px;
+	width: 550px;
 	height: 70px;
 	line-height: 70px;
 	float: left;
-	margin-right: 70px;
 	font-size:35px;
 	overflow:hidden;
 }
@@ -111,10 +110,11 @@ overflow:hidden;
 #yesdiscount{
 width:100%;
 float:left;
-line-height: 40px;
-height: 40px;
+line-height: 20px;
+height: 20px;
 font-size:13px;
 color:gray;
+
 }
 
 #productPrBox>ul {
@@ -176,12 +176,12 @@ padding-left:20px;
 }
 
 #productTotalPrice {
-    padding-left: 350px;
+  
 	width: 100%;
 	float: left;
 	line-height: 70px;
 	height: 70px;
-	padding-left:240px;
+	padding-left:200px;
 	margin-bottom:25px;
 	font-weight:bold;
     color:black;
@@ -402,7 +402,9 @@ width:100%;
 float:left;
 padding-left:30px;
 padding-bottom:10px;
-border-bottom:1px solid #ddd;
+padding-top:10px;
+background-color:#f0f4f5;
+border-bottom:1px solid #eee;
 }
 
 /* 리뷰이미지 설정*/
@@ -427,17 +429,17 @@ border-bottom:1px solid #ddd;
 	float: left;
 	padding-left:50px;
 	overflow:auto;
+
 }
 
 #qnatxtbox2{
-   padding-left:15px;
-	width:1050px;
+	width:1020px;
 	height: 300px;
 	line-height: 100px;
 	float: left;
-	padding-left:50px;
-	background-color:#eee;
 	overflow:auto;
+	background-color:white;
+	padding:10px;
 }
 
 #nonebox{
@@ -794,6 +796,11 @@ font-size:40px;
 color:red;
 }
 
+#prtnum{
+margin-right:5px;
+margin-left:5px;
+}
+
 /* 채팅 */
 #chatIframe{
 		position:absolute;
@@ -1071,8 +1078,10 @@ color:red;
       
       $("#totalbuy").click(function(){
     	  if(${logId==null}){
-    		  alert("로그인후 이용해 주세요")
-    	  }
+				if(confirm("로그인후 이용해주세요")){
+					location.href="login"
+				}
+			}
     	  var productname="${pvo.productname}";
     	  var toltalPrice = (prtprice * pcount) + (optprice* ocount);
     	  var totalCount = pcount+optprice;
@@ -1081,6 +1090,11 @@ color:red;
       ///////////////////////////장바구니에 등록하기//////////////////////////////
       ////장바구니에 넘겨야할 데이터-> 아이디/상품코드/상품가격/상품의갯수/할인가격/옵션코드/옵션가격/옵션의갯수/최종구매가격
 		$("#wishbtn").click(function() {
+			if(${logId==null}){
+				if(confirm("로그인후 이용해주세요")){
+					location.href="login"
+				}
+			}
 			//alert("아이디="+"${logId}"+"상품코드"+productnump+"상품가격="+prtprice+"/상품의 갯수="+pcount+"/옵션가격="+optprice+"/옵션의갯수="+ocount+"/최종구매가격="+submitprice+"/옵션코드="+optnum+"/본래할인가격"+dprtprice+"/총할인가격="+(dprtprice*pcount));
 			var data= "userid=${logId}&productnum=${pvo.productnum}&prtprice="+prtprice+"&optnum="+optnum+"&pcount="+pcount+"&optprice="+optprice+"&ocount="+ocount+"&submitprice="+submitprice+"&dprtprice="+dprtprice;
 			var url="customWishInsert";
@@ -1103,6 +1117,11 @@ color:red;
        ///////////////////////////////////채팅하기////////////////////
    
      $(document).on('click','input[value="1:1대화하기"]', function(){
+    	 if(${logId==null}){
+				if(confirm("로그인후 이용해주세요")){
+					location.href="login"
+				}
+			}
 		var roomcode =1;
 		var theyid = "${pvo.userid}";
 		var myid = "${logId}";
@@ -1297,11 +1316,11 @@ color:red;
 				</div>
 			
 				<c:if test="${Dprice>0}">
-				<div id="yesdiscount">해당 상품은 할인이 적용중입니다.</div>
+				<div id="yesdiscount" style="color:#ef709b;">해당 상품은 할인이 적용중입니다.</div>
 				</c:if>
 				
 				<c:if test="${Dprice<=0}">
-				<div id="yesdiscount">해당 상품은 할인이 없습니다.</div>
+				<div id="yesdiscount" style="color:#ef709b;">해당 상품은 할인이 없습니다.</div>
 				</c:if>
 				
 				<div id=productPrice>원가: ${pvo.productprice}</div>  <!-- 가격 -->
@@ -1310,7 +1329,7 @@ color:red;
 					<a href="#">${pvo.userid}</a>  <!-- 판매자 아이디 -->
 				</div>
 				<div id="simg">
-					<a href="#"><img src="resource/sellerprofileimg/${fvo.farmprofile}"/></a>  <!-- 프사 -->
+					<a href="#"><img src="resources/sellerprofileimg/${fvo.farmprofile}"/></a>  <!-- 프사 -->
 				</div>
 				
 				
@@ -1480,7 +1499,7 @@ color:red;
 							</div>
 		   <!-- 리뷰 신고하기 -->			
 							
-							<div id="reviewchatInfoTitle"><span id="reviewchatHeaderSpan" class="reviewchatHeaderSpan"><span id="reviewreportChat">신고하기</span><span id="reviewtheyId"></span></span></div>
+							<div id="reviewchatInfoTitle"><span id="reviewchatHeaderSpan" class="reviewchatHeaderSpan"><span id="reviewreportChat" style="color:red;">신고하기</span><span id="reviewtheyId"></span></span></div>
 							<input type=hidden value="${rlist.userid}">
 						    <input type=hidden value="${rlist.reviewnum}">
 					  </div>
@@ -1492,7 +1511,7 @@ color:red;
           <!-- 신고하기 부분-->
 				<div style="height:350px;width:500px;border:1px solid #e2d1d1;position:absolute;top:400px;left:800px;background-color:white;display:none;" id="reviewreportDiv" class="reviewreportDiv">
 					<form style="height:400px;width:500px;float:left;" method="post" action="customreport" id="reviewreportForm" class="reviewreportForm">
-						<h2 style="margin-left:10px;">신고하기</h2>
+						<h2 style="margin-left:10px; background-color:#eee; margin-right:10px;">신고하기</h2>
 						<span style="float:left;font-size:20px;margin-left:10px;">신고사유</span>
 							<input type="hidden" name="userid" value="${logId}"/>												<!-- 신고자 아이디 -->
 							<input type="hidden" name="reporteduser" id="reporteduser" value=""/>											<!-- 신고할 사람 아이디 -->
@@ -1625,7 +1644,7 @@ color:red;
 				</c:if>	
 				
 				<c:if test="${qlist.qopen==0 && logId!=qlist.userid}">	
-				           <div id="qnatxtbox2">
+				           <div id="qnatxtbox">
 				                비공개로 작성된 글입니다.
 				           </div>
 				</c:if>	

@@ -39,8 +39,7 @@ a:hover, a:active, a:visited, a:link {
 	   line-height: 30px;
 	   /* color: #fff; */
 	   color:black;
-	   font-weight:bold;
-	   font-size:1em;
+	   font-size:30px;
 	   text-indent: 0.4em;
 	   /* background-color: rgb(224,102,102); */
 	   margin-bottom:30px;
