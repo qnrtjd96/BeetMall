@@ -52,6 +52,11 @@
 		font-size:25px;
 		margin-left: 10px;
 	}
+	.regiFinBtn{
+		border: none;
+	}
+	
+	
 </style>
 <script>
 	$(function(){

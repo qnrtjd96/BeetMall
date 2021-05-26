@@ -1309,7 +1309,7 @@
 	 				</c:if>
 			 		<ul id="info">
 			 			<li><input type="text" value="${ilist.username}" name="username"/></li>
-						<li><input type="text" value="${ilist.userid}"name="userid"/></li>
+						<li><input type="text" value="${ilist.userid}"name="userid" readonly/></li>
 						<li><input type="text" value="${ilist.useremail}"name="useremail"/></li>
 						<li><input type="text" value="${ilist.birthday}"name="birthday" disabled/></li>
 						<li><input type="text" value="${ilist.joindate}"name="joindate" disabled/></li>
@@ -1392,7 +1392,7 @@
 					<li id="linkStop">
 						<a href="customproduct?no=${vo.productnum}"><img src="/sshj/resources/sellerProductImgs/${vo.thumbimg}" style="margin-right:10px;"></a>
 						<a href="customproduct?no=${vo.productnum}"><span class="pointtitle wordcut">${vo.productname}</span><br/></a>
-						<a href="customproduct?no=${vo.productnum}"><span class="pointdetail wordcut">${vo.productcontent }</span></a>
+						<a href="customproduct?no=${vo.productnum}"><span class="pointdetail wordcut">${vo.productinfomation }</span></a>
 					</li>
 					<li><span class="pointprice">${vo.orderprice}</span>원</li>
 					<c:if test="${vo.changepoint > 0}">
