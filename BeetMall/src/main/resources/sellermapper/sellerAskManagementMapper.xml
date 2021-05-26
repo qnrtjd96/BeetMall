@@ -38,12 +38,12 @@
 				<if test="!''.equals(searchTxt)">where qtitle like '%'||#{searchTxt}||'%'</if>
 				
 				<if test="startDate != ''">
-					and qwritedate BETWEEN '${startDate}' and '${endDate}'
+					and qwritedate >= '${startDate}' and qwritedate  <![CDATA[<=]]>  '${endDate}'
 				</if>
 			</when>
 			<when test="searchTxt == ''">
 				<if test="startDate != ''">
-					where qwritedate BETWEEN '${startDate}' and '${endDate}'
+					where qwritedate >= '${startDate}' and qwritedate  <![CDATA[<=]]>  '${endDate}'
 				</if>
 			</when>
 		</choose>
@@ -103,12 +103,12 @@
 				<if test="!''.equals(searchTxt)">where qtitle like '%'||#{searchTxt}||'%'</if>
 				
 				<if test="startDate != ''">
-					and qwritedate BETWEEN '${startDate}' and '${endDate}'
+					and qwritedate >= '${startDate}' and qwritedate  <![CDATA[<=]]> '${endDate}'
 				</if>
 			</when>
 			<when test="searchTxt == ''">
 				<if test="startDate != ''">
-					where qwritedate BETWEEN '${startDate}' and '${endDate}'
+					where qwritedate >= '${startDate}' and qwritedate  <![CDATA[<=]]> '${endDate}'
 				</if>
 			</when>
 		</choose>

@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
  
- 
- 
  <style> 
 /*상단*/
 	 #container li{ 
@@ -101,7 +99,7 @@ input[type=text]{
 button, .btn{box-shadow:none;font-size:16px; line-height:35px;}
 .ui-datepicker-trigger{border:none; font-weight:bold;}
 #sell_start_finish{line-height:35px;}
-	li{margin-bottom:15px;}
+	li{margin-bottom:0px;}
 	li>span{line-height:35px;}
 	ul{margin-bottom:5px}
 	label{margin:0; line-height:35px; font-size:16px}

@@ -41,12 +41,12 @@
 				<if test="!''.equals(searchTxt)">where userid like '%'||#{searchTxt}||'%'</if>
 				
 				<if test="startDate != ''">
-					and reviewwritedate BETWEEN '${startDate}' and '${endDate}'
+					and reviewwritedate >= '${startDate}' and reviewwritedate  <![CDATA[<=]]>  '${endDate}'
 				</if>
 			</when>
 			<when test="searchTxt == ''">
 				<if test="startDate != ''">
-					where reviewwritedate BETWEEN '${startDate}' and '${endDate}'
+					where reviewwritedate >= '${startDate}' and reviewwritedate  <![CDATA[<=]]> '${endDate}'
 				</if>
 			</when>
 		</choose>
@@ -105,12 +105,12 @@
 				<if test="!''.equals(searchTxt)">where userid like '%'||#{searchTxt}||'%'</if>
 				
 				<if test="startDate != ''">
-					and reviewwritedate BETWEEN '${startDate}' and '${endDate}'
+					and reviewwritedate >= '${startDate}' and reviewwritedate  <![CDATA[<=]]> '${endDate}'
 				</if>
 			</when>
 			<when test="searchTxt == ''">
 				<if test="startDate != ''">
-					where reviewwritedate BETWEEN '${startDate}' and '${endDate}'
+					where reviewwritedate >= '${startDate}' and reviewwritedate  <![CDATA[<=]]> '${endDate}'
 				</if>
 			</when>
 		</choose>

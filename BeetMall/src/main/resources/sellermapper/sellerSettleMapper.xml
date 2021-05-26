@@ -39,7 +39,7 @@
 		from ( select productnum from product where userid='${userid}' ) a 
 		join orderdetail b on a.productnum = b.productnum) c 
 		join ordertbl d on c.ordernum = d.ordernum 
-		where orderdate BETWEEN '${startDate}' and '${endDate}' and orderstatus='구매확정' order by orderdate asc, ordernum asc)
+		where orderdate >= '${startDate}' and orderdate <![CDATA[<=]]>  '${endDate}' and orderstatus='구매확정' order by orderdate asc, ordernum asc)
 		where rownum <![CDATA[ <= ]]> ${pageNum*onePageRecord} order by orderdate desc, ordernum desc) 
 		<if test="#{pageNum} == #{totalPage}">
 			where rownum <![CDATA[ <= ]]>${lastPageRecord} 
@@ -57,7 +57,7 @@
 		from ( select productnum from product where userid='${userid}' ) a 
 		join orderdetail b on a.productnum = b.productnum) c 
 		join ordertbl d on c.ordernum = d.ordernum 
-		where settledate BETWEEN '${startDate}' and '${endDate}' and orderstatus='구매확정' order by settledate asc, orderdate asc)
+		where settledate >= '${startDate}' and settledate  <![CDATA[<=]]>  '${endDate}' and orderstatus='구매확정' order by settledate asc, orderdate asc)
 		where rownum <![CDATA[ <= ]]> ${pageNum*onePageRecord} order by settledate desc, orderdate desc) 
 		<if test="#{pageNum} == #{totalPage}">
 			where rownum <![CDATA[ <= ]]>${lastPageRecord} 
@@ -73,7 +73,7 @@
 		from( select d.realpayment
 		from( select ordernum, orderstatus, settlecheck, settledate 
 		from( select productnum from product where userid='ghdrlfehd' ) a join orderdetail b on a.productnum = b.productnum) c 
-		join ordertbl d on c.ordernum = d.ordernum where settledate BETWEEN '${startDate}' and '${endDate}' and orderstatus='구매확정')
+		join ordertbl d on c.ordernum = d.ordernum where settledate >= '${startDate}' and  settledate <![CDATA[<=]]>  '${endDate}' and orderstatus='구매확정')
 	</select>
 	
 	<select id="totalOrder" resultType="com.beetmall.sshj.seller.vo.SellerSettleVO">
@@ -81,7 +81,7 @@
 		from( select d.realpayment
 		from( select ordernum, orderstatus, settlecheck, settledate 
 		from( select productnum from product where userid='ghdrlfehd' ) a join orderdetail b on a.productnum = b.productnum) c 
-		join ordertbl d on c.ordernum = d.ordernum where orderdate BETWEEN '${startDate}' and '${endDate}' and orderstatus='구매확정')
+		join ordertbl d on c.ordernum = d.ordernum where orderdate >= '${startDate}' and orderdate  <![CDATA[<=]]> '${endDate}' and orderstatus='구매확정')
 	</select>
 	
 	
@@ -92,7 +92,7 @@
 		from ( select ordernum, orderstatus, settlecheck, settledate 
 		from ( select productnum from product where userid='${userid}' ) a join orderdetail b on a.productnum = b.productnum 
 		where orderstatus='구매확정') c, ordertbl d 
-		where c.ordernum = d.ordernum group by orderdate having orderdate BETWEEN '${startDate}' and '${endDate}' order by orderdate asc) 
+		where c.ordernum = d.ordernum group by orderdate having orderdate >= '${startDate}' and orderdate  <![CDATA[<=]]>  '${endDate}' order by orderdate asc) 
 		where rownum <![CDATA[ <= ]]> ${pageNum*onePageRecord} order by orderdate desc) 
 		<if test="#{pageNum} == #{totalPage}">
 			where rownum <![CDATA[ <= ]]> ${lastPageRecord} 
@@ -110,7 +110,7 @@
 		from ( select ordernum, orderstatus, settlecheck, settledate 
 		from ( select productnum from product where userid='${userid}' ) a join orderdetail b on a.productnum = b.productnum 
 		where orderstatus='구매확정') c, ordertbl d 
-		where c.ordernum = d.ordernum group by orderdate having orderdate BETWEEN '${startDate}' and '${endDate}' order by orderdate asc) 
+		where c.ordernum = d.ordernum group by orderdate having orderdate >= '${startDate}' and orderdate  <![CDATA[<=]]> '${endDate}' order by orderdate asc) 
 		order by orderdate desc) 
 		order by orderdate asc
 	</select>
@@ -122,7 +122,7 @@
 		from ( select ordernum, orderstatus, settlecheck, settledate 
 		from ( select productnum from product where userid='${userid}' ) a join orderdetail b on a.productnum = b.productnum 
 		where orderstatus='구매확정') c, ordertbl d 
-		where c.ordernum = d.ordernum  group by settledate having settledate BETWEEN '${startDate}' and '${endDate}' order by settledate desc) 
+		where c.ordernum = d.ordernum  group by settledate having settledate >= '${startDate}' and settledate  <![CDATA[<=]]> '${endDate}' order by settledate desc) 
 		where rownum <![CDATA[ <= ]]> ${pageNum*onePageRecord}) 
 		<if test="#{pageNum} == #{totalPage}">
 			where rownum <![CDATA[ <= ]]> ${lastPageRecord} 
@@ -140,7 +140,7 @@
 		from ( select ordernum, orderstatus, settlecheck, settledate 
 		from ( select productnum from product where userid='${userid}' ) a join orderdetail b on a.productnum = b.productnum 
 		where orderstatus='구매확정') c, ordertbl d 
-		where c.ordernum = d.ordernum  group by settledate having settledate BETWEEN '${startDate}' and '${endDate}' order by settledate desc) )
+		where c.ordernum = d.ordernum  group by settledate having settledate >= '${startDate}' and settledate  <![CDATA[<=]]>  '${endDate}' order by settledate desc) )
 		order by settledate asc
 	
 	</select>
@@ -156,7 +156,7 @@
 		from ( select productnum from product where userid='${userid}' ) a 
 		join orderdetail b on a.productnum = b.productnum) c 
 		join ordertbl d on c.ordernum = d.ordernum 
-		where orderdate BETWEEN '${startDate}' and '${endDate}' and orderstatus='구매확정' order by orderdate asc, ordernum asc)
+		where orderdate >= '${startDate}' and orderdate  <![CDATA[<=]]> '${endDate}' and orderstatus='구매확정' order by orderdate asc, ordernum asc)
 		order by orderdate desc, ordernum desc) 
 		order by orderdate asc
 	</select>
@@ -169,7 +169,7 @@
 		from ( select productnum from product where userid='${userid}' ) a 
 		join orderdetail b on a.productnum = b.productnum) c 
 		join ordertbl d on c.ordernum = d.ordernum 
-		where settledate BETWEEN '${startDate}' and '${endDate}' and orderstatus='구매확정' order by settledate asc, orderdate asc)
+		where settledate >= '${startDate}' and settledate  <![CDATA[<=]]> '${endDate}' and orderstatus='구매확정' order by settledate asc, orderdate asc)
 		order by settledate desc, orderdate desc) 
 		order by settledate asc, orderdate asc
 	</select>
