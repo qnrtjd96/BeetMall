@@ -774,21 +774,24 @@ td, .td{
  
 #pagelibtn{
 float:left;
-width:70px;
+width:80px;
 height:29px;
 line-height:50px;
 margin-left:1010px;
 font-size:15px;
 color:black;
+text-align:center;
 }
 
 #pagelibtn>a{
 float:left;
-width:70px;
+width:80px;
 height:28px;
 line-height:28px;
 font-size:15px;
 margin-right:4px;
+border:1px solid #eee;
+border-radius:5px;
 }
 
 #spanTotalPrice{
@@ -1081,11 +1084,14 @@ margin-left:5px;
 				if(confirm("로그인후 이용해주세요")){
 					location.href="login"
 				}
-			}
+			}else{
+				
+			
     	  var productname="${pvo.productname}";
     	  var toltalPrice = (prtprice * pcount) + (optprice* ocount);
     	  var totalCount = pcount+optprice;
     	  location.href="/sshj/productPay?total="+toltalPrice+"&discountprice="+(dprtprice*pcount)+"&productnum=${pvo.productnum}&productname="+productname+"&deliveryoption=${pvo.deliveryoption}&optionnum="+optprice+"&totalCount="+totalCount;
+        }
       });
       ///////////////////////////장바구니에 등록하기//////////////////////////////
       ////장바구니에 넘겨야할 데이터-> 아이디/상품코드/상품가격/상품의갯수/할인가격/옵션코드/옵션가격/옵션의갯수/최종구매가격
@@ -1095,6 +1101,9 @@ margin-left:5px;
 					location.href="login"
 				}
 			}
+			
+			
+			
 			//alert("아이디="+"${logId}"+"상품코드"+productnump+"상품가격="+prtprice+"/상품의 갯수="+pcount+"/옵션가격="+optprice+"/옵션의갯수="+ocount+"/최종구매가격="+submitprice+"/옵션코드="+optnum+"/본래할인가격"+dprtprice+"/총할인가격="+(dprtprice*pcount));
 			var data= "userid=${logId}&productnum=${pvo.productnum}&prtprice="+prtprice+"&optnum="+optnum+"&pcount="+pcount+"&optprice="+optprice+"&ocount="+ocount+"&submitprice="+submitprice+"&dprtprice="+dprtprice;
 			var url="customWishInsert";
@@ -1111,7 +1120,9 @@ margin-left:5px;
 			})
 			
 			
-			
+			if(confirm("장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?")){
+				location.href="customWish"
+			}
 		
 		});
        ///////////////////////////////////채팅하기////////////////////
@@ -1121,6 +1132,7 @@ margin-left:5px;
 				if(confirm("로그인후 이용해주세요")){
 					location.href="login"
 				}
+
 			}
 		var roomcode =1;
 		var theyid = "${pvo.userid}";
@@ -1509,9 +1521,9 @@ margin-left:5px;
              </c:forEach>
                
           <!-- 신고하기 부분-->
-				<div style="height:350px;width:500px;border:1px solid #e2d1d1;position:absolute;top:400px;left:800px;background-color:white;display:none;" id="reviewreportDiv" class="reviewreportDiv">
+				<div style="height:350px;width:500px;border:1px solid #ddd;position:absolute;top:400px;left:800px;background-color:white;display:none;" id="reviewreportDiv" class="reviewreportDiv">
 					<form style="height:400px;width:500px;float:left;" method="post" action="customreport" id="reviewreportForm" class="reviewreportForm">
-						<h2 style="margin-left:10px; background-color:#eee; margin-right:10px;">신고하기</h2>
+						<h2 style="margin:0px; background-color:#514c4c; color:white; margin-bottom:5px; padding:5px;">신고하기</h2>
 						<span style="float:left;font-size:20px;margin-left:10px;">신고사유</span>
 							<input type="hidden" name="userid" value="${logId}"/>												<!-- 신고자 아이디 -->
 							<input type="hidden" name="reporteduser" id="reporteduser" value=""/>											<!-- 신고할 사람 아이디 -->
@@ -1533,7 +1545,9 @@ margin-left:5px;
 				</div>
            <!--  신고하기 밑에 스크립트까지임 -->	
                
-               <div id="pagelibtn" class="btn"><a href="/sshj/mybuyList">후기 작성</a></div>
+               <c:if test="${logId!=null}">
+               <div id="pagelibtn"><a href="/sshj/mybuyList">후기작성</a></div>
+               </c:if>
                
 		       <div id="nonebox">   </div>
 
@@ -1653,8 +1667,9 @@ margin-left:5px;
 				
 		  </c:forEach>	
 
-				<div id="pagelibtn"><input type="button" class="btn qnaWrite" value="문의작성"/></div>
-				
+               <c:if test="${logId!=null}">
+   				<div id="pagelibtn"><input type="button" class="btn qnaWrite" value="문의작성"/></div>
+			   </c:if>
 				
 				<div id="nonebox">   </div>
 
