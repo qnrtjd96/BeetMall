@@ -127,17 +127,12 @@ ul>li {
 }
 
 /*  큰제목----------------------------------------------                 */
-#recit {
-	width: 300px;
-	padding: 0px;
-	margin: 0px;
-	color: rgb(252, 118, 45);
-}
 
 /*  게시글 리스트----------------------------------------------                 */
 #slist {
+float:left;
 	width: 100%;
-	height:500px;
+	height:700px;
 	margin-bottom: 30px;
 }
 
@@ -145,10 +140,21 @@ ul>li {
 	padding: 0px;
 	margin-top: 10px;
 	border-bottom: 1px solid #ddd;
+	font-size:20px;
+	color:gray;
+	float:left;
+	width:100%;
+	text-align:center;
+	
+}
+#reciListT>li {
+margin-bottom:10px;
+
 }
 
 #reciList, #reciListT {
 	width: 100%;
+	
 }
 
 #reciList>li, #reciListT>li {
@@ -161,11 +167,23 @@ ul>li {
 #reciList>li {
 	border-bottom: 1px solid #ddd;
 	margin-bottom: 5px;
+	font-size:18px;
+	height:50px;
+	line-height:50px;
 }
 
-#reciList>li:nth-child(6n+2), #reciListT>li:nth-child(6n+2) {
+#reciList>li:nth-child(6n+2){
 	width: 50%;
 }
+
+#reciListT>li:nth-child(6n+2) {
+	width: 500px;
+	}
+	
+#reciListT>li:nth-child(6n+6) {
+	width: 145px;
+}
+
 
 /*  글안에 내용----------------------------------------------                 */
 #reciContenView {
@@ -173,17 +191,20 @@ ul>li {
 	height: 40px;
 	background-color: #eee;
 	border-bottom: 1px solid #ddd;
+	text-align:center;
 }
 
 #reciContenView>li {
 	width: 10%;
 	float: left;
 	line-height: 40px;
+	
 }
 
 #reciContenView>li:nth-child(6n+2) {
 	width: 50%;
 }
+
 
 /*  해당 게시글 보기----------------------------------------------                 */
 #rcontent {
@@ -306,6 +327,9 @@ width:100%;
 float:left;
 }
 
+#retili>a,#retili{
+overflow:hidden;
+}
 
 </style>
 <script>
@@ -320,34 +344,24 @@ float:left;
 
 		<!-- ------------------------큰제목----------------------------------- -->
 		<div id="recipettile">
-			<b>레시피를 올리는 곳입니다.</b>
+			<b></b>
 		</div>
 		
 	<!-- ------------------------검색 기능----------------------------------- -->
 	
 	<div id="searb">
-	<form method="get" action="recipeList" id="searchFrm">
-				<select name="searchKey" id="searchKey">
-					<option value="recipetitle">제목</option>
-					<option value="recipecontent">내용</option>
-					<option value="userid">작성자</option>
-				</select>
-				<span id="cs_search_box">
-					<input type="text" id="searchWord" name="searchWord" placeholder="내용을 입력해주세요.">
-				    <input type="submit" value="검색"/> 
-				</span>
-				
-	 </form>
+	
 	 </div>
 <!-- ------------------------게시글 리스트----------------------------------- -->
 		<div>
 
+<!--
 			<select name="selectOrder" style="float: right">
 				<option>최신순</option>
 				<option>추천순</option>
 				<option>조회수순</option>
 			</select>
-			
+	-->	
 <!-- ------------------------게시글 리스트----------------------------------- -->
 			<div id="slist">
 				<ul id="reciListT">
@@ -362,7 +376,7 @@ float:left;
 				<ul id="reciList">
 					<c:forEach var="data" items="${list}">
 					<li>${data.recipenum}</li>
-					<li><a href="recipeView?recipenum=${data.recipenum}&id=${logId}">${data.recipetitle}</a></li>
+					<li id="retili"><a href="recipeView?recipenum=${data.recipenum}&id=${logId}">${data.recipetitle}</a></li>
 					<li>${data.userid}</li>
 					<li>${data.reciperecommend}</li>
 					<li>${data.recipehit}</li>

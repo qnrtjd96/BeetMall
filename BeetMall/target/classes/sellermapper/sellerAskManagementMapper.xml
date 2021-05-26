@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.beetmall.sshj.seller.dao.SellerAskManagementDAO">
 	<select id="breakdown" resultType="com.beetmall.sshj.seller.vo.SellerAskManagementVO">	
-		select to_char(qwritedate,'yyyy-MM-dd') qwritedate, qanswer from (
+		select qwritedate, qanswer from (
 		select * from product a join mcategory b 
 		on a.mcatenum = b.mcatenum where a.userid='${userid}') c 
 		join userqboard d on c.productnum = d.productnum
@@ -14,7 +14,7 @@
 		select * from ( 
 		select * from ( 
 		select qnum, d.productnum productnum, d.userid, qcontent, qtitle,
-				to_char(qwritedate, 'yyyy-MM-dd') qwritedate, qopen, qanswer, productname
+				qwritedate, qopen, qanswer, productname
 		from (select * from product a join mcategory b on a.mcatenum = b.mcatenum 
 		
 		where 
@@ -79,7 +79,7 @@
 	
 	<select id="asklistRecord" resultType="com.beetmall.sshj.seller.vo.SellerAskManagementVO">	
 		select qnum, d.productnum productnum, d.userid, qcontent, qtitle,
-				to_char(qwritedate, 'yyyy-MM-dd') qwritedate, qopen, qanswer, productname
+				qwritedate, qopen, qanswer, productname
 		from (select * from product a join mcategory b on a.mcatenum = b.mcatenum 
 		
 		where 
@@ -114,13 +114,9 @@
 		</choose>
 
 	</select>
-
-	<update id="askUpdate" parameterType="int">
-		update userqboard set qanswer = #{qanswer} where userid = #{userid} and qnum = ${qnum}
-	</update>
 	
 	<update id="askAnswerUpdate" parameterType="int">
-		update userqboard set qanswer = #{qanswer} where userid = #{userid} and qnum = ${qnum} 
+		update userqboard set qanswer = #{qanswer}, qanswerdate = sysdate  where userid = #{userid} and qnum = ${qnum} 
 	</update>
 	
 	<insert id="reportInsert" parameterType="int">

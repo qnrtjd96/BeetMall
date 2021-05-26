@@ -14,4 +14,6 @@ public interface MyfavoriFormDAO {
 
 	public int farmHit(int storenum);
 
+	public MyfavoriFormVO discountSelect2(int storenum);
+
 }

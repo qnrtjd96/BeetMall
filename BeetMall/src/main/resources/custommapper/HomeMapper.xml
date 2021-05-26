@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beetmall.sshj.custom.dao.HomeDAO">
+	<select id="homeProduct" resultType="com.beetmall.sshj.custom.vo.HomeVO">
+		select a.productnum, a.thumbimg, a.productprice, a.productname, a.productinfomation,a.catename, a.catesort, nvl(d.saleprice,0) as saleprice from(
+		select p.productnum, p.thumbimg, p.productprice, p.productname, p.productinfomation, mc.catename, mm.catesort
+		from product p 
+		join mainmcategory mm
+		    on mm.productnum = p.productnum
+		join maincategory mc
+		    on mc.catenum = mm.catenum
+		where mm.catenum = #{param1}
+		order by mm.catesort) a
+		left join discount d
+		    on a.productnum = d.productnum
+	</select>
+	<select id="homeProductTitle" resultType="String">
+		select catename
+		from maincategory 
+		where catenum = #{param1}
+	</select>
+	<select id="homerecipe" resultType="com.beetmall.sshj.custom.vo.RecipeVO">
+		select * from(
+		select recipetitle, recipemainimg, recipehit, recipenum 
+		from recipe
+		<if test="param1 == 0">
+			order by recipehit desc
+		</if>
+		<if test="param1 == 1">
+			order by recipewritedate desc
+		</if>
+		) where rownum <![CDATA[<=]]> 3
+	</select>
+	<select id="popupselect" resultType="com.beetmall.sshj.custom.vo.PopupVO">
+		select popupimg, popuplink, popupterm, popupheight, popupwidth from mainlayout
+	</select>
+</mapper>

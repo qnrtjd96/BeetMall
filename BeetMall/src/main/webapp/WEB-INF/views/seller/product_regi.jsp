@@ -1,42 +1,48 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/inc/sellerHeader.jsp" %> 
-<html>
-<head>
-		<meta charset="UTF-8">
-		<title>Insert title here</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>	
+		
 		<!-- include libraries(jQuery, bootstrap) -->
-		<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
 		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+		
 		<!--jquery datepicker사용하기  -->
 		 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 		 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 		 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		 
+		<!-- bootstrap -->
+		<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		
+		
 		<!-- include summernote css/js -->
 		<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 		<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-		<!-- font -->
-		<link rel="preconnect" href="https://fonts.gstatic.com">
-		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300&display=swap" rel="stylesheet">
-	
+
 		 <!-- css -->
 		<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/jcss/basicStyle.css">
 		<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/jcss/headerStyle.css">
-</head>
+
 <style>
+,button, .btn{box-shadow:none;font-size:16px; line-height:35px;}
+.ui-datepicker-trigger{border:none; font-weight:bold;}
+#sell_start_finish{line-height:35px;}
 	li{margin-bottom:15px;}
-	li>span{line-height:30px;}
+	li>span{line-height:35px;}
 	ul{margin-bottom:5px}
-	label{margin:0; line-height:30px;}
+	label{margin:0; line-height:35px; font-size:16px}
 	select{height:28px;}
 	input, textarea, select{
 		border:1px solid lightgray; 
-		font-size:14px;
+		font-size:16px;
 	}
 	input{padding:2px}
-	input,select,button{height:30px;}
+	input,select,button{height:35px;}
 	textarea{
 		width:100%;
 	}
@@ -44,15 +50,21 @@
 		margin-right:5px; height:10px;
 	}
 	/* div*/
+	.categoryStar{
+		color:rgb(252,118,45);
+		:20px;
+		line-height:35px;
+		padding:5px;
+	}
 	.category_title{
 	   width: 100%;
-	   height: 30px;
-	   line-height: 30px;
+	   height: 35px;
+	   line-height: 35px;
 	   text-indent: 0.4em;
-	   font-size:16px;
+	   font-size:18px;
 	   margin-top:20px;
 	   margin-bottom:10px;
-	   font-size:16px;
+	   font-size:18px;
 	}
 	.category_wrap{
 		border:1px solid lightgray;
@@ -65,6 +77,7 @@
 	 .category_wrap>div{margin-bottom:20px; font-size:15px;}
 	/* 리뷰 검색 */
 	/* 카테고리 검색 */
+	strong{font-size:16px;}
 	#categoryList{
 	   width: 90%;
 	   margin: 30px auto;
@@ -93,7 +106,7 @@
 	
 	#category{
 	   border-right: 1px solid lightgray;
-	   font-size:14px;
+	   font-size:16px;
 	}
 	#category a{
 	   color: black;
@@ -129,7 +142,7 @@
 	
 /*해당 목록에 대한 설명 또는 주의사항*/
 	.notice{
-		font-size:0.75em;
+		font-size:0.93em;
 		color:gray;
 	}
 /*판매가격*/
@@ -141,16 +154,26 @@
 /*옵션*/
 	.regi_option_table input{
 		border:none;
-		height:30px;
+		height:35px;
 	}
 	th{
-		height: 30px;
+		height: 35px;
 		font-size:13px;
 		text-align:center;
 	}
 	table,td {
 		border:1px solid lightgray;
 	}
+/*파일선택*/
+input[type=file] {
+    display: block;
+    line-height:20px;
+    text-align:center;
+	color:black;
+	background:white;
+}
+
+
 /*상품내용*/
 
 /*상세설명*/
@@ -160,10 +183,10 @@
 		height:700px;
 	}
 	.note-editable, .note_editor {
-		height:500px; width:80%;
+		height:500px; width:100%;
 	}
 /*배송*/
-	#pay{height:50px; line-height:30px;}
+	#pay{height:50px; line-height:35px;}
 /*취소 저장하기 버튼*/
 	.end_button_wrap{
 		text-align:center;
@@ -174,7 +197,7 @@
 		background: #fff;
 		margin: 20px 10px 40px 0 ;
 	}
-	span{line-height:30px;}
+	span{line-height:35px;}
 	
 /*placeholder*/
 
@@ -185,7 +208,10 @@ input::-moz-placeholder { font-size: 90%;padding-left:5px; }
 input:-ms-input-placeholder { font-size: 90%;padding-left:5px; }
 input:-moz-placeholder { font-size: 90%; padding-left:5px;}
 input::placeholder { font-size: 90%; padding-left:5px;}
-
+.ui-datepicker-trigger{border:none;}
+.ui-datepicker-group ui-datepicker-group-first{
+	margin-right:10px;
+}
 </style>
 <script>
 
@@ -282,7 +308,7 @@ $(function(){
 //서머노트
 	$(document).ready(function() {
 		  $('#summernote').summernote({
-			  focus: true,
+
 			  lang: "ko-KR",	
 			  //콜백 함수
 	          callbacks : { 
@@ -355,7 +381,7 @@ $('#thumbimg').on('change',function(){
 		});
 //못난이 할인 default 
 		if($('#saleb').val() != '1' || $('#saleb').val()==' '){
-			$('#saleb').val('0');
+			$('#saleb').val(0);
 		}
 //국내산, 수입산
 		$('#import').on('click',function(){
@@ -425,8 +451,8 @@ $('#thumbimg').on('change',function(){
 		});// 옵션 선택 end
 		
 // 못난이할인
-	 	if($('#saleb').val()!='1'){
-	 		$('$saleb').val() =='0';
+	 	if($('#saleb').val()!= 1){
+	 		$('$saleb').val() == 0 ;
 	 		console.log('못난이할인 noncheck saleb value -> ',$('$saleb').val());
 	 	}
 
@@ -480,7 +506,7 @@ function priceAjax(){
 	}
 });//function end
 
-//판매기간/ 할인기간 날짜 설정
+//판매기간/ 할인기간 날짜 설정	$().remove();
 
 $(function(){
 	//오늘 날짜 구하기
@@ -492,34 +518,43 @@ $(function(){
      //datepicker 옵션 설정
 	 var dateFormat ="yy/mm/dd",
 	 from = $('.start_date').datepicker({
-		 showOn:"both",
+		 
+		 showMonthAfterYear:true, //년도 먼저 나오고, 뒤에 월 표시
 		 defalutDate:"+1w",
 		 changeMonth:true,
 		 numberOfMonths:2,
 		 changeMonth: true,//콤보박스에서 년 선택 가능
 	     changeYear: true, //콤보박스에서 월 선택 가능
-	     buttonText: "날짜선택",
+	     yearSuffix: "년", //달력의 년도 부분 뒤에 붙는 텍스트
+	     monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'], //달력의 월 부분 텍스트
+	     monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'], //달력의 월 부분 Tooltip 텍스트
+	     dayNamesMin: ['일','월','화','수','목','금','토'], //달력의 요일 부분 텍스트
 	     dateFormat: 'yy/mm/dd',
 	     language:'kr',
 	     minDate:0, //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전, 0: 오늘)
 	     showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
-	     
+	    
 	 });
 	 from = $('.start_date').on('change', function(){
 		// 시작일(.start_date) datepicker가 닫힐때 최소 날짜(minDate)를 선택한 시작일로 지정
 		 to.datepicker('option','minDate',getDate(this));		
 	 }),
 	 to=$('.finish_date').datepicker({
-		 showOn:"both",
+		
+		 showMonthAfterYear:true, //년도 먼저 나오고, 뒤에 월 표시
 		 dafaultDate:'+1w',
 		 changeMonth:true,
 		 numberOfMonths:2,
 		 changeMonth: true,
 	     changeYear: true,
-	     buttonText: "날짜선택",
 	     dateFormat: 'yy/mm/dd',
+	     yearSuffix: "년", //달력의 년도 부분 뒤에 붙는 텍스트
+	     monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'], //달력의 월 부분 텍스트
+	     monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'], //달력의 월 부분 Tooltip 텍스트
+	     dayNamesMin: ['일','월','화','수','목','금','토'], //달력의 요일 부분 텍스트
 	     language:'kr',
-	     maxDate: "+5Y" //최대 선택일자(+1D:하루후, +1M:한달후, +1Y:일년후)    
+	     maxDate: "+5Y" //최대 선택일자(+1D:하루후, +1M:한달후, +1Y:일년후) 
+	    	
 	 })
 	 to=$('.finish_date').on('change',function(){
 		 from.datepicker('option','maxDate',getDate(this));
@@ -527,7 +562,7 @@ $(function(){
 	//시작일의 초기값을 설정
 	$('.start_date').datepicker('setDate', 'today');
 	//판매일의 초기값을 설정
-	$('.finish_date').datepicker('setDate', '+5Y');	 //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, +1M:한달후, +1Y:일년후)
+	$('.finish_date').datepicker('setDate', '+2Y');	 //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, +1M:한달후, +1Y:일년후)
 	
 	function getDate( element ) {
 	      var date;
@@ -537,14 +572,11 @@ $(function(){
 	        date = null;
 	      }
 	      return date;
-	    }
-});
-$(function(){
-	
+	    };
+	    
 
-
-//submit 등록하기 전 유효성검사
-$('submit').click(function(){
+//--------------------------------------------------- submit 유효성검사 --------------------------------------------------------------------
+	$('#product_regi_form').on('submit', function(){
 	
 	//유효성검사 
 	//전체
@@ -553,33 +585,34 @@ $('submit').click(function(){
 	//-------카테고리 선택-------
 	//카테고리가 선택되지 않은 경우
 	if($('#categoryManagement>li').val()==null){
-		return alert('판매 상품 카테고리를 선택해주세요');
+		alert('판매 상품 카테고리를 선택해주세요');
+		return false;
 	}
 	//-------상품명------------
-	//상품명이 공백일 경우
-	if($('#product_register_name').text()=='' || $('#product_register_name').val()==null || $('#product_register_name').val() == '' ){
-       return alert('상품명을 입력해주세요.'); 
+	//상품명이 공백일 경우 $('#product_register_name').text()==' ' || 
+	if($('#product_register_name').val()==null || $('#product_register_name').val() == '' ){
+        alert('상품명을 입력해주세요.'); 
        return false;
   }
 	//상품명이 100자가 넘는 경우
-	if($('#product_register_name').text().length>100){
-      return alert('상품명은 100자 이내로 작성해주세요.'); 
+	if($('#product_register_name').text().length > 100){
+       alert('상품명은 100자 이내로 작성해주세요.'); 
       return false;
- }
- //--------판매가격-------
- //판매가격이 입력되지 않은 경우
-	if($("#productprice").val()==null || $("#productprice").val()=='' || $("#productprice").val()<0  || $("#productprice").text()==''){ 
-		alert("판매 금액을 입력해주세요."); 
-		return false;
-	} 
- if($("input[name=saleselect]:checked").val() == ''){
-	   alert("할인 적용 여부를 선택해주세요."); 
-		return false;
- }
+	 }
+	 //--------판매가격-------
+	 //판매가격이 입력되지 않은 경우
+	if($("#productprice").val()==null || $("#productprice").val()=='' || $("#productprice").val()<0 ){ 
+		alert("판매 가격을 입력해주세요."); 
+			return false;
+		} 
+	 if($("input[name=saleselect]:checked").val() == ''){
+		  alert("할인 적용 여부를 선택해주세요."); 
+			return false;
+	 }
 	//할인설정 
 	if($("input[name=saleselect]:checked").val() == 1){
 	   //할인금액이 입력되지 않은 경우
-		if($("#saleprice").val()==null || $("#saleprice").val()=='' || $("#saleprice").val()<0  || $("#saleprice").text()==''){ 
+		if($("#saleprice").val()==null || $("#saleprice").val()=='' || $("#saleprice").val()<0 ){ 
 			alert("할인 금액을 입력해주세요."); 
 			return false;
 		} 
@@ -587,28 +620,28 @@ $('submit').click(function(){
 	
 	//날짜를 입력하지 않은 경우
 	   if($('.start_date').val()==null || $('start_date').val()==''){
-		   return alert('판매 날짜를 입력해주세요');
+		   alert('판매 날짜를 입력해주세요');
 		   return false;
 	   }
 	//--------재고수량---------
 	//재고수량을 입력하지 않은 경우
-	if($('#totalstock').text('') || $('#totalstock').val()==null || $("#totalstock").val()<0 || $("#totalstock").text()==''){
-		return alert('재고 수량을 입력해주세요.');
+	if($('#totalstock').val()==null || $("#totalstock").val()<0 ){
+		alert('재고 수량을 입력해주세요.');
 		return false;
 	}
 	//-------옵션------------
 	if($("input[name=optionselect]:checked").val() == ''||$("input[name=optionselect]:checked").val() == null){
-		return alert('옵션 적용 여부를 선택해주세요.');
+		alert('옵션 적용 여부를 선택해주세요.');
 		return false;
 	}
 	//옵션 선택 후 값을 입력하지 않은 경우
 	if($("input[name=optionselect]:checked").val() == '1'){
 		if($('#select_option').val()=='0'){
-			return alert('추가할 옵션 갯수을 선택해주세요.');
+			alert('추가할 옵션 갯수을 선택해주세요.');
 			return false;
 		}
 		if($('#optionname').val()=='' && $('#optionstock').val()=='' && $('#optionprice').val()==''){
-			return alert('옵션 목록을 정확히 입력해주세요.');
+			alert('옵션 목록을 정확히 입력해주세요.');
 			return false;
 		}
 		
@@ -621,10 +654,10 @@ $('submit').click(function(){
 	}
 	//------상세설명---------
 	//상세설명이 빈칸인 경우
-	if($("#productcontent").val()==null || $("#username").val()==''){ 
-		alert("상품 상세 설명을 입력해주세요"); 
-		return false;
-	}
+	//if($("#productcontent").val()==null || $("#productcontent").val()==''){ 
+	//	alert("상품 상세 설명을 입력해주세요"); 
+	//	return false;
+	//}
 	//-------배송-----------
 	//택배 또는 픽업 버튼 중 어느것도 선택하지 않은 경우
 	if($("#deliverysel").val()==null || $("#deliverysel").val()==''){ 
@@ -632,8 +665,8 @@ $('submit').click(function(){
 		return false;
 	}
 	//택비 설정
-	//배송비를 입력하지 않은 경우
-	if($("#deliveryprice").val()==null || $("#deliveryprice").val()=='' || $("#deliveryprice").val()<0 || $("#deliveryprice").text()==''){ 
+	/*배송비를 입력하지 않은 경우
+	if($("#deliveryprice").val()==null || $("#deliveryprice").val()=='' || $("#deliveryprice").val()<0 ){ 
 		alert("배송비를 입력해주세요"); 
 		return false;
 	}
@@ -642,6 +675,7 @@ $('submit').click(function(){
 		alert("배송방법을 선택해주세요"); 
 		return false;
 	}
+	*/
 	//-------상품내용-------------
 	//판매단위를 입력하지 않은 경우
 	if($("#selloption").val()==null || $("#selloption").val()==''){ 
@@ -654,7 +688,7 @@ $('submit').click(function(){
 		return false;
 	}
 	
-	//원산지 선택하지 않은 경우
+	/*원산지 선택하지 않은 경우
 	if($("#origin").val()==null || $("#origin").val()==''){ 
 		alert("원산지를 선택해주세요"); 
 		return false;
@@ -664,6 +698,7 @@ $('submit').click(function(){
 		alert("보관/포장타입을 선택해주세요"); 
 		return false;
 	}
+	*/
 	//상품정보, 주의사항, 보관방법, 유통기한이 빈칸일 경우
 	if($("#productinfomation").val()==null || $("#productinfomation").val()==''){ 
 		alert("상품정보를 입력해주세요"); 
@@ -677,9 +712,12 @@ $('submit').click(function(){
 		alert("유통기한 입력해주세요"); 
 		return false;
 	}
-		return true;
-	}); //submit 유효성검사 end
+	return true;
+	}); 
+//---------------------------------------------------submit 유효성검사 end-------------------------------------------
+
 });
+
 </script>
 <body>
 	<div class="main">
@@ -697,12 +735,16 @@ $('submit').click(function(){
 		<!-- 배송 -->
 		<!-- 상품내용 -->
 		<!-- 취소 저장하기 버튼 -->
+		<div>
+		<span class="categoryStar">*</span><span class="notice">표시된 항목은 모두 입력해주세요.</span>
+		</div>
 	<form method="post" name="product_regi_form" id="product_regi_form" action="product_regi_ok" enctype="multipart/form-data">
 	<!------------------------------------------ 카테고리------------------------------------------------->
+	
 	 <div class="category_title">카테고리</div>
 		<div class="category_wrap">
             <div id="categoryList">
-               <strong>&nbsp;&nbsp;카테고리 선택</strong>
+               <strong>&nbsp;&nbsp;<span class="categoryStar">*</span>카테고리 선택</strong>
                  <div id="categoryListMiddle">
                   <!--카테고리에서 대분류 카테고리 선택-------------------------->
                   <ul id="category"><!-- 카테고리 리스트에서 모든 카테고리 리스트를 가져오지만 우선 대분류만 보이게 한다.-->
@@ -734,12 +776,11 @@ $('submit').click(function(){
 		<div class="category_title">상품명 등록</div>
 	<div class="category_wrap">
 			<ul>
-				<li><label for="">상품명</label>&nbsp;
+				<li><span class="categoryStar">*</span><label for="">상품명</label>&nbsp;
 					<input type="text" name="productname" id="product_register_name" maxlength="100" size="100"/>&nbsp;<span id="count"></span>/<span id="max_count">100</span><br/>
 					<span class="notice" >
-					판매 상품과 직접 관련이 없는 다른 상품명, 스팸성 키워드 입력 시 관리자에 의해 판매 금지될 수 있습니다.<br/>
-					유명 상품 유사문구를 무단으로 도용하여 기재하는 경우 별도 고지 없이 제재될 수 있습니다. <br/>
-					상품명을 검색최적화 가이드에 잘 맞게 입력하면 검색 노출에 도움이 될 수 있습니다. <br/>
+					판매 상품과 직접 관련이 없는 다른 상품명, 스팸성 키워드 입력 시 관리자에 의해 판매 금지될 수 있습니다.
+					유명 상품 유사문구를 무단으로 도용하여 기재하는 경우 별도 고지 없이 제재될 수 있습니다. 
 					</span>
 				</li>
 			</ul>
@@ -749,35 +790,36 @@ $('submit').click(function(){
 	<div class="category_title">판매가격</div>
 	<div class="category_wrap">		
 		<ul>
-			<li><label>판매가격 </label>&nbsp;<input type="number" name="productprice" id="productprice" min=100 placeholder="숫자만 입력하세요."/>&nbsp;<span>원</span></li>
-			<br/>
-			
+			<li><span class="categoryStar">*</span><label>판매가격 </label>&nbsp;<input type="number" name="productprice" id="productprice" min=100 placeholder="숫자만 입력하세요."/>&nbsp;<span>원</span></li>
+	
 			<li> 
-				<label>판매기간</label>&nbsp;&nbsp;<span class="notice">판매 기간을 설정해주세요. 미선택시 판매시작일은 등록일, 판매종료일은 5년이내로 지정됩니다.</span>
+				<span class="categoryStar">*</span><label>판매기간</label>&nbsp;&nbsp;<span class="notice">판매 기간을 설정해주세요. 미선택시 판매시작일은 등록일, 판매종료일은 2년이내로 지정됩니다.</span>
 			</li>
 			<li id="sell_start_finish"><label for="start_date" >판매시작일</label><input type="text" name="sellstart" id="sellstart" class="start_date" max="2099-12-31"/> ~ <label for="finish_date">판매종료일</label><input type="text" name="sellfinish" id="sellfinish" class="finish_date" max="2099-12-31"/></li>
 		
 			<li>
-				<label>할인여부 </label>&nbsp;
+				<span class="categoryStar">*</span><label>할인여부 </label>&nbsp;
 				<input type="radio" value="1" name="saleselect" id="sale_check"><label for="설정">설정</label>
 				<input type="radio" value="0" name="saleselect" id="sale_uncheck"><label for="설정안함">설정안함</label>
 			</li>
-			<ul id="sale_ul" style="display:none; background-color:#fcfcfc;">
-				<li>
-					<label>할인금액 </label>&nbsp;
-					<input type="number" name="saleprice" id="saleprice" placeholder="할인적용금액" min=0 />&nbsp;<span>원</span>&nbsp;<span>할인</span>
-				</li>
-				<li>
-					<span class="notice">원하시는 할인 시작일과 할인 종료일을 설정하고 싶으시면, 특정기간만 할인을 선택해주세요. 미선택시 할인시작일은 등록일, 할인종료일은 5년이내로 지정됩니다.</span>
-				</li>
-				<li id="sale_period">
-					<label for="start_date">할인시작일</label><input type="text" name="salestart" id="salestart"  class="start_date " max="2099-12-31"/> ~  <label for="finish_date">할인종료일</label><input type="text" name="salefinish" id="saledate" class="finish_date" max="2099-12-31"/>
-					<span class="notice">특정기간이 지난후에는 판매가로 적용됩니다.</span>
-				</li>
-				
-				<li><input type="checkbox" name="saleb" id="saleb" value="1"/><label for="saleb">못난이 할인 상품으로 등록</label></li> 
-				<!-- default = 0 , 컨트롤러에서 선택 안하면 0으로 값이 지정되도록 설정할 것-->
-			</ul>
+			<li>
+				<ul id="sale_ul" style="display:none; background-color:#fcfcfc;">
+					<li>
+						<span class="categoryStar">*</span><label>할인금액 </label>&nbsp;
+						<input type="number" name="saleprice" id="saleprice" placeholder="할인적용금액" min=0 />&nbsp;<span>원</span>&nbsp;<span>할인</span>
+					</li>
+					<li>
+						<span class="notice">원하시는 할인 시작일과 할인 종료일을 설정하고 싶으시면, 특정기간만 할인을 선택해주세요. 미선택시 할인시작일은 등록일, 할인종료일은 2년이내로 지정됩니다.</span>
+					</li>
+					<li id="sale_period">
+						<label for="start_date">할인시작일</label><input type="text" name="salestart" id="salestart"  class="start_date " max="2099-12-31"/> ~  <label for="finish_date">할인종료일</label><input type="text" name="salefinish" id="saledate" class="finish_date" max="2099-12-31"/>
+						<span class="notice">특정기간이 지난후에는 판매가로 적용됩니다.</span>
+					</li>
+					
+					<li><input type="checkbox" name="saleb" id="saleb" value="1"/><label for="saleb">못난이 할인 상품으로 등록</label></li> 
+					<!-- default = 0 , 컨트롤러에서 선택 안하면 0으로 값이 지정되도록 설정할 것-->
+				</ul>
+			</li>
 			<li>
 				<label for="">최종 판매가격</label>&nbsp; <span id="total_price" ></span>&nbsp;원 &nbsp;(-<span id="discount_price"></span>원 할인) 
 				<span class="notice">수수료는 전체매출에서 2%차감된금액입니다.&nbsp;<a href="">안내 바로가기</a></span>
@@ -789,7 +831,7 @@ $('submit').click(function(){
 	 <div class="category_title">재고수량</div>
 	<div class="category_wrap">
 			<ul>
-				<li><label>재고수량</label>&nbsp; <input type="number" name="totalstock" id="totalstock" min=0 value=0/>&nbsp;<span>개</span></li>
+				<li><span class="categoryStar">*</span><label>재고수량</label>&nbsp; <input type="number" name="totalstock" id="totalstock" min="0" value="0" value="1000"/>&nbsp;<span>개</span></li>
 				<li><span class="notice">판매할 총 재고량을 입력하세요.</span></li>
 			</ul>			
 	</div>	
@@ -797,37 +839,41 @@ $('submit').click(function(){
 	<div class="category_title">옵션</div>
 	<div class="category_wrap">
 			<ul class="regi_option_wrap">
-				<li>
+				<li><span class="categoryStar">*</span>
 					<input type="radio" value="1" name="optionselect" id="add_option"><label for="옵션추가">옵션추가</label>
 					<input type="radio" value="0" name="optionselect" id="none_option"><label for="추가안함">추가안함</label>
 				</li>
-				<ul id="add_option_ul" style="display:none; background-color:#fcfcfc;">
-				<li><label>옵션 갯수</label>&nbsp;
-					<select id="select_option" name="option_count"> 
-						<option selected value='0'>옵션추가</option>
-						<option value='1'>1</option>
-						<option value='2'>2</option>
-						<option value='3'>3</option>
-						<option value='4'>4</option>
-						<option value='5'>5</option>
-					</select>
+				<li>
+					<ul id="add_option_ul" style="display:none; background-color:#fcfcfc;">
+					<li><span class="categoryStar">*</span><label>옵션 갯수</label>&nbsp;
+					
+						<select id="select_option" name="option_count"> 
+							<option selected value='0'>옵션추가</option>
+							<option value='1'>1</option>
+							<option value='2'>2</option>
+							<option value='3'>3</option>
+							<option value='4'>4</option>
+							<option value='5'>5</option>
+						</select>
+					<span class="notice">추가하려는 옵션의 갯수를 선택해주세요.</span>
+					</li>
+					<li><span class="categoryStar">*</span><label>옵션 목록</label><span class="notice">옵션명, 재고수량, 가격을 모두 기입해주세요.</span>
+						<table class="regi_option_table">
+							<thead>
+								<tr>
+									<th>옵션명</th>
+									<th>재고수량</th>
+									<th>가격</th>
+									
+								</tr>
+							</thead>
+							<tbody id="option_tbody">
+								<!--  선택한 value 값 만큼 표 추가  -->
+							</tbody>
+						</table>
+					</li>
+					</ul>
 				</li>
-				<li><label>옵션 목록</label>
-					<table class="regi_option_table">
-						<thead>
-							<tr>
-								<th>옵션명</th>
-								<th>재고수량</th>
-								<th>가격</th>
-								
-							</tr>
-						</thead>
-						<tbody id="option_tbody">
-							<!--  선택한 value 값 만큼 표 추가  -->
-						</tbody>
-					</table>
-				</li>
-				</ul>
 				<li><span class="notice">상세페이지에 예시) 호박고구마 1kg (+3000원)으로 표기됩니다.</span></li>
 			</ul>
 			</div>
@@ -835,7 +881,7 @@ $('submit').click(function(){
 	<div class="category_title">상품 이미지</div>
 	<div class="category_wrap">
 			<ul>
-				<li><label>대표이미지</label><br/>
+				<li><span class="categoryStar">*</span><label>대표이미지</label><br/>
 					<span class="notice">홈페이지에 연출되는 대표 이미지를 업로드해주세요.</span><br/>
 					<img name="thumbimg1" id="thumbimg1" src="#" alt="image upload" style="width:400px;"/><br/>
 					<input type="file" id="thumbimg" name ="file" accept="img/*" />
@@ -843,7 +889,7 @@ $('submit').click(function(){
 		   </ul>	
 		</div>
  	<!-----------------------------------------------상세설명------------------------------------->
-	<div class="category_title">상세설명</div>
+	<div class="category_title"><span class="categoryStar">*</span>상세설명</div>
 	<div class="category_wrap">
 		<textarea id="summernote"  name="productcontent"></textarea> <!-- name="editordata" -->
 		</div>
@@ -851,47 +897,51 @@ $('submit').click(function(){
 	<div class="category_title">배송</div>
 	<div class="category_wrap">
 			<ul>
-				<li><label>배송방법</label>&nbsp; 
+				<li><span class="notice"> 등록 상품의 배송방법을 선택해주세요.</span></li>
+				<li><label><span class="categoryStar">*</span>배송방법</label>&nbsp; 
 					<select name="deliveryoption" id="deliverysel" >
-						<option value="1" id="pickup">픽업</option>
+						<option value="1" id="pickup" seleted>픽업</option>
 						<option value="2" id="delivery">택배</option>
 						<option value="3" id="delandpick">택배/픽업</option>
 					</select>
 				</li>
-				<ul id="delivery_option" style="display:none; background-color:#fcfcfc;">
-					<li><label>배송비</label>&nbsp;
+				<li id="delivery_option" style="display:none; background-color:#fcfcfc;">
+					<ul>
+					<li><span class="categoryStar">*</span><label>배송비</label>&nbsp;
 						<input type="number" name="deliveryprice" id="deliveryprice" min=0  />&nbsp;<span>원</span>	 <!-- 픽업 선택시 배송비 0원 고정 -->
 					</li>
-					<li id="pay"><label>결제방식</label>&nbsp;
-						<input type="radio" name="paymentoption" id="delivery_price_option" value="1"/><label for="착불">착불</label>&nbsp;
+					<li id="pay"><span class="categoryStar">*</span><label>결제방식</label>&nbsp;
+						<input type="radio" name="paymentoption" id="delivery_price_option" value="1" seleted/><label for="착불">착불</label>&nbsp;
 						<input type="radio" name="paymentoption" id="delivery_price_option" value="2"/><label for="선결제">선결제</label>&nbsp;
 						<input type="radio" name="paymentoption" id="delivery_price_option"  value="3"/><label for="착불또는선결제">착불 또는 선결제</label>
 					</li>
-				</ul>
+					</ul>
+				</li>
+				
 			</ul>
 		</div>
 	<!----------------------------------------------상품내용--------------------------------------->
 	<div class="category_title">상품 내용</div>
 	<div class="category_wrap">
 			<ul>
-				<li><label for="">판매단위</label>&nbsp;
-					<input type="number" name="selloptionnum" id="selloption"  min="0" onchange="javascript:removeCommaReturn(this);"/>
-					<select id="select_unit" name="selloptionunit" onchange="javascript:removeCommaReturn(this);">
+				<li><span class="categoryStar">*</span><label for="">판매단위</label>&nbsp;
+					<input type="text" name="selloptionnum" id="selloption"  min="0"/>
+					<select id="select_unit" name="selloptionunit" >
 						<option value=" ">해당없음</option>
 						<option value="팩">팩</option>
 						<option value="박스">박스</option>
 					</select>
 					<input type="hidden" name="selloption" id="selloption_hidden"/>
 				</li>
-				<li><label for="">중량/용량</label>&nbsp;
-					<input type="number" name="sellweightnum" id="sellweight" min="0" onchange="javascript:removeCommaReturn(this);"/>
-					<select id="select_weight" name="sellweightunit" onchange="javascript:removeCommaReturn(this);">
+				<li><span class="categoryStar">*</span><label for="">중량/용량</label>&nbsp;
+					<input type="text" name="sellweightnum" id="sellweight" min="0"/>
+					<select id="select_weight" name="sellweightunit" >
 						<option value="g">g</option>
 						<option value="kg">kg</option>
 					</select>
 					<input type="hidden" name="sellweight" id="sellweight_hidden"/>
 				</li>
-				<li><label for="">원산지</label>&nbsp;
+				<li><span class="categoryStar">*</span><label for="">원산지</label>&nbsp;
 					<input type="radio" value="국내산" name="origin" id="domestic"><label for="국내산">국내산</label>
 					<input type="radio" value="수입산" name="origin" id="import"><label for="수입산">수입산</label>
 					<div id="import_wrap" style="display:none; background-color:#fcfcfc;">
@@ -904,31 +954,36 @@ $('submit').click(function(){
 					</div>
 				</li>
 			
-				<li><label for="보관/포장타입">보관/ 포장타입</label>&nbsp;
+				<li><span class="categoryStar">*</span><label for="보관/포장타입">보관/ 포장타입</label>&nbsp;
 					<select id="select_packing" name="wrapping">
 						<option value='0'>실온</option>
 						<option value='1'>냉장</option>
 						<option value='2'>냉동</option>
 					</select>
 				</li>
-				<li><label for="">상품정보</label><br/>
+				<li><span class="categoryStar">*</span><label for="">상품정보</label><br/>
 					<textarea placeholder="간략한 상품정보를 입력해주세요." id ="productinfomation" name="productinfomation"></textarea>
 				</li>
-				<li><label for="">주의사항</label><br/>
-					<textarea placeholder="주의사항을 입력해주세요." id="prevention" name="prevention"></textarea>
+				<li><span class="categoryStar">*</span><label for="">주의사항</label><br/>
+					<textarea placeholder="주의사항을 입력해주세요. 예)제품 수령 후 반드시 냉장보관해주세요. " id="prevention" name="prevention">제품 수령 후 반드시 냉장보관해주세요.</textarea>
 				</li>
-				<li><label for="">유통기한</label><br/>
-					<textarea placeholder="유통기한을 입력해주세요. 예) 수령후 일주일 또는, 신선식품이므로 가능한 빨리 드시기를 바랍니다." id="deadline" name="deadline"></textarea>
+				<li><span class="categoryStar">*</span><label for="">유통기한</label><br/>
+					<textarea placeholder="유통기한을 입력해주세요. 예) 수령후 일주일 또는, 신선식품이므로 가능한 빨리 드시기를 바랍니다." id="deadline" name="deadline" value="">수령후 일주일 또는, 신선식품이므로 가능한 빨리 드시기를 바랍니다.</textarea>
 				</li>
 			</ul>
 		</div>
+		<div>
+		<span class="categoryStar">*</span><span class="notice">표시된 항목은 모두 입력해주세요.</span>
+		<a href="#" style="float:right;"><span>TOP</span></a>
+		</div>
 		<hr/>
+		
 	<!--------------------------------------------취소/ 저장하기 버튼---------------------------------------->
 		<div class="end_button_wrap">
 			<input type="button" id="cancel_btn" class="btn" value="취소" onclick="location.href='seller/product_list'">
 			<input type="submit" name="submit" value="등록하기" id="save_btn" class="btn"/>
 		</div>
-	</form>
+	</form> <!-- form end -->
 	</div><!-- article end -->
 	</div><!-- main end -->
 </body>

@@ -22,9 +22,9 @@ public class SaleController {
 	SaleService saleService;
 	
 	
-	//목록 전체보기
+	//목록 전체보기 
 	@RequestMapping("/sale_management")
-	public ModelAndView saleList(SearchAndPageVO sapvo, HttpSession session, HttpServletRequest req){
+	public ModelAndView saleList(SearchAndPageVO sapvo, OrderSaleVO osvo, HttpSession session, HttpServletRequest req){
 		 ModelAndView mav = new ModelAndView();
 		sapvo.setUserid((String)session.getAttribute("logId"));
 		System.out.println("id->"+sapvo.getUserid());
@@ -35,7 +35,10 @@ public class SaleController {
 		}
 		//검색어
 		sapvo.setSearchWord(sapvo.getSearchWord());
-						
+		sapvo.setSearchnum(sapvo.getSearchnum());
+		sapvo.setSearchid(sapvo.getSearchid());
+		
+		System.out.println("search num : "+sapvo.getSearchnum() +", searchid : "+sapvo.getSearchid());				
 		//총 레코드 수 구하기 
 		sapvo.setTotalRecord(saleService.totalRecord(sapvo));
 		//리스트에 담기
@@ -43,7 +46,8 @@ public class SaleController {
 		 for(int i = 0; i<list.size(); i++){
 		   OrderSaleVO vo = list.get(i);
 		 }
-		 mav.addObject("list",list);
+		mav.addObject("oneList", saleService.oneSaleSelect(osvo));//모달에 들어가는 레코드 한개 불러오기	
+		mav.addObject("list",list);
 		//검색어와 페이징를 담기
 		mav.addObject("searchWord",sapvo.getSearchWord());
 		mav.addObject("sapvo",sapvo);
@@ -54,26 +58,23 @@ public class SaleController {
 	}
 
 
-
-
-//모달에 들어가는 레코드 한개 불러오기
-// 판매 상태 변경
-@RequestMapping("/claimStatusUpdate")
-public String claimStatusUpdate(@RequestParam(value="orderNumArr") List<String> orderNumList, @RequestParam(value="claimStatus") String claimstatus,OrderSaleVO osvo) {
-	//ModelAndView mav = new ModelAndView();
-	//ajax의 valArr에서 받은 orderNumList 를 하나씩 꺼내서 ArrayList에 담음
-	ArrayList<String> orderNumArr = new ArrayList<String>(); 
-	System.out.println("claimStatus->"+ claimstatus);
-	System.out.println("orderNumList->"+ orderNumList);
-	for(int i = 0 ; i < orderNumList.size(); i++) {
-		orderNumArr.add(orderNumList.get(i));
-		System.out.println("orderNumArr->"+ orderNumArr);
+	// 상태 변경
+	@RequestMapping("/claimStatusUpdate")
+	public String claimStatusUpdate(@RequestParam(value="orderNumArr") List<String> orderNumList, @RequestParam(value="claimStatus") String claimstatus,OrderSaleVO osvo) {
+		//ModelAndView mav = new ModelAndView();
+		//ajax의 valArr에서 받은 orderNumList 를 하나씩 꺼내서 ArrayList에 담음
+		ArrayList<String> orderNumArr = new ArrayList<String>(); 
+		System.out.println("claimStatus->"+ claimstatus);
+		System.out.println("orderNumList->"+ orderNumList);
+		for(int i = 0 ; i < orderNumList.size(); i++) {
+			orderNumArr.add(orderNumList.get(i));
+			System.out.println("orderNumArr->"+ orderNumArr);
+		}
+		for(int i = 0; i < orderNumArr.size(); i++) {
+			String ordernum = orderNumArr.get(i);
+			System.out.println("update ordernum ->" + ordernum);
+			saleService.claimStatusUpdate(ordernum, claimstatus);
+		}
+		return "redirect:sale_management";
 	}
-	for(int i = 0; i < orderNumArr.size(); i++) {
-		String ordernum = orderNumArr.get(i);
-		System.out.println("update ordernum ->" + ordernum);
-		saleService.claimStatusUpdate(ordernum, claimstatus);
-	}
-	return "redirect:sale_management";
-}
 }

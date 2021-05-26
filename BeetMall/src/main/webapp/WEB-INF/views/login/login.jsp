@@ -13,16 +13,12 @@
 		height:50px;
 		width:358px;
 		float:left;
-		margin-left:390px;
-		margin-right:390px;
-		margin-top:1px;
 		
 	}
-	#idInput, #pwdInput, #logStatus{
+	#idInput, #pwdInput{
 		height:50px;
 		width:358px;
-		margin-left:390px;
-		margin-right:390px;
+		margin:4px auto;
 		padding:13px 40px 13px 18px;
 		background-color: #fafafa;
 		border:1px solid #dddddd;
@@ -37,7 +33,6 @@
 		line-height: 35px;
 	}
 	#logStatus>div{
-		float:right;
 		width:358px;
 	}
 	#loginBtn{
@@ -70,26 +65,41 @@
 	.loginBtn{
 		border:none;
 	}
+	#searchId, #searchPwd, #register, #logStatus>div{
+		font-size:13px;
+	}
+	#loginCenter{
+		margin:0 auto;
+		width:400px;
+	}
 </style>
 <div class="section" id="loginDiv">
 	<h2>로그인</h2>
-	<form method="post" action="loginOk">
-		<input type="text" name="userid" placeholder="아이디를 입력해주세요" id="idInput" value="master"/><br/>
-		<input type="password" name="userpwd" placeholder="비밀번호를 입력해주세요" id="pwdInput" value="master"/><br/>
-		<input type="submit" value="로그인" id="loginBtn"/>
-		<div id="logStatus">
-			<!-- <input type="checkbox" name="logalways"/>로그인상태유지 -->
-			<div><a href="searchId" id="searchId">아이디찾기</a> | <a href="searchPwd" id="searchPwd">비밀번호찾기</a> | <a href="searchPwd" id="searchPwd">회원가입</a></div>
-		</div>
-<!-- 		<input type="button" value="회원가입" id="registerBtn"/> -->
-		<c:if test="${logStop != null}">
-			<script>alert(" 정지된 아이디 입니다...\n 정지 해제 예정일 : ${stopdate}")</script>
-		</c:if>
-		<c:if test="${Type != null}">
-			<script>alert(" 탈퇴한 아이디 입니다...")</script>
-		</c:if>
-		<!-- <input type="button" value="Google 로그인" id="googleLogin" class="loginBtn"/>
-		<input type="button" value="네이버 로그인" id="naverLogin" class="loginBtn"/>
-		<input type="button" value="Kakao 로그인" id="kakaoLogin" class="loginBtn"/> -->
-	</form>
+	<div id="loginCenter">
+		<form method="post" action="loginOk">
+			<input type="text" name="userid" placeholder="아이디를 입력해주세요" id="idInput" value="seller"/><br/>
+			<input type="password" name="userpwd" placeholder="비밀번호를 입력해주세요" id="pwdInput" value="seller"/><br/>
+			<input type="submit" value="로그인" id="loginBtn"/>
+			<div id="logStatus">
+				<!-- <input type="checkbox" name="logalways"/>로그인상태유지 -->
+				<div><a href="searchId" id="searchId">아이디찾기</a> | <a href="searchPwd" id="searchPwd">비밀번호찾기</a> | <a href="searchPwd" id="register">회원가입</a></div>
+			</div>
+	<!-- 		<input type="button" value="회원가입" id="registerBtn"/> -->
+			<c:if test="${logStop != null}">
+				<script>alert(" 정지된 아이디 입니다\n 정지 해제 예정일 : ${stopdate}")</script>
+			</c:if>
+			<c:if test="${Type != null}">
+				<script>alert(" 탈퇴한 아이디 입니다")</script>
+			</c:if>
+			<c:if test="${logTry != null}">
+				<script>alert(" 아이디 또는 비밀번호가 잘못 입력되었습니다")</script>
+			</c:if>
+			<c:if test="${logId != null}">
+				<script>alert("이미 로그인 되어 있습니다");location.href="/sshj"</script>
+			</c:if>
+			<!-- <input type="button" value="Google 로그인" id="googleLogin" class="loginBtn"/>
+			<input type="button" value="네이버 로그인" id="naverLogin" class="loginBtn"/>
+			<input type="button" value="Kakao 로그인" id="kakaoLogin" class="loginBtn"/> -->
+		</form>
+	</div>
 </div>

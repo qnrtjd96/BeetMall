@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="sellerNoticeAllRecord" parameterType="com.beetmall.sshj.seller.vo.SearchAndPageVO" resultType="com.beetmall.sshj.seller.vo.SellerNoticeVO">
 	select*from
 	(select*from
-	(select infonum, infotitle, infocontent, to_char(infowritedate, 'YY/MM/DD') as infowritedate, infohit, infotype, infoattach 
+	(select infonum, infotitle, infocontent, to_char(infowritedate, 'YY/MM/DD') as infowritedate, infohit, infotype, filename
 	from notice 
 	<choose>
 		<when test = 'searchWord!=null'>
@@ -24,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         order by infonum desc
 	</select>
 	<select id="sellerNoticeSelect" resultType="com.beetmall.sshj.seller.vo.SellerNoticeVO">
-		select infonum, infotitle, infocontent,to_char(infowritedate,'YY-MM-DD') as infowritedate, infohit, infotype, infoattach 
+		select infonum, infotitle, infocontent,to_char(infowritedate,'YY-MM-DD') as infowritedate, infohit, infotype, filename 
 		from notice 
 		where infotype=2 and infonum=#{param1}
 	</select>

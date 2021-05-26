@@ -23,6 +23,7 @@
 	select, input, .search_num, search_id, .save_excel, .search_btn{
 		color:gray;
 		height:30px;
+		background:white;
 		border:0.8px solid lightgray;
 		width:100px;
 		border-radius: 4px;

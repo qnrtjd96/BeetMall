@@ -64,8 +64,10 @@ public class SellerMainController {
 			mav.addObject("review", service.getReview(vo));
 			mav.addObject("qboard", service.getQboard(vo));
 			
-			int num[] = {2,1,0};
+		
 			
+			int num[] = {2,1,0};
+			// data를 꺼내온다
 			for (int j=0; j<num.length; j++) {
 				List<SellerMainVO> result = service.getPayData(num[j], userid);
 				int resultSum = 0;
@@ -73,11 +75,14 @@ public class SellerMainController {
 					for(int i =0; i < result.size(); i++) {
 						resultSum += result.get(i).getPayData();
 					}
-					
 					String resultStr = formatter.format(resultSum);
-					String resultDate = result.get(j).getMonthData()+"월";
+					String resultDate = result.get(0).getMonthData()+"월";
+					
 					mav.addObject("resultStr"+j,resultSum);
 					mav.addObject("resultDate"+j,resultDate);
+				} else {
+					mav.addObject("resultStr"+j,0);
+					mav.addObject("resultDate"+j,0);
 				}
 			}
 		

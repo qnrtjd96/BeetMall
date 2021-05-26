@@ -10,41 +10,44 @@
 	        productprice, saleselect, optionselect, saleb, sellstart, sellfinish, thumbimg,
 	        saleprice, to_number(productprice - saleprice) sellprice, floor((saleprice/productprice)*100) as salepercent, 
 	        salestart, salefinish,
-	        NVL( sum(orderquantity) , 0) as soldstock, to_number(totalstock- NVL( sum(orderquantity) , 0)) as nowstock ,totalstock
+	        NVL( sum(orderquantity) , 0) as soldstock, to_number(totalstock- NVL( sum(orderquantity) , 0)) as nowstock ,totalstock,
+            optionprice, optionstock, optionname, deliveryprice, paymentoption, selloption, sellweight, origin, wrapping, productinfomation, prevention, deadline 
 			from 
 			    (select c.catenum,c.catename,m.mcatenum, m.mcatename,  
-			        o.orderquantity, p.productnum, p.productname, p.userid, p.totalstock, p.productprice, p.saleselect, p.optionselect, p.saleb, p.thumbimg,
+			        nvl(o.orderquantity,0) orderquantity , p.productnum, p.productname, p.userid, p.totalstock, p.thumbimg, p.productprice, p.saleselect, p.optionselect, p.saleb,
 			        to_char(p.sellstart,'YY/MM/DD') as sellstart, to_char(p.sellfinish,'YY/MM/DD') as sellfinish ,
-			        d.saleprice, to_char(d.salestart, 'YY/MM/DD') as salestart, to_char(d.salefinish, 'YY/MM/DD') as salefinish
+			         nvl(d.saleprice,0) saleprice, to_char(d.salestart, 'YY/MM/DD') as salestart, to_char(d.salefinish, 'YY/MM/DD') as salefinish,
+                     nvl(o.optionprice,0) optionprice, nvl(o.optionstock,0) optionstock, o.optionname,
+                     p.deliveryoption, nvl(p.deliveryprice,0 ) deliveryprice, p.paymentoption, p.selloption, p.sellweight, p.origin, p.wrapping, p.productinfomation, p.prevention, p.deadline
 			        from product p
 			        left join orderdetail o on p.productnum = o.productnum 
 			        join mcategory m on p.mcatenum = m.mcatenum
 			        join category c on c.catenum = m.catenum
 			        left join discount d on p.productnum = d.productnum
-			        
-			         <choose>
-				    	<when test = 'searchWord!=null or searchWord != " "'>
-				    	 where p.userid='${userid}' 
-				    	 		and ( p.productnum like '%${searchWord}%'
-			                    or c.catenum like '%${searchWord}%' 
-			                    or c.catename like '%${searchWord}%' 
-			                    or m.catenum like '%${searchWord}%'
-			                    or m.mcatename like '%${searchWord}%' 
-			                    or p.productname like '%${searchWord}%' 
-			                    or p.productprice like '%${searchWord}%'
-			                    or d.saleprice like '%${searchWord}%'
-			                    or sellstart like '%${searchWord}%'
-			                    or sellstart like '%${searchWord}%' )
-				    	</when>
-				    	<when test = 'searchWord==null or searchWord == " " '>
-				    	where p.userid='${userid}' 
-				    	</when>
-				    </choose>
-			        
+                    left join optiontbl o on p.productnum = o.productnum
+                	<choose>
+						<when test = 'searchWord!=null or searchWord != " "'>
+							where p.userid='${userid}'
+							and ( p.productnum like '%${searchWord}%'
+							or c.catenum like '%${searchWord}%'
+							or c.catename like '%${searchWord}%'
+							or m.catenum like '%${searchWord}%'
+							or m.mcatename like '%${searchWord}%'
+							or p.productname like '%${searchWord}%'
+							or p.productprice like '%${searchWord}%'
+							or d.saleprice like '%${searchWord}%'
+							or sellstart like '%${searchWord}%'
+							or sellstart like '%${searchWord}%' )
+						</when>
+						<when test = 'searchWord==null or searchWord == " " '>
+							where p.userid='${userid}'
+						</when>
+					</choose>
 			       group by  c.catenum,c.catename, m.mcatenum, m.mcatename, p.totalstock,p.productnum, p.productname, p.userid, o.ordernum, o.orderquantity, p.productprice, p.saleselect, p.optionselect, p.saleb,
-			                    p.sellstart, p.sellfinish, p.thumbimg, d.saleprice, d.salestart, d.salefinish) 
+			                    p.sellstart, p.sellfinish, p.thumbimg, d.saleprice, d.salestart, d.salefinish, o.optionprice, o.optionstock, o.optionname, 
+                                p.deliveryoption, p.deliveryprice, p.paymentoption, p.selloption, p.sellweight, p.origin, p.wrapping, p.productinfomation, p.prevention, p.deadline) 
 				group by catenum, catename, mcatenum, mcatename, productnum, userid,  productname, totalstock,  productprice, saleselect, optionselect, saleb, sellstart, sellfinish,
-				        thumbimg, saleprice, salestart, salefinish
+				        thumbimg, saleprice, salestart, salefinish,optionprice, optionstock, optionname, deliveryprice, paymentoption, selloption, sellweight, origin, wrapping, productinfomation, prevention, deadline 
 				order by productnum desc)
 		<![CDATA[where rownum<=]]>(${pageNum}*${onePageRecord}) order by productnum)
         <![CDATA[where rownum<=]]>
@@ -86,9 +89,37 @@
 		insert into optiontbl
 		(optionnum, productnum, optionname, optionstock, optionnowstock, optionprice)
 		values
-		(optionsq.nextval, productsq.currval, '${optioname}' ,${optionstock}, ${optionstock}, ${optionprice} )
+		(optionsq.nextval, productsq.currval, '${optionname}' ,${optionstock}, ${optionstock}, ${optionprice} )
 	</insert>
 	<delete id="productDelete">
 		delete from product where productnum=#{param1}
 	</delete>
+	<select id="onePageRecordSelect"  resultType="com.beetmall.sshj.seller.vo.ProductVO" >
+	select catenum, catename, mcatenum, mcatename, productnum, productname, 
+	        productprice, saleselect, optionselect, saleb, sellstart, sellfinish, thumbimg,
+	        saleprice, to_number(productprice - saleprice) sellprice,
+	        salestart, salefinish, totalstock, 
+            optionprice, optionstock, optionname, deliveryprice, paymentoption, selloption, sellweight, origin, wrapping, productinfomation, prevention, deadline 
+			from 
+			    (select c.catenum,c.catename,m.mcatenum, m.mcatename,  
+			        nvl(o.orderquantity,0) as orderquantity , p.productnum, p.productname, p.userid, p.totalstock, p.thumbimg, p.productprice, p.saleselect, p.optionselect, p.saleb,
+			        to_char(p.sellstart,'YYYY/MM/DD') as sellstart, to_char(p.sellfinish,'YYYY/MM/DD') as sellfinish ,
+			         nvl(d.saleprice,0) as saleprice, to_char(d.salestart, 'YYYY/MM/DD') as salestart, to_char(d.salefinish, 'YYYY/MM/DD') as salefinish,
+                     nvl(o.optionprice,0) as optionprice, nvl(o.optionstock,0) as optionstock, o.optionname,
+                     p.deliveryoption, nvl(p.deliveryprice,0 ) as  deliveryprice, p.paymentoption, p.selloption, p.sellweight, p.origin, p.wrapping, p.productinfomation, p.prevention, p.deadline
+			        from product p
+			        left join orderdetail o on p.productnum = o.productnum 
+			        join mcategory m on p.mcatenum = m.mcatenum
+			        join category c on c.catenum = m.catenum
+			        left join discount d on p.productnum = d.productnum
+                    left join optiontbl o on p.productnum = o.productnum
+                	where p.productnum=${productnum}
+			       group by  c.catenum,c.catename, m.mcatenum, m.mcatename, p.totalstock,p.productnum, p.productname, p.userid, o.ordernum, o.orderquantity, p.productprice, p.saleselect, p.optionselect, p.saleb,
+			                    p.sellstart, p.sellfinish, p.thumbimg, d.saleprice, d.salestart, d.salefinish, o.optionprice, o.optionstock, o.optionname, 
+                                p.deliveryoption, p.deliveryprice, p.paymentoption, p.selloption, p.sellweight, p.origin, p.wrapping, p.productinfomation, p.prevention, p.deadline)
+                                 
+				group by catenum, catename, mcatenum, mcatename, productnum, userid,  productname, totalstock,  productprice, saleselect, optionselect, saleb, sellstart, sellfinish,
+				        thumbimg, saleprice, salestart, salefinish,optionprice, optionstock, optionname, deliveryprice, paymentoption, selloption, sellweight, origin, wrapping, productinfomation, prevention, deadline 
+				order by productnum desc
+	</select>
 </mapper>

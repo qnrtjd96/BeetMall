@@ -27,6 +27,7 @@ import com.beetmall.sshj.seller.service.ProductService;
 import com.beetmall.sshj.seller.vo.OrderSaleVO;
 import com.beetmall.sshj.seller.vo.ProductVO;
 import com.beetmall.sshj.seller.vo.SearchAndPageVO;
+import com.beetmall.sshj.seller.vo.SellerSettleVO;
 
 
 @Controller
@@ -41,6 +42,8 @@ public class ProductController {
 //====================================== 판매상품 목록 ===================================================
 	  @RequestMapping("/product_list") 
 	  public ModelAndView product_list(ProductVO vo, SearchAndPageVO sapvo, HttpSession session, HttpServletRequest req) { 
+		  
+		ModelAndView mav = new ModelAndView();
 		//로그인한 아이디가져오기
 		sapvo.setUserid((String)session.getAttribute("logId"));
 			
@@ -49,20 +52,39 @@ public class ProductController {
 		if(reqPageNum != null) {
 			sapvo.setPageNum(Integer.parseInt(reqPageNum)); 
 		}
+		
+		
 		//검색어
 		sapvo.setSearchWord(sapvo.getSearchWord());
 		//총 레코드 수 구하기 
 		sapvo.setTotalRecord(productService.totalRecord(sapvo));
-		  
-		ModelAndView mav = new ModelAndView();
 		
-		//상품목록 담기
-		mav.addObject("productList", productService.productAllSelect(sapvo));
-					
 		//검색어와 페이징를 담기
 		mav.addObject("searchWord",sapvo.getSearchWord());
 		mav.addObject("sapvo",sapvo);
-			
+
+		 //selloption = selloptionnum + selloptionunit / sellweight = sellweightnum +sellweightunit 
+		//List<ProductVO> pvo = productService.productAllSelect(sapvo);
+		//for(int i = 0 ; i < pvo.size(); i++) {
+		//	String selloption = pvo.get(i).getSelloption();
+		//	 System.out.println("product controller selloption------> " + selloption);
+			  //옵션 숫자 
+		//	 String[] numArr = selloption.split("[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]"); 
+		//	 String selloptionnum = numArr[0];
+			  //옵션 단위 
+		//	 String[] unitArr = selloption.split("[0-9]"); 
+		//	 String selloptionunit =  unitArr[1];
+		//	 vo.setSelloptionnum(selloptionnum); vo.setSelloptionunit(selloptionunit);
+		//	 System.out.println("selloptionnum--->" + selloptionnum);
+		//	 System.out.println("selloptionunit--->" + selloptionunit);  
+		//	 String sellweight = pvo.get(i).getSellweight();
+		//	 System.out.println("product controller sellweight------>" + sellweight);
+		//}
+
+		 
+		//상품목록 담기
+		mav.addObject("productList", productService.productAllSelect(sapvo));
+					
 		mav.setViewName("seller/product_list"); 
 		return mav; 
 	  }
@@ -85,6 +107,8 @@ public class ProductController {
 	@Transactional(rollbackFor= {Exception.class, RuntimeException.class})
 	@RequestMapping(value="/product_regi_ok", method=RequestMethod.POST)
 	public ModelAndView product_regi(ProductVO vo, HttpSession session, HttpServletRequest req) {
+
+		
 		System.out.println("product_regi_ok까지는 넘어옴");
 		//첨부파일 받아오기 
 				MultipartHttpServletRequest multireq = (MultipartHttpServletRequest)req;
@@ -148,7 +172,7 @@ public class ProductController {
 			vo.setThumbimg(orgName);
 			System.out.println("vo에 set해주는 이미지 이름 orgName -> "+orgName);
 			
-//------------------------확인----------------------------------------------------
+//--------------------------확인----------------------------------------------------
 			
 			System.out.println("확인");
 			System.out.println("mcatenum -> "+ vo.getMcatenum());
@@ -167,45 +191,52 @@ public class ProductController {
 			System.out.println("productcontent ->"+vo.getProductcontent());
 			System.out.println("origin ->" +vo.getOrigin());
 			System.out.println("selloption->"+vo.getSelloption());
+			System.out.println("selloptionnum-->"+vo.getSelloptionnum());
+			System.out.println("selloptionunit-->"+vo.getSelloptionunit());
 			System.out.println("sellWeight->"+vo.getSellweight());
+			System.out.println("sellWeightnum->"+vo.getSellweightnum());
+			System.out.println("sellweightunit-->"+vo.getSelloptionunit());
 			System.out.println("wrapping -> "+ vo.getWrapping());
 			
 			
 //---------------------------insert & 조건-----------------------------------------		
 			// 못난이 할인을 선택하지 않았을 때,
-			if(vo.getSaleb()!='1' || vo.getSaleb()=='0') {
-				vo.setSaleb('0');
+			if(vo.getSaleb()!= 1 || vo.getSaleb()== 0) {
+				vo.setSaleb(0);
 			}
 			//배송옵션이 0이면 나머지 다 0으로 세팅
-			 if(vo.getDeliveryoption()=="1" || vo.getDeliveryoption().equals(1)) { 
-				vo.setPaymentoption("0");
+			 if(vo.getDeliveryoption()==1 ) { 
+				vo.setPaymentoption(0);
 				vo.setDeliveryprice(0); 
-			}			
-			
+			}		
+			 //orgin
+			if(vo.getOrigin()==null) {
+				vo.setOrigin("국내산");
+			}
 			//상품등록 
 			int result = productService.productInsert(vo);
-			System.out.println("상품 insert -> "+ result);
+			System.out.println("상품 insert 결과 -> "+ result);
 		
 			//할인선택이 있을 때, insert
 			if(vo.getSaleselect() == '1' || vo.getSaleselect() == 1) {
 				result2 = productService.discountInsert(vo);
-				System.out.println("vo.getSaleSelect -> " + vo.getSaleselect());
-				System.out.println("할인 insert +" + result2);
+				System.out.println("할인 insert vo.getSaleSelect 결과-> " + vo.getSaleselect());
+				System.out.println("할인 insert 확인 --> " + result2);
 			}
 			// 옵션선택이 있을 때, insert
 			if(vo.getOptionselect() == '1' || vo.getOptionselect() == 1) {
 				result3 = productService.optionInsert(vo);
 				System.out.println("vo.getOpionSelect ->" + vo.getOptionselect());
-				System.out.println("옵션 insert + "+ result3);
+				System.out.println("옵션 insert 확인 --> "+ result3);
 			}
 			
 			 
 //---------------------------insert 결과 확인--------------------------------------
 			// 상품등록 확인
-			if(result>0) {
-				System.out.println("[상품 등록 완료]");
+			if(result>0) {		
 				transactionManager.commit(status); 
-				mav.setViewName("redirect:product_list");			
+				mav.setViewName("redirect:product_list");		
+				System.out.println("[상품 등록 완료]");
 			}else {
 				System.out.println("[상품 등록 실패 - 다시 확인해주세요.]");
 				mav.setViewName("redirect:product_regi");
@@ -257,22 +288,34 @@ public class ProductController {
 		return "redirect:product_list";
 	}
 	
-//====================================== 수정 ===================================================
+	//====================================== 수정 ===================================================
 	//수정하기 뷰로 이동
-	@RequestMapping("oneRecordSelect")
-	public ModelAndView onePageRecordSelect(int productnum) {
+	@RequestMapping("/product_edit")
+	public ModelAndView onePageRecordSelect(@RequestParam(value="productnum") int productnum) {
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("productnum", productService.onePageRecordSelect(productnum));
+		ProductVO vo = new ProductVO();
+		
+		// 카테고리 리스트
+		mav.addObject("cateList",farmService.allCategoryList());	
+		
+		mav.addObject("vo", productService.onePageRecordSelect(productnum));
 		mav.setViewName("seller/product_edit");
 		return mav;
 	}
-	// 수정하기 
-	@RequestMapping("/product_edit")
-	public ModelAndView product_edit(OrderSaleVO osvo) {
+
+
+	public ModelAndView product_edit(ProductVO vo, int productnum) {
+		ModelAndView mav = new ModelAndView();
+		//상품목록 담기dmd
+		mav.addObject("vo", productService.productOneSelect(vo));		
+		return mav;
+	}
+	//수정하기 처리
+	@RequestMapping("/product_edit_ok")
+	public ModelAndView product_edit_ok(OrderSaleVO osvo) {
 		ModelAndView mav = new ModelAndView();
 		
 		return mav;
 	}
-	
 
 }

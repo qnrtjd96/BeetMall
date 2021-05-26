@@ -30,6 +30,7 @@
 		padding:30px 0px;
 		margin:0px;
 		width:1080px;
+		
 	}
 	#pointUl>li{
 		width:180px;
@@ -37,6 +38,7 @@
 		line-height:60px;
 		margin:5px 0;
 		text-align:center;
+		border-bottom:1px solid #eee;
 	}
 	#pointUl>li:nth-child(1), #pointUl>li:nth-child(2), #pointUl>li:nth-child(3){
 		border-bottom:1px solid rgb(252,118,45);
@@ -259,7 +261,8 @@
 	/* 페이징처리끝 */
 	#chatIframe{
 		position:absolute;
-		top:600px;
+		top:400px;
+		left:800px;
 		width:502px;
 		height:662px;
 		padding:1px;
@@ -318,7 +321,7 @@
 		}
 		
 	})
-	$(document).on('click','input[value=조회]', function(){
+	$(document).on('click','input[value=대화하기]', function(){
 		var roomcode =$(this).prev().val();
 		var theyid = $(this).parent().prev().children().eq(0).text();
 		var myid = "${logId}";
@@ -326,6 +329,12 @@
 		$("#theyId").text(theyid);
 		$("#chatIframe").css("display","block");/* 아이피 수정해야 할 곳 ^^^^^^ */
 		$("#chatContainer").attr("src","http://192.168.0.52:12021/chatForm?sender="+myid+"&receiver="+theyid+"&roomcode="+roomcode);
+		// 신고창 미리 세팅해두는 부분
+		$("#reporteduser").val(theyid);
+		$("#reportboardnum").val(roomcode);
+	});
+	$(document).on('click','#chatHeaderSpan', function(){
+		$("#reportDiv").css("display","block");
 	});
 	$(document).on('click','input[value=삭제]', function(){
 		if(confirm("해당대화를 삭제하시겠습니까? \n대화가 삭제되더라도 상대방에게는 남아있을 수 있습니다.\n삭제한 대화는 취소할 수 없습니다.")){
@@ -352,6 +361,7 @@
 	$(document).on('click',"#closedivBtn",function(){
 		$("#chatIframe").css("display","none");
 	})
+	
 </script>
 <div class="section">
 	<div id="mypointList">
@@ -379,7 +389,7 @@
 						<span class="chatttitle wordcut">${vo.receiver}</span><span class="chatdetail wordcut">${vo.otocontent}</span>
 					</c:if>
 					</li>
-					<li><input type="hidden" value="${vo.roomcode}"/><input type="button" class="btn" value="조회"/><input type="button" class="btn" value="삭제"/><input type="button" class="btn" value="신고하기"/></li>
+					<li><input type="hidden" value="${vo.roomcode}"/><input type="button" class="btn" value="대화하기"/><input type="button" class="btn" value="삭제"/><input type="button" class="btn" value="신고하기"/></li>
 				</c:forEach>
 			</ul>
 		</div>
@@ -412,4 +422,69 @@
 				<div id="chatInfoTitle"><span id="chatHeaderSpan"><span id="reportChat">신고하기</span><span id="theyId"></span>님과의 채팅입니다.</span><span id="closedivBtn">&times;</span></div>
 				<iframe src="" id="chatContainer" frameborder="0" ></iframe>
 	</div>
+	<!-- 신고하기 부분 -->
+	<div style="height:350px;width:500px;border:1px solid red;position:absolute;top:400px;left:800px;background-color:white;display:none;" id="reportDiv">
+		<form style="height:400px;width:500px;float:left;" method="post" action="customreport" id="reportForm">
+			<h2 style="margin-left:10px;">신고하기</h2>
+			<span style="float:left;font-size:20px;margin-left:10px;">신고사유</span>
+				<input type="hidden" name="userid" value="${logId}"/>												<!-- 신고자 아이디 -->
+				<input type="hidden" name="reporteduser" id="reporteduser"/>											<!-- 신고할 사람 아이디 -->
+				<input type="hidden" name="reportboard" value="1:1채팅"/>							<!-- 신고한 게시판 -->
+				<input type="hidden" name="reportboardnum" id="reportboardnum"/>										<!-- 신고한 글 번호 -->
+				<select name="reportreason"  style="float:right;margin-right:10px;font-size:20px;">	<!-- 신고사유 -->
+					<option value="비방/욕설">비방/욕설</option>
+					<option value="허위">허위</option>
+					<option value="성희롱">성희롱</option>
+					<option value="기타">기타</option>
+				</select>
+			<textarea name="reportcontent" id="reportcontent" style="height:200px;width:480px;margin-left:10px; margin-right:10px;font-size:15px;" maxlength="149"></textarea><!-- 신고내용 -->
+			<div style="font-size:20px;float:right;margin-right:10px;">
+				<input type="button" value="신고하기" style="background-color:#ff3a3a;color:white;border:1px solid #aaa;"id="reportsubmit"/>
+				<input type="button" value="닫기"style="background-color:#ddd;color:white;border:1px solid #aaa;"id="reportClose"/>
+			</div>
+		</form>
+	</div>
+	<!-- 신고하기 밑에 스크립트까지임 -->
+	<script>
+		$(function(){
+			$("#reportsubmit").click(function(){	// 신고처리하는 ajax부분
+				var formdata = $("#reportForm").serialize();
+				console.log("formdata === "+formdata);
+				$.ajax({
+					url: "customreport",
+					type : "POST",
+					cache:false,
+					data:formdata,
+					success:function(result){
+						console.log(result);
+						if(result == 1){
+							alert('고객님의 신고가 접수되었습니다');
+							location.href="myChatList";
+						}else if(result != 1){
+							alert('신고에 실패했습니다. error_code : 176');
+							$("#reportcontent").val('');
+							$("#reportDiv").css("display","none");
+						}
+					}, error:function(error){
+						console.log(error);
+					}
+				})
+				$("#reportcontent").val('');
+				$("#reportDiv").css("display","none");
+			})
+			$("#reportClose").click(function(){			// 신고 닫기 부분
+				$("#reportcontent").val('');
+				$("#reportDiv").css("display","none");
+			})
+			$(document).on('click','input[value=신고하기]', function(){	// 신고창 여는 부분(여기서 신고할 유저아이디, 신고할 글번호 세팅해줌)
+				var reporteduser = $(this).parent().prev().children().eq(0).html();
+				$("#reporteduser").val(reporteduser);
+				var reportboardnum = $(this).prev().prev().prev().val();
+				$("#reportboardnum").val(reportboardnum);
+				$("#reportDiv").css("display","block");
+				
+			});
+		})
+	</script>
+	<!-- 신고하기 끝 -->
 </div>

@@ -39,8 +39,10 @@
 		margin-bottom: 50px;
 	}
 	#payyy{
+	    font-size: 20px;
 	    width: 350px;
 	    height: 50px;
+	    color: white;
 	    background-color: rgb(252,118,45);
 	    border: 1px solid lightgray;
 	}
@@ -86,6 +88,11 @@
 	#pointCheck{
 		margin-left: 15px;
 	}
+	.productname{
+		font-size: 18px;
+		font-weight: 600;
+		color: brown;
+	}
 </style>
 <script>
 	$(function(){
@@ -119,15 +126,22 @@
 			point = $("#usePoint").val();
 			asdf = tototaal-point;
 			if(asdf>=100){
+				hellopoint = havingPoint-point;
 				if(hellopoint>0){
 					if(point%100==0){
 						tototaal = tototaal-point;
 						hellopoint = havingPoint-point;
 						$("#totototo").empty();
 						$("#totototo").html("<h3>"+tototaal+"원</h3>");
-						$("#pointCheck").prop('readonly', true);
+						$("#pointCheck").attr("disabled", true);
+					}else{
+						alert("100원 단위로 사용가능합니다.");
 					}
+				}else{
+					alert("가진 포인트보다 많이 사용할수 없습니다.");
 				}
+			}else{
+				alert("100원은 결제하셔야합니다.");
 			}
 		});
 		
@@ -157,6 +171,7 @@
 				        	send +="&deliverymemo="+$("#deliverymemo").val()+"&usedpoint="+point;
 				        	send +="&mypoint=${vo.point}&realpayment="+tototaal+"&optionnum="+$("#optionnum").val();
 				        	send +="&productnum="+$("#productnum").val()+"&orderquantity="+$("#orderquantity").val()+"&orderprice22="+orderprice22+"&hellopoint="+hellopoint;
+				        	send +="&jangba="+$("#jangba").val();
 				        location.href="/sshj/productPayBuy"+send
 				    } else {
 				        var msg = '결제에 실패하였습니다.';
@@ -209,6 +224,7 @@
 <input type="hidden" id="deliveryoption" value="${vo5}"/> <!-- 옵션 -->
 <input type="hidden" id="optionnum" value="${vo6}"/> <!-- 옵션번호 -->
 <input type="hidden" id="orderquantity" value="${vo7}"/> <!-- 총개수 -->
+<input type="hidden" id="jangba" value="${vo8}"/> <!-- 장바구니에서넘어왔는지체크 -->
 
 <div class="section">
 	<div id="mainname"><h1>주문/결제</h1></div>

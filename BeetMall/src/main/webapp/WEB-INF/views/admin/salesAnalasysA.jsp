@@ -1,3 +1,4 @@
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -13,6 +14,9 @@
 <c:set var='yearCheck'>
 	<fmt:formatDate value="${today }" pattern="yyyy" />
 </c:set>
+<c:set var="monthThreePtn">
+	<fmt:formatDate value="<%=new Date(new Date().getTime() - 60*60*24*1000*90L ) %>" pattern="yyyy-MM" />
+</c:set>
 
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/xstyle_sellerSales.css">
 <!-- 차트 라이브러리 chart.js -->
@@ -21,7 +25,6 @@
 
 <!-- chart.js pdf 변환 -->
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.debug.js'></script>
-
 <style>
 #contentBox ul {
 	margin-left: 0px !important;
@@ -67,6 +70,8 @@ button {
 
 #calendarApply {
 	width: 120px;
+	background-color: #aaa;
+	color: white;
 }
 
 #categorySearch_container {
@@ -194,6 +199,7 @@ table td{
 }
 </style>
 <script>
+
 //선택된 날짜의 데이터를 저장해 높는 변수
 let startCalendarDataValue = "";
 let endCalendarDataValue = "";
@@ -335,184 +341,189 @@ $(function(){
 		}
 		
 		//========================제한사항 걸러내기 끝 ===============================//
-		
-		$.ajax({
-			type: "POST",
-			url:'salesAdminChartData',
-			data: $('#dataFrm').serialize(),
-			success: function(result){
-				// 가지고 있는 key값 거꾸로 되어있으니 sort한다
-				let keys = Object.keys(result).sort();
-				let valueLength ; // 값이 얼마나 들어있는지 확인하기 위한 변수
-
-				
-				// 차트 라벨과 데이터셋에 들어있는 데이터 삭제
-				myChart.data.labels.splice(0,12);
-				myChart.data.datasets.splice(0,12);
-				myChart.update();
-				
-				// 매출분석 엑셀데이터 넣기
-				let excelData = "<thead>";
-						excelData += "<tr>";
-						excelData += "<th>분류</th>";
-				// 차트 x축 label 데이터 ex) 2021-1월, 2021-2월 .....
-				for( let i = 0; i < keys.length; i++){
-					if(keys[0] == 'ac'){
-						let labelData = Object.keys(result.ac).sort();
-						for(let j = 0 ; j < labelData.length; j++){
-							myChart.data.labels.push(labelData[j]);
-							excelData += "<th>" + labelData[j] + "</th>";
-						}
-						valueLength = Object.keys(result.ac).length;
-						break;
-					} else if(keys[0] == 'co'){
-						let labelData = Object.keys(result.co).sort();
-						for(let j = 0 ; j < labelData.length; j++){
-							myChart.data.labels.push(labelData[j]);
-							excelData += "<th>" + labelData[j] + "</th>";
-						}
-						valueLength = Object.keys(result.co).length;
-						break;
-					} else if(keys[0] == 'se'){
-						let labelData = Object.keys(result.se).sort();
-						for(let j = 0 ; j < labelData.length; j++){
-							myChart.data.labels.push(labelData[j]);
-							excelData += "<th>" + labelData[j] + "</th>";
-						}
-						valueLength = Object.keys(result.se).length;
-						break;
-					} else if(keys[0] == 'cu'){
-						let labelData = Object.keys(result.cu).sort();
-						for(let j = 0 ; j < labelData.length; j++){
-							myChart.data.labels.push(labelData[j]);
-							excelData += "<th>" + labelData[j] + "</th>";
-						}
-						valueLength = Object.keys(result.cu).length;
-						break;
-					}
-				}
-					excelData += "<th>매출평균</th>";
-					excelData += "<th>매출합계</th>";
-					excelData += "</thead></tr>";
-					excelData += "<tbody>";
-
-				
-				// 배열 데이터 저장할 변수 선연
-				let valueData = []; // 밑의 InsertData 배열 값들을 저장하는 값
-				let acInsertData = [];
-				let coInsertData = [];
-				let seInsertData = [];
-				let cuInsertData = [];
-				
-				let labelName = [];
-				let yAxisData = [];
-				let colorData = [];
-				let typeData = [];
-
-				// 불러온 데이터 각각의 배열로 순서대로 저장
-				keys.forEach(function(checkKey){
-					if(checkKey == 'ac'){
-						for(let i = 0; i < valueLength; i++){
-							acInsertData.push(result.ac[ Object.keys(result.ac).sort()[i] ]);
-						}
-						valueData.push(acInsertData);
-						labelName.push('누적수익');
-						yAxisData.push('A');
-						colorData.push('#5eaa5f');
-						typeData.push('line');
-					} else if(checkKey == 'co'){
-						for(let i = 0; i < valueLength; i++){
-							coInsertData.push(result.co[ Object.keys(result.co).sort()[i] ]);
-						}
-						valueData.push(coInsertData);
-						labelName.push('회사수익');
-						yAxisData.push('A');
-						colorData.push('rgba(255, 70, 46,1)');
-						typeData.push('line');
-					} else if(checkKey == 'se'){
-						for(let i = 0; i < valueLength; i++){
-							seInsertData.push(result.se[ Object.keys(result.se).sort()[i] ]);
-						}
-						valueData.push(seInsertData);
-						labelName.push('판매자수익');
-						yAxisData.push('A');
-						colorData.push('#728ef0');
-						typeData.push('line');
-					} else if(checkKey == 'cu'){
-						for(let i = 0; i < valueLength; i++){
-							cuInsertData.push(result.cu[ Object.keys(result.cu).sort()[i] ]);
-						}
-						valueData.push(cuInsertData);
-						labelName.push('구매추이');
-						yAxisData.push('B');
-						colorData.push('rgba(255,178,46,0.6)');
-						typeData.push('bar');
-					}
-					
-				})
-				
-				
-				//인덱스 변수
-				let index = 0;
-				keys.forEach(function(checkKey){
-						
-					excelData += "<tr>";
-					excelData += "<th>" + labelName[index] + "</th>";
-					// 매출평균용 저장 변수
-					let payAvg = 0;
-					// 매출합계 저장 변수
-					let paySum = 0;
-					// 데이터를 쉽표를 찍어서 넣는다.
-					for(let i = 0; i < valueLength; i++){
-						payAvg += valueData[index][i];
-						paySum += valueData[index][i];
-						if(labelName[index] != '구매추이'){
-							excelData += "<td>" + reqularExpression(valueData[index][i]) + "원</td>";
-						} else {
-							excelData += "<td>" + reqularExpression(valueData[index][i]) + "개</td>";
-						}
-						
-					}
-					// 위ㅔ서 매출평균, 매출합계에 저장된 데이터를 이용해 데이터를 쉼표를 찍어서 넣는다.
-					if(labelName[index] != '구매추이'){
-						excelData += "<td style='font-weight:bold'>" + reqularExpression(Math.round(payAvg/valueLength)) + "원</td>";
-						excelData += "<td style='font-weight:bold; color:red;'>" + reqularExpression(paySum) + "원</td>";
-					} else {
-						excelData += "<td style='font-weight:bold'>" + reqularExpression(Math.round(payAvg/valueLength)) + "개</td>";
-						excelData += "<td style='font-weight:bold; color:red;'>" + reqularExpression(paySum) + "개</td>";
-					}
-					excelData += "</tr>";
-					
-					let data = {
-						type : typeData[index],
-						label: labelName[index],
-						yAxisID: yAxisData[index],
-						data: valueData[index],
-						borderColor : colorData[index],
-						backgroundColor : colorData[index],
-						fill: false
-					}
-					myChart.data.datasets.push(data);
-						
-					index++;	
-				})// foreach문 종료...
-				
-				// 차트에 데이터 삽입
-				excelData += "</tbody>";
-				$('table').html(excelData);
-				
-				// chart update (push한 데이터로 수정한다);
-				myChart.update();
-				
-				
-			}, error: function(){
-				console.log('ajax 실패');
-			}
-		})
-		
-	})
+		getData();
+	});
 	
 })
+
+function getData(){
+	console.log('test');
+	$.ajax({
+		type: "POST",
+		url:'salesAdminChartData',
+		data: $('#dataFrm').serialize(),
+		success: function(result){
+			// 가지고 있는 key값 거꾸로 되어있으니 sort한다
+			let keys = Object.keys(result).sort();
+			let valueLength ; // 값이 얼마나 들어있는지 확인하기 위한 변수
+
+			
+			// 차트 라벨과 데이터셋에 들어있는 데이터 삭제
+			myChart.data.labels.splice(0,12);
+			myChart.data.datasets.splice(0,12);
+			myChart.update();
+			
+			// 매출분석 엑셀데이터 넣기
+			let excelData = "<thead>";
+					excelData += "<tr>";
+					excelData += "<th>분류</th>";
+			// 차트 x축 label 데이터 ex) 2021-1월, 2021-2월 .....
+			for( let i = 0; i < keys.length; i++){
+				if(keys[0] == 'ac'){
+					let labelData = Object.keys(result.ac).sort();
+					for(let j = 0 ; j < labelData.length; j++){
+						myChart.data.labels.push(labelData[j]);
+						excelData += "<th>" + labelData[j] + "</th>";
+					}
+					valueLength = Object.keys(result.ac).length;
+					break;
+				} else if(keys[0] == 'co'){
+					let labelData = Object.keys(result.co).sort();
+					for(let j = 0 ; j < labelData.length; j++){
+						myChart.data.labels.push(labelData[j]);
+						excelData += "<th>" + labelData[j] + "</th>";
+					}
+					valueLength = Object.keys(result.co).length;
+					break;
+				} else if(keys[0] == 'se'){
+					let labelData = Object.keys(result.se).sort();
+					for(let j = 0 ; j < labelData.length; j++){
+						myChart.data.labels.push(labelData[j]);
+						excelData += "<th>" + labelData[j] + "</th>";
+					}
+					valueLength = Object.keys(result.se).length;
+					break;
+				} else if(keys[0] == 'cu'){
+					let labelData = Object.keys(result.cu).sort();
+					for(let j = 0 ; j < labelData.length; j++){
+						myChart.data.labels.push(labelData[j]);
+						excelData += "<th>" + labelData[j] + "</th>";
+					}
+					valueLength = Object.keys(result.cu).length;
+					break;
+				}
+			}
+				excelData += "<th>매출평균</th>";
+				excelData += "<th>매출합계</th>";
+				excelData += "</thead></tr>";
+				excelData += "<tbody>";
+
+			
+			// 배열 데이터 저장할 변수 선연
+			let valueData = []; // 밑의 InsertData 배열 값들을 저장하는 값
+			let acInsertData = [];
+			let coInsertData = [];
+			let seInsertData = [];
+			let cuInsertData = [];
+			
+			let labelName = [];
+			let yAxisData = [];
+			let colorData = [];
+			let typeData = [];
+
+			// 불러온 데이터 각각의 배열로 순서대로 저장
+			keys.forEach(function(checkKey){
+				if(checkKey == 'ac'){
+					for(let i = 0; i < valueLength; i++){
+						acInsertData.push(result.ac[ Object.keys(result.ac).sort()[i] ]);
+					}
+					valueData.push(acInsertData);
+					labelName.push('누적수익');
+					yAxisData.push('A');
+					colorData.push('#5eaa5f');
+					typeData.push('line');
+				} else if(checkKey == 'co'){
+					for(let i = 0; i < valueLength; i++){
+						coInsertData.push(result.co[ Object.keys(result.co).sort()[i] ]);
+					}
+					valueData.push(coInsertData);
+					labelName.push('회사수익');
+					yAxisData.push('A');
+					colorData.push('rgba(255, 70, 46,1)');
+					typeData.push('line');
+				} else if(checkKey == 'se'){
+					for(let i = 0; i < valueLength; i++){
+						seInsertData.push(result.se[ Object.keys(result.se).sort()[i] ]);
+					}
+					valueData.push(seInsertData);
+					labelName.push('판매자수익');
+					yAxisData.push('A');
+					colorData.push('#728ef0');
+					typeData.push('line');
+				} else if(checkKey == 'cu'){
+					for(let i = 0; i < valueLength; i++){
+						cuInsertData.push(result.cu[ Object.keys(result.cu).sort()[i] ]);
+					}
+					valueData.push(cuInsertData);
+					labelName.push('구매추이');
+					yAxisData.push('B');
+					colorData.push('rgba(255,178,46,0.6)');
+					typeData.push('bar');
+				}
+				
+			})
+			
+			
+			//인덱스 변수
+			let index = 0;
+			keys.forEach(function(checkKey){
+					
+				excelData += "<tr>";
+				excelData += "<th>" + labelName[index] + "</th>";
+				// 매출평균용 저장 변수
+				let payAvg = 0;
+				// 매출합계 저장 변수
+				let paySum = 0;
+				// 데이터를 쉽표를 찍어서 넣는다.
+				for(let i = 0; i < valueLength; i++){
+					payAvg += valueData[index][i];
+					paySum += valueData[index][i];
+					if(labelName[index] != '구매추이'){
+						excelData += "<td>" + reqularExpression(valueData[index][i]) + "원</td>";
+					} else {
+						excelData += "<td>" + reqularExpression(valueData[index][i]) + "개</td>";
+					}
+					
+				}
+				// 위ㅔ서 매출평균, 매출합계에 저장된 데이터를 이용해 데이터를 쉼표를 찍어서 넣는다.
+				if(labelName[index] != '구매추이'){
+					excelData += "<td style='font-weight:bold'>" + reqularExpression(Math.round(payAvg/valueLength)) + "원</td>";
+					excelData += "<td style='font-weight:bold; color:red;'>" + reqularExpression(paySum) + "원</td>";
+				} else {
+					excelData += "<td style='font-weight:bold'>" + reqularExpression(Math.round(payAvg/valueLength)) + "개</td>";
+					excelData += "<td style='font-weight:bold; color:red;'>" + reqularExpression(paySum) + "개</td>";
+				}
+				excelData += "</tr>";
+				
+				let data = {
+					type : typeData[index],
+					label: labelName[index],
+					yAxisID: yAxisData[index],
+					data: valueData[index],
+					borderColor : colorData[index],
+					backgroundColor : colorData[index],
+					fill: false
+				}
+				myChart.data.datasets.push(data);
+					
+				index++;	
+			})// foreach문 종료...
+			
+			// 차트에 데이터 삽입
+			excelData += "</tbody>";
+			$('table').html(excelData);
+			
+			// chart update (push한 데이터로 수정한다);
+			myChart.update();
+			
+			
+		}, error: function(){
+			console.log('ajax 실패');
+		}
+	})
+	
+}
+
 
 
 $( ()=>{
@@ -734,8 +745,8 @@ $(()=>{
 											<option value="월별" selected>월별</option>
 											<option value="일별">일별</option>
 										</select> 
-										<input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_start" name="categoryCalendar_start"/> <b>&nbsp;~&nbsp;</b> 
-										<input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_end" name="categoryCalendar_end"/>
+										<input type="month" value="${monthThreePtn }" min="2018-01" max="${monthPtn }" id="categoryCalendar_start" name="categoryCalendar_start"/> <b>&nbsp;~&nbsp;</b> 
+										<input type="month" value="${monthPtn }" min="2018-01" max="${monthPtn }" id="categoryCalendar_end" name="categoryCalendar_end"/>
 										
 										<input type="checkbox" value="누적수익" name="accumulate" id="accumulate" checked="checked"><label for="accumulate">누적수익</label> 
 										<input type="checkbox" value="회사수익" name="company" id="company" checked="checked"><label for="company">회사수익</label> 
@@ -760,3 +771,7 @@ $(()=>{
 		</div>
 	</div>
 </div>
+<script>
+// onload를 통해 기본 데이터값을 불러온다
+window.onload = getData();
+</script>

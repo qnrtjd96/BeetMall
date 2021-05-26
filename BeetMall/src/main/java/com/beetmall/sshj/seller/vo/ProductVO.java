@@ -17,9 +17,9 @@ public class ProductVO {
 	private String productname; //상품명 
 	
 	private Integer productprice; //판매가격
-	private char saleselect; //할인여부
-	private char optionselect; //옵션여부
-	private char saleb; //b급 선택여부
+	private int saleselect; //할인여부
+	private int optionselect; //옵션여부
+	private int saleb; //b급 선택여부
 	private String sellstart;//판매시작일
 	private String sellfinish;//판매종료일
 	
@@ -31,9 +31,9 @@ public class ProductVO {
 	
 	private String productcontent;//내용
 	
-	private String deliveryoption;//배송방법
+	private int deliveryoption;//배송방법
 	private Integer deliveryprice;//배송비
-	private String paymentoption;//배송비 결제방식
+	private int paymentoption;//배송비 결제방식
 	
 	private String selloption;//판매단위
 	private String selloptionnum; //판매단위 숫자
@@ -44,7 +44,7 @@ public class ProductVO {
 	
 	private String origin;//원산지
 	
-	private String wrapping;//보관,포장타입
+	private int wrapping;//보관,포장타입
 	
 	private String productinfomation;//상품정보
 	private String prevention;//주의사항
@@ -140,22 +140,22 @@ public class ProductVO {
 	public void setProductprice(Integer productprice) {
 		this.productprice = productprice;
 	}
-	public char getSaleselect() {
+	public int getSaleselect() {
 		return saleselect;
 	}
-	public void setSaleselect(char setSaleselect) {
+	public void setSaleselect(int setSaleselect) {
 		this.saleselect = setSaleselect;
 	}
-	public char getSaleb() {
+	public int getSaleb() {
 		return saleb;
 	}
-	public void setSaleb(char saleb) {
+	public void setSaleb(int saleb) {
 		this.saleb = saleb;
 	}
-	public char getOptionselect() {
+	public int getOptionselect() {
 		return optionselect;
 	}
-	public void setOptionselect(char optionselect) {
+	public void setOptionselect(int optionselect) {
 		this.optionselect = optionselect;
 	}
 	
@@ -201,10 +201,10 @@ public class ProductVO {
 	public void setProductcontent(String productcontent) {
 		this.productcontent = productcontent;
 	}
-	public String getDeliveryoption() {
+	public int getDeliveryoption() {
 		return deliveryoption;
 	}
-	public void setDeliveryoption(String deliveryoption) {
+	public void setDeliveryoption(int deliveryoption) {
 		this.deliveryoption = deliveryoption;
 	}
 	public Integer getDeliveryprice() {
@@ -213,34 +213,40 @@ public class ProductVO {
 	public void setDeliveryprice(Integer deliveryprice) {
 		this.deliveryprice = deliveryprice;
 	}
-	public String getPaymentoption() {
+	public int getPaymentoption() {
 		return paymentoption;
 	}
-	public void setPaymentoption(String paymentoption) {
+	public void setPaymentoption(int paymentoption) {
 		this.paymentoption = paymentoption;
 	}
 	//상품내용
-	public String getSelloption() {
-		this.selloption = selloptionnum + selloptionunit;
-		return selloption;
-	}
-	public void setSelloption(String selloption) {
-		this.selloption = selloptionnum + selloptionunit;
-	}
-	public String getSellweight() {
-		this.sellweight = sellweightnum + sellweightunit;
-		return sellweight;
-	}
-	public void setSellweight(String sellweight) {
-		this.sellweight = sellweightnum + sellweightunit;
-	}
-	
+	// selloption 판매단위
+		public String getSelloption() {
+			this.selloption = selloptionnum + selloptionunit;
+			return selloption;
+		}
+		public void setSelloption(String selloption) {
+			this.selloption = selloption;
+		}
+		
+		// sellweight 중량/용량
+		public String getSellweight() {
+			this.sellweight = sellweightnum + sellweightunit;
+			return sellweight;
+		}
+		public void setSellweight(String sellweight) {
+			this.sellweight = sellweight;
+		}
+		//상품내용 숫자+단위
 	//상품내용 숫자+단위
 	public String getSelloptionnum() { 
+		System.out.println("selloptionnum5555-->"+selloptionnum);
 		return selloptionnum;
 	}
 	public void setSelloptionnum(String selloptionnum) {
+		System.out.println("selloptionnum-6666->"+selloptionnum);
 		this.selloptionnum = selloptionnum;
+		
 	}
 	public String getSelloptionunit() {
 		return selloptionunit;
@@ -252,27 +258,28 @@ public class ProductVO {
 		return sellweightnum;
 	}
 	public void setSellweightnum(String sellweightnum) {
+	
 		this.sellweightnum = sellweightnum;
 	}
 	public String getSellweightunit() {
 		return sellweightunit;
 	}
 	public void setSellweightunit(String sellweightunit) {
+		
 		this.sellweightunit = sellweightunit;
 	}
 	//상품내용
-	
-	
+
 	public String getOrigin() {
 		return origin;
 	}
 	public void setOrigin(String origin) {
 		this.origin = origin;
 	}
-	public String getWrapping() {
+	public int getWrapping() {
 		return wrapping;
 	}
-	public void setWrapping(String wrapping) {
+	public void setWrapping(int wrapping) {
 		this.wrapping = wrapping;
 	}
 	public String getProductinfomation() {

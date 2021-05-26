@@ -5,6 +5,11 @@ import java.util.List;
 import com.beetmall.sshj.seller.vo.SellerSettleVO;
 
 public interface SellerSettleDAO {
+	// 초기 데이터 갯수
+	public List<SellerSettleVO> initalLength(String userid);
+	// 초기 데이터
+	public List<SellerSettleVO> initalData(SellerSettleVO vo);
+	
 	// 주문 건별 매출일자 데이터 가져오기
 	public List<SellerSettleVO> getOrderDateData(SellerSettleVO vo);
 	// 주문건별 정산일자 데이터 가져오기

@@ -75,6 +75,7 @@
 	} 
 	#container li:nth-of-type(4):not(#sortBox li:nth-of-type(4)){
 		width:20%;	
+		text-align: left;
 	}
 	#title>ul,.contentList{
 		position:relative; left:-20px;
@@ -122,6 +123,9 @@
 		width:500px;
 		margin:400px 0 0 450px;
 		z-index:1;
+		position: absolute;
+        top: -140px;
+	    background-color: aliceblue;
 	}
 	#modalHeader, #modalPastHeader{
 		background-color:lightgray;
@@ -175,9 +179,6 @@
 		background-color:#eee; 
 	}
 </style>
-<script>
- 
-</script> 
 <%@ include file="/inc/top.jspf" %>
 	<div id="topBarContainer">
 		<div id="topBar">
@@ -238,63 +239,61 @@
 				<li>처리일</li>
 				<li>신고유형</li>
 				<li>신고인</li>
-				<li>신고받은이</li> 
+				<li>신고받은이(+)</li> 
 			</ul>
 		</div>  
 		<div id="contentList">
 			<c:forEach var="data" items="${list}">
 				<ul class="contentList">
-					<li><input type="checkbox" name="check" id="check"> </li>
-					<li>1286</li>
-					<li>리뷰</li>
-					<li class="wordCut"><a href="제목?">과일 상태 왜이래요 껍질이 너무 두꺼워서 일도 먹을게 없쟈나요</a></li>
-					<li>2021/03/21</li>
-					<li>2021/03/23</li>
-					<li>비방</li>
-					<li>asdghle</li>
-					<li>yuthgvf</li>
-				</ul>
-			</c:forEach>
-			<c:forEach var="data" items="${list}">
-				<ul class="contentList">
-					<li><input type="checkbox" name="check" id="check"> </li>
-					<li>1286</li>
-					<li>리뷰</li>
-					<li class="wordCut"><a href="제목?">과일 상태 왜이래요 껍질이 너무 두꺼워서 일도 먹을게 없쟈나요</a></li>
-					<li>2021/03/21</li>
-					<li>2021/03/23</li>
-					<li>비방</li>
-					<li>asdghle</li>
-					<li>yuthgvf</li>
+					<li><input type="checkbox" name="check" id="check"></li>
+					<li>${data.reportnum }</li>
+					<li>${data.reportboard }</li>
+					<li class="wordCut"><a href="/sshj/csReportSelect?reportnum=${data.reportnum}">${data.reportcontent}</a></li>
+					<li>${data.reportdate }</li>
+					<li>
+						<c:if test="${data.completedate==null }">
+							처리요망
+						</c:if>
+						<c:if test="${data.completedate != null }">
+							${data.completedate }
+						</c:if>
+					</li>
+					<li>${data.reportreason }</li>
+					<li>${data.userid }</li>
+					<li class="popup" style="cursor: pointer;">${data.reporteduser }</li>
 				</ul>
 			</c:forEach> 
-			</div>
+		</div>
 		</div>	 
 		<div class="page_wrap">
 			<div class="page_nation">
-			   <a class="arrow pprev" href="<%=request.getContextPath()%>/img/kpage_pprev.png"></a>
-			   <a class="arrow prev" href="#"></a>
-			   <a href="#" class="active">1</a>
-			   <a href="#">2</a>
-			   <a href="#">3</a>
-			   <a href="#">4</a>
-			   <a href="#">5</a>
-			   <a href="#">6</a>
-			   <a href="#">7</a>
-			   <a href="#">8</a>
-			   <a href="#">9</a>
-			   <a href="#">10</a>
-			   <a class="arrow next" href="#"></a>
-			   <a class="arrow nnext" href="#"></a>
+			   <c:if test="${pageVO.pageNum>1}"><!-- 이전페이지가 있을때 -->
+			   		<a class="arrow prev" href="/sshj/csreportListA?pageNum=${pageVO.pageNum-1}<c:if test="${pageVO.searchWord != null && pageVO.searchWord != ''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>"></a>
+			   </c:if>
+			   <!-- 페이지 번호                   1                                    5                     -->
+	           <c:forEach var="p" begin="${pageVO.startPageNum}" step="1" end="${pageVO.startPageNum + pageVO.onePageNum-1}">
+	              <c:if test="${p<=pageVO.totalPage}">
+	                 <c:if test="${p==pageVO.pageNum}"> <!-- 현재페이지일때 실행 -->
+	                    <a class="active">${p}</a>
+	                 </c:if>   
+	                 <c:if test="${p!=pageVO.pageNum}"> <!-- 현재페이지가 아닐때 실행 -->
+	                    <a href="/sshj/csreportListA?pageNum=${p}<c:if test="${pageVO.searchWord != null && pageVO.searchWord != ''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>">${p}</a>
+	                 </c:if>
+	              </c:if>
+	           </c:forEach>
+	           <c:if test="${pageVO.pageNum < pageVO.totalPage}">
+	              <a class="arrow next" href="/sshj/csreportListA?pageNum=${pageVO.pageNum+1}<c:if test="${pageVO.searchWord != null && pageVO.searchWord != ''}">&searchKey=${pageVO.searchKey}&searchWord=${pageVO.searchWord}</c:if>"></a>
+	           </c:if>
 			</div>
 		 </div> 
 		 <div>
-			<form method="get" class="searchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
+			<form method="get" class="searchFrm" action="/sshj/csreportListA">
 				 <select name="searchKey">
-					<option value="subject" selected>제목</option>
-	   				<option value="no">공지번호</option> 
-	   				<option value="who">대상</option> 
-	   				<option value="writedate">공지일</option> 
+					<option value="reportcontent" selected>내용</option>
+	   				<option value="userid">신고인</option> 
+	   				<option value="reporteduser">신고받은사람</option> 
+	   				<option value="reportreason">신고유형</option> 
+	   				<option value="reportboard">게시판</option>
 				</select>			
 				<input type="text" name="searchWord" id="searchWord"/>
 				<input type="submit" value="검색"/> 
@@ -303,7 +302,7 @@
 		</div>  
 	</div>
 		<!-- 신고 처리 모달창 -->
-		<div id="modal">
+		<div id="modal" style="display:none">
 			<div id="modalHeader">
 				회원 정지 처리
 			</div>
@@ -312,26 +311,95 @@
 					<li>신고인</li>
 					<li>신고사유</li>
 				</ul>
-				<ul>
-					<li><div>dlkfjhbu</div></li>
-					<li><div>비방</div></li>
-				</ul>
-				<ul>
-					<li>aosihnf</li>
-					<li>욕설</li>
+				<ul id="reason">
+					<!-- <li><div>dlkfjhbu</div></li>
+					<li><div>비방</div></li> -->
 				</ul>
 			</div>
 			<div id="modalPastHeader">정지 이력</div>
 			<div id="modalPast">
 				<ul>
-					<li>정지 : 총 <div >2</div>회</li>
-					<li>정지일 : 총 <div >8</div>일</li>
-					<li><button class="success" value="" name="" id="">내역 상세 보기</button></li>
+					<li>정지 : 총 <div id="tt2"></div>회</li>
+					<li>정지일 : 총 <div id="tt3"></div>일</li>
+					<li><button class="success">내역 상세 보기</button></li>
 				</ul>
 			</div>
 			<hr>
-			<input type="text">&nbsp; 일 &nbsp;
-			<button class="success" value="" name="" id="">정지</button>
-			<button class="success" value="" name="" id="">닫기</button>
+			<input type="text" value="" id="stopinput">&nbsp; 일 &nbsp;
+			<button class="success" id="modalstop">정지</button>
+			<button class="success" id="modalcancel">닫기</button>
 		</div> 
-</html>
+<script>
+	$(function(){
+		$("#modalcancel").click(function(){
+			$(this).parent().css("display","none");
+		});
+		
+		var userid=""; //유저아이디
+		var reportnum=0; //번호
+		$('.popup').click(function(){
+			  userid = $(this).html();
+			  reportnum = $(this).prev().prev().prev().prev().prev().prev().prev().html();
+			  var url = "/sshj/modalSelect";
+			  var params = "reporteduser="+userid;
+			  $.ajax({
+				url:url,
+				data:params,
+				success:function(result){
+					console.log(result);
+					var $result = $(result); //vo, vo, vo, vo
+					
+					var tag="";
+					var tag2=0;
+					var tag3=0;
+					$result.each(function(idx, obj){
+						for(i=0; i<obj.list.length; i++){
+							tag += "<li class='kangsan'><div>"+ obj.list[i].userid+ "</div></li>";
+							tag += "<li class='kangsan'><div>"+ obj.list[i].reportreason+ "<div></li>";
+						}
+						if(obj.list2.length>=1){
+							tag2 = obj.list2[0].count
+							tag3 = obj.list2[0].reportdate
+						}
+					});
+					$("#reason").html(tag);
+					$("#tt2").html(tag2);
+					$("#tt3").html(tag3);
+					$("#modal").css("display","block");
+				},error:function(){
+					console.log("가져오기 에러..");
+				}
+			}); 
+		});
+		$("#modalstop").click(function(){
+			var stopdate = $("#stopinput").val();
+			console.log("stopdate = " + stopdate);
+			$.ajax({
+				url: "/sshj/memberstop",
+				data: "stopdate="+ stopdate+ "&userid="+userid +"&reportnum="+reportnum,
+				success:function(result){
+					console.log("성공 = " +result);
+					alert(userid +"는"+stopdate+"일 정지 처리되었습니다.");
+					location.href="/sshj/csreportListA";
+				},error:function(){
+					console.log("정지 시켜주기 에러..");
+				}
+			}); 
+		});
+	});
+</script>
+<style>
+	.kangsan{
+	    width: 249px !important;
+	    text-align: center !important;
+	    display: block;
+	}
+	#reason{
+		display: block !important;
+		overflow:auto;
+	}
+	#reason>li{
+		float:left;
+		background-color: aliceblue;
+	}
+</style>

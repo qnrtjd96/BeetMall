@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 <html>
 <head>
 		<meta charset="UTF-8">
@@ -44,7 +46,7 @@
 	.content{
 		padding: 10px;
 	}
-	#content_td{padding: 25px 25px 25px 30px;}
+	#content_td{padding: 25px 25px 25px 30px; height:300px;}
 	.tr_head{
 		font-weight:bold;
 	}
@@ -70,9 +72,9 @@
 	.prev_next_wrap a{
 		padding-left:20px;
 		color: black;
-		font-size:12px;
+		font-size:14px;
 	}
-	.next, .prev{font-size:12px;}
+	.next, .prev{font-size:14px;}
 	.next{margin-bottom:30px}
 	.content{padding:10px;}
 	#seller_cs_menu{
@@ -107,8 +109,9 @@
                </div>
             </c:if>
          </div>   
+        <!-- 고객센터 상단 메뉴 판매자홈, 공지사항, 자주묻는질문, 문의하기 -->
          <ul id="seller_cs_menu">
-            <li><a href="#">BEETMALL</a></li>
+            <li><a href="<%=request.getContextPath()%>/sellerMain">Beetmall</a></li>
             <li><a href="notice">공지사항</a></li>
             <li><a href="faq">자주묻는 질문</a></li>
             <li><a href="ask_admin_list">문의하기</a></li>

@@ -34,7 +34,7 @@ public class ProductServiceImp implements ProductService {
 	}
 
 	@Override
-	public List<ProductVO> onePageRecordSelect(int productnum) {
+	public ProductVO onePageRecordSelect(int productnum) {
 		return productDAO.onePageRecordSelect(productnum);
 	}
 
@@ -51,6 +51,26 @@ public class ProductServiceImp implements ProductService {
 	@Override
 	public int productDelete(int productnum) {
 		return productDAO.productDelete(productnum);
+	}
+
+	@Override
+	public ProductVO productOneSelect(ProductVO vo) {
+		return productDAO.productOneSelect(vo);
+	}
+
+	@Override
+	public int productUpdate(ProductVO vo) {
+		return productDAO.productUpdate(vo);
+	}
+
+	@Override
+	public int discountUpdate(ProductVO vo) {
+		return productDAO.discountUpdate(vo);
+	}
+
+	@Override
+	public int optionUpdate(ProductVO vo) {
+		return productDAO.optionUpdate(vo);
 	}
 
 

@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="/inc/menu_c.jspf"%>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style>
 	#cMyPageLeft{
 		display: block;
 	}
 	#myInfoDiv{
 		font-size:20px;
-		overflow:auto;
 		margin-bottom:100px;
 	}
 	.formUl>li:nth-child(2n+1){
@@ -51,7 +51,7 @@
 		padding-left:10px;
 	}
 	.btnClass{
-		background-color:rgb(252,118,45);
+		background-color:#FF8882;
 		color:white;
 		border:none;
 		border-radius:5%;
@@ -61,6 +61,7 @@
 		padding:1px;
 	}
 	#infosubmit{
+	    margin-top:15px;
 		margin-left:490px;
 	}
 	#sFrm{
@@ -93,46 +94,211 @@
 		border:1px solid #eee;
 	}
 </style>
+<script>
+	$(function(){
+		
+		//var sphone="${vo3.userphone}";
+		//var sph=sphone;
+		//var userphoneArr=sph.split("-");
+		//var pnum1=parseInt(userphoneArr[0]);
+		//var pnum2=parseInt(userphoneArr[1]);
+		//var pnum3=parseInt(userphoneArr[2]);
+		
+		
+		
+		$("#infosubmit").click(function(){
+	
+			if($("#checkEmailResult").val()=='N'){
+				alert("이메일 인증을 진행해주세요");
+				return false;
+			}
+			if($("#userpwd").val()==null || $("#userpwd").val()==''){ 
+				alert("비밀번호를 입력해주세요"); 
+				return false;
+			}
+			if($("#userpwd").val() != $("#userpwd2").val()){ 
+				alert("비밀번호 확인과 비밀번호가 일치하지 않습니다."); 
+				return false;
+			}
+			if($("#username").val()==null || $("#username").val()==''){ 
+				alert("이름을 입력해주세요"); 
+				return false;
+			}
+			if($("#userphone2").val()==null || $("#userphone2").val()==''|| $("#userphone3").val()==null || $("#userphone3").val()==''){ 
+				alert("휴대폰 번호를 입력해주세요"); 
+				return false;
+			}
+			if($("#userzipcode").val()==null || $("#userzipcode").val()==''){ 
+				alert("주소를 입력해주세요"); 
+				return false;
+			}
+			if($("#useraddr").val()==null || $("#useraddr").val()==''){ 
+				alert("주소를 입력해주세요"); 
+				return false;
+			}
+			if($("#userdetailaddr").val()==null || $("#userdetailaddr").val()==''){ 
+				alert("주소를 입력해주세요"); 
+				return false;
+			}
+	
+			
+			
+			if(regCheck() == false){
+				return false;
+			}
+			alert("2342343");
+			
+		});
+		
+
+
+
+		// 주소검색
+		$("#zipSearch").click(function(){
+			new daum.Postcode({
+		        oncomplete: function(data) {
+		            $("#userzipcode").val(data.zonecode);
+		            $("#useraddr").val(data.address);
+		            document.getElementById('userdetailaddr').focus();
+		        }
+		    }).open();
+		});
+		
+		// 이메일 인증코드 전송
+		$("#emailSend").click(function(){
+			if(emailCheckCustom()!=false){
+				var url = 'emailSend';
+				var param = "SendToEmail="+$("#useremail").val();
+				$.ajax({
+					url : url,
+					data : param,
+					success :function(data){
+						alert("인증코드 전송에 성공했습니다. 이메일을 확인해주세요!");
+					}, error : function(){
+						alert("인증코드 전송에 실패하였습니다 잠시후 다시 시도해주세요");
+					}
+				})
+			}
+		})
+		
+		// 이메일 인증코드 확인
+		$("#emailCheckBtn").click(function(){
+			if($("#emailCheck").val()!=null || $("#emailCheck").val()!=''){
+				var url = 'emailCheck';
+				var param = "emailCode="+$("#emailCheck").val();
+				$.ajax({
+					url : url,
+					data : param,
+					success : function(data){
+						console.log(data);
+						if(data == 1){
+							alert("인증에 성공하였습니다.");							
+							$("#checkEmailResult").val('Y');
+							$("#useremail").attr("readonly",true);
+						}else{
+							alert("인증코드가 일치하지 않거나 인증에 실패하였습니다.");
+						}
+					}, error : function(){
+						alert("인증에 실패하였습니다.");
+					}
+				});
+			}
+		})
+	});
+	
+	
+	function regCheck(){
+		// 비밀번호 검사
+		var pwdreg = /^[A-Za-z1-9!@#]{6,15}$/;
+		if(!pwdreg.test(document.getElementById("userpwd").value)){
+			alert("비밀번호는 6~15자리, 특수문자는!@#만 사용 가능합니다.");
+			return false;
+		}
+		// 이름 검사
+		var namereg = /^[가-힣]{2,4}$/;
+		if(!namereg.test(document.getElementById("username").value)){
+			alert("이름은 2~4글자만 가능합니다.");
+			return false;
+		}
+		// 이메일 검사
+		var emailreg = /^\w{6,20}[@][a-zA-Z]{2,10}[.][a-zA-Z]{2,3}([.][a-zA-Z]{2,3})?$/;
+		if(!emailreg.test(document.getElementById("useremail").value)){
+			alert("이메일이 잘못 입력되었습니다.");
+			return false;			
+		}
+		
+		// 전화번호 검사
+		var midtelreg=/^[0-9]{3,4}$/;
+		if(!midtelreg.test(document.getElementById("userphone2").value)){
+		  alert("전화번호를 잘못입력하였습니다...");
+		  return false;
+		}
+		
+		var lasttelreg=/^[0-9]{4}$/;
+		if(!lasttelreg.test(document.getElementById("userphone3").value)){
+		  alert("전화번호를 잘못입력하였습니다...");
+		  return false;
+		}
+	}
+	// 이메일 검사
+	function emailCheckCustom(){
+		var emailreg = /^\w{6,20}[@][a-zA-Z]{2,10}[.][a-zA-Z]{2,3}([.][a-zA-Z]{2,3})?$/;
+		if($("#useremail").val()==null||$("#useremail").val()==''){
+			alert("이메일을 입력하세요")
+			return false;
+		}else if(!emailreg.test(document.getElementById("useremail").value)){
+			alert("이메일이 잘못 입력되었습니다.");
+			return false;			
+		}
+	}
+</script>
 <div class="section" id="myInfoDiv">
 	<div id="userinputDiv">
 		<h2>정보수정</h2><span class="spanstar">*</span>표시는 필수입력항목입니다
 		<hr/>
-		<form>	
+<form method="post" id="regiFrm" action="editinfoOk">	
 			<ul class="formUl">
-				<li><span class="spanstar">*</span>아이디</li> 		<li><input type="text" name="userid" style="margin-right:5px;" disabled value="userid"/></li>
-				<li><span class="spanstar">*</span>비밀번호</li>		<li><input type="text" name="userpwd"/></li>	
-				<li><span class="spanstar">*</span>비밀번호 확인</li>	<li><input type="text" name="userpwd2" style="float:left"/><div id="passwordCheck" style="margin-left:200px"></div></li>	
-				<li><span class="spanstar">*</span>이름</li>			<li><input type="text" name="username" value="username" disabled/></li>		
-				<li><span class="spanstar">*</span>이메일</li>			<li><input type="text" name="useremail" style="margin-right:5px;"/><input type="button" class="btn" value="인증하기"/></li>			
-				<li><span class="spanstar">*</span>휴대폰</li>			<li><input type="text" name="userphone"/></li>			
-				<li><span class="spanstar">*</span>주소</li>			<li><input type="button" name="userzipcode" class="btn"  style="width:145px;"value="우편번호 검색" style="margin-right:5px;"/><input type="text" name="useraddr" readonly/><br/><input type="text" name="userdetailaddr" style="margin-top:5px; width:302px;"></li>			
-				<li><span class="spanstar">*</span>생년월일</li>		<li><input type="text" name="birthday" value="birth" disabled/></li>		
+				<li><span class="spanstar">*</span>아이디</li> 		<li><input type="text" name="userid" style="margin-right:5px;" disabled value="${logId}"/></li>
+				<li><span class="spanstar">*</span>비밀번호</li>		<li><input type="password" name="userpwd" id="userpwd"/></li>	
+				<li><span class="spanstar">*</span>비밀번호 확인</li>	<li><input type="password" name="userpwd2" id="userpwd2" style="float:left"/><div id="passwordCheck" style="margin-left:200px"></div></li>	
+				<li><span class="spanstar">*</span>이름</li>			<li><input type="text" name="username" id="username" value="${vo3.username}" /></li>		
+				<li><span class="spanstar">*</span>이메일</li>			<li><input type="text" name="useremail" style="margin-right:5px;" value="${vo3.useremail}"/><input type="button" class="btn" value="인증하기"/></li>			
+				<li><span class="spanstar">*</span>휴대폰</li>			<li><select  id="userphone1" name="userphone1" style="height:30px;">
+																			<option value="010">010</option>
+																			 <option value="02">02</option>
+																			<option value="031">031</option>
+																			<option value="032">032</option>
+																			<option value="033">033</option>
+																			<option value="041">041</option>
+																			<option value="042">042</option>
+																			<option value="043">043</option>
+																			<option value="044">044</option>
+																			<option value="051">051</option>
+																			<option value="052">052</option>
+																			<option value="053">053</option>
+																			<option value="054">054</option>
+																			<option value="055">055</option>
+																			<option value="061">061</option>
+																			<option value="062">062</option>
+																			<option value="063">063</option>
+																			<option value="064">064</option>
+																			</select> -
+																			<input type="text" name="userphone2" id="userphone2" style="width:80px;" maxlength="4"  value="${pnum2}" /> -
+																			<input type="text" name="userphone3" id="userphone3" style="width:80px;" maxlength="4"  value="${pnum3}"/></li>
+				<li><span class="spanstar">*</span>주소</li>			<li><input type="button"  id="zipSearch" value="우편번호 검색" style="margin-right:5px;" class="btn"/>
+																		<input type="text" name="userzipcode" id="userzipcode" readonly  style="width:100px;" value="${vo3.userzipcode}"/>
+																		<input type="text" name="useraddr" id="useraddr" style="margin-top:5px; width:400px;" value="${vo3.useraddr}"/>
+																		<input type="text" name="userdetailaddr" id="userdetailaddr" style="margin-top:5px; width:420px;" value="${vo3.userdetailaddr}"/></li>			
 			</ul>
+			
+			
+			<div id="infoCheckDiv">
+			<div style="margin-bottom:60px;margin-top: 70px;"><input type="submit" value="수정하기" class="btnClass" id="infosubmit"></div>
+		    </div>
+		    
 		</form>
 		</div>
-		<c:if test="${logType==2 }">
-		<div id="sellerForm">
-			<ul class="formUl" id="sFrm">
-				<li><span class="spanstar">*</span>상호명</li> 			<li><input type="text" name="storename" style="margin-right:5px;"/><input type="button" class="btn" value="중복검사"/></li>
-				<li><span class="spanstar">*</span>대표자</li>				<li><input type="text" name="sellername"/></li>	
-				<li><span class="spanstar">*</span>사업장등록번호</li>		<li><input type="text" name="sellerreginum" style="float:left"/><div id="passwordCheck" style="margin-left:200px"></div></li>	
-				<li><span class="spanstar">*</span>사업자등록증 첨부</li>	<li><input type="file" name="sellerregiimg" class="btn"/></li>
-				<li></li>								<li><div id="notice">※사업자등록번호 도용 방지를 위해 기업인증을 시행하고 있습니다.<br/>
-																※사업자등록증을 첨부해주세요. 관리 절차에 따라 가입이 승인됩니다.<br/>
-																※인증이 되지 않을 경우 고객센터(02-111-1111)로 문의해주세요.<br/>
-																<span class="spanstar">※안전한 거래를 위해서 관리자의 승인 후에 수정이 이루어집니다.</span></div></li>		
-				<li><span class="spanstar">*</span>사업장소재지</li>		<li><input type="button" name="storeaddr" class="btn"  style="width:145px;"value="우편번호 검색" style="margin-right:5px;"/><input type="text" name="useraddr" readonly/><br/><input type="text" name="userdetailaddr" style="margin-top:5px; width:302px;"></li>				
-				<li><span class="spanstar">*</span>은행</li>				<li><select name="bank">
-															<option value="index">은행명선택</option>  
-															<option value="nonghub">농협</option>  
-															<option value="sinhan">신한은행</option>  
-															<option value="kakaobank">카카오뱅크</option>  
-														</select></li>			
-				<li><span class="spanstar">*</span>계좌번호</li>			<li><input type="text" name="bankaccount"/></li>
-				<li><span class="spanstar">*</span>예금주</li>				<li><input type="text" name="bankname"/></li>
-				<li><span class="spanstar">*</span>이메일</li>				<li><input type="text" name="storeemail" style="margin-right:5px;"/><input type="button" class="btn" value="인증하기"/></li>
-			</ul>
-			<div style="margin-bottom:20px; padding-top:20px"><input type="submit" value="가입하기" class="btn" id="infosubmit"></div>
-		</div>
-		</c:if>
+		
+	
+		
 </div>

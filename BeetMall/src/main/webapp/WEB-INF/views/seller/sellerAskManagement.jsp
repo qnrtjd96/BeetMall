@@ -750,6 +750,24 @@ function reportUpdate(){
 				
 				<!-- 문의 검색 -->
 				<div id="categoryList">
+						<!-- 날짜 적용 할 수 있는 기능들 모여있는 컨테이너 -->
+						<div id="categorySearch_container" style='display:flex; justify-content: space-between'>
+							<div>
+								<select class="categorySearch_item" id="categoryDate" name="categoryDate" onchange="typeChange(this)">
+									<option value="년별">년별</option>
+									<option value="월별" selected>월별</option>
+									<option value="일별">일별</option>
+								</select> 
+								<input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_start" /> 
+								<b>&nbsp;&nbsp;~&nbsp;&nbsp;</b> 
+								<input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_end" />
+							</div>
+							<div>
+								<input type="text" id="searchTxt" name="searchTxt" size="13em" placeholder="작성자"/>
+								<button id="searchingBtn" style='margin:0 10px'>조회</button>
+							</div>
+						</div>
+				
 						<div id="categoryListMiddle">
 							<!-- 대분류 카테고리!!!! -->
 							<ul id="category">
@@ -775,25 +793,6 @@ function reportUpdate(){
 	
 						<!-- 중분류 카테고리 선택하면 선택된 사항이 삽입되는 위치 -->
 						<ul id="categoryManagement"></ul>
-	
-						<!-- 날짜 적용 할 수 있는 기능들 모여있는 컨테이너 -->
-						<div id="categorySearch_container" style='display:flex; justify-content: space-between'>
-							<div>
-								<select class="categorySearch_item" id="categoryDate" name="categoryDate" onchange="typeChange(this)">
-									<option value="년별">년별</option>
-									<option value="월별" selected>월별</option>
-									<option value="일별">일별</option>
-								</select> 
-								<input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_start" /> 
-								<b>&nbsp;&nbsp;~&nbsp;&nbsp;</b> 
-								<input type="month" min="2018-01" max="${monthPtn }" id="categoryCalendar_end" />
-							</div>
-							<div>
-								<input type="text" id="searchTxt" name="searchTxt" size="13em" placeholder="작성자"/>
-								<button id="searchingBtn" style='margin:0 10px'>조회</button>
-							</div>
-						</div>
-						
 	
 					</div>
 					<!-- categoryList 끝 -->

@@ -1,3 +1,5 @@
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
 <head>
@@ -24,39 +26,44 @@
 </head>
 
 <script>
-//테이블 collapse
-  //showHideFaq
+	function askDel(){
+		if(confirm("문의글을 삭제하시겠습니까?")){
+			location.href="ask_admin_delete?qmnum=${saavo.qmnum}"
+		}
+		
+	};
 </script>
 <body>
 	<div class="main">
 	<!------------------ 고객센터 상단 사이드바 ----------------------->
-         <nav>
-         <div id="headerMember">
-            <c:if test="${logStatus != 'Y'}">
-               <div class="sellerLoginBtn">   <!-- 로그인 전 -->
-                  <input type="button" value="회원가입" class="sellerMenuButtons"/>
-                  <input type="button" value="로그인" class="sellerMenuButtons"/>
-                  <input type="button" value="고객센터" class="sellerMenuButtons"/>
-               </div>
-            </c:if>
-            <c:if test="${logStatus == 'Y' }">
-               <div class="sellerLoginBtn">   <!-- 로그인 후 -->
-                  <c:if test="${logType==2}">
-                     <input type="button" value="판매자 페이지로 이동하기" class="sellerMenuButtons"/>
-                  </c:if>
-                  <a href="myinfoEdit">${logName}님</a><span id="sellerMenuButtons">▼</span>
-                  <input type="button" value="로그아웃" class="sellerMenuButtons"/>
-                  <input type="button" value="고객센터" class="sellerMenuButtons"  onClick="location.href='<%=request.getContextPath() %>/ask_admin_list'"/>
-               </div>
-            </c:if>
-         </div>   
+      <nav class="cs_nav">
+		<div id="headerMember">
+			<c:if test="${logStatus != 'Y'}">
+				<div class="sellerLoginBtn">
+					<!-- 로그인 전 -->
+					<input type="button" value="회원가입" class="sellerMenuButtons" /> <input type="button" value="로그인" class="sellerMenuButtons" /> <input type="button" value="고객센터" class="sellerMenuButtons" />
+				</div>
+			</c:if>
+			<c:if test="${logStatus == 'Y' }">
+				<div class="sellerLoginBtn">
+					<!-- 로그인 후 -->
+					<c:if test="${logType==2}">
+						<input type="button" value="판매자 페이지로 이동하기" class="sellerMenuButtons" />
+					</c:if>
+					<a href="myinfoEdit">${logName}님</a><span id="sellerMenuButtons">▼</span> <input type="button" value="로그아웃" class="sellerMenuButtons" /> <input type="button" value="고객센터" class="sellerMenuButtons" onClick="location.href='<%=request.getContextPath()%>/notice'" />
+				</div>
+			</c:if>
+		</div>
+         <!-- headerMember end -->
+         <!-- 고객센터 상단 메뉴 판매자홈, 공지사항, 자주묻는질문, 문의하기 -->
          <ul id="seller_cs_menu">
-            <li><a href="#">BEETMALL</a></li>
+            <li><a href="<%=request.getContextPath()%>/sellerMain">Beetmall</a></li>
             <li><a href="notice">공지사항</a></li>
             <li><a href="faq">자주묻는 질문</a></li>
             <li><a href="ask_admin_list">문의하기</a></li>
          </ul>
       </nav>
+  
    </div> 
 	<!-- 가운데 메인 div -->
 	<div id="article">
@@ -68,6 +75,7 @@
 		</div>
 		<!-- 내글 보기 -->	
 		<fieldset>
+		<input type="hidden" value="${saavo.qmnum}"/>
 			<table>
 				<tbody>
 					<tr>
@@ -75,20 +83,19 @@
 					</tr>
 					<tr class="tr_head">
 						<th class="menu" >제목</th>
-						<td class="td" colspan="3" ><span >상품을 등록했는데 등록이 안됐어요! ㅠ</span></td>
+						<td class="td" colspan="3" ><span >${saavo.qmtitle}</span></td>
 					</tr>
 					<tr class="tr_head">
 						<th class="menu">작성자</th>
-						<td class="td"><span >로그인한 아이디</span></td>
+						<td class="td"><span >${saavo.userid}</span></td>
 							<th class="menu">문의날짜</th>
-						<td class="td"><span>21/04/21</span></td>
+						<td class="td"><span>${saavo.qmdate}</span></td>
 					</tr>
 				
 					<tr>
 						<td class="question_content" colspan="4">
 							<span class="content" >
-							
-							고객 문의 사항 
+							${saavo.qmcontent}
 							</span>
 						</td>	
 					</tr>
@@ -103,15 +110,32 @@
 					</tr>
 					<tr class="tr_head">
 						<th class="menu">문의번호</th>
-						<td  class="td"><span>1213</span></td>
+						<td  class="td"><span>${saavo.qmnum}</span></td>
 						<th class="menu">답변일</th>
-						<td class="td" ><span>21/04/21</span></td>
+						<td class="td" >
+							<span>
+								<c:if test="${vo.qmanserdate==null}">
+										답변예정
+								</c:if>
+								<c:if test="${vo.qmanserdate!=null}">
+										${vo.qmanserdate}
+								</c:if>
+							</span>
+						</td>
 					</tr>
 				
 					<tr>
 						<td class="question_content" colspan="4">
 							<span class="content" >
-					
+								<c:if test="${vo.qmanswer==null}">
+								<strong>
+								아직 답변이 도착하지않았습니다<br/>
+								 <br/>
+								</strong>
+								</c:if>
+								<c:if test="${vo.qmanswer!=null || vo.qmanswer!=''}">
+									${vo.qmanswer}
+								</c:if>
 							</span>
 						</td>	
 					</tr>
@@ -119,10 +143,10 @@
 			</table>
 		</fieldset>
 			<div class="bottom_wrap">
-				<input type="button" value="확인" id="btn" onClick="location.href='<%=request.getContextPath() %>/ask_admin_list'"/>
-			<c:if test="${question_content ==''}">
-				<input type="button"  value="수정하기" id="btn" onClick="location.href='<%=request.getContextPath() %>/ask_admin_edit'"/>
-				<input type="button" value="삭제하기" id="btn" onClick=""/>
+				<input type="button" value="확인" id="btn" onClick="location.href='<%=request.getContextPath()%>/ask_admin_list'"/>
+			<c:if test="${vo.qmanswer==null}">
+				<input type="button"  value="수정하기" id="btn" onClick="location.href='<%=request.getContextPath()%>/ask_admin_edit?qmnum=${saavo.qmnum}'"/>
+				<input type="button" value="삭제하기" id="btn" onClick="askDel()"/>
 			</c:if>	
 			</div>
 		</div>

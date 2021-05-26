@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 <html>
 <head>
 		<meta charset="UTF-8">
@@ -61,7 +63,7 @@
 	}
 	.answer_td{
 		padding: 20px 10px 20px 10px;
-		font-size:12px;
+		font-size:14px;
 	}
 	.answer_td:nth-child(1){
 		color:rgb(224,102,102);
@@ -96,7 +98,7 @@
 	#cs_search_q{
 		font-weight:bold;
 		color:gray;
-		font-size:17px;
+		font-size:20px;
 	}
 	select{
 		float:left; 
@@ -187,8 +189,9 @@
             </c:if>
          </div>   
          <!-- headerMember end -->
+        <!-- 고객센터 상단 메뉴 판매자홈, 공지사항, 자주묻는질문, 문의하기 -->
          <ul id="seller_cs_menu">
-            <li><a href="#">BEETMALL</a></li>
+            <li><a href="<%=request.getContextPath()%>/sellerMain">Beetmall</a></li>
             <li><a href="notice">공지사항</a></li>
             <li><a href="faq">자주묻는 질문</a></li>
             <li><a href="ask_admin_list">문의하기</a></li>
@@ -250,11 +253,12 @@
 		<!-------------- 페이징------------------>
 		<div class="page_wrap">
 			<div class="page_nation">
-				
+			<c:if test="${pageVO.pageNum>1}"><!-- 이전페이지가 있을때 -->
 			  	<!--맨앞으로-->
   				<a class="arrow_pprev" href="faq?pageNum=1<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>"></a>
 				<!--앞으로-->
         		<a class="arrow_prev" href="faq?pageNum=${sapvo.pageNum-1}<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>"></a>
+ 			</c:if>
  				<!--레코드 갯수에 따른 페이지 갯수 표시--> 
          		<c:forEach var="p" begin="${sapvo.startPageNum}" end="${(sapvo.startPageNum + sapvo.onePageNum)-1}">
 	         		<!--p가 총페이지수보다 작거나같을때  레코드가 있는 페이지까지만 표시 -->
@@ -270,10 +274,12 @@
 	            	</c:if>
         		</c:forEach>
         		<!-- 다음 페이지가 있을 때 -->
+        		<c:if test="${pageVO.pageNum < pageVO.totalPage}">
 				<!--뒤로-->            
 	         	<a class="arrow next" href="faq?pageNum=${sapvo.pageNum+1}<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>"></a>
 				<!--맨뒤로-->
 	         	<a class="arrow nnext" href="faq?pageNum=${sapvo.totalPage}<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>"></a>
+				</c:if>
 			</div>
 		 </div> 
 		 <!-------------- 페이징 끝 --------------->

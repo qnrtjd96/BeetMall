@@ -44,7 +44,7 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 		mav.addObject("countrk",countrk);
 		mav.addObject("countrg",countrg);
 		
-		System.out.println("Ff");
+		//System.out.println("Ff");
 		
 		//뷰어전체
 	
@@ -62,13 +62,15 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 	}
 	
 	@RequestMapping(value="/recipeWriteOk", method=RequestMethod.POST)
-	public ModelAndView recipeWriteOk(RecipeVO vo, @RequestParam MultipartFile file, HttpServletRequest req) {
+	public ModelAndView recipeWriteOk(HttpSession session,RecipeVO vo, @RequestParam MultipartFile file, HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
 		
 		
     	//String userid = (String)req.getSession().getAttribute("logId");
 		//파일업로드
 		//저장 위치
+		String userid = (String)session.getAttribute("logId");
+		
 		String path = req.getSession().getServletContext().getRealPath("/upload");
 		System.out.println("path --> " + path);
 		
@@ -81,6 +83,7 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 			if(orgName != null && !orgName.equals("")) {
 				file.transferTo(new File(path, orgName));//파일업로드
 				vo.setRecipemainimg(orgName);
+				vo.setUserid(userid);
 			}
 		}catch (Exception e) {
 			System.out.println("파일업로드 에러발생 --> " + e.getMessage());
@@ -121,15 +124,20 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 			return mav;
 		}
 		
-		//수정하기
+		//수정하기///////////////////////////////////////////////////////////
 		@RequestMapping("/recipeEditeOk")
-		public ModelAndView recipeEditeOk(RecipeVO vo) {
+		public ModelAndView recipeEditeOk(RecipeVO vo,HttpSession session) {
+			
+			String id = (String)session.getAttribute("logId");
+			vo.setUserid(id);
+			
 			ModelAndView mav = new ModelAndView();
 			int result = recipeService.recipeEditeOk(vo);
 			mav.addObject("recipenum", vo.getRecipenum());
+			//System.out.println("recipenum2222222222"+vo.getRecipenum());레시피 숫자 잘 나옴
 			
 			if(result>0) {
-				mav.setViewName("redirect:recipeView");
+				mav.setViewName("redirect:recipeList");
 			}else {
 				mav.setViewName("redirect:recipeEdite");
 			}
@@ -139,18 +147,20 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 //////////////////////////////////////////////////////////레시피 지우기///////////////////////////////////////////////////////////
 	
 	@RequestMapping("/recipeDelete")
-	public ModelAndView recipeDelete(int recipenum) {
-		ModelAndView mav = new ModelAndView();
+	@ResponseBody
+	public int recipeDelete(int recipenum) {
+		int result=0;
 		
 		if(recipeService.recipeDelete(recipenum)>0){//삭제
-			mav.setViewName("redirect:recipeHome");
+			result=1;
 		}else {//삭제실패
-			mav.addObject("recipenum", recipenum);
-			mav.setViewName("redirect:recipeList");
+			result=0;
 		}
-		return mav;
+		return result;
 		
 	}
+	
+	
 //////////////////////////////////////////////////////////레시피 리스트///////////////////////////////////////////////////////////	
 		
 	@RequestMapping("/recipeList")
@@ -295,7 +305,25 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 	}
 
 	
-	
+////////////////////////////////////장바구니 담은 레시피 삭제/////////////////////////////////
+
+@RequestMapping("/recikeepDelete")
+@ResponseBody
+public int recikeepDelete(int recipenum,HttpSession session) {
+int result=0;	
+String userid = (String)session.getAttribute("logId");
+
+result=recipeService.recikeepDelete(recipenum,userid);
+
+if(result>0){//삭제
+result=1;
+}else {//삭제실패
+result=0;
+}
+return result;
+}
+
+
 	/////////////////////////////////////레시피 추천 수 올리기///////////////////////////////////////
 	
 	@RequestMapping("/recigoodOk")
@@ -374,20 +402,6 @@ import com.beetmall.sshj.custom.vo.RecipeVO;
 	
 	
 	
-   ////////////////////////////////////장바구니 담은 레시피 삭제/////////////////////////////////
-
-	@RequestMapping("/recikeepDelete")
-	@ResponseBody
-	public int recikeepDelete(HttpServletRequest req) {
-				
-		String id=req.getParameter("id");
-		int num=Integer.parseInt(req.getParameter("num"));
-		
-		return recipeService.recikeepDelete(num,id);
-		
-		
-		
-	}
 
 	
 }

@@ -10,7 +10,7 @@
 		display: block;
 	}
 	#mypointList{
-		height:1500px;
+		height:980px;
 		overflow:auto;
 		position: relative;
 	}
@@ -40,10 +40,11 @@
 	}
 	#pointUl>li{
 		width:135px;
-		height:60px;
+		height:65px;
 		line-height:60px;
 		margin:5px 0;
 		text-align:center;
+		border-bottom:1px solid #eee;
 	}
 	
 	#pointUl>li:nth-child(6n+1){
@@ -69,6 +70,7 @@
 		text-align:left;
 		float:left;
 		width:242px;
+		height:30px;
 	}
 	#pointUl>li:nth-child(6n+3) img{
 		line-height:60px;
@@ -100,11 +102,7 @@
 		font-size:0.9em;
 		color:#999;
 	}
-	.wordcut{
-		overflow:hidden;
-		white-space: nowrap;
-		text-overflow: ellipsis;
-	}
+	
 	.buybutton{
 		width:70px;
 		height:35px;
@@ -269,7 +267,7 @@
 	}
 	#buyProduct{
 		float:left;
-		width:680px;
+		width:550px;
 	}
 	#buyProduct img{
 		height:100px;
@@ -360,11 +358,11 @@
 		width:1080px;
 	}
 	#infoInput>li:nth-child(2n+1){
-		width:200px;
+		width:147px;
 		float:left;
 	}
 	#infoInput>li:nth-child(2n){
-		width:839px;
+		width:400px;
 		float:left;
 	}
 	.normalFont{
@@ -413,7 +411,7 @@
 	}
 	#questionUl>li:last-child{
 		width:548px;
-		height:530px;		
+		height:480px;		
 		background-color: rgb(250, 250, 250);
 		padding-top:5px;
 		padding-left:10px;
@@ -475,6 +473,17 @@
 		border:1px solid #42454c;
 	}
 	/* 페이징처리끝 */
+	/* 모달 처리 */
+	#buylistmodal{
+		background-color: gray;
+		opacity: 0.6;
+		position: fixed;
+		left:0px;
+		top:0px;
+		width:100%;
+		height:100%;
+		display:none;
+	}
 </style>
 <script>
 	$(function(){
@@ -483,6 +492,8 @@
 		})
 		$(".buyListBarClose").click(function(){
 			$(this).parent().css("display","none");
+			$("#buylistmodal").css("display","none");
+			$(document.body).css("overflow","visible");
 		})
 		$(".thumbsupNo").click(function(){
 			$(this).toggleClass("thumbsupNo");
@@ -506,6 +517,8 @@
 		var ordernum = $(this).parent().prev().prev().prev().prev().html();
 		$("#buyCancelNotice").css("display","block");
 		$("#cancelNoticeVal").val(ordernum);
+		$("#buylistmodal").css("display","block");
+		$(document.body).css("overflow","hidden");
     });
 	$(document).on('click','#cancelNoticeBtn', function(){
 		var ordernum = $("#cancelNoticeVal").val();
@@ -533,12 +546,16 @@
 		var invoicenum = $(this).prev().val();
 		$("#invoiceIframe").attr("src","https://www.ilogen.com/web/personal/trace/"+invoicenum);
 		// 주소 : https://www.ilogen.com/web/personal/trace/123131564
+		$("#buylistmodal").css("display","block");
+		$(document.body).css("overflow","hidden");
 	});
 	$(document).on('click','input[value=구매확정]', function(){
 		var num = $(this).parent().prev().children().val();
 		$("#buyCommit").css("display","block");
 		var ordernum = $(this).parent().prev().prev().prev().prev().html();
 		$("#orderCommitHidden").val(ordernum);
+		$("#buylistmodal").css("display","block");
+		$(document.body).css("overflow","hidden");
 		
 	});
 	$(document).on('click','#ordercommit', function(){
@@ -573,7 +590,8 @@
 		var ordernum = $(this).parent().prev().prev().prev().prev().html();
 		$("#buyReviewWrite").css("display","block");
 		$("#buyReviewView").css("display","none");
-		
+		$("#buylistmodal").css("display","block");
+		$(document.body).css("overflow","hidden");
 		$.ajax({
 			url : "productInfo",
 			data : "productNum="+num,
@@ -583,9 +601,8 @@
 				$("#reviewTitle").html(result.productname);
 				$("#reviewordernum").val(ordernum);
 				$("#reviewproductnum").val(num);
-				
 			}, error : function(){
-			alert("리뷰작성 오류가 발생했습니다. \n error-code:13")
+				alert("리뷰작성 오류가 발생했습니다. \n error-code:13");
 			}
 		});
 	});
@@ -595,6 +612,8 @@
 		var ordernum = $(this).parent().prev().prev().prev().prev().html();
 		$("#buyReviewView").css("display","block");
 		$("#buyReviewWrite").css("display","none");
+		$("#buylistmodal").css("display","block");
+		$(document.body).css("overflow","hidden");
 		var reviewnum = -1;
 		$.ajax({
 			url : "reviewSelect",
@@ -619,14 +638,20 @@
 							$(".thumbsupNo").toggleClass("thumbsupNo").toggleClass("thumbsupYes");
 						}else if(result == -1){
 							alert('서버에 문제가 있어 불러오기에 실패했습니다\n잠시후 다시 시도하세요\n error_code:03');
+							$("#buylistmodal").css("display","none");
+							$(document.body).css("overflow","visible");
 						}
 					}, error : function(){
 						alert('서버에 문제가 있어 불러오기에 실패했습니다\n잠시후 다시 시도하세요\n error_code:03');
+						$("#buylistmodal").css("display","none");
+						$(document.body).css("overflow","visible");
 					}
 				});
 				//
 			}, error : function(){
 				alert('서버에 문제가 있어 불러오기에 실패했습니다\n잠시후 다시 시도하세요\n error_code:03');
+				$("#buylistmodal").css("display","none");
+				$(document.body).css("overflow","visible");
 			}
 		});
 	})
@@ -637,10 +662,12 @@
 		$("#buyReturnInput").css("display","block");
 		$("#returnProductnum").val(num);
 		$("#returnOrdernum").val(ordernum); 
+		$("#buylistmodal").css("display","block");
+		$(document.body).css("overflow","hidden");
 	});
 	$(document).on('click','input[value=재구매]', function(){
 		var num = $(this).prev().prev().val();
-		location.href="customproduct?no="+num;
+		location.href="customproduct?productnum="+num;
 	});
 	$(document).on('click','input[value=문의작성]', function(){
 		var ordernum = $(this).parent().prev().prev().prev().prev().html();
@@ -648,24 +675,49 @@
 		$("#qboardnum").val(productnum);
 		$(".qsetNum").html(productnum);
 		$("#questionDiv").css("display","block");
-		
-		
+		$("#buylistmodal").css("display","block");
+		$(document.body).css("overflow","hidden");
 	});
 	$(document).on('click','#questionBtn', function(){
+		var qtitle = '';
+		qtitle = $(".qtitleInput").val();
+		var qcontent = '';
+		qcontent = $("#summernoteQuestion").val();
+		if(qtitle == null || qtitle == ''){
+			alert("제목을 입력해주세요"+qtitle);
+			$(".qtitleInput").focus();
+			return false;
+		}
+		if(qcontent == null || qcontent == ''){
+			alert("내용을 입력해주세요"+qcontent);
+			$("#summernoteQuestion").focus();
+			return false;
+		}
 		$("#questionForm").submit();
+		$("#buylistmodal").css("display","none");
+		$(document.body).css("overflow","visible");
 	});
 	$(document).on('click','#questionCloseBtn', function(){
 		$("#questionDiv").css("display","none");
+		$("#buylistmodal").css("display","none");
+		$(document.body).css("overflow","visible");
 	});
 	$(document).on('click','input[value=환불확정]', function(){
 		var ordernum = $(this).prev().prev().val();
+		$("#buylistmodal").css("display","block");
+		$(document.body).css("overflow","hidden");
 		if(confirm('환불을 확정하시겠습니까? 환불확정 된 주문은 모든 환불 절차가 끝난 것입니다.')){
 			location.href="returnSubmit?ordernum="+ordernum;
+		}else{
+			$("#buylistmodal").css("display","none");
+			$(document.body).css("overflow","visible");
 		}
 	})
 	$(document).on('click','input[value="환불내역 보기"]', function(){
 		var num = $(this).parent().prev().children().val();
 		$("#returnDiv").css("display","block");
+		$("#buylistmodal").css("display","block");
+		$(document.body).css("overflow","hidden");
 		var ordernum = $(this).prev().val();
 		$.ajax({
 			url:"returnView",
@@ -688,12 +740,34 @@
 				$("#returnUl").empty();
 				$("#returnUl").append(tag);
 			}, error:function(){
-				
+				alert("환불내역 보기 오류가 발생했습니다... error_code:122")
+				$("#buylistmodal").css("display","none");
+				$(document.body).css("overflow","visible");
 			}
 		})
 	});
 	
 	
+	$(document).on('click','#buyReviewViewCloseBtn', function(){
+		$("#buyReviewView  ").css("display","none");
+		$("#buylistmodal").css("display","none");
+		$(document.body).css("overflow","visible");
+	});
+	$(document).on('click','#divcloseBtn', function(){
+		$("#buyCancelRollBack").css("display","none");
+		$("#buylistmodal").css("display","none");
+		$(document.body).css("overflow","visible");
+	});
+	$(document).on('click','#invoiceCloseBtn', function(){
+		$("#buyListdeliverySearch").css("display","none");
+		$("#buylistmodal").css("display","none");
+		$(document.body).css("overflow","visible");
+	});
+	$(document).on('click','#buyReviewViewCloseBtn', function(){
+		$("#buyReviewView").css("display","none");
+		$("#buylistmodal").css("display","none");
+		$(document.body).css("overflow","visible");
+	});
 	$(document).on('click','.thumbsupYes', function(){
 		var reviewnum = $(this).parent().prev().prev().prev().prev().prev().prev().text();
 		$(this).toggleClass('thumbsupNo');
@@ -735,6 +809,8 @@
 	});
 	$(document).on('click', "#returnBtn", function(){
 		$("#returnDiv").css("display","none");
+		$("#buylistmodal").css("display","none");
+		$(document.body).css("overflow","visible");
 	});
 	$(document).on('click', "#3months", function(){
 		location.href="mybuyList?month=3";
@@ -755,9 +831,11 @@
 		}
 		location.href=lin;
 	}
+	
 </script>
 <div class="section">
 	<div id="mypointList">
+		<div id="buylistmodal"></div>
 		<h2>구매내역</h2>
 		<div id="pointSelect">
 			<div class="btn" id="allmonths">전체</div>
@@ -783,11 +861,14 @@
 					<li><span class="pointdate">${vo.orderdate}</span></li>
 					<li>${vo.ordernum}</li>
 					<li>
-					<a href="customproduct?no=${vo.productnum}"><img src="/sshj/resources/sellerProductImgs/${vo.thumbimg}"></a><span class="buyttitle wordcut"><a href="customproduct?no=${vo.productnum}">${vo.productname}</a></span><span class="buydetail wordcut"><a href="customproduct?no=${vo.productnum}">${vo.productcontent}</a></span>
+					<a href="customproduct?productnum=${vo.productnum}"><img src="/sshj/resources/sellerProductImgs/${vo.thumbimg}"></a><span class="buyttitle wordcut"><a href="customproduct?productnum=${vo.productnum}">${vo.productname}</a></span><span class="buydetail wordcut"><a href="customproduct?productnum=${vo.productnum}">${vo.productcontent}</a></span>
 					</li>
 					<li><span class="pointprice">${vo.orderprice}</span>원</li>
 					<li>${vo.orderstatus}<input type="hidden" value="${vo.productnum}"/></li>
 					<c:if test="${vo.orderstatus == '준비중'}">
+					<li><input type="button" class="btn qnaWrite" value="문의작성"/><input type="button" class="btn" value="취소하기"/></li>
+					</c:if>
+					<c:if test="${vo.orderstatus == '결제완료'}">
 					<li><input type="button" class="btn qnaWrite" value="문의작성"/><input type="button" class="btn" value="취소하기"/></li>
 					</c:if>
 					<c:if test="${vo.orderstatus == '배송중'}">
@@ -824,7 +905,7 @@
 			</ul>
 		</div>
 		</div>
-		<div class="buyListDiv" id="buyListdeliverySearch" style="overflow-x:hidden; width:1300px;z-index:80;">
+		<div class="buyListDiv" id="buyListdeliverySearch" style="overflow-x:hidden; width:1300px;z-index:80;left:422px;">
 			<div class="buyListBar" style="font-size:21px; width:1300px;">배송 조회</div><div class="buyListBarClose" style="left:1250px;">&times;</div>
 			<div class="buyListContent" style="text-align:center;padding-top:47px; width:1300px;">
 			<iframe src="https://www.ilogen.com/web/personal/tkSearch" height="548px" width="1298px"  frameborder="no" id="invoiceIframe">
@@ -890,7 +971,7 @@
 			</form>
 			</div>
 		</div>
-		<div class="buyListDiv" id="buyCancelNotice">
+		<div class="buyListDiv" id="buyCancelNotice" style="left:750px;">
 			<div class="buyListBar" style="font-size:21px;">배송 취소</div><div class="buyListBarClose">&times;</div>
 			<div class="buyListContent" style="text-align:center;padding-top:100px; height:300px;">
 				<h2>선택하신 주문을 취소하시겠습니까?</h2>
@@ -899,7 +980,7 @@
 			</div>
 		</div>
 		
-		<div class="buyListDiv" id="buyCancelRollBack">
+		<div class="buyListDiv" id="buyCancelRollBack" style="left:750px;top:100px;">
 			<div class="buyListBar" style="font-size:21px;">취소 실패</div><div class="buyListBarClose">&times;</div>
 			<div class="buyListContent" style="text-align: center;padding-top:100px; height:340px;">
 				<h2>배송중 / 배송완료 상품은 취소할 수 없습니다.</h2>
@@ -908,36 +989,36 @@
 			</div>
 		</div>
 		<!-- @@ -->
-		<div class="buyListDiv" id="buyReviewView">
-			<div class="buyListBar" style="font-size:21px;width:1080px;">상품리뷰 보기</div><div class="buyListBarClose" style="left:1030px;">&times;</div>
-			<div class="buyListContent" style="padding-top:60px; height:730px;background-color: #ddd; text-align: center;width:1080px;">
+		<div class="buyListDiv" id="buyReviewView" style="width:550px;left:750px;top:100px;">
+			<div class="buyListBar" style="font-size:21px;width:550px;">상품리뷰 보기</div><div class="buyListBarClose" style="left:500px;">&times;</div>
+			<div class="buyListContent" style="padding-top:60px; height:730px;background-color: #ddd; text-align: center;width:550px;">
 				<ul id="infoInput" style="text-align:left;">
 					<li>번호</li> 	<li>100</li>
 					<li>작성자</li> 	<li>rabbit123</li>
 					<li>작성일</li>	<li>2021-04-02</li>
 					<li>추천</li>	<li>4<div class="thumbsupYes"></div></li>
 				</ul>
-				<div id="buyReviewtxt" style="width:1060px;"></div>
-				<input type="button" value="닫기" class="btn" style="top:600px;" />
+				<div id="buyReviewtxt" style="width:530px;"></div>
+				<input type="button" value="닫기" class="btn" style="top:600px;" id="buyReviewViewCloseBtn"/>
 			</div>
 		</div>
 		<!--  -->
 		
-		<div class="buyListDiv" id="buyReviewWrite">
-			<div class="buyListBar" style="font-size:21px;">상품리뷰 작성하기</div><div class="buyListBarClose">&times;</div>
-			<div class="buyListContent" style="padding-top:60px; height:1200px;">
+		<div class="buyListDiv" id="buyReviewWrite" style="width:550px;left:750px;top:100px;">
+			<div class="buyListBar" style="font-size:21px;width:550px;">상품리뷰 작성하기</div><div class="buyListBarClose"style="left:500px;">&times;</div>
+			<div class="buyListContent" style="padding-top:60px; height:790px;width:550px;">
 			<div id="buyProduct">
 				<span class="buyListleftMenu">구매상품</span>
 				<img src="/sshj/" id="reviewImg"/>
-				<div id="reviewTitle" style="font-size: 17px;padding-left:5px;">불러오는 중입니다...</div>
+				<div id="reviewTitle" style="font-size: 17px;padding-left:5px;height: 100px;width: 345px;">불러오는 중입니다...</div>
 				<div></div>
 			</div>
 			<form method="post" name="reviewFrm" enctype="multipart/form-data" action="reviewWrite" >
 					<input type="hidden" name="ordernum" value="" id="reviewordernum"/>
 					<input type="hidden" name="productnum" value="" id="reviewproductnum"/>
-				<div id="buyProductStar">
-					<span class="buyListleftMenu">상품평가</span>
-					<div id="reviewStars">
+				<div id="buyProductStar"style="height: 50px;width:550px;line-height: 50px;">
+					<span class="buyListleftMenu"style="height: 50px;line-height: 50px;">상품평가</span>
+					<div id="reviewStars"style="height: 50px;line-height: 50px;">
 						<span class="redstar">
 							<select name="reviewscore">
 								<option value="5">★★★★★</option>
@@ -947,19 +1028,19 @@
 								<option value="1">★</option>
 							</select>
 						</span>
-					</div><span>별을 클릭하여 상품 만족도를 알려주세요</span>
+					</div><div style="height: 50px;float:left;width:290px;line-height: 50px;">별을 클릭하여 상품 만족도를 알려주세요<br/></div>
 				</div>
-				<div id="buyProductImg">
-					<span class="buyListleftMenu" style="float:left">첨부이미지</span><input type="file" name="file"/>&nbsp;
+				<div id="buyProductImg"style="height: 50px;margin-bottom: 10px;">
+					<span class="buyListleftMenu" style="float:left;height: 50px;line-height: 50px;">첨부이미지</span><input type="file" name="file" style="width: 446px;height: 60px;line-height: 50px;"/>&nbsp;
 				</div>
-				<textarea name="reviewcontent" id="summernote">
+				<textarea name="reviewcontent" id="summernote" style="margin-top:10px;padding-top:10px;">
 					
 				</textarea>
-				<input type="submit" value="리뷰 제출하기" class="btnSubmit" id="reviewSubmitBtn"/>
+				<input type="submit" value="리뷰 제출하기" class="btnSubmit" id="reviewSubmitBtn" style="margin-left: 235px;margin-right: 0px"/>
 			</form>
 			</div>
 		</div>
-		<div class="buyListDiv" id="returnDiv">
+		<div class="buyListDiv" id="returnDiv" style="width:550px;left:765px;top:100px;">
 			<div class="buyListBar" style="font-size:21px;width:550px;">환불정보</div><div class="buyListBarClose" style="left:500px;">&times;</div>
 			<div class="buyListContent" style="padding-top:60px; height:730px;background-color:white; text-align: center;width:550px;">
 				<ul id="returnUl" style="text-align:left;">
@@ -975,13 +1056,13 @@
 				<input type="button" value="닫기" class="btn" style="top:600px;" id="returnBtn" />
 			</div>
 		</div>
-		<div class="buyListDiv" id="questionDiv">
+		<div class="buyListDiv" id="questionDiv" style="width:550px;left:765px;top:100px;">
 			<div class="buyListBar" style="font-size:21px;width:550px;">문의하기</div><div class="buyListBarClose" style="left:500px;">&times;</div>
-			<div class="buyListContent" style="padding-top:60px; height:730px;background-color:white; text-align: center;width:550px;">
+			<div class="buyListContent" style="padding-top:60px; height:700px;background-color:white; text-align: center;width:550px;">
 			<form id="questionForm" action="questionWrite" method="post">
 				<input type="hidden" name="productnum" value="" id="qboardnum"/>
 				<ul id="questionUl" style="text-align:left;">
-					<li>제목</li>		<li><input type="text" name="qtitle" style="width:335px;" placeholder="제목을 작성해주세요" maxlength="100"/></li>
+					<li>제목</li>		<li><input type="text" name="qtitle" style="width:335px;" placeholder="제목을 작성해주세요" maxlength="100" class="qtitleInput"/></li>
 					<li>상품번호</li>		<li><span id="productnum" class="qsetNum"></span></li>
 					<li>공개비공개 설정하기</li> 	<li>
 										<select name="qopen">
@@ -1026,9 +1107,9 @@
 <script>
 $(document).ready(function() {
 	  $('#summernote').summernote({
-		  height: 660,                 // 에디터 높이
-		  maxHeight:660,
-		  minHeight:660,
+		  height: 370,                 // 에디터 높이
+		  maxHeight:370,
+		  minHeight:370,
 		  focus: true,
 		  placeholder:'고객님의 리뷰를 작성해주세요 단, 무분별한 비난, 욕설 등이 포함된 리뷰는 숨김처리 될 수 있습니다.',
 		  //콜백 함수
@@ -1065,9 +1146,9 @@ $(document).ready(function() {
 	});
 $(document).ready(function() {
 	  $('#summernoteQuestion').summernote({
-		  height: 430,                 // 에디터 높이
-		  maxHeight:430,
-		  minHeight:430,
+		  height: 370,                 // 에디터 높이
+		  maxHeight:370,
+		  minHeight:370,
 		  width:530,
 		  focus: true,
 		  placeholder:'고객님의 문의를 작성해주세요 단, 무분별한 비난, 욕설 등이 포함된 문의는 숨김처리 또는 삭제 될 수 있습니다.',

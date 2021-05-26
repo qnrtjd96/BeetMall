@@ -29,7 +29,7 @@ public class SellerEditFarmController {
 	ProductService productService;
 	
 	@RequestMapping("/sellerEditFarm")
-	public ModelAndView edit_farm(HttpSession session, ProductVO vo, SearchAndPageVO spvo) {
+	public ModelAndView edit_farm(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 	
 		if(session.getAttribute("logId")!=null) {
@@ -41,12 +41,12 @@ public class SellerEditFarmController {
 				mav.addObject("favorite", service.selectFavorite(userid)); // 즐겨찾기 수 불러오기
 				mav.setViewName("seller/sellerEditFarm");
 			}	else {
-				mav.setViewName("redirect:/");
+				mav.setViewName("seller/sellerEditFarm");
 				
 			}
 			
 		} else {
-			mav.setViewName("redirect:/");
+			mav.setViewName("home");
 			
 		}
 		
@@ -90,19 +90,18 @@ public class SellerEditFarmController {
 		ModelAndView mav = new ModelAndView();
 		
 		// 저장위치를 구한다
-		String path = session.getServletContext().getRealPath("/upload");
-		
+		String path = session.getServletContext().getRealPath("/resources/sellerprofileimg");
+		System.out.println(path);
 		MultipartHttpServletRequest mr = (MultipartHttpServletRequest)req;
 		
 		MultipartFile mf = mr.getFile("filename");
-		
-		String orgName = mf.getOriginalFilename(); // 원래 파일명
+		String delFilename = vo.getFarmprofile();
+		String orgName = mf.getOriginalFilename(); // 바뀔 원래 파일명
 		if(mf.getSize() != 0 ) {
 			// farmprofile 새로운 이미지를 등록한다
-			
+
 			// db에 등록되어 있는 파일명을 가져온다
 			String checkImg = service.getImgName(vo.getStorenum());
-			
 			
 			if(orgName != null && !orgName.equals("")) {
 				
@@ -139,7 +138,7 @@ public class SellerEditFarmController {
 				
 				//기존에 있던 파일은 삭제한다.
 				try {
-					File delFile = new File(path,checkImg);
+					File delFile = new File(path,delFilename);
 					delFile.delete();
 				} catch(Exception e) {
 					e.printStackTrace();

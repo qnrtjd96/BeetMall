@@ -85,6 +85,7 @@
 		text-align: left;
 		margin-right: 65px;
 		margin-bottom: 30px;
+		height: 340px;
 	}
 	#productDiv{
 		width:200px;
@@ -231,6 +232,11 @@
 	}
 	#kAreamMall{
 		width:600px;
+	}
+	.productname{
+		font-size: 18px;
+		font-weight: 600;
+		color: brown;
 	}
 </style>
 <script>
@@ -392,8 +398,6 @@
        ///여기바꿔야함///////////////////////////////////////////////////////////////////////
        
        //지역넣어줄값
-       
-       
 		$('#Sequence').change(function(){
 			var hrefff ="/sshj/categoryCharge?"
 	   		if($('#Sequence option:selected').val() == "평점높은순"){
@@ -414,10 +418,10 @@
 			            	}
 		            	}
 	            	}
-	            	hrefff += "&type=1";
+	            	hrefff += "&type=1#aaaa";
 	            	location.href=hrefff;
 	            }else{
-	            	location.href="/sshj/categoryCharge?type=1"
+	            	location.href="/sshj/categoryCharge?type=1#aaaa"
 	            }
 	   		}else if($('#Sequence option:selected').val() == "평점낮은순"){
 	   			if($("#area").val() != null && $("#area").val()!=''){//지역이 널이아닐때
@@ -437,10 +441,10 @@
 			            	}
 		            	}
 	            	}
-	            	hrefff += "&type=2";
+	            	hrefff += "&type=2#aaaa";
 	            	location.href=hrefff;
 	            }else{
-	            	location.href="/sshj/categoryCharge?type=2"
+	            	location.href="/sshj/categoryCharge?type=2#aaaa"
 	            }
 	   		}else if($('#Sequence option:selected').val() == "리뷰많은순"){
 	   			if($("#area").val() != null && $("#area").val()!=''){//지역이 널이아닐때
@@ -460,10 +464,10 @@
 			            	}
 		            	}
 	            	}
-	            	hrefff += "&type=3";
+	            	hrefff += "&type=3#aaaa";
 	            	location.href=hrefff;
 	            }else{
-	            	location.href="/sshj/categoryCharge?type=3"
+	            	location.href="/sshj/categoryCharge?type=3#aaaa"
 	            }
 	   		}else if($('#Sequence option:selected').val() == "리뷰적은순"){
 	   			if($("#area").val() != null && $("#area").val()!=''){//지역이 널이아닐때
@@ -480,10 +484,10 @@
 			            	}
 		            	}
 	            	}
-	            	hrefff += "&type=4";
+	            	hrefff += "&type=4#aaaa";
 	            	location.href=hrefff;
 	            }else{
-	            	location.href="/sshj/categoryCharge?type=4";
+	            	location.href="/sshj/categoryCharge?type=4#aaaa";
 	            }
 	   		}
 		});
@@ -644,6 +648,11 @@
 		return loca;
 	}
 </script>
+<c:if test="${list2!=null}">
+	<script>
+		location.href="#aaaa";
+	</script>
+</c:if>
 	<div class="section">
 		<div id="main">
 	        <h1>지역별 보기</h1>
@@ -986,6 +995,7 @@
 		        <input type="submit" value="검색하기" id="boardUpddate" class="btn" style="margin-bottom: 20px;"/>
 	      	</form>
 	    </div>
+	    <span id="aaaa"><a href="#aaaa"></a></span>
 	    <hr/>
 	    <select id="Sequence">
 	        <option value="평점높은순">평점높은순</option>
@@ -998,33 +1008,40 @@
 				<a href="/sshj/customproduct?productnum=${data.productnum}" id="taag">
 					<div id="productDiv">
 						<ul style="width:200px;">
-							<li><img src="/sshj/img/${data.thumbimg}"></li>
-							<li>
+							<li><img src="/sshj/resources/sellerProductImgs/${data.thumbimg}"></li>
+							<li class="productname" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">${data.productname}</li>
+							<li style="font-size: 14px; font-size: large; font-weight: bold;">
 								<c:if test="${data.saleprice==null || data.saleprice=='' || data.salefinish=='1' || data.salestart=='1'}">
 									${data.productprice}원
 								</c:if>
 								<c:if test="${data.saleprice != null && data.saleprice != '' && data.salefinish !='1' && data.salestart !='1'}">
-									${data.proprice}원
+									<span style="color:red; font-size: 14px;">${data.productprice-data.proprice}원 할인</span>&nbsp;${data.proprice}원
 								</c:if>
 							</li>
-							<li>${data.productname}</li>
-							<c:if test="${data.totalscore==1}">
-								<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★☆☆☆☆</span></li>
-							</c:if>
-							<c:if test="${data.totalscore==2}">
-								<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★★☆☆☆</span></li>
-							</c:if>
-							<c:if test="${data.totalscore==3}">
-								<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★★★☆☆</span></li>
-							</c:if>
-							<c:if test="${data.totalscore==4}">
-								<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★★★★☆</span></li>
-							</c:if>
-							<c:if test="${data.totalscore==5}">
-								<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★★★★★</span></li>
-							</c:if>
+							<li style="text-decoration: line-through; color: gray;">
+								<c:if test="${data.saleprice != null && data.saleprice != ''}">
+									${data.productprice}원
+								</c:if>
+							</li>
+								<c:if test="${data.totalscore==null}">
+									<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">☆☆☆☆☆</span></li>
+								</c:if>
+								<c:if test="${data.totalscore==1}">
+									<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★☆☆☆☆</span></li>
+								</c:if>
+								<c:if test="${data.totalscore==2}">
+									<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★★☆☆☆</span></li>
+								</c:if>
+								<c:if test="${data.totalscore==3}">
+									<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★★★☆☆</span></li>
+								</c:if>
+								<c:if test="${data.totalscore==4}">
+									<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★★★★☆</span></li>
+								</c:if>
+								<c:if test="${data.totalscore==5}">
+									<li>리뷰 ${data.sumreview} &nbsp;&nbsp;&nbsp;<span id="coloor">★★★★★</span></li>
+								</c:if>
 							<li>${data.storeaddr}</li>
-							<li>${data.username}</li>
 						</ul>
 					</div>
 				</a>

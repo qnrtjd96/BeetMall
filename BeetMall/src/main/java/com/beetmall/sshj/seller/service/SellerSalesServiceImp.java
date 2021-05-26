@@ -30,6 +30,25 @@ public class SellerSalesServiceImp implements SellerSalesService {
 		return dao.todayList(vo);
 	}
 
+	@Override
+	public List<SellerSalesVO> sellerSalesAllData(SellerSalesVO vo) {
+		// TODO Auto-generated method stub
+		return dao.sellerSalesAllData(vo);
+	}
+
+	@Override
+	public int sellerSalesAllDataLength(String userid) {
+		// TODO Auto-generated method stub
+		return dao.sellerSalesAllDataLength(userid);
+	}
+
+	@Override
+	public List<SellerSalesVO> sellerSalesChartData(int num, String userid) {
+		// TODO Auto-generated method stub
+		return dao.sellerSalesChartData(num, userid);
+	}
+
+
 
 
 }

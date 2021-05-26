@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beetmall.sshj.admin.dao.Admin_DesignDAO">
+	<select id="designselect" resultType="com.beetmall.sshj.admin.vo.Admin_DesignVO">
+		select t.catenum, b.catesort, b.productnum, b.mcatenum, thumbimg, productname
+		from maincategory t 
+		left join mainmcategory b on t.catenum = b.catenum
+		left join product p on b.productnum = p.productnum
+		where b.catenum = #{param1} 
+		order by b.catesort
+	</select>
+	<select id="designname" resultType="String">
+		select catename from maincategory where catenum =#{param1}
+	</select>
+	<select id="adminproductList" resultType="com.beetmall.sshj.admin.vo.adminProductVO" parameterType="com.beetmall.sshj.admin.vo.adminkPageSearchVO">
+		select * from(
+	    	select * from(
+				select a.productnum, a.mcatenum, a.productname, b.storename, b.sellername, c.count, to_char(a.sellstart, 'YYYY-MM-DD') sellstart
+				from product a
+				join seller b
+				    on a.userid = b.userid
+				left outer join (select count(productnum) count, productnum 
+				        from wish
+				        group by productnum) c
+				    on a.productnum = c.productnum 
+				where 1=1 
+				<!-- <choose>
+					<when test ='searchKey!=null'>
+						and faqcate = '${searchKey}' 
+					</when>
+					<when test ='searchKey!=null and searchWord==null'>
+						where faqcate = '${searchKey}' and faqoption = 1
+					</when>
+					<when test ='searchWord!=null'>
+						where faqtitle like '%${searchWord}%' and faqoption = 1
+					</when>
+					<when test ='searchWord==null'>
+						where faqoption = 1
+					</when>
+				</choose> -->
+				order by productnum desc)
+			where <![CDATA[rownum<=]]>${pageNum}*${onePageRecord} order by productnum)
+			where <![CDATA[rownum<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
+        							  <if test="pageNum!=totalPage">${onePageRecord}</if>
+        order by productnum desc
+	</select>
+	<select id="adminproductOnetotalRecord" parameterType="com.beetmall.sshj.admin.vo.adminkPageSearchVO" resultType="int">
+		select count(a.productnum)
+		from product a
+		join seller b
+		    on a.userid = b.userid
+		left outer join (select count(productnum) count, productnum 
+		        from wish
+		        group by productnum) c
+		    on a.productnum = c.productnum
+		order by a.productnum desc
+		<!-- <choose>
+			<when test = 'searchWord!=null and searchKey!=null'>
+				where faqtitle like '%${searchWord}%' and faqoption=1 and faqcate=${searchKey}
+			</when>
+			<when test = 'searchWord!=null'>
+				where faqtitle like '%${searchWord}%' and faqoption=1 
+			</when>
+			<when test = 'searchWord==null'>
+				where faqoption=1
+			</when>
+		</choose> -->
+	</select>
+	<update id="maincateEdit">
+		update mainmcategory set productnum = #{param3} where catenum=#{param2} and catesort=#{param1}
+	</update>
+	<update id="titleChange">
+		update maincategory set catename=#{param2} where catename = #{param1}
+	</update>
+	<delete id="popdel">
+		delete from mainlayout
+	</delete>
+	<insert id="popInsert" parameterType="com.beetmall.sshj.custom.vo.PopupVO">
+		insert into mainlayout(popupimg, popuplink, popupterm, popupheight, popupwidth)
+		values(#{popupimg}, #{popuplink}, #{popupterm}, #{popupheight}, #{popupwidth})
+	</insert>
+	<select id="popupSelect" resultType="com.beetmall.sshj.custom.vo.PopupVO">
+		select popupimg, popuplink, popupterm, popupheight, popupwidth from mainlayout
+	</select>
+</mapper>

@@ -34,5 +34,10 @@ public class MyfavoriFormServiceImp implements MyfavoriFormService{
 	public int farmHit(int storenum) {
 		return myfavoriFormDAO.farmHit(storenum);
 	}
+
+	@Override
+	public MyfavoriFormVO discountSelect2(int storenum) {
+		return myfavoriFormDAO.discountSelect2(storenum);
+	}
 	
 }

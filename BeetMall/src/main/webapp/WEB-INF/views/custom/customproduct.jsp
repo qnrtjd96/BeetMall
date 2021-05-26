@@ -53,11 +53,11 @@ a:hover, a:active, a:visited, a:link {
 
 #productMainTiltle {
 	width: 480px;
-	height: 50px;
-	line-height: 50px;
+	height: 70px;
+	line-height: 70px;
 	float: left;
 	margin-right: 70px;
-	font-size:25px;
+	font-size:35px;
 }
 
 #productPrice {
@@ -65,8 +65,10 @@ a:hover, a:active, a:visited, a:link {
 	width: 50%;
 	height: 40px;
 	line-height: 40px;
-	font-size:17px;
+	font-size:21px;
     margin-bottom:20px;
+    color:red;
+    font-weight:bold;
    
 }
 
@@ -78,11 +80,13 @@ a:hover, a:active, a:visited, a:link {
 	padding-left:20px;
 	margin-bottom:20px;;
 	font-size:14px;
+	overflow:hidden;
 	
 }
 
 #sprofile>a{
 color:gray;
+overflow:hidden;
 }
 
 #simg {
@@ -158,6 +162,9 @@ padding-left:20px;
 	line-height: 10px;
 	width: 20px;
 	height:20px;
+	margin-right:2px;
+	margin-left:2px;
+	font-weight:bold;
 }
 
 #selecOption {
@@ -165,15 +172,16 @@ padding-left:20px;
 }
 
 #productTotalPrice {
-	padding-left: 350px;
+    padding-left: 350px;
 	width: 100%;
 	float: left;
-	line-height: 50px;
-	height: 50px;
-	font-size:25px;
-	padding-left:280px;
+	line-height: 70px;
+	height: 70px;
+	padding-left:240px;
 	margin-bottom:25px;
 	font-weight:bold;
+    color:black;
+	font-size:30px;
 
 	
 }
@@ -233,18 +241,21 @@ padding-left:20px;
 .infoBtnb {
 	width: 100%;
 	float: left;
-	padding-left: 10px;
-	height: 30px;
-	line-height: 30px;
-	border-bottom: 1px solid #eee;
+	padding-left: 2px;
+	height: 35px;
+	line-height: 35px;
+	border-bottom: 2px solid #eee;
 	margin-bottom: 10px;
+	padding-left:15px;
+	margin-top:45px;
 }
 
 .infoBtnb>a>input{
-	width: 150px;
+	width: 350px;
 	height: 30px;
 	line-height: 30px;
 	float:left;
+	margin:0px;
 }
 
 /*  상세정보박스1  -------------------------------------------------------- */
@@ -646,17 +657,30 @@ float:left;
 	
 	
 	#infoBtn1,#infoBtn2,#infoBtn3{
-	   border-radius: 1px;	 	
+	  width:350px;
+	 height:35px;
+	 line-height:30px;
+	 border-radius: 1px;	 	
+	 background-color:#eee;	 border-radius: 1px;	 	
 	   background-color:#eee;	
 	}
 	
-	#infoBtn1:hover,#infoBtn2:hover,#infoBtn3:hover{
+	#infoBtn1:hover{
 	
-	background-color:#FF5430;	
+	background-color:#ff6464;	
 	color:white;
 	
 	}
 	
+	#infoBtn2:hover{
+	background-color:#ff6464;
+	color:white;
+	}
+	
+	#infoBtn3:hover{
+	background-color:#ff6464;
+	color:white;
+	}
 	
 	
 	#infoBtn1>a:active,#infoBtn2>a:active,#infoBtn3>a:active{
@@ -664,14 +688,36 @@ float:left;
 	}
 	
 	#productBtn>.btn{
-	background-color:#eee;	
-	height:30px;
+	height:40px;
+	width:160px;
 	}
+	
 	#productBtn>.btn:hover{
-	background-color:#FF5430;
+	background-color:#ff0000;
 	color:white;
 	}
 
+    #chatbtn{
+	background-color:#2aa1b7;
+	color:white;
+	font-weight:bold;
+	}
+	
+	#wishbtn{
+	background-color:#F96167;
+	color:white;
+	font-weight:bold;
+	}
+	
+	#totalbuy{
+	background-color:#ff414d;
+	color:white;
+	font-weight:bold;
+	}
+
+  input>.btn{
+    border:none;
+    }
 
 #productBtn{
     padding-left: 0px;
@@ -732,6 +778,11 @@ line-height:50px;
 margin-left:1010px;
 font-size:15px;
 color:black;
+}
+
+#spanTotalPrice{
+font-size:40px;
+color:red;
 }
 
 /* 채팅 */
@@ -817,7 +868,7 @@ color:black;
 
     		var tprice=(optprice*ocount)+((prtprice-dprtprice)*pcount);			
     		//alert("pcount="+pcount+"tprice="+tprice);
-    		$("#productTotalPrice").html("구매가격:"+tprice+"원");
+    		$("#spanTotalPrice").html(tprice);
     		$("#productTotalPrice2").html("할인된가격: - "+(dprtprice*pcount)+"원");
     		$("#productTotalPrice4").html("상품"+prtprice+"원 x"+pcount+"개");
     		$("#productTotalPrice3").html("옵션가격:"+(optprice*ocount)+"원("+optprice+"x"+ocount+"개)");
@@ -839,7 +890,7 @@ color:black;
 	
     		tprice=(optprice*ocount)+((prtprice-dprtprice)*pcount);
     		//alert("pcount="+pcount+"tprice="+tprice); 		 		
-    		$("#productTotalPrice").html("구매가격:"+tprice+"원");
+    		$("#spanTotalPrice").html(tprice);
     		$("#productTotalPrice2").html("할인된가격: - "+(dprtprice*pcount)+"원");
     		$("#productTotalPrice4").html("상품"+prtprice+"원 x"+pcount+"개");
     		$("#productTotalPrice3").html("옵션가격:"+(optprice*ocount)+"원("+optprice+"x"+ocount+"개)");
@@ -868,7 +919,7 @@ color:black;
 			var tprice=(optprice*ocount)+((prtprice-dprtprice)*pcount);
 			//alert("옵션바뀔때 가격"+optprice+",tprice="+tprice);
 			
-			$("#productTotalPrice").html("구매가격:"+tprice+"원");
+			$("#spanTotalPrice").html(tprice);
 			$("#productTotalPrice2").html("할인된가격: - "+(dprtprice*pcount)+"원");
 			$("#productTotalPrice4").html("상품"+prtprice+"원 x"+pcount+"개");
 			$("#productTotalPrice3").html("옵션가격:"+(optprice*ocount)+"원("+optprice+"x"+ocount+"개)");
@@ -885,7 +936,7 @@ color:black;
 		 tprice=(optprice*ocount)+((prtprice-dprtprice)*pcount);    		 
 
 		 $("#productTotalPrice3").html("옵션가격:"+(optprice*ocount)+"원("+optprice+"x"+ocount+"개)");
-		 $("#productTotalPrice").html("구매가격:"+tprice+"원");
+		 $("#spanTotalPrice").html(tprice);
   		 $("#productTotalPrice2").html("할인된가격: - "+(dprtprice*pcount)+"원");
   		 $("#productTotalPrice4").html("상품"+prtprice+"원 x"+pcount+"개");
 
@@ -906,12 +957,12 @@ color:black;
  		 tprice=(optprice*ocount)+((prtprice-dprtprice)*pcount);    		 
 
  		 $("#productTotalPrice3").html("옵션가격:"+(optprice*ocount)+"원("+optprice+"x"+ocount+"개)");
- 		 $("#productTotalPrice").html("구매가격:"+tprice+"원");
+ 		 $("#spanTotalPrice").html(tprice);
    		 $("#productTotalPrice2").html("할인된가격: - "+(dprtprice*pcount)+"원");
    		 $("#productTotalPrice4").html("상품"+prtprice+"원 x"+pcount+"개");
 
  		 submitprice=tprice;
- 		 totaldprtprice=dprtprice*pcount;
+ 		 totaldprtprice=(dprtprice*pcount);
        });
       
       //////////총계산 값 저장해놓기/////////////////////////////////
@@ -920,14 +971,15 @@ color:black;
     	  if(${logId==null}){
     		  alert("로그인후 이용해 주세요")
     	  }
+    	  var productname="${pvo.productname}";
     	  var toltalPrice = (prtprice * pcount) + (optprice* ocount);
     	  var totalCount = pcount+optprice;
-    	  location.href="/sshj/productPay?total="+toltalPrice+"&discountprice="+totaldprtprice+"&productnum=${pvo.productnum}&productname=${pvo.productname}&deliveryoption=${pvo.deliveryoption}&optionnum="+optprice+"&totalCount="+totalCount;
+    	  location.href="/sshj/productPay?total="+toltalPrice+"&discountprice="+(dprtprice*pcount)+"&productnum=${pvo.productnum}&productname="+productname+"&deliveryoption=${pvo.deliveryoption}&optionnum="+optprice+"&totalCount="+totalCount;
       });
-      ///////////////////////////장바구니에 등록하기/////////////////////////////
+      ///////////////////////////장바구니에 등록하기//////////////////////////////
       ////장바구니에 넘겨야할 데이터-> 아이디/상품코드/상품가격/상품의갯수/할인가격/옵션코드/옵션가격/옵션의갯수/최종구매가격
 		$("#wishbtn").click(function() {
-			alert("아이디="+"${logId}"+"상품코드"+productnump+"상품가격="+prtprice+"/상품의 갯수="+pcount+"/옵션가격="+optprice+"/옵션의갯수="+ocount+"/최종구매가격="+submitprice+"/옵션코드="+optnum+"/본래할인가격"+dprtprice+"/총할인가격="+totaldprtprice);
+			//alert("아이디="+"${logId}"+"상품코드"+productnump+"상품가격="+prtprice+"/상품의 갯수="+pcount+"/옵션가격="+optprice+"/옵션의갯수="+ocount+"/최종구매가격="+submitprice+"/옵션코드="+optnum+"/본래할인가격"+dprtprice+"/총할인가격="+(dprtprice*pcount));
 			var data= "userid=${logId}&productnum=${pvo.productnum}&prtprice="+prtprice+"&optnum="+optnum+"&pcount="+pcount+"&optprice="+optprice+"&ocount="+ocount+"&submitprice="+submitprice+"&dprtprice="+dprtprice;
 			var url="customWishInsert";
 			//alert(data);
@@ -989,13 +1041,105 @@ color:black;
   				}
   			);
   		});
- 
+ /////////////////////////////신고하기///////////////////////////
     
-    
+	var reporteduser=0;
+	var reportboardnum=0;
+	
+	$(document).on('click','.reviewchatHeaderSpan', function(){
+		
+		var scroll = window.scrollY;
+		if(scroll>255){
+			$("#reviewreportDiv").css("top",scroll+350);
+		}else {
+			$("#reviewreportDiv").css("top",scroll+350);
+		}
+		
+	
+		$("#reviewreportDiv").css("display","block");
+		reporteduser=$(this).parent().next().val();
+		reportboardnum=$(this).parent().next().next().val();
+		//alert("id"+reporteduser+"num"+reportboardnum);
+		$("#reporteduser").val(reporteduser);
+		$("#reportboardnum").val(reportboardnum);
+		
+	   	$(document).on('click','input[value=리뷰신고]', function(){	// 신고창 여는 부분(여기서 신고할 유저아이디, 신고할 글번호 세팅해줌)
+			//alert("id2"+reporteduser+"num2"+reportboardnum);
+			//var reporteduser=$(this).parent().parent().parent().prev().children().eq(0).value();
+			//var reportboardnum=$(this).parent().parent().parent().prev().children().eq(1).value();
+			
+			alert(reporteduser+reportboardnum+여기까지옴);
+			$("#reviewreportDiv").css("display","block");
+	
+	      });
+		
+		
+		$(".reviewreportsubmit").click(function(){	// 신고처리하는 ajax부분
+			
+			var formdata = $(".reviewreportForm").serialize();
+			alert("reviewformdata === "+formdata);
+			$.ajax({
+				url: "customreport",
+				type : "POST",
+				cache:false,
+				data:formdata,
+				success:function(result){
+					console.log(result);
+					if(result == 1){
+						alert('고객님의 신고가 접수되었습니다');
+						location.href="customproduct?productnum=${pvo.productnum}";
+					}else if(result != 1){
+						alert('신고에 실패했습니다. error_code : 176');
+						$("#reportcontent").val('');
+						$("#reviewreportDiv").css("display","none");
+					}
+				}, error:function(error){
+					console.log(error);
+				}
+			})
+			$("#reportcontent").val('');
+			$("#reviewreportDiv").css("display","none");
+		})
+		
+		
+		
+		$("#reviewreportClose").click(function(){			// 신고 닫기 부분
+		$("#reportcontent").val('');
+		$("#reviewreportDiv").css("display","none");
+	     })
+	     
+	     
+	  
+    });
     
 });
+	
+//////////////함수안 여기까지
+	
+	$(document).on('click',"#closedivBtn",function(){
+		$("#chatIframe").css("display","none");
+	})
+	
+	$(document).on('click','#chatHeaderSpan', function(){
+		if(confirm("신고하기로 이동하시겠습니까?")){
+			location.href='myChatList';
+		}
+	});
+	
+	$(document).on('click','#reviewchatHeaderSpan', function(){
+		$("#reviewreportDiv").css("display","block");
+	});
+	
+	
 </script>
 <body>
+<!--  
+<c:if test="${report != null }">
+	<script>
+		 location.href='customproduct?productnum='+${report };
+	</script>
+</c:if>
+-->
 	<div class="section" id="productPageDiv">
 		
 
@@ -1009,7 +1153,7 @@ color:black;
 
 
 			<div id=productImgBox>
-				<img src="img/${pvo.thumbimg}"/>
+				<img src="resources/sellerProductImgs/${pvo.thumbimg}"/>
 			</div>
 
 
@@ -1033,7 +1177,7 @@ color:black;
 					<a href="#">${pvo.userid}</a>  <!-- 판매자 아이디 -->
 				</div>
 				<div id="simg">
-					<a href="#"><img src="img/${fvo.farmprofile}"/></a>  <!-- 프사 -->
+					<a href="#"><img src="resource/sellerprofileimg/${fvo.farmprofile}"/></a>  <!-- 프사 -->
 				</div>
 				
 				
@@ -1082,7 +1226,7 @@ color:black;
                 <div id=productTotalPrice4></div>
                 <div id=productTotalPrice2>할인된가격:- ${Dprice} 원</div>
                 <div id=productTotalPrice3>옵션가격:</div>
-				<div id=productTotalPrice>구매가격: <span id="spanTotalPrice"></span> 원</div>
+				<div id=productTotalPrice>구매가격: <span id="spanTotalPrice" style="font-size:40px; color:red"></span> 원</div>
 				
 				<div id=productBtn>
 					<input type="button" value="1:1대화하기"  class="btn" id="chatbtn"/>
@@ -1193,16 +1337,49 @@ color:black;
 					</ul>
 					
 					   <div id="reviewViewbox" style="display:none" >
-					      <input type="hidden" value="r${rlist.reviewnum}"/>
+					        <input type="hidden" value="r${rlist.reviewnum}"/>
 							<div id="reviewImgbox">
 								<img src="img/${rlist.reviewimg}"/>
 							</div>
+							
 							<div id="reviewtxtbox">					
 							     ${rlist.reviewcontent}
 							</div>
-					   </div>
-					   
-               </c:forEach>
+		   <!-- 리뷰 신고하기 -->			
+							
+							<div id="reviewchatInfoTitle"><span id="reviewchatHeaderSpan" class="reviewchatHeaderSpan"><span id="reviewreportChat">신고하기</span><span id="reviewtheyId"></span></span></div>
+							<input type=hidden value="${rlist.userid}">
+						    <input type=hidden value="${rlist.reviewnum}">
+					  </div>
+     
+				          
+          <!-- 리뷰 신고  끝단 -->	    
+             </c:forEach>
+               
+          <!-- 신고하기 부분-->
+				<div style="height:350px;width:500px;border:1px solid red;position:absolute;top:400px;left:800px;background-color:white;display:none;" id="reviewreportDiv" class="reviewreportDiv">
+					<form style="height:400px;width:500px;float:left;" method="post" action="customreport" id="reviewreportForm" class="reviewreportForm">
+						<h2 style="margin-left:10px;">신고하기</h2>
+						<span style="float:left;font-size:20px;margin-left:10px;">신고사유</span>
+							<input type="hidden" name="userid" value="${logId}"/>												<!-- 신고자 아이디 -->
+							<input type="hidden" name="reporteduser" id="reporteduser" value=""/>											<!-- 신고할 사람 아이디 -->
+							<input type="hidden" name="reportboard" value="리뷰"/>							<!-- 신고한 게시판 -->
+							<input type="hidden" name="reportboardnum" id="reportboardnum" value=""/>										<!-- 신고한 글 번호 -->
+							<select name="reportreason"  style="float:right;margin-right:10px;font-size:20px;">	<!-- 신고사유 -->
+								<option value="비방/욕설">비방/욕설</option>
+								<option value="허위">허위</option>
+								<option value="성희롱">성희롱</option>
+								<option value="기타">기타</option>
+							</select>
+						<textarea name="reportcontent" id="reportcontent" style="height:200px;width:480px;margin-left:10px; margin-right:10px;font-size:15px;" maxlength="149"></textarea><!-- 신고내용 -->
+						<div style="font-size:20px;float:right;margin-right:10px;">
+							<input type="button" value="리뷰신고" style="background-color:#ff3a3a;color:white;border:1px solid #aaa;"id="reviewreportsubmit" class="reviewreportsubmit"/><!-- 신고버튼 -->
+							<input type="button" value="닫기"style="background-color:#ddd;color:white;border:1px solid #aaa;"id="reviewreportClose"/>
+							
+						</div>
+					</form>
+				</div>
+           <!--  신고하기 밑에 스크립트까지임 -->	
                
                <div id="pagelibtn"><a href="/sshj/mybuyList">후기 작성</a></div>
                
@@ -1362,12 +1539,16 @@ color:black;
 		<!--productInfoPage  -->
 
 
-			<!-- 채팅창 -->
+			<!-- 채팅창 ------------------------------------------------------------->
          	<div id ="chatIframe">
 				<div id="chatTop"></div>
-				<div id="chatInfoTitle"><span id="chatHeaderSpan"><span id="reportChat">신고하기</span><span id="theyId"></span>님과의 채팅입니다.</span><span id="closedivBtn">&times;</span></div>
+				<div id="chatInfoTitle"><span id="chatHeaderSpan"><span id="reportChat" class="productChatreport">신고하기</span><span id="theyId"></span>님과의 채팅입니다.</span><span id="closedivBtn">&times;</span></div>
 				<iframe src="" id="chatContainer" frameborder="0" ></iframe>
-			</div>									
+			</div>
+			
+			
+
+						
 
 	</div>
 	<!-- section -->

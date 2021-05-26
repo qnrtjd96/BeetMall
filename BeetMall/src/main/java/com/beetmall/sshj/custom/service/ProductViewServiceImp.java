@@ -93,7 +93,7 @@ public class ProductViewServiceImp implements ProductViewService {
 
 
 	@Override
-	public ProductViewVO customWishInsert(String id, int productnum, int optnum, int pcount, int ocount) {
+	public int customWishInsert(String id, int productnum, int optnum, int pcount, int ocount) {
 	
 		return productVeiwDAO.customWishInsert(id,productnum,optnum,pcount,ocount);
 	}
@@ -112,6 +112,14 @@ public class ProductViewServiceImp implements ProductViewService {
 	public int totalRecord3(String userid) {
 		
 		return productVeiwDAO.totalRecord3(userid);
+	}
+
+
+
+	@Override
+	public int wishDel(int num) {
+		return productVeiwDAO.wishDel(num);
+		
 	}
 
 

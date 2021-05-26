@@ -12,7 +12,7 @@
 			<!-- info 컨테이너 묶기 width:700px 고정 -->
 			<div id="info_container">
 				<div id="profile_box">
-					<img src="<%=request.getContextPath()%>/resources/img/${result.farmprofile}"/>
+					<img src="<%=request.getContextPath()%>/resources/sellerprofileimg/${result.farmprofile}" onerror="this.src='/sshj/img/derror.png'"/>
 					<div id="farmname" name="farmname">${result.farmname }</div>
 					<div>
 						방문 : ${result.farmvisitor}명 | 농장 즐겨찾기 : ${favorite}명
@@ -41,16 +41,15 @@
 					<input type="hidden" name="productnum" value="${result.productnum }"/> 
 					<div>대표메뉴</div>
 					<div id="repMenu_content">
-						<img src="<%=request.getContextPath()%>/resources/img/${result.thumbimg}" name="thumbimg"/>
+						<img src="<%=request.getContextPath()%>/resources/fileupload/${result.thumbimg}" name="thumbimg" onerror="this.src='/sshj/img/derror.png'"/>
 						<div>
 							<div>${result.productname }</div>
 							<div>
-								<c:if test="${result1.saleselect != '0' && result1.saleselect != null}">
-									판매금액 : <div>${ result.productprice - result1.saleprice }</div>원
-								</c:if>
-								<c:if test="${result1.saleselect == '0' || result1.saleselect == null }">
-									판매금액 : <div>${ result.productprice }</div>원
-								</c:if>
+								<div>
+									<div>${ result1.saleprice }원 할인</div>
+									<div>${ result.productprice- result1.saleprice }원</div>
+								</div>
+								<div>${ result.productprice }원</div>
 							</div>
 						</div>
 					</div>

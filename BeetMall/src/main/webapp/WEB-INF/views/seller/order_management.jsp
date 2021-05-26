@@ -78,10 +78,6 @@
 		}
 	}// function end
     	
-	//검색하기
-		//1. 카테고리 변경
-	
-	//탭
 
 	//모달
 	function modal(id) {
@@ -143,7 +139,8 @@
 	$(function(){
 		$("#searchForm").submit(function(){
 			//searchWord있는지 없는지 찾기 , 있을때만 데이터 넘기기
-			if($('#searchWord').val()=="" || $('#searchWord').val()==null){
+			if($('.search_id').val()==null || $('.search_num').val()==null){
+				console.log()
 				alert("검색어를 입력하세요.");
 				return false;
 			}
@@ -161,6 +158,30 @@
 			});
 	
 	});
+	
+	function orderNumSend(){
+		console.log('orderNum 1 ->', $('#hiddenOrderNum').text());
+		var url = "order_management";
+		var ordernum = $('#hiddenOrderNum').val();
+	console.log('orderNum 2 ->', ordernum);
+	
+/*		$.ajax({
+			url:url,
+			type:'POST',
+			traditional:true,
+			data:{
+				ordernum : ordernum
+			}, success :function(){
+				console.log('modal data input success');
+				var tag = "<span>"+${orderList.ordernum}+"</span>";
+				$('#orderNumSet').html(tag);
+			}, error : { 
+				function(e){
+					console.log("error >>", e.status)
+				}
+			}
+		});*/	
+	}  	
 </script>	
 	
 <body>
@@ -202,10 +223,10 @@
 					<!-- 채소 -->
 				</li>
 				<li><label for="">주문번호</label><br/>
-					<input type="number" size="15" name="searchWord" class="search_num" placeholder="주문번호를 입력해주세요."/>
+					<input type="number" size="15" name="searchnum" class="search_num" placeholder="주문번호를 입력해주세요."/>
 				</li>
 				<li><label for="">구매자 ID</label><br/>
-					<input type="text" size="15" name="searchWord" class="search_id" placeholder="ID를 입력해주세요."/>
+					<input type="text" size="15" name="searchid" class="search_id" placeholder="ID를 입력해주세요."/>
 				</li>
 				<li>
 					<input type="button" name="" class="save_excel" value="엑셀로 저장" onclick="save_excel()"/>
@@ -252,7 +273,7 @@
 						<tbody>
 						<c:forEach var="list" items="${list}" >
 							<tr>
-								<td><a href="javascript:modal()">${list.ordernum}</a></td><!-- id="popup_open_btn" -->
+								<td><a href="javascript:modal()">${list.ordernum}<input type="hidden" value="${list.ordernum}" id="hiddenOrderNum"></a></td><!-- id="popup_open_btn" -->
 								<td>${list.productnum}</td>
 								<td>${list.productname}</td>
 								<td>${list.orderquantity}</td>
@@ -276,7 +297,7 @@
 						<option value="배송중">배송중</option>
 						<option value="배송완료">배송완료</option>
 						<option value="픽업대기중">픽업대기중</option>
-						<option value="픽업대기중">픽업완료</option>
+						<option value="픽업완료">픽업완료</option>
 					</select>
 					
 					<input type="button" id="selBtn" value="변경" onClick="selectOrderStatusUpdate()"/>
@@ -284,10 +305,12 @@
 			<!-- 페이징-->
 		<div class="page_wrap">
 			<div class="page_nation">
+			  <c:if test="${pageVO.pageNum>1}"><!-- 이전페이지가 있을때 -->
 			  	<!--맨앞으로-->
   				<a class="arrow_pprev" href="order_management?pageNum=1<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>"></a>
 				<!--앞으로-->
         		<a class="arrow_prev" href="order_management?pageNum=${sapvo.pageNum-1}<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>"></a>
+ 			</c:if>	
  				<!--레코드 갯수에 따른 페이지 갯수 표시--> 
          		<c:forEach var="p" begin="${sapvo.startPageNum}" end="${(sapvo.startPageNum + sapvo.onePageNum)-1}">
 	         		<!--p가 총페이지수보다 작거나같을때  레코드가 있는 페이지까지만 표시 -->
@@ -303,10 +326,12 @@
 	            	</c:if>
         		</c:forEach>
         		<!-- 다음 페이지가 있을 때 -->
+        	<c:if test="${pageVO.pageNum < pageVO.totalPage}">
 				<!--뒤로-->            
 	         	<a class="arrow next" href="order_management?pageNum=${sapvo.pageNum+1}<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>"></a>
 				<!--맨뒤로-->
 	         	<a class="arrow nnext" href="order_management?pageNum=${sapvo.totalPage}<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>"></a>
+			</c:if>
 			</div>
 		 </div>
 		 <!-- 페이징 끝 -->
@@ -327,7 +352,7 @@
 				<tbody>
 					<tr class="detail_line1">
 						<td><span class="detail_menu">주문번호</span></td>
-						<td>${oneList.ordernum}</td>
+						<td id="orderNumSet">${oneList.ordernum}</td>
 						<td><span class="detail_menu">주문일</span></td>
 						<td>${oneList.orderdate}</td>
 					</tr>
@@ -409,13 +434,13 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="deliverynow" items="${oneList}">
+					
 					<tr>
-						<td colspan="2">${deliverynow.deliverystatus}</td>
-						<td colspan="2">${deliverynow.deliverydate}</td>		
+						<td colspan="2">${oneList.deliverystatus}</td>
+						<td colspan="2">${oneList.deliverydate}</td>		
 					</tr>
-					</c:forEach>
-					<tr><td colspan="4" style="text-align:center"><button id="talk_customer">구매자와 대화하기</button></td></tr>
+					
+					<!-- <tr><td colspan="4" style="text-align:center"><button id="talk_customer">구매자와 대화하기</button></td></tr> -->
 				</tbody>
 			</table>	
 		</div>

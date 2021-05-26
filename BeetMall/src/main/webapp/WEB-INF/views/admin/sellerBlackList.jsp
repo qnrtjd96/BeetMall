@@ -85,9 +85,47 @@
 		border:1px solid #42454c;
 	}
 	/* 페이징처리끝 */
+	.foreachUL>li:nth-child(8n+1), #forachtitle>li:nth-child(8n+1){
+		width:0px !important;
+	}
+	.foreachUL>li:nth-child(8n+2), #forachtitle>li:nth-child(8n+2){
+		width:142px;
+	}
+	.foreachUL>li:nth-child(8n+3), #forachtitle>li:nth-child(8n+3){
+		width:142px;
+	}
+	.foreachUL>li:nth-child(8n+4), #forachtitle>li:nth-child(8n+4){
+		width:42px;
+	}
+	.foreachUL>li:nth-child(8n+5), #forachtitle>li:nth-child(8n+5){
+		width:182px !important;
+	}
+	.foreachUL>li:nth-child(8n+6), #forachtitle>li:nth-child(8n+6){
+		width:242px;
+		white-space: nowrap;
+		overflow:hidden;
+		text-overflow: ellipsis;
+	}
+	.foreachUL>li:nth-child(8n+7), #forachtitle>li:nth-child(8n+7){
+		width:142px;
+		white-space: nowrap;
+		overflow:hidden;
+		text-overflow: ellipsis;
+	}
+	.foreachUL>li:nth-child(8n), #forachtitle>li:nth-child(8n){
+		width:142px;
+	}
+	.foreachUL>li{
+		cursor: pointer;
+	}
 </style>
 <script>
- 
+$(function(){
+	$(".foreachUL").click(function(){
+		var userid = $(this).children().eq(0).children().val();
+		location.href="sellerInfoEditA?userid="+userid;
+	});
+})
 </script>
  
  
@@ -108,7 +146,7 @@
 			<a href="customerBlackList"><button class="success" value="" name="" id="">일반회원</button></a>
 			<a href="sellerBlackList"><button class="success" value="" name="" id="" style="background-color:lightgray; color:black;">판매자회원</button></a>
 		</div> 
-		<div id="sortBox">
+		<div id="sortBox" style="display:none">
 			<ul>
 				<li>
 					<select name="searchDate">  
@@ -134,151 +172,53 @@
 			</ul>
 		</div>
 		<div id="contentBox"> 	
-		<div id="title">
-			<ul>
-				<li><input type="checkbox" name="check"  ></li>
-				<li>신고번호</li>
-				<li>이름</li>
-				<li>아이디</li>
-				<li>신고자</li>
-				<li>신고유형</li>
-				<li>신고일</li>
-				<li>처리일</li> 
-			</ul>
-		</div>  
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 1236954</li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">sellerid</a></li>
-				<li>badid</li>
-				<li>비방</li>
-				<li>2021-05-23</li>
-				<li>2021-02-16</li> 
-			</ul>
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 1236954</li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">sellerid</a></li>
-				<li>badid</li>
-				<li>비방</li>
-				<li>2021-05-23</li>
-				<li>2021-02-16</li> 
-			</ul>  
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 1236954</li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">sellerid</a></li>
-				<li>badid</li>
-				<li>비방</li>
-				<li>2021-05-23</li>
-				<li>2021-02-16<br/></li> 
-			</ul>  
-		
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 1236954</li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">sellerid</a></li>
-				<li>badid</li>
-				<li>비방</li>
-				<li>2021-05-23</li>
-				<li>2021-02-16<br/></li> 
-			</ul> 
-		
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 1236954</li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">sellerid</a></li>
-				<li>badid</li>
-				<li>비방</li>
-				<li>2021-05-23</li>
-				<li>2021-02-16<br/></li> 
-			</ul> 
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 1236954</li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">sellerid</a></li>
-				<li>badid</li>
-				<li>비방</li>
-				<li>2021-05-23</li>
-				<li>2021-02-16<br/></li> 
-			</ul> 
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 1236954</li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">sellerid</a></li>
-				<li>badid</li>
-				<li>비방</li>
-				<li>2021-05-23</li>
-				<li>2021-02-16<br/></li> 
-			</ul> 
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 1236954</li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">sellerid</a></li>
-				<li>badid</li>
-				<li>비방</li>
-				<li>2021-05-23</li>
-				<li>2021-02-16<br/></li> 
-			</ul> 
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 1236954</li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">sellerid</a></li>
-				<li>badid</li>
-				<li>비방</li>
-				<li>2021-05-23</li>
-				<li>2021-02-16<br/></li> 
-			</ul> 
-		<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> 1236954</li>
-				<li>홍길동</li>
-				<li><a href="회원정보?">sellerid</a></li>
-				<li>badid</li>
-				<li>비방</li>
-				<li>2021-05-23</li>
-				<li>2021-02-16<br/></li> 
-			</ul>     
-		<c:forEach var="data" items="${list}">
-			<ul class="contentList">
-				<li><input type="checkbox" name="check" id="check"> </li>
-				<li> name?</li>
-				<li><a href="회원정보?">id?</a></li>
-				<li>나이?</li>
-				<li>{member.email}</li>  
-				<li>{data.birthday}</li>
-				<li>{data.addr}</li>
-				<li>탈퇴일?<br/></li> 
-			</ul>
-		</c:forEach>
+			<div id="title">
+				<ul id="forachtitle">
+					<li></li>
+					<li>아이디</li>
+					<li>이름</li>
+					<li>나이</li>
+					<li>이메일</li>
+					<li>주소</li>
+					<li>누적 정지횟수</li>
+					<li>정지해제일</li> 
+				</ul>
+			</div>  
+			<c:forEach var="vo" items="${list}">
+				<ul class="contentList foreachUL">
+					<li><input type="hidden" value="${vo.userid}"/></li>
+					<li>${vo.userid}</li>
+					<li>${vo.username}</li>
+					<li>${vo.age}</li>
+					<li>${vo.useremail}</li>
+					<li>(${vo.userzipcode})${vo.useraddr} ${vo.userdetailaddr}</li>
+					<li>${vo.reportcount}</li>
+					<li>${vo.reportfin}<br /></li>
+				</ul>
+			</c:forEach> 
 		</div>	 
-		<div class="page_wrap">
+		<div class="page_wrap">	
 			<div class="page_nation">
-			   <a class="arrow pprev" href="<%=request.getContextPath()%>/img/kpage_pprev.png"></a>
-			   <a class="arrow prev" href="#"></a>
-			   <a href="#" class="active">1</a>
-			   <a href="#">2</a>
-			   <a href="#">3</a>
-			   <a href="#">4</a>
-			   <a href="#">5</a>
-			   <a href="#">6</a>
-			   <a href="#">7</a>
-			   <a href="#">8</a>
-			   <a href="#">9</a>
-			   <a href="#">10</a>
-			   <a class="arrow next" href="#"></a>
-			   <a class="arrow nnext" href="#"></a>
+			   <c:if test="${pageVO.pageNum>1}"><!-- 이전페이지가 있을때 -->
+			   		<a class="arrow prev" href="javascript:pagelist(${pageVO.pageNum-1})"></a>
+			   </c:if>
+			   <!-- 페이지 번호                   1                                    5                     -->
+	           <c:forEach var="p" begin="${pageVO.startPageNum}" step="1" end="${pageVO.startPageNum + pageVO.onePageNum-1}">
+	              <c:if test="${p<=pageVO.totalPage}">
+	                 <c:if test="${p==pageVO.pageNum }"> <!-- 현재페이지일때 실행 -->
+	                    <a class="active">${p}</a>
+	                 </c:if>   
+	                 <c:if test="${p!=pageVO.pageNum}"> <!-- 현재페이지가 아닐때 실행 -->
+	                    <a href="javascript:pagelist(${p})">${p}</a>
+	                 </c:if>
+	              </c:if>
+	           </c:forEach>
+	           <c:if test="${pageVO.pageNum < pageVO.totalPage}">
+	              <a class="arrow next" href="javascript:pagelist(${pageVO.pageNum+1})"></a>
+	           </c:if>
 			</div>
-		 </div>  
+			
+		 </div> 
 		 <div>
 			<form method="get" class="searchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
 				<select name="searchKey">
