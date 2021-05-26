@@ -89,7 +89,7 @@
 		padding-top: 3px;
 	}
 	#productDiv>ul>li:nth-child(5n+2){
-	    font-size: x-large;
+	    font-size: 14px;
 	    font-weight: bold;
 	}
 	#productDiv>ul>li:nth-child(5n+1){

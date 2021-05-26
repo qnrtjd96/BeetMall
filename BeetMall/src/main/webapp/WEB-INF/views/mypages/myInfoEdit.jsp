@@ -34,11 +34,11 @@
 	#infoCheckDiv{
 		padding-top:20px;
 		padding-bottom:30px;
-		border-bottom: 1px solid rgb(252,118,45);
+		
 	}
 	
 	#userinputDiv{
-		height:500px;
+		height:600px;
 		background-color:white;
 	}
 	#infoView, #infoView2{
@@ -73,22 +73,7 @@
 	.radiusClass{
 		border-radius:5px;
 	}
-	button, .btn{
-		padding: 3px 10px;
-		color: #666666;
-		background:#fff;
-		border:1px solid #eee;
-		text-align: center;
- 		text-decoration: none;
-		display: inline-block;
-		margin:0 3px;
-	}
-	/*버튼*/
-	.btn:hover{
-		background: rgb(252,118,45);
-		color:white;
-		display: inline-block;
-	}
+	
 	input{
 		border:1px solid #eee;
 	}
