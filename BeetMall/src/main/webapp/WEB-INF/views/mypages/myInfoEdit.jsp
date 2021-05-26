@@ -51,7 +51,7 @@
 		padding-left:10px;
 	}
 	.btnClass{
-		background-color:#FF8882;
+		background-color:#f25757;
 		color:white;
 		border:none;
 		border-radius:5%;
@@ -61,7 +61,7 @@
 		padding:1px;
 	}
 	#infosubmit{
-	    margin-top:15px;
+	    margin-top:25px;
 		margin-left:490px;
 	}
 	#sFrm{
@@ -247,7 +247,7 @@
 				<li><span class="spanstar">*</span>비밀번호</li>		<li><input type="password" name="userpwd" id="userpwd"/></li>	
 				<li><span class="spanstar">*</span>비밀번호 확인</li>	<li><input type="password" name="userpwd2" id="userpwd2" style="float:left"/><div id="passwordCheck" style="margin-left:200px"></div></li>	
 				<li><span class="spanstar">*</span>이름</li>			<li><input type="text" name="username" id="username" value="${vo3.username}" /></li>		
-				<li><span class="spanstar">*</span>이메일</li>			<li><input type="text" name="useremail" style="margin-right:5px;" value="${vo3.useremail}"/><input type="button" class="btn" value="인증하기"/></li>			
+				<li><span class="spanstar">*</span>이메일</li>			<li><input type="text" name="useremail" style="margin-right:5px;" value="${vo3.useremail}"/></li>			
 				<li><span class="spanstar">*</span>휴대폰</li>			<li><select  id="userphone1" name="userphone1" style="height:30px;">
 																			<option value="010">010</option>
 																			 <option value="02">02</option>

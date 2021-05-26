@@ -64,11 +64,11 @@ a:hover, a:active, a:visited, a:link {
 }
 
 #productPrice {
-   float: left;
-   width: 50%;
-   height: 40px;
-   line-height: 40px;
-   font-size:21px;
+	float: left;
+	width: 250px;
+	height: 40px;
+	line-height: 40px;
+	font-size:21px;
     margin-bottom:20px;
     color:red;
     font-weight:bold;
@@ -77,7 +77,7 @@ a:hover, a:active, a:visited, a:link {
 
 #sprofile {
    float: left;
-   width: 250px;
+   width: 300px;
    height: 40px;
    line-height: 40px;
    padding-left:20px;
@@ -402,7 +402,9 @@ width:100%;
 float:left;
 padding-left:30px;
 padding-bottom:10px;
-border-bottom:1px solid #ddd;
+padding-top:10px;
+background-color:#f0f4f5;
+border-bottom:1px solid #eee;
 }
 
 /* 리뷰이미지 설정*/
@@ -430,14 +432,13 @@ border-bottom:1px solid #ddd;
 }
 
 #qnatxtbox2{
-   padding-left:15px;
-   width:1050px;
-   height: 300px;
-   line-height: 100px;
-   float: left;
-   padding-left:50px;
-   background-color:#eee;
-   overflow:auto;
+	width:1020px;
+	height: 300px;
+	line-height: 100px;
+	float: left;
+	overflow:auto;
+	background-color:white;
+	padding:10px;
 }
 
 #nonebox{
@@ -772,26 +773,34 @@ td, .td{
  
 #pagelibtn{
 float:left;
-width:70px;
+width:80px;
 height:29px;
 line-height:50px;
 margin-left:1010px;
 font-size:15px;
 color:black;
+text-align:center;
 }
 
 #pagelibtn>a{
 float:left;
-width:70px;
+width:80px;
 height:28px;
 line-height:28px;
 font-size:15px;
 margin-right:4px;
+border:1px solid #eee;
+border-radius:5px;
 }
 
 #spanTotalPrice{
 font-size:40px;
 color:red;
+}
+
+#prtnum{
+margin-right:5px;
+margin-left:5px;
 }
 
 /* 채팅 */
@@ -1070,15 +1079,18 @@ color:red;
       //////////총계산 값 저장해놓기/////////////////////////////////
       
       $("#totalbuy").click(function(){
-         if(${logId==null}){
-            if(confirm("로그인후 이용해주세요")){
-               location.href="login"
-            }
-         }
-         var productname="${pvo.productname}";
-         var toltalPrice = (prtprice * pcount) + (optprice* ocount);
-         var totalCount = pcount+optprice;
-         location.href="/sshj/productPay?total="+toltalPrice+"&discountprice="+(dprtprice*pcount)+"&productnum=${pvo.productnum}&productname="+productname+"&deliveryoption=${pvo.deliveryoption}&optionnum="+optprice+"&totalCount="+totalCount;
+    	  if(${logId==null}){
+				if(confirm("로그인후 이용해주세요")){
+					location.href="login"
+				}
+			}else{
+				
+			
+    	  var productname="${pvo.productname}";
+    	  var toltalPrice = (prtprice * pcount) + (optprice* ocount);
+    	  var totalCount = pcount+optprice;
+    	  location.href="/sshj/productPay?total="+toltalPrice+"&discountprice="+(dprtprice*pcount)+"&productnum=${pvo.productnum}&productname="+productname+"&deliveryoption=${pvo.deliveryoption}&optionnum="+optprice+"&totalCount="+totalCount;
+    	  }
       });
       ///////////////////////////장바구니에 등록하기//////////////////////////////
       ////장바구니에 넘겨야할 데이터-> 아이디/상품코드/상품가격/상품의갯수/할인가격/옵션코드/옵션가격/옵션의갯수/최종구매가격
@@ -1104,6 +1116,9 @@ color:red;
          })
          
          
+			if(confirm("장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?")){
+				location.href="customWish"
+			}
          
       
       });
@@ -1297,9 +1312,9 @@ color:red;
       <div id=productMainBox >
 
 
-         <div id=productImgBox>
-            <img src="resources/sellerProductImgs/${pvo.thumbimg}"/>
-         </div>
+			<div id=productImgBox>
+				<img src="resources/sellerProductImgs/${pvo.thumbimg}" onerror="this.src='/sshj/img/derror.png'"/>
+			</div>
 
 
 
@@ -1309,11 +1324,11 @@ color:red;
             </div>
          
             <c:if test="${Dprice>0}">
-            <div id="yesdiscount">해당 상품은 할인이 적용중입니다.</div>
+            <div id="yesdiscount" style="color:#ef709b;">해당 상품은 할인이 적용중입니다.</div>
             </c:if>
             
             <c:if test="${Dprice<=0}">
-            <div id="yesdiscount">해당 상품은 할인이 없습니다.</div>
+            <div id="yesdiscount" style="color:#ef709b;">해당 상품은 할인이 없습니다.</div>
             </c:if>
             
             <div id=productPrice>원가: ${pvo.productprice}</div>  <!-- 가격 -->
@@ -1322,7 +1337,7 @@ color:red;
                <a href="#">${pvo.userid}</a>  <!-- 판매자 아이디 -->
             </div>
             <div id="simg">
-               <a href="#"><img src="resource/sellerprofileimg/${fvo.farmprofile}"/></a>  <!-- 프사 -->
+               <a href="#"><img src="resources/sellerprofileimg/${fvo.farmprofile}" onerror="this.src='/sshj/img/derror.png'"/></a>  <!-- 프사 -->
             </div>
             
             
@@ -1492,7 +1507,7 @@ color:red;
                      </div>
          <!-- 리뷰 신고하기 -->         
                      
-                     <div id="reviewchatInfoTitle"><span id="reviewchatHeaderSpan" class="reviewchatHeaderSpan"><span id="reviewreportChat">신고하기</span><span id="reviewtheyId"></span></span></div>
+                     <div id="reviewchatInfoTitle"><span id="reviewchatHeaderSpan" class="reviewchatHeaderSpan"><span id="reviewreportChat" style="color:red;">신고하기</span><span id="reviewtheyId"></span></span></div>
                      <input type=hidden value="${rlist.userid}">
                       <input type=hidden value="${rlist.reviewnum}">
                  </div>
@@ -1502,9 +1517,9 @@ color:red;
              </c:forEach>
                
           <!-- 신고하기 부분-->
-            <div style="height:350px;width:500px;border:1px solid #e2d1d1;position:absolute;top:400px;left:800px;background-color:white;display:none;" id="reviewreportDiv" class="reviewreportDiv">
+            <div style="height:350px;width:500px;border:1px solid #ddd;position:absolute;top:400px;left:800px;background-color:white;display:none;" id="reviewreportDiv" class="reviewreportDiv">
                <form style="height:400px;width:500px;float:left;" method="post" action="customreport" id="reviewreportForm" class="reviewreportForm">
-                  <h2 style="margin-left:10px;">신고하기</h2>
+                  <h2 style="margin:0px; background-color:#514c4c; color:white; margin-bottom:5px; padding:5px;">신고하기</h2>
                   <span style="float:left;font-size:20px;margin-left:10px;">신고사유</span>
                      <input type="hidden" name="userid" value="${logId}"/>                                    <!-- 신고자 아이디 -->
                      <input type="hidden" name="reporteduser" id="reporteduser" value=""/>                                 <!-- 신고할 사람 아이디 -->
@@ -1526,7 +1541,9 @@ color:red;
             </div>
            <!--  신고하기 밑에 스크립트까지임 -->   
                
-               <div id="pagelibtn" class="btn"><a href="/sshj/mybuyList">후기 작성</a></div>
+               <c:if test="${logId!=null}">
+               <div id="pagelibtn"><a href="/sshj/mybuyList">후기작성</a></div>
+               </c:if>
                
              <div id="nonebox">   </div>
 
@@ -1637,7 +1654,7 @@ color:red;
             </c:if>   
             
             <c:if test="${qlist.qopen==0 && logId!=qlist.userid}">   
-                       <div id="qnatxtbox2">
+                       <div id="qnatxtbox">
                             비공개로 작성된 글입니다.
                        </div>
             </c:if>   
@@ -1646,10 +1663,11 @@ color:red;
             
         </c:forEach>   
 
-            <div id="pagelibtn"><input type="button" class="btn qnaWrite" value="문의작성"/></div>
-            
-            
-            <div id="nonebox">   </div>
+               <c:if test="${logId!=null}">
+   				<div id="pagelibtn"><input type="button" class="btn qnaWrite" value="문의작성"/></div>
+			   </c:if>
+				
+				<div id="nonebox">   </div>
 
          <c:if test="${not empty faqlist}">
          
