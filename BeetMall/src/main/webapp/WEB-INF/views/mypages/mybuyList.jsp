@@ -10,7 +10,7 @@
 		display: block;
 	}
 	#mypointList{
-		height:980px;
+		height:1000px;
 		overflow:auto;
 		position: relative;
 	}
@@ -326,27 +326,6 @@
  		text-decoration: none;
 		display: inline-block;
 		border:none;
-	}
-	button, .btn{
-		padding: 3px 10px;
-		color: #666666;
-		border-radius: 8px;
-		background:#fff;
-		box-shadow: 0 0px 3px 0 rgba(0,0,0,0.5);
-		text-align: center;
- 		text-decoration: none;
-		display: inline-block;
-		border:none;
-		margin:0 3px;
-	}
-	/*버튼*/
-	.btn:hover, .btnSubmit:hover{
-		background: gray;
-		color:white;
-		display: inline-block;
-	}
-	.nonBtn{
-		
 	}
 	.redstar{
 		color:red;
@@ -861,11 +840,11 @@
 					<li><span class="pointdate">${vo.orderdate}</span></li>
 					<li>${vo.ordernum}</li>
 					<li>
-					<a href="customproduct?productnum=${vo.productnum}"><img src="/sshj/resources/sellerProductImgs/${vo.thumbimg}"></a><span class="buyttitle wordcut"><a href="customproduct?productnum=${vo.productnum}">${vo.productname}</a></span><span class="buydetail wordcut"><a href="customproduct?productnum=${vo.productnum}">${vo.productcontent}</a></span>
+					<a href="customproduct?productnum=${vo.productnum}"><img src="/sshj/resources/sellerProductImgs/${vo.thumbimg}"></a><span class="buyttitle wordcut"><a href="customproduct?productnum=${vo.productnum}">${vo.productname}</a></span><span class="buydetail wordcut"><a href="customproduct?productnum=${vo.productnum}">${vo.productinfomation}</a></span>
 					</li>
 					<li><span class="pointprice">${vo.orderprice}</span>원</li>
 					<li>${vo.orderstatus}<input type="hidden" value="${vo.productnum}"/></li>
-					<c:if test="${vo.orderstatus == '준비중'}">
+					<c:if test="${vo.orderstatus == '배송준비중'}">
 					<li><input type="button" class="btn qnaWrite" value="문의작성"/><input type="button" class="btn" value="취소하기"/></li>
 					</c:if>
 					<c:if test="${vo.orderstatus == '결제완료'}">

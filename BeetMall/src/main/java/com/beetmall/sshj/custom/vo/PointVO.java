@@ -12,9 +12,15 @@ public class PointVO {
 	private String productname;
 	private String productcontent;
 	private int orderprice;
+	private String productinfomation;
 	
 	
-	
+	public String getProductinfomation() {
+		return productinfomation;
+	}
+	public void setProductinfomation(String productinfomation) {
+		this.productinfomation = productinfomation;
+	}
 	public String getThumbimg() {
 		return thumbimg;
 	}

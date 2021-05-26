@@ -42,15 +42,19 @@ public class admin_customerController {
 		}else if(pageNumStr != null) {
 			pageVO.setPageNum(Integer.parseInt(pageNumStr));
 		}
-		
-		
+		//검색어, 검색키
+		String searchKey = req.getParameter("searchKey");
+		pageVO.setSearchKey(searchKey);
+		pageVO.setSearchWord(req.getParameter("searchWord"));
+		System.out.println("getSearchKey>>>>>"+pageVO.getSearchKey());
+		System.out.println("getSearchWord>>>>>"+pageVO.getSearchWord());
 		//pageVO.setTotalRecord();
 		if(session.getAttribute("logType")!=null) {
 			logType = (int)session.getAttribute("logType");
 		}else {
 			logType = 0;
 		}
-		int re = memberservice.memberCountall();
+		int re = memberservice.memberCountall(pageVO);
 		System.out.println("레코드 수>>"+re);
 		pageVO.setTotalRecord(re);
 		
@@ -163,6 +167,13 @@ public class admin_customerController {
 	@RequestMapping("userinfoupdate")
 	public ModelAndView customerEdit(Admin_MemberVO vo) {
 		ModelAndView mav = new ModelAndView();
+		System.out.println(">>>>>>>>>>>>>><<<<<<<<<<<<<<<");
+		System.out.println(vo.getUseraddr());
+		System.out.println(vo.getUsername());
+		System.out.println(vo.getUserid());
+		System.out.println(vo.getUseremail());
+		System.out.println(vo.getUserzipcode());
+		System.out.println(vo.getUserdetailaddr());
 		if(memberservice.memberEdit(vo)>0) {
 			mav.addObject("editOk","Y");
 		}else {
@@ -178,11 +189,16 @@ public class admin_customerController {
 	public ModelAndView customerLeaveList(HttpServletRequest req, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		Admin_Member_PageVO pageVO = new Admin_Member_PageVO();
-		int logType = 0;
+		
 		int selType = 4; // 탈퇴한 일반회원
 		pageVO.setUserType(4); // 탈퇴한 일반회원만 조회할거라서 4;
 		String pageNumStr = req.getParameter("pageNum");
-		
+		//검색어, 검색키
+		String searchKey = req.getParameter("searchKey");
+		pageVO.setSearchKey(searchKey);
+		pageVO.setSearchWord(req.getParameter("searchWord"));
+		System.out.println("getSearchKey>>>>>"+pageVO.getSearchKey());
+		System.out.println("getSearchWord>>>>>"+pageVO.getSearchWord());
 		if(pageNumStr == null) {
 			pageVO.setPageNum(1);
 		}else if(pageNumStr != null) {
@@ -190,13 +206,7 @@ public class admin_customerController {
 		}
 		
 		
-		//pageVO.setTotalRecord();
-		if(session.getAttribute("logType")!=null) {
-			logType = (int)session.getAttribute("logType");
-		}else {
-			logType = 0;
-		}
-		int re = memberservice.memberCount(logType,  selType);
+		int re = memberservice.memberCount(pageVO);
 		pageVO.setTotalRecord(re);
 		
 		mav.addObject("list", memberservice.memberselect(pageVO));
@@ -213,13 +223,19 @@ public class admin_customerController {
 		int selType = 1; // 정지된 구매자회원
 		pageVO.setUserType(1); // 정지된 구매자회원만 조회할거라서 1;
 		String pageNumStr = req.getParameter("pageNum");
+		//검색어, 검색키
+		String searchKey = req.getParameter("searchKey");
 		
+		pageVO.setSearchKey(searchKey);
+		pageVO.setSearchWord(req.getParameter("searchWord"));
+		System.out.println("getSearchKey>>>>>"+pageVO.getSearchKey());
+		System.out.println("getSearchWord>>>>>"+pageVO.getSearchWord());
 		if(pageNumStr == null) {
 			pageVO.setPageNum(1);
 		}else if(pageNumStr != null) {
 			pageVO.setPageNum(Integer.parseInt(pageNumStr));
 		}
-		int re = memberservice.reportPageNum(selType);
+		int re = memberservice.reportPageNum(pageVO);
 		pageVO.setTotalRecord(re);
 		
 		mav.addObject("list", memberservice.reportselect(pageVO));
@@ -233,12 +249,19 @@ public class admin_customerController {
 		ModelAndView mav = new ModelAndView();
 		Admin_Member_PageVO pageVO = new Admin_Member_PageVO();
 		String pageNumStr = req.getParameter("pageNum");
+		//검색어, 검색키
+		String searchKey = req.getParameter("searchKey");
+		
+		pageVO.setSearchKey(searchKey);
+		pageVO.setSearchWord(req.getParameter("searchWord"));
+		System.out.println("getSearchKey>>>>>"+pageVO.getSearchKey());
+		System.out.println("getSearchWord>>>>>"+pageVO.getSearchWord());
 		if(pageNumStr == null) {
 			pageVO.setPageNum(1);
 		}else if(pageNumStr != null) {
 			pageVO.setPageNum(Integer.parseInt(pageNumStr));
 		}
-		pageVO.setTotalRecord(memberservice.chatTotal());
+		pageVO.setTotalRecord(memberservice.chatTotal(pageVO));
 		mav.addObject("list", memberservice.chatList(pageVO));
 		mav.addObject("pageVO", pageVO);
 		mav.setViewName("/admin/csReportChat");

@@ -118,6 +118,9 @@
 	.foreachUL>li{
 		cursor: pointer;
 	}
+	#addBtn, #delBtn{
+		visibility: hidden;
+	}
 </style>
 <script>
 $(function(){
@@ -220,16 +223,14 @@ $(function(){
 			
 		 </div> 
 		 <div>
-			<form method="get" class="searchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
+			<form method="get" class="searchFrm" action="sellerBlackList"> 
 				<select name="searchKey">
-					<option value="subject" selected>제목</option>
-	   				<option value="no">공지번호</option> 
-	   				<option value="who">대상</option> 
-	   				<option value="writedate">공지일</option> 
-				</select>			
-				<input type="text" name="searchWord" id="searchWord"/>
-				<input type="submit" value="검색"/> 
-			</form> 
+					<option value="userid" selected>아이디</option>
+					<option value="useremail">이메일</option> 
+					<option value="username">이름</option> 
+				</select> <input type="text" name="searchWord" id="searchWord" /> 
+				<input type="submit" value="검색" />
+			</form>
 		</div>  
 	</div>
 </div>

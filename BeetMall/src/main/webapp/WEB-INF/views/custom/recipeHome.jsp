@@ -16,10 +16,13 @@
 
 <style>
 /*  기본설정----------------------------------------------                 */
-body, .btn{
+body{
 font-size: 14px !important;
 }
-
+.btn{
+	font-size:14px;
+	padding:0px !important;
+}
 a:hover, a:active, a:visited, a:link {
     text-decoration: none;
     color: black;

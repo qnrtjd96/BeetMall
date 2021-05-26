@@ -30,13 +30,13 @@
 	<footer>
 	<div></div>
 		<div>
-			주식회사 어디어디 | 사업자 등록번호 : 123-45-56789<a href=""> [사업자 정보확인]</a>
+			주식회사 어디어디 | 사업자 등록번호 : 123-45-67890<a href="https://teht.hometax.go.kr/websquare/websquare.html?w2xPath=/ui/ab/a/a/UTEABAAA13.xml"> [사업자 정보확인]</a>
 		</div>
 		<div>
 			대표자 홍길동 | 개인정보 관리책임자 : 홍길동 | 통신판매업 신고번호 : 1234-0000-1234
 		</div>
 		<div>
-			<a href="infoView">이용안내</a> | <a href="infoView">이용약관</a> | <a href="infoView">개인정보처리방침</a>
+			<a href="infoView?type=1">회사소개</a> | <a href="infoView?type=2">이용약관</a> | <a href="infoView?type=3">개인정보처리방침</a>
 		</div>
 	</footer>
 </body>
