@@ -36,7 +36,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.beetmall.sshj.admin.service.Admin_SalesService;
-import com.beetmall.sshj.admin.service.BoardService;
 import com.beetmall.sshj.admin.vo.Admin_CateSalesVO;
 import com.beetmall.sshj.admin.vo.Admin_SalesVO;
 import com.beetmall.sshj.seller.service.SellerSalesService;
@@ -44,8 +43,6 @@ import com.beetmall.sshj.seller.vo.SellerSalesVO;
 
 @Controller
 public class admin_salesController {
-	@Inject
-	BoardService adminService;
 
 	// 매출관리 
 	@Autowired

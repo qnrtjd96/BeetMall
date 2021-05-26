@@ -1,4 +1,4 @@
-package com.beetmall.sshj.admin.controller;
+ package com.beetmall.sshj.admin.controller;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -7,7 +7,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.poi.ss.usermodel.BorderStyle;
@@ -31,14 +30,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.beetmall.sshj.admin.service.Admin_SettleService;
-import com.beetmall.sshj.admin.service.BoardService;
 import com.beetmall.sshj.admin.vo.Admin_SettleVO;
 import com.beetmall.sshj.seller.vo.SellerSettleVO;
 
 @Controller
 public class admin_settleController {
-	@Inject
-	BoardService adminService;
 	
 	@Autowired
 	Admin_SettleService service;
