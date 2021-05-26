@@ -279,13 +279,18 @@
 	</c:if>
 	<c:if test="${logStatus == 'Y' }">
 		<div class="loginButtons section" style="position: relative;">	<!-- 로그인 후 -->
+			<c:if test="${logType==1}">
+				<div style="float:left;margin-left: 10px;margin-left:860px;"><a href="mybuyList">${logName}님</a></div><div  id="usermypage" style="float:left;height:25px;margin-left: 2px;"><span>▼</span></div>
+			</c:if>
 			<c:if test="${logType==2}">
 				<input type="button" value="판매자 페이지로 이동하기" class="menuButtons btn"  onClick="location.href='<%=request.getContextPath() %>/sellerMain'" style="float:left;margin-left:689px;"/>
+				<div style="float:left;margin-left: 10px;"><a href="mybuyList">${logName}님</a></div><div  id="usermypage" style="float:left;height:25px;margin-left: 2px;"><span>▼</span></div>
 			</c:if>
 			<c:if test="${logType==3}">
 				<input type="button" value="관리자 페이지로 이동하기" class="menuButtons btn"  onClick="location.href='<%=request.getContextPath() %>/adminHome'" style="float:left;margin-left:689px;"/>
+				<input type="button" value="관리자 페이지로 이동하기" class="menuButtons btn"  onClick="location.href='<%=request.getContextPath() %>/adminHome'" style="float:left;margin-left:689px;"/>
+				<div style="float:left;margin-left: 10px;"><a href="mybuyList">${logName}님</a></div><div  id="usermypage" style="float:left;height:25px;margin-left: 2px;"><span>▼</span></div>
 			</c:if>
-			<div style="float:left;margin-left: 10px;"><a href="mybuyList">${logName}님</a></div><div  id="usermypage" style="float:left;height:25px;margin-left: 2px;"><span>▼</span></div>
 				<div id="mypagePreviewDiv" style="background-color: rgb(250, 250, 250);border:1px solid black;position:absolute;width:84px;height:194px;top:34px;left:855px;z-index:100;display:none;">
 					<ul style="font-size: 12px;line-height:24px;" >
 						<li class="menuquick"><a href="myinfoEdit">정보수정</a></li>

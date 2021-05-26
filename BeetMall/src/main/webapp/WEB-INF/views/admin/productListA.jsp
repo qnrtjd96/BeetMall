@@ -190,7 +190,7 @@
 						쌀/잡곡
 					</c:if>
 					<c:if test="${data.mcatenum>=69 &&data.mcatenum<=104}">
-						야채
+						채소
 					</c:if>
 				</li>
 				<li id="kktitle" class="wordcut"><a href="/sshj/productEditA?productnum=${data.productnum}">${data.productname}</a></li>

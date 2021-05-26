@@ -633,7 +633,7 @@ float:left;
    padding-left: 0px;
 }
 
-   button, .btn{
+   button{
       padding: 3px 10px;
       color: #666666;
       text-align: center;
@@ -695,7 +695,7 @@ float:left;
    height:40px;
    width:160px;
    }
-   
+
 
     #chatbtn{
    background-color:#2aa1b7;
