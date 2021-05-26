@@ -417,8 +417,8 @@ border-bottom:1px solid #eee;
 }
 
 #reviewImgbox>img {
-   width:300px;
-   height:300px;
+   width:200px;
+   height:200px;
    float: left;
 }
 
@@ -1028,8 +1028,7 @@ margin-left:5px;
          optprice=parseInt(optArr[1]); //옵션 가격
          //ocount=1;
          
-         
-          
+       
          //$('#optnum').text(ocount);
           
          //alert(dprtprice);
@@ -1374,8 +1373,6 @@ margin-left:5px;
                   <c:if test="${not empty ovo}">
                      <li><select name="selectOption" id="selectOption">
                         
-                        
-                             <option value="0&0">옵션 선택 안함</option>
                                
                          <c:forEach var="ovodata" items="${ovo}">                               
                            <option value="${ovodata.optionnum}&${ovodata.optionprice}">${ovodata.optionnum}${ovodata.optionname}</option> <!-- -----옵션선택하기----- -->
@@ -1679,6 +1676,10 @@ margin-left:5px;
 				
 				<div id="nonebox">   </div>
 
+
+
+         </div>
+         <!--productInfoPage3  -->
          <c:if test="${not empty faqlist}">
          
             <!-- 페이징 표시--------- -->
@@ -1705,10 +1706,6 @@ margin-left:5px;
     </div>
             <!-- 페이징 표시--------- -->
            </c:if>
-
-         </div>
-         <!--productInfoPage3  -->
-
       </div>
       <!--productInfoPage  -->
 

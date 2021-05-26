@@ -79,7 +79,7 @@ margin-bottom:20px;
 #qnatxtbox2{
    padding-left:15px;
 	width:1050px;
-	height: 200px;
+	height: 150px;
 	line-height: 100px;
 	float: left;
 	padding-left:50px;
@@ -94,13 +94,12 @@ float:left;
  line-height:2px;
  margin-top:50px;
  margin-bottom:150px;
- background-color:#eee;
 }
 	/* ---------------상세정보박스3시잗-------------------- */
 #productInfoPage3 {
    float:left;
 	width: 100%;
-	height:700px;
+	height:900px;
 }
 
 #productInfoPage3>#qtitle {
@@ -139,6 +138,7 @@ overflow:hidden;
 	height: 60px;
 	line-height: 50px;
 	padding-bottom:10px;
+	font-size:17px;
 	
 }
 
@@ -648,8 +648,6 @@ $(function(){
 			</div>
 			<!--productInfoPage3  -->
 
-		</div>
-		<!--productInfoPage  -->
 			<c:if test="${not empty faqlist}">
 			
 				<!-- 페이징 표시--------- -->
@@ -676,6 +674,11 @@ $(function(){
 	 </div>
 				<!-- 페이징 표시--------- -->
   			</c:if>
+
+
+		</div>
+		<!--productInfoPage  -->
+
 	</div>
 </div>
 
