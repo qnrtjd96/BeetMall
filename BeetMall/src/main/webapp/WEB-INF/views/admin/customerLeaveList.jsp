@@ -155,12 +155,12 @@
    		<div id="contentBox"> 	
 		<div id="title">
 			<ul>
-				<li><input type="checkbox" name="check"  ></li>
+				<li><input type="hidden" name="check"  ></li>
 				<li>이름</li>
 				<li>아이디</li>
 				<li>나이</li>
 				<li>이메일</li>
-				<li>생년월일</li>
+				<li>포인트</li>
 				<li>주소</li>
 				<li>탈퇴일</li> 
 				

@@ -186,6 +186,9 @@
 	#choose{
 		margin: 50px 0 0 20px !important;
 	}
+	#forachtitle{
+		margin-left:0px !important;
+	}
 	#foreachUL>li:nth-child(8n+1), #forachtitle>li:nth-child(8n+1){
 		width:0px !important;
 	}

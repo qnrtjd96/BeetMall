@@ -9,6 +9,7 @@
 	 #contentBox{ 
 		top:20px; 
 		margin-left:10px;
+		margin-top:0px !important;
 	}
 	/*남색 바*/  
 	#topBar h5{
