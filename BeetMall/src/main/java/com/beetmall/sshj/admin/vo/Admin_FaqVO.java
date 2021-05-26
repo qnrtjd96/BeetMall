@@ -6,6 +6,11 @@ public class Admin_FaqVO {
 	private String faqtitle;
 	private String faqcontent;
 	private int faqoption;
+	private int[] check;
+	private String searchKey;
+	private String searchWord;
+	
+	
 
 	///////////////////////////////////////////////////////////////////////////
 	
@@ -80,6 +85,24 @@ public class Admin_FaqVO {
 	
 	public int getFaqnum() {
 		return faqnum;
+	}
+	public String getSearchKey() {
+		return searchKey;
+	}
+	public void setSearchKey(String searchKey) {
+		this.searchKey = searchKey;
+	}
+	public String getSearchWord() {
+		return searchWord;
+	}
+	public void setSearchWord(String searchWord) {
+		this.searchWord = searchWord;
+	}
+	public int[] getCheck() {
+		return check;
+	}
+	public void setCheck(int[] check) {
+		this.check = check;
 	}
 	public void setFaqnum(int faqnum) {
 		this.faqnum = faqnum;

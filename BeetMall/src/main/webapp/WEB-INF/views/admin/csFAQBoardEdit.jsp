@@ -148,7 +148,8 @@
 <%@ include file="/inc/leftBar.jspf" %>    
 <div class="container">
 	<div id="box"> 	
-	<form method="post" action="csFAQInsert">
+	<form method="post" action="csFAQBoardEditOk">
+	<input type="hidden" name="faqnum" value="${vo.faqnum }">
 		<table>
 			<tbody> 
 				
@@ -157,8 +158,14 @@
 				<td class="td" colspan="3">
 					<div id="cate">
 					<select name="faqoption">
-						<option value="1" selected>소비자</option>
-						<option value="2">판매자</option> 
+						<c:if test="${vo.faqoption == 1 }">
+							<option value="1" selected>소비자</option>
+							<option value="2">판매자</option>
+						</c:if>
+						<c:if test="${vo.faqoption == 2 }">
+							<option value="1">소비자</option>
+							<option value="2" selected>판매자</option>
+						</c:if> 
 					</select>
 					</div>
 				</td>
@@ -168,19 +175,25 @@
 				<td class="td" colspan="3">
 					<div id="cate">
 					<select name="faqcate">
-						<option value="상품" >상품</option>
-						<option value="회원/포인트">회원/포인트</option>
-						<option value="판매">판매</option>
-						<option value="주문/결제">주문/결제</option>
-						<option value="배송">배송</option>
-						<option value="판매">교환</option>
+						<c:if test="${vo.faqcate == '상품' }"><option value="상품" selected="selected">상품</option></c:if>
+						<c:if test="${vo.faqcate != '상품' }"><option value="상품">상품</option></c:if>
+						<c:if test="${vo.faqcate == '회원/포인트' }"><option value="회원/포인트" selected="selected">회원/포인트</option></c:if>
+						<c:if test="${vo.faqcate != '회원/포인트' }"><option value="회원/포인트">회원/포인트</option></c:if>
+						<c:if test="${vo.faqcate == '판매' }"><option value="판매" selected="selected">판매</option></c:if>
+						<c:if test="${vo.faqcate != '판매' }"><option value="판매">판매</option></c:if>
+						<c:if test="${vo.faqcate == '배송' }"><option value="배송" selected="selected">배송</option></c:if>
+						<c:if test="${vo.faqcate != '배송' }"><option value="배송">배송</option></c:if>
+						<c:if test="${vo.faqcate == '교환' }"><option value="판매" selected="selected">교환</option></c:if>
+						<c:if test="${vo.faqcate != '교환' }"><option value="판매">교환</option></c:if>
+						<c:if test="${vo.faqcate == '주문/결제' }"><option value="주문/결제" selected="selected">주문/결제</option></c:if>
+						<c:if test="${vo.faqcate != '주문/결제' }"><option value="주문/결제">주문/결제</option></c:if>
 					</select>
 					</div>
 				</td>
 			</tr>
 				<tr class="tr_head">
 					<th class="menu">제목</th>
-					<td  class="td"><input type="text" name="faqtitle" placeholder="제목을 입력하세요"/></td>
+					<td  class="td"><input type="text" name="faqtitle" value="${vo.faqtitle }"/></td>
 				</tr>
 
 				<tr>
@@ -188,14 +201,14 @@
 				</tr>
 				<tr>
 					<td class="question_content" colspan="4">
-						<textarea id="qmcontent" name="faqcontent" class="summernote" placeholder="자주 묻는 질문 내용을 입력해주세요."></textarea>
+						<textarea id="qmcontent" name="faqcontent" class="summernote" placeholder="자주 묻는 질문 내용을 입력해주세요.">${vo.faqcontent }</textarea>
 					</td>	
 				</tr>
 			</tbody>
 		</table>
 			<div id="bottommm">
-				<input type="submit" value="작성하기" class="btn write_btn" id="write_btn"/>	
-				<input type="reset" value="다시 쓰기" class="btn write_btn" id="reset_btn"/>	
+				<input type="submit" value="수정하기" class="btn write_btn" id="write_btn"/>	
+				<input type="reset" value="다시쓰기" class="btn write_btn" id="reset_btn"/>	
 				<input type="button" value="취소" class="btn write_btn" id="cancle_btn" onClick="location.href='javascript:history.back()'"/>
 			</div>
 		</form>

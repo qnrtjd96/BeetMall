@@ -163,11 +163,11 @@
 	line-height: 45px;
 }
 
-#listContainer li:nth-child(n+5) {
+#listContainer li:nth-child(n+6) {
 	border-bottom: 1px solid #eee;
 }
 
-#listContainer li:nth-child(n+1):nth-child(-n+4) {
+#listContainer li:nth-child(n+1):nth-child(-n+5) {
 	border-bottom: 1px solid #ccc;
 	font-weight: bold;
 	font-size: 16px;
@@ -179,24 +179,81 @@
 	margin: 10px 0 0 0;
 }
 
-#listContainer li:nth-child(4n+1) {
+#listContainer li:nth-child(5n+1) {
 	width: 5%;
-	padding: 0;
+	padding-top: 5px;
 }
 
-#listContainer li:nth-child(4n+2) {
+#listContainer li:nth-child(5n+2) {
 	width: 15%;
 }
 
-#listContainer li:nth-child(4n+3) {
-	width: 20%;
+#listContainer li:nth-child(5n+3) {
+	width: 15%;
 }
 
-#listContainer li:nth-child(4n+4) {
-	width: 60%;
+#listContainer li:nth-child(5n+4) {
+	width: 15%;
+}
+
+#listContainer li:nth-child(5n+5) {
+	width: 50%;
 }
 
 </style>
+<script>
+	$(function(){
+		//전체선택, 전체해제
+		$('#allCheck').click(function(){
+			let btnCheck = $('#allCheck').prop('checked');
+			
+			if(btnCheck == true){
+				$('input[name="check"]').prop('checked',true);
+			} else {
+				$('input[name="check"]').prop('checked',false);
+			}
+			
+		})
+		
+		//삭제
+		$('#delBtn').click(function(){
+			let cnt = $('input[name="check"]:checked').length;
+			let checkNum = new Array;
+			$('input[name="check"]:checked').each(function(){
+				checkNum.push(parseInt($(this).val(),10));
+			});
+			
+			if( cnt == 0){
+				alert('체크박스를 선택후 삭제가 가능합니다');
+				return false;
+			} else {
+				if(confirm('선택한 게시글을 삭제하시겠습니까?')){
+					$.ajax({
+						type:"post",
+						url:"csFAQDel",
+						data: "check="+checkNum,
+						success: function(result){
+							if(result > 0){
+								alert('삭제 성공하였습니다.');
+								location.href="csFAQ";
+							} else{
+								alert('삭제 실패하였습니다.')
+							}
+						},error: function(){
+							alert('서버통신오류');
+						}
+					})
+				}
+			}
+		})
+		
+		//글작성
+		$('#addBtn').click(function(){
+			location.href="csFAQWrite";
+		})
+	})
+</script>
+
 <%@ include file="/inc/top.jspf"%>
 <div id="topBarContainer">
 	<div id="topBar">
@@ -204,8 +261,7 @@
 			<li><h5>
 					<strong><a href="csFAQ">자주 묻는 질문</a></strong>
 				</h5></li>
-			<li><button class="success" value="add" name="add" id="editBtn">수정</button></li>
-			<li><button class="success" value="add" name="add" id="addBtn">추가</button></li>
+			<li><button class="success" value="add" name="add" id="addBtn">글작성</button></li>
 			<li><button class="success" value="del" name="del" id="delBtn">삭제</button></li>
 		</ul>
 	</div>
@@ -215,27 +271,33 @@
 	<div id="container">
 		<div id="listContainer">
 			<ul>
-				<li><input type="checkbox" name="check"></li>
+				<li><input type="checkbox" id="allCheck" name="allCheck"></li>
 				<li>문의번호</li>
 				<li>카테고리</li>
+				<li>구분</li>
 				<li>제목</li>
 
 				<c:if test="${list !=null }">
 					<c:forEach var="result" items="${list }">
-						<li><input type="checkbox" name="check"><input type="hidden" name="faqnum" value="${result.faqnum }"></li>
+						<li><input type="checkbox" name="check" value="${result.faqnum }"></li>
 						<li>${result.faqnum }</li>
 						<li>${result.faqcate }</li>
-						<li>${result.faqtitle }</li>
+						<c:if test="${result.faqoption==1 }">
+							<li>판매자</li>
+						</c:if>
+						<c:if test="${result.faqoption==2 }">
+							<li>구매자</li>
+						</c:if>
+						<li><a href="csFAQBoard?faqnum=${result.faqnum }">${result.faqtitle }</a></li>
 					</c:forEach>
 				</c:if>
 			</ul>
-
 			<c:if test="${pageVO != null }" >
 				<div class="page_wrap" style="margin: 0 auto; position:static;">
 					<div class="page_nation">
 						<c:if test="${pageVO.pageNum>1}">
 							<!-- 이전페이지가 있을때 -->
-							<a class="arrow prev" href="/sshj/salesCateAnalasysA?pageNum=${pageVO.pageNum-1}"></a>
+							<a class="arrow prev" href="csFAQ?pageNum=${pageVO.pageNum-1}<c:if test='${pageVO.searchKey !=null }'>&searchKey=${pageVO.searchKey }&searchWord=${pageVO.searchWord}</c:if>"></a>
 						</c:if>
 						<!-- 페이지 번호                   1                                    5                     -->
 						<c:forEach var="p" begin="${pageVO.startPageNum}" step="1" end="${pageVO.startPageNum + pageVO.onePageNum-1}">
@@ -247,12 +309,12 @@
 
 								<c:if test="${p!=pageVO.pageNum}">
 									<!-- 현재페이지가 아닐때 실행 -->
-									<a class="arrow" href="/sshj/salesCateAnalasysA?pageNum=${p}">${p}</a>
+									<a class="arrow" href="csFAQ?pageNum=${p}<c:if test='${pageVO.searchKey !=null }'>&searchKey=${pageVO.searchKey }&searchWord=${pageVO.searchWord}</c:if>">${p}</a>
 								</c:if>
 							</c:if>
 						</c:forEach>
 						<c:if test="${pageVO.pageNum < pageVO.totalPage}">
-							<a class="arrow next" href="/sshj/salesCateAnalasysA?pageNum=${pageVO.pageNum+1}"></a>
+							<a class="arrow next" href="csFAQ?pageNum=${pageVO.pageNum+1}<c:if test='${pageVO.searchKey !=null }'>&searchKey=${pageVO.searchKey }&searchWord=${pageVO.searchWord}</c:if>"></a>
 						</c:if>
 					</div>
 				</div>
@@ -266,12 +328,12 @@
 				</div>
 			</c:if>
 			<div>
-				<form method="get" class="searchFrm" action="<%=request.getContextPath()%>/board/noticeBoardList.jsp">
-					<select name="searchKey">
+				<form method="get" class="searchFrm" action="csFAQ">
+					<select name="searchKey" style="margin-top:10px;">
 						<option value="subject" selected>제목</option>
+						<option value="content">내용</option>
 						<option value="no">공지번호</option>
 						<option value="who">대상</option>
-						<option value="writedate">공지일</option>
 					</select> <input type="text" name="searchWord" id="searchWord" /> <input type="submit" value="검색" />
 				</form>
 			</div>
