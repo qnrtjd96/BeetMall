@@ -253,11 +253,12 @@
 		<!-------------- 페이징------------------>
 		<div class="page_wrap">
 			<div class="page_nation">
-				
+			<c:if test="${pageVO.pageNum>1}"><!-- 이전페이지가 있을때 -->
 			  	<!--맨앞으로-->
   				<a class="arrow_pprev" href="faq?pageNum=1<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>"></a>
 				<!--앞으로-->
         		<a class="arrow_prev" href="faq?pageNum=${sapvo.pageNum-1}<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>"></a>
+ 			</c:if>
  				<!--레코드 갯수에 따른 페이지 갯수 표시--> 
          		<c:forEach var="p" begin="${sapvo.startPageNum}" end="${(sapvo.startPageNum + sapvo.onePageNum)-1}">
 	         		<!--p가 총페이지수보다 작거나같을때  레코드가 있는 페이지까지만 표시 -->
@@ -273,10 +274,12 @@
 	            	</c:if>
         		</c:forEach>
         		<!-- 다음 페이지가 있을 때 -->
+        		<c:if test="${pageVO.pageNum < pageVO.totalPage}">
 				<!--뒤로-->            
 	         	<a class="arrow next" href="faq?pageNum=${sapvo.pageNum+1}<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>"></a>
 				<!--맨뒤로-->
 	         	<a class="arrow nnext" href="faq?pageNum=${sapvo.totalPage}<c:if test="${sapvo.searchWord != null && sapvo.searchWord != ''}">&searchKey=${sapvo.searchKey}&searchWord=${sapvo.searchWord}</c:if>"></a>
+				</c:if>
 			</div>
 		 </div> 
 		 <!-------------- 페이징 끝 --------------->

@@ -51,7 +51,7 @@
 		padding-left:10px;
 	}
 	.btnClass{
-		background-color:rgb(252,118,45);
+		background-color:#FF8882;
 		color:white;
 		border:none;
 		border-radius:5%;
@@ -61,6 +61,7 @@
 		padding:1px;
 	}
 	#infosubmit{
+	    margin-top:15px;
 		margin-left:490px;
 	}
 	#sFrm{

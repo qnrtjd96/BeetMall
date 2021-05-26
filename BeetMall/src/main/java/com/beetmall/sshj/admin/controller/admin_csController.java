@@ -13,14 +13,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.beetmall.sshj.admin.service.Admin_FaqService;
-import com.beetmall.sshj.admin.service.Boardervice;
 import com.beetmall.sshj.admin.vo.Admin_FaqVO; 
 
 @Controller
 public class admin_csController {
 
-	@Inject
-	Boardervice adminService;
 	
 	@Autowired
 	Admin_FaqService service;

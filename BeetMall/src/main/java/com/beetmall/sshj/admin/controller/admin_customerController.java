@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.beetmall.sshj.admin.service.Admin_BoardService;
 import com.beetmall.sshj.admin.service.Admin_MemberService;
-import com.beetmall.sshj.admin.service.Admin_MemberServiceImp;
-import com.beetmall.sshj.admin.service.Boardervice;
+import com.beetmall.sshj.admin.service.Admin_MemberServiceImp; 
 import com.beetmall.sshj.admin.vo.Admin_MemberVO;
 import com.beetmall.sshj.admin.vo.Admin_Member_PageVO;
 import com.beetmall.sshj.admin.vo.Admin_reportVO;
@@ -24,7 +24,7 @@ import com.beetmall.sshj.admin.vo.Admin_reportVO;
 @Controller
 public class admin_customerController {
 	@Inject
-	Boardervice adminService;
+	Admin_BoardService adminService;
 	//////////////////////일반회원 관리////////////////////////////////
 	@Inject
 	Admin_MemberServiceImp memberservice;

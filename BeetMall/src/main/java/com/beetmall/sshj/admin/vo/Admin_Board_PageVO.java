@@ -14,7 +14,12 @@ public class Admin_Board_PageVO {
 	private String searchKey;//검색키
 	private String searchWord;//검색어
 	
-
+	private String sort1;
+	private String sort2;
+	
+	private String asc;
+	private String desc;
+	
 	public int getPageNum() {
 		return pageNum;
 	}
@@ -84,4 +89,29 @@ public class Admin_Board_PageVO {
 	public void setSearchWord(String searchWord) {
 		this.searchWord = searchWord;
 	}
+	public String getSort1() {
+		return sort1;
+	}
+	public void setSort1(String sort1) {
+		this.sort1 = sort1;
+	}
+	public String getSort2() {
+		return sort2;
+	}
+	public void setSort2(String sort2) {
+		this.sort2 = sort2;
+	}
+	public String getAsc() {
+		return asc;
+	}
+	public void setAsc(String asc) {
+		this.asc = asc;
+	}
+	public String getDesc() {
+		return desc;
+	}
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
+	
 }

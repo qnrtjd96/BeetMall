@@ -8,7 +8,7 @@ public class SellerNoticeVO {
 	private String infowritedate; //등록일
 	private int infohit; //조회수
 	private String infotype; //판매자 소비자 구분 1, 소비자, 2.판매자
-	private String infoattach; // 첨부파일
+	private String filename; // 첨부파일
 	public int getInfonum() {
 		return infonum;
 	}
@@ -45,11 +45,11 @@ public class SellerNoticeVO {
 	public void setInfotype(String infotype) {
 		this.infotype = infotype;
 	}
-	public String getInfoattach() {
-		return infoattach;
+	public String getFilename() {
+		return filename;
 	}
-	public void setInfoattach(String infoattach) {
-		this.infoattach = infoattach;
+	public void setFilename(String filename) {
+		this.filename = filename;
 	}
 	
 	

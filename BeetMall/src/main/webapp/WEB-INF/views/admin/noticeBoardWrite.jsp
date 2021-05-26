@@ -96,11 +96,11 @@
 	    height:40px;
 	    border-bottom:1px solid lightgray;
 	}
-	.td, .qmcontent{
+	.td, .infocontent{
 		padding-left:20px;
 		
 	}
-	.qmcontent{
+	.infocontent{
 		margin: 20px 0 20px;
 	}
 	td, .td{
@@ -157,29 +157,18 @@
 		position:relative;
 		top:-5px;
 	}
-	#recipeWriteDate{
+	#infoWriteDate{
 		font-weight:normal;
 	}
 </style>
-<script>
-/*$.ajax({
-	type:"GET",
-	url:"/resources/adminmapper/getInfonum.do",
-	contentType : "application/x-www-form-urlencoded; charset=utf-8",
-	success : function(res) { 
-       $("#noticeNum").text(res);   
-   },
-   error : function(request, status, error) {
-       alert("에러가 발생했습니다.\n error_code:BD5");
-   } 
-});*/
+<script> 
 //오늘날짜
 let today = new Date();   
 let year = today.getFullYear();  
 let month = today.getMonth() + 1;   
 let date = today.getDate();
 $(document).ready(function(){ 
-	$("#recipeWriteDate").html(year + '/' + month + '/' + date);
+	$("#infoWriteDate").html(year + '/' + month + '/' + date);
 }); 
 //파일명 추출
 $(document).ready(function(){ 
@@ -226,25 +215,31 @@ $(document).on('click',"#addBtn",function(){
 			<table>
 				<tbody> 
 					<tr class="tr_head">
-						<th class="menu" >공지 번호</th>
-						<td class="td" colspan="3" id="noticeNum"></td>
+						<th class="menu">제목</th>
+						<td  class="td"><input type="text" name="infotitle" id="infotitle" placeholder="공지 제목을 입력하세요"/></td>
 					</tr>
 					<tr class="tr_head">
-						<th class="menu">제목</th>
-						<td  class="td"><input type="text" name="noticeSubject" id="noticeSubject" placeholder="공지 제목을 입력하세요"/></td>
+						<th class="menu">대상</th>
+						<td  class="td"> 
+							<select name="infotype">  
+								<option value="3">전체</option>  
+								<option value="1">소비자</option>  
+								<option value="2">판매자</option>  
+							</select>  
+						</td>
 					</tr>
 					<tr class="tr_head">
 						<th class="menu">등록일</th>
-						<td  class="td" id="recipeWriteDate"></td>
+						<td  class="td" ><div id="infoWriteDate" name="infowritedate"></div></td>
 					</tr>
 					<tr class="tr_head">
 						<th class="menu">첨부파일</th>
 						<td  class="td">
 							<div style="display:flex;">
-								<label for="file" id="attach"> 
+								<label for="filename" id="attach"> 
 									<div>파일 첨부하기</div>
 								</label>
-								<input type="file" style="width: 500px;" id="file">
+								<input type="file" style="width: 500px;" name="file" id="filename">
 								<input class="uploadFile" style="width: 500px;" id="uploadFile" >
 							</div>
 						</td> 
@@ -254,7 +249,7 @@ $(document).on('click',"#addBtn",function(){
 					</tr>
 					<tr>
 						<td class="question_content" colspan="4">
-							<textarea id="qmcontent" name="qmcontent" class="summernote" placeholder="문의내용을 입력해주세요."></textarea>
+							<textarea id="infocontent" name="infocontent" class="summernote" placeholder="문의내용을 입력해주세요."></textarea>
 						</td>	
 					</tr>
 				</tbody>
@@ -264,7 +259,6 @@ $(document).on('click',"#addBtn",function(){
 		<input type="reset" value="다시 쓰기" class="btn write_btn" id="reWrite_btn"/>	
 		<input type="button" value="취소" class="btn write_btn" id="cancle_btn" onClick="location.href='<%=request.getContextPath() %>/noticeBoardList'"/>
 	</div>
-		<!--<c:if test="${logId !=null}">--><!--</c:if>	-->
 		</form>
 	</div>
 

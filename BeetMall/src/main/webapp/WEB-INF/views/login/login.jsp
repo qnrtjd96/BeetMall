@@ -77,8 +77,8 @@
 	<h2>로그인</h2>
 	<div id="loginCenter">
 		<form method="post" action="loginOk">
-			<input type="text" name="userid" placeholder="아이디를 입력해주세요" id="idInput" value="master"/><br/>
-			<input type="password" name="userpwd" placeholder="비밀번호를 입력해주세요" id="pwdInput" value="master"/><br/>
+			<input type="text" name="userid" placeholder="아이디를 입력해주세요" id="idInput" value="seller"/><br/>
+			<input type="password" name="userpwd" placeholder="비밀번호를 입력해주세요" id="pwdInput" value="seller"/><br/>
 			<input type="submit" value="로그인" id="loginBtn"/>
 			<div id="logStatus">
 				<!-- <input type="checkbox" name="logalways"/>로그인상태유지 -->
