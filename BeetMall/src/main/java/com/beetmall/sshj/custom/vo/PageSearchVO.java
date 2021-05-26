@@ -37,6 +37,9 @@ public class PageSearchVO {
 	private String area5;
 	private String searchAreaList;
 	
+	//다시넣기귀찮아서 한거
+	private String userid;
+	
 	public int getPageNum() {
 		return pageNum;
 	}
@@ -249,4 +252,11 @@ public class PageSearchVO {
 		}
 		this.area5 = area5;
 	}
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+	
 }

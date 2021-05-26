@@ -973,7 +973,9 @@ color:red;
     	  }
     	  var productname="${pvo.productname}";
     	  var toltalPrice = (prtprice * pcount) + (optprice* ocount);
-    	  var totalCount = pcount+optprice;
+    	  var totalCount = pcount+ocount;
+    	  alert("ocount ==" ocount);
+    	  alert("optprice ===" optprice);
     	  location.href="/sshj/productPay?total="+toltalPrice+"&discountprice="+(dprtprice*pcount)+"&productnum=${pvo.productnum}&productname="+productname+"&deliveryoption=${pvo.deliveryoption}&optionnum="+optprice+"&totalCount="+totalCount;
       });
       ///////////////////////////장바구니에 등록하기//////////////////////////////
