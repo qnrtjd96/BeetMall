@@ -674,19 +674,16 @@
 					<li><span class="spanstar">*</span>은행</li>				<li><select name="bank" id="bankName">
 																				<option value="index" disabled selected>은행명선택</option>  
 																				<option value="국민">국민</option>  
-																				<option value="비씨">비씨</option>  
-																				<option value="신한">신한</option>  
-																				<option value="현대">현대</option>  
-																				<option value="삼성">삼성</option>  
-																				<option value="롯데">롯데</option>  
-																				<option value="외환">외환</option>  
-																				<option value="NH">NH</option>  
-																				<option value="하나">하나</option>  
+																				<option value="기업">기업</option>  
+																				<option value="농협">농협</option>  
+																				<option value="신한">신한</option>   
+																				<option value="산업">산업</option>  
 																				<option value="우리">우리</option>  
+																				<option value="하나">하나</option>  
+																				<option value="우체국">우체국</option>  
 																				<option value="광주">광주</option>  
-																				<option value="수협">수협</option>  
-																				<option value="씨티">씨티</option>  
-																				<option value="전북">전북</option>  
+																				<option value="대구">대구</option>  
+																				<option value="부산">부산</option>  
 																				<option value="제주">제주</option>  
 																				<option value="카카오뱅크">카카오뱅크</option>  
 																				<option value="케이뱅크">케이뱅크</option>  
