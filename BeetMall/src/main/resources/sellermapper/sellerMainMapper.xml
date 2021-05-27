@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.beetmall.sshj.seller.dao.SellerMainDAO">
 	<select id="getOrderSales" resultType="com.beetmall.sshj.seller.vo.SellerMainVO">
-        select nvl(count(realpayment),0) newOrder, sum(realpayment) realpayment from
+        select nvl(count(realpayment),0) newOrder, sum(realpayment+usedpoint) realpayment from
         (select ordernum from orderdetail where productnum in 
         (select productnum from product where userid= #{userid})) a join ordertbl b 
         on a.ordernum = b.ordernum where b.orderdate >= to_char(sysdate, 'YYYY-MM-DD') 
