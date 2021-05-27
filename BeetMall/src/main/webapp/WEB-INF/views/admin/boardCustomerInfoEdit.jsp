@@ -1356,7 +1356,7 @@
 			 	</script>
 		 	</c:if>
 	 	<div id="mypointList"><a name="pageNumA"></a>
-	 	<div id="mileBar" style="top:0px;"><div><strong>회원 마일리지 내역</strong></div></div>
+	 	<div id="mileBar" style="top:0px;"><div><strong>회원 포인트 내역</strong></div></div>
 		<c:if test="${type != null}">
 			<input type="hidden" id="type" value="${type}"/>
 		</c:if>
@@ -1385,12 +1385,12 @@
 				<li>일시</li>
 				<li>상품</li>
 				<li>판매가</li>
-				<li>마일리지</li>
-				<li>잔여<br/>마일리지</li>
+				<li>포인트</li>
+				<li>잔여<br/>포인트</li>
 				<c:forEach var="vo" items="${listA}">
 					<li><span class="pointdate">${vo.orderdate}</span></li>
 					<li id="linkStop">
-						<a href="customproduct?no=${vo.productnum}"><img src="/sshj/resources/sellerProductImgs/${vo.thumbimg}" style="margin-right:10px;"></a>
+						<a href="customproduct?no=${vo.productnum}"><img src="/sshj/resources/sellerProductImgs/${vo.thumbimg}" style="margin-right:10px;"onerror="this.src='/sshj/img/derror.png'"></a>
 						<a href="customproduct?no=${vo.productnum}"><span class="pointtitle wordcut">${vo.productname}</span><br/></a>
 						<a href="customproduct?no=${vo.productnum}"><span class="pointdetail wordcut">${vo.productinfomation }</span></a>
 					</li>
@@ -1445,7 +1445,7 @@
 							
 							<c:forEach var="data" items="${listB}">
 								<li>
-									<img src="/sshj/img/${data.farmprofile}"><span class="buyttitle wordcut">${data.farmname}</span><span class="buydetail wordcut">${data.farmintro}</span>
+									<img src="/sshj/img/${data.farmprofile}"onerror="this.src='/sshj/img/derror.png'"><span class="buyttitle wordcut">${data.farmname}</span><span class="buydetail wordcut">${data.farmintro}</span>
 								</li>
 								<li><span class="favprice">${data.storeaddr}</span></li>
 								<li id="hh"><div class="like"></div><div class="hate">${data.goodTotal}명</div></li>
@@ -1492,7 +1492,7 @@
 				<c:forEach var="wl" items="${listC}">
 
 					<ul class="wishList">
-						<li><a href=""><img src="img/${wl.thumbimg}"></a></li>
+						<li><a href=""><img src="img/${wl.thumbimg}"onerror="this.src='/sshj/img/derror.png'"></a></li>
 						<!-- 이미지 -->
 
 						<li>
@@ -1587,7 +1587,7 @@
 						</c:if>
 					</div>
 				</div>
-				<div id="wishPriceTitle">
+				<div id="wishPriceTitle" style="display:none;">
 					<div id="wishone">상품 가격:</div>
 					<div id="wishtotal">총 구매가격:</div>
 				</div>
@@ -1670,7 +1670,7 @@
 							</tbody>
 						</table>
 					</div>
-					<div class="page_wrap" id="cartpage">
+					<div class="page_wrap" id="cartpage" style="display:none;">
 						<div class="page_nation">
 							<a class="arrow pprev"
 								href="<%=request.getContextPath()%>/img/kpage_pprev.png"></a> <a

@@ -146,9 +146,9 @@ $(function(){
 				</div>
 			</label> <input type="checkbox" id="menu_bar01" class="accordion" />
 			<ul id="links01">
-				<li><a href="customerListA">회원 목록</a></li>
+				<li><a href="customerListA">일반 회원</a></li>
 				<li><a href="customerLeaveList">탈퇴 회원</a></li>
-				<li><a href="customerBlackList">블랙리스트</a></li>
+				<li><a href="customerBlackList">정지 회원</a></li>
 			</ul>
 			<label for="menu_bar02">상품 관리
 				<div id="tri">
@@ -196,9 +196,8 @@ $(function(){
 				<li><a href="csQuestionA">고객 문의</a></li>
 				<li><a href="csQBrowse">상품 문의</a></li>
 				<li><a href="csFAQ">자주 묻는 질문</a></li>
-				<li><a href="csChat">1:1 대화하기</a></li>
 				<li><a href="csreportListA">신고 관리</a></li>
-				<li><a href="csReportChat">신고 채팅 관리</a></li>
+				<li><a href="csReportChat">채팅 관리</a></li>
 			</ul> 
 		</div>
 	</div>

@@ -153,17 +153,23 @@
 			$("#mypagePreviewDiv").css("display","none");
 		})
 		/* 메뉴 바 내려오게 하기 */
-		$(document).on("load", function(){
+		$(function(){
 			var scroll = window.scrollY;
 			$("#categoriList").css("top","285px");
 			$("#leftMenu").css("top","150px");
 			$("#mypageMenubar").css("top","150px");
 			$("#cMyPageLeft").css("top","150px");
-			$(".buyListDiv").css("top", scroll+200);
 			$(".popupForm").css("top","450px");
 			$("#buyReturnInput").css("top",scroll+75);
 			$("#buyCommit").css("top",scroll+300);
-		})
+			$("#buyCancelRollBack").css("top",scroll);
+			$("#buyReviewWrite").css("top", scroll+50);
+			$("#buyReviewView").css("top", scroll+50);
+			$("#questionDiv").css("top", scroll+70);
+			$("#buyCancelNotice").css("top", scroll+70);
+			$("#returnDiv").css("top", scroll+70);
+		});
+		
 		$(document).on('scroll', function(){
 			var scroll = window.scrollY;
 			if(scroll>255){
@@ -173,7 +179,6 @@
 				$("#mypageMenubar").css("top",scroll);
 				$("#cMyPageLeft").css("top",scroll);
 				$("#chatIframe").css("top",scroll+50);
-				$(".buyListDiv").css("top", scroll+200);
 				$(".popupForm").css("top",scroll+250);
 				$("#buyReturnInput").css("top",scroll+75);
 				$("#buyCommit").css("top",scroll+300);
@@ -183,12 +188,16 @@
 				$("#leftMenu").css("top","150px");
 				$("#mypageMenubar").css("top","150px");
 				$("#cMyPageLeft").css("top","150px");
-				$(".buyListDiv").css("top", scroll+200);
 				$(".popupForm").css("top","450px");
 				$("#buyReturnInput").css("top",scroll+75);
 				$("#buyCommit").css("top",scroll+300);
 			}
-			
+			$("#buyCancelRollBack").css("top",scroll);
+			$("#buyReviewWrite").css("top",scroll+50);
+			$("#buyReviewView").css("top", scroll+50);
+			$("#questionDiv").css("top", scroll+70);
+			$("#buyCancelNotice").css("top", scroll+70);
+			$("#returnDiv").css("top", scroll+70);
 		});
 		
 		/*룰렛*/
