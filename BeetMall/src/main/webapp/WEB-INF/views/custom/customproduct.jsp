@@ -1503,7 +1503,7 @@ margin-left:5px;
                   <div id="reviewViewbox" style="display:none" >
                        <input type="hidden" value="r${rlist.reviewnum}"/>
                      <div id="reviewImgbox">
-                        <img src="img/${rlist.reviewimg}"/>
+                        <img src="img/${rlist.reviewimg}" onerror="this.src='/sshj/img/derror.png'"/>
                      </div>
                      
                      <div id="reviewtxtbox">               
