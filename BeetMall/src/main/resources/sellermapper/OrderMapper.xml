@@ -70,4 +70,5 @@
 	<update id="orderStatusUpdate" >
 		UPDATE orderdetail SET orderstatus = '${param2}' WHERE ordernum = ${param1}
 	</update>
+
 </mapper>
