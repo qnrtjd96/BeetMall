@@ -478,7 +478,7 @@ $(document).ready(function(){
 		    <div id="recimainbox2">
 				    <c:forEach var="data2" items="${list2}">
 			     
-						<div id="recipebox">
+						<div id="recipebox"> 
 						      
 										<ul>
 											<li><a href="recipeView?recipenum=${data2.recipenum}&id=${logId}"><img src="/sshj/upload/${data2.recipemainimg}" onerror="this.src='/sshj/img/derror.png'" id="rtitleImg"/></a></li>
