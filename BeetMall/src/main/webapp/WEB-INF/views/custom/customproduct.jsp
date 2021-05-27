@@ -267,6 +267,7 @@ padding-left:20px;
    width: 100%;
    float: left;
    padding-left: 100px;
+   
 }
 
 #productInfoPage1 {
@@ -314,6 +315,7 @@ padding-left:20px;
 /* ---------------상세정보2 --------------------------------------------------------------------------------- */
 #productInfoPage2 {
    width: 100%;
+   height:700px;
 }
 
 
@@ -415,8 +417,8 @@ border-bottom:1px solid #eee;
 }
 
 #reviewImgbox>img {
-   width:600px;
-   height: 400px;
+   width:200px;
+   height:200px;
    float: left;
 }
 
@@ -424,7 +426,7 @@ border-bottom:1px solid #eee;
 #reviewtxtbox,#qnatxtbox {
     padding-left:15px;
    width:1050px;
-   height: 300px;
+   height: 200px;
    line-height: 100px;
    float: left;
    padding-left:50px;
@@ -454,6 +456,7 @@ float:left;
    text-align: center;
    font-size: 0;
    padding-bottom: 30px;
+   width:100%;
 }
 
 .page_nation {
@@ -523,6 +526,7 @@ float:left;
 /* ---------------상세정보박스3시잗-------------------- */
 #productInfoPage3 {
    width: 100%;
+   height:700px;
 }
 
 #productInfoPage3>#qtitle {
@@ -780,6 +784,7 @@ margin-left:1010px;
 font-size:15px;
 color:black;
 text-align:center;
+margin-bottom:15px;
 }
 
 #pagelibtn>a{
@@ -791,6 +796,7 @@ font-size:15px;
 margin-right:4px;
 border:1px solid #eee;
 border-radius:5px;
+
 }
 
 #spanTotalPrice{
@@ -1022,8 +1028,7 @@ margin-left:5px;
          optprice=parseInt(optArr[1]); //옵션 가격
          //ocount=1;
          
-         
-          
+       
          //$('#optnum').text(ocount);
           
          //alert(dprtprice);
@@ -1333,10 +1338,11 @@ margin-left:5px;
             <div id="sprofile">
                <a href="#">${fvo.farmname}</a>  <!--농장이름 -->
                <a href="#">${pvo.userid}</a>  <!-- 판매자 아이디 -->
-            </div>
-            <div id="simg">
+               <div id="simg">
                <a href="#"><img src="resources/sellerprofileimg/${fvo.farmprofile}" onerror="this.src='/sshj/img/derror.png'"/></a>  <!-- 프사 -->
+               </div>
             </div>
+            
             
             
             
@@ -1365,8 +1371,6 @@ margin-left:5px;
                   <c:if test="${not empty ovo}">
                      <li><select name="selectOption" id="selectOption">
                         
-                        
-                             <option value="0&0">옵션 선택 안함</option>
                                
                          <c:forEach var="ovodata" items="${ovo}">                               
                            <option value="${ovodata.optionnum}&${ovodata.optionprice}">${ovodata.optionnum}${ovodata.optionname}</option> <!-- -----옵션선택하기----- -->
@@ -1466,7 +1470,9 @@ margin-left:5px;
             <div id="retitle">상품에 대한 후기를 남기는 공간입니다 해당 게시판의 성격과 다른 글은 사전동의
                없이 담당 게시판으로 이동될 수 있습니다.</div>
                
-
+			<c:if test="${logId!=null}">
+			               <div id="pagelibtn"><a href="/sshj/mybuyList">후기작성</a></div>
+			               </c:if>
 
             <ul id="reviewTitle">
                <li><b>번호</b></li>
@@ -1539,13 +1545,15 @@ margin-left:5px;
             </div>
            <!--  신고하기 밑에 스크립트까지임 -->   
                
-               <c:if test="${logId!=null}">
-               <div id="pagelibtn"><a href="/sshj/mybuyList">후기작성</a></div>
-               </c:if>
+               
                
              <div id="nonebox">   </div>
 
-               <c:if test="${not empty reviewlist}">
+               
+
+         </div>
+         
+         <c:if test="${not empty reviewlist}">
                
                <!-- 페이징 표시--------- -->
       <div class="page_wrap">
@@ -1572,8 +1580,6 @@ margin-left:5px;
        
                <!-- 페이징 표시--------- -->
               </c:if>
-
-         </div>
          <!-- productInfoPage2 -->
       </div>
       <!-- productInfoPage -->
@@ -1601,6 +1607,9 @@ margin-left:5px;
             <div id="qtitle">상품에 대한 문의를 남기는 공간입니다 해당 게시판의 성격과 다른 글은 사전동의
                없이 담당 게시판으로 이동될 수 있습니다.</div>
                
+                <c:if test="${logId!=null}">
+   				<div id="pagelibtn"><input type="button" class="btn qnaWrite" value="문의작성"/></div>
+			   </c:if>
 
             <ul id="qnaTitle">
                <li><b>번호</b></li>
@@ -1661,12 +1670,14 @@ margin-left:5px;
             
         </c:forEach>   
 
-               <c:if test="${logId!=null}">
-   				<div id="pagelibtn"><input type="button" class="btn qnaWrite" value="문의작성"/></div>
-			   </c:if>
+              
 				
 				<div id="nonebox">   </div>
 
+
+
+         </div>
+         <!--productInfoPage3  -->
          <c:if test="${not empty faqlist}">
          
             <!-- 페이징 표시--------- -->
@@ -1693,10 +1704,6 @@ margin-left:5px;
     </div>
             <!-- 페이징 표시--------- -->
            </c:if>
-
-         </div>
-         <!--productInfoPage3  -->
-
       </div>
       <!--productInfoPage  -->
 
