@@ -585,6 +585,7 @@ $(function(){
 				  		<li>미답변</li>
 				  	</c:if>
 				  	
+				  	
 				  	<c:if test="${qlist.qanswer!=null}">
 				 		 <li>답변완료</li>
 				 	</c:if>
