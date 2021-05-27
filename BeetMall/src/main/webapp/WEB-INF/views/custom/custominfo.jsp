@@ -433,7 +433,7 @@ $(function(){
 		
 		
 		
-		$("#reportClose").click(function(){			// 신고  닫기 부분
+		$("#reportClose").click(function(){			// 신고  닫기 부분 
 		$("#reportcontent").val('');
 		$("#reportDiv").css("display","none");
 	     })
