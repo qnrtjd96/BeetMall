@@ -114,11 +114,11 @@
 						<th class="menu">답변일</th>
 						<td class="td" >
 							<span>
-								<c:if test="${vo.qmanserdate==null}">
+								<c:if test="${saavo.qmanserdate==null}">
 										답변예정
 								</c:if>
-								<c:if test="${vo.qmanserdate!=null}">
-										${vo.qmanserdate}
+								<c:if test="${saavo.qmanserdate!=null}">
+										${saavo.qmanserdate}
 								</c:if>
 							</span>
 						</td>
@@ -127,14 +127,14 @@
 					<tr>
 						<td class="question_content" colspan="4">
 							<span class="content" >
-								<c:if test="${vo.qmanswer==null}">
-								<strong>
-								아직 답변이 도착하지않았습니다<br/>
-								 <br/>
-								</strong>
+								<c:if test="${saavo.qmanswer==null}">
+									<strong>
+									아직 답변이 도착하지않았습니다<br/>
+									 <br/>
+									</strong>
 								</c:if>
-								<c:if test="${vo.qmanswer!=null || vo.qmanswer!=''}">
-									${vo.qmanswer}
+								<c:if test="${saavo.qmanswer!=null || saavo.qmanswer!=''}">
+									${saavo.qmanswer}
 								</c:if>
 							</span>
 						</td>	
