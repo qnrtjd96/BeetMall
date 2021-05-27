@@ -168,6 +168,8 @@
 			$("#questionDiv").css("top", scroll+70);
 			$("#buyCancelNotice").css("top", scroll+70);
 			$("#returnDiv").css("top", scroll+70);
+			$("#returnDiv").css("top", scroll+70);
+			$(".admingchatiframe").css("top", scroll+100);
 		});
 		
 		$(document).on('scroll', function(){
@@ -198,6 +200,7 @@
 			$("#questionDiv").css("top", scroll+70);
 			$("#buyCancelNotice").css("top", scroll+70);
 			$("#returnDiv").css("top", scroll+70);
+			$(".admingchatiframe").css("top", scroll+100);
 		});
 		
 		/*룰렛*/
