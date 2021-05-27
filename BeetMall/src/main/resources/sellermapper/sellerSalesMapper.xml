@@ -8,7 +8,7 @@
 		from category a join mcategory b on a.catenum = b.catenum order by catesort, mcatesort
 	</select>
 	<select id="todayList" resultType="com.beetmall.sshj.seller.vo.SellerSalesVO">
-		select count(realpayment) todayNum, SUM(realpayment) todayMoney
+		select count(realpayment) todayNum, SUM(usedpoint+realpayment) todayMoney
 		from ordertbl where ordernum in (select ordernum
 		from orderdetail where productnum in (select productnum from product where userid = '${userid}')) 
     		and to_char(orderdate, 'YYYYMMDD') = to_char(sysdate,'YYYYMMDD')
@@ -25,7 +25,7 @@
 				${item} 
 			</foreach> 
 		</if>
-		and orderstatus='구매확정' and orderconfirm >= #{startCalendarDataValue} and orderconfirm <![CDATA[<=]]> #{endCalendarDataValue} order by orderconfirm asc, ordernum asc 
+		and orderstatus not in('취소','환불','환불 준비중') and orderconfirm >= #{startCalendarDataValue} and orderconfirm <![CDATA[<=]]> #{endCalendarDataValue} order by orderconfirm asc, ordernum asc 
 	</select>
 	
 	

@@ -14,7 +14,7 @@
 		width:600px !important;
 	}
 	#contentBox {
-		height:4400px;
+		height:2600px;
 		margin-top:70px !important;
 	}
 	/*컨테이너 공통*/
@@ -206,6 +206,11 @@
 	#popul>li>input{
 		width:400px;
 	}
+	.cutwords{
+		white-space: nowrap;
+		overflow:hidden;
+		text-overflow: ellipsis;
+	}
 </style>
 <script>
 $(document).ready(function(){ 
@@ -289,7 +294,7 @@ $(document).ready(function(){
 		})
 		$(document).on('click', "#popBtn", function(){
 			$("#popupform").submit();
-			alert('서브밋함');				
+			alert('수정되었습니다');				
 		});
 		$(document).on('click', "input[value=제거]", function(){
 			var catesort = $(this).prev().prev().val();	/* srot넘 */
@@ -355,8 +360,8 @@ $(document).ready(function(){
 							tag +="채소";
 						}
 						tag += "</li>"+
-						'<li id="kktitle"><a href="/sshj/productEditA?productnum='+data.productnum+'">'+data.productname+'</a></li>'+
-						'<li>'+data.storename+'</li>'+
+						'<li id="kktitle" class="cutwords">'+data.productname+'</li>'+
+						'<li class="cutwords">'+data.storename+'</li>'+
 						'<li>'+data.sellstart+'</li>'+
 						'<li><input type="hidden" value="'+data.productnum+'"/><input type="button" class="addproduct" value="선택" style="width:60px; height:35px;"></li>'+
 						'</ul>';
@@ -516,8 +521,8 @@ $(document).ready(function(){
 						채소
 					</c:if>
 				</li>
-				<li id="kktitle"><a href="/sshj/productEditA?productnum=${data.productnum}">${data.productname}</a></li>
-				<li>${data.storename}</li>
+				<li id="kktitle" class="cutwords">${data.productname}</li>
+				<li class="cutwords">${data.storename}</li>
 				<li>${data.sellstart}</li> 
 				<li><input type="hidden" value="${data.productnum}"/><input type="button" class="addproduct" value="선택" style="width:60px; height:35px;"></li>
 		</c:forEach>
@@ -611,8 +616,8 @@ $(document).ready(function(){
 						<li>팝업이미지</li>					<li><input type="file" name="file"/></li>
 						<li>팝업링크</li>						<li><input type="text" name="popuplink" value="${popup.popuplink}"/></li>
 						<li>팝업 재노출 주기(일 단위 입력)</li>	<li><input type="text" name="popupterm" value="${popup.popupterm}"/></li>
-						<li>팝업 가로 길이(px)</li>			<li><input type="text" name="popupheight" value="${popup.popupheight}"/></li>
-						<li>팝업 세로 길이(px)</li>			<li><input type="text" name="popupwidth" value="${popup.popupwidth}"/></li>
+						<li>팝업 가로 너비(px)</li>			<li><input type="text" name="popupwidth" value="${popup.popupwidth}"/></li>
+						<li>팝업 세로 높이(px)</li>			<li><input type="text" name="popupheight" value="${popup.popupheight}"/></li>
 					</ul>
 					<input type="button" value="적용하기" style="width:80px;height:30px;line-height:30px;margin-left:480px;margin-top:10px;background-color:#85b8cb;color:white;border:none;" id="popBtn"/>
 				</form>

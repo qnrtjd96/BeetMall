@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beetmall.sshj.admin.dao.Admin_ProductDAO">
+	<select id="productListData" resultType="com.beetmall.sshj.admin.vo.Admin_ProductVO">
+		select * from product a 
+		join mcategory b on a.mcatenum = b.mcatenum 
+		join category c on b.catenum = c.catenum
+		where productnum = ${productnum}
+	</select>
+	
+	<select id="productOptionData" resultType="com.beetmall.sshj.admin.vo.Admin_ProductVO">
+		select * from optiontbl where productnum = ${productnum}
+	</select>
+	
+	<select id="productSaleData" resultType="com.beetmall.sshj.admin.vo.Admin_ProductVO">
+		select * from discount where productnum = ${productnum}
+	</select>
+	
+	
+	
+	<insert id="productUpdate" parameterType="com.beetmall.sshj.admin.vo.Admin_ProductVO">
+		insert into product (productnum, userid, mcatenum, productname, productprice, saleselect, saleb, optionselect,
+								sellstart, sellfinish,
+								totalstock, nowstock, thumbimg, productcontent, deliveryoption, deliveryprice, paymentoption, selloption, sellweight,origin, wrapping, productinfomation, prevention, deadline)       			
+       	values(productsq.nextval, '${userid}' , ${mcatenum}, '${productname}', ${productprice}, '${saleselect}', '${saleb}', '${optionselect}',
+       			'${sellstart}','${sellfinish}', ${totalstock}, ${totalstock},'${thumbimg}',
+       			'${productcontent}', '${deliveryoption}', ${deliveryprice}, '${paymentoption}', '${selloption}', '${sellweight}', 
+       			'${origin}', '${wrapping}', '${productinfomation}', '${prevention}', '${deadline}')     
+    		  				
+	</insert>
+	<insert id="discountUpdate" parameterType="com.beetmall.sshj.admin.vo.Admin_ProductVO">
+		insert into discount 
+		(productnum, saleprice, salestart,  salefinish)
+		values(productsq.currval, ${saleprice}, '${salestart}', '${salefinish}')				
+
+	</insert>
+	<insert id="optionUpdate" parameterType="com.beetmall.sshj.admin.vo.Admin_ProductVO">
+		insert into optiontbl
+		(optionnum, productnum, optionname, optionstock, optionnowstock, optionprice)
+		values
+		(optionsq.nextval, productsq.currval, '${optionname}' ,${optionstock}, ${optionstock}, ${optionprice} )
+	</insert>
+</mapper>

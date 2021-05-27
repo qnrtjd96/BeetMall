@@ -45,7 +45,7 @@
 		order by username asc
 	</select>
 	<select id="memberCountSeller" resultType="Integer" parameterType="com.beetmall.sshj.admin.vo.Admin_Member_PageVO">
-		select count(*) from member m join seller s on m.userid=s.userid where usertype=#{userType} <if test="userType > 3">and userstop = 'N'</if><if test="searchWord != null"> and s.${searchKey} like '%${searchWord}%' </if>
+		select count(*) from seller
 	</select>
 	<select id="memberselectSellerAll" parameterType="com.beetmall.sshj.admin.vo.Admin_Member_PageVO" resultType="com.beetmall.sshj.admin.vo.Admin_MemberVO">
 		select * from(
@@ -54,11 +54,11 @@
 		s.storeemail, s.storename, storezipcode, storeaddr, storedetailaddr, bank, bankname, bankaccount, regiapproval, 
 		to_char(regiapprovaldate, 'YYYY/MM/DD') as regiapprovaldate, sellerregiimg , usertype
 		from member m join seller s on m.userid = s.userid
-		<if test="searchWord != null"> where s.${searchKey} like '%${searchWord}%' </if>
-		)where rownum<![CDATA[<=]]>${pageNum}*${onePageRecord} order by sellername desc
+		<if test="searchWord != null"> where s.${searchKey} like '%${searchWord}%' </if> order by storenum desc, sellername desc
+		)where rownum<![CDATA[<=]]>${pageNum}*${onePageRecord} order by storenum asc, sellername asc
 		)where rownum<![CDATA[<=]]><if test="pageNum==totalPage">${lastPageRecord}</if>
 								   <if test="pageNum!=totalPage">${onePageRecord}</if>
-		order by sellername asc
+		order by storenum desc, sellername desc
 	</select>
 	<select id="memberselectSeller" parameterType="com.beetmall.sshj.admin.vo.Admin_Member_PageVO" resultType="com.beetmall.sshj.admin.vo.Admin_MemberVO">
 		select * from(

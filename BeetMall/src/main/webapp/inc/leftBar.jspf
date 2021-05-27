@@ -146,9 +146,9 @@ $(function(){
 				</div>
 			</label> <input type="checkbox" id="menu_bar01" class="accordion" />
 			<ul id="links01">
-				<li><a href="customerListA">회원 목록</a></li>
+				<li><a href="customerListA">일반 회원</a></li>
 				<li><a href="customerLeaveList">탈퇴 회원</a></li>
-				<li><a href="customerBlackList">블랙리스트</a></li>
+				<li><a href="customerBlackList">정지 회원</a></li>
 			</ul>
 			<label for="menu_bar02">상품 관리
 				<div id="tri">
@@ -157,7 +157,6 @@ $(function(){
 			</label> <input type="checkbox" id="menu_bar02" class="accordion" />
 			<ul id="links02">
 				<li><a href="productListA">상품 목록</a></li>
-				<li><a href="productEditA">상품 수정</a></li>
 			</ul>
 			<label for="menu_bar03">매출 관리
 				<div id="tri">
@@ -185,7 +184,6 @@ $(function(){
 			<ul id="links05">
 				<li><a href="noticeBoardList">공지 관리</a></li>
 				<li><a href="reviewListA">소비자 리뷰</a></li>
-				<li><a href="boardRecipeListA">레시피 관리</a></li>
 				<li><a href="boardDesignMng">디자인 관리</a></li>
 			</ul>
 			<label for="menu_bar06">고객센터
@@ -197,9 +195,8 @@ $(function(){
 				<li><a href="csQuestionA">고객 문의</a></li>
 				<li><a href="csQBrowse">상품 문의</a></li>
 				<li><a href="csFAQ">자주 묻는 질문</a></li>
-				<li><a href="csChat">1:1 대화하기</a></li>
 				<li><a href="csreportListA">신고 관리</a></li>
-				<li><a href="csReportChat">신고 채팅 관리</a></li>
+				<li><a href="csReportChat">채팅 관리</a></li>
 			</ul> 
 		</div>
 	</div>

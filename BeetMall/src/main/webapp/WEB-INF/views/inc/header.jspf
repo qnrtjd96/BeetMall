@@ -153,6 +153,23 @@
 			$("#mypagePreviewDiv").css("display","none");
 		})
 		/* 메뉴 바 내려오게 하기 */
+		$(function(){
+			var scroll = window.scrollY;
+			$("#categoriList").css("top","285px");
+			$("#leftMenu").css("top","150px");
+			$("#mypageMenubar").css("top","150px");
+			$("#cMyPageLeft").css("top","150px");
+			$(".popupForm").css("top","450px");
+			$("#buyReturnInput").css("top",scroll+75);
+			$("#buyCommit").css("top",scroll+300);
+			$("#buyCancelRollBack").css("top",scroll);
+			$("#buyReviewWrite").css("top", scroll+50);
+			$("#buyReviewView").css("top", scroll+50);
+			$("#questionDiv").css("top", scroll+70);
+			$("#buyCancelNotice").css("top", scroll+70);
+			$("#returnDiv").css("top", scroll+70);
+		});
+		
 		$(document).on('scroll', function(){
 			var scroll = window.scrollY;
 			if(scroll>255){
@@ -162,20 +179,25 @@
 				$("#mypageMenubar").css("top",scroll);
 				$("#cMyPageLeft").css("top",scroll);
 				$("#chatIframe").css("top",scroll+50);
-				$(".buyListDiv").css("top", scroll+150);
 				$(".popupForm").css("top",scroll+250);
-				
+				$("#buyReturnInput").css("top",scroll+75);
+				$("#buyCommit").css("top",scroll+300);
 			}else {
 				$("#menuBar").css("position","static");
 				$("#categoriList").css("top","285px");
 				$("#leftMenu").css("top","150px");
 				$("#mypageMenubar").css("top","150px");
 				$("#cMyPageLeft").css("top","150px");
-				$(".buyListDiv").css("top", scroll+150);
 				$(".popupForm").css("top","450px");
-				
+				$("#buyReturnInput").css("top",scroll+75);
+				$("#buyCommit").css("top",scroll+300);
 			}
-			
+			$("#buyCancelRollBack").css("top",scroll);
+			$("#buyReviewWrite").css("top",scroll+50);
+			$("#buyReviewView").css("top", scroll+50);
+			$("#questionDiv").css("top", scroll+70);
+			$("#buyCancelNotice").css("top", scroll+70);
+			$("#returnDiv").css("top", scroll+70);
 		});
 		
 		/*룰렛*/
@@ -287,7 +309,6 @@
 				<div style="float:left;margin-left: 10px;"><a href="mybuyList">${logName}님</a></div><div  id="usermypage" style="float:left;height:25px;margin-left: 2px;"><span>▼</span></div>
 			</c:if>
 			<c:if test="${logType==3}">
-				<input type="button" value="관리자 페이지로 이동하기" class="menuButtons btn"  onClick="location.href='<%=request.getContextPath() %>/adminHome'" style="float:left;margin-left:689px;"/>
 				<input type="button" value="관리자 페이지로 이동하기" class="menuButtons btn"  onClick="location.href='<%=request.getContextPath() %>/adminHome'" style="float:left;margin-left:689px;"/>
 				<div style="float:left;margin-left: 10px;"><a href="mybuyList">${logName}님</a></div><div  id="usermypage" style="float:left;height:25px;margin-left: 2px;"><span>▼</span></div>
 			</c:if>

@@ -135,7 +135,7 @@
     
     #leftMenu{
        position: absolute;
-       left:-200px;
+       left:-250px;
        top:150px;
        display: none;
        width:180px;
@@ -184,7 +184,7 @@
     /* 마이페이지 왼쪽 */
     #cMyPageLeft{
     	position: absolute;
-    	left:-200px;
+    	left:-250px;
     	top:150px;
     	display: none;
     	width:180px;
@@ -379,11 +379,11 @@
 	/* 레시피*/
     #mypageMenubar{
     	position: absolute;
-    	left:-200px;
+    	left:-250px;
     	top:150px;
     	display: none;
     	width:180px;
-    	height:480px;
+    	height:284px;
     	color:black;
     	background-color:white;
     	text-align:left;
