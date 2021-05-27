@@ -2,7 +2,7 @@ package com.beetmall.sshj.seller.vo;
 
 public class SellerSettleVO {
 	private String userid; //아이디
-	private int ordernum; // 주문번호
+	private long ordernum; // 주문번호
 	private int productnum; // 상품번호
 	private String orderdate; // 주문일
 	private long orderprice; //주문금액
@@ -161,10 +161,10 @@ public class SellerSettleVO {
 	public void setUserid(String userid) {
 		this.userid = userid;
 	}
-	public int getOrdernum() {
+	public long getOrdernum() {
 		return ordernum;
 	}
-	public void setOrdernum(int ordernum) {
+	public void setOrdernum(long ordernum) {
 		this.ordernum = ordernum;
 	}
 	public int getProductnum() {
