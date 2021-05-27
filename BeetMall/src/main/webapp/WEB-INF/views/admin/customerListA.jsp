@@ -186,6 +186,9 @@
 	#choose{
 		margin: 50px 0 0 20px !important;
 	}
+	#forachtitle{
+		margin-left:0px !important;
+	}
 	#foreachUL>li:nth-child(8n+1), #forachtitle>li:nth-child(8n+1){
 		width:0px !important;
 	}
@@ -215,15 +218,29 @@
 	}
 	#foreachUL>li{
 		cursor: pointer;
+		
+		height:40px;
 	}
 	#foreachUL{
 		margin:0px !important;
 		padding:0px !important;
 	}
+	#sortBox{
+		display:none;
+	}
 </style>
 <script>
+	$("#searchForm").submit(function(){
+		//searchWord있는지 없는지 찾기 , 있을때만 데이터 넘기기
+		if($('#searchWord').val()==""){
+			alert("검색어를 입력하세요.");
+			return false;
+		}
+		return true;
+	});
 	function pagelist(pagenum){
 		var lin = "customerListA?pageNum="+pagenum;
+		
 		location.href=lin;
 	}
 	$(function(){
@@ -329,14 +346,13 @@
 			</div>
 		 </div>
 		<div>
-			<form method="get" class="searchFrm"
-				action="<%=request.getContextPath()%>/board/noticeBoardList.jsp"> 
+			<form method="get" class="searchFrm" action="customerListA"> 
 				<select name="searchKey">
 					<option value="userid" selected>아이디</option>
-					<option value="email">이메일</option> 
-					<option value="addr">주소</option> 
-				</select> <input type="text" name="searchWord" id="searchWord" /> <input
-					type="submit" value="검색" />
+					<option value="useremail">이메일</option> 
+					<option value="username">이름</option> 
+				</select> <input type="text" name="searchWord" id="searchWord" /> 
+				<input type="submit" value="검색" />
 			</form>
 		</div>
 	</div>

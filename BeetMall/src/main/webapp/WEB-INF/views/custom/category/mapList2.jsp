@@ -7,6 +7,10 @@
 <style>
 	*{margin:0px; padding:0px; list-style-type :none; font-family: 'Nanum Gothic', sans-serif;}
 	#leftMenu{ display:block;}
+	#productMain {
+		width:1200px !important;
+		overflow:visible !important;
+	}
 	/* 페이징처리부분 */
 	.page_wrap {
 		text-align:center;
@@ -85,7 +89,7 @@
 		padding-top: 3px;
 	}
 	#productDiv>ul>li:nth-child(5n+2){
-	    font-size: x-large;
+	    font-size: 14px;
 	    font-weight: bold;
 	}
 	#productDiv>ul>li:nth-child(5n+1){
@@ -189,6 +193,7 @@
 				// 커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에
 				// 별도의 이벤트 메소드를 제공하지 않습니다 
 				var content = document.createElement('div');
+				var farmprofile = "${data.farmprofile}"
 				content.className= 'overlay';
 				content.innerHTML= '<div class="wrap">' + 
 				            '    <div class="info">' + 
@@ -198,7 +203,7 @@
 				            '        </div>' + 
 				            '        <div class="body">' + 
 				            '            <div class="img">' +
-				            '                <img src="img/k001.png" width="73" height="70">' + //이부분바꿔야함 자신의 프로필이미지로
+				            '                <img src="'+ farmprofile+'" width="73" height="70">' + //이부분바꿔야함 자신의 프로필이미지로
 				            '           </div>' + 
 				            '            <div class="desc">' + 
 				            '                <div class="ellipsis">${data.storeaddr}</div>' + 

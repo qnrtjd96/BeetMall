@@ -297,16 +297,17 @@ public class MyBuyListController {
 	public ModelAndView questionWrite(int productnum, HttpSession session, UserQBoardVO vo) {
 		ModelAndView mav = new ModelAndView();
 		vo.setUserid((String)session.getAttribute("logId"));
-//		System.out.println("productnum-->"+vo.getProductnum());
-//		System.out.println("답변은 원래 널-->"+vo.getQanswer());
-//		System.out.println("내용-->"+vo.getQcontent());
-//		System.out.println("q넘버 시퀀스라 노상관-->"+vo.getQnum());
-//		System.out.println("N으로 옴 잘온거-->"+vo.getQopen());
-//		System.out.println("널 맞음 sysdate-->"+vo.getQwritedate());
-//		System.out.println("아이디 잘옴-->"+vo.getUserid());
-//		System.out.println("qtitle"+vo.getQtitle());
 		mybuylistservice.qboardInsert(vo);
 		mav.setViewName("redirect:mybuyList");
+		return mav;
+	}
+	@RequestMapping(value="pquestionWrite")
+	public ModelAndView pquestionWrite(int productnum, HttpSession session, UserQBoardVO vo) {
+		ModelAndView mav = new ModelAndView();
+		vo.setUserid((String)session.getAttribute("logId"));
+		mybuylistservice.qboardInsert(vo);
+		mav.addObject("productnum",productnum);
+		mav.setViewName("redirect:customproduct");
 		return mav;
 	}
 	@RequestMapping("returnSubmit")

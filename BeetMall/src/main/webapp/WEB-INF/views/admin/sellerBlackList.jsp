@@ -9,6 +9,7 @@
 	 #contentBox{ 
 		top:20px; 
 		margin-left:10px;
+		margin-top:0px !important;
 	}
 	/*남색 바*/ 
 	#topBar h5{ 
@@ -118,6 +119,9 @@
 	.foreachUL>li{
 		cursor: pointer;
 	}
+	#addBtn, #delBtn{
+		visibility: hidden;
+	}
 </style>
 <script>
 $(function(){
@@ -133,7 +137,7 @@ $(function(){
 	<div id="topBarContainer">
 		<div id="topBar">
 			<ul>
-				<li><h5><strong><a href="sellerBlackList">블랙리스트</a></strong></h5></li> 
+				<li><h5><strong><a href="sellerBlackList">정지 회원</a></strong></h5></li> 
 				<li><button class="success" value="add" name="add" id="addBtn">추가</button></li>
 				<li><button class="success" value="del" name="del" id="delBtn">삭제</button></li>
 			</ul> 
@@ -220,16 +224,14 @@ $(function(){
 			
 		 </div> 
 		 <div>
-			<form method="get" class="searchFrm" action="<%=request.getContextPath() %>/board/noticeBoardList.jsp">
+			<form method="get" class="searchFrm" action="sellerBlackList"> 
 				<select name="searchKey">
-					<option value="subject" selected>제목</option>
-	   				<option value="no">공지번호</option> 
-	   				<option value="who">대상</option> 
-	   				<option value="writedate">공지일</option> 
-				</select>			
-				<input type="text" name="searchWord" id="searchWord"/>
-				<input type="submit" value="검색"/> 
-			</form> 
+					<option value="userid" selected>아이디</option>
+					<option value="useremail">이메일</option> 
+					<option value="username">이름</option> 
+				</select> <input type="text" name="searchWord" id="searchWord" /> 
+				<input type="submit" value="검색" />
+			</form>
 		</div>  
 	</div>
 </div>

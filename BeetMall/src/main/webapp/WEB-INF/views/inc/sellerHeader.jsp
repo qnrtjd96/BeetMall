@@ -107,7 +107,14 @@ footer{
 		}, function(){
 			$(this).children('ul').css('display','none');
 		})
+		
+		
+		
 	}) 
+	
+	function movePage(){
+			location.href = "/sshj/";
+	}
 </script>
 <div id="seller_header">
 	<!-- 상단 메뉴 바 -->
@@ -122,9 +129,7 @@ footer{
 			<c:if test="${logStatus == 'Y' }">
 				<div class="sellerLoginBtn">
 					<!-- 로그인 후 -->
-					<c:if test="${logType==2}">
-						<input type="button" value="판매자 페이지로 이동하기" class="sellerMenuButtons" />
-					</c:if>
+					<input type="button" onclick="movePage()" id="moveBtn" value="구매자 페이지로 이동하기" class="sellerMenuButtons" />
 					<a href="myinfoEdit">${logName}님</a><span id="sellerMenuButtons">▼</span> <input type="button" value="로그아웃" class="sellerMenuButtons" /> <input type="button" value="고객센터" class="sellerMenuButtons" onClick="location.href='<%=request.getContextPath()%>/notice'" />
 				</div>
 			</c:if>

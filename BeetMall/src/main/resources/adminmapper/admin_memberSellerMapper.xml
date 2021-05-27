@@ -22,7 +22,7 @@
 	
 	<select id="getReportData" resultType="com.beetmall.sshj.admin.vo.Admin_MemberSellerVO">
 		select nvl(count(userid),0) reportcount, nvl(sum(reportdate),0) reportsum from reporttbl 
-		where userid = #{param} group by userid, reportdate
+		where userid = #{userid} group by userid
 	</select>
 	
 	<select id="discountSelect" resultType="com.beetmall.sshj.admin.vo.Admin_MemberSellerVO">
@@ -37,11 +37,11 @@
 	</select>
 	
 	<update id="regiapprovalOkUpdate" parameterType="String">
-		update seller set regiapproval = 2 where userid= #{userid}
+		update seller set regiapproval = 2, regiapprovaldate = sysdate where userid= #{userid}
 	</update>
 	
 	<update id="regiapprovalNoUpdate" parameterType="String">
-		update seller set regiapproval = 3 where userid= #{userid}
+		update seller set regiapproval = 3, regiapprovaldate = null where userid= #{userid}
 	</update>
 	
 	<update id="farmUpdate" parameterType="com.beetmall.sshj.admin.vo.Admin_MemberSellerVO">

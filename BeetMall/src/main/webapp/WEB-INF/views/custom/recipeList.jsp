@@ -18,6 +18,9 @@
 
 </head>
 <style>
+.btn{
+	padding:0 !important;
+}
 /*  기본설정----------------------------------------------                 */
 a:hover, a:active, a:visited, a:link {
     text-decoration: none;

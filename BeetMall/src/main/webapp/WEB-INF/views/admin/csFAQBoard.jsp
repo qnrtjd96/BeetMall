@@ -235,10 +235,10 @@ input[type="submit"].btn:hover, input[type="button"].btn:hover, input[type="subm
 							<th class="menu">문의구분</th>
 							<td class="td" colspan="3">
 								<c:if test="${vo.faqoption==1 }">
-									<div>판매자</div>
+									<div>소비자</div>
 								</c:if>
 								<c:if test="${vo.faqoption==2 }">
-									<div>구매자</div>
+									<div>판매자</div>
 								</c:if>
 							</td>
 						</tr>

@@ -10,7 +10,7 @@
 		display: block;
 	}
 	#mypointList{
-		height:980px;
+		height:1000px;
 		overflow:auto;
 		position: relative;
 	}
@@ -281,7 +281,8 @@
 	.buyListleftMenu{
 		width:100px;
 		float:left;
-		font-size:20px;
+		font-size:17px;
+		padding-left:5px;
 		line-height: 100px;
 	}
 	#reviewStars{
@@ -326,27 +327,6 @@
  		text-decoration: none;
 		display: inline-block;
 		border:none;
-	}
-	button, .btn{
-		padding: 3px 10px;
-		color: #666666;
-		border-radius: 8px;
-		background:#fff;
-		box-shadow: 0 0px 3px 0 rgba(0,0,0,0.5);
-		text-align: center;
- 		text-decoration: none;
-		display: inline-block;
-		border:none;
-		margin:0 3px;
-	}
-	/*버튼*/
-	.btn:hover, .btnSubmit:hover{
-		background: gray;
-		color:white;
-		display: inline-block;
-	}
-	.nonBtn{
-		
 	}
 	.redstar{
 		color:red;
@@ -656,7 +636,7 @@
 		});
 	})
 	
-	$(document).on('click','input[value="반품/환불신청"]', function(){
+	$(document).on('click','input[value="환불신청"]', function(){
 		var num = $(this).parent().prev().children().val();
 		var ordernum = $(this).prev().prev().prev().val();
 		$("#buyReturnInput").css("display","block");
@@ -861,11 +841,11 @@
 					<li><span class="pointdate">${vo.orderdate}</span></li>
 					<li>${vo.ordernum}</li>
 					<li>
-					<a href="customproduct?productnum=${vo.productnum}"><img src="/sshj/resources/sellerProductImgs/${vo.thumbimg}"></a><span class="buyttitle wordcut"><a href="customproduct?productnum=${vo.productnum}">${vo.productname}</a></span><span class="buydetail wordcut"><a href="customproduct?productnum=${vo.productnum}">${vo.productcontent}</a></span>
+					<a href="customproduct?productnum=${vo.productnum}"><img src="/sshj/resources/sellerProductImgs/${vo.thumbimg}"onerror="this.src='/sshj/img/derror.png'"></a><span class="buyttitle wordcut"><a href="customproduct?productnum=${vo.productnum}">${vo.productname}</a></span><span class="buydetail wordcut"><a href="customproduct?productnum=${vo.productnum}">${vo.productinfomation}</a></span>
 					</li>
 					<li><span class="pointprice">${vo.orderprice}</span>원</li>
 					<li>${vo.orderstatus}<input type="hidden" value="${vo.productnum}"/></li>
-					<c:if test="${vo.orderstatus == '준비중'}">
+					<c:if test="${vo.orderstatus == '배송준비중'||vo.orderstatus == '픽업대기중'}">
 					<li><input type="button" class="btn qnaWrite" value="문의작성"/><input type="button" class="btn" value="취소하기"/></li>
 					</c:if>
 					<c:if test="${vo.orderstatus == '결제완료'}">
@@ -874,8 +854,8 @@
 					<c:if test="${vo.orderstatus == '배송중'}">
 					<li><input type="hidden" value="${vo.invoice}"/><input type="button" class="btn" value="배송조회"/><input type="button" class="btn" value="문의작성"/><input type="button" class="btn nonBtn" value="취소하기"/></li>
 					</c:if>
-					<c:if test="${vo.orderstatus == '배송완료'}">
-					<li><input type="hidden" value="${vo.ordernum}"/><input type="button" class="btn" value="구매확정"/><input type="button" class="btn" value="문의작성"/><input type="button" class="btn" value="반품/환불신청"/></li>
+					<c:if test="${vo.orderstatus == '배송완료'||vo.orderstatus == '픽업완료'}">
+					<li><input type="hidden" value="${vo.ordernum}"/><input type="button" class="btn" value="구매확정"/><input type="button" class="btn" value="문의작성"/><input type="button" class="btn" value="환불신청"/></li>
 					</c:if>
 					<c:if test="${vo.orderstatus == '환불'}">
 					<li><input type="button" class="btn" value="문의작성"/></li>
@@ -915,7 +895,7 @@
 			</div>
 		</div>
 		<div class="section">
-		<div class="buyListDiv" id="buyCommit">
+		<div class="buyListDiv" id="buyCommit" style="left:650px;top:325px;">
 			<div class="buyListBar" style="font-size:21px;">구매 확정</div><div class="buyListBarClose">&times;</div>
 			<div class="buyListContent" style="text-align: center;padding-top:100px; height:300px;">
 				<input type="hidden" value="" id="orderCommitHidden"/>
@@ -925,18 +905,18 @@
 			</div>
 		</div>
 		
-		<div class="buyListDiv" id="buyReturnInput">
-			<div class="buyListBar" style="margin-left:0px;font-size:21px;"><span class="change">반품/환불</span> 신청</div><div class="buyListBarClose">&times;</div>
+		<div class="buyListDiv" id="buyReturnInput" style="width:552px;top:75px;left:650px;">
+			<div class="buyListBar" style="margin-left:0px;font-size:21px;width: 552px;"><span class="change">환불</span> 신청</div><div class="buyListBarClose" style="left: 502px;">&times;</div>
 			<!-- 반품신청 -->
-			<div class="buyListContent" style="height:750px;" id="tradeDiv">
+			<div class="buyListContent" style="height:700px;width:552px;" id="tradeDiv">
 			
 			<form method="post" action='tradeCommit'>
 				<input type="hidden" name="ordernum" id="returnOrdernum"/>
 				<input type="hidden" name="productnum" id="returnProductnum"/>
 				
-				<div style="background-color: rgb(250, 250, 250); text-align:center;height: 100px;margin-left:-10px;padding-top: 7px;">
-					<input type="radio" name="claimkind" value="1" id="trade" style="margin-top:60px;" checked/><span style=" margin-right:5px;">반품 신청</span>
-					<input type="radio" name="claimkind" value="2" id="refund"/><span style="margin-left:5px;">환불 신청</span>
+				<div style="background-color: rgb(250, 250, 250); text-align:center;height: 100px;margin-left:-10px;padding-top: 7px;display:none;">
+					<input type="radio" name="claimkind" value="1" id="trade" style="margin-top:60px;display:none;"/><span style=" margin-right:5px;display:none;">반품 신청</span>
+					<input type="radio" name="claimkind" value="2" id="refund" checked /><span style="margin-left:5px;">환불 신청</span>
 				</div>
 				<h3 style="text-align: center">해당 제품을 <span class="change">반품</span>하시겠습니까?</h3>
 				<h5><span class="change">반품</span>사유를 선택해주세요</h5>
@@ -961,6 +941,12 @@
 					<select class="normalFont" name="delivery">
 						<option value="우체국택배">우체국 택배</option>
 						<option value="CJ대한통운">CJ대한통운</option>
+						<option value="로젠택배">로젠택배</option>
+						<option value="경동택배">경동택배</option>
+						<option value="한진택배">한진택배</option>
+						<option value="롯데택배">롯데택배</option>
+						<option value="대신택배">대신택배</option>
+						<option value="우체국택배">우체국택배</option>
 					</select><br/>
 				</div>
 				<div class="normalFont" style="padding-bottom:10px;">
@@ -971,7 +957,7 @@
 			</form>
 			</div>
 		</div>
-		<div class="buyListDiv" id="buyCancelNotice" style="left:750px;">
+		<div class="buyListDiv" id="buyCancelNotice" style="left:600px;top:300px;">
 			<div class="buyListBar" style="font-size:21px;">배송 취소</div><div class="buyListBarClose">&times;</div>
 			<div class="buyListContent" style="text-align:center;padding-top:100px; height:300px;">
 				<h2>선택하신 주문을 취소하시겠습니까?</h2>
@@ -980,7 +966,7 @@
 			</div>
 		</div>
 		
-		<div class="buyListDiv" id="buyCancelRollBack" style="left:750px;top:100px;">
+		<div class="buyListDiv" id="buyCancelRollBack" style="left:600px;top:100px;">
 			<div class="buyListBar" style="font-size:21px;">취소 실패</div><div class="buyListBarClose">&times;</div>
 			<div class="buyListContent" style="text-align: center;padding-top:100px; height:340px;">
 				<h2>배송중 / 배송완료 상품은 취소할 수 없습니다.</h2>
@@ -989,7 +975,7 @@
 			</div>
 		</div>
 		<!-- @@ -->
-		<div class="buyListDiv" id="buyReviewView" style="width:550px;left:750px;top:100px;">
+		<div class="buyListDiv" id="buyReviewView" style="width:550px;left:650px;top:100px;">
 			<div class="buyListBar" style="font-size:21px;width:550px;">상품리뷰 보기</div><div class="buyListBarClose" style="left:500px;">&times;</div>
 			<div class="buyListContent" style="padding-top:60px; height:730px;background-color: #ddd; text-align: center;width:550px;">
 				<ul id="infoInput" style="text-align:left;">
@@ -1004,16 +990,16 @@
 		</div>
 		<!--  -->
 		
-		<div class="buyListDiv" id="buyReviewWrite" style="width:550px;left:750px;top:100px;">
+		<div class="buyListDiv" id="buyReviewWrite" style="width:550px;left:650px;top:100px;">
 			<div class="buyListBar" style="font-size:21px;width:550px;">상품리뷰 작성하기</div><div class="buyListBarClose"style="left:500px;">&times;</div>
-			<div class="buyListContent" style="padding-top:60px; height:790px;width:550px;">
+			<div class="buyListContent" style="padding-top:60px; height:822px;width:550px;">
 			<div id="buyProduct">
 				<span class="buyListleftMenu">구매상품</span>
 				<img src="/sshj/" id="reviewImg"/>
 				<div id="reviewTitle" style="font-size: 17px;padding-left:5px;height: 100px;width: 345px;">불러오는 중입니다...</div>
 				<div></div>
 			</div>
-			<form method="post" name="reviewFrm" enctype="multipart/form-data" action="reviewWrite" >
+			<form method="post" name="reviewFrm" enctype="multipart/form-data" action="reviewWrite"style="height:660px;float: left;">
 					<input type="hidden" name="ordernum" value="" id="reviewordernum"/>
 					<input type="hidden" name="productnum" value="" id="reviewproductnum"/>
 				<div id="buyProductStar"style="height: 50px;width:550px;line-height: 50px;">
@@ -1033,7 +1019,7 @@
 				<div id="buyProductImg"style="height: 50px;margin-bottom: 10px;">
 					<span class="buyListleftMenu" style="float:left;height: 50px;line-height: 50px;">첨부이미지</span><input type="file" name="file" style="width: 446px;height: 60px;line-height: 50px;"/>&nbsp;
 				</div>
-				<textarea name="reviewcontent" id="summernote" style="margin-top:10px;padding-top:10px;">
+				<textarea name="reviewcontent" id="summernote" style="margin-top:10px;padding-top:10px;width:540px;">
 					
 				</textarea>
 				<input type="submit" value="리뷰 제출하기" class="btnSubmit" id="reviewSubmitBtn" style="margin-left: 235px;margin-right: 0px"/>
@@ -1056,7 +1042,7 @@
 				<input type="button" value="닫기" class="btn" style="top:600px;" id="returnBtn" />
 			</div>
 		</div>
-		<div class="buyListDiv" id="questionDiv" style="width:550px;left:765px;top:100px;">
+		<div class="buyListDiv" id="questionDiv" style="width:550px;left:650px;top:100px;">
 			<div class="buyListBar" style="font-size:21px;width:550px;">문의하기</div><div class="buyListBarClose" style="left:500px;">&times;</div>
 			<div class="buyListContent" style="padding-top:60px; height:700px;background-color:white; text-align: center;width:550px;">
 			<form id="questionForm" action="questionWrite" method="post">
@@ -1105,12 +1091,15 @@
 </div>
 
 <script>
+
 $(document).ready(function() {
+	
 	  $('#summernote').summernote({
-		  height: 370,                 // 에디터 높이
-		  maxHeight:370,
-		  minHeight:370,
+		  height: 400,                 // 에디터 높이
+		  maxHeight:400,
+		  minHeight:400,
 		  focus: true,
+		  width:540,
 		  placeholder:'고객님의 리뷰를 작성해주세요 단, 무분별한 비난, 욕설 등이 포함된 리뷰는 숨김처리 될 수 있습니다.',
 		  //콜백 함수
         callbacks : { 
@@ -1124,12 +1113,15 @@ $(document).ready(function() {
         }
 	  });
 	});
+$(function(){
+	$("#summernote").next().css("margin-left","5px");
+})
 $(document).ready(function() {
 	  $('.summernote').summernote({
 		  height: 330,                 // 에디터 높이
 		  maxHeight:330,
 		  minHeight:330,
-		  width:660,
+		  width:530,
 		  focus: true,
 		  placeholder:'가로+세로+높이=120cm, 10kg 규격 초과 시 현장수거 불가할 수 있으며, 강제수거요청 시 판매자가 추가비용 별도 청구할 수 있습니다. <br/> 이미지를 끌어서 놓으시면 이미지도 첨부가 가능합니다.',
 		  //콜백 함수

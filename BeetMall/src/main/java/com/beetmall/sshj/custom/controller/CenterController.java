@@ -52,11 +52,13 @@ public class CenterController {
 	}
 	//1:1 목록가져오기 customerCenter부분
 	@RequestMapping("/customerCenter")
-	public ModelAndView qmboardList(HttpServletRequest req, HttpServletResponse res) {
+	public ModelAndView qmboardList(HttpServletRequest req, HttpServletResponse res, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		String pageNumStr = req.getParameter("pageNum");
-		
+			
 		PageSearchVO pageVO = new PageSearchVO();
+		
+		pageVO.setUserid((String)session.getAttribute("logId"));
 		if(pageNumStr != null) {//페이지 번호가 있을때 숫자화, 없으면 1로 설정 설정되어있음.
 			pageVO.setPageNum(Integer.parseInt(pageNumStr));
 		}

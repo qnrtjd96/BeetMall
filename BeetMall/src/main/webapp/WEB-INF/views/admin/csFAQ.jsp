@@ -283,10 +283,10 @@
 						<li>${result.faqnum }</li>
 						<li>${result.faqcate }</li>
 						<c:if test="${result.faqoption==1 }">
-							<li>판매자</li>
+							<li>소비자</li>
 						</c:if>
 						<c:if test="${result.faqoption==2 }">
-							<li>구매자</li>
+							<li>판매자</li>
 						</c:if>
 						<li><a href="csFAQBoard?faqnum=${result.faqnum }">${result.faqtitle }</a></li>
 					</c:forEach>

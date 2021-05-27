@@ -246,14 +246,14 @@
 				<li>일시</li>
 				<li>상품</li>
 				<li>판매가</li>
-				<li>마일리지</li>
-				<li>잔여<br/>마일리지</li>
+				<li>포인트</li>
+				<li>잔여<br/>포인트</li>
 				<c:forEach var="vo" items="${list}">
 					<li><span class="pointdate">${vo.orderdate}</span></li>
 					<li class="linkStop wordcut">
-						<a href="customproduct?no=${vo.productnum}"><img src="/sshj/resources/sellerProductImgs/${vo.thumbimg}" style="margin-right:10px;"></a>
+						<a href="customproduct?no=${vo.productnum}"><img src="/sshj/resources/sellerProductImgs/${vo.thumbimg}" style="margin-right:10px;"onerror="this.src='/sshj/img/derror.png'"></a>
 						<a href="customproduct?no=${vo.productnum}"><span class="pointtitle wordcut">${vo.productname}</span><br/></a>
-						<a href="customproduct?no=${vo.productnum}"><span class="pointdetail cutpoint">${vo.productcontent }</span></a>
+						<a href="customproduct?no=${vo.productnum}"><span class="pointdetail cutpoint">${vo.productinfomation }</span></a>
 					</li>
 					<li><span class="pointprice">${vo.orderprice}</span>원</li>
 					<c:if test="${vo.changepoint > 0}">

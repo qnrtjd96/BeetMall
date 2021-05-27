@@ -45,7 +45,21 @@
 	}
 </style>
 <script>
-	window.onload = function(){
+	$(function(){
+		$(".infobusiz").click(function(){
+			infobusiz();
+		});
+		
+		$(".infomaition").click(function(){
+			infomaition();
+		});
+		
+		$(".personaal").click(function(){
+			personal();
+		});
+		
+	});
+	function infobusiz(){
 		var url = "/sshj/infobusiz";
          $.ajax({
             url : url,
@@ -59,60 +73,58 @@
             }
          });
 	}
-	$(function(){
-		$(".infobusiz").click(function(){
-			var url = "/sshj/infobusiz";
-	         $.ajax({
-	            url : url,
-	            success : function(result){
-	            	var $result = $(result);
-	            	$result.each(function(idx, obj){
-	            		$("#infoPrint").html("<pre>"+obj.userinfocontent+"</pre>");
-	            	});
-	            }, error:function(){
-	               $("#infoPrint").html("전송받기 실패..");
-	            }
-	         });
-		});
-		$(".infomaition").click(function(){
-			var url = "/sshj/infomaition";
-	         $.ajax({
-	            url : url,
-	            success : function(result){
-	            	var $result = $(result);
-	            	$result.each(function(idx, obj){
-	            		$("#infoPrint").html("<pre>"+obj.userinfocontent+"</pre>");
-	            	});
-	            }, error:function(){
-	               $("#infoPrint").html("전송받기 실패..");
-	            }
-	         });
-		});
-		$(".personaal").click(function(){
-			var url = "/sshj/personaal";
-	         $.ajax({
-	            url : url,
-	            success : function(result){
-	            	var $result = $(result);
-	            	$result.each(function(idx, obj){
-	            		$("#infoPrint").html("<pre>"+obj.userinfocontent+"</pre>");
-	            	});
-	            }, error:function(){
-	               $("#infoPrint").html("전송받기 실패..");
-	            }
-	         });
-		});
-		
-	});
+	function infomaition(){
+		var url = "/sshj/infomaition";
+         $.ajax({
+            url : url,
+            success : function(result){
+            	var $result = $(result);
+            	$result.each(function(idx, obj){
+            		$("#infoPrint").html("<pre>"+obj.userinfocontent+"</pre>");
+            	});
+            }, error:function(){
+               $("#infoPrint").html("전송받기 실패..");
+            }
+         });
+	}
+	function personal(){
+		var url = "/sshj/personaal";
+         $.ajax({
+            url : url,
+            success : function(result){
+            	var $result = $(result);
+            	$result.each(function(idx, obj){
+            		$("#infoPrint").html("<pre>"+obj.userinfocontent+"</pre>");
+            	});
+            }, error:function(){
+               $("#infoPrint").html("전송받기 실패..");
+            }
+         });
+	}
 </script>
 <div class="section">
 	<div id="infoTitle">
 		<h2>이용안내</h2>
 	</div>
 	<div id="infoSelect">
-		<div class="infobusiz">회사소개</div>
-		<div class="infomaition">이용약관</div>
-		<div class="personaal">개인정보처리방침</div>
+		<c:if test="${type == 1}">
+			<script>$(function(){
+				infobusiz();
+			})</script>
+		</c:if>
+		<c:if test="${type == 2}">
+			<script>$(function(){
+				infomaition();
+			})</script>
+		</c:if>
+		<c:if test="${type == 3}">
+			<script>$(function(){
+				personal();
+			})</script>
+		</c:if>
+		<div class="infobusiz" style="cursor: pointer;">회사소개</div>
+		<div class="infomaition" style="cursor: pointer;">이용약관</div>
+		<div class="personaal" style="cursor: pointer;">개인정보처리방침</div>
 		<div><div id="infoPrint"></div></div>
 	</div>
 	

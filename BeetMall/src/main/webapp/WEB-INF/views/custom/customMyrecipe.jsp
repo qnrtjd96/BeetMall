@@ -39,8 +39,7 @@ a:hover, a:active, a:visited, a:link {
 	   line-height: 30px;
 	   /* color: #fff; */
 	   color:black;
-	   font-weight:bold;
-	   font-size:1em;
+	   font-size:30px;
 	   text-indent: 0.4em;
 	   /* background-color: rgb(224,102,102); */
 	   margin-bottom:30px;
@@ -420,7 +419,7 @@ $(document).ready(function(){
 					<div id="recipebox">
 					      
 									<ul>
-										<li><a href="recipeView?recipenum=${data.recipenum}&id=${logId}"><img src="img/${data.recipemainimg}" id="rtitleImg"/></a></li>
+										<li><a href="recipeView?recipenum=${data.recipenum}&id=${logId}"><img src="/sshj/upload/${data.recipemainimg}" onerror="this.src='/sshj/img/derror.png'" id="rtitleImg"/></a></li>
 										<li id="retili"><a href="recipeView?recipenum=${data.recipenum}&id=${logId}">${data.recipetitle}</a></li>
 										<li>${data.userid}</li>
 										<li>추천수${data.reciperecommend} 조회수 ${data.recipehit}</li>
@@ -479,10 +478,10 @@ $(document).ready(function(){
 		    <div id="recimainbox2">
 				    <c:forEach var="data2" items="${list2}">
 			     
-						<div id="recipebox">
+						<div id="recipebox"> 
 						      
 										<ul>
-											<li><a href="recipeView?recipenum=${data2.recipenum}&id=${logId}"><img src="img/${data2.recipemainimg}" id="rtitleImg"/></a></li>
+											<li><a href="recipeView?recipenum=${data2.recipenum}&id=${logId}"><img src="/sshj/upload/${data2.recipemainimg}" onerror="this.src='/sshj/img/derror.png'" id="rtitleImg"/></a></li>
 											<li id="retili"><a href="recipeView?recipenum=${data2.recipenum}&id=${logId}">${data2.recipetitle}</a></li>
 											<li>${data2.userid}</li>
 											<li>추천수${data2.reciperecommend} 조회수 ${data2.recipehit}</li>

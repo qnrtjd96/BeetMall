@@ -381,7 +381,7 @@ function imgChange(data){
 					<input type="hidden" id="productnum" name="productnum" value="${result.productnum }" />
 					<div>대표메뉴<br><input type="button" value="대표메뉴 수정" id="MenuEditBtn" onclick="javascript:menuEditOpen()"></div>
 					<div id="repMenu_content">
-						<img src="<%=request.getContextPath()%>/resources/fileupload/${result.thumbimg}" name="thumbimg" onerror="this.src='/sshj/img/derror.png'"/>
+						<img src="<%=request.getContextPath()%>/resources/sellerProductImgs/${result.thumbimg}" name="thumbimg" onerror="this.src='/sshj/img/derror.png'"/>
 						<div>
 							<div id="openerProductname">${result.productname }</div>
 							<div>
@@ -396,8 +396,9 @@ function imgChange(data){
 				</div>
 			</div>
 			<!-- info_container 종료 -->
-			<div style="margin:30px auto; width:100px;">
+			<div style="margin:30px auto; width:250px; display:flex;">
 				<input type="button" id="edit_btn" value="수정하기" onclick="editCheck()" />
+				<input type="button" id="return_btn" value="취소" onclick="location.href='javascript:history.back()'" />
 			</div>
 		</form>
 		

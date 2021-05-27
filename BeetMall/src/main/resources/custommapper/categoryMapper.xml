@@ -451,13 +451,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from product a 
 		    left outer join review b 
 		        on a.productnum=b.productnum 
-		    join member c
+		    left outer join member c
 		        on c.userid=a.userid
-		    join seller d
+		    left outer join seller d
 		        on d.userid=a.userid
 		    left outer join discount e
 		        on e.productnum=a.productnum
-            join (select a.farmname, a.storenum, b.userid 
+            left outer join (select a.farmname, a.storenum, b.userid 
                     from farm a
                     join seller b
                     on a.storenum=b.storenum

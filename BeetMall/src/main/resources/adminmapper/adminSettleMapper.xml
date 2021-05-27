@@ -24,7 +24,7 @@
 		
 		) 
 		e join orderdetail f on e.productnum = f.productnum 
-		where orderconfirm between #{startDate} and #{endDate} 
+		where orderconfirm >= #{startDate} and orderconfirm  <![CDATA[<=]]> #{endDate} 
 		
 		<if test="checkBtn == '구매확정'">
 			and orderstatus = '구매확정'
@@ -65,7 +65,7 @@
 		
 		) 
 		e join orderdetail f on e.productnum = f.productnum 
-		where orderconfirm between #{startDate} and #{endDate} 
+		where orderconfirm >= #{startDate} and orderconfirm  <![CDATA[<=]]>  #{endDate} 
 		
 		<if test="checkBtn == '구매확정'">
 			and orderstatus = '구매확정'
@@ -116,7 +116,7 @@
 		
 		) 
 		e join orderdetail f on e.productnum = f.productnum 
-		where orderconfirm between #{startDate} and #{endDate} 
+		where orderconfirm >= #{startDate} and orderconfirm  <![CDATA[<=]]> #{endDate} 
 		
 		<if test="checkBtn == '구매확정'">
 			and orderstatus = '구매확정'
@@ -147,7 +147,7 @@
 
 	<update id="settleUpdate" parameterType="int">
 		update orderdetail set settledate = sysdate, settlecheck='Y'  
-			where orderconfirm <![CDATA[<=]]> to_char(sysdate,'yyyy-MM-dd')
+			where orderconfirm <![CDATA[<=]]> to_char(sysdate,'yyyy-MM-dd'), orderstatus = '구매확정'
 	</update>
 
 </mapper>

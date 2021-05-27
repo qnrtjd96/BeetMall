@@ -8,7 +8,7 @@
         nvl(round((sum(realpayment)*0.058)),0) coPay, count(ordernum) cuPay 
         from ordertbl where orderdate 
         
-        between #{startDate} and #{endDate} 
+        >= #{startDate} and orderdate  <![CDATA[<=]]>  #{endDate} 
 		
 		and ordernum in (select ordernum from orderdetail 
 		where not( orderstatus = '환불' or orderstatus = '취소' or orderstatus = '환불 진행중'))
@@ -27,7 +27,7 @@
 			</foreach> 
 		</if>
          
-         and orderconfirm between #{startCalendarDataValue} and #{endCalendarDataValue} order by orderconfirm asc, ordernum asc 
+         and orderconfirm >= #{startCalendarDataValue} and orderconfirm  <![CDATA[<=]]> #{endCalendarDataValue} order by orderconfirm asc, ordernum asc 
 	</select>
 	
 		<select id="sellerSalesAllData2" resultType="com.beetmall.sshj.admin.vo.Admin_CateSalesVO">
@@ -39,7 +39,7 @@
 		from (select ordernum, a.productnum, productname, b.mcatenum, orderquantity, orderconfirm, orderprice, userid, orderstatus
 		from (select ordernum, productnum, orderquantity, orderconfirm, orderprice, orderstatus from orderdetail) a join 
 		product b on a.productnum = b.productnum ) od join mcategory mc on od.mcatenum = mc.mcatenum where
-		orderstatus='구매확정' and orderconfirm between add_months(last_day(sysdate)+1,-3) and add_months(last_day(sysdate),0) order by orderconfirm desc, ordernum desc) 
+		orderstatus='구매확정' and orderconfirm >= add_months(last_day(sysdate)+1,-3) and orderconfirm  <![CDATA[<=]]>  add_months(last_day(sysdate),0) order by orderconfirm desc, ordernum desc) 
         
         where rownum <![CDATA[ <= ]]> ${pageNum*onePageRecord} order by orderconfirm asc, ordernum asc )
 	        <if test="#{pageNum} == #{totalPage}">
@@ -56,7 +56,7 @@
 		from (select ordernum, a.productnum, productname, b.mcatenum, orderquantity, orderconfirm, orderprice, userid, orderstatus
 		from (select ordernum, productnum, orderquantity, orderconfirm, orderprice, orderstatus from orderdetail) a join 
 		product b on a.productnum = b.productnum ) od join mcategory mc on od.mcatenum = mc.mcatenum where 
-		orderstatus='구매확정' and orderconfirm between add_months(last_day(sysdate)+1,-3) and add_months(last_day(sysdate),0)
+		orderstatus='구매확정' and orderconfirm >= add_months(last_day(sysdate)+1,-3) and orderconfirm  <![CDATA[<=]]> add_months(last_day(sysdate),0)
 	</select>
 	
 	<select id="sellerSalesChartData2" resultType="com.beetmall.sshj.admin.vo.Admin_CateSalesVO">
@@ -75,16 +75,16 @@
 		from (select ordernum, a.productnum, productname, b.mcatenum, orderquantity, orderconfirm, orderprice, userid, orderstatus
 		from (select ordernum, productnum, orderquantity, orderconfirm, orderprice, orderstatus from orderdetail) a join 
 		product b on a.productnum = b.productnum ) od join mcategory mc on od.mcatenum = mc.mcatenum where
-		orderstatus='구매확정' and orderconfirm between 
+		orderstatus='구매확정' and orderconfirm >= 
 		
 		<if test="param1 == 0">
-    		to_char(add_months(LAST_DAY(SYSDATE)+1,-1), 'YYYY-MM-DD') and to_char(add_months(LAST_DAY(SYSDATE), 0), 'YYYY-MM-DD')
+    		to_char(add_months(LAST_DAY(SYSDATE)+1,-1), 'YYYY-MM-DD') and orderconfirm  <![CDATA[<=]]> to_char(add_months(LAST_DAY(SYSDATE), 0), 'YYYY-MM-DD')
     	</if>
     	<if test="param1 == 1">
-    		to_char(add_months(LAST_DAY(SYSDATE)+1,-2), 'YYYY-MM-DD') and to_char(add_months(LAST_DAY(SYSDATE), -1), 'YYYY-MM-DD')
+    		to_char(add_months(LAST_DAY(SYSDATE)+1,-2), 'YYYY-MM-DD') and orderconfirm  <![CDATA[<=]]> to_char(add_months(LAST_DAY(SYSDATE), -1), 'YYYY-MM-DD')
     	</if>
     	<if test="param1 == 2">
-    		to_char(add_months(LAST_DAY(SYSDATE)+1,-3), 'YYYY-MM-DD') and to_char(add_months(LAST_DAY(SYSDATE), -2), 'YYYY-MM-DD')
+    		to_char(add_months(LAST_DAY(SYSDATE)+1,-3), 'YYYY-MM-DD') and orderconfirm  <![CDATA[<=]]> to_char(add_months(LAST_DAY(SYSDATE), -2), 'YYYY-MM-DD')
     	</if> 
         
         group by productnum

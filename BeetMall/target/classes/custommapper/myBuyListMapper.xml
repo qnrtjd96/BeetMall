@@ -4,7 +4,7 @@
 	<select id="selectBuyList" resultType="com.beetmall.sshj.custom.vo.MyBuyListVO" parameterType="com.beetmall.sshj.custom.vo.PointPageVO">
 		select * from(
 		select * from(
-		select ord.orderdate as orderdate, ord.ordernum as ordernum, pro.productname as productname, pro.thumbimg as thumbimg, pro.productcontent as productcontent, det.orderprice as orderprice, det.orderstatus as orderstatus, nvl(del.invoice,-1) as invoice, pro.productnum, rev.ordernum as ordercnt
+		select ord.orderdate as orderdate, ord.ordernum as ordernum, pro.productname as productname, pro.thumbimg as thumbimg, pro.productcontent as productcontent, det.orderprice as orderprice, det.orderstatus as orderstatus, nvl(del.invoice,-1) as invoice, pro.productnum, rev.ordernum as ordercnt, productinfomation
 		from ordertbl ord
 		    join orderdetail det
 		        on ord.ordernum = det.ordernum

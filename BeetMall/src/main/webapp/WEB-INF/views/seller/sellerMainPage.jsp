@@ -142,10 +142,10 @@ function reqularExpression(num){
 							<li>미답변 문의 &nbsp;<p>0</p> 건</li>
 						</c:if>
 						<c:if test="${review !=null}">
-							<li>미답변 문의 &nbsp;<p>${review.reviewanswer}</p> 건</li>
+							<li>미답변 리뷰 &nbsp;<p>${review.reviewanswer}</p> 건</li>
 						</c:if>
 						<c:if test="${review ==null}">
-							<li>미답변 문의 &nbsp;<p>0</p> 건</li>
+							<li>미답변 리뷰 &nbsp;<p>0</p> 건</li>
 						</c:if>
 					</ul>
 				</div>
