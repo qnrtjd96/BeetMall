@@ -1,5 +1,7 @@
 package com.beetmall.sshj.admin.vo;
 
+import org.apache.poi.hpsf.Array;
+
 public class Admin_ProductVO {
 	private long productnum;
 	private String userid;
@@ -26,6 +28,7 @@ public class Admin_ProductVO {
 	private String prevention;
 	private String deadline;
 	private int optionselect;
+	private String productinfomation;
 	
 	private long optionnum;
 	private String optionname;
@@ -40,10 +43,29 @@ public class Admin_ProductVO {
 	
 	private String catename;
 	private String mcatename;
+	private int saleselect;
+	private long sellprice;
 	
 	
 	
-	
+	public String getProductinfomation() {
+		return productinfomation;
+	}
+	public void setProductinfomation(String productinfomation) {
+		this.productinfomation = productinfomation;
+	}
+	public long getSellprice() {
+		return sellprice;
+	}
+	public void setSellprice(long sellprice) {
+		this.sellprice = sellprice;
+	}
+	public int getSaleselect() {
+		return saleselect;
+	}
+	public void setSaleselect(int saleselect) {
+		this.saleselect = saleselect;
+	}
 	public String getMcatename() {
 		return mcatename;
 	}
@@ -212,14 +234,60 @@ public class Admin_ProductVO {
 	public void setPaymentoption(String paymentoption) {
 		this.paymentoption = paymentoption;
 	}
-	public String getSelloption() {
-		return selloption;
+	public String[] getSelloption() {
+		String result[] = new String[2];
+		if(selloption.indexOf("팩") >= 0) {
+			int index = selloption.indexOf("팩");
+			result[0] = selloption.substring(0, index);
+			result[1] = selloption.substring(index);
+			
+		} else if(selloption.indexOf("박스") >= 0){
+			int index = selloption.indexOf("박스");
+			if(index == 0) {
+				result[0] = "";
+				result[1] = "박스";
+			}else {
+				result[0] = selloption.substring(0, index);
+				result[1] = selloption.substring(index);
+			}
+		
+		} else {
+			result[0] = selloption;
+			result[1] = "";
+		}
+		System.out.println(result[0]);
+		System.out.println(result[1]);
+		System.out.println(selloption);
+		return result;
 	}
 	public void setSelloption(String selloption) {
 		this.selloption = selloption;
 	}
-	public String getSellweight() {
-		return sellweight;
+	public String[] getSellweight() {
+		String result[] = new String[2];
+		if(sellweight.indexOf("kg") >= 0) {
+			int index = sellweight.indexOf("kg");
+			result[0] = sellweight.substring(0, index);
+			result[1] = sellweight.substring(index);
+			
+		} else if(sellweight.indexOf("g") >= 0){
+			int index = sellweight.indexOf("g");
+			if(index == 0) {
+				result[0] = "";
+				result[1] = "g";
+			}else {
+				result[0] = sellweight.substring(0, index);
+				result[1] = sellweight.substring(index);
+			}
+		} else {
+			result[0] = sellweight;
+			result[1] = "";
+		}
+		System.out.println(result[0]);
+		System.out.println(result[1]);
+		System.out.println(sellweight);
+		
+		return result;
 	}
 	public void setSellweight(String sellweight) {
 		this.sellweight = sellweight;
