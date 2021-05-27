@@ -10,7 +10,7 @@
 		ordernum,  productnum, productname, sellerid, orderquantity, userid, username, userphone,  orderprice, orderdate, orderstatus, claimstatus, claimdate, claimcontent
 		from
 		(select to_char(o.ordernum, '99999999999999') as ordernum, p.productname, p.userid as sellerid, od.productnum, o.userid as userid, o.username, o.userphone,
-		o.orderprice, o.orderdate,  od.orderquantity,od.orderstatus, c.claimstatus,c.claimkind, c.claimdate, c.claimcontent
+		to_number(o.orderprice + nvl(o.usedpoint,0)) as orderprice, o.orderdate,  od.orderquantity,od.orderstatus, c.claimstatus,c.claimkind, c.claimdate, c.claimcontent
 		from ordertbl o
 		left join orderdetail od on od.ordernum = o.ordernum
 		left join product p on od.productnum = p.productnum
