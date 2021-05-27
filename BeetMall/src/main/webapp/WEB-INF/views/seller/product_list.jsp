@@ -310,7 +310,7 @@ $(document).ready(function(){
 						<c:if test="${vo.saleb < 1}">
 						<td class="tbl_line_cell"> N </td>
 						</c:if>
-						<c:if test="${vo.saleb > 1}">
+						<c:if test="${vo.saleb == 1}">
 						<td class="tbl_line_cell"> Y </td>
 						</c:if>
 						<!-- 판매상태 -->
