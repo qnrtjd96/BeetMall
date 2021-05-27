@@ -87,7 +87,7 @@ public class MyBuyListController {
 	@ResponseBody
 	public int orderCancel(HttpServletRequest req) {
 		int result = 0;
-		int ordernum = Integer.parseInt(req.getParameter("ordernum"));
+		long ordernum = Integer.parseInt(req.getParameter("ordernum"));
 //		System.out.println("ordernum="+ordernum);
 //		System.out.println("ordercancel="+mybuylistservice.orderCancel(ordernum));
 		
@@ -107,7 +107,7 @@ public class MyBuyListController {
 	@ResponseBody
 	public int reviewCheck(HttpServletRequest req) {
 		int result = 0;
-		int ordernum = Integer.parseInt(req.getParameter("ordernum"));
+		long ordernum = Integer.parseInt(req.getParameter("ordernum"));
 		int reviewCheck = mybuylistservice.reviewCheck(ordernum);
 		if(reviewCheck<=0) {
 			result = 1;
@@ -192,7 +192,7 @@ public class MyBuyListController {
 	@RequestMapping("reviewSelect")
 	@ResponseBody
 	public ReviewVO ReviewSelect(ReviewVO vo, HttpServletRequest req, HttpSession session) {
-		int ordernum = Integer.parseInt(req.getParameter("ordernum"));
+		long ordernum = Integer.parseInt(req.getParameter("ordernum"));
 		vo = mybuylistservice.reviewSelect(ordernum);
 		return vo;
 	}
@@ -247,7 +247,7 @@ public class MyBuyListController {
 	public ModelAndView claimInsert(ClaimVO vo, HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
 		int productnum = Integer.parseInt(req.getParameter("productnum"));
-		int ordernum = Integer.parseInt(req.getParameter("ordernum"));
+		long ordernum = Integer.parseInt(req.getParameter("ordernum"));
 		String claimkind = req.getParameter("claimkind");
 		vo.setProductnum(productnum);
 		vo.setOrdernum(ordernum);
@@ -287,7 +287,7 @@ public class MyBuyListController {
 	
 	@RequestMapping("returnView")
 	@ResponseBody
-	public ClaimVO returnSelect(int ordernum, ClaimVO vo) {
+	public ClaimVO returnSelect(long ordernum, ClaimVO vo) {
 //		System.out.println("주문번호"+ordernum);
 		vo = mybuylistservice.returnSelect(ordernum);
 		
@@ -313,7 +313,7 @@ public class MyBuyListController {
 	@RequestMapping("returnSubmit")
 	public ModelAndView returnFinish(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
-		int ordernum = Integer.parseInt(req.getParameter("ordernum"));
+		long ordernum = Integer.parseInt(req.getParameter("ordernum"));
 //		System.out.println("ordernum ="+ordernum);
 		mybuylistservice.returnFinish(ordernum);
 		

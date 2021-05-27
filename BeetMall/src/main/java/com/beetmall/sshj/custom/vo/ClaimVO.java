@@ -1,7 +1,7 @@
 package com.beetmall.sshj.custom.vo;
 
 public class ClaimVO {
-	private int ordernum;
+	private long ordernum;
 	private int productnum;
 	private String claimkind;
 	private String claimstatus;
@@ -9,10 +9,10 @@ public class ClaimVO {
 	private String claimdate;
 	private String delivery;
 	private long invoice;
-	public int getOrdernum() {
+	public long getOrdernum() {
 		return ordernum;
 	}
-	public void setOrdernum(int ordernum) {
+	public void setOrdernum(long ordernum) {
 		this.ordernum = ordernum;
 	}
 	public int getProductnum() {

@@ -2,7 +2,7 @@ package com.beetmall.sshj.custom.vo;
 
 public class ReviewVO {
 	private int reviewnum;
-	private int ordernum;
+	private long ordernum;
 	private int productnum;
 	private String reviewcontent;
 	private String userid;
@@ -26,10 +26,10 @@ public class ReviewVO {
 	public void setReviewnum(int reviewnum) {
 		this.reviewnum = reviewnum;
 	}
-	public int getOrdernum() {
+	public long getOrdernum() {
 		return ordernum;
 	}
-	public void setOrdernum(int ordernum) {
+	public void setOrdernum(long ordernum) {
 		this.ordernum = ordernum;
 	}
 	public int getProductnum() {

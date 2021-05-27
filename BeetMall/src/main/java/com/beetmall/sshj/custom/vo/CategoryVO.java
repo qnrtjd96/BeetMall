@@ -28,7 +28,7 @@ public class CategoryVO {
 	private String salefinish;//할인끝나는날
 	
 	//베스트 상품떄문에 필요한 칼럼
-	private int ordernum; //구매량
+	private long ordernum; //구매량
 	
 	//이름떄문에 필요한칼럼
 	private String farmname; //농장이름
@@ -128,10 +128,10 @@ public class CategoryVO {
 	public void setProprice(int proprice) {
 		this.proprice = proprice;
 	}
-	public int getOrdernum() {
+	public long getOrdernum() {
 		return ordernum;
 	}
-	public void setOrdernum(int ordernum) {
+	public void setOrdernum(long ordernum) {
 		this.ordernum = ordernum;
 	}
 	public String getFarmname() {

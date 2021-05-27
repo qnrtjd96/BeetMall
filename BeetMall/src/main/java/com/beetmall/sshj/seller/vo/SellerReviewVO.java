@@ -2,7 +2,7 @@ package com.beetmall.sshj.seller.vo;
 
 public class SellerReviewVO {
 	private int reviewnum; // 리뷰글번호
-	private int ordernum; // 주문번호 
+	private long ordernum; // 주문번호 
 	private int productnum; // 상품번호 
 	private String reviewcontent; // 리뷰내용
 	private String userid; // 아이디
@@ -200,11 +200,11 @@ public class SellerReviewVO {
 		this.reviewnum = reviewnum;
 	}
 
-	public int getOrdernum() {
+	public long getOrdernum() {
 		return ordernum;
 	}
 
-	public void setOrdernum(int ordernum) {
+	public void setOrdernum(long ordernum) {
 		this.ordernum = ordernum;
 	}
 
