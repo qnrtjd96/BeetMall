@@ -460,10 +460,21 @@ paddig-bottom:5px;
 	
 <script>
 $(document).on('click','#chatHeaderSpan', function(){
+	  
+    var scroll = window.scrollY;
+    if(scroll>255){
+       $("#reportDiv").css("top",scroll+450);
+    }else {
+       $("#reportDiv").css("top",scroll+450);
+    }
+    
+	
 	$("#reportDiv").css("display","block");
 });
 $(function(){
 	$("#reportsubmit").click(function(){	// 신고처리하는 ajax부분
+		
+		
 		var formdata = $("#reportForm").serialize();
 		console.log("formdata === "+formdata);
 		$.ajax({
