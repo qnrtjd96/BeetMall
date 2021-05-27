@@ -358,7 +358,7 @@ div[id^=box] {
 			</div>
 			<div id="accept">
 				<div id="acceptTitle">판매자 승인 요청</div>
-				<br /> <img class="last" src="<%=request.getContextPath()%>/img/y_accept.png" />
+				<br /> <img class="last" src="<%=request.getContextPath()%>/img/y_accepta.png" />
 				<div id="box5">
 					승인 신청 건수
 					<div style="font-weight: bold; color: blue">${approve }</div>
@@ -369,7 +369,7 @@ div[id^=box] {
 			</div>
 			<div id="rep">
 				<div id="repTitle">신고내역</div>
-				<br /> <img class="last" src="<%=request.getContextPath()%>/img/y_report.png" />
+				<br /> <img class="last" src="<%=request.getContextPath()%>/img/y_reporta.png" />
 				<div id="box6">
 					접수 건수
 					<div style="font-weight: bold; color: green">${report }</div>
