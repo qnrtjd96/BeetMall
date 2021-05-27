@@ -111,7 +111,7 @@
     #kcategory{
         margin-bottom: 40px;
 	    padding-bottom: 30px;
-	    border-bottom: 1px solid rgb(252,118,45);
+	    
 	    font-size: 21px;
 	    font-weight: bold;
     }
@@ -155,19 +155,23 @@
     /* 공지사항 */
     #NoticeleftMenu{
     	position: absolute;
-    	left:-200px;
+    	left:-250px;
     	top:130px;
     	display: none;
     	width:180px;
-    	height:480px;
+    	height:290px;
     	color:black;
     	background-color:white;
     	text-align:left;
     	padding-left:10px;
     	padding-right:10px;
+    	border-top:3px solid rgb(252,118,45)
     }
     #NoticeleftMenu>div{
     	padding-top:15px;
+    }
+    #kNoticeMain:last-child{
+    	border-bottom:3px solid rgb(252,118,45);
     }
     #NoticeleftMenu a:active, #NoticeleftMenu a:link, #NoticeleftMenu a:visited, #NoticeleftMenu a:hover{
 		color:black;

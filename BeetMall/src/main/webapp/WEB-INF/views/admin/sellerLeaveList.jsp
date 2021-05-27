@@ -122,6 +122,9 @@
 	#sortBox{
 		display:none;
 	}
+	#choose{
+		margin-top: 50px !important;
+	}
 </style>
 <script>
 	function pagelist(pagenum){
@@ -222,7 +225,6 @@
 		<input type="hidden" id="searchKeyhidden"/>
 		<input type="hidden" id="searchWordhidden"/>
 		 
-		</div>	 
 		<div class="page_wrap">	
 			<div class="page_nation">
 			   <c:if test="${pageVO.pageNum>1}"><!-- 이전페이지가 있을때 -->
@@ -255,6 +257,7 @@
 				<input type="submit" value="검색" />
 			</form>
 		</div>  
+		</div>	 
 	</div>
 </div>
 </body>

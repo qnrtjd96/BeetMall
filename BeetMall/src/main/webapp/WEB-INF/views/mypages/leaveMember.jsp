@@ -86,6 +86,7 @@
 		width:100%;
 		height:100%;
 		display:none;
+		margin-top:0px;
 	}
 </style>
 <script>
@@ -93,44 +94,54 @@
 		$(".leaveBtn").click(function(){
 			$(this).parent().parent().css('display',"none");
 			$("#leavepopupContent").css("display","none");
+			$("#modal").css("display","none");
+			$(document.body).css("overflow","visible");
 		})
 		$("#leaveBtn").click(function(){
 			$(this).parent().parent().css('display',"none");
 			$("#leavepopupContent").css("display","none");
+			$("#modal").css("display","none");
+			$(document.body).css("overflow","visible");
 		})
 		$(".leaveListBarClose").click(function(){
 			$(this).parent().css("display","none");
+			$("#modal").css("display","none");
+			$(document.body).css("overflow","visible");
 		})
 		$("#leaveCancel").click(function(){
+			$("#modal").css("display","none");
+			$(document.body).css("overflow","visible");
 			location.href="/sshj";
 		})
 		$("#leaveCheck").click(function(){
-			$.ajax({
-				url : 'leaveMemberOk',
-				data : 'userpwd='+$("#pwdInput").val(),
-				success: function(result){
-					console.log("result = "+result);
-					if(result == 0){
-						alert('잘못 입력하였습니다.');
-					}else if(result == -1){
-						$("#buyCancelRollBack").css("display","block");
-						$("#modal").css("display","block");
-						$(document.body).css("overflow","hidden");
-					}else if(result == -2){
-						alert("회원탈퇴에 실패하였습니다.")
-					}else if(result == 1){
-						alert("회원탈퇴에 성공하였습니다. \n 이용해주셔서 감사합니다.");
-						location.href="logout";
+			if(confirm('정말로 회원탈퇴 하시겠습니까?')){
+				$.ajax({
+					url : 'leaveMemberOk',
+					data : 'userpwd='+$("#pwdInput").val(),
+					success: function(result){
+						console.log("result = "+result);
+						if(result == 0){
+							alert('잘못 입력하였습니다.');
+						}else if(result == -1){
+							$("#buyCancelRollBack").css("display","block");
+							$("#modal").css("display","block");
+							$(document.body).css("overflow","hidden");
+						}else if(result == -2){
+							alert("회원탈퇴에 실패하였습니다.")
+						}else if(result == 1){
+							alert("회원탈퇴에 성공하였습니다. \n 이용해주셔서 감사합니다.");
+							location.href="logout";
+						}
+					}, error: function(){
+						console.log("에러")
 					}
-				}, error: function(){
-					console.log("에러")
-				}
-			});
+				});
+			};
 		});
 	});
 </script>
 <div class="section" id="leaveDiv">
-	<div id="modal"></div>
+	<div id="modal" style="margin-top:0px;"></div>
 	<h2>회원 탈퇴</h2>
 	<h4>정말로 탈퇴하시겠습니까?</h4>
 	<div>
