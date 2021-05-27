@@ -48,8 +48,8 @@ public class ProductViewController {
 		mav.addObject("ovo",productViewService.ProductViewSelectoption(productnum));
 		
 		//상품의 할인가격 구하기	-->${Dprice}가 마이너스 되는 가격임	
+		mav.addObject("Dprice", productViewService.PDprice(productnum));
 		
-		mav.addObject("Dprice",productViewService.PDprice(productnum)); 
 		
 	
 		//System.out.println(productViewService.PDprice(productnum)); //출력됨
