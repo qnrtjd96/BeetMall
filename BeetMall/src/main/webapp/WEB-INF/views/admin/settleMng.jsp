@@ -318,7 +318,7 @@ function searchParam(key) {
 							<li>${data.ordernum }</li>
 							<li>${data.mcatename }</li>
 							<li>${data.orderstatus }</li>
-							<li><a href="제목?">${data.productname }</a></li>
+							<li><a href="customproduct?productnum=${data.productnum }">${data.productname }</a></li>
 							<li>${data.userid }</li>
 							<li>${data.storename }</li>
 							<li>${data.orderconfirm }</li>

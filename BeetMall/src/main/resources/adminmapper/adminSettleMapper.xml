@@ -46,7 +46,7 @@
 	<select id="getSettleList" resultType="com.beetmall.sshj.admin.vo.Admin_SettleVO">	
 		select * from (
 		select * from(
-		select h.ordernum, mcatename, orderstatus, productname, userid, storename, to_char(orderconfirm,'yyyy-MM-dd') orderconfirm, to_char(settledate,'yyyy-MM-dd') settledate
+		select h.ordernum, productnum, mcatename, orderstatus, productname, userid, storename, to_char(orderconfirm,'yyyy-MM-dd') orderconfirm, to_char(settledate,'yyyy-MM-dd') settledate
 		from( select f.productnum, mcatename, orderstatus, productname, storename, orderconfirm, settledate, ordernum 
 		from ( select productnum, productname, storename, mcatename from mcategory c join 
 		(select productnum, productname, storename, mcatenum from product a join 
@@ -147,7 +147,7 @@
 
 	<update id="settleUpdate" parameterType="int">
 		update orderdetail set settledate = sysdate, settlecheck='Y'  
-			where orderconfirm <![CDATA[<=]]> to_char(sysdate,'yyyy-MM-dd'), orderstatus = '구매확정'
+			where orderconfirm <![CDATA[<=]]> to_char(sysdate,'yyyy-MM-dd') and orderstatus = '구매확정'
 	</update>
 
 </mapper>

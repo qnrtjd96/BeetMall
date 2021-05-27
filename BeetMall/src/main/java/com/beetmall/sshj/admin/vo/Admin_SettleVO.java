@@ -18,6 +18,7 @@ public class Admin_SettleVO {
 	private String searchTxt; // 검색어
 	private long sellerMoney; // 정산 판매자 금액
 	private long adminMoney; // 정산 관리자 금액
+	private long productnum;
 	
 	///////////////////////////////////////////////////////////////////////////
 	//페이징
@@ -33,6 +34,12 @@ public class Admin_SettleVO {
 	
 	
 	
+	public long getProductnum() {
+		return productnum;
+	}
+	public void setProductnum(long productnum) {
+		this.productnum = productnum;
+	}
 	public String getSearchTxt() {
 		return searchTxt;
 	}
