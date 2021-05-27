@@ -251,6 +251,7 @@
 		background-color:white;
 		display:none;
 		overflow:hidden;
+		z-index:20;
 	}
 	#chatContainer{
 		width:500px;
@@ -302,6 +303,23 @@
 		font-size:20px !important;
 		margin-right:0px !important;
 	}
+	/* 모달 처리 */
+	#modal{
+		background-color: gray;
+		opacity: 0.6;
+		position: fixed;
+		left:0px;
+		top:0px;
+		width:100%;
+		height:100%;
+		display:none;
+		margin:0px !important;
+		z-index:10;
+	}
+	#sortBox{
+		display:none;
+		
+	}
 </style>
 <script>
 	function pagelist(pagenum){
@@ -314,6 +332,8 @@
 			$("#chatFooter").css("display","none");
 		}
 		$(".contentList").click(function(){
+			$("#modal").css("display","block");
+			$(document.body).css("overflow","hidden");
 			var roomcode = $(this).children().eq(0).children().eq(0).val();
 			var sender = $(this).children().eq(0).children().eq(1).val();
 			var receiver = $(this).children().eq(0).children().eq(2).val();
@@ -363,9 +383,13 @@
 		
 		$(document).on('click',"#closedivBtn",function(){
 			$("#chatIframe").css("display","none");
+			$("#modal").css("display","none");
+			$(document.body).css("overflow","visible");
 		});
 		$(document).on('click', "#closeChatdiv", function(){
 			$("#chatIframe").css("display","none");
+			$("#modal").css("display","none");
+			$(document.body).css("overflow","visible");
 		})
 		$(document).on('click', "#stopreportuserBtn", function(){
 			var seltype = $("#useridsel").val();
@@ -385,18 +409,19 @@
 	})
 </script> 
 <%@ include file="/inc/top.jspf" %>
+	<div id="modal"></div>
 	<div id="topBarContainer">
 		<div id="topBar">
 			<ul>
 				<li><h5><strong><a href="csReportChat">채팅 관리</a></strong></h5></li> 
-					<li><button class="success" value="add" name="add" id="blind">비공개</button></li>
-				<li><button class="success" value="del" name="del" id="delBtn">정지</button></li> 
+					<li><button class="success" value="add" name="add" id="blind" style="display:none;">비공개</button></li>
+				<li><button class="success" value="del" name="del" id="delBtn" style="display:none;">정지</button></li> 
 			</ul>
 		</div>  
 		</div>
 <div id="body1">
 <%@ include file="/inc/leftBar.jspf" %>
-	<div id="container">
+	<div id="container" style="padding-top:30px;">
 		<div id="sortBox">
 			<ul>
 				<li>
@@ -504,18 +529,9 @@
 		</div>  
 	</div>
 		<!-- 신고된 채팅 보기 모달창 -->
-		<div id="modal" style="display:none;">
-			<select name="reportChoice"> 
-				<option value="선택" selected>선택</option>
-		   		<option value="dlkfjhbu">dlkfjhbu</option>
-		   		<option value="aosihnf">aosihnf</option>
-		   	</select>
-			<input type="text">&nbsp; 일 &nbsp;
-			<button class="success" value="" name="" id="">정지</button>
-			<button class="success" value="" name="" id="">닫기</button>
-		</div> 
+		
 		</div>
-		<div id ="chatIframe">
+		<div id ="chatIframe" class="admingchatiframe">
 			<div style="position: relative;">
 				<div style="width:500px;">
 					<div id="chatTop"></div>

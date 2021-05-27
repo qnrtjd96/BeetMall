@@ -186,6 +186,11 @@
 		color:blue;
 		margin-top:5px;
 	}
+	.present{
+		width:250px;
+		padding-left:10px;
+		padding-right:10px;
+	}
 </style>
 <script>
 	$(function(){
@@ -613,14 +618,14 @@
 			<input type="hidden" id="checkEmailSellerResult" value="N"/>
 				
 			<ul id="formUl">	
-				<li><span class="spanstar">*</span>아이디</li> 		<li><input type="text" name="userid" id="userid" style="margin-right:5px;" readonly/><input type="button" value="중복검사" class="btn" id="idCheckDibPop"/></li>
-				<li><span class="spanstar">*</span>비밀번호</li>		<li><input type="password" name="userpwd" id="userpwd"/></li>	
-				<li><span class="spanstar">*</span>비밀번호 확인</li>	<li><input type="password" id="userpwd2" style="float:left"/><div id="passwordCheck" style="margin-left:200px"></div></li>	
-				<li><span class="spanstar">*</span>이름</li>			<li><input type="text" name="username" id="username"/></li>		
-				<li><span class="spanstar">*</span>이메일</li>			<li><input type="text" name="useremail" id="useremail" style="margin-right:5px;" value=""/><input type="button" value="인증코드 전송" class="btn" id="emailSend"/></li>
-				<li></li>												<li><input type="text" name="emailCheck" id="emailCheck" style="margin-right:5px;" value=""/><input type="button" value="인증하기" class="btn" id="emailCheckBtn"/></li>
+				<li><span class="spanstar">*</span>아이디</li> 		<li><input type="text" name="userid" id="userid" style="margin-right:5px;" readonly class="present"/><input type="button" value="중복검사" class="btn" id="idCheckDibPop" style="width:83px;"/></li>
+				<li><span class="spanstar">*</span>비밀번호</li>		<li><input type="password" name="userpwd" id="userpwd"class="present"/></li>	
+				<li><span class="spanstar">*</span>비밀번호 확인</li>	<li><input type="password" id="userpwd2" style="float:left"class="present"/><div id="passwordCheck" style="margin-left:200px"></div></li>	
+				<li><span class="spanstar">*</span>이름</li>			<li><input type="text" name="username" id="username"class="present"/></li>		
+				<li><span class="spanstar">*</span>이메일</li>			<li><input type="text" name="useremail" id="useremail" style="margin-right:5px;" value=""class="present"/><input type="button" value="인증코드 전송" class="btn" id="emailSend" style="width:83px;"/></li>
+				<li></li>												<li><input type="text" name="emailCheck" id="emailCheck" style="margin-right:5px;" value=""class="present"/><input type="button" value="인증하기" class="btn" id="emailCheckBtn" style="width:83px;"/></li>
 							
-				<li><span class="spanstar">*</span>휴대폰</li>			<li><select  id="userphone1" name="userphone1" style="height:30px;">
+				<li><span class="spanstar">*</span>휴대폰</li>			<li><select  id="userphone1" name="userphone1" style="height:30px;width:55px;">
 																			<option value="010">010</option>
 																			 <option value="02">02</option>
 																			<option value="031">031</option>
@@ -640,13 +645,13 @@
 																			<option value="063">063</option>
 																			<option value="064">064</option>
 																			</select> -
-																			<input type="text" name="userphone2" id="userphone2" style="width:80px;" maxlength="4"/> -
-																			<input type="text" name="userphone3" id="userphone3" style="width:80px;" maxlength="4"/></li>
+																			<input type="text" name="userphone2" id="userphone2" style="width:85px;" maxlength="4"/> -
+																			<input type="text" name="userphone3" id="userphone3" style="width:85px;" maxlength="4"/></li>
 				<li><span class="spanstar">*</span>주소</li>			<li><input type="button"  id="zipSearch" value="우편번호 검색" style="margin-right:5px;" class="btn"/>
-																		<input type="text" name="userzipcode" id="userzipcode" readonly  style="width:100px;"/>
-																		<input type="text" name="useraddr" id="useraddr" style="margin-top:5px; width:400px;"readonly placeholder="우편 번호 검색을 통해 입력해주세요"/>
-																		<input type="text" name="userdetailaddr" id="userdetailaddr" style="margin-top:5px; width:420px;" placeholder="상세 주소 입력"/></li>			
-				<li><span class="spanstar">*</span>생년월일</li>		<li><input type="date" name="birthday" id="birthday"/></li>
+																		<input type="text" name="userzipcode" id="userzipcode" readonly  style="width:160px;"/><br/>
+																		<input type="text" name="useraddr" id="useraddr" style="margin-top:5px; width:450px;"readonly placeholder="우편 번호 검색을 통해 입력해주세요"/><br/>
+																		<input type="text" name="userdetailaddr" id="userdetailaddr" style="margin-top:5px; width:450px;" placeholder="상세 주소 입력"/></li>			
+				<li><span class="spanstar">*</span>생년월일</li>		<li><input type="date" name="birthday" id="birthday"class="present"/></li>
 			</ul>
 			
 			<div id="infoCheckDiv" style="padding-top:390px;">
@@ -660,18 +665,18 @@
 			</div>
 			<div style="position: relative;">
 				<ul class="formUl" id="sFrm">
-					<li><span class="spanstar">*</span>상호명</li> 			<li><input type="text" name="storename" style="margin-right:5px;" id="storename"/></li>
-					<li><span class="spanstar">*</span>대표자</li>				<li><input type="text" name="sellername" id="sellername"/></li>	
-					<li><span class="spanstar">*</span>사업장등록번호</li>		<li><input type="text" name="sellerreginum" id="sellerreginum" style="float:left"/><div id="passwordCheck" style="margin-left:200px"></div></li>	
+					<li><span class="spanstar">*</span>상호명</li> 			<li><input type="text" name="storename" style="margin-right:5px;" id="storename"class="present"/></li>
+					<li><span class="spanstar">*</span>대표자</li>				<li><input type="text" name="sellername" id="sellername"class="present"/></li>	
+					<li><span class="spanstar">*</span>사업자등록번호</li>		<li><input type="text" name="sellerreginum" id="sellerreginum" style="float:left"class="present"/><div id="passwordCheck" style="margin-left:200px"class="present"></div></li>	
 					<li><span class="spanstar">*</span>사업자등록증 첨부</li>	<li><input type="file" name="file" id="sellerregiimg"/></li>
 					<li></li>								<li><div id="notice">※사업자등록번호 도용 방지를 위해 기업인증을 시행하고 있습니다.<br/>
 																	※사업자등록증을 첨부해주세요. 관리 절차에 따라 가입이 승인됩니다.<br/>
 																	※인증이 되지 않을 경우 고객센터(02-111-1111)로 문의해주세요.</div></li>		
 					<li><span class="spanstar">*</span>사업장소재지</li>		<li><input type="button"  id="sellerzipSearch" value="우편번호 검색" style="margin-right:5px;" class="btn"/>
-																			<input type="text" name="storezipcode" id="storezipcode" readonly  style="width:100px;"/>
-																			<input type="text" name="storeaddr" id="storeaddr" style="margin-top:5px; width:302px;" readonly  placeholder="우편 번호 검색을 통해 입력해주세요"/>
-																			<input type="text" name="storedetailaddr" id="storedetailaddr" style="margin-top:5px; width:540px;" placeholder="상세 주소 입력"/></li>					
-					<li><span class="spanstar">*</span>은행</li>				<li><select name="bank" id="bankName">
+																			<input type="text" name="storezipcode" id="storezipcode" readonly  style="width:160px;"/><br/>
+																			<input type="text" name="storeaddr" id="storeaddr" style="margin-top:5px; width:250px;" readonly  placeholder="우편 번호 검색을 통해 입력해주세요"/><br/>
+																			<input type="text" name="storedetailaddr" id="storedetailaddr" style="margin-top:5px; width:250px;" placeholder="상세 주소 입력"/></li>					
+					<li><span class="spanstar">*</span>은행</li>				<li><select name="bank" id="bankName"class="present" style="height:22px;">
 																				<option value="index" disabled selected>은행명선택</option>  
 																				<option value="국민">국민</option>  
 																				<option value="기업">기업</option>  
@@ -688,10 +693,10 @@
 																				<option value="카카오뱅크">카카오뱅크</option>  
 																				<option value="케이뱅크">케이뱅크</option>  
 																			</select></li>			
-					<li><span class="spanstar">*</span>계좌번호</li>			<li><input type="text" name="bankaccount" id="bankaccount" value=""/></li>
-					<li><span class="spanstar">*</span>예금주</li>				<li><input type="text" name="bankname" id="bankname" value=""/></li>
-					<li><span class="spanstar">*</span>이메일</li>				<li><input type="text" name="storeemail" id="storeemail" style="margin-right:5px;"/><input type="button" value="인증코드 전송" id="storeemailBtn" class="btn"/></li>
-					<li></li>													<li><input type="text" name="storeemailCheck" id="storeemailCheck" style="margin-right:5px;"/><input type="button" value="인증하기" id="storeemailCheckBtn" class="btn"/></li>
+					<li><span class="spanstar">*</span>계좌번호</li>			<li><input type="text" name="bankaccount" id="bankaccount" value=""class="present"/></li>
+					<li><span class="spanstar">*</span>예금주</li>				<li><input type="text" name="bankname" id="bankname" value=""class="present"/></li>
+					<li><span class="spanstar">*</span>이메일</li>				<li><input type="text" name="storeemail" id="storeemail" style="margin-right:5px;"class="present"/><input type="button" value="인증코드 전송" id="storeemailBtn" class="btn" style="width:83px;"/></li>
+					<li></li>													<li><input type="text" name="storeemailCheck" id="storeemailCheck" style="margin-right:5px;"class="present"/><input type="button" value="인증하기" id="storeemailCheckBtn" class="btn" style="width:83px;"/></li>
 				</ul>
 				<img src="/sshj/img/dimgPrev.png" id="imgPrev"/>
 				<div id="imgPrevInfo"><span>아래 이미지는 미리보기입니다.</span></div>

@@ -80,6 +80,11 @@
 	#addBtn, #delBtn{
 		visibility: hidden;
 	}
+	#choose{
+		margin-top: 50px !important;
+	}
+	
+	
 </style>
 <script>
 	function pagelist(pagenum){

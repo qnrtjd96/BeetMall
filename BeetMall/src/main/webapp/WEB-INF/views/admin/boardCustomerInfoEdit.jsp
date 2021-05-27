@@ -1342,7 +1342,7 @@
 		 	<div id="reportBox">
 			 	<div id="reportTitle"><div id="reportHead">신고내역</div></div> 	
 			 	<section id="reportsBox">		 
-					<div id="stopNum">정지 횟수 <div class="numSpace">${rlist.ordercount}</div>회</div>
+					<div id="stopNum">정지 횟수 <div class="numSpace">${rlist.reportcount}</div>회</div>
 					<div id="stopDays">정지 총 일수  <div class="numSpace">${rlist.reportsum}</div>일</div>		
 			 	</section> 	 
 		 	</div>

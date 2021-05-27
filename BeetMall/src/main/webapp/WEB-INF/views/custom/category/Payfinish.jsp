@@ -47,6 +47,8 @@
 	    height: 50px;
 	    background-color: rgb(252,118,45);
 	    border: 1px solid lightgray;
+	    font-size:20px;
+	    color:white;
 	}
 </style>
 <script>

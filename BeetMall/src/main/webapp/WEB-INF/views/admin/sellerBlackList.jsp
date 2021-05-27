@@ -90,37 +90,40 @@
 		width:0px !important;
 	}
 	.foreachUL>li:nth-child(8n+2), #forachtitle>li:nth-child(8n+2){
-		width:142px;
+		width:142px !important;
 	}
 	.foreachUL>li:nth-child(8n+3), #forachtitle>li:nth-child(8n+3){
-		width:142px;
+		width:142px !important;
 	}
 	.foreachUL>li:nth-child(8n+4), #forachtitle>li:nth-child(8n+4){
-		width:42px;
+		width:42px !important;
 	}
 	.foreachUL>li:nth-child(8n+5), #forachtitle>li:nth-child(8n+5){
 		width:182px !important;
 	}
 	.foreachUL>li:nth-child(8n+6), #forachtitle>li:nth-child(8n+6){
-		width:242px;
+		width:242px !important;
 		white-space: nowrap;
 		overflow:hidden;
 		text-overflow: ellipsis;
 	}
 	.foreachUL>li:nth-child(8n+7), #forachtitle>li:nth-child(8n+7){
-		width:142px;
+		width:142px !important;
 		white-space: nowrap;
 		overflow:hidden;
 		text-overflow: ellipsis;
 	}
 	.foreachUL>li:nth-child(8n), #forachtitle>li:nth-child(8n){
-		width:142px;
+		width:142px !important;
 	}
 	.foreachUL>li{
 		cursor: pointer;
 	}
 	#addBtn, #delBtn{
 		visibility: hidden;
+	}
+	#choose{
+		margin-top: 50px !important;
 	}
 </style>
 <script>
