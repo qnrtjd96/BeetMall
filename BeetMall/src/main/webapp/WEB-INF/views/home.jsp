@@ -502,7 +502,7 @@
 		<div class="todayRecipt">
 			<c:forEach var="vo" items="${toprecipe}">
 				<div class="reciptList">
-					<div><a href="http://localhost:9090/sshj/recipeView?recipenum=${vo.recipenum}&id=<c:if test="${logId != null}">${logId}</c:if>"><img src="/sshj/img/${vo.recipemainimg}"onerror="this.src='/sshj/img/derror.png'"/></a></div>
+					<div><a href="http://localhost:9090/sshj/recipeView?recipenum=${vo.recipenum}&id=<c:if test="${logId != null}">${logId}</c:if>"><img src="/sshj/upload/${vo.recipemainimg}"onerror="this.src='/sshj/img/derror.png'"/></a></div>
 					<div class="wordcut"><a href="http://localhost:9090/sshj/recipeView?recipenum=${vo.recipenum}&id=<c:if test="${logId != null}">${logId}</c:if>">${vo.recipetitle}</a></div>
 					<c:if test="${vo.recipehit > 999}">
 						<div><div class="like"></div><span class="likeCount">999+</span></div>
@@ -615,7 +615,7 @@
 		<div class="todayRecipt">
 			<c:forEach var="vo" items="${bottomrecipe}">
 				<div class="reciptList">
-					<div><a href="http://localhost:9090/sshj/recipeView?recipenum=${vo.recipenum}&id=<c:if test="${logId != null}">${logId}</c:if>"><img src="/sshj/img/${vo.recipemainimg}"onerror="this.src='/sshj/img/derror.png'"/></a></div>
+					<div><a href="http://localhost:9090/sshj/recipeView?recipenum=${vo.recipenum}&id=<c:if test="${logId != null}">${logId}</c:if>"><img src="/sshj/upload/${vo.recipemainimg}"onerror="this.src='/sshj/img/derror.png'"/></a></div>
 					<div class="wordcut"><a href="http://localhost:9090/sshj/recipeView?recipenum=${vo.recipenum}&id=<c:if test="${logId != null}">${logId}</c:if>">${vo.recipetitle}</a></div>
 					<c:if test="${vo.recipehit > 999}">
 						<div><div class="like"></div><span class="likeCount">999+</span></div>
