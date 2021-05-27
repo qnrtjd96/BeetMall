@@ -164,10 +164,10 @@
 					<td class="number">${vo.qmnum}</td>
 					<td class=><a href="<%=request.getContextPath()%>/ask_admin_view?qmnum=${vo.qmnum}">${vo.qmtitle}</a></td>
 					<td>${vo.qmdate}</td>
-					<c:if test="${vo.qmanswer!=null || vo.qmanswer==''}">
+					<c:if test="${vo.qmanswer!=null}">
 						<td><span class="answer_span" id="answer">답변완료</span></td>				
 					</c:if>
-					<c:if test="${vo.qmanswer==null || vo.qmanswer!=''}">
+					<c:if test="${vo.qmanswer==null }">
 						<td><span class="answer_span" id="no_answer">답변대기중</span></td>				
 					</c:if>
 				</tr>
