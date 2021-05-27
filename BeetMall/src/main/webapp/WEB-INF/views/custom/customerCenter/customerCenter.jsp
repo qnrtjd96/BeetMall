@@ -74,7 +74,7 @@
 		width:100%;
 	}
 	
-	button, .btn {
+	button{
 	    padding: 3px 10px;
 	    color: #666666;
 	    background: #fff;

@@ -87,7 +87,7 @@
 		order by orderstatus
 	</select>
 	<select id="reportinfoSelect" resultType="com.beetmall.sshj.admin.vo.Admin_MemberVO">
-		select count(userid) as reportcount , sum(reportdate) as reportsum from reporttbl where userid = #{param1} 
+		select count(reportdate) as reportcount , sum(reportdate) as reportsum from reporttbl where userid = #{param1} 
 	</select>
 	<select id="orderstatusSelect"  resultType="Integer" parameterType="com.beetmall.sshj.admin.vo.Admin_Member_PageVO">
 		select count(nvl(userid,0)) as ordercount from orderdetail od join ordertbl ot on od.ordernum = ot.ordernum

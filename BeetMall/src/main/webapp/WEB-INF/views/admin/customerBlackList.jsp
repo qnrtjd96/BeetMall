@@ -119,6 +119,9 @@
 	#sortBox{
 		display:none;
 	}
+	#choose{
+		margin-top: 50px !important;
+	}
 </style>
 <script>
 $(function(){
