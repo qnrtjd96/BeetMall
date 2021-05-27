@@ -201,6 +201,7 @@
 			$("#buyCancelNotice").css("top", scroll+70);
 			$("#returnDiv").css("top", scroll+70);
 			$(".admingchatiframe").css("top", scroll+100);
+			$("#NoticeleftMenu").css("top", scroll+100);
 		});
 		
 		/*룰렛*/
