@@ -44,12 +44,13 @@
 
 
 #qnaViewbox{
-width:100%;
-float:left;
-padding-left:30px;
-padding-bottom:10px;
-border-bottom:1px solid #ddd;
-margin-bottom:20px;
+	width:100%;
+	float:left;
+	padding-left:30px;
+	padding-bottom:10px;
+	border-bottom:1px solid #ddd;
+	margin-bottom:20px;
+	display: none;
 }
 
 /* 리뷰이미지 설정*/
@@ -283,7 +284,7 @@ overflow:hidden;
 	    font-family: inherit;
 	    font-size: inherit;
 	    line-height: inherit;
-	    text-transform: none;
+	    /* text-transform: none; */
 	    color: inherit;
 	    font: inherit;
 	    margin: 0;
