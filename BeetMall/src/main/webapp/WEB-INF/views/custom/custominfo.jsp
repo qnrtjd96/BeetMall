@@ -80,7 +80,7 @@
 #qnatxtbox2{
    padding-left:15px;
 	width:1050px;
-	height: 200px;
+	height: 150px;
 	line-height: 100px;
 	float: left;
 	padding-left:50px;
@@ -91,20 +91,23 @@
 #nonebox{
 float:left;
  width:100%;
- height:30px;
- line-height:30px;
- margin:10px;
+ height:2px;
+ line-height:2px;
+ margin-top:50px;
+ margin-bottom:150px;
 }
 	/* ---------------상세정보박스3시잗-------------------- */
 #productInfoPage3 {
+   float:left;
 	width: 100%;
+	height:900px;
 }
 
 #productInfoPage3>#qtitle {
 	width: 100%;
 	float: left;
-	margin-top:30px;
-	margin-bottom: 50px;
+	margin-top:5px;
+	
 }
 
 #qnaTitle {
@@ -136,6 +139,7 @@ overflow:hidden;
 	height: 60px;
 	line-height: 50px;
 	padding-bottom:10px;
+	font-size:17px;
 	
 }
 
@@ -358,6 +362,8 @@ overflow:hidden;
 		border:1px solid #42454c;
 	}
 	/* 페이징처리끝 */
+	
+	
 </style>
 
 <script>
@@ -428,7 +434,7 @@ $(function(){
 		
 		
 		
-		$("#reportClose").click(function(){			// 신고 닫기 부분
+		$("#reportClose").click(function(){			// 신고  닫기 부분 
 		$("#reportcontent").val('');
 		$("#reportDiv").css("display","none");
 	     })
@@ -643,8 +649,6 @@ $(function(){
 			</div>
 			<!--productInfoPage3  -->
 
-		</div>
-		<!--productInfoPage  -->
 			<c:if test="${not empty faqlist}">
 			
 				<!-- 페이징 표시--------- -->
@@ -671,6 +675,11 @@ $(function(){
 	 </div>
 				<!-- 페이징 표시--------- -->
   			</c:if>
+
+
+		</div>
+		<!--productInfoPage  -->
+
 	</div>
 </div>
 
