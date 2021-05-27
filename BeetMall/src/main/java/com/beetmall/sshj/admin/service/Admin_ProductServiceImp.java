@@ -31,6 +31,30 @@ public class Admin_ProductServiceImp implements Admin_ProductService{
 		// TODO Auto-generated method stub
 		return dao.productSaleData(productnum);
 	}
+
+	@Override
+	public Admin_ProductVO productOneSelect(Admin_ProductVO vo) {
+		// TODO Auto-generated method stub
+		return dao.productOneSelect(vo);
+	}
+
+	@Override
+	public int productUpdate(Admin_ProductVO vo) {
+		// TODO Auto-generated method stub
+		return dao.productUpdate(vo);
+	}
+
+	@Override
+	public int discountUpdate(Admin_ProductVO vo) {
+		// TODO Auto-generated method stub
+		return dao.discountUpdate(vo);
+	}
+
+	@Override
+	public int optionUpdate(Admin_ProductVO vo) {
+		// TODO Auto-generated method stub
+		return dao.optionUpdate(vo);
+	}
 	
 
 }

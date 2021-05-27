@@ -1,302 +1,413 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
- 
- <style> 
-/*상단*/
-	 #container li{ 
-		 list-style-type:none; 
-		
-	 }   
-	#contentBox{ 
-		margin-top:80px !important;		
-	}  
-	#topBar h5{  
-		padding-left:120px;
-	}
-	input, textarea, select{
-		border:1px solid lightgray; 
-		border-radius: 3px;
-	}  
-/*카테고리 제목*/
-	.wrapTitle{
-		margin:40px 40px 40px 0px;
-		text-align:center;
-		font-size:20px;
-	}
-	/*버튼*/
-	button, .btn{
-		padding: 3px 10px;
-		color: #666666;
-		text-align: center;
- 		text-decoration: none;
-		display: inline-block;
-		border:1px solid lightgray;
-		border-radius: 0px;
-	}
-	/*테이블헤더*/
-	th{
-		height:50px;
-		display: table-cell;
-	    vertical-align: inherit;
-	    font-weight: bold;
-	    text-align: -internal-center;
-	    border-bottom: 1px solid #ccc;
-	    border-top: 1px solid #ccc;
-   		/*background-color: #fcfcfc;*/
-   		font-size: 16px;
-	}
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-	input, textarea, select{
-		border:1px solid lightgray; 
-	}
-	label{list-style-type:none;}
-	select{height:28px; background:white;}
-	/* 검색하기 */
-	#search_container{
-		width: 100%;
-		height: 30px;
-		margin-bottom: 30px;
-	}
-	#search_box{
-		height: 30px;
-		line-height: 30px;
-		border: solid 1px #ddd;
-		display: inline-block;
-		float: right;
-		background-color: #fff;
-	}
-	#search, #searchWord{
-		height: 25px;
-		text-indent: 0.2em;
-		border: white;
-		float: left;
-	}
-	#search_box img{
-		width: 27px;
-		height: 27px;	
-		filter: invert(86%) sepia(34%) saturate(7117%) hue-rotate(311deg) brightness(90%) contrast(103%);
-		float: right;
-	}
-	/*해당 목록에 대한 설명 또는 주의사항*/
-	.notice{
-		font-size:0.8em;
-		color:gray;
-	}
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+<style>
+/*상단*/
+#container li {
+	list-style-type: none;
 }
-input[type=number] {
-   -moz-appearance: textfield;
+
+#contentBox {
+	margin-top: 80px !important;
 }
-input[type=button]{
-	border-radius:0;
+
+#topBar h5 {
+	padding-left: 120px;
 }
-input[type=text]{
-	padding-left:5px;
+
+input, textarea, select {
+	border: 1px solid lightgray;
+	border-radius: 3px;
 }
-button, .btn{box-shadow:none;font-size:16px; line-height:35px;}
-.ui-datepicker-trigger{border:none; font-weight:bold;}
-#sell_start_finish{line-height:35px;}
-	li{margin-bottom:0px;}
-	li>span{line-height:35px;}
-	ul{margin-bottom:5px}
-	label{margin:0; line-height:35px; font-size:16px}
-	select{height:28px;}
-	input, textarea, select{
-		border:1px solid lightgray; 
-		font-size:16px;
-	}
-	input{padding:2px}
-	input,select,button{height:35px; background:white;}
-	textarea{
-		width:100%;
-	}
-	input[type="radio"], input[type="checkbox"]{
-		margin-right:5px; height:10px;
-	}
-	/* div*/
-	.categoryStar{
-		color:rgb(252,118,45);
-		:20px;
-		line-height:35px;
-		padding:5px;
-	}
-	.category_title{
-	   width: 100%;
-	   height: 35px;
-	   line-height: 35px;
-	   text-indent: 0.4em;
-	   font-size:18px;
-	   margin-top:20px;
-	   margin-bottom:10px;
-	   font-size:18px;
-	}
-	.category_wrap{
-		border:1px solid lightgray;
-		padding:20px;
-		margin-bottom:10px;
-	}
-	.category_wrap li{
-		padding-left:10px;
-	}
-	 .category_wrap>div{margin-bottom:20px; font-size:15px;}
-	/* 리뷰 검색 */
-	/* 카테고리 검색 */
-	strong{font-size:16px;}
-	#categoryList{
-	   width: 90%;
-	   margin: 30px auto;
-	   border: 1px solid lightgray;
-	}
-	
-	#categoryListMiddle{
-	   width: 100%;
-	   height: 170px;
-	   display: flex;
-	   flex-basis: 1;
-	   margin-bottom: 5px;
-	   border-top:1px solid lightgray;
-	}
-	
-	#categoryListMiddle ul{
-	   border-bottom: 1px solid lightgray;
-	   overflow: auto;
-	   flex: 1;
-	   display: flex;
-	   flex-direction: column;
-	   overflow-x:hidden;
-	   overflow-y:auto; 
-	   	width: 25px;
-	}
-	
-	#category{
-	   border-right: 1px solid lightgray;
-	   font-size:16px;
-	}
-	#category a{
-	   color: black;
-	}
-	#category li{ 
-		margin:5px;
-	}
-	#categoryListMiddle li{
-	   width: 100%;
-	   text-indent: 0.4em;
-	   display: flex;
-	   margin-top:5px;
-	}
-	
-	#categoryListMiddle span{
-	   margin-left: auto;
-	   margin-right: 10px;
-	}
-	
-	#categoryManagement{
-	   width: 90%;
-	   display: flex;
-	   flex-wrap: wrap;
-	   margin-left: 55px;
-	}
-	#categoryManagement a{
-	   color: black;
-	   font-weight: bold;
-	}
-	#mcategory li>a{
-	   color: black;
-	}
-	
+/*카테고리 제목*/
+.wrapTitle {
+	margin: 40px 40px 40px 0px;
+	text-align: center;
+	font-size: 20px;
+}
+/*버튼*/
+button, .btn {
+	padding: 3px 10px;
+	color: #666666;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	border: 1px solid lightgray;
+	border-radius: 0px;
+}
+/*테이블헤더*/
+th {
+	height: 50px;
+	display: table-cell;
+	vertical-align: inherit;
+	font-weight: bold;
+	text-align: -internal-center;
+	border-bottom: 1px solid #ccc;
+	border-top: 1px solid #ccc;
+	/*background-color: #fcfcfc;*/
+	font-size: 16px;
+}
+
+input, textarea, select {
+	border: 1px solid lightgray;
+}
+
+label {
+	list-style-type: none;
+}
+
+select {
+	height: 28px;
+	background: white;
+}
+/* 검색하기 */
+#search_container {
+	width: 100%;
+	height: 30px;
+	margin-bottom: 30px;
+}
+
+#search_box {
+	height: 30px;
+	line-height: 30px;
+	border: solid 1px #ddd;
+	display: inline-block;
+	float: right;
+	background-color: #fff;
+}
+
+#search, #searchWord {
+	height: 25px;
+	text-indent: 0.2em;
+	border: white;
+	float: left;
+}
+
+#search_box img {
+	width: 27px;
+	height: 27px;
+	filter: invert(86%) sepia(34%) saturate(7117%) hue-rotate(311deg)
+		brightness(90%) contrast(103%);
+	float: right;
+}
 /*해당 목록에 대한 설명 또는 주의사항*/
-	.notice{
-		font-size:0.93em;
-		color:gray;
-	}
+.notice {
+	font-size: 0.8em;
+	color: gray;
+}
+
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button
+	{
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+input[type=number] {
+	-moz-appearance: textfield;
+}
+
+input[type=button] {
+	border-radius: 0;
+}
+
+input[type=text] {
+	padding-left: 5px;
+}
+
+button, .btn {
+	box-shadow: none;
+	font-size: 16px;
+	line-height: 35px;
+}
+
+.ui-datepicker-trigger {
+	border: none;
+	font-weight: bold;
+}
+
+#sell_start_finish {
+	line-height: 35px;
+}
+
+li {
+	margin-bottom: 0px;
+}
+
+li>span {
+	line-height: 35px;
+}
+
+ul {
+	margin-bottom: 5px
+}
+
+label {
+	margin: 0;
+	line-height: 35px;
+	font-size: 16px
+}
+
+select {
+	height: 28px;
+}
+
+input, textarea, select {
+	border: 1px solid lightgray;
+	font-size: 16px;
+}
+
+input {
+	padding: 2px
+}
+
+input, select, button {
+	height: 35px;
+	background: white;
+}
+
+textarea {
+	width: 100%;
+}
+
+input[type="radio"], input[type="checkbox"] {
+	margin-right: 5px;
+	height: 10px;
+}
+/* div*/
+.categoryStar {
+	color: rgb(252, 118, 45); :20 px;
+	line-height: 35px;
+	padding: 5px;
+}
+
+.category_title {
+	width: 100%;
+	height: 35px;
+	line-height: 35px;
+	text-indent: 0.4em;
+	font-size: 18px;
+	margin-top: 20px;
+	margin-bottom: 10px;
+	font-size: 18px;
+}
+
+.category_wrap {
+	border: 1px solid lightgray;
+	padding: 20px;
+	margin-bottom: 10px;
+}
+
+.category_wrap li {
+	padding-left: 10px;
+}
+
+.category_wrap>div {
+	margin-bottom: 20px;
+	font-size: 15px;
+}
+/* 리뷰 검색 */
+/* 카테고리 검색 */
+strong {
+	font-size: 16px;
+}
+
+#categoryList {
+	width: 90%;
+	margin: 30px auto;
+	border: 1px solid lightgray;
+}
+
+#categoryListMiddle {
+	width: 100%;
+	height: 170px;
+	display: flex;
+	flex-basis: 1;
+	margin-bottom: 5px;
+	border-top: 1px solid lightgray;
+}
+
+#categoryListMiddle ul {
+	border-bottom: 1px solid lightgray;
+	overflow: auto;
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	overflow-x: hidden;
+	overflow-y: auto;
+	width: 25px;
+}
+
+#category {
+	border-right: 1px solid lightgray;
+	font-size: 16px;
+}
+
+#category a {
+	color: black;
+}
+
+#category li {
+	margin: 5px;
+}
+
+#categoryListMiddle li {
+	width: 100%;
+	text-indent: 0.4em;
+	display: flex;
+	margin-top: 5px;
+}
+
+#categoryListMiddle span {
+	margin-left: auto;
+	margin-right: 10px;
+}
+
+#categoryManagement {
+	width: 90%;
+	display: flex;
+	flex-wrap: wrap;
+	margin-left: 55px;
+}
+
+#categoryManagement a {
+	color: black;
+	font-weight: bold;
+}
+
+#mcategory li>a {
+	color: black;
+}
+
+/*해당 목록에 대한 설명 또는 주의사항*/
+.notice {
+	font-size: 0.93em;
+	color: gray;
+}
 /*판매가격*/
-	#total_price{
-		font-weight:bold;
-		font-size:17px;
-	}
-	label{margin-right:10px;}
+#total_price {
+	font-weight: bold;
+	font-size: 17px;
+}
+
+label {
+	margin-right: 10px;
+}
 /*옵션*/
-	.regi_option_table input{
-		border:none;
-		height:35px;
-	}
-	th{
-		height: 35px;
-		font-size:13px;
-		text-align:center;
-	}
-	table,td {
-		border:1px solid lightgray;
-	}
+.regi_option_table input {
+	border: none;
+	height: 35px;
+}
+
+th {
+	height: 35px;
+	font-size: 13px;
+	text-align: center;
+}
+
+table, td {
+	border: 1px solid lightgray;
+}
 /*파일선택*/
 input[type=file] {
-    display: block;
-    line-height:20px;
-    text-align:center;
-	color:black;
-	background:white;
+	display: block;
+	line-height: 20px;
+	text-align: center;
+	color: black;
+	background: white;
 }
 
 /*상세설명*/
-	.info_detail{
-		width:90%;
-		margin-left:40px;
-		height:700px;
-	}
-	.note-editable, .note_editor {
-		height:500px; width:80%;
-	}
-/*배송*/
-	#pay{height:50px; line-height:35px;}
-/*취소 저장하기 버튼*/
-	.end_button_wrap{
-		text-align:center;
-	}
-	.save_btn, .cancel_btn{
-		width: 100px;
-		height: 35px;
-		background: #fff;
-		margin: 20px 10px 40px 0 ;
-	}
-	span{line-height:35px;}
-	
-/*placeholder*/
-
-input::-webkit-input-placeholder { font-size: 90%; padding-left:5px;}
-#optionstock::-webkit-input-placeholder, #optionprice::-webkit-input-placeholder{ font-size: 90%; text-align:right;}
-#optionname::-webkit-input-placeholder{ font-size: 90%; text-align:center;}
-input::-moz-placeholder { font-size: 90%;padding-left:5px; }
-input:-ms-input-placeholder { font-size: 90%;padding-left:5px; }
-input:-moz-placeholder { font-size: 90%; padding-left:5px;}
-input::placeholder { font-size: 90%; padding-left:5px;}
-.ui-datepicker-trigger{border:none;}
-.ui-datepicker-group ui-datepicker-group-first{
-	margin-right:10px;
+.info_detail {
+	width: 90%;
+	margin-left: 40px;
+	height: 700px;
 }
-	
 
+.note-editable, .note_editor {
+	height: 500px;
+	width: 80%;
+}
+/*배송*/
+#pay {
+	height: 50px;
+	line-height: 35px;
+}
+/*취소 저장하기 버튼*/
+.end_button_wrap {
+	text-align: center;
+}
 
-		/*버튼*/
-		.btn:hover, .minibtn:hover{
-			background: gray;
-			color:white;
-			display: inline-block;
-		} 
-		
-		
-		
-		
-		form {
-			display: block !important;
-		}
-		
-		#contentBox li{
-			text-align: left !important;
-		}
-</style> 
+.save_btn, .cancel_btn {
+	width: 100px;
+	height: 35px;
+	background: #fff;
+	margin: 20px 10px 40px 0;
+}
+
+span {
+	line-height: 35px;
+}
+
+/*placeholder*/
+input::-webkit-input-placeholder {
+	font-size: 90%;
+	padding-left: 5px;
+}
+
+#optionstock::-webkit-input-placeholder, #optionprice::-webkit-input-placeholder
+	{
+	font-size: 90%;
+	text-align: right;
+}
+
+#optionname::-webkit-input-placeholder {
+	font-size: 90%;
+	text-align: center;
+}
+
+input::-moz-placeholder {
+	font-size: 90%;
+	padding-left: 5px;
+}
+
+input:-ms-input-placeholder {
+	font-size: 90%;
+	padding-left: 5px;
+}
+
+input:-moz-placeholder {
+	font-size: 90%;
+	padding-left: 5px;
+}
+
+input::placeholder {
+	font-size: 90%;
+	padding-left: 5px;
+}
+
+.ui-datepicker-trigger {
+	border: none;
+}
+
+.ui-datepicker-group ui-datepicker-group-first {
+	margin-right: 10px;
+}
+
+/*버튼*/
+.btn:hover, .minibtn:hover {
+	background: gray;
+	color: white;
+	display: inline-block;
+}
+
+form {
+	display: block !important;
+}
+
+#contentBox li {
+	text-align: left !important;
+}
+</style>
 <script>
 $(function(){
 	//1. 카테고리 변경
@@ -798,293 +909,253 @@ $('submit').click(function(){
 });
 </script>
 <!-- 헤더 상단 include -->
-<%@ include file="/inc/top.jspf" %>
-	<div id="topBarContainer">
-		<div id="topBar">
-			<ul>
-				<li><h5><strong><a href="productEditA">상품 수정</a></strong></h5></li>  
-			</ul> 
-		</div> 
-		</div>
-<div id="body1">
-<!-- 왼쪽 메뉴바 include -->
-<%@ include file="/inc/leftBar.jspf" %>
-<div id="container"> 
-   	<div id="contentBox">  
-	<!-- 상품등록 상단 제목-->
-	<div class="wrapTitle" style="font-size:20px">상품 수정</div>
-		<div>
-		<span class="categoryStar">*</span><span class="notice">표시된 항목은 모두 입력해주세요.</span>
-	</div>
-	<!-- wrapTitle -->
-	
-	<!-- 수정하기 폼 -->
-		<form method="post" name="product_regi_form" id="product_regi_form" action="product_edit_ok" enctype="multipart/form-data">
-	<!------------------------------------------ 카테고리------------------------------------------------->
-	<input type="hidden" value="${vo.productnum}" name="productnum">
-	 <div class="category_title">카테고리</div>
-		<div class="category_wrap">
-            <div id="categoryList">
-               <strong>&nbsp;&nbsp;<span class="categoryStar">*</span>카테고리 선택</strong>
-                 <div id="categoryListMiddle">
-                  <!--카테고리에서 대분류 카테고리 선택-------------------------->
-                  <ul id="category"><!-- 카테고리 리스트에서 모든 카테고리 리스트를 가져오지만 우선 대분류만 보이게 한다.-->
-                     <c:if test="${cateList!=null}">
-                        <!-- 변수 i를 선언해주고 -->
-                        <c:set var="i" value="1"/>
-                        <!-- 변수 i 즉, catenum이 i와 일치하는 데이터 하나를 가지고 오면 
-                                 i를 더해주어 다음 조건을 만들어 다음 번호 것만 가져오게 한다 -->
-                           <c:forEach var="categoryList" items="${cateList}">
-                              <c:if test="${categoryList.catenum==i}">
-                                
-                                 <c:set var="i" value="${i+1 }"/>
-                              </c:if>
-                              <c:if test="${categoryList.catenum!=i}">
-                                <li value="${categoryList.catenum}"><a href="#" onclick="return false">${categoryList.catename}</a><span>&gt;</span></li>
-                              </c:if>
-                           </c:forEach>
-                        <c:remove var="i"/>
-                     </c:if>
-                  </ul>
-                  
-                  <!--카테고리에서 중분류 카테고리 선택-------------------------->
-                  <ul id="mcategory"></ul>
-               </div>
-  			<!--------------------------선택된 카테고리 항목-------------------------->	
-            </div><!-- categoryList end -->
-			<ul id="categoryManagement">
-				
-  				 <li value="${vo.mcatenum}">
-  				 	<input type='hidden' value="${vo.mcatename}"><a href='#' onclick='return false'><label for='categoryManagement' id='categoryManagement_label'>선택한 상품 카테고리 : </label>${list.catename}&gt;${list.mcatename}<span>⊠</span></a>
-  				 </li>
-  				 
-			</ul>
-			<span class="notice" style="margin-left:55px;">등록한 판매상품은 고객님이 선택하신 카테고리로 분류되어 홈페이지에 적용됩니다. 원하시는 상품 카테고리가 없거나, 변경을 원하는 경우 관리자에게 문의해주세요.</span>
-		</div><!-- categorySelection div end -->
-		
-	<!----------------------------------------------상품명------------------------------------------>
-		<div class="category_title">상품명 등록</div>
-	<div class="category_wrap">
-			<ul>
-				<li><span class="categoryStar">*</span><label for="">상품명</label>&nbsp;
-					<input type="text" name="productname" id="product_register_name" value="${list.productname}" maxlength="100" size="100"/>&nbsp;<span id="count"></span>/<span id="max_count">100</span><br/>
-					<span class="notice" >
-					판매 상품과 직접 관련이 없는 다른 상품명, 스팸성 키워드 입력 시 관리자에 의해 판매 금지될 수 있습니다.
-					유명 상품 유사문구를 무단으로 도용하여 기재하는 경우 별도 고지 없이 제재될 수 있습니다. 
-					</span>
-				</li>
-			</ul>
-		</div> <!-- productNameRegi div end -->
-		
-	<!-----------------------------------------------판매가격 설정--------------------------------------->
-	<div class="category_title">판매가격</div>
-	<div class="category_wrap">		
+<%@ include file="/inc/top.jspf"%>
+<div id="topBarContainer">
+	<div id="topBar">
 		<ul>
-			<li><span class="categoryStar">*</span><label>판매가격 </label>&nbsp;<input type="number" name="productprice" id="productprice" value="${list.productprice}" min=100 placeholder="숫자만 입력하세요."/>&nbsp;<span>원</span></li>
-	
-			<li> 
-				<span class="categoryStar">*</span><label>판매기간</label>&nbsp;&nbsp;<span class="notice">판매 기간을 설정해주세요. 미선택시 판매시작일은 등록일, 판매종료일은 2년이내로 지정됩니다.</span>
-			</li>
-			<li id="sell_start_finish"><label for="start_date" >판매시작일</label><input type="text" name="sellstart" id="sellstart" class="start_date" value="${list.sellstart}" max="2099-12-31"/> ~ <label for="finish_date">판매종료일</label><input type="text" name="sellfinish" id="sellfinish" class="finish_date" value="${list.sellfinish}" max="2099-12-31"/></li>
-		
-			<li>
-				<span class="categoryStar">*</span><label>할인여부 </label>&nbsp;
-				<input type="radio" value="1" name="saleselect" id="sale_check" <c:if test="${list.saleselect==1}">checked</c:if>><label for="설정" >설정</label>
-				<input type="radio" value="0" name="saleselect" id="sale_uncheck" <c:if test="${list.saleselect==0}">checked</c:if>><label for="설정안함" >설정안함</label>
-			</li>
-			<li>
-				<ul id="sale_ul" style="display:none; background-color:#fcfcfc; width: 900px;">
-					<li>
-						<span class="categoryStar">*</span><label>할인금액 </label>&nbsp;
-						<input type="number" name="saleprice" id="saleprice" placeholder="할인적용금액" value="${list.saleprice}" min=0 />&nbsp;<span>원</span>&nbsp;<span>할인</span>
-					</li>
-					<li>
-						<span class="notice">원하시는 할인 시작일과 할인 종료일을 설정하고 싶으시면, 특정기간만 할인을 선택해주세요. 미선택시 할인시작일은 등록일, 할인종료일은 2년이내로 지정됩니다.</span>
-					</li>
-					<li id="sale_period">
-						<label for="start_date">할인시작일</label><input type="text" name="salestart" id="salestart"  class="start_date " value="${list.salestart}" max="2099-12-31"/> ~  <label for="finish_date">할인종료일</label><input type="text" name="salefinish" id="saledate" class="finish_date" value="${list.salefinish}" max="2099-12-31"/>
-						<span class="notice">특정기간이 지난후에는 판매가로 적용됩니다.</span>
-					</li>
-					
-					<li><input type="checkbox" name="saleb" id="saleb" value="1" <c:if test="${list.saleb==1}">checked</c:if>/><label for="saleb">못난이 할인 상품으로 등록</label></li> 
-					<!-- default = 0 , 컨트롤러에서 선택 안하면 0으로 값이 지정되도록 설정할 것-->
-				</ul>
-			</li>
-			<li>
-				<label for="">최종 판매가격</label>&nbsp; <span id="total_price" >${list.productprice}<c:if test="${list.saleselect == 1 }">-${dis.saleprice }</</c:if></span>&nbsp;원 &nbsp;(-<span id="discount_price"><c:if test="${list.saleselect == 1 }">${dis.saleprice }</</c:if></span>원 할인) 
-				<span class="notice">수수료는 전체매출에서 2%차감된금액입니다.&nbsp;<a href="">안내 바로가기</a></span>
-			</li>
+			<li><h5>
+					<strong><a href="productEditA">상품 수정</a></strong>
+				</h5></li>
 		</ul>
-		</div>
-	
-	<!-----------------------------------------------재고수량--------------------------------------->
-	 <div class="category_title">재고수량</div>
-	<div class="category_wrap">
-			<ul>
-				<li><span class="categoryStar">*</span><label>재고수량</label>&nbsp; <input type="number" name="totalstock" id="totalstock" min="0" value="${list.totalstock}"/>&nbsp;<span>개</span></li>
-				<li><span class="notice">판매할 총 재고량을 입력하세요.</span></li>
-			</ul>			
-	</div>	
-	<!-----------------------------------------------옵션--------------------------------------->
-	<div class="category_title">옵션</div>
-	<div class="category_wrap">
-			<ul class="regi_option_wrap">
-				<li><span class="categoryStar">*</span>
-					<input type="radio" value="1" name="optionselect" id="add_option" <c:if test="${list.optionselect!=0}">checked</c:if>/><label for="옵션추가">옵션추가</label>
-					<input type="radio" value="0" name="optionselect" id="none_option" <c:if test="${list.optionselect==0}">checked</c:if>/><label for="추가안함">추가안함</label>
-				</li>
-				<li>
-					<ul id="add_option_ul" style="display:none; background-color:#fcfcfc;">
-					<li><span class="categoryStar">*</span><label>옵션 갯수</label>&nbsp;
-					
-						<select id="select_option" name="option_count"> 
-							<option value='0'>옵션추가</option>
-								<c:if test="${list.optionselect == 1}"><option selected value='1'>1</option></c:if>
-								<c:if test="${list.optionselect != 1}"><option value='1'>1</option></c:if>
-								<c:if test="${list.optionselect == 2}"><option selected value='2'>2</option></c:if>
-								<c:if test="${list.optionselect != 2}"><option value='2'>2</option></c:if>
-								<c:if test="${list.optionselect == 3}"><option selected value='3'>3</option></c:if>
-								<c:if test="${list.optionselect != 3}"><option value='3'>3</option></c:if>
-								<c:if test="${list.optionselect == 4}"><option selected value='4'>4</option></c:if>
-								<c:if test="${list.optionselect != 4}"><option value='4'>4</option></c:if>
-								<c:if test="${list.optionselect == 5}"><option selected value='5'>5</option></c:if>
-								<c:if test="${list.optionselect != 5}"><option value='5'>5</option></c:if>
-						</select>
-					<span class="notice">추가하려는 옵션의 갯수를 선택해주세요.</span>
-					</li>
-					<li><span class="categoryStar">*</span><label>옵션 목록</label><span class="notice">옵션명, 재고수량, 가격을 모두 기입해주세요.</span>
-						<table class="regi_option_table">
-							<thead>
-								<tr>
-									<th>옵션명</th>
-									<th>재고수량</th>
-									<th>가격</th>
-									
-								</tr>
-							</thead>
-							<tbody id="option_tbody">
-								<!--  선택한 value 값 만큼 표 추가  -->
-							</tbody>
-						</table>
-					</li>
-					</ul>
-				</li>
-				<li><span class="notice">상세페이지에 예시) 호박고구마 1kg (+3000원)으로 표기됩니다.</span></li>
-			</ul>
+	</div>
+</div>
+<div id="body1">
+	<!-- 왼쪽 메뉴바 include -->
+	<%@ include file="/inc/leftBar.jspf"%>
+	<div id="container">
+		<div id="contentBox">
+			<!-- 상품등록 상단 제목-->
+			<div class="wrapTitle" style="font-size: 20px">상품 수정</div>
+			<div>
+				<span class="categoryStar">*</span><span class="notice">표시된 항목은 모두 입력해주세요.</span>
 			</div>
-	<!-----------------------------------------------상품 이미지-------------------------------------->
-	<div class="category_title">상품 이미지</div>
-	<div class="category_wrap">
-			<ul>
-				<li><span class="categoryStar">*</span><label>대표이미지</label><br/>
-					<span class="notice">홈페이지에 연출되는 대표 이미지를 업로드해주세요.</span><br/>
-					<!-- 이미지미리보기 -->
-					<img name="thumbimg1" id="thumbimg1" src="<%=request.getContextPath()%>/resources/sellerProductImgs/${list.thumbimg}" alt="image upload" style="width:400px;"/><br/>
-					<!-- 이미지업로드/미리보기올리기 -->
-					<input type="file" id="thumbimg" name ="file" accept="img/*" value="${list.thumbimg}" />
-				</li>
-		   </ul>	
-		</div>
- 	<!-----------------------------------------------상세설명------------------------------------->
-	<div class="category_title"><span class="categoryStar">*</span>상세설명</div>
-	<div class="category_wrap">
-		<textarea id="summernote"  name="productcontent" >${list.productcontent}</textarea> <!-- name="editordata" -->
-		</div>
-	<!-----------------------------------------------배송----------------------------------------->
-	<div class="category_title">배송</div>
-	<div class="category_wrap">
-			<ul>
-				<li><span class="notice"> 등록 상품의 배송방법을 선택해주세요.</span></li>
-				<li><label><span class="categoryStar">*</span>배송방법</label>&nbsp; 
-					<select name="deliveryoption" id="deliverysel" >
-						<option value="1" id="pickup" <c:if test="${list.deliveryoption=='1'}">selected</c:if>>픽업</option>
-						<option value="2" id="delivery" <c:if test="${list.deliveryoption=='2'}">selected</c:if>>택배</option>
-						<option value="3" id="delandpick" <c:if test="${list.deliveryoption=='3'}">selected</c:if>>택배/픽업</option>
-					</select>
-				</li>
-				<li id="delivery_option" style="display:none; background-color:#fcfcfc;">
-					<ul>
-					<li><span class="categoryStar">*</span><label>배송비</label>&nbsp;
-						<input type="number" name="deliveryprice" id="deliveryprice" min=0  value="${list.deliveryprice}"/>&nbsp;<span>원</span>	 <!-- 픽업 선택시 배송비 0원 고정 -->
-					</li>
-					<li id="pay"><span class="categoryStar">*</span><label>결제방식</label>&nbsp;
-						<input type="radio" name="paymentoption" id="delivery_price_option" value="1" <c:if test="${list.deliveryoption=='1'}">checked</c:if>/><label for="착불">착불</label>&nbsp;
-						<input type="radio" name="paymentoption" id="delivery_price_option" value="2" <c:if test="${list.deliveryoption=='2'}">checked</c:if>/><label for="선결제">선결제</label>&nbsp;
-						<input type="radio" name="paymentoption" id="delivery_price_option"  value="3" <c:if test="${list.deliveryoption=='3'}">checked</c:if>/><label for="착불또는선결제">착불 또는 선결제</label>
-					</li>
-					</ul>
-				</li>
-				
-			</ul>
-		</div>
-	<!----------------------------------------------상품내용--------------------------------------->
-	<div class="category_title">상품 내용</div>
-	<div class="category_wrap">
-			<ul>
-				<li><span class="categoryStar">*</span><label for="">판매단위</label>&nbsp;
-					<input type="number" name="selloption[0]" id="selloption"  value="${list.selloption[0]}" min="0" onchange="javascript:removeCommaReturn(this);"/>
-					<select id="select_unit" name="selloption[1]" onchange="javascript:removeCommaReturn(this);">
-						<option value=" " <c:if test="${list.selloption[1] == ''}">selected</c:if>>해당없음</option>
-						<option value="팩" <c:if test="${list.selloption[1] == '팩'}">selected</c:if>>팩</option>
-						<option value="박스" <c:if test="${list.selloption[1] == '박스'}">selected</c:if>>박스</option>
-					</select>
-					<input type="hidden" name="selloption" value="${list.selloption[0]}" id="selloption_hidden"/>
-				</li>
-				<li><span class="categoryStar">*</span><label for="">중량/용량</label>&nbsp;
-					<input type="number" name="sellweightnum" id="sellweight" min="0" value="${list.sellweight[0]}" onchange="javascript:removeCommaReturn(this);"/>
-					<select id="select_weight" name="sellweightunit" onchange="javascript:removeCommaReturn(this);">
-						<option value="g" <c:if test="${list.sellweight[1] == 'g'}">selected</c:if> >g</option>
-						<option value="kg" <c:if test="${list.sellweight[1] == 'kg'}">selected</c:if> >kg</option>
-					</select>
-					<input type="hidden" name="sellweight" id="sellweight_hidden"/>
-				</li>
-				<li><span class="categoryStar">*</span><label for="">원산지</label>&nbsp;
-					<input type="radio" value="국내산" name="origin" id="domestic" <c:if test="${list.origin eq '국내산'}">checked</c:if>><label for="국내산">국내산</label>
-					<input type="radio" value="수입산" name="origin" id="import" <c:if test="${list.origin eq '수입산'}">checked</c:if>><label for="수입산">수입산</label>
-					<div id="import_wrap" style="display:none; background-color:#fcfcfc;">
-						<input type="radio" value="중국산" name="origin" id="china" <c:if test="${list.origin eq '중국산'}">checked</c:if>><label for="중국산">중국산</label>
-						<input type="radio" value="일본산" name="origin" id="japan" <c:if test="${list.origin eq '일본산'}">checked</c:if>><label for="일본산">일본산</label>
-						<input type="radio" value="말레이시아산" name="origin" id="malaysia" <c:if test="${list.origin eq '말레이시아산'}">checked</c:if>><label for="말레이시아산">말레이시아산</label>
-						<input type="radio" value="필리핀산" name="origin" id="philippines" <c:if test="${list.origin eq '필리핀산'}">checked</c:if>><label for="필리핀산">필리핀산</label>
-						<input type="radio" value="베트남산" name="origin" id="vietnam" <c:if test="${list.origin eq '베트남산'}">checked</c:if>><label for="베트남산">베트남산</label>
-						<input type="radio" value="칠레산" name="origin" id="chile" <c:if test="${list.origin eq '칠레산'}">checked</c:if>><label for="칠레산">칠레산</label>
-					</div>
-				</li>
-			
-				<li><span class="categoryStar">*</span><label for="보관/포장타입">보관/ 포장타입</label>&nbsp;
-					<select id="select_packing" name="wrapping">
-						<option value='0' <c:if test="${list.wrapping==1}">selected</c:if>>실온</option>
-						<option value='1' <c:if test="${list.wrapping==2}">selected</c:if>>냉장</option>
-						<option value='2' <c:if test="${list.wrapping==3}">selected</c:if>>냉동</option>
-					</select>
-				</li>
-				<li><span class="categoryStar">*</span><label for="">상품정보</label><br/>
-					<textarea placeholder="간략한 상품정보를 입력해주세요." id ="productinfomation" name="productinfomation" >${list.productinfomation }</textarea>
-				</li>
-				<li><span class="categoryStar">*</span><label for="">주의사항</label><br/>
-					<textarea placeholder="주의사항을 입력해주세요. 예)제품 수령 후 반드시 냉장보관해주세요. " id="prevention" name="prevention" >${list.prevention}</textarea>
-				</li>
-				<li><span class="categoryStar">*</span><label for="">유통기한</label><br/>
-					<textarea placeholder="유통기한을 입력해주세요. 예) 수령후 일주일 또는, 신선식품이므로 가능한 빨리 드시기를 바랍니다." id="deadline" name="deadline" >${list.deadline}</textarea>
-				</li>
-			</ul>
-		</div>
-		<div>
-		<span class="categoryStar">*</span><span class="notice">표시된 항목은 모두 입력해주세요.</span>
-		<a href="#" style="float:right;"><span>TOP</span></a>
-		</div>
-		<hr/>
-		
-	<!--------------------------------------------취소/ 저장하기 버튼---------------------------------------->
-		<div class="end_button_wrap">
-			<input type="button" id="cancel_btn" class="btn" value="취소" onclick="location.href='seller/product_list'">
-			<input type="submit" name="submit" value="수정하기" id="save_btn" class="btn"/>
-		</div>
-	</form>
-	<!-- 수정하기 폼 end -->
+			<!-- wrapTitle -->
 
-	<div style="clear: both;"></div>
-</div>   <!--contentBox end -->
-</div> <!-- container end -->
-</div> <!-- body 1 end -->
+			<!-- 수정하기 폼 -->
+			<form method="post" name="product_regi_form" id="product_regi_form" action="product_edit_ok" enctype="multipart/form-data">
+				<!------------------------------------------ 카테고리------------------------------------------------->
+				<input type="hidden" value="${list.productnum}" name="productnum">
+				<div class="category_title">카테고리</div>
+				<div class="category_wrap">
+					<div id="categoryList">
+						<strong>&nbsp;&nbsp;<span class="categoryStar">*</span>카테고리 선택
+						</strong>
+						<div id="categoryListMiddle">
+							<!--카테고리에서 대분류 카테고리 선택-------------------------->
+							<ul id="category">
+								<!-- 카테고리 리스트에서 모든 카테고리 리스트를 가져오지만 우선 대분류만 보이게 한다.-->
+								<c:if test="${cateList!=null}">
+									<!-- 변수 i를 선언해주고 -->
+									<c:set var="i" value="1" />
+									<!-- 변수 i 즉, catenum이 i와 일치하는 데이터 하나를 가지고 오면 
+                                 i를 더해주어 다음 조건을 만들어 다음 번호 것만 가져오게 한다 -->
+									<c:forEach var="categoryList" items="${cateList}">
+										<c:if test="${categoryList.catenum==i}">
+
+											<c:set var="i" value="${i+1 }" />
+										</c:if>
+										<c:if test="${categoryList.catenum!=i}">
+											<li value="${categoryList.catenum}"><a href="#" onclick="return false">${categoryList.catename}</a><span>&gt;</span></li>
+										</c:if>
+									</c:forEach>
+									<c:remove var="i" />
+								</c:if>
+							</ul>
+
+							<!--카테고리에서 중분류 카테고리 선택-------------------------->
+							<ul id="mcategory"></ul>
+						</div>
+						<!--------------------------선택된 카테고리 항목-------------------------->
+					</div>
+					<!-- categoryList end -->
+					<ul id="categoryManagement">
+
+						<li value="${list.mcatenum}"><input type='hidden' value="${list.mcatename}"><a href='#' onclick='return false'><label for='categoryManagement' id='categoryManagement_label'>선택한 상품 카테고리 : </label>${list.catename}&gt;${list.mcatename}<span>⊠</span></a></li>
+
+					</ul>
+					<span class="notice" style="margin-left: 55px;">등록한 판매상품은 고객님이 선택하신 카테고리로 분류되어 홈페이지에 적용됩니다. 원하시는 상품 카테고리가 없거나, 변경을 원하는 경우 관리자에게 문의해주세요.</span>
+				</div>
+				<!-- categorySelection div end -->
+
+				<!----------------------------------------------상품명------------------------------------------>
+				<div class="category_title">상품명 등록</div>
+				<div class="category_wrap">
+					<ul>
+						<li><span class="categoryStar">*</span><label for="">상품명</label>&nbsp; <input type="text" name="productname" id="product_register_name" value="${list.productname}" maxlength="100" size="100" />&nbsp;<span id="count"></span>/<span id="max_count">100</span><br /> <span class="notice"> 판매 상품과 직접 관련이 없는 다른 상품명, 스팸성 키워드 입력 시 관리자에 의해 판매 금지될 수 있습니다. 유명 상품 유사문구를 무단으로 도용하여 기재하는 경우 별도 고지 없이 제재될 수 있습니다. </span></li>
+					</ul>
+				</div>
+				<!-- productNameRegi div end -->
+
+				<!-----------------------------------------------판매가격 설정--------------------------------------->
+				<div class="category_title">판매가격</div>
+				<div class="category_wrap">
+					<ul>
+						<li><span class="categoryStar">*</span><label>판매가격 </label>&nbsp;<input type="number" name="productprice" id="productprice" value="${list.productprice}" min=100 placeholder="숫자만 입력하세요." />&nbsp;<span>원</span></li>
+
+						<li><span class="categoryStar">*</span><label>판매기간</label>&nbsp;&nbsp;<span class="notice">판매 기간을 설정해주세요. 미선택시 판매시작일은 등록일, 판매종료일은 2년이내로 지정됩니다.</span></li>
+						<li id="sell_start_finish"><label for="start_date">판매시작일</label><input type="date" name="sellstart" id="sellstart" class="start_date" value="${list.sellstart}" max="2099-12-31" /> ~ <label for="finish_date">판매종료일</label><input type="date" name="sellfinish" id="sellfinish" class="finish_date" value="${list.sellfinish}" max="2099-12-31" /></li>
+
+						<li><span class="categoryStar">*</span><label>할인여부 </label>&nbsp; <input type="radio" value="1" name="saleselect" id="sale_check" <c:if test="${list.saleselect==1}">checked</c:if>><label for="설정">설정</label> <input type="radio" value="0" name="saleselect" id="sale_uncheck" <c:if test="${list.saleselect==0}">checked</c:if>><label for="설정안함">설정안함</label></li>
+						<li>
+							<ul id="sale_ul" style="display: none; background-color: #fcfcfc; width: 900px;">
+								<li><span class="categoryStar">*</span><label>할인금액 </label>&nbsp; <input type="number" name="saleprice" id="saleprice" placeholder="할인적용금액" value="${list.saleprice}" min=0 />&nbsp;<span>원</span>&nbsp;<span>할인</span></li>
+								<li><span class="notice">원하시는 할인 시작일과 할인 종료일을 설정하고 싶으시면, 특정기간만 할인을 선택해주세요. 미선택시 할인시작일은 등록일, 할인종료일은 2년이내로 지정됩니다.</span></li>
+								<li id="sale_period"><label for="start_date">할인시작일</label><input type="text" name="salestart" id="salestart" class="start_date " value="${list.salestart}" max="2099-12-31" /> ~ <label for="finish_date">할인종료일</label><input type="text" name="salefinish" id="saledate" class="finish_date" value="${list.salefinish}" max="2099-12-31" /> <span class="notice">특정기간이 지난후에는 판매가로 적용됩니다.</span></li>
+
+								<li><input type="checkbox" name="saleb" id="saleb" value="1" <c:if test="${list.saleb==1}">checked</c:if> /><label for="saleb">못난이 할인 상품으로 등록</label></li>
+								<!-- default = 0 , 컨트롤러에서 선택 안하면 0으로 값이 지정되도록 설정할 것-->
+							</ul>
+						</li>
+						<li><label for="">최종 판매가격</label>&nbsp; <span id="total_price">${list.productprice}<c:if test="${list.saleselect == 1 }">-${dis.saleprice }</</c:if></span>&nbsp;원 &nbsp;(-<span id="discount_price"><c:if test="${list.saleselect == 1 }">${dis.saleprice }</</c:if></span>원 할인) <span class="notice">수수료는 전체매출에서 2%차감된금액입니다.&nbsp;<a href="">안내 바로가기</a></span></li>
+					</ul>
+				</div>
+
+				<!-----------------------------------------------재고수량--------------------------------------->
+				<div class="category_title">재고수량</div>
+				<div class="category_wrap">
+					<ul>
+						<li><span class="categoryStar">*</span><label>재고수량</label>&nbsp; <input type="number" name="totalstock" id="totalstock" min="0" value="${list.totalstock}" />&nbsp;<span>개</span></li>
+						<li><span class="notice">판매할 총 재고량을 입력하세요.</span></li>
+					</ul>
+				</div>
+				<!-----------------------------------------------옵션--------------------------------------->
+				<div class="category_title">옵션</div>
+				<div class="category_wrap">
+					<ul class="regi_option_wrap">
+						<li><span class="categoryStar">*</span> <input type="radio" value="1" name="optionselect" id="add_option" <c:if test="${list.optionselect!=0}">checked</c:if> /><label for="옵션추가">옵션추가</label> <input type="radio" value="0" name="optionselect" id="none_option" <c:if test="${list.optionselect==0}">checked</c:if> /><label for="추가안함">추가안함</label></li>
+						<li>
+							<ul id="add_option_ul" style="display: none; background-color: #fcfcfc;">
+								<li><span class="categoryStar">*</span><label>옵션 갯수</label>&nbsp; <select id="select_option" name="option_count">
+										<option value='0'>옵션추가</option>
+										<c:if test="${list.optionselect == 1}">
+											<option selected value='1'>1</option>
+										</c:if>
+										<c:if test="${list.optionselect != 1}">
+											<option value='1'>1</option>
+										</c:if>
+										<c:if test="${list.optionselect == 2}">
+											<option selected value='2'>2</option>
+										</c:if>
+										<c:if test="${list.optionselect != 2}">
+											<option value='2'>2</option>
+										</c:if>
+										<c:if test="${list.optionselect == 3}">
+											<option selected value='3'>3</option>
+										</c:if>
+										<c:if test="${list.optionselect != 3}">
+											<option value='3'>3</option>
+										</c:if>
+										<c:if test="${list.optionselect == 4}">
+											<option selected value='4'>4</option>
+										</c:if>
+										<c:if test="${list.optionselect != 4}">
+											<option value='4'>4</option>
+										</c:if>
+										<c:if test="${list.optionselect == 5}">
+											<option selected value='5'>5</option>
+										</c:if>
+										<c:if test="${list.optionselect != 5}">
+											<option value='5'>5</option>
+										</c:if>
+								</select> <span class="notice">추가하려는 옵션의 갯수를 선택해주세요.</span></li>
+								<li><span class="categoryStar">*</span><label>옵션 목록</label><span class="notice">옵션명, 재고수량, 가격을 모두 기입해주세요.</span>
+									<table class="regi_option_table">
+										<thead>
+											<tr>
+												<th>옵션명</th>
+												<th>재고수량</th>
+												<th>가격</th>
+
+											</tr>
+										</thead>
+										<tbody id="option_tbody">
+											<!--  선택한 value 값 만큼 표 추가  -->
+										</tbody>
+									</table></li>
+							</ul>
+						</li>
+						<li><span class="notice">상세페이지에 예시) 호박고구마 1kg (+3000원)으로 표기됩니다.</span></li>
+					</ul>
+				</div>
+				<!-----------------------------------------------상품 이미지-------------------------------------->
+				<div class="category_title">상품 이미지</div>
+				<div class="category_wrap">
+					<ul>
+						<li><span class="categoryStar">*</span><label>대표이미지</label><br /> <span class="notice">홈페이지에 연출되는 대표 이미지를 업로드해주세요.</span><br /> <!-- 이미지미리보기 --> <img name="thumbimg1" id="thumbimg1" src="<%=request.getContextPath()%>/resources/sellerProductImgs/${list.thumbimg}" alt="image upload" style="width: 400px;" /><br /> <!-- 이미지업로드/미리보기올리기 --> <input type="file" id="thumbimg" name="file" accept="img/*" value="${list.thumbimg}" /></li>
+					</ul>
+				</div>
+				<!-----------------------------------------------상세설명------------------------------------->
+				<div class="category_title">
+					<span class="categoryStar">*</span>상세설명
+				</div>
+				<div class="category_wrap">
+					<textarea id="summernote" name="productcontent">${list.productcontent}</textarea>
+					<!-- name="editordata" -->
+				</div>
+				<!-----------------------------------------------배송----------------------------------------->
+				<div class="category_title">배송</div>
+				<div class="category_wrap">
+					<ul>
+						<li><span class="notice"> 등록 상품의 배송방법을 선택해주세요.</span></li>
+						<li><label><span class="categoryStar">*</span>배송방법</label>&nbsp; <select name="deliveryoption" id="deliverysel">
+								<option value="1" id="pickup" <c:if test="${list.deliveryoption=='1'}">selected</c:if>>픽업</option>
+								<option value="2" id="delivery" <c:if test="${list.deliveryoption=='2'}">selected</c:if>>택배</option>
+								<option value="3" id="delandpick" <c:if test="${list.deliveryoption=='3'}">selected</c:if>>택배/픽업</option>
+						</select></li>
+						<li id="delivery_option" style="display: none; background-color: #fcfcfc;">
+							<ul>
+								<li><span class="categoryStar">*</span><label>배송비</label>&nbsp; <input type="number" name="deliveryprice" id="deliveryprice" min=0 value="${list.deliveryprice}" />&nbsp;<span>원</span> <!-- 픽업 선택시 배송비 0원 고정 --></li>
+								<li id="pay"><span class="categoryStar">*</span><label>결제방식</label>&nbsp; <input type="radio" name="paymentoption" id="delivery_price_option" value="1" <c:if test="${list.deliveryoption=='1'}">checked</c:if> /><label for="착불">착불</label>&nbsp; <input type="radio" name="paymentoption" id="delivery_price_option" value="2" <c:if test="${list.deliveryoption=='2'}">checked</c:if> /><label for="선결제">선결제</label>&nbsp; <input type="radio" name="paymentoption" id="delivery_price_option" value="3" <c:if test="${list.deliveryoption=='3'}">checked</c:if> /><label for="착불또는선결제">착불 또는 선결제</label></li>
+							</ul>
+						</li>
+
+					</ul>
+				</div>
+				<!----------------------------------------------상품내용--------------------------------------->
+				<div class="category_title">상품 내용</div>
+				<div class="category_wrap">
+					<ul>
+						<li><span class="categoryStar">*</span><label for="">판매단위</label>&nbsp; <input type="number" name="selloption[0]" id="selloption" value="${list.selloption[0]}" min="0" onchange="javascript:removeCommaReturn(this);" /> <select id="select_unit" name="selloption[1]" onchange="javascript:removeCommaReturn(this);">
+								<option value=" " <c:if test="${list.selloption[1] == ''}">selected</c:if>>해당없음</option>
+								<option value="팩" <c:if test="${list.selloption[1] == '팩'}">selected</c:if>>팩</option>
+								<option value="박스" <c:if test="${list.selloption[1] == '박스'}">selected</c:if>>박스</option>
+						</select> <input type="hidden" name="selloption" value="${list.selloption[0]}" id="selloption_hidden" /></li>
+						<li><span class="categoryStar">*</span><label for="">중량/용량</label>&nbsp; <input type="number" name="sellweightnum" id="sellweight" min="0" value="${list.sellweight[0]}" onchange="javascript:removeCommaReturn(this);" /> <select id="select_weight" name="sellweightunit" onchange="javascript:removeCommaReturn(this);">
+								<option value="g" <c:if test="${list.sellweight[1] == 'g'}">selected</c:if>>g</option>
+								<option value="kg" <c:if test="${list.sellweight[1] == 'kg'}">selected</c:if>>kg</option>
+						</select> <input type="hidden" name="sellweight" id="sellweight_hidden" /></li>
+						<li><span class="categoryStar">*</span><label for="">원산지</label>&nbsp; <input type="radio" value="국내산" name="origin" id="domestic" <c:if test="${list.origin eq '국내산'}">checked</c:if>><label for="국내산">국내산</label> <input type="radio" value="수입산" name="origin" id="import" <c:if test="${list.origin eq '수입산'}">checked</c:if>><label for="수입산">수입산</label>
+							<div id="import_wrap" style="display: none; background-color: #fcfcfc;">
+								<input type="radio" value="중국산" name="origin" id="china" <c:if test="${list.origin eq '중국산'}">checked</c:if>><label for="중국산">중국산</label> <input type="radio" value="일본산" name="origin" id="japan" <c:if test="${list.origin eq '일본산'}">checked</c:if>><label for="일본산">일본산</label> <input type="radio" value="말레이시아산" name="origin" id="malaysia" <c:if test="${list.origin eq '말레이시아산'}">checked</c:if>><label for="말레이시아산">말레이시아산</label> <input type="radio" value="필리핀산" name="origin" id="philippines" <c:if test="${list.origin eq '필리핀산'}">checked</c:if>><label for="필리핀산">필리핀산</label> <input type="radio" value="베트남산" name="origin" id="vietnam" <c:if test="${list.origin eq '베트남산'}">checked</c:if>><label for="베트남산">베트남산</label> <input type="radio" value="칠레산" name="origin" id="chile" <c:if test="${list.origin eq '칠레산'}">checked</c:if>><label for="칠레산">칠레산</label>
+							</div></li>
+
+						<li><span class="categoryStar">*</span><label for="보관/포장타입">보관/ 포장타입</label>&nbsp; <select id="select_packing" name="wrapping">
+								<option value='0' <c:if test="${list.wrapping==1}">selected</c:if>>실온</option>
+								<option value='1' <c:if test="${list.wrapping==2}">selected</c:if>>냉장</option>
+								<option value='2' <c:if test="${list.wrapping==3}">selected</c:if>>냉동</option>
+						</select></li>
+						<li><span class="categoryStar">*</span><label for="">상품정보</label><br /> <textarea placeholder="간략한 상품정보를 입력해주세요." id="productinfomation" name="productinfomation">${list.productinfomation }</textarea></li>
+						<li><span class="categoryStar">*</span><label for="">주의사항</label><br /> <textarea placeholder="주의사항을 입력해주세요. 예)제품 수령 후 반드시 냉장보관해주세요. " id="prevention" name="prevention">${list.prevention}</textarea></li>
+						<li><span class="categoryStar">*</span><label for="">유통기한</label><br /> <textarea placeholder="유통기한을 입력해주세요. 예) 수령후 일주일 또는, 신선식품이므로 가능한 빨리 드시기를 바랍니다." id="deadline" name="deadline">${list.deadline}</textarea></li>
+					</ul>
+				</div>
+				<div>
+					<span class="categoryStar">*</span><span class="notice">표시된 항목은 모두 입력해주세요.</span> <a href="#" style="float: right;"><span>TOP</span></a>
+				</div>
+				<hr />
+
+				<!--------------------------------------------취소/ 저장하기 버튼---------------------------------------->
+				<div class="end_button_wrap">
+					<input type="button" id="cancel_btn" class="btn" value="취소" onclick="location.href='seller/product_list'"> <input type="submit" name="submit" value="수정하기" id="save_btn" class="btn" />
+				</div>
+			</form>
+			<!-- 수정하기 폼 end -->
+
+			<div style="clear: both;"></div>
+		</div>
+		<!--contentBox end -->
+	</div>
+	<!-- container end -->
+</div>
+<!-- body 1 end -->
 </html>

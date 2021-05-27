@@ -11,4 +11,12 @@ public interface Admin_ProductService {
 	public List<Admin_ProductVO> productOptionData(int productnum);
 	//디스카운드테 있는 데이터
 	public Admin_ProductVO productSaleData(int productnum);
+	//상품 수정하기 뷰 
+	public Admin_ProductVO productOneSelect(Admin_ProductVO vo);
+	//상품 수정하기
+	public int productUpdate(Admin_ProductVO vo);
+	//할인 수정
+	public int discountUpdate(Admin_ProductVO vo);
+	// 옵션 수정
+	public int optionUpdate(Admin_ProductVO vo);
 }

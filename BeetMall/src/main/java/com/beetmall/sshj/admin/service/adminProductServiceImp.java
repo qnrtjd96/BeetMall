@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.beetmall.sshj.admin.dao.adminProductDAO;
+import com.beetmall.sshj.admin.vo.Admin_ProductVO;
 import com.beetmall.sshj.admin.vo.adminProductVO;
 import com.beetmall.sshj.admin.vo.adminkPageSearchVO;
 
@@ -25,5 +26,7 @@ public class adminProductServiceImp implements adminProductService {
 	public int productOnetotalRecord(adminkPageSearchVO pageVO) {
 		return productDAO.productOnetotalRecord(pageVO);
 	}
+
+
 	
 }

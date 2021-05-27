@@ -1,5 +1,7 @@
 package com.beetmall.sshj.admin.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -79,6 +81,9 @@ public class admin_productController {
 		
 		// 프로덕트에 있는 데이터 불러오기
 		Admin_ProductVO vo2 = service.productListData(productnum);
+
+		vo2.setSellstart(vo2.getSellstart().substring(0,10));
+		vo2.setSellfinish(vo2.getSellfinish().substring(0,10));
 		mav.addObject("list",vo2);
 		
 		if( vo2.getOptionselect() != 0) {
@@ -92,6 +97,9 @@ public class admin_productController {
 			Admin_ProductVO vo4 = service.productSaleData(productnum);
 			mav.addObject("dis",vo4);
 		}
+		
+		
+		
 		
 		mav.setViewName("admin/productEditA");
 		return mav;

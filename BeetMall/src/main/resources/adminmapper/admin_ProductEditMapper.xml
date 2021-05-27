@@ -17,4 +17,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="productSaleData" resultType="com.beetmall.sshj.admin.vo.Admin_ProductVO">
 		select * from discount where productnum = ${productnum}
 	</select>
+	
+	
+	
+	<insert id="productUpdate" parameterType="com.beetmall.sshj.admin.vo.Admin_ProductVO">
+		insert into product (productnum, userid, mcatenum, productname, productprice, saleselect, saleb, optionselect,
+								sellstart, sellfinish,
+								totalstock, nowstock, thumbimg, productcontent, deliveryoption, deliveryprice, paymentoption, selloption, sellweight,origin, wrapping, productinfomation, prevention, deadline)       			
+       	values(productsq.nextval, '${userid}' , ${mcatenum}, '${productname}', ${productprice}, '${saleselect}', '${saleb}', '${optionselect}',
+       			'${sellstart}','${sellfinish}', ${totalstock}, ${totalstock},'${thumbimg}',
+       			'${productcontent}', '${deliveryoption}', ${deliveryprice}, '${paymentoption}', '${selloption}', '${sellweight}', 
+       			'${origin}', '${wrapping}', '${productinfomation}', '${prevention}', '${deadline}')     
+    		  				
+	</insert>
+	<insert id="discountUpdate" parameterType="com.beetmall.sshj.admin.vo.Admin_ProductVO">
+		insert into discount 
+		(productnum, saleprice, salestart,  salefinish)
+		values(productsq.currval, ${saleprice}, '${salestart}', '${salefinish}')				
+
+	</insert>
+	<insert id="optionUpdate" parameterType="com.beetmall.sshj.admin.vo.Admin_ProductVO">
+		insert into optiontbl
+		(optionnum, productnum, optionname, optionstock, optionnowstock, optionprice)
+		values
+		(optionsq.nextval, productsq.currval, '${optionname}' ,${optionstock}, ${optionstock}, ${optionprice} )
+	</insert>
 </mapper>
