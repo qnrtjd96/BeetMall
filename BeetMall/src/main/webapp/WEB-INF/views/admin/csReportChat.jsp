@@ -515,7 +515,7 @@
 			<button class="success" value="" name="" id="">닫기</button>
 		</div> 
 		</div>
-		<div id ="chatIframe">
+		<div id ="chatIframe" class="admingchatiframe">
 			<div style="position: relative;">
 				<div style="width:500px;">
 					<div id="chatTop"></div>
