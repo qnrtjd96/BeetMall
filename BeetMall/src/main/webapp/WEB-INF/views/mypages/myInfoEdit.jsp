@@ -93,10 +93,7 @@
 		
 		$("#infosubmit").click(function(){
 	
-			if($("#checkEmailResult").val()=='N'){
-				alert("이메일 인증을 진행해주세요");
-				return false;
-			}
+			
 			if($("#userpwd").val()==null || $("#userpwd").val()==''){ 
 				alert("비밀번호를 입력해주세요"); 
 				return false;
@@ -131,7 +128,7 @@
 			if(regCheck() == false){
 				return false;
 			}
-			alert("2342343");
+			//alert("2342343");
 			
 		});
 		
@@ -149,46 +146,7 @@
 		    }).open();
 		});
 		
-		// 이메일 인증코드 전송
-		$("#emailSend").click(function(){
-			if(emailCheckCustom()!=false){
-				var url = 'emailSend';
-				var param = "SendToEmail="+$("#useremail").val();
-				$.ajax({
-					url : url,
-					data : param,
-					success :function(data){
-						alert("인증코드 전송에 성공했습니다. 이메일을 확인해주세요!");
-					}, error : function(){
-						alert("인증코드 전송에 실패하였습니다 잠시후 다시 시도해주세요");
-					}
-				})
-			}
-		})
-		
-		// 이메일 인증코드 확인
-		$("#emailCheckBtn").click(function(){
-			if($("#emailCheck").val()!=null || $("#emailCheck").val()!=''){
-				var url = 'emailCheck';
-				var param = "emailCode="+$("#emailCheck").val();
-				$.ajax({
-					url : url,
-					data : param,
-					success : function(data){
-						console.log(data);
-						if(data == 1){
-							alert("인증에 성공하였습니다.");							
-							$("#checkEmailResult").val('Y');
-							$("#useremail").attr("readonly",true);
-						}else{
-							alert("인증코드가 일치하지 않거나 인증에 실패하였습니다.");
-						}
-					}, error : function(){
-						alert("인증에 실패하였습니다.");
-					}
-				});
-			}
-		})
+
 	});
 	
 	
