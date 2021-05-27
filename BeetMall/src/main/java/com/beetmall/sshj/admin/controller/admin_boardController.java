@@ -59,7 +59,7 @@ public class admin_boardController {
 		String pageNumStr = req.getParameter("pageNum");
 		if (pageNumStr != null) {
 			pageVO.setPageNum(Integer.parseInt(pageNumStr));
-		}
+		} 
 		String type = req.getParameter("type");
 		System.out.println("type = " + type);
 		pageVO.setSearchKey(req.getParameter("searchKey"));
