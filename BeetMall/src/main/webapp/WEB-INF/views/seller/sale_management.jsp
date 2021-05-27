@@ -324,11 +324,8 @@
 				<span class="notice">선택상품의 클레임 상태를 변경하실 수 있습니다.  </span><br/>
 					<select id="option_sel">
 						<option value=" ">-</option>
-						<option value="취소요청">취소요청</option>
-						<option value="취소진행중">취소진행중</option>
-						<option value="반품요청">반품요청</option>
-						<option value="반품진행중">반품진행중</option>
-						<option value="반품완료">반품완료</option>
+						<option value="환불진행중">환불진행중</option>
+						<option value="환불완료">환불완료</option>
 					</select>
 					<input type="button" id="selBtn" value="변경" onClick="selectClaimStatusUpdate()"/>
 				</div>
