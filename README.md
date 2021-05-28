@@ -1,6 +1,7 @@
 
 # Final Team Project 😎
-## 씽씽하조 / BeetMall Project
+## 팀명 : 씽씽하조
+## 프로젝트 : 농산물 직거래 사이트
 
 > BITCAMP 2020-12-14~2021-05-28 Final Team Project (1조)
 
