@@ -772,6 +772,11 @@
 		#favUl>li:nth-child(4) {
 		border-bottom: 1px solid #e06666;
 	}
+	#favUl>li:nth-child(4n+1){
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
 	/* #favUl>li:nth-child(5n+3){
 			width:240px;
 		}
@@ -780,7 +785,7 @@
 			line-height:60px;
 			float:left;
 		    padding-left: 30px;
-		}
+		} 
 		#favUl>li:nth-child(5n+1){
 			width:60px;
 		} */

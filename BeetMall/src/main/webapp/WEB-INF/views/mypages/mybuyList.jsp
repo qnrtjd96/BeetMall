@@ -50,15 +50,19 @@
 	#pointUl>li:nth-child(6n+1){
 		line-height:20px;
 		padding-top:10px;
+		width:125px;
 	}
 	
 	#pointUl>li:nth-child(6n+2){
-		width:105px;
+		width:140px;
 	}
 	#pointUl>li:nth-child(6n){
 		width:270px;
 	}
 	
+	#pointUl>li:nth-child(6n+4){
+		width:110px;
+	}
 	#pointUl>li:nth-child(6n+3){
 		width:300px;
 	}
