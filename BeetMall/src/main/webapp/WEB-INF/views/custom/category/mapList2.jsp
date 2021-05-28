@@ -203,7 +203,7 @@
 				            '        </div>' + 
 				            '        <div class="body">' + 
 				            '            <div class="img">' +
-				            '                <img src="'+ farmprofile+'" width="73" height="70">' + //이부분바꿔야함 자신의 프로필이미지로
+				            '                <img src="/sshj/resources/sellerprofileimg/'+ farmprofile+'" width="73" height="70" onerror='+"this.src='/sshj/img/derror.png'"+'>' + //이부분바꿔야함 자신의 프로필이미지로
 				            '           </div>' + 
 				            '            <div class="desc">' + 
 				            '                <div class="ellipsis">${data.storeaddr}</div>' + 
@@ -213,7 +213,7 @@
 				            '</div>'
 				content.onclick = function() {
 					overlay.setMap(null);
-				};
+				}; 
 				
 				// 마커 위에 커스텀오버레이를 표시합니다
 				// 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
