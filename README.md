@@ -51,14 +51,14 @@
 
 # Contact Me
 ## 우리에게 연락하길 희망하면 아래 이메일로 연락주세요.
-'''
+```
  - Kim Seo-Yoon : godkmn1004@naver.com
  - Kim Yun-Su : glowsu14@gmail.com
  - Lee Kang-San : qnrtjd96@naver.com
  - Jang Su-Yeon : suyeonjang127@gmail.com
  - Cha Yoon-Ju : 33cyj@naver.com
  - Choi Kyung-Sik : kyungsik0907@gmail.com
-'''
+```
 
 ![슬라이드1](https://user-images.githubusercontent.com/70927354/119912657-e3a25b80-bf96-11eb-9733-1b1322d07e18.JPG)
 ![슬라이드2](https://user-images.githubusercontent.com/70927354/119912662-e56c1f00-bf96-11eb-97e2-520807951f92.JPG)
