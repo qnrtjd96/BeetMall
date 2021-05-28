@@ -127,7 +127,7 @@
 			<!-- info 컨테이너 묶기 width:700px 고정 -->
 			<div id="info_container">
 				<div id="profile_box">
-					<img src="<%=request.getContextPath()%>/resources/img/${result.farmprofile}"/>
+					<img src="/sshj/resources/sellerprofileimg/${result.farmprofile}"/>
 					<div id="farmname" name="farmname">${result.farmname }</div>
 					<div>
 						방문자수 : ${result.farmvisitor}명<br/>
@@ -164,7 +164,7 @@
 					<input type="hidden" name="productnum" value="${result.productnum }"/> 
 					<div>대표메뉴</div>
 					<div id="repMenu_content">
-						<img src="<%=request.getContextPath()%>/resources/img/${result.thumbimg}" name="thumbimg"/>
+						<img src="/sshj/resources/sellerProductImgs/${result.thumbimg}" name="thumbimg"/>
 						<div>
 							<div>${result.productname }</div>
 							<div>

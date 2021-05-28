@@ -191,7 +191,7 @@
 				<c:forEach var="data" items="${list}">
 					<li></li>
 					<li class="wordcut">
-						<img src="/sshj/img/${data.farmprofile}"><span class="buyttitle wordcut">${data.farmname}</span><span class="buydetail wordcut">${data.farmintro}</span>
+						<img src="/sshj/resources/sellerprofileimg/${data.farmprofile}"><span class="buyttitle wordcut">${data.farmname}</span><span class="buydetail wordcut">${data.farmintro}</span>
 					</li>
 					<li><span class="favprice">${data.storeaddr}</span></li>
 					<li id="hh"><div class="like"></div><div class="hate">${data.goodTotal}명</div></li>
