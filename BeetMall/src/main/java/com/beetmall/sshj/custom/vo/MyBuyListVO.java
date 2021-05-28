@@ -10,7 +10,7 @@ public class MyBuyListVO {
 	private String orderstatus;
 	private int productnum;
 	private long invoice;
-	private int ordercnt;
+	private long ordercnt;
 	private String productinfomation;
 	
 	public String getProductinfomation() {
@@ -73,10 +73,10 @@ public class MyBuyListVO {
 	public void setInvoice(long invoice) {
 		this.invoice = invoice;
 	}
-	public int getOrdercnt() {
+	public long getOrdercnt() {
 		return ordercnt;
 	}
-	public void setOrdercnt(int ordercnt) {
+	public void setOrdercnt(long ordercnt) {
 		this.ordercnt = ordercnt;
 	}
 	
