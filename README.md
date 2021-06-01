@@ -19,16 +19,18 @@
  - Notion : https://www.notion.so/1-bfa2de9b5d1243109d53a8dcbdf0b0c9
  - Google Drive : 프로젝트 진행 중 문서 정리
  - Kakao Oven : 레이아웃 설계
+ - 
+<br/>
 
----------------------------------------------------------------------------------
 
 ## Toy Project : Naver Webtoon Page ( https://comic.naver.com/webtoon/weekday.nhn );
 
 > 2021/03/05 ~ 2021/03/28
 
 > GitHub url : https://github.com/kschoi93/Toy_project_naver_webtoon.git
+> 
+<br/>
 
------------------------------------------------------------------------------------
 
 ## Final Project : BeetMall < 농산물 직거래 사이트 >
 > 2021/04/15 ~ 2021/05/28
@@ -50,8 +52,10 @@
  - Kim Seo-Yoon 
 ```
 
+<br/>
+
 <details>
- <summary>프로젝트 PPT 내역 자세히 </summary>
+ <summary>프로젝트 PPT 내역 자세히 보기! </summary>
 
 ![슬라이드1](https://user-images.githubusercontent.com/70927354/119912657-e3a25b80-bf96-11eb-9733-1b1322d07e18.JPG)
 ![슬라이드2](https://user-images.githubusercontent.com/70927354/119912662-e56c1f00-bf96-11eb-97e2-520807951f92.JPG)
@@ -103,7 +107,10 @@
 ![슬라이드48](https://user-images.githubusercontent.com/70927354/119912736-f4eb6800-bf96-11eb-933f-5ffd12b50be9.JPG)
 
 </details>
+
+ <br/>
  
+
 # Contact Me
 ## 우리에게 연락하길 희망하면 아래 이메일로 연락주세요.
 ```
