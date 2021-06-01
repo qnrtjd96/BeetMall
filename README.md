@@ -50,7 +50,8 @@
  - Kim Seo-Yoon 
 ```
 
-
+<details>
+ <summary>프로젝트 PPT 내역 자세히 </summary>
 
 ![슬라이드1](https://user-images.githubusercontent.com/70927354/119912657-e3a25b80-bf96-11eb-9733-1b1322d07e18.JPG)
 ![슬라이드2](https://user-images.githubusercontent.com/70927354/119912662-e56c1f00-bf96-11eb-97e2-520807951f92.JPG)
@@ -101,7 +102,8 @@
 ![슬라이드47](https://user-images.githubusercontent.com/70927354/119912733-f4eb6800-bf96-11eb-869b-bb575134d879.JPG)
 ![슬라이드48](https://user-images.githubusercontent.com/70927354/119912736-f4eb6800-bf96-11eb-933f-5ffd12b50be9.JPG)
 
-
+</details>
+ 
 # Contact Me
 ## 우리에게 연락하길 희망하면 아래 이메일로 연락주세요.
 ```
