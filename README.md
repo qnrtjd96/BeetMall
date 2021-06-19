@@ -1,123 +1,74 @@
 
-# Final Team Project 😎
-## 팀명 : 씽씽하조
-## 프로젝트 : 농산물 직거래 사이트
+# Beetmall 🥕
+### 팀명 : 씽씽하조
+### 유형 : 농산물 직거래 사이트
+### 2021/04/15 ~ 2021/05/28
 
-> BITCAMP 2020-12-14~2021-05-28 Final Team Project (1조)
-
-> 본 Git Repository는 비트캠프 자바 교육과정 마지막 팀 프로젝트를 위해 생성한 Git Repository 이다.
-
-> 팀원 구성 
- - Kim Seo-Yoon 
- - Jang Su-Yeon 
- - Choi Kyung-Sik 
- - Kim Yun-Su 
- - Lee Kang-San 
- - Cha Yoon-Ju
-
-> 팀 협업 툴
- - Notion : https://www.notion.so/1-bfa2de9b5d1243109d53a8dcbdf0b0c9
- - Google Drive : 프로젝트 진행 중 문서 정리
- - Kakao Oven : 레이아웃 설계
- - 
-<br/>
-
-
-## Toy Project : Naver Webtoon Page ( https://comic.naver.com/webtoon/weekday.nhn );
-
-> 2021/03/05 ~ 2021/03/28
-
-> GitHub url : https://github.com/kschoi93/Toy_project_naver_webtoon.git
-> 
-<br/>
-
-
-## Final Project : BeetMall < 농산물 직거래 사이트 >
-> 2021/04/15 ~ 2021/05/28
-
-> 임무분장
+> 맡은 기능
 ```
 구매자 페이지
- - Kim Yun-Su 
- - Lee Kang-San 
- - Cha Yoon-Ju
-```
-```
-판매자 페이지
- - Jang Su-Yeon 
- - Choi Kyung-Sik
+ - 메인페이지
+ - 로그인, 로그아웃, 아이디/비밀번호 찾기
+ - 회원가입, 회원탈퇴
+ - 구매내역 조회(구매확정, 배송조회, 문의작성, 주문취소)
+ - 포인트 적립내역
+ - 1:1 채팅
 ```
 ```
 관리자 페이지
- - Kim Seo-Yoon 
+ - 메인페이지 수정(카테고리 수정, 팝업창 수정)
+ - 채팅관리(신고내역, 회원정지)
+ - 회원목록, 회원관리
 ```
-
+> 개발환경
+```
+ FRONT-END
+ - EJS, HTML5, CSS3, JavaScript, jQuery
+ BACK-END
+ - JAVA, JSP, Spring, My-Batis
+ DB / SERVER
+ - Oracle, Node.js, Git, Tomcat9
+ TOOL
+ - Eclipse, STS3, Notion, eXERD, sqlDeveloper
+ ```
 <br/>
 
 <details>
- <summary>프로젝트 PPT 내역 자세히 보기! </summary>
+ 
+ <summary>포트폴리오</summary>
+ 
+![001](https://user-images.githubusercontent.com/60975167/122634806-7c05a900-d11b-11eb-8e0d-b5aac69b9d10.png)
+![002](https://user-images.githubusercontent.com/60975167/122634807-7d36d600-d11b-11eb-94f3-78206e1431e1.png)
+![003](https://user-images.githubusercontent.com/60975167/122634808-7f993000-d11b-11eb-846a-3b586b8d1fd8.png)
+![004](https://user-images.githubusercontent.com/60975167/122634810-8031c680-d11b-11eb-880d-84996a40c42d.png)
+![005](https://user-images.githubusercontent.com/60975167/122634811-80ca5d00-d11b-11eb-8db7-3cce550e264c.png)
+![006](https://user-images.githubusercontent.com/60975167/122634812-832cb700-d11b-11eb-948e-14d0415b84d4.png)
+![007](https://user-images.githubusercontent.com/60975167/122634815-858f1100-d11b-11eb-8b24-db55520fa5c9.png)
+![008](https://user-images.githubusercontent.com/60975167/122634816-86c03e00-d11b-11eb-9797-678bc18ca032.png)
+![009](https://user-images.githubusercontent.com/60975167/122634817-87f16b00-d11b-11eb-9fca-4801e7d4235f.png)
+![010](https://user-images.githubusercontent.com/60975167/122634820-888a0180-d11b-11eb-9873-52a0d4c85d31.png)
+![011](https://user-images.githubusercontent.com/60975167/122634821-89229800-d11b-11eb-81aa-9841f5988867.png)
+![012](https://user-images.githubusercontent.com/60975167/122634823-8a53c500-d11b-11eb-9a13-d28c2466b2cd.png)
 
-![슬라이드1](https://user-images.githubusercontent.com/70927354/119912657-e3a25b80-bf96-11eb-9733-1b1322d07e18.JPG)
-![슬라이드2](https://user-images.githubusercontent.com/70927354/119912662-e56c1f00-bf96-11eb-97e2-520807951f92.JPG)
-![슬라이드3](https://user-images.githubusercontent.com/70927354/119912663-e56c1f00-bf96-11eb-8b2c-c8a7f5681c14.JPG)
-![슬라이드4](https://user-images.githubusercontent.com/70927354/119912665-e604b580-bf96-11eb-9383-fde5343c6c68.JPG)
-![슬라이드5](https://user-images.githubusercontent.com/70927354/119912666-e604b580-bf96-11eb-8179-447908c15d0e.JPG)
-![슬라이드6](https://user-images.githubusercontent.com/70927354/119912667-e69d4c00-bf96-11eb-9b3c-13b3fcff3b26.JPG)
-![슬라이드7](https://user-images.githubusercontent.com/70927354/119912669-e69d4c00-bf96-11eb-8818-c5950900626f.JPG)
-![슬라이드8](https://user-images.githubusercontent.com/70927354/119912670-e735e280-bf96-11eb-9aae-395de5cf9642.JPG)
-![슬라이드9](https://user-images.githubusercontent.com/70927354/119912672-e735e280-bf96-11eb-9290-2207efe04da7.JPG)
-![슬라이드10](https://user-images.githubusercontent.com/70927354/119912673-e7ce7900-bf96-11eb-81a0-ec689f5fca20.JPG)
-![슬라이드11](https://user-images.githubusercontent.com/70927354/119912674-e7ce7900-bf96-11eb-84fd-be75bd7da487.JPG)
-![슬라이드12](https://user-images.githubusercontent.com/70927354/119912676-e8670f80-bf96-11eb-9b20-17144e7e75b3.JPG)
-![슬라이드13](https://user-images.githubusercontent.com/70927354/119912677-e8ffa600-bf96-11eb-93f1-43c60653f1e9.JPG)
-![슬라이드14](https://user-images.githubusercontent.com/70927354/119912678-e8ffa600-bf96-11eb-9f0b-457b204456b2.JPG)
-![슬라이드15](https://user-images.githubusercontent.com/70927354/119912682-e9983c80-bf96-11eb-9a9f-00664ae8006e.JPG)
-![슬라이드16](https://user-images.githubusercontent.com/70927354/119912683-e9983c80-bf96-11eb-975e-1b7596e49dba.JPG)
-![슬라이드17](https://user-images.githubusercontent.com/70927354/119912685-ea30d300-bf96-11eb-87f9-5fb9d8d793c1.JPG)
-![슬라이드18](https://user-images.githubusercontent.com/70927354/119912686-ea30d300-bf96-11eb-811f-d296d49c9d24.JPG)
-![슬라이드19](https://user-images.githubusercontent.com/70927354/119912687-eac96980-bf96-11eb-8aea-a1111feabfb0.JPG)
-![슬라이드20](https://user-images.githubusercontent.com/70927354/119912688-eac96980-bf96-11eb-8085-50bd7c78b642.JPG)
-![슬라이드21](https://user-images.githubusercontent.com/70927354/119912689-eb620000-bf96-11eb-88bd-ed73285e0831.JPG)
-![슬라이드22](https://user-images.githubusercontent.com/70927354/119912692-ebfa9680-bf96-11eb-8cd3-b01c76da2b35.JPG)
-![슬라이드23](https://user-images.githubusercontent.com/70927354/119912695-ec932d00-bf96-11eb-8150-9e3975962ebd.JPG)
-![슬라이드24](https://user-images.githubusercontent.com/70927354/119912699-ec932d00-bf96-11eb-97f2-0c07a3f177d8.JPG)
-![슬라이드25](https://user-images.githubusercontent.com/70927354/119912701-ed2bc380-bf96-11eb-8180-5f7f6a4ea523.JPG)
-![슬라이드26](https://user-images.githubusercontent.com/70927354/119912702-ed2bc380-bf96-11eb-9dec-f8ed2b8a74ea.JPG)
-![슬라이드27](https://user-images.githubusercontent.com/70927354/119912703-edc45a00-bf96-11eb-9be4-49db15b4e17f.JPG)
-![슬라이드28](https://user-images.githubusercontent.com/70927354/119912705-ee5cf080-bf96-11eb-8122-e5f23b3469dc.JPG)
-![슬라이드29](https://user-images.githubusercontent.com/70927354/119912706-ee5cf080-bf96-11eb-9556-51578a966204.JPG)
-![슬라이드30](https://user-images.githubusercontent.com/70927354/119912707-eef58700-bf96-11eb-9608-f55177cded64.JPG)
-![슬라이드31](https://user-images.githubusercontent.com/70927354/119912709-eef58700-bf96-11eb-86df-a38eb329fb83.JPG)
-![슬라이드32](https://user-images.githubusercontent.com/70927354/119912710-ef8e1d80-bf96-11eb-88b4-28362fca53d5.JPG)
-![슬라이드33](https://user-images.githubusercontent.com/70927354/119912711-ef8e1d80-bf96-11eb-83b0-eb4b6c777e8e.JPG)
-![슬라이드34](https://user-images.githubusercontent.com/70927354/119912714-f026b400-bf96-11eb-8fc5-d3919bf26c69.JPG)
-![슬라이드35](https://user-images.githubusercontent.com/70927354/119912716-f0bf4a80-bf96-11eb-9d1b-b7d2a7194590.JPG)
-![슬라이드36](https://user-images.githubusercontent.com/70927354/119912717-f0bf4a80-bf96-11eb-8422-828d4565b11d.JPG)
-![슬라이드37](https://user-images.githubusercontent.com/70927354/119912718-f157e100-bf96-11eb-93c0-5930d6ee690a.JPG)
-![슬라이드38](https://user-images.githubusercontent.com/70927354/119912720-f157e100-bf96-11eb-9e4d-247298c88a99.JPG)
-![슬라이드39](https://user-images.githubusercontent.com/70927354/119912721-f1f07780-bf96-11eb-83e7-de39b1194ee3.JPG)
-![슬라이드40](https://user-images.githubusercontent.com/70927354/119912723-f2890e00-bf96-11eb-87c7-9b65cf50012d.JPG)
-![슬라이드41](https://user-images.githubusercontent.com/70927354/119912724-f2890e00-bf96-11eb-87ac-bafe90ea98d1.JPG)
-![슬라이드42](https://user-images.githubusercontent.com/70927354/119912725-f321a480-bf96-11eb-8c99-f802a671aa06.JPG)
-![슬라이드43](https://user-images.githubusercontent.com/70927354/119912726-f321a480-bf96-11eb-9ea3-fb91931f236b.JPG)
-![슬라이드44](https://user-images.githubusercontent.com/70927354/119912729-f3ba3b00-bf96-11eb-812c-37743e21d1a8.JPG)
-![슬라이드45](https://user-images.githubusercontent.com/70927354/119912731-f452d180-bf96-11eb-9686-17a70e1ced3c.JPG)
-![슬라이드46](https://user-images.githubusercontent.com/70927354/119912732-f452d180-bf96-11eb-8226-1ba1503419be.JPG)
-![슬라이드47](https://user-images.githubusercontent.com/70927354/119912733-f4eb6800-bf96-11eb-869b-bb575134d879.JPG)
-![슬라이드48](https://user-images.githubusercontent.com/70927354/119912736-f4eb6800-bf96-11eb-933f-5ffd12b50be9.JPG)
-
+ 
 </details>
 
+<details>
+ <summary>실제 발표 ppt </summary>
+ <a href="https://github.com/kschoi93/BeetMall">발표 ppt</a><br/>
+ <a href= "https://youtu.be/pRCXQvYP8sU">발표 영상(페이지 이동)</a>
  <br/>
- 
 
+ 
+</details>
+
+<details>
+ <summary>학습 기록</summary>
+ <a href= "https://www.notion.so/bitcamp-91b0acda4c084d5da1428eccb1c897cf">보러가기(페이지 이동)</a>
+ </details>
+ 
 # Contact Me
-## 우리에게 연락하길 희망하면 아래 이메일로 연락주세요.
+#### 연락하길 희망하면 아래 이메일로 연락주세요.
 ```
- - Kim Seo-Yoon : godkmn1004@naver.com
  - Kim Yun-Su : glowsu14@gmail.com
- - Lee Kang-San : qnrtjd96@naver.com
- - Jang Su-Yeon : suyeonjang127@gmail.com
- - Cha Yoon-Ju : 33cyj@naver.com
- - Choi Kyung-Sik : kyungsik0907@gmail.com
 ```
