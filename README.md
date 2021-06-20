@@ -56,7 +56,9 @@
 <details>
  <summary>실제 발표 ppt </summary>
  <a href="https://github.com/kschoi93/BeetMall">발표 ppt</a><br/>
- <a href= "https://youtu.be/pRCXQvYP8sU">발표 영상(페이지 이동)</a>
+ <a href= "https://youtu.be/pRCXQvYP8sU"><img src="https://user-images.githubusercontent.com/60975167/122664514-e6cae900-d1dc-11eb-969d-fa5a1eb4d9b5.png" height="16px"/>유투브 이동하기</a>
+ 
+
  <br/>
 
  
