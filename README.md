@@ -7,18 +7,22 @@
 > 맡은 기능
 ```
 구매자 페이지
- - 메인페이지
- - 로그인, 로그아웃, 아이디/비밀번호 찾기
- - 회원가입, 회원탈퇴
- - 구매내역 조회(구매확정, 배송조회, 문의작성, 주문취소)
- - 포인트 적립내역
- - 1:1 채팅
+ - DB설계
+ - 전체적인 UI 설계
+ - 상품조회(가격별,지역별, 카테고리별, 신상품, 베스트카테고리, 할인품목)
+ - 통합검색
+ - 즐겨찾는 농장
+ - 구매하기(구매API 이용)
+ - 공지사항
+ - 1:1문의
+ - 자주묻는질문
 ```
 ```
 관리자 페이지
- - 메인페이지 수정(카테고리 수정, 팝업창 수정)
- - 채팅관리(신고내역, 회원정지)
- - 회원목록, 회원관리
+ - 상품목록관리
+ - 관리자 소비자리뷰관리
+ - 상품문의관리
+ - 신고내역 보기및 
 ```
 > 개발환경
 ```
@@ -54,7 +58,7 @@
 </details>
 
 <details>
- <summary>실제 발표 ppt </summary>
+ <summary>실제 발표 ppt 및 발표시연(발표 본인)</summary>
  <a href="https://github.com/kschoi93/BeetMall">발표 ppt</a><br/>
  <a href= "https://youtu.be/pRCXQvYP8sU"><img src="https://user-images.githubusercontent.com/60975167/122664514-e6cae900-d1dc-11eb-969d-fa5a1eb4d9b5.png" height="16px"/>유투브 이동하기</a>
  
@@ -72,5 +76,5 @@
 # Contact Me
 #### 연락하길 희망하면 아래 이메일로 연락주세요.
 ```
- - Kim Yun-Su : glowsu14@gmail.com
+ - Lee Kang-san : qnrtjd96@naver.com
 ```
