@@ -36,10 +36,9 @@
  - Eclipse, STS3, Notion, eXERD, sqlDeveloper
  ```
 <br/>
-
-<details>
  
- <summary>포트폴리오</summary>
+###포트폴리오
+ 
 ![1제목](https://user-images.githubusercontent.com/54973523/123365926-37ae5900-d5b2-11eb-8304-dd40b2f36086.jpg)
 ![2목차](https://user-images.githubusercontent.com/54973523/123365935-3b41e000-d5b2-11eb-9759-6fd5cbd7bf4a.jpg)
 ![3맡은기능](https://user-images.githubusercontent.com/54973523/123365937-3bda7680-d5b2-11eb-9343-893241b13167.jpg)
@@ -52,10 +51,6 @@
 ![10](https://user-images.githubusercontent.com/54973523/123365954-43018480-d5b2-11eb-80a7-01b14368f9c7.jpg)
 ![11](https://user-images.githubusercontent.com/54973523/123365957-439a1b00-d5b2-11eb-8134-d87f44b59e87.jpg)
 ![12](https://user-images.githubusercontent.com/54973523/123365964-44cb4800-d5b2-11eb-93f4-5d11e2b4d61f.jpg)
-
-
- 
-</details>
 
 <details>
  <summary>실제 발표 ppt 및 발표시연(발표자 본인)</summary>
