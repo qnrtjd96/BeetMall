@@ -4,6 +4,7 @@
 ### 유형 : 농산물 직거래 사이트
 ### 2021/04/15 ~ 2021/05/28
 
+---
 > 맡은 기능
 ```
 구매자 페이지
@@ -24,6 +25,8 @@
  - 상품문의관리
  - 신고관리
 ```
+
+---
 > 개발환경
 ```
  FRONT-END
@@ -37,6 +40,7 @@
  ```
 <br/>
  
+---
 > 포트폴리오
  
 ![1제목](https://user-images.githubusercontent.com/54973523/123365926-37ae5900-d5b2-11eb-8304-dd40b2f36086.jpg)
@@ -52,6 +56,7 @@
 ![11](https://user-images.githubusercontent.com/54973523/123365957-439a1b00-d5b2-11eb-8134-d87f44b59e87.jpg)
 ![12](https://user-images.githubusercontent.com/54973523/123365964-44cb4800-d5b2-11eb-93f4-5d11e2b4d61f.jpg)
 
+---
 <details>
  <summary>실제 발표 ppt 및 발표시연(발표자 본인)</summary>
  <a href="https://github.com/kschoi93/BeetMall" height="16px">발표 ppt</a><br/>
@@ -59,15 +64,16 @@
  
 
  <br/>
-
- 
 </details>
 
 ---
-<details>
- <summary>학습 기록</summary>
- <a href= "https://www.notion.so/bitcamp-91b0acda4c084d5da1428eccb1c897cf">보러가기(페이지 이동)</a>
- </details>
+> 실제 발표 ppt 및 발표시연(발표자 본인)
+```
+구매자 페이지
+ - <a href="https://github.com/kschoi93/BeetMall" height="16px">발표 ppt</a><br/>
+ - <a href= "https://youtu.be/pRCXQvYP8sU"><img src="https://user-images.githubusercontent.com/60975167/122664514-e6cae900-d1dc-11eb-969d-fa5a1eb4d9b5.png" height="16px"/>유튜브 이동하기</a>
+```
+
  
 # Contact Me
 #### 연락하길 희망하면 아래 이메일로 연락주세요.
