@@ -40,7 +40,7 @@
 <details>
  
  <summary>포트폴리오</summary>
- ![1제목](https://user-images.githubusercontent.com/54973523/123365926-37ae5900-d5b2-11eb-8304-dd40b2f36086.jpg)
+![1제목](https://user-images.githubusercontent.com/54973523/123365926-37ae5900-d5b2-11eb-8304-dd40b2f36086.jpg)
 ![2목차](https://user-images.githubusercontent.com/54973523/123365935-3b41e000-d5b2-11eb-9759-6fd5cbd7bf4a.jpg)
 ![3맡은기능](https://user-images.githubusercontent.com/54973523/123365937-3bda7680-d5b2-11eb-9343-893241b13167.jpg)
 ![4카테고리메인](https://user-images.githubusercontent.com/54973523/123365940-3c730d00-d5b2-11eb-9c80-19bcafd75142.jpg)
