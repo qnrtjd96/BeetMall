@@ -3,7 +3,7 @@
 ### 팀명 : 씽씽하조
 ### 유형 : 농산물 직거래 사이트
 ### 2021/04/15 ~ 2021/05/28
-### 팀원포지션 및 전체내용 <a href="https://github.com/kschoi93/BeetMall" height="16px">발표 ppt</a>
+### 팀원포지션 및 전체내용 <a href="https://github.com/kschoi93/BeetMall" height="16px">이동하기</a>
 ---
 
 >내가 맡은 기능
