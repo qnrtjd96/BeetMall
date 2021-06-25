@@ -57,20 +57,11 @@
 ![12](https://user-images.githubusercontent.com/54973523/123365964-44cb4800-d5b2-11eb-93f4-5d11e2b4d61f.jpg)
 
 ---
-<details>
- <summary>실제 발표 ppt 및 발표시연(발표자 본인)</summary>
+# 실제 발표 ppt 및 발표시연(발표자 본인)
  <a href="https://github.com/kschoi93/BeetMall" height="16px">발표 ppt</a><br/>
  <a href= "https://youtu.be/pRCXQvYP8sU"><img src="https://user-images.githubusercontent.com/60975167/122664514-e6cae900-d1dc-11eb-969d-fa5a1eb4d9b5.png" height="16px"/>유튜브 이동하기</a>
  
-
- <br/>
-</details>
-
 ---
-> 실제 발표 ppt 및 발표시연(발표자 본인)
- <br/>
- <a href="https://github.com/kschoi93/BeetMall" height="16px">발표 ppt</a><br/>
- <a href= "https://youtu.be/pRCXQvYP8sU"><img src="https://user-images.githubusercontent.com/60975167/122664514-e6cae900-d1dc-11eb-969d-fa5a1eb4d9b5.png" height="16px"/>유튜브 이동하기</a>
 
  
 # Contact Me
