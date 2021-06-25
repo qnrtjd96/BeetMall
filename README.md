@@ -63,10 +63,11 @@
  
 </details>
 
-/*<details>
+---
+<details>
  <summary>학습 기록</summary>
  <a href= "https://www.notion.so/bitcamp-91b0acda4c084d5da1428eccb1c897cf">보러가기(페이지 이동)</a>
- </details>*/
+ </details>
  
 # Contact Me
 #### 연락하길 희망하면 아래 이메일로 연락주세요.
